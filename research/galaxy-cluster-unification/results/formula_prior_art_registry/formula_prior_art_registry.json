@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 167,
+    "sigma_protocols": 168,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 145,
     "eligibility": {
@@ -7127,6 +7127,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "9d0ab3e6d0d52a4e55871385607b2b006e78a4c99b4f64e8e772a0e88ad12c63"
+    },
+    {
+      "config": "configs/sigma_v19bf_long_wave_scale_window.json",
+      "protocol_version": "SIGMA-V19BF-LONG-WAVE-SCALE-WINDOW-1.0.0",
+      "status": "frozen while V19W was still running, after V19BE passed, before reading a V19X gas-state result, selecting a covariant action or universal Sigma constant, opening a lensing or halo payload, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "bf70d96a25dd5f2f570e95357559a04fe7d1189576d7aff23de0a7d6bdc9f12c"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

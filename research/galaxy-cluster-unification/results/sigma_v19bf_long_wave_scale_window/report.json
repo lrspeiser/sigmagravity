@@ -1,0 +1,163 @@
+{
+  "all_constraint_bounds": {
+    "active_lower_constraint": "transition_maximum",
+    "active_upper_constraint": "transition_minimum",
+    "effective_lower_kpc": 5.424267439147406,
+    "effective_upper_kpc": 6.56394869324723,
+    "lower_bounds_kpc": {
+      "inner_galaxy_maximum": 2.814035763282131,
+      "planetary_literal_tidal": 0.07716049382716052,
+      "planetary_low_pass": 0.34281487991997645,
+      "transition_maximum": 5.424267439147406
+    },
+    "nonempty": true,
+    "upper_bounds_kpc": {
+      "outer_galaxy_minimum": 7.7126370766724,
+      "transition_minimum": 6.56394869324723
+    }
+  },
+  "claim_boundary": [
+    "A nonempty geometric scale window proves only that the long-wave premise is dimensionally compatible with planetary and galactic baselines under the declared control response.",
+    "The planetary thresholds are preselection proxies, not Cassini, Mercury, pulsar, gravitational-wave, ephemeris or PPN likelihoods.",
+    "The activation function does not determine an amplitude, attraction, source tensor, phase, polarization, field energy, metric slip or covariant action.",
+    "No gas, lensing, halo, galaxy rotation, holdout or gravity-fit payload is read.",
+    "The derived interval is not a measured confidence interval and no point in it is selected as a theory constant."
+  ],
+  "config": "configs/sigma_v19bf_long_wave_scale_window.json",
+  "config_sha256": "bf70d96a25dd5f2f570e95357559a04fe7d1189576d7aff23de0a7d6bdc9f12c",
+  "decision": "passed_dimensionless_scale_window",
+  "derived_correlation_length_window_kpc": {
+    "active_lower_constraint": "transition_maximum",
+    "active_upper_constraint": "transition_minimum",
+    "lower": 5.424267439147406,
+    "upper": 6.56394869324723,
+    "width_ratio": 1.2101078656031312
+  },
+  "derived_literal_wavelength_window_kpc": {
+    "lower_kpc": 34.08167747586362,
+    "upper_kpc": 41.24250598649164
+  },
+  "endpoint_checks": {
+    "inner_activation_at_lower": 0.015042652449435812,
+    "outer_activation_at_upper": 0.9423260249744072,
+    "planetary_literal_tidal_at_lower": 2.0235214344299832e-16,
+    "planetary_low_pass_at_lower": 3.994270972988067e-15,
+    "transition_activation_at_lower": 0.55,
+    "transition_activation_at_upper": 0.44999999999999996
+  },
+  "gate_results": {
+    "all_parent_hashes_exact": true,
+    "illustrative_control_inside_window": true,
+    "inner_transition_outer_constraints_pass_at_entire_window": true,
+    "no_action_constant_or_payload_selected": true,
+    "nonempty_universal_length_window": true,
+    "planetary_constraints_pass_at_entire_window": true,
+    "v19be_passed_without_action_selection": true
+  },
+  "illustrative_control": {
+    "baselines": [
+      {
+        "amplitude_control_products": {
+          "A=1": 3.2645040656884552e-15,
+          "A=6": 1.958702439413073e-14
+        },
+        "literal_tidal_factor": 1.653817168792021e-16,
+        "low_pass_activation": 3.2645040656884552e-15,
+        "name": "planetary_100_au",
+        "radius_kpc": 4.84813681109536e-07
+      },
+      {
+        "amplitude_control_products": {
+          "A=1": 1.3887345775458676e-08,
+          "A=6": 8.332407465275206e-08
+        },
+        "literal_tidal_factor": 7.03619330849568e-10,
+        "low_pass_activation": 1.3887345775458676e-08,
+        "name": "one_parsec",
+        "radius_kpc": 0.001
+      },
+      {
+        "amplitude_control_products": {
+          "A=1": 0.012437987627616831,
+          "A=6": 0.07462792576570099
+        },
+        "literal_tidal_factor": 0.000703619330849568,
+        "low_pass_activation": 0.012437987627616831,
+        "name": "inner_galaxy_1_kpc",
+        "radius_kpc": 1.0
+      },
+      {
+        "amplitude_control_products": {
+          "A=1": 0.09020401043104986,
+          "A=6": 0.5412240625862992
+        },
+        "literal_tidal_factor": 0.006332573977646112,
+        "low_pass_activation": 0.09020401043104986,
+        "name": "disk_3_kpc",
+        "radius_kpc": 3.0
+      },
+      {
+        "amplitude_control_products": {
+          "A=1": 0.49633172576650175,
+          "A=6": 2.9779903545990107
+        },
+        "literal_tidal_factor": 0.07036193308495678,
+        "low_pass_activation": 0.49633172576650175,
+        "name": "transition_10_kpc",
+        "radius_kpc": 10.0
+      },
+      {
+        "amplitude_control_products": {
+          "A=1": 0.9595723180054871,
+          "A=6": 5.757433908032922
+        },
+        "literal_tidal_factor": 0.6332573977646112,
+        "low_pass_activation": 0.9595723180054871,
+        "name": "outer_galaxy_30_kpc",
+        "radius_kpc": 30.0
+      },
+      {
+        "amplitude_control_products": {
+          "A=1": 0.9999989792644283,
+          "A=6": 5.999993875586569
+        },
+        "literal_tidal_factor": 7.03619330849568,
+        "low_pass_activation": 0.9999989792644283,
+        "name": "cluster_100_kpc",
+        "radius_kpc": 100.0
+      }
+    ],
+    "correlation_length_kpc": 6.0,
+    "literal_wave_crossing_time_years": 122958.05761876544,
+    "literal_wavelength_kpc": 37.69911184307752,
+    "selected_as_constant": false
+  },
+  "implementation": {
+    "runner": "scripts/check_sigma_v19bf_long_wave_scale_window.py",
+    "runner_sha256": "8eb2f652108de84b144dadfb550616cd1c0c669a300dc406871756f742f479d5"
+  },
+  "input_hashes": {
+    "v19be_config": "9d0ab3e6d0d52a4e55871385607b2b006e78a4c99b4f64e8e772a0e88ad12c63",
+    "v19be_report": "7dc1ef7d3e0320d4d59040e8d0c10534f91d146a211740fb59b33b70c514f0bd"
+  },
+  "literal_wave_crossing_time_window_years": {
+    "lower_years": 111159.56472037999,
+    "upper_years": 134515.06360515216
+  },
+  "outputs": {
+    "grid": "results/sigma_v19bf_long_wave_scale_window/scale_grid.csv",
+    "grid_sha256": "0db008275db3471db6a2dfd5b5ea178427f81b3b23cf5a823b34929669a6a47c",
+    "plot": "results/sigma_v19bf_long_wave_scale_window/activation_window.svg",
+    "plot_sha256": "32a931d8b834457c68052ae90c782e2ba0dfa68fa8e95098d51595cfddd3026b"
+  },
+  "protocol_version": "SIGMA-V19BF-LONG-WAVE-SCALE-WINDOW-1.0.0",
+  "theory_state": {
+    "covariant_action_selected": false,
+    "dimensionless_scale_window_derived": true,
+    "euler_lagrange_equations_derived": false,
+    "gas_source_state_available": false,
+    "physical_postulate_recorded": true,
+    "universal_constants_selected": false,
+    "weak_field_metric_derived": false
+  }
+}
