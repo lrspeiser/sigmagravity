@@ -1,0 +1,62 @@
+{
+  "protocol_version": "SIGMA-V19O-FOV-FILTERED-RESPONSE-WORKLOAD-1.0.0",
+  "status": "frozen after V19N failed exact Bullet science-count conservation by one event and before translating a V19O FOV, filtering a registered event through that FOV, knowing a corrected response-task count, constructing a spectrum or response, fitting thermodynamics, opening lensing data, or changing gravity physics",
+  "purpose": "Correct V19N's missing observation-specific detector support by applying the same astrometrically translated repro FOV used by the inherited response pipeline before enumerating each region/observation/CCD task.",
+  "parents": {
+    "v19n_config": "configs/sigma_v19n_regional_response_workload.json",
+    "v19n_config_sha256": "dffb878e6abe8c444a39024be639c392414488d54c4d5859d1b37e867776e69e",
+    "v19n_runner": "scripts/run_sigma_v19n_regional_response_workload.py",
+    "v19n_runner_sha256": "8d3a3df8f68ffb7588a3a33489e30fdab1bc38b904e9667c26a91c4e7cee917e",
+    "v19n_failure_report": "results/sigma_v19n_regional_response_workload/report.json",
+    "v19n_failure_report_sha256": "1ead26fe0b6c08f47160a47e481c067268b2fce40ddd520fd146e25db2175351",
+    "v19m_report": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+    "v19m_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "repro_report": "results/sigma_v19f_chandra_repro/report.json",
+    "repro_report_sha256": "6541133c249103400e9cedffc8f8118e72fd75f2a6bda7c3db1d876614cd7ab9",
+    "astrometry_report": "results/sigma_v19g_chandra_astrometry/report.json",
+    "astrometry_report_sha256": "b6f77ad4dff16af66a1698f6d8e9310cadd98d1085c5d0965ec57cd2c58732a6",
+    "inherited_response_runner": "scripts/run_sigma_v17c_integrated_spectra.py",
+    "inherited_response_runner_sha256": "1116dff3c8da44c54a0402d20dbcf7094945579abdbcf89e9278a3017685dd21"
+  },
+  "sample": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "all_twenty_observations_required": true,
+    "same_fov_translation_filter_and_task_rule": true
+  },
+  "fov_correction": {
+    "source": "the unique chandra_repro *_repro_fov1.fits product for each observation, with its frozen repro-report hash",
+    "translation": "copy once and run CIAO wcs_update in place with the observation's frozen V19G transform and WCS image",
+    "science_filter": "registered point-source-excluded event[sky=region(translated FOV)][energy=500:7000]",
+    "background_task_filter": "matching registered blank-sky event[sky=region(translated FOV)][energy=500:7000]",
+    "task_rule": "retain the V19N admitted-region/observation/CCD rule after FOV filtering",
+    "reason": "flux_obs used detector masks when constructing broad counts; unmasked coordinate assignment retained two Bullet event rows absent from the frozen image, one inside a contbin label"
+  },
+  "conservation_gates": {
+    "science": "FOV-filtered event assignment inside every contbin label exactly equals the frozen broad-count image",
+    "background_parent": "V19N's unfiltered scaled-background assignment must retain its already exact conservation result",
+    "all_admitted_regions_have_at_least_one_task": true,
+    "no_unexpected_ccd_id": true,
+    "all_translated_fov_hashes_finite_and_unique": true,
+    "failure_rule": "fail before response construction; do not rescue the count by deleting an event, changing an endpoint, or dropping a region/observation/CCD"
+  },
+  "engineering_report": {
+    "files_per_response_cell": 4,
+    "provisional_upper_storage_megabytes_per_cell": 25.0,
+    "storage_is_planning_only": true,
+    "batching_may_change_scheduling_but_not_task_membership": true
+  },
+  "integrity": {
+    "translated_fov_constructed_at_freeze": false,
+    "fov_filtered_event_read_at_freeze": false,
+    "corrected_task_count_known_at_freeze": false,
+    "spectrum_or_response_constructed_at_freeze": false,
+    "temperature_density_mach_or_speed_fitted_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}

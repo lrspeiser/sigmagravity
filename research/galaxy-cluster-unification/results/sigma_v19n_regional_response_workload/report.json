@@ -1,0 +1,188 @@
+{
+  "status": "regional_response_workload_gate_failed",
+  "protocol_version": "SIGMA-V19N-REGIONAL-RESPONSE-WORKLOAD-1.0.0",
+  "generated_utc": "2026-08-05T05:48:33.390927+00:00",
+  "config_sha256": "dffb878e6abe8c444a39024be639c392414488d54c4d5859d1b37e867776e69e",
+  "runner_sha256": "8d3a3df8f68ffb7588a3a33489e30fdab1bc38b904e9667c26a91c4e7cee917e",
+  "manifest": {
+    "path": "results/sigma_v19n_regional_response_workload/response_task_manifest.csv",
+    "sha256": "dc3a64aafe1cc81e0c02b9d3d371fa38e91cf6dfc2c38b2f8ad9f3e197205f4c",
+    "bytes": 269543,
+    "response_task_count": 5082
+  },
+  "clusters": [
+    {
+      "cluster": "BULLET",
+      "observation_count": 10,
+      "admitted_region_count": 366,
+      "response_task_count": 3812,
+      "expected_output_file_count": 15248,
+      "provisional_upper_storage_gib": 93.06640625,
+      "science_events_assigned_inside_all_bins": 775284,
+      "frozen_broad_counts_inside_all_bins": 775283.0,
+      "science_count_delta": 1.0,
+      "weighted_blanksky_events_inside_all_bins": 68042.402920141,
+      "frozen_scaled_background_inside_all_bins": 68042.402920141,
+      "scaled_background_count_delta": 0.0,
+      "missing_admitted_region_ids": [],
+      "unexpected_ccd_ids": [],
+      "observations": [
+        {
+          "obsid": 554,
+          "source_events_inside_all_bins": 34066,
+          "blanksky_events_inside_all_bins": 58563,
+          "response_task_count": 329
+        },
+        {
+          "obsid": 3184,
+          "source_events_inside_all_bins": 119148,
+          "blanksky_events_inside_all_bins": 174628,
+          "response_task_count": 366
+        },
+        {
+          "obsid": 4984,
+          "source_events_inside_all_bins": 108962,
+          "blanksky_events_inside_all_bins": 175247,
+          "response_task_count": 370
+        },
+        {
+          "obsid": 4985,
+          "source_events_inside_all_bins": 32886,
+          "blanksky_events_inside_all_bins": 177092,
+          "response_task_count": 388
+        },
+        {
+          "obsid": 4986,
+          "source_events_inside_all_bins": 54680,
+          "blanksky_events_inside_all_bins": 176512,
+          "response_task_count": 404
+        },
+        {
+          "obsid": 5355,
+          "source_events_inside_all_bins": 31982,
+          "blanksky_events_inside_all_bins": 177115,
+          "response_task_count": 387
+        },
+        {
+          "obsid": 5356,
+          "source_events_inside_all_bins": 129207,
+          "blanksky_events_inside_all_bins": 174986,
+          "response_task_count": 387
+        },
+        {
+          "obsid": 5357,
+          "source_events_inside_all_bins": 103634,
+          "blanksky_events_inside_all_bins": 175282,
+          "response_task_count": 409
+        },
+        {
+          "obsid": 5358,
+          "source_events_inside_all_bins": 42892,
+          "blanksky_events_inside_all_bins": 176360,
+          "response_task_count": 401
+        },
+        {
+          "obsid": 5361,
+          "source_events_inside_all_bins": 117827,
+          "blanksky_events_inside_all_bins": 172873,
+          "response_task_count": 371
+        }
+      ],
+      "gates": {
+        "science_count_conservation_exact": false,
+        "scaled_background_conservation_within_1e_5": true,
+        "all_admitted_regions_have_a_response_task": true,
+        "no_unexpected_ccd_id": true
+      }
+    },
+    {
+      "cluster": "ABELL2146",
+      "observation_count": 10,
+      "admitted_region_count": 128,
+      "response_task_count": 1270,
+      "expected_output_file_count": 5080,
+      "provisional_upper_storage_gib": 31.005859375,
+      "science_events_assigned_inside_all_bins": 346066,
+      "frozen_broad_counts_inside_all_bins": 346066.0,
+      "science_count_delta": 0.0,
+      "weighted_blanksky_events_inside_all_bins": 87547.33460349702,
+      "frozen_scaled_background_inside_all_bins": 87547.334603497,
+      "scaled_background_count_delta": 1.4551915228366852e-11,
+      "missing_admitted_region_ids": [],
+      "unexpected_ccd_ids": [],
+      "observations": [
+        {
+          "obsid": 10464,
+          "source_events_inside_all_bins": 47123,
+          "blanksky_events_inside_all_bins": 22377,
+          "response_task_count": 128
+        },
+        {
+          "obsid": 10888,
+          "source_events_inside_all_bins": 9120,
+          "blanksky_events_inside_all_bins": 22738,
+          "response_task_count": 128
+        },
+        {
+          "obsid": 12245,
+          "source_events_inside_all_bins": 37357,
+          "blanksky_events_inside_all_bins": 93568,
+          "response_task_count": 128
+        },
+        {
+          "obsid": 12246,
+          "source_events_inside_all_bins": 37950,
+          "blanksky_events_inside_all_bins": 94117,
+          "response_task_count": 128
+        },
+        {
+          "obsid": 12247,
+          "source_events_inside_all_bins": 49500,
+          "blanksky_events_inside_all_bins": 94460,
+          "response_task_count": 128
+        },
+        {
+          "obsid": 13020,
+          "source_events_inside_all_bins": 31302,
+          "blanksky_events_inside_all_bins": 92672,
+          "response_task_count": 128
+        },
+        {
+          "obsid": 13021,
+          "source_events_inside_all_bins": 34968,
+          "blanksky_events_inside_all_bins": 93471,
+          "response_task_count": 123
+        },
+        {
+          "obsid": 13023,
+          "source_events_inside_all_bins": 22822,
+          "blanksky_events_inside_all_bins": 96307,
+          "response_task_count": 128
+        },
+        {
+          "obsid": 13120,
+          "source_events_inside_all_bins": 35848,
+          "blanksky_events_inside_all_bins": 94149,
+          "response_task_count": 123
+        },
+        {
+          "obsid": 13138,
+          "source_events_inside_all_bins": 40076,
+          "blanksky_events_inside_all_bins": 94997,
+          "response_task_count": 128
+        }
+      ],
+      "gates": {
+        "science_count_conservation_exact": true,
+        "scaled_background_conservation_within_1e_5": true,
+        "all_admitted_regions_have_a_response_task": true,
+        "no_unexpected_ccd_id": true
+      }
+    }
+  ],
+  "response_extraction_authorized": false,
+  "spectrum_or_response_constructed": false,
+  "temperature_density_mach_or_speed_fitted": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

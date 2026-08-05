@@ -446,3 +446,11 @@ def test_v19_observability_gate_does_not_pretend_to_be_a_formula() -> None:
     v19m = protocols["sigma_v19m_adaptive_thermodynamic_regions.json"]
     assert v19m["role"] == "gate_or_data_protocol_no_new_formula_fragment"
     assert v19m["formula_fragment_count"] == 0
+
+    v19n = protocols["sigma_v19n_regional_response_workload.json"]
+    assert v19n["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19n["formula_fragment_count"] == 0
+
+    v19o = protocols["sigma_v19o_fov_filtered_response_workload.json"]
+    assert v19o["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19o["formula_fragment_count"] == 0

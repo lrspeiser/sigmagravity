@@ -1,0 +1,592 @@
+{
+  "status": "fov_filtered_regional_response_workload_gate_failed",
+  "protocol_version": "SIGMA-V19O-FOV-FILTERED-RESPONSE-WORKLOAD-1.0.0",
+  "generated_utc": "2026-08-05T05:57:48.487202+00:00",
+  "config_sha256": "f614fdf984b477d9b5d07dcc03ce63522974457e0d353c4dd83c9df38dc59ac6",
+  "runner_sha256": "7b88717606901386f5a52d3daa49ab98a148dcc84ad2fb8be638cfbee4216060",
+  "manifest": {
+    "path": "results/sigma_v19o_fov_filtered_response_workload/response_task_manifest.csv",
+    "sha256": "34ee2e8a760c41a2adb8d78f7b8fbe0217ccf32001effe37fa1190728d169fde",
+    "bytes": 599895,
+    "response_task_count": 5082
+  },
+  "clusters": [
+    {
+      "cluster": "BULLET",
+      "observation_count": 10,
+      "admitted_region_count": 366,
+      "response_task_count": 3812,
+      "expected_output_file_count": 15248,
+      "provisional_upper_storage_gib": 93.06640625,
+      "science_events_assigned_inside_all_bins": 775284,
+      "frozen_broad_counts_inside_all_bins": 775283.0,
+      "science_count_delta": 1.0,
+      "v19n_unfiltered_upper_bound_response_tasks": 3812,
+      "tasks_removed_by_fov_filter": 0,
+      "missing_admitted_region_ids": [],
+      "unexpected_ccd_ids": [],
+      "observations": [
+        {
+          "obsid": 554,
+          "science_events_inside_all_bins": 34066,
+          "response_task_count": 329,
+          "translated_fov_sha256": "ebe9f3a6d84b50f1eaf79bfc0ad2d577bcb3ab073fba7fe0dd28eac9d64185f2"
+        },
+        {
+          "obsid": 3184,
+          "science_events_inside_all_bins": 119148,
+          "response_task_count": 366,
+          "translated_fov_sha256": "f7ccd67965a0cd0af99841d24d1d7bbbc9e29b63d99fd731222034165da9a8d9"
+        },
+        {
+          "obsid": 4984,
+          "science_events_inside_all_bins": 108962,
+          "response_task_count": 370,
+          "translated_fov_sha256": "e0a2ad95b9a201c1c0ac1083218c37a297497585c2216ea6328f9b2844d18d2e"
+        },
+        {
+          "obsid": 4985,
+          "science_events_inside_all_bins": 32886,
+          "response_task_count": 388,
+          "translated_fov_sha256": "99c57039862010e82b006ea9fde60350ff7369858bff85eb34e061774c517bfc"
+        },
+        {
+          "obsid": 4986,
+          "science_events_inside_all_bins": 54680,
+          "response_task_count": 404,
+          "translated_fov_sha256": "8e1cb55c53a00c7f32ef5b2021d625814a46bdf9560fcc200f569fa1b0b16950"
+        },
+        {
+          "obsid": 5355,
+          "science_events_inside_all_bins": 31982,
+          "response_task_count": 387,
+          "translated_fov_sha256": "08e8c24260fb1d67b357a4fd291dacc8c27f22155d24db6f99445385af87d305"
+        },
+        {
+          "obsid": 5356,
+          "science_events_inside_all_bins": 129207,
+          "response_task_count": 387,
+          "translated_fov_sha256": "5a39fc87f7bfe7d370be2204cadaa86cbecff47b69e472fb7149482b26be196a"
+        },
+        {
+          "obsid": 5357,
+          "science_events_inside_all_bins": 103634,
+          "response_task_count": 409,
+          "translated_fov_sha256": "efefc3a7d13d39250a73fb3acdb5a3860333bbd752a196e7ad2a5b463d431fab"
+        },
+        {
+          "obsid": 5358,
+          "science_events_inside_all_bins": 42892,
+          "response_task_count": 401,
+          "translated_fov_sha256": "8c8ae07bdb5bdcbd3d5cd40a4d5d0310dbb9748052e5f45fe05174508d411dd7"
+        },
+        {
+          "obsid": 5361,
+          "science_events_inside_all_bins": 117827,
+          "response_task_count": 371,
+          "translated_fov_sha256": "9e6fcb46d582b0e0838629d692ebc788a2c19fea51eacc4c8fede50cd809ae08"
+        }
+      ],
+      "translated_fovs": [
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf554_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/554/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/554/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf554_gaia_fov1.wcs_update.log",
+          "log_sha256": "e27d44e08f2dd02933a7a9eddf5d3981d589744675f908817d2aa76b5d6a18fe",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/554/acisf00554_repro_fov1.fits",
+          "source_sha256": "d3a6e4d9be7c011d09cd9650bc69ad09036169d9fa38cca28ac39b2be5e61331",
+          "transform_sha256": "93acdeaaf4a501033dfd837f691a30acfa6f275fdb466e1a2dbbf26edaa0f4ff",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf554_gaia_fov1.fits",
+          "translated_sha256": "ebe9f3a6d84b50f1eaf79bfc0ad2d577bcb3ab073fba7fe0dd28eac9d64185f2"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf3184_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/3184/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/3184/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf3184_gaia_fov1.wcs_update.log",
+          "log_sha256": "c198380e071e20da48653457430907a3d88863aa3c82ef0220f37a03dac48e20",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/3184/acisf03184_repro_fov1.fits",
+          "source_sha256": "f4e74b4fd38fb39a5114fc3798c1f7b37932afc203695c0ee94662ab7533cae8",
+          "transform_sha256": "9e8eccd6fa179cef1030ce77986c3a91a984cde1b52e6768fdcdaa428813526f",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf3184_gaia_fov1.fits",
+          "translated_sha256": "f7ccd67965a0cd0af99841d24d1d7bbbc9e29b63d99fd731222034165da9a8d9"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf4984_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/4984/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/4984/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf4984_gaia_fov1.wcs_update.log",
+          "log_sha256": "7dd6e3ebc306a6dd2d02141e9d26c846f04ff392899491d125430cb7eba2369e",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/4984/acisf04984_repro_fov1.fits",
+          "source_sha256": "af906dd37513672a503f317f42cf4d517572ab34ae1ffd8da74fbc79ea0372fe",
+          "transform_sha256": "4bca270186549efa485c5593b130f20cadcfbdb203735145d7c810b5aee8af06",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf4984_gaia_fov1.fits",
+          "translated_sha256": "e0a2ad95b9a201c1c0ac1083218c37a297497585c2216ea6328f9b2844d18d2e"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf4985_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/4985/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/4985/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf4985_gaia_fov1.wcs_update.log",
+          "log_sha256": "45a684110d8314baeb71680902c376624165bff4ad555c7a40fe0152d27b6ed1",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/4985/acisf04985_repro_fov1.fits",
+          "source_sha256": "73dbb5bfe8cabb51d309c363c6e4a5658ee540134aef86417ec4085479fa5d9b",
+          "transform_sha256": "9fb639f78ff428115110d60916327670cb0de8987223d39bce453e909d0e1e83",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf4985_gaia_fov1.fits",
+          "translated_sha256": "99c57039862010e82b006ea9fde60350ff7369858bff85eb34e061774c517bfc"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf4986_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/4986/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/4986/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf4986_gaia_fov1.wcs_update.log",
+          "log_sha256": "6ec96996ff5a212c2135b5760274f0a15df2c51ee79be1600ba46731738505cb",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/4986/acisf04986_repro_fov1.fits",
+          "source_sha256": "7dbd19e4867b2001421ccd1ff3492aac11b7bde34318ebdb63eb4e6dcdf2959d",
+          "transform_sha256": "d069e411cc74204204e2df3eafe326ae9a7498911252a71ab6887b0442d2880f",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf4986_gaia_fov1.fits",
+          "translated_sha256": "8e1cb55c53a00c7f32ef5b2021d625814a46bdf9560fcc200f569fa1b0b16950"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5355_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5355/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/5355/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5355_gaia_fov1.wcs_update.log",
+          "log_sha256": "3b5753cd73cde6d1315651320470faba68ea1bbb149afe7674ef9d528110bd83",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/5355/acisf05355_repro_fov1.fits",
+          "source_sha256": "8f4d073f19c6011a05ba675b4e8ee3c08438a92620e9f9fe281bcd786877357e",
+          "transform_sha256": "2e28cf42148fa0fee21e76ad04e42209e5f2272049fdddcc5338e591ec0505ee",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5355_gaia_fov1.fits",
+          "translated_sha256": "08e8c24260fb1d67b357a4fd291dacc8c27f22155d24db6f99445385af87d305"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5356_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v101/BULLET/5356/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/5356/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5356_gaia_fov1.wcs_update.log",
+          "log_sha256": "1d8cc1aa8ab4b3d36bf2faf70387313b2cbb9a3f4fe402e985b9a00ebab56665",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/5356/acisf05356_repro_fov1.fits",
+          "source_sha256": "4efafcdb08db7f99859494c31355f14988b1a1eed46fe2968ee862c1d2c1dc0c",
+          "transform_sha256": "973bfe2539e1958c143dab69821f856c000731a13efce6706f3755450e0f58a5",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5356_gaia_fov1.fits",
+          "translated_sha256": "5a39fc87f7bfe7d370be2204cadaa86cbecff47b69e472fb7149482b26be196a"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5357_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5357/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/5357/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5357_gaia_fov1.wcs_update.log",
+          "log_sha256": "d137243110fd34b89fcacf48f697897c53e05943b93588e79482925436cbf3fe",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/5357/acisf05357_repro_fov1.fits",
+          "source_sha256": "1d4adae06f3728d90669f2ed6800f3518192665e57e392c63c617697050bb3ab",
+          "transform_sha256": "7aad7c2d700799c4d7a068303476ba23e4f4bfdf5fad3c034fb0697105c75521",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5357_gaia_fov1.fits",
+          "translated_sha256": "efefc3a7d13d39250a73fb3acdb5a3860333bbd752a196e7ad2a5b463d431fab"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5358_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5358/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/5358/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5358_gaia_fov1.wcs_update.log",
+          "log_sha256": "3bccb2d7f2957658dede84c0365f2835fba1d5e0440fe000747211331d92fc91",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/5358/acisf05358_repro_fov1.fits",
+          "source_sha256": "0079dc4428d17213a1aa6c305b02f9a2884f75e342634740ef80fa706c38d200",
+          "transform_sha256": "588232fdfa65852b32712545d4a25adaa2193094cc5afd7bae6e04e83a0ca244",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5358_gaia_fov1.fits",
+          "translated_sha256": "8c8ae07bdb5bdcbd3d5cd40a4d5d0310dbb9748052e5f45fe05174508d411dd7"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5361_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5361/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/BULLET/5361/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5361_gaia_fov1.wcs_update.log",
+          "log_sha256": "0d82f195a03fdb8b6af059f6f8cc6f118c6020f9a7df73d6950a7f8763ec93af",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/BULLET/5361/acisf05361_repro_fov1.fits",
+          "source_sha256": "7dee7cc0e1e85ecc38af71212199a39f0db1aae01162a389ce0ead14b193358c",
+          "transform_sha256": "8ea251ad79dbdf8eba29ac1908925e1ebf810bb29b0d5716d25778b432a45a4e",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/BULLET/acisf5361_gaia_fov1.fits",
+          "translated_sha256": "9e6fcb46d582b0e0838629d692ebc788a2c19fea51eacc4c8fede50cd809ae08"
+        }
+      ],
+      "gates": {
+        "science_count_conservation_exact": false,
+        "parent_scaled_background_conservation_retained": true,
+        "all_admitted_regions_have_a_response_task": true,
+        "no_unexpected_ccd_id": true,
+        "all_translated_fov_hashes_finite_and_unique": true
+      }
+    },
+    {
+      "cluster": "ABELL2146",
+      "observation_count": 10,
+      "admitted_region_count": 128,
+      "response_task_count": 1270,
+      "expected_output_file_count": 5080,
+      "provisional_upper_storage_gib": 31.005859375,
+      "science_events_assigned_inside_all_bins": 341811,
+      "frozen_broad_counts_inside_all_bins": 346066.0,
+      "science_count_delta": -4255.0,
+      "v19n_unfiltered_upper_bound_response_tasks": 1270,
+      "tasks_removed_by_fov_filter": 0,
+      "missing_admitted_region_ids": [],
+      "unexpected_ccd_ids": [],
+      "observations": [
+        {
+          "obsid": 10464,
+          "science_events_inside_all_bins": 43934,
+          "response_task_count": 128,
+          "translated_fov_sha256": "495812289387a97bd61a7f24ec9742040e6f26f5ec27d05bea482657e4bca13c"
+        },
+        {
+          "obsid": 10888,
+          "science_events_inside_all_bins": 8528,
+          "response_task_count": 128,
+          "translated_fov_sha256": "886b41cbe4396c96f20e3d55d5551449101eb54d4740590b3fa7277a584d7ab7"
+        },
+        {
+          "obsid": 12245,
+          "science_events_inside_all_bins": 37321,
+          "response_task_count": 128,
+          "translated_fov_sha256": "e395ec25ddfc0b3a78910292c97cb1ea9660ca1e7a6845d124de24734f806a8c"
+        },
+        {
+          "obsid": 12246,
+          "science_events_inside_all_bins": 37746,
+          "response_task_count": 128,
+          "translated_fov_sha256": "9649ba170369a73b06072883ae14d0c9f8d712918edd2dfad6f51001918967fd"
+        },
+        {
+          "obsid": 12247,
+          "science_events_inside_all_bins": 49500,
+          "response_task_count": 128,
+          "translated_fov_sha256": "f8983f750342d2cae259c33728796ee00d7204214da71d1b3a65372b84e391f1"
+        },
+        {
+          "obsid": 13020,
+          "science_events_inside_all_bins": 31302,
+          "response_task_count": 128,
+          "translated_fov_sha256": "3634d7bcb45a406eb99a4772e68920fd17ff2a6dfde0d0b88c5e88e6dd9aa2f1"
+        },
+        {
+          "obsid": 13021,
+          "science_events_inside_all_bins": 34968,
+          "response_task_count": 123,
+          "translated_fov_sha256": "5e7e3386c42eeb3f91034c88466ab83594437df5476fa74eb385b5d46d549bac"
+        },
+        {
+          "obsid": 13023,
+          "science_events_inside_all_bins": 22822,
+          "response_task_count": 128,
+          "translated_fov_sha256": "133a2ed9c70ace282f309070438db526ac71771b75da99ed411a355aa2b01ba4"
+        },
+        {
+          "obsid": 13120,
+          "science_events_inside_all_bins": 35805,
+          "response_task_count": 123,
+          "translated_fov_sha256": "79087fc5808c708bea671464e6d46f042f2ee13e39bb081e2c6dda36e97176f4"
+        },
+        {
+          "obsid": 13138,
+          "science_events_inside_all_bins": 39885,
+          "response_task_count": 128,
+          "translated_fov_sha256": "c457db3a4d817872b1bb0429f60975d155682485466efd36e18a0c4b304f63e0"
+        }
+      ],
+      "translated_fovs": [
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf10464_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/10464/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/10464/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf10464_gaia_fov1.wcs_update.log",
+          "log_sha256": "97e9954465a87c609db4d33ad884eefb7b8f7409942fd6fd7830a30752b06bc2",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/10464/acisf10464_repro_fov1.fits",
+          "source_sha256": "ca58180dd611c849ca587f302c88ba96bc6c10e0ddd026cb15832415044ea9d3",
+          "transform_sha256": "6ead9bfe2370c372b5798015dac89a9aab2b9bfbff88d4e1c37affc260d85851",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf10464_gaia_fov1.fits",
+          "translated_sha256": "495812289387a97bd61a7f24ec9742040e6f26f5ec27d05bea482657e4bca13c"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf10888_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/10888/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/10888/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf10888_gaia_fov1.wcs_update.log",
+          "log_sha256": "bbc7040d7f873eed9da12e889a3115bb4506a67426c3ee5eea3ce7296e905351",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/10888/acisf10888_repro_fov1.fits",
+          "source_sha256": "413eadf6d920a4c69d471554dee28cc407611895e8e99c70d49799753de9dfe0",
+          "transform_sha256": "dcd28e3794ff2844b1f9f9e66aca0b019f3cf25caff0cb4d9bc267a8dd0e15fc",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf10888_gaia_fov1.fits",
+          "translated_sha256": "886b41cbe4396c96f20e3d55d5551449101eb54d4740590b3fa7277a584d7ab7"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf12245_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/12245/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/12245/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf12245_gaia_fov1.wcs_update.log",
+          "log_sha256": "42791da8ebd103ee8eb4cd0326cc8c7e2fbae1e509b4c3eed1e33f528e908e43",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/12245/acisf12245_repro_fov1.fits",
+          "source_sha256": "cef2711daf268ffb985642a075fc66910b0534d5526dd21ee68efdb0f0a6293f",
+          "transform_sha256": "551a5944d35c4fb5a5a206e901830c2e0fa262700c51a0bfae645061a27911dc",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf12245_gaia_fov1.fits",
+          "translated_sha256": "e395ec25ddfc0b3a78910292c97cb1ea9660ca1e7a6845d124de24734f806a8c"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf12246_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/12246/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/12246/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf12246_gaia_fov1.wcs_update.log",
+          "log_sha256": "69c07638cd73ff30f3a5e66e3e98bfa97eb2d56ef8212e5ae95fb226cabde427",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/12246/acisf12246_repro_fov1.fits",
+          "source_sha256": "8dafe03591f6ffc6b141a66f87e49c7a106daa7f17dada8035771e7ac4dd7bc3",
+          "transform_sha256": "4058eb3e49a46a828790bf5b0ddf27ccbc74b2989f5b78ddc9daac927dafe597",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf12246_gaia_fov1.fits",
+          "translated_sha256": "9649ba170369a73b06072883ae14d0c9f8d712918edd2dfad6f51001918967fd"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf12247_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v101/ABELL2146/12247/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/12247/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf12247_gaia_fov1.wcs_update.log",
+          "log_sha256": "1e1042c0635e41d9b3d03edba4a8aafa2c407ba3495ff5992fa1ff41651118ad",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/12247/acisf12247_repro_fov1.fits",
+          "source_sha256": "ae7119bbd6380906c3c7b247e7f085d52d81eb73bad289e2a39d2dccdb5cdb59",
+          "transform_sha256": "1381a3adb2f9c524363fa46c0e184e45a9e2726a9305196937d3e33d5c20aaf0",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf12247_gaia_fov1.fits",
+          "translated_sha256": "f8983f750342d2cae259c33728796ee00d7204214da71d1b3a65372b84e391f1"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13020_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/13020/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/13020/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13020_gaia_fov1.wcs_update.log",
+          "log_sha256": "a217b3f2aa8218913e36ed0a1f375da0a173abd091f271474b5c8a0674690d11",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13020/acisf13020_repro_fov1.fits",
+          "source_sha256": "85e1f79ab1454c5f2c6012689639971f250e1f7acb48f01d611976354c8189b1",
+          "transform_sha256": "c0f5c3716d8cb83d59b0e37929d4747c5489eeae750d0ea94bd94e187278d3d4",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13020_gaia_fov1.fits",
+          "translated_sha256": "3634d7bcb45a406eb99a4772e68920fd17ff2a6dfde0d0b88c5e88e6dd9aa2f1"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13021_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/13021/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/13021/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13021_gaia_fov1.wcs_update.log",
+          "log_sha256": "f3a6816807dc599ab91855b9bb9a5a4fe8151397e596d17ec01f68d0d8cdc46e",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13021/acisf13021_repro_fov1.fits",
+          "source_sha256": "4de3d5c285117ec1f244c69ee4c962b3fabc11a165e654c8fe0b15705698e51f",
+          "transform_sha256": "f7d9f197323369654a09a016f1df6349c4aeb90dae16e2a7ca1bd046664e328e",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13021_gaia_fov1.fits",
+          "translated_sha256": "5e7e3386c42eeb3f91034c88466ab83594437df5476fa74eb385b5d46d549bac"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13023_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/13023/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/13023/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13023_gaia_fov1.wcs_update.log",
+          "log_sha256": "be0315cc7d49e95cb876ee878bd1de2406a342b80770bc9f22e28cb5d6dc2e3a",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13023/acisf13023_repro_fov1.fits",
+          "source_sha256": "5fecdd9cf4592c5313a4a15c2d5bbecc13b6e1bbaf7cf042759259c85ca89a71",
+          "transform_sha256": "0414f89e9b6622fa570f3cf1df9c1ad7c304e9c434d0333b3c19228f4987f5e0",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13023_gaia_fov1.fits",
+          "translated_sha256": "133a2ed9c70ace282f309070438db526ac71771b75da99ed411a355aa2b01ba4"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13120_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/13120/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/13120/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13120_gaia_fov1.wcs_update.log",
+          "log_sha256": "52fa90e91b4443eae59f107c50b083317e5578c02bf5ec702c5ca8f9ccb0b5d4",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13120/acisf13120_repro_fov1.fits",
+          "source_sha256": "172794ae54035f6fe2a2c2528af1bb29c2b6e90056101d98458749fb4f3011f5",
+          "transform_sha256": "4824245d195dd240a996a5d42c80e2f90fae256647d67d83a14cd4733aeff6df",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13120_gaia_fov1.fits",
+          "translated_sha256": "79087fc5808c708bea671464e6d46f042f2ee13e39bb081e2c6dda36e97176f4"
+        },
+        {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13138_gaia_fov1.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/13138/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v19f-chandra/clean/ABELL2146/13138/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13138_gaia_fov1.wcs_update.log",
+          "log_sha256": "097293c9a50f91e0404bd6f6b94b9eb55f4b27ea73fd28dc0b9219db0b97ab00",
+          "reused": true,
+          "source": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13138/acisf13138_repro_fov1.fits",
+          "source_sha256": "0d73d8ff8db60f3b01f049a88e9f4eb2dbd703266605783c6d823ec783b54165",
+          "transform_sha256": "93c7225c50413ab2924632a35144ad0028b1ea1d253355b86074c66f49854a4c",
+          "translated": "/home/henry/sigma-v19o-response-workload/fov_v100/translated_fov/ABELL2146/acisf13138_gaia_fov1.fits",
+          "translated_sha256": "c457db3a4d817872b1bb0429f60975d155682485466efd36e18a0c4b304f63e0"
+        }
+      ],
+      "gates": {
+        "science_count_conservation_exact": false,
+        "parent_scaled_background_conservation_retained": true,
+        "all_admitted_regions_have_a_response_task": true,
+        "no_unexpected_ccd_id": true,
+        "all_translated_fov_hashes_finite_and_unique": true
+      }
+    }
+  ],
+  "response_extraction_authorized": false,
+  "spectrum_or_response_constructed": false,
+  "temperature_density_mach_or_speed_fitted": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

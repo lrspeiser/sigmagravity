@@ -1,0 +1,66 @@
+{
+  "protocol_version": "SIGMA-V19N-REGIONAL-RESPONSE-WORKLOAD-1.0.0",
+  "status": "frozen after V19M passed its machine and visual region gates but before reading a V19N event row, assigning an event to a thermodynamic region, knowing a nonempty observation/CCD/region cell count, constructing a spectrum or response, fitting temperature or density, opening a lensing target, or changing a gravity formula",
+  "purpose": "Enumerate the exact response workload for every frozen V19M admitted region using the already registered V19H events, with conservation checks against the frozen broad-band images, before starting expensive CIAO response construction.",
+  "parents": {
+    "v19m_config": "configs/sigma_v19m_adaptive_thermodynamic_regions.json",
+    "v19m_config_sha256": "285cdc12694217af69a03eef532094d26ace90b53b740faa2ef511138ef587f1",
+    "v19m_report": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+    "v19m_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+    "v19m_visual_audit": "results/sigma_v19m_adaptive_thermodynamic_regions/visual_audit.json",
+    "v19m_visual_audit_sha256": "662143cbcfb8145b87ede0c7fced090ead6b97ab905c4669a3e4bb152f199714",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af"
+  },
+  "sample": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "all_twenty_registered_observations_required": true,
+    "all_frozen_admitted_regions_required": true,
+    "all_ccds_with_a_frozen_blank_sky_scale_required": true
+  },
+  "assignment": {
+    "energy_eV": [
+      500,
+      7000
+    ],
+    "coordinate_columns": [
+      "X",
+      "Y"
+    ],
+    "ccd_column": "CCD_ID",
+    "image_index": "column=floor((X-xlo)/binsize), row=floor((Y-ylo)/binsize), using each V19H grid and V19M integer bin map",
+    "task_rule": "create one future response task for every admitted region, observation and frozen-scale CCD having at least one source-band event",
+    "zero_source_rule": "record but do not create a response task",
+    "background_rule": "record raw blank-sky events and the exact frozen BKGSCAL value; do not rescale event rows"
+  },
+  "conservation_gates": {
+    "science": "event rows assigned to every in-mask contbin label must exactly equal the summed frozen broad-count image inside those labels",
+    "background": "sum of assigned raw blank-sky events times the matching frozen BKGSCAL must equal the frozen scaled-background image inside all labels to absolute tolerance 1e-5 counts",
+    "all_admitted_regions_have_at_least_one_task": true,
+    "no_unexpected_ccd_id": true,
+    "failure_rule": "fail the workload manifest; do not drop an observation, CCD or region and do not change a coordinate convention to improve feasibility"
+  },
+  "engineering_report": {
+    "files_per_response_cell": 4,
+    "file_roles": [
+      "source PHA",
+      "blank-sky PHA",
+      "weighted ARF",
+      "weighted RMF"
+    ],
+    "provisional_upper_storage_megabytes_per_cell": 25.0,
+    "meaning": "a deliberately conservative planning envelope, not a science or admission threshold",
+    "full_extraction_rule": "freeze commands, batching, isolated PFILES and storage reclamation only after the exact manifest is known; batching may change scheduling but never task membership"
+  },
+  "integrity": {
+    "event_row_read_at_freeze": false,
+    "response_task_count_known_at_freeze": false,
+    "spectrum_or_response_constructed_at_freeze": false,
+    "temperature_density_mach_or_speed_fitted_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}

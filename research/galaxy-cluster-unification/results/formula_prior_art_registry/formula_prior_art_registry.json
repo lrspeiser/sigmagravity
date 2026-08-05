@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 121,
+    "sigma_protocols": 123,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6827,6 +6827,30 @@
         "NEWTON-POISSON"
       ],
       "sha256": "285cdc12694217af69a03eef532094d26ace90b53b740faa2ef511138ef587f1"
+    },
+    {
+      "config": "configs/sigma_v19n_regional_response_workload.json",
+      "protocol_version": "SIGMA-V19N-REGIONAL-RESPONSE-WORKLOAD-1.0.0",
+      "status": "frozen after V19M passed its machine and visual region gates but before reading a V19N event row, assigning an event to a thermodynamic region, knowing a nonempty observation/CCD/region cell count, constructing a spectrum or response, fitting temperature or density, opening a lensing target, or changing a gravity formula",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "dffb878e6abe8c444a39024be639c392414488d54c4d5859d1b37e867776e69e"
+    },
+    {
+      "config": "configs/sigma_v19o_fov_filtered_response_workload.json",
+      "protocol_version": "SIGMA-V19O-FOV-FILTERED-RESPONSE-WORKLOAD-1.0.0",
+      "status": "frozen after V19N failed exact Bullet science-count conservation by one event and before translating a V19O FOV, filtering a registered event through that FOV, knowing a corrected response-task count, constructing a spectrum or response, fitting thermodynamics, opening lensing data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "f614fdf984b477d9b5d07dcc03ce63522974457e0d353c4dd83c9df38dc59ac6"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",
