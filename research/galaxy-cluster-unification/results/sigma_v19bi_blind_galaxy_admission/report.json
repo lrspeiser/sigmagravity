@@ -1,0 +1,182 @@
+{
+  "admission_state": {
+    "action_selected": false,
+    "new_kinematic_targets_opened": 0,
+    "selected_galaxies": 0,
+    "survey_level_protocol_frozen": true,
+    "universal_constants_selected": false
+  },
+  "authorization_audit": {
+    "change_or_select_gravity_formula": false,
+    "download_or_open_new_kinematic_targets": false,
+    "fit_universal_constants": false,
+    "perform_detailed_solar_optimization": false,
+    "read_public_survey_metadata": true,
+    "select_final_galaxy_sample": false
+  },
+  "candidate_universes": [
+    {
+      "data_url": "https://wallaby-survey.org/data/",
+      "id": "WALLABY_PDR1_KINEMATICS",
+      "limitation": "many galaxies are only marginally resolved; fixed 10 km/s dispersion, beam smearing, inclination and inner surface-density systematics must be propagated or re-forward-modeled",
+      "published_systems": 109,
+      "role": "primary independent outer-disk candidate pool",
+      "strength": "homogeneous H I tilted-ring models, rotation curves, H I surface-density profiles, geometry and two-component velocity uncertainties in three environments",
+      "url": "https://arxiv.org/abs/2211.07333"
+    },
+    {
+      "data_url": "https://www.phangs.org/home/data",
+      "id": "PHANGS_CO_KINEMATICS",
+      "limitation": "CO generally probes inner disks and many systems may overlap earlier galaxy samples, so identity freshness and outer-radius coverage must be audited before holdout use",
+      "published_systems": 67,
+      "role": "high-resolution inner-geometry candidate or locked systematic test",
+      "strength": "roughly 150-pc CO rotation curves and orientations for massive star-forming disks, resolving bulges, bars and inner baryonic structure",
+      "url": "https://arxiv.org/abs/2005.11709"
+    },
+    {
+      "id": "DISKMASS_RADIAL_VERTICAL",
+      "limitation": "stellar scale height and mass-to-light ratio are important measurement nuisances and published availability must be verified per object",
+      "published_systems": 30,
+      "role": "radial-versus-vertical consistency candidate or locked systematic test",
+      "strength": "nearly face-on disks with rotation curves, surface-brightness profiles and line-of-sight stellar velocity-dispersion profiles",
+      "url": "https://academic.oup.com/mnras/article/451/4/3551/1104023"
+    }
+  ],
+  "claim_boundary": [
+    "This protocol identifies candidate surveys and mandatory diversity; it does not claim that 48 eligible fresh galaxies have already been assembled.",
+    "WALLABY catalog rotation curves are not raw truth: beam, inclination, fixed dispersion and tilted-ring assumptions must be audited with forward cube tests.",
+    "PHANGS inner curves and DiskMass vertical dispersions are complementary geometry tests, not substitutes for outer H I curves.",
+    "No new velocity, dispersion or residual target was opened and no galaxy was selected because of a Sigma outcome.",
+    "Solar tests remain mandatory but do not drive the current galaxy/cluster formula search."
+  ],
+  "config": "configs/sigma_v19bi_blind_galaxy_admission.json",
+  "config_sha256": "ca85ddd9f48443f5e684e0b1a1ed0d6cf5fe92608f446661e75c6b37e82242fb",
+  "decision": "passed_survey_level_blind_galaxy_admission_protocol",
+  "fair_comparator_contract": {
+    "each_stratum_RMSE_maximum_relative_to_fixed_MOND_RAR": 1.25,
+    "fixed_MOND_RAR_parameters_frozen_before_targets": true,
+    "halo_comparator_may_fit_per_galaxy_but_parameter_count_reported": true,
+    "no_per_galaxy_gravity_parameter_for_sigma": true,
+    "overall_RMSE_maximum_relative_to_fixed_MOND_RAR": 1.05,
+    "point_weighted_secondary_score_reported": true,
+    "primary_aggregate_is_object_balanced": true,
+    "raw_field_residual_structure_reported": true,
+    "same_baryon_draws_and_measurement_nuisances_for_all_gravity_models": true
+  },
+  "final_holdout_requirements": {
+    "minimum_group_or_cluster_environment_systems": 8,
+    "minimum_high_resolution_inner_curve_systems": 8,
+    "minimum_independent_non_WALLABY_galaxies": 8,
+    "minimum_low_density_field_environment_systems": 8,
+    "minimum_per_required_stratum": 6,
+    "minimum_primary_WALLABY_galaxies": 32,
+    "minimum_radial_plus_vertical_systems": 8,
+    "minimum_raw_cube_or_velocity_field_systems": 12,
+    "minimum_unique_galaxies": 48,
+    "sample_selected_here": false,
+    "strata_may_overlap": true
+  },
+  "gate_results": {
+    "all_frozen_galaxy_strata_are_retained": true,
+    "all_parent_hashes_exact": true,
+    "comparators_and_scores_are_fair": true,
+    "final_sample_and_targets_remain_sealed": true,
+    "independent_candidate_universes_are_broad": true,
+    "measurement_nuisances_are_not_gravity_parameters": true,
+    "no_theory_or_constant_selected": true,
+    "sample_size_and_observable_breadth_are_required": true,
+    "solar_is_retained_as_later_veto": true,
+    "source_and_target_payloads_remain_separated": true,
+    "spent_galaxy_evidence_is_segregated": true
+  },
+  "implementation": {
+    "runner": "scripts/check_sigma_v19bi_blind_galaxy_admission.py"
+  },
+  "nuisance_boundary": {
+    "gravity_parameters": [
+      "Sigma coupling",
+      "Sigma length or mass scale",
+      "Sigma kinetic or self-interaction coefficient",
+      "metric coupling"
+    ],
+    "measurement_nuisances": [
+      "distance",
+      "inclination",
+      "position_angle",
+      "systemic_velocity",
+      "stellar_mass_to_light_ratio",
+      "scale_height",
+      "gas_conversion",
+      "beam_and_PSF",
+      "asymmetric_drift"
+    ],
+    "rule": "Measurement nuisances may vary only under the same external priors for every comparator. No nuisance may select or alter a Sigma gravity constant per galaxy."
+  },
+  "parent_audit": {
+    "blind_cluster_admission": {
+      "actual_sha256": "3aba06b1360e976794b6dd2ded4bd65e2e472e184e84abb46b187baea2bf07d8",
+      "exact": true,
+      "expected_sha256": "3aba06b1360e976794b6dd2ded4bd65e2e472e184e84abb46b187baea2bf07d8",
+      "path": "results/sigma_v19bh_blind_cluster_admission/report.json"
+    },
+    "broad_phenomenology": {
+      "actual_sha256": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd",
+      "exact": true,
+      "expected_sha256": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd",
+      "path": "results/sigma_v19bg_broad_phenomenology_contract/report.json"
+    }
+  },
+  "priority": {
+    "detailed_solar_optimization_now": false,
+    "first": "freeze and test broad galaxy and cluster transfer from one metric",
+    "later_hard_veto": "Solar-System, PPN, propagation, stability and causal initial-value constraints",
+    "next": "weak lensing and merger offsets, then satellite, stream and friction predictions"
+  },
+  "protocol_version": "SIGMA-V19BI-BLIND-GALAXY-ADMISSION-1.0.0",
+  "registered_strata": [
+    "low_baryonic_mass_dwarf",
+    "high_baryonic_mass_giant",
+    "gas_rich",
+    "gas_poor",
+    "low_surface_brightness",
+    "high_surface_brightness",
+    "bulgeless_disk",
+    "bulge_dominated_or_pressure_supported"
+  ],
+  "spent_evidence": [
+    {
+      "id": "SPARC_DEVELOPMENT",
+      "observations": 3034,
+      "role": "development, morphology diagnosis and fixed-MOND comparator benchmarking; never a new holdout",
+      "systems": 131
+    },
+    {
+      "id": "LITTLE_THINGS_RESOLVED",
+      "role": "spent external rotation-curve, velocity-field and simulator commissioning evidence; never a new holdout",
+      "systems": 13
+    },
+    {
+      "id": "SPIDERS_MANGA_BCG",
+      "role": "spent pressure-supported giant-galaxy development evidence; never a new holdout",
+      "systems": 34
+    }
+  ],
+  "status": "completed_survey_level_blind_galaxy_admission_protocol",
+  "systematic_controls": [
+    {
+      "failure_meaning": "A catalog-curve success that disappears in the observed cube may be inclination, beam-smearing or fixed-dispersion leakage rather than gravity.",
+      "id": "WALLABY_FORWARD_CUBE_CONTROL",
+      "requirement": "For the raw subset, convolve the predicted velocity field and gas distribution through the released cube geometry and beam rather than comparing only deprojected catalog speeds."
+    },
+    {
+      "failure_meaning": "A field insensitive to baryonic geometry will wash out the resolved inner features that motivated a source-state response.",
+      "id": "PHANGS_INNER_GEOMETRY_CONTROL",
+      "requirement": "Report bulged, barred and unbarred inner residuals separately at the released CO resolution and never treat inner-only success as an outer flat-curve test."
+    },
+    {
+      "failure_meaning": "A law that increases radial attraction but overpredicts vertical restoring force has the wrong three-dimensional geometry even if its rotation curve looks good.",
+      "id": "DISKMASS_VERTICAL_CONTROL",
+      "requirement": "Use one metric and one stellar-population nuisance ensemble for both radial rotation and vertical dispersion; scale height may not be tuned to rescue gravity."
+    }
+  ]
+}

@@ -1,5 +1,24 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19BI blind-galaxy admission protocol
+
+The future galaxy test is now protected from reusing the 131 SPARC systems,
+13 resolved LITTLE THINGS systems or 34 SPIDERS-MaNGA BCGs as fresh evidence.
+The primary independent candidate universe is the 109-system WALLABY PDR1
+kinematic release; PHANGS contributes 67 high-resolution inner CO curves and
+DiskMass contributes 30 published radial-plus-vertical systems, subject to
+identity and data-availability audits.
+
+No new velocity target or galaxy is opened or selected.  The final holdout
+must contain at least 48 galaxies, six per frozen mass/gas/surface-brightness/
+bulge stratum, with raw-field, high-resolution inner and radial-plus-vertical
+subsets.  WALLABY's few-beam resolution, fixed 10-km/s dispersion and
+inclination/beam systematics are explicit forward-cube controls rather than
+hidden caveats.  Measurement nuisances use the same external priors for Sigma,
+fixed MOND/RAR and halo comparators and cannot become per-galaxy gravity
+constants.  See
+[`SIGMA_V19BI_BLIND_GALAXY_ADMISSION.md`](SIGMA_V19BI_BLIND_GALAXY_ADMISSION.md).
+
 ## 2026-08-05 Sigma V19BH blind-cluster admission protocol
 
 The future cluster holdout is now protected by an outcome-blind, state-
