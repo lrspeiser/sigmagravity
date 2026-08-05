@@ -1,0 +1,106 @@
+{
+  "protocol_version": "SIGMA-V19J-AUTOMATED-FRONT-IMPLEMENTATION-1.0.0",
+  "status": "frozen after V19H source-map hashing and V19I member-field failure but before reading any frozen soft-band science array, calculating a gradient, score, ridge, profile, or bootstrap, visually inspecting a science map, opening a replacement-cluster lensing target, or selecting a gravity formula",
+  "purpose": "Resolve the numerical implementation choices left implicit by the V19H automated-front estimator and execute the same target-blind source-only X-ray discontinuity search in the Bullet Cluster and Abell 2146.",
+  "parents": {
+    "v19h_config": "configs/sigma_v19h_causal_observable_protocol.json",
+    "v19h_config_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "v19i_member_failure_report": "results/sigma_v19i_continuous_member_field/report.json",
+    "v19i_member_failure_report_sha256": "6bbd82f51103b2d877324605c9b3d799800df338a85a985cdb8c1a05bcc28b55"
+  },
+  "sample": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "same_algorithm_and_thresholds": true,
+    "soft_band_keV": [
+      0.5,
+      2.0
+    ],
+    "lensing_targets_sealed": true,
+    "published_front_coordinates_or_sectors_forbidden": true
+  },
+  "physical_grid": {
+    "chandra_native_pixel_arcsec": 0.492,
+    "frozen_image_binning": 2,
+    "pixel_scale_arcsec": 0.984,
+    "cluster_kpc_per_arcsec": {
+      "BULLET": 4.554708213666332,
+      "ABELL2146": 3.822721649528813
+    },
+    "candidate_gaussian_sigma_kpc": [
+      8.0,
+      16.0,
+      32.0,
+      64.0
+    ],
+    "kernel_truncation_sigma": 3.0
+  },
+  "local_normal": {
+    "smoothed_rate": "R_sigma=G_sigma*(C-B)/(G_sigma*E), using zero outside the frozen map and dividing only where the smoothed exposure is positive",
+    "gradient": "centered finite difference of R_sigma in logical image pixels; atan2(dR/dy,dR/dx) points from the fainter toward the brighter side",
+    "directed_orientation_bins": 32,
+    "orientation_centers_rad": "2*pi*j/32 for integer j from 0 through 31",
+    "assignment": "nearest directed orientation center by wrapped angular distance; exact ties choose the lower integer bin"
+  },
+  "poisson_step_score": {
+    "side_kernels": "within radius three sigma, split the isotropic Gaussian kernel by positive or negative dot product with the assigned local normal; pixels exactly on the dividing line contribute to neither side",
+    "net_rate_each_side": "r_s=sum w_s(C-B)/sum w_s E",
+    "variance_each_side": "V_s=sum w_s^2(C+V_B)/(sum w_s E)^2, where V_B is the frozen scaled-background variance",
+    "score": "Z=abs(r_plus-r_minus)/sqrt(V_plus+V_minus)",
+    "side_valid_fraction": "sum w_s M/sum w_s, where M is the frozen binary analysis mask",
+    "minimum_side_valid_fraction": 0.9,
+    "minimum_single_scale_score_sigma": 5.0,
+    "zero_or_nonfinite_denominator_rule": "mark invalid and never repair or floor the score"
+  },
+  "scale_space_nonmaximum": {
+    "normal_direction": "retain a pixel only when its Z is not lower than the bilinearly sampled Z one logical pixel in either direction along its assigned normal",
+    "scale_direction": "retain a pixel only at the candidate physical scale having the largest finite Z at that pixel; exact ties choose the smaller scale",
+    "analysis_mask_required": true
+  },
+  "ridge_linking": {
+    "maximum_link_gap_kpc": 20.0,
+    "gap_implementation": "binary closing with a Euclidean disk whose radius is floor((maximum gap/2)/pixel scale); this cannot bridge an empty straight-line gap longer than the frozen maximum",
+    "skeletonization": "eight-connected one-pixel skeleton after closing, followed by eight-connected component labeling",
+    "projected_length": "sum each unique horizontal or vertical skeleton edge as one pixel scale and each unique diagonal edge as sqrt(2) pixel scales",
+    "minimum_projected_length_kpc": 100.0,
+    "curvature": "unweighted algebraic least-squares circle fit to all skeleton coordinates in physical kpc; reject a singular fit",
+    "minimum_curvature_radius_kpc": 50.0,
+    "maximum_curvature_radius_kpc": 2000.0,
+    "minimum_component_valid_fraction": 0.9,
+    "component_score": "sum Z^2/2 over skeleton pixels, used only to rank automatically retained ridges",
+    "representative_position": "Z^2-weighted mean of skeleton physical coordinates",
+    "representative_normal": "circular mean of the signed fainter-to-brighter local normals weighted by Z^2"
+  },
+  "profile_and_uncertainty_boundary": {
+    "this_stage": "construct and hash the complete scale score cube, nonmaximum ridge mask, skeleton, and retained ridge catalog",
+    "next_stage_only_if_each_cluster_has_a_retained_ridge": "run the inherited projected broken-power-law Poisson profile fits and exactly 1000 parametric bootstraps without changing any ridge threshold or choosing a ridge by a temperature or lensing outcome",
+    "no_shock_claim_before_spectra": true,
+    "no_front_position_or_normal_precision_claim_before_bootstrap": true
+  },
+  "synthetic_fixtures": {
+    "uniform_exposure_step": "a curved two-rate Poisson fixture must produce at least one retained ridge within one Gaussian sigma of the injected arc",
+    "uniform_field": "a noiseless uniform-rate fixture must produce zero retained ridges",
+    "masked_edge": "a step whose two-sided valid fractions are below 0.9 must not be retained"
+  },
+  "gates": {
+    "all_parent_and_map_product_hashes_match": true,
+    "all_four_scale_score_arrays_finite_or_explicitly_invalid": true,
+    "minimum_retained_ridges_per_cluster": 1,
+    "every_retained_ridge_length_and_curvature_inside_frozen_bounds": true,
+    "synthetic_fixtures_pass": true,
+    "failure_rule": "fail source-front identifiability; do not lower the score, length, curvature, gap, or valid-fraction thresholds, change orientation count, use a published coordinate or sector, drop an observation, inspect lensing, or select a different implementation after seeing the maps"
+  },
+  "integrity": {
+    "science_array_read_at_freeze": false,
+    "registered_science_image_visually_inspected": false,
+    "gradient_score_or_ridge_known_at_freeze": false,
+    "published_front_coordinate_used": false,
+    "lensing_target_opened": false,
+    "gravity_formula_selected": false,
+    "gravity_parameter_changed": false
+  }
+}

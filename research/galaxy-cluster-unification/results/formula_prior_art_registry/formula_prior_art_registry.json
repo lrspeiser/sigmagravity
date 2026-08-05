@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 117,
+    "sigma_protocols": 118,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6779,6 +6779,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "697d7ea87a24e403dfa90ec2b834deff5bd6643c73a1205dc466a140aa04e0e0"
+    },
+    {
+      "config": "configs/sigma_v19j_automated_front_implementation.json",
+      "protocol_version": "SIGMA-V19J-AUTOMATED-FRONT-IMPLEMENTATION-1.0.0",
+      "status": "frozen after V19H source-map hashing and V19I member-field failure but before reading any frozen soft-band science array, calculating a gradient, score, ridge, profile, or bootstrap, visually inspecting a science map, opening a replacement-cluster lensing target, or selecting a gravity formula",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "13e50f4d2465c108ca61adde3ef445bc41312a8a25b596ed399213b04d8b5c14"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

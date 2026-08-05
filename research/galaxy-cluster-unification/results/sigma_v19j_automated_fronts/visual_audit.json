@@ -1,0 +1,51 @@
+{
+  "audit_version": "SIGMA-V19J-POST-HASH-VISUAL-AUDIT-1.0.0",
+  "audited_utc": "2026-08-05T05:17:13.099278+00:00",
+  "authorization": "V19H visual_audit_after_machine_execution, performed only after every V19J map, score, ridge, catalog, diagnostic and report product was written and hashed",
+  "parent_report": "results/sigma_v19j_automated_fronts/report.json",
+  "parent_report_sha256": "06eb0add35583f8ee45c17ba65432b0d082922cb842a28631ff78a73cf8f4923",
+  "inspected_products": [
+    {
+      "cluster": "BULLET",
+      "path": "results/sigma_v19j_automated_fronts/bullet_diagnostic.png",
+      "sha256": "f2571d2cf673c72cd633dde7b8fb3aa04c1b916b03c1a3454013a541a34284fb"
+    },
+    {
+      "cluster": "ABELL2146",
+      "path": "results/sigma_v19j_automated_fronts/abell2146_diagnostic.png",
+      "sha256": "6906e918eb970200af3c754d9bddf72e80d4b8635690b364bb49ed73ee02ed56"
+    }
+  ],
+  "machine_result_preserved": {
+    "status": "both_clusters_passed_frozen_v19j_automated_front_map_gate",
+    "edited_after_audit": false,
+    "interpretation": "formal threshold result retained as an implementation artifact, not promoted as a physical front catalog"
+  },
+  "audit_findings": {
+    "BULLET": {
+      "passed": false,
+      "observations": [
+        "the skeleton is a dense nested contour forest spanning most of the valid aperture rather than a small set of one-dimensional discontinuity arcs",
+        "the highest-ranked connected structure has a reported total edge length of 72927.2069 kpc inside a map with physical diagonal 3967.7563 kpc, a ratio of 18.380",
+        "12222 of 12249 primary-ridge skeleton pixels select the 64-kpc scale, showing that broad smooth surface-brightness structure dominates the formal score"
+      ]
+    },
+    "ABELL2146": {
+      "passed": false,
+      "observations": [
+        "the skeleton again follows many nested smooth brightness contours, including broad closed and branched structures, rather than isolated fronts",
+        "every one of the 347 primary-ridge skeleton pixels selects the 64-kpc scale",
+        "the formal catalog contains 18 retained ridges and 6562 linked skeleton pixels, inconsistent with a sparse front representation"
+      ]
+    }
+  },
+  "failure_class": "statistic and topology implementation failure",
+  "root_cause": "the two-sided rate-difference significance tests whether a local gradient is nonzero but does not compare a discontinuous step against a continuous smooth-gradient null; high-count, large-scale cluster brightness gradients therefore receive extremely high significance and skeletonize into contour forests",
+  "scientific_threshold_changed": false,
+  "front_or_sector_chosen": false,
+  "published_front_coordinate_used": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false,
+  "decision": "fail V19J implementation validation and do not run profile fitting, 1000 bootstraps, spectral extraction, thermodynamics or shock classification from these ridges",
+  "required_successor": "issue a new pre-analysis protocol that compares a discontinuity model directly with a continuous local gradient/curvature null and contains smooth linear-gradient and smooth radial-profile negative fixtures before another science-array execution"
+}

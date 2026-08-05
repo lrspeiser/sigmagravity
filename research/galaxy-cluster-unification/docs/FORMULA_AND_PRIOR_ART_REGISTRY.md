@@ -4,7 +4,7 @@ Registry version: `FORMULA-PRIOR-ART-REGISTRY-1.1.0`. Published-literature cutof
 
 ## What this file guarantees
 
-This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **117 Sigma protocol files** and their **138 explicit formula/action fragments** (including **14** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
+This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **118 Sigma protocol files** and their **138 explicit formula/action fragments** (including **14** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
 
 It does **not** claim to contain every equation ever published in gravitation. It is a reproducible scientific prior-art screen of the families that overlap mechanisms we have actually explored. It is not a legal novelty or patent opinion.
 
@@ -308,6 +308,7 @@ This appendix closes a gap in the older scorecard: later action-health and sourc
 | `configs/sigma_v19g_gaia_hierarchical_astrometry.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | RAR-EMPIRICAL, MOND-ALGEBRAIC |
 | `configs/sigma_v19h_causal_observable_protocol.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19i_continuous_member_field.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19j_automated_front_implementation.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v1_nonmetricity_cycle.json` | formula_or_action_protocol | `action.action_density`: `L_g=-(c^4/8 pi G)(a_sigma^2/c^4) F(X)`<br>`action.matter_action`: `S_b[g_ab,psi_b]` | SYMMETRIC-TELEPARALLEL |
 | `configs/sigma_v2_trace_nonmetricity_cycle.json` | formula_or_action_protocol | `action.action_density`: `L_g=-(c^4/16 pi G)[Q+2(a_sigma/c^2)^2 H(Y)]`<br>`action.matter_action`: `S_b[g_ab,psi_b]` | SYMMETRIC-TELEPARALLEL |
 | `configs/sigma_v3_mechanism_selection.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |

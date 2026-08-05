@@ -1,0 +1,1022 @@
+{
+  "status": "both_clusters_passed_frozen_v19j_automated_front_map_gate",
+  "protocol_version": "SIGMA-V19J-AUTOMATED-FRONT-IMPLEMENTATION-1.0.0",
+  "generated_utc": "2026-08-05T05:15:11.520892+00:00",
+  "config_sha256": "13e50f4d2465c108ca61adde3ef445bc41312a8a25b596ed399213b04d8b5c14",
+  "runner_sha256": "f67be696dd5098a718751fda2bb3d02bc9599ea62219cb9a6ed7b9be3c135964",
+  "synthetic_fixtures": {
+    "uniform_field_retained_ridges": 0,
+    "uniform_field_passed": true,
+    "curved_step_retained_ridges": 1,
+    "curved_step_nearest_radius_error_kpc": 0.5054020979584095,
+    "curved_step_passed": true,
+    "masked_edge_retained_ridges": 0,
+    "masked_edge_passed": true
+  },
+  "failed_clusters": [],
+  "clusters": [
+    {
+      "cluster": "BULLET",
+      "shape_y_x": [
+        626,
+        626
+      ],
+      "pixel_scale_kpc": 4.481832882247671,
+      "candidate_pixels": 23737,
+      "linked_skeleton_pixels": 14581,
+      "retained_ridge_count": 12,
+      "ridges": [
+        {
+          "ridge_id": 1,
+          "skeleton_pixels": 12249,
+          "projected_length_kpc": 72927.20691654486,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -140.1322053098447,
+          "curvature_center_y_kpc": -68.42878607897455,
+          "curvature_radius_kpc": 694.9656009965731,
+          "representative_x_kpc": 5.480736065990948,
+          "representative_y_kpc": 20.578339449342373,
+          "normal_faint_to_bright_deg": 275.43046031637675,
+          "maximum_score_sigma": 88.30449582537913,
+          "median_score_sigma": 12.198685978735512,
+          "integrated_half_z2": 2434306.180642402,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            5,
+            7,
+            15,
+            12222
+          ],
+          "row_min_max": [
+            104,
+            584
+          ],
+          "column_min_max": [
+            106,
+            473
+          ]
+        },
+        {
+          "ridge_id": 2,
+          "skeleton_pixels": 74,
+          "projected_length_kpc": 439.77936610302163,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 146.43757883629266,
+          "curvature_center_y_kpc": -337.07064222730526,
+          "curvature_radius_kpc": 168.4632778580283,
+          "representative_x_kpc": 255.40112345153645,
+          "representative_y_kpc": -411.08939798661004,
+          "normal_faint_to_bright_deg": 132.63902253945773,
+          "maximum_score_sigma": 27.219702324137923,
+          "median_score_sigma": 21.618154629602543,
+          "integrated_half_z2": 18071.508451632653,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            74
+          ],
+          "row_min_max": [
+            225,
+            280
+          ],
+          "column_min_max": [
+            352,
+            409
+          ]
+        },
+        {
+          "ridge_id": 3,
+          "skeleton_pixels": 556,
+          "projected_length_kpc": 3270.8238503263156,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 477.6491790249748,
+          "curvature_center_y_kpc": 154.52899669164242,
+          "curvature_radius_kpc": 309.04928664742044,
+          "representative_x_kpc": 649.4375680047499,
+          "representative_y_kpc": 290.75190171459286,
+          "normal_faint_to_bright_deg": 197.75921429554936,
+          "maximum_score_sigma": 13.536024681898665,
+          "median_score_sigma": 5.882869223945376,
+          "integrated_half_z2": 12207.680665228007,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            556
+          ],
+          "row_min_max": [
+            302,
+            473
+          ],
+          "column_min_max": [
+            425,
+            514
+          ]
+        },
+        {
+          "ridge_id": 4,
+          "skeleton_pixels": 178,
+          "projected_length_kpc": 1088.029927651479,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 296.25752633358957,
+          "curvature_center_y_kpc": 717.0207024499027,
+          "curvature_radius_kpc": 95.73914395320756,
+          "representative_x_kpc": 331.3663977469288,
+          "representative_y_kpc": 742.2774055793861,
+          "normal_faint_to_bright_deg": 229.69950073587606,
+          "maximum_score_sigma": 11.434637138576452,
+          "median_score_sigma": 7.483221544346757,
+          "integrated_half_z2": 5240.536337350042,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            178
+          ],
+          "row_min_max": [
+            488,
+            538
+          ],
+          "column_min_max": [
+            369,
+            423
+          ]
+        },
+        {
+          "ridge_id": 5,
+          "skeleton_pixels": 165,
+          "projected_length_kpc": 908.7019639891604,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 643.6452908408562,
+          "curvature_center_y_kpc": 840.1474839863367,
+          "curvature_radius_kpc": 112.41281164810809,
+          "representative_x_kpc": 587.411033146541,
+          "representative_y_kpc": 798.9472849445158,
+          "normal_faint_to_bright_deg": 217.8796164840871,
+          "maximum_score_sigma": 7.0998489016714155,
+          "median_score_sigma": 5.775427812921905,
+          "integrated_half_z2": 2781.9847100188863,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            165
+          ],
+          "row_min_max": [
+            501,
+            559
+          ],
+          "column_min_max": [
+            438,
+            491
+          ]
+        },
+        {
+          "ridge_id": 6,
+          "skeleton_pixels": 21,
+          "projected_length_kpc": 108.20101728612026,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 454.45307147891737,
+          "curvature_center_y_kpc": 603.3346881244504,
+          "curvature_radius_kpc": 66.79167617478271,
+          "representative_x_kpc": 401.7378318210702,
+          "representative_y_kpc": 574.9399108323205,
+          "normal_faint_to_bright_deg": 216.0668109135752,
+          "maximum_score_sigma": 17.421924680054463,
+          "median_score_sigma": 15.90396187296684,
+          "integrated_half_z2": 2642.0031284616557,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            21
+          ],
+          "row_min_max": [
+            467,
+            487
+          ],
+          "column_min_max": [
+            411,
+            421
+          ]
+        },
+        {
+          "ridge_id": 7,
+          "skeleton_pixels": 138,
+          "projected_length_kpc": 776.8723744398612,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 215.39078888081133,
+          "curvature_center_y_kpc": 919.0913429143711,
+          "curvature_radius_kpc": 132.56007926495613,
+          "representative_x_kpc": 231.07407716281017,
+          "representative_y_kpc": 1010.4964152912825,
+          "normal_faint_to_bright_deg": 247.9834847714924,
+          "maximum_score_sigma": 6.860243740592575,
+          "median_score_sigma": 5.483943516002636,
+          "integrated_half_z2": 2097.815379709554,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            3,
+            3,
+            132
+          ],
+          "row_min_max": [
+            561,
+            585
+          ],
+          "column_min_max": [
+            335,
+            412
+          ]
+        },
+        {
+          "ridge_id": 8,
+          "skeleton_pixels": 130,
+          "projected_length_kpc": 759.2635569669586,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 855.0402735498087,
+          "curvature_center_y_kpc": -320.68017259575504,
+          "curvature_radius_kpc": 83.18626263909042,
+          "representative_x_kpc": 868.2477959648782,
+          "representative_y_kpc": -321.4981489838578,
+          "normal_faint_to_bright_deg": 155.55720139131813,
+          "maximum_score_sigma": 7.005757888969079,
+          "median_score_sigma": 5.508109752670257,
+          "integrated_half_z2": 2068.342135743866,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            6,
+            124
+          ],
+          "row_min_max": [
+            246,
+            301
+          ],
+          "column_min_max": [
+            500,
+            541
+          ]
+        },
+        {
+          "ridge_id": 9,
+          "skeleton_pixels": 83,
+          "projected_length_kpc": 409.88980946290474,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 795.0694278514923,
+          "curvature_center_y_kpc": -537.9754896210188,
+          "curvature_radius_kpc": 70.03992843708573,
+          "representative_x_kpc": 831.0371969487497,
+          "representative_y_kpc": -542.7731813999447,
+          "normal_faint_to_bright_deg": 175.16280319050855,
+          "maximum_score_sigma": 6.218134541639592,
+          "median_score_sigma": 5.347123179706176,
+          "integrated_half_z2": 1233.051890406298,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            83
+          ],
+          "row_min_max": [
+            202,
+            253
+          ],
+          "column_min_max": [
+            506,
+            516
+          ]
+        },
+        {
+          "ridge_id": 10,
+          "skeleton_pixels": 48,
+          "projected_length_kpc": 270.8210572713887,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 455.0799292598328,
+          "curvature_center_y_kpc": 505.40012645573086,
+          "curvature_radius_kpc": 207.65083227099535,
+          "representative_x_kpc": 617.450233372299,
+          "representative_y_kpc": 614.2207105369837,
+          "normal_faint_to_bright_deg": 218.8495196001774,
+          "maximum_score_sigma": 5.56563386689771,
+          "median_score_sigma": 5.304288982688098,
+          "integrated_half_z2": 659.6920113398687,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            48
+          ],
+          "row_min_max": [
+            465,
+            506
+          ],
+          "column_min_max": [
+            446,
+            478
+          ]
+        },
+        {
+          "ridge_id": 11,
+          "skeleton_pixels": 22,
+          "projected_length_kpc": 121.96502998895136,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 583.852291417801,
+          "curvature_center_y_kpc": 635.2000637556233,
+          "curvature_radius_kpc": 105.74218224808092,
+          "representative_x_kpc": 516.3083566148381,
+          "representative_y_kpc": 562.0289927212787,
+          "normal_faint_to_bright_deg": 223.5499575263046,
+          "maximum_score_sigma": 6.800440852144404,
+          "median_score_sigma": 6.05850249437572,
+          "integrated_half_z2": 398.303454458207,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            22
+          ],
+          "row_min_max": [
+            466,
+            482
+          ],
+          "column_min_max": [
+            434,
+            453
+          ]
+        },
+        {
+          "ridge_id": 12,
+          "skeleton_pixels": 24,
+          "projected_length_kpc": 134.64156768168007,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 415.99349261959514,
+          "curvature_center_y_kpc": 827.0054821684901,
+          "curvature_radius_kpc": 54.93141914181987,
+          "representative_x_kpc": 389.9807146530093,
+          "representative_y_kpc": 795.7672398382895,
+          "normal_faint_to_bright_deg": 226.86533095987494,
+          "maximum_score_sigma": 6.3806647098850995,
+          "median_score_sigma": 5.207376551201096,
+          "integrated_half_z2": 329.75134596301825,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            24
+          ],
+          "row_min_max": [
+            517,
+            536
+          ],
+          "column_min_max": [
+            404,
+            423
+          ]
+        }
+      ],
+      "valid_score_pixels_by_scale": [
+        220463,
+        215907,
+        206628,
+        188149
+      ],
+      "pixels_at_or_above_5sigma_by_scale": [
+        508,
+        4304,
+        50045,
+        136034
+      ],
+      "maximum_score_sigma_by_scale": [
+        11.067961941251149,
+        24.515730838529567,
+        48.60514076097305,
+        88.30449582537913
+      ],
+      "products": [
+        {
+          "kind": "scale_score_cube",
+          "path": "results/sigma_v19j_automated_fronts/bullet_score_cube.npz",
+          "sha256": "73d30096aeab1f3b75ea11ab79f1cd30ada2a6516369bc18243137966d7ad600",
+          "bytes": 21485734
+        },
+        {
+          "kind": "ridge_arrays",
+          "path": "results/sigma_v19j_automated_fronts/bullet_ridge_products.npz",
+          "sha256": "45ef0466148c0e017e9bf0407394619b51ad4eb0b2c787811add1063827ab97b",
+          "bytes": 3602395
+        },
+        {
+          "kind": "retained_ridge_catalog",
+          "path": "results/sigma_v19j_automated_fronts/bullet_ridge_catalog.json",
+          "sha256": "9f36218db9d1973bb0266c4e3768e32c3679a447688199672595c0834b94639c",
+          "bytes": 9337
+        },
+        {
+          "kind": "automated_diagnostic",
+          "path": "results/sigma_v19j_automated_fronts/bullet_diagnostic.png",
+          "sha256": "f2571d2cf673c72cd633dde7b8fb3aa04c1b916b03c1a3454013a541a34284fb",
+          "bytes": 981179
+        }
+      ],
+      "gates": {
+        "all_four_scale_score_arrays_finite_or_explicitly_invalid": true,
+        "minimum_retained_ridges": true,
+        "every_retained_ridge_length_and_curvature_inside_frozen_bounds": true
+      }
+    },
+    {
+      "cluster": "ABELL2146",
+      "shape_y_x": [
+        745,
+        745
+      ],
+      "pixel_scale_kpc": 3.761558103136352,
+      "candidate_pixels": 9660,
+      "linked_skeleton_pixels": 6562,
+      "retained_ridge_count": 18,
+      "ridges": [
+        {
+          "ridge_id": 1,
+          "skeleton_pixels": 347,
+          "projected_length_kpc": 1720.4872809172618,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 11.170333176111223,
+          "curvature_center_y_kpc": 19.71148173362613,
+          "curvature_radius_kpc": 140.16305463469405,
+          "representative_x_kpc": -6.114247561671894,
+          "representative_y_kpc": -38.64426458032301,
+          "normal_faint_to_bright_deg": 126.51887739930763,
+          "maximum_score_sigma": 106.60660234535243,
+          "median_score_sigma": 78.9444547978522,
+          "integrated_half_z2": 945706.1544971891,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            347
+          ],
+          "row_min_max": [
+            336,
+            419
+          ],
+          "column_min_max": [
+            294,
+            389
+          ]
+        },
+        {
+          "ridge_id": 2,
+          "skeleton_pixels": 275,
+          "projected_length_kpc": 1307.804190639452,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 69.13182665068568,
+          "curvature_center_y_kpc": -59.45097072491103,
+          "curvature_radius_kpc": 292.21989163423314,
+          "representative_x_kpc": -118.83546900845424,
+          "representative_y_kpc": -247.4843188905066,
+          "normal_faint_to_bright_deg": 70.05836366978588,
+          "maximum_score_sigma": 61.75080842033566,
+          "median_score_sigma": 56.42678387398043,
+          "integrated_half_z2": 358350.6846233561,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            275
+          ],
+          "row_min_max": [
+            274,
+            343
+          ],
+          "column_min_max": [
+            266,
+            401
+          ]
+        },
+        {
+          "ridge_id": 3,
+          "skeleton_pixels": 235,
+          "projected_length_kpc": 1171.3187961121644,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 36.977313668871595,
+          "curvature_center_y_kpc": 261.24443316656385,
+          "curvature_radius_kpc": 87.4171425120797,
+          "representative_x_kpc": 22.649351954381228,
+          "representative_y_kpc": 271.99782047655657,
+          "normal_faint_to_bright_deg": 282.34016225810296,
+          "maximum_score_sigma": 59.507910899459844,
+          "median_score_sigma": 42.645767976605036,
+          "integrated_half_z2": 244557.31478861856,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            235
+          ],
+          "row_min_max": [
+            422,
+            462
+          ],
+          "column_min_max": [
+            304,
+            390
+          ]
+        },
+        {
+          "ridge_id": 4,
+          "skeleton_pixels": 139,
+          "projected_length_kpc": 694.3111624454417,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 230.93007606959875,
+          "curvature_center_y_kpc": 83.07251446675451,
+          "curvature_radius_kpc": 71.86480154844048,
+          "representative_x_kpc": 245.9230328395046,
+          "representative_y_kpc": 69.32865638923211,
+          "normal_faint_to_bright_deg": 174.32646994459057,
+          "maximum_score_sigma": 58.016085668251414,
+          "median_score_sigma": 46.48108965368925,
+          "integrated_half_z2": 158547.04983719683,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            139
+          ],
+          "row_min_max": [
+            360,
+            427
+          ],
+          "column_min_max": [
+            381,
+            418
+          ]
+        },
+        {
+          "ridge_id": 5,
+          "skeleton_pixels": 1998,
+          "projected_length_kpc": 9783.611514810718,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 186.7220042320564,
+          "curvature_center_y_kpc": -67.61620629114486,
+          "curvature_radius_kpc": 407.7311352778948,
+          "representative_x_kpc": 446.78517208058935,
+          "representative_y_kpc": -60.62332089941888,
+          "normal_faint_to_bright_deg": 173.54322249550668,
+          "maximum_score_sigma": 21.89409001110681,
+          "median_score_sigma": 8.159707038652925,
+          "integrated_half_z2": 99021.18277432775,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            1998
+          ],
+          "row_min_max": [
+            218,
+            495
+          ],
+          "column_min_max": [
+            327,
+            534
+          ]
+        },
+        {
+          "ridge_id": 6,
+          "skeleton_pixels": 1524,
+          "projected_length_kpc": 7311.54185695059,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -144.00131733136388,
+          "curvature_center_y_kpc": 180.0162322837238,
+          "curvature_radius_kpc": 363.9989539504801,
+          "representative_x_kpc": -257.8384753384575,
+          "representative_y_kpc": 336.36369578899297,
+          "normal_faint_to_bright_deg": 307.53097538882935,
+          "maximum_score_sigma": 16.40747844344215,
+          "median_score_sigma": 8.00378901776198,
+          "integrated_half_z2": 64132.54619572862,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            1524
+          ],
+          "row_min_max": [
+            345,
+            543
+          ],
+          "column_min_max": [
+            179,
+            384
+          ]
+        },
+        {
+          "ridge_id": 7,
+          "skeleton_pixels": 23,
+          "projected_length_kpc": 110.79986914452257,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 108.07939050633978,
+          "curvature_center_y_kpc": 108.07487373568188,
+          "curvature_radius_kpc": 197.28004271625838,
+          "representative_x_kpc": 247.0685110214911,
+          "representative_y_kpc": 244.2975988791051,
+          "normal_faint_to_bright_deg": 224.97028103384076,
+          "maximum_score_sigma": 59.99572056980271,
+          "median_score_sigma": 59.36944327166264,
+          "integrated_half_z2": 40301.856290445074,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            23
+          ],
+          "row_min_max": [
+            429,
+            449
+          ],
+          "column_min_max": [
+            392,
+            412
+          ]
+        },
+        {
+          "ridge_id": 8,
+          "skeleton_pixels": 407,
+          "projected_length_kpc": 2008.5043023843825,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 341.4110830938003,
+          "curvature_center_y_kpc": 497.218904740462,
+          "curvature_radius_kpc": 138.16520985459653,
+          "representative_x_kpc": 383.1033668965052,
+          "representative_y_kpc": 474.2603193981809,
+          "normal_faint_to_bright_deg": 227.49117442914002,
+          "maximum_score_sigma": 10.896347162106633,
+          "median_score_sigma": 6.033802254334965,
+          "integrated_half_z2": 8928.985938495163,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            407
+          ],
+          "row_min_max": [
+            445,
+            565
+          ],
+          "column_min_max": [
+            386,
+            475
+          ]
+        },
+        {
+          "ridge_id": 9,
+          "skeleton_pixels": 34,
+          "projected_length_kpc": 152.17700827902246,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 171.51871837016404,
+          "curvature_center_y_kpc": 266.97556979225226,
+          "curvature_radius_kpc": 156.29953153682052,
+          "representative_x_kpc": 241.8589144579395,
+          "representative_y_kpc": 400.2473187776057,
+          "normal_faint_to_bright_deg": 244.7379282508901,
+          "maximum_score_sigma": 19.966727502344543,
+          "median_score_sigma": 17.925025043037543,
+          "integrated_half_z2": 5425.5310285730375,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            34
+          ],
+          "row_min_max": [
+            471,
+            488
+          ],
+          "column_min_max": [
+            385,
+            417
+          ]
+        },
+        {
+          "ridge_id": 10,
+          "skeleton_pixels": 24,
+          "projected_length_kpc": 104.94557125222323,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -359.840604831293,
+          "curvature_center_y_kpc": -56.217651196492966,
+          "curvature_radius_kpc": 65.37414734667811,
+          "representative_x_kpc": -416.4980252399678,
+          "representative_y_kpc": -76.31652788668897,
+          "normal_faint_to_bright_deg": 13.606776748642169,
+          "maximum_score_sigma": 22.40099036501742,
+          "median_score_sigma": 17.836384163396104,
+          "integrated_half_z2": 4145.228284095763,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            24
+          ],
+          "row_min_max": [
+            346,
+            367
+          ],
+          "column_min_max": [
+            224,
+            230
+          ]
+        },
+        {
+          "ridge_id": 11,
+          "skeleton_pixels": 223,
+          "projected_length_kpc": 1176.0389270976796,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -385.6210970487235,
+          "curvature_center_y_kpc": -279.9593997864263,
+          "curvature_radius_kpc": 145.1681139130111,
+          "representative_x_kpc": -453.3607852631403,
+          "representative_y_kpc": -343.639292301273,
+          "normal_faint_to_bright_deg": 41.210801945923784,
+          "maximum_score_sigma": 7.033193252168402,
+          "median_score_sigma": 5.274308069167915,
+          "integrated_half_z2": 3341.120909783396,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            223
+          ],
+          "row_min_max": [
+            243,
+            335
+          ],
+          "column_min_max": [
+            182,
+            249
+          ]
+        },
+        {
+          "ridge_id": 12,
+          "skeleton_pixels": 97,
+          "projected_length_kpc": 450.94405264836274,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": 693.0142259762074,
+          "curvature_center_y_kpc": -259.3157714409944,
+          "curvature_radius_kpc": 53.26066333497426,
+          "representative_x_kpc": 690.13136661152,
+          "representative_y_kpc": -267.46304513671805,
+          "normal_faint_to_bright_deg": 176.5365455056566,
+          "maximum_score_sigma": 6.20406160582749,
+          "median_score_sigma": 5.444124017481738,
+          "integrated_half_z2": 1461.9114082349827,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            97
+          ],
+          "row_min_max": [
+            281,
+            331
+          ],
+          "column_min_max": [
+            510,
+            530
+          ]
+        },
+        {
+          "ridge_id": 13,
+          "skeleton_pixels": 53,
+          "projected_length_kpc": 258.9479936168139,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -337.1751888003433,
+          "curvature_center_y_kpc": 276.07563488155574,
+          "curvature_radius_kpc": 228.89158791223045,
+          "representative_x_kpc": -532.6428096835824,
+          "representative_y_kpc": 381.23209274510407,
+          "normal_faint_to_bright_deg": 331.2551544896672,
+          "maximum_score_sigma": 6.052616491032969,
+          "median_score_sigma": 5.506265473503869,
+          "integrated_half_z2": 797.6352917876233,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            53
+          ],
+          "row_min_max": [
+            454,
+            500
+          ],
+          "column_min_max": [
+            184,
+            210
+          ]
+        },
+        {
+          "ridge_id": 14,
+          "skeleton_pixels": 50,
+          "projected_length_kpc": 230.7916728092912,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -700.6217297372432,
+          "curvature_center_y_kpc": 193.75673006935835,
+          "curvature_radius_kpc": 65.32335704429967,
+          "representative_x_kpc": -659.5550211163628,
+          "representative_y_kpc": 188.2798162328891,
+          "normal_faint_to_bright_deg": 354.5098446226031,
+          "maximum_score_sigma": 6.396031111941903,
+          "median_score_sigma": 5.474629025333284,
+          "integrated_half_z2": 780.3916140694259,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            50
+          ],
+          "row_min_max": [
+            402,
+            447
+          ],
+          "column_min_max": [
+            156,
+            166
+          ]
+        },
+        {
+          "ridge_id": 15,
+          "skeleton_pixels": 40,
+          "projected_length_kpc": 182.26947310411325,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -119.5222077840923,
+          "curvature_center_y_kpc": 827.7204228670364,
+          "curvature_radius_kpc": 69.35010257184419,
+          "representative_x_kpc": -131.9628181039013,
+          "representative_y_kpc": 882.7937879525404,
+          "normal_faint_to_bright_deg": 277.63615973785056,
+          "maximum_score_sigma": 5.811666721141269,
+          "median_score_sigma": 5.229565340243308,
+          "integrated_half_z2": 555.8183818410689,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            40
+          ],
+          "row_min_max": [
+            601,
+            614
+          ],
+          "column_min_max": [
+            288,
+            320
+          ]
+        },
+        {
+          "ridge_id": 16,
+          "skeleton_pixels": 34,
+          "projected_length_kpc": 141.91577094439737,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -153.9040901482284,
+          "curvature_center_y_kpc": -471.43941251097687,
+          "curvature_radius_kpc": 60.480680578864785,
+          "representative_x_kpc": -149.5381715011808,
+          "representative_y_kpc": -520.4690445823207,
+          "normal_faint_to_bright_deg": 87.20992188711242,
+          "maximum_score_sigma": 5.408571042106083,
+          "median_score_sigma": 5.139993168654843,
+          "integrated_half_z2": 454.065906439001,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            34
+          ],
+          "row_min_max": [
+            232,
+            239
+          ],
+          "column_min_max": [
+            283,
+            313
+          ]
+        },
+        {
+          "ridge_id": 17,
+          "skeleton_pixels": 32,
+          "projected_length_kpc": 145.2992734119391,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -417.0441990854324,
+          "curvature_center_y_kpc": 610.6788415257041,
+          "curvature_radius_kpc": 57.71490101217753,
+          "representative_x_kpc": -393.90316512927376,
+          "representative_y_kpc": 571.9429676186139,
+          "normal_faint_to_bright_deg": 291.34199977719265,
+          "maximum_score_sigma": 5.554143172719557,
+          "median_score_sigma": 5.103284570317891,
+          "integrated_half_z2": 417.5233321590665,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            32
+          ],
+          "row_min_max": [
+            519,
+            534
+          ],
+          "column_min_max": [
+            217,
+            246
+          ]
+        },
+        {
+          "ridge_id": 18,
+          "skeleton_pixels": 27,
+          "projected_length_kpc": 113.38139450128006,
+          "valid_fraction": 1.0,
+          "curvature_center_x_kpc": -135.95957095692378,
+          "curvature_center_y_kpc": 578.9916354759869,
+          "curvature_radius_kpc": 87.68392329756216,
+          "representative_x_kpc": -124.86151834236782,
+          "representative_y_kpc": 660.8477142060001,
+          "normal_faint_to_bright_deg": 267.30060383296404,
+          "maximum_score_sigma": 5.88640395894068,
+          "median_score_sigma": 5.402653808776066,
+          "integrated_half_z2": 406.60643632290584,
+          "scale_pixel_counts_8_16_32_64_kpc": [
+            0,
+            0,
+            0,
+            27
+          ],
+          "row_min_max": [
+            547,
+            552
+          ],
+          "column_min_max": [
+            291,
+            317
+          ]
+        }
+      ],
+      "valid_score_pixels_by_scale": [
+        312985,
+        306446,
+        293612,
+        268357
+      ],
+      "pixels_at_or_above_5sigma_by_scale": [
+        373,
+        8333,
+        36623,
+        82655
+      ],
+      "maximum_score_sigma_by_scale": [
+        11.4301650119984,
+        23.76889401593618,
+        54.008633538499666,
+        106.60660234535243
+      ],
+      "products": [
+        {
+          "kind": "scale_score_cube",
+          "path": "results/sigma_v19j_automated_fronts/abell2146_score_cube.npz",
+          "sha256": "43efeb5ffe8b6aa6085083cac6d47e584a31e68154416028f2186cb1224a5cc2",
+          "bytes": 30612536
+        },
+        {
+          "kind": "ridge_arrays",
+          "path": "results/sigma_v19j_automated_fronts/abell2146_ridge_products.npz",
+          "sha256": "159569fd403b2497bdef786ebe00ae17da15479297d720356aea273e00a4ee32",
+          "bytes": 5160147
+        },
+        {
+          "kind": "retained_ridge_catalog",
+          "path": "results/sigma_v19j_automated_fronts/abell2146_ridge_catalog.json",
+          "sha256": "258101db9d83194f3beb27922403bbcd859c01b5d0fd009f78342a5a8afd5065",
+          "bytes": 14018
+        },
+        {
+          "kind": "automated_diagnostic",
+          "path": "results/sigma_v19j_automated_fronts/abell2146_diagnostic.png",
+          "sha256": "6906e918eb970200af3c754d9bddf72e80d4b8635690b364bb49ed73ee02ed56",
+          "bytes": 680262
+        }
+      ],
+      "gates": {
+        "all_four_scale_score_arrays_finite_or_explicitly_invalid": true,
+        "minimum_retained_ridges": true,
+        "every_retained_ridge_length_and_curvature_inside_frozen_bounds": true
+      }
+    }
+  ],
+  "profile_fit_run": false,
+  "parametric_bootstrap_run": false,
+  "shock_classification_run": false,
+  "spectrum_or_response_constructed": false,
+  "registered_science_image_visually_inspected": false,
+  "published_front_coordinate_used": false,
+  "lensing_target_opened": false,
+  "gravity_formula_selected": false,
+  "gravity_parameter_changed": false
+}
