@@ -1,0 +1,121 @@
+{
+  "protocol_version": "SIGMA-V19AA-MEMBER-COUNTERPART-ASSOCIATION-1.0.0",
+  "status": "frozen_before_any_counterpart_likelihood_or_assignment",
+  "purpose": "Create quantization-aware HSC/NSC counterpart posteriors and a global one-to-one MAP assignment for all 141 V19 spectroscopic members without using lensing, gravity residuals, photometric transformations, or stellar-mass assumptions.",
+  "parents": {
+    "v19y_config": "configs/sigma_v19y_hsc_member_photometry.json",
+    "v19y_config_sha256": "9755dde1361b231121d5f36c55afc1cbd19e7a23f6b3954dcd218321df49b079",
+    "v19z_config": "configs/sigma_v19z_nsc_member_photometry.json",
+    "v19z_config_sha256": "bcb3a5d2fad63081aa9854f2ff539a5f100dffa23d42d315d17ebd4e14c93aeb",
+    "v19y_report": "results/sigma_v19y_hsc_member_photometry/provenance.json",
+    "v19y_report_sha256": "a03ef4bb091a9df269b396b0410d2c4fccb7cc2e6bab445de067cc1c68908222",
+    "v19z_report": "results/sigma_v19z_nsc_member_photometry/provenance.json",
+    "v19z_report_sha256": "7ce94eba8fdbbcf6d9f2c816de353aa283d8169f66840690a858fd21982bd477",
+    "v19y_coverage": "results/sigma_v19y_hsc_member_photometry/coverage_analysis.json",
+    "v19y_coverage_sha256": "82243dc561a50f6207808f2c77c3d387fd69dd512d5cededa844710680e7fc7e",
+    "v19z_coverage": "results/sigma_v19z_nsc_member_photometry/coverage_analysis.json",
+    "v19z_coverage_sha256": "0b5a201ae76052aba4ebe1581f8a98f3f249908bab02f6982b9decdf5028f306",
+    "bullet_members": "data/derived/sigma_v19d_assembly_members/bullet_members.csv",
+    "bullet_members_sha256": "36a87b48f77e4998fc8b4136ab1b1c559b90d1b18d7d65633e8dacf167dea64b",
+    "abell2146_members": "data/derived/sigma_v19d_assembly_members/abell2146_members.csv",
+    "abell2146_members_sha256": "cf7c61854f4aa0317a9dd3ea8e91618e90fa7823a6cb30634147f8af39243360",
+    "bullet_published_bri": "data/derived/sigma_v19z_member_photometry/bullet_published_bri.csv",
+    "bullet_published_bri_sha256": "396af209b9ba466f9396f7f0fcf4af1ced3d0725fffc143b07e0e0218d3c63a7"
+  },
+  "member_catalogs": {
+    "BULLET": {
+      "path": "data/derived/sigma_v19d_assembly_members/bullet_members.csv",
+      "expected_rows": 78,
+      "query_radius_arcsec": 6.0,
+      "coordinate_model": "sexagesimal_ra_dec_rounding",
+      "ra_time_quantization_seconds": 1.0,
+      "dec_quantization_arcsec": 1.0
+    },
+    "ABELL2146": {
+      "path": "data/derived/sigma_v19d_assembly_members/abell2146_members.csv",
+      "expected_rows": 63,
+      "query_radius_arcsec": 1.0,
+      "coordinate_model": "decimal_degree_rounding",
+      "ra_quantization_deg": 0.0001,
+      "dec_quantization_deg": 0.0001
+    }
+  },
+  "astrometry": {
+    "hsc_dsigma_unit": "milliarcseconds",
+    "nsc_raerr_decerr_unit": "arcseconds",
+    "hsc_astrometric_floor_arcsec": 0.02,
+    "nsc_astrometric_floor_arcsec": 0.02,
+    "published_centroid_floor_arcsec": 0.1,
+    "hsc_nsc_reciprocal_crossmatch_radius_arcsec": 0.5,
+    "background_estimator": "[Jeffreys half-count + sum over members max(N_unified-1,0)] divided by total frozen cone area",
+    "background_jeffreys_pseudocount": 0.5,
+    "metadata_sources": {
+      "hsc": "https://catalogs.mast.stsci.edu/hsc/detailed-fields.html",
+      "nsc": "TAP_SCHEMA.columns at https://datalab.noirlab.edu/tap/sync; raerr/decerr Arcseconds and proper motions Milliarcseconds/year"
+    }
+  },
+  "association": {
+    "primary_evidence": "published-coordinate rounding kernel convolved with catalog astrometry divided by a cluster background surface density",
+    "counterpart_prior_sensitivity": [0.8, 0.9, 0.95, 0.99],
+    "primary_counterpart_prior": 0.9,
+    "global_map": "maximum posterior-weight bipartite assignment with one private null state per member and each unified catalog candidate usable at most once",
+    "secure_match_gates": {
+      "minimum_posterior_across_prior_grid": 0.9,
+      "minimum_top_to_second_likelihood_ratio": 10.0,
+      "require_global_map_agreement": true,
+      "require_dual_survey_or_repeated_detection": true,
+      "foreground_diagnostic": "reject a hard secure label only when NSC proper-motion significance is at least 5 and class_star is at least 0.8"
+    },
+    "photometry_role": "availability and catalog values are retained for the next protocol but no Bessel/NSC/HST transformation enters the V19AA association likelihood",
+    "ambiguity_rule": "retain the complete candidate and null posterior; never substitute a nearest neighbor for an ambiguous member"
+  },
+  "outputs": {
+    "unified_candidates": "data/derived/sigma_v19aa_member_counterpart_association/unified_candidates.csv",
+    "candidate_posteriors": "data/derived/sigma_v19aa_member_counterpart_association/candidate_posteriors.csv",
+    "member_associations": "data/derived/sigma_v19aa_member_counterpart_association/member_associations.csv",
+    "report": "results/sigma_v19aa_member_counterpart_association/report.json"
+  },
+  "gates": {
+    "exact_member_count": 141,
+    "posterior_normalization_tolerance": 1e-12,
+    "every_input_and_raw_payload_hash_verified": true,
+    "global_assignment_must_be_one_to_one": true,
+    "mass_inference_forbidden": true,
+    "mass_current_construction_forbidden": true,
+    "lensing_or_halo_payload_forbidden": true,
+    "gravity_formula_or_parameter_change_forbidden": true
+  },
+  "claim_boundary": [
+    "V19AA is a catalog-association result, not a stellar-mass, mass-current, lensing, or gravity result.",
+    "A secure positional association does not make HSC, NSC, and Bessel passbands equivalent.",
+    "The member catalogs are spectroscopic but not necessarily complete samples of all cluster galaxies.",
+    "Proper motion and morphology are diagnostics only; the primary probability is astrometric.",
+    "A later mass-current map must marginalize ambiguous associations and transverse-velocity uncertainty rather than treating secure rows as complete four-dimensional currents."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19aa_member_counterpart_association.py",
+    "runner_sha256": "3fabf505018b2737c06402e9e50ffd4b2ab8b57363ac9a202fb2883304148b8b"
+  },
+  "authorization": {
+    "read_only_frozen_hsc_nsc_and_member_payloads": true,
+    "compute_positional_association": true,
+    "write_association_outputs": true,
+    "fit_photometric_transformation": false,
+    "derive_stellar_mass": false,
+    "construct_mass_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "aggregate_candidate_coverage_known_at_freeze": true,
+    "individual_counterpart_likelihoods_computed_at_freeze": false,
+    "global_assignment_computed_at_freeze": false,
+    "secure_counterpart_selected_at_freeze": false,
+    "photometric_transformation_computed_at_freeze": false,
+    "stellar_mass_inferred_at_freeze": false,
+    "mass_current_constructed_at_freeze": false,
+    "lensing_target_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  }
+}
