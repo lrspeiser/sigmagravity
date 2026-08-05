@@ -1,0 +1,152 @@
+{
+  "protocol_version": "SIGMA-V19AE-FORS1-COMMISSIONING-FRAMES-1.0.0",
+  "status": "frozen_before_any_fits_payload_download_or_inspection",
+  "purpose": "Losslessly acquire the exact public ESO FORS1 Bessel B/R/I science frames behind the Bullet member paper and a predetermined contemporaneous full-field bias/twilight-flat pool, without opening FITS payloads or measuring any member or candidate.",
+  "parent_artifacts": [
+    {
+      "path": "results/sigma_v19ad_fixed_aperture_color_commissioning/report.json",
+      "sha256": "d892d05bce8f8e6c1d4846562cc9d70db86368b736823d7a5fc25fffee5da492"
+    },
+    {
+      "path": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+      "sha256": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7"
+    },
+    {
+      "path": "data/raw/sigma_v19c_assembly_sources/bullet/arxiv_astro-ph_0202323_source.tar",
+      "sha256": "3d54a4d1c9423c448baf09f8cdbfde4c8df8aa00b4d57336b91f6a5eaa405b76"
+    },
+    {
+      "path": "configs/sigma_v19z_nsc_member_photometry.json",
+      "sha256": "bcb3a5d2fad63081aa9854f2ff539a5f100dffa23d42d315d17ebd4e14c93aeb"
+    }
+  ],
+  "source": {
+    "authority": "European Southern Observatory Science Archive",
+    "tap_endpoint": "https://archive.eso.org/tap_obs/sync",
+    "raw_table": "dbo.raw",
+    "download_endpoint_basis": "access_url returned by dbo.raw",
+    "programs": [
+      "60.A-9203(A)",
+      "60.A-9203(B)"
+    ],
+    "instrument": "FORS1",
+    "science_filters": [
+      "B_BESS",
+      "R_BESS",
+      "I_BESS"
+    ],
+    "timeout_seconds": 240,
+    "download_timeout_seconds": 300,
+    "maximum_attempts": 5,
+    "pre_freeze_metadata_only_inventory": "TAP metadata identified seven archive-category SCIENCE B/R/I images, fourteen full-field 1x1 bias frames and twenty-five B/R/I twilight flats. Only tabular metadata and DataLink association XML were read; no FITS byte was downloaded or opened.",
+    "automatic_calibration_preflight": "ESO calSelector raw2master and raw2raw both returned UNKNOWN_CATEGORY, complete=false and no association for representative B frame OFORS.1998-12-14T06:05:25.298. The acquisition therefore freezes a transparent manual calibration pool; it does not claim those frames are valid until a later header/pixel QC protocol passes.",
+    "archive_documentation": "https://archive.eso.org/cms/eso-data/programmatic-access.html",
+    "calibration_documentation": "https://archive.eso.org/cms/application_support/calselectorInfo.html"
+  },
+  "expected_dataset_ids": {
+    "science": [
+      "OFORS.1998-12-14T05:29:52.242",
+      "OFORS.1998-12-14T05:44:56.445",
+      "OFORS.1998-12-14T05:54:16.814",
+      "OFORS.1998-12-14T06:05:25.298",
+      "OFORS.1998-12-22T07:06:10.815",
+      "OFORS.1998-12-22T07:17:21.016",
+      "OFORS.1998-12-26T05:59:26.235"
+    ],
+    "bias": [
+      "OFORS.1998-12-12T13:10:23.667",
+      "OFORS.1998-12-12T13:11:08.884",
+      "OFORS.1998-12-12T13:11:53.972",
+      "OFORS.1998-12-12T13:12:39.035",
+      "OFORS.1998-12-12T13:13:24.097",
+      "OFORS.1998-12-15T12:15:31.013",
+      "OFORS.1998-12-15T12:16:15.434",
+      "OFORS.1998-12-15T12:17:44.851",
+      "OFORS.1998-12-15T12:18:28.971",
+      "OFORS.1998-12-15T12:19:13.524",
+      "OFORS.1998-12-15T12:19:57.984",
+      "OFORS.1998-12-15T12:20:42.232",
+      "OFORS.1998-12-15T12:21:26.946",
+      "OFORS.1998-12-15T12:22:12.071"
+    ],
+    "flat": [
+      "OFORS.1998-12-22T23:59:33.253",
+      "OFORS.1998-12-23T00:00:29.201",
+      "OFORS.1998-12-23T00:01:27.904",
+      "OFORS.1998-12-23T00:02:28.864",
+      "OFORS.1998-12-23T00:03:33.950",
+      "OFORS.1998-12-23T09:22:58.783",
+      "OFORS.1998-12-23T09:23:53.360",
+      "OFORS.1998-12-23T09:24:48.931",
+      "OFORS.1998-12-23T09:25:42.970",
+      "OFORS.1998-12-23T09:26:36.529",
+      "OFORS.1998-12-24T00:04:00.463",
+      "OFORS.1998-12-24T00:04:59.388",
+      "OFORS.1998-12-24T00:06:00.381",
+      "OFORS.1998-12-24T00:07:04.172",
+      "OFORS.1998-12-24T00:08:12.026",
+      "OFORS.1998-12-26T09:18:22.976",
+      "OFORS.1998-12-26T09:19:33.214",
+      "OFORS.1998-12-26T09:20:38.693",
+      "OFORS.1998-12-26T09:21:41.988",
+      "OFORS.1998-12-26T09:22:41.991",
+      "OFORS.1998-12-26T09:25:19.100",
+      "OFORS.1998-12-26T09:26:15.538",
+      "OFORS.1998-12-26T09:27:10.780",
+      "OFORS.1998-12-26T09:28:05.542",
+      "OFORS.1998-12-26T09:29:00.575"
+    ]
+  },
+  "selection_boundary": {
+    "science": "Every archive-category SCIENCE FORS1 IMAGE in the frozen Bullet sky/date box having B_BESS, R_BESS or I_BESS is acquired. No image is preferred using pixels or member outcomes.",
+    "bias": "Every archive-category CALIB IMAGE/BIAS in 1998-12-12 through 1998-12-15 with full-field ob_name ALL-BIAS_fl1x1_10 is acquired. Slit-mode biases are excluded by the frozen ob_name.",
+    "flat": "Every B_BESS/R_BESS/I_BESS twilight flat in 1998-12-22 through 1998-12-26 returned by the frozen template/date query is acquired.",
+    "excluded_target_frames": "Two R_BESS target exposures cataloged by ESO as CALIB/OTHER are not promoted into the primary SCIENCE pool. Their existence was seen in metadata but their payloads are not acquired by this protocol."
+  },
+  "outputs": {
+    "raw_root": "data/raw/sigma_v19ae_fors1_commissioning_frames",
+    "report": "results/sigma_v19ae_fors1_commissioning_frames/provenance.json"
+  },
+  "gates": {
+    "exact_science_files": 7,
+    "exact_bias_files": 14,
+    "exact_flat_files": 25,
+    "exact_total_files": 46,
+    "http_200_for_every_metadata_query_and_download": true,
+    "content_length_matches_when_returned": true,
+    "every_payload_and_query_hashed": true,
+    "no_fits_payload_opened_or_parsed": true
+  },
+  "claim_boundary": [
+    "V19AE proves only lossless acquisition and provenance of the frozen archive files.",
+    "The manual bias/flat pool is not yet certified as detector-compatible or scientifically valid; FITS-header and pixel QC belong to a separately frozen protocol.",
+    "No pixel, source, member, candidate, flux, color, counterpart, mass, current, lensing, halo, or gravity quantity is read or produced.",
+    "Successful acquisition does not authorize a photometry model. Reduction, astrometric registration, deblending, profile family, background model, uncertainty model and validation split must be frozen before any FITS payload is opened."
+  ],
+  "implementation": {
+    "runner": "scripts/download_sigma_v19ae_fors1_commissioning_frames.py",
+    "runner_sha256": "ee724948734670025b590741cd00249aefe1e90045346ecddacffaf9784322f3",
+    "post_freeze_correction": "The first execution validated and wrote archive metadata, then stopped before creating any FITS payload because literal ESO IDs contain colons forbidden in Windows filenames. The runner now encodes only the local filename component by replacing nonportable punctuation with underscores while retaining the literal dp_id in metadata, queries and provenance. No dataset ID, query, calibration selection, gate or scientific authorization changed."
+  },
+  "authorization": {
+    "query_only_frozen_archive_metadata": true,
+    "download_exact_frozen_payloads_losslessly": true,
+    "hash_every_payload": true,
+    "open_or_parse_fits_payload": false,
+    "select_science_exposure_from_pixels": false,
+    "fit_photometry_or_counterparts": false,
+    "infer_stellar_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "fits_payload_downloaded_at_freeze": false,
+    "fits_payload_opened_at_freeze": false,
+    "first_execution_stopped_before_any_fits_payload_created": true,
+    "member_or_candidate_pixel_inspected_at_freeze": false,
+    "photometry_or_counterpart_model_chosen_at_freeze": false,
+    "lensing_or_halo_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  }
+}
