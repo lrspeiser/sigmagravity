@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 108,
+    "sigma_protocols": 109,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6670,6 +6670,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "3f01e1c0bb74ef3bf358539dc1134606234d1c4780f1c3db9be3c9179c3d1b35"
+    },
+    {
+      "config": "configs/sigma_v19a_assembly_history_readiness.json",
+      "protocol_version": "SIGMA-V19A-ASSEMBLY-HISTORY-READINESS-1.0.0",
+      "status": "frozen after the v19 observability gate and primary-source audit, before constructing a history source or reading any new lensing target",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "d92f47d357ffa6d2fe73d5f8f10b372541052a616693407c36a4f50aa8c68b9e"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

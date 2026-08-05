@@ -1,0 +1,173 @@
+{
+  "decision": "do not construct a causal-history source from this spent pair; acquire a matched pair with identifiable clocks and projection ensembles",
+  "external_history_evidence": {
+    "MACS0416": {
+      "accepted_history_statistic_sigma": null,
+      "direct_time_ordered_clock_available": false,
+      "measured_line_of_sight_member_depths_available": false,
+      "measured_transverse_member_velocities_available": false,
+      "member_redshift_uncertainty_column_available": false,
+      "observational_summary": [
+        "Jauzac et al. found distinct northeast and southwest redshift distributions and discussed both a near-first-passage scenario and a preferred prior-passage, turnaround, second-approach scenario.",
+        "Ogrean et al. found the main gas and mass centers aligned and interpreted the main pair as pre-merger.",
+        "The approximately 450 kpc south-southwest density discontinuity was associated with a smaller interaction, not a propagation clock for the main northeast-southwest pair."
+      ],
+      "primary_event": "the approximately 250 kpc northeast-southwest main-core pair",
+      "primary_sources": [
+        {
+          "arxiv_id": "1406.3011",
+          "title": "Hubble Frontier Fields: The Geometry and Dynamics of the Massive Galaxy Cluster Merger MACSJ0416.1-2403",
+          "url": "https://arxiv.org/abs/1406.3011"
+        },
+        {
+          "arxiv_id": "1505.05560",
+          "title": "Frontier Fields Clusters: Chandra and JVLA View of the Pre-Merging Cluster MACS J0416.1-2403",
+          "url": "https://arxiv.org/abs/1505.05560"
+        }
+      ],
+      "projection_uncertainty_ensemble_available": false,
+      "resolved_temperature_uncertainty_map_available": false,
+      "unique_causal_origin": false
+    },
+    "PLCKG287": {
+      "accepted_history_statistic_sigma": null,
+      "direct_time_ordered_clock_available": true,
+      "measured_clock_diagnostics": {
+        "approximate_shock_speed_km_s": 2100.0,
+        "density_jump": 1.43,
+        "density_jump_above_unity_sigma": 4.3,
+        "density_jump_uncertainty": 0.1,
+        "mach_number": 1.29,
+        "mach_number_uncertainty": 0.07,
+        "propagation_age_upper_bound_myr": 180.0,
+        "shock_radius_kpc": 389.0,
+        "shock_radius_uncertainty_kpc": 6.0
+      },
+      "measured_line_of_sight_member_depths_available": false,
+      "measured_transverse_member_velocities_available": false,
+      "member_redshift_uncertainty_column_available": false,
+      "observational_summary": [
+        "Gitti et al. measured a 389+/-6 kpc shock, density jump 1.43+/-0.10, Mach number 1.29+/-0.07, and an approximate 2100 km/s propagation speed.",
+        "The reported approximately 180 Myr propagation age is an upper bound under an AGN-driven interpretation, not a unique time since cluster core passage.",
+        "The same analysis states that merger and AGN origins remain unresolved, so the feature is not an identified universal assembly clock."
+      ],
+      "primary_event": "the northwest shock and cold-front system",
+      "primary_sources": [
+        {
+          "arxiv_id": "2503.13735",
+          "title": "Deep Chandra observations of PLCKG287.0+32.9: a clear detection of a shock front in a heated former cool core",
+          "url": "https://arxiv.org/abs/2503.13735"
+        }
+      ],
+      "projection_uncertainty_ensemble_available": false,
+      "resolved_temperature_uncertainty_map_available": false,
+      "unique_causal_origin": false
+    }
+  },
+  "failure_classification": "data insufficiency and causal non-identifiability; not a falsification of causal-history physics",
+  "formula_selected": false,
+  "gate_results": {
+    "equal_snapshot_different_history_sentinel_distinguished": false,
+    "five_sigma_history_statistic_both_clusters": false,
+    "history_source_construction_authorized": false,
+    "member_and_temperature_uncertainty_products_both_clusters": false,
+    "member_phase_space_controls_available": true,
+    "one_common_time_ordered_observable": false,
+    "projection_uncertainty_ensemble_both_clusters": false,
+    "unique_causal_origin_both_clusters": false
+  },
+  "generated_utc": "2026-08-05T03:01:41.375894+00:00",
+  "gravity_parameters_fit": 0,
+  "holdout_opened": false,
+  "input_hashes": {
+    "MACS0416_member_catalog": "31cf730221cf3d31b64d75e99f0eaee184d4cbf745f5c3344e39ebaf47659652",
+    "PLCKG287_member_catalog": "06eac064eb37418ea69b29044a114ae1b4ba13ce7829897cddb77c853672048d",
+    "config": "d92f47d357ffa6d2fe73d5f8f10b372541052a616693407c36a4f50aa8c68b9e",
+    "member_readiness_config": "b21fb0462d1a886ae95a1687a34c23f42b1fe5a87cb24c7d5bbdd5ff0580fed9",
+    "member_readiness_report": "56ebe3b0ecb780b2523955b77af6dcbd9d49be336f7bc1e261b27b02293fb315",
+    "observability_gate": "3f01e1c0bb74ef3bf358539dc1134606234d1c4780f1c3db9be3c9179c3d1b35"
+  },
+  "instantaneous_controls_count_as_history": false,
+  "instantaneous_phase_space_controls": {
+    "MACS0416": {
+      "contains_transverse_velocity_or_depth_information": false,
+      "dressler_shectman": {
+        "delta_sum": 324.92696338444597,
+        "delta_sum_per_member": 1.4066102311014976,
+        "neighbor_count_excluding_self": 15,
+        "one_sided_sigma_equivalent": 2.6356221050384914,
+        "permutation_exceedances": 20,
+        "permutation_p_value": 0.004199160167966407
+      },
+      "global_velocity_dispersion_km_s": 1184.6682924696574,
+      "global_velocity_mean_km_s": 103.88735871339998,
+      "is_genuinely_time_ordered": false,
+      "median_redshift": 0.3979,
+      "permutation_resolution": {
+        "maximum_claimable_one_sided_sigma": 3.5401365750084204,
+        "meets_five_sigma_resolution": false,
+        "minimum_resolvable_p_value": 0.0001999600079984003,
+        "permutations": 5000
+      },
+      "selected_members": 231,
+      "velocity_gradient": {
+        "angle_east_of_north_deg": 354.63496093566243,
+        "bootstrap_absolute_angle_error_deg": {
+          "median": 6.661642484307691,
+          "p68": 10.041733640143104,
+          "p95": 21.4064847740338
+        },
+        "bootstrap_fraction_within_declared_half_angle": 0.9985,
+        "east_km_s_per_mpc": -79.30513439293696,
+        "magnitude_km_s_per_mpc": 848.1758132218371,
+        "north_km_s_per_mpc": 844.4601268227191,
+        "one_sided_sigma_equivalent": 3.3528501328551195,
+        "permutation_exceedances": 1,
+        "permutation_p_value": 0.0003999200159968006,
+        "r_squared": 0.063698472958994
+      }
+    },
+    "PLCKG287": {
+      "contains_transverse_velocity_or_depth_information": false,
+      "dressler_shectman": {
+        "delta_sum": 134.9052589537094,
+        "delta_sum_per_member": 1.0457772011915456,
+        "neighbor_count_excluding_self": 11,
+        "one_sided_sigma_equivalent": 0.09562899386038931,
+        "permutation_exceedances": 2309,
+        "permutation_p_value": 0.46190761847630474
+      },
+      "global_velocity_dispersion_km_s": 1823.5335068128898,
+      "global_velocity_mean_km_s": 16.96820840065552,
+      "is_genuinely_time_ordered": false,
+      "median_redshift": 0.3833,
+      "permutation_resolution": {
+        "maximum_claimable_one_sided_sigma": 3.5401365750084204,
+        "meets_five_sigma_resolution": false,
+        "minimum_resolvable_p_value": 0.0001999600079984003,
+        "permutations": 5000
+      },
+      "selected_members": 129,
+      "velocity_gradient": {
+        "angle_east_of_north_deg": 100.19301755486293,
+        "bootstrap_absolute_angle_error_deg": {
+          "median": 46.72386621295976,
+          "p68": 70.94396796210722,
+          "p95": 151.1014636869023
+        },
+        "bootstrap_fraction_within_declared_half_angle": 0.482,
+        "east_km_s_per_mpc": 434.0473005067,
+        "magnitude_km_s_per_mpc": 441.0076441618048,
+        "north_km_s_per_mpc": -78.04282883129936,
+        "one_sided_sigma_equivalent": -0.7962016872470096,
+        "permutation_exceedances": 3935,
+        "permutation_p_value": 0.7870425914817036,
+        "r_squared": 0.004419755671909664
+      }
+    }
+  },
+  "lensing_or_halo_input_used": false,
+  "new_lensing_target_opened": false,
+  "protocol_version": "SIGMA-V19A-ASSEMBLY-HISTORY-READINESS-1.0.0",
+  "status": "completed Sigma v19A causal-assembly readiness audit"
+}

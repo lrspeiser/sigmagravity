@@ -1,0 +1,115 @@
+{
+  "protocol_version": "SIGMA-V19A-ASSEMBLY-HISTORY-READINESS-1.0.0",
+  "status": "frozen after the v19 observability gate and primary-source audit, before constructing a history source or reading any new lensing target",
+  "purpose": "Test whether the spent MACS J0416 and PLCK G287 baryonic data contain one target-blind, genuinely time-ordered assembly observable that can be evaluated before proposing a causal Sigma source.",
+  "parents": {
+    "observability_gate": "configs/sigma_v19_causal_assembly_observability_gate.json",
+    "observability_gate_sha256": "3f01e1c0bb74ef3bf358539dc1134606234d1c4780f1c3db9be3c9179c3d1b35",
+    "member_readiness_config": "configs/sigma_v18b_replacement_pair_readiness.json",
+    "member_readiness_config_sha256": "b21fb0462d1a886ae95a1687a34c23f42b1fe5a87cb24c7d5bbdd5ff0580fed9",
+    "member_readiness_report": "results/sigma_v18b_replacement_pair_readiness/report.json",
+    "member_readiness_report_sha256": "56ebe3b0ecb780b2523955b77af6dcbd9d49be336f7bc1e261b27b02293fb315"
+  },
+  "instantaneous_phase_space_controls": {
+    "role": "diagnostic control only; these statistics contain positions and line-of-sight velocities at one epoch and cannot count as a causal history coordinate",
+    "permutation_seed": 1900416,
+    "permutations": 5000,
+    "bootstrap_resamples": 2000,
+    "local_neighbor_count_rule": "round(sqrt(N)), with the object itself added to each local neighborhood",
+    "dressler_shectman_definition": "delta_i^2=(N_nn+1)/sigma_global^2*[(vbar_local-vbar_global)^2+(sigma_local-sigma_global)^2]; Delta=sum_i delta_i",
+    "velocity_gradient_definition": "v_los=v0+a*x_east+b*y_north, with gradient magnitude hypot(a,b) and angle atan2(a,b) east of north",
+    "permutation_null": "shuffle measured line-of-sight velocities over fixed projected positions",
+    "p_value_rule": "(exceedances+1)/(permutations+1)",
+    "minimum_claimable_significance_sigma": 5.0,
+    "direction_stability_half_angle_deg": 45.0
+  },
+  "clusters": {
+    "MACS0416": {
+      "primary_event": "the approximately 250 kpc northeast-southwest main-core pair",
+      "direct_time_ordered_clock_available": false,
+      "unique_causal_origin": false,
+      "projection_uncertainty_ensemble_available": false,
+      "member_redshift_uncertainty_column_available": false,
+      "resolved_temperature_uncertainty_map_available": false,
+      "measured_transverse_member_velocities_available": false,
+      "measured_line_of_sight_member_depths_available": false,
+      "accepted_history_statistic_sigma": null,
+      "observational_summary": [
+        "Jauzac et al. found distinct northeast and southwest redshift distributions and discussed both a near-first-passage scenario and a preferred prior-passage, turnaround, second-approach scenario.",
+        "Ogrean et al. found the main gas and mass centers aligned and interpreted the main pair as pre-merger.",
+        "The approximately 450 kpc south-southwest density discontinuity was associated with a smaller interaction, not a propagation clock for the main northeast-southwest pair."
+      ],
+      "primary_sources": [
+        {
+          "title": "Hubble Frontier Fields: The Geometry and Dynamics of the Massive Galaxy Cluster Merger MACSJ0416.1-2403",
+          "url": "https://arxiv.org/abs/1406.3011",
+          "arxiv_id": "1406.3011"
+        },
+        {
+          "title": "Frontier Fields Clusters: Chandra and JVLA View of the Pre-Merging Cluster MACS J0416.1-2403",
+          "url": "https://arxiv.org/abs/1505.05560",
+          "arxiv_id": "1505.05560"
+        }
+      ]
+    },
+    "PLCKG287": {
+      "primary_event": "the northwest shock and cold-front system",
+      "direct_time_ordered_clock_available": true,
+      "unique_causal_origin": false,
+      "projection_uncertainty_ensemble_available": false,
+      "member_redshift_uncertainty_column_available": false,
+      "resolved_temperature_uncertainty_map_available": false,
+      "measured_transverse_member_velocities_available": false,
+      "measured_line_of_sight_member_depths_available": false,
+      "accepted_history_statistic_sigma": null,
+      "measured_clock_diagnostics": {
+        "shock_radius_kpc": 389.0,
+        "shock_radius_uncertainty_kpc": 6.0,
+        "density_jump": 1.43,
+        "density_jump_uncertainty": 0.10,
+        "mach_number": 1.29,
+        "mach_number_uncertainty": 0.07,
+        "approximate_shock_speed_km_s": 2100.0,
+        "propagation_age_upper_bound_myr": 180.0,
+        "density_jump_above_unity_sigma": 4.3
+      },
+      "observational_summary": [
+        "Gitti et al. measured a 389+/-6 kpc shock, density jump 1.43+/-0.10, Mach number 1.29+/-0.07, and an approximate 2100 km/s propagation speed.",
+        "The reported approximately 180 Myr propagation age is an upper bound under an AGN-driven interpretation, not a unique time since cluster core passage.",
+        "The same analysis states that merger and AGN origins remain unresolved, so the feature is not an identified universal assembly clock."
+      ],
+      "primary_sources": [
+        {
+          "title": "Deep Chandra observations of PLCKG287.0+32.9: a clear detection of a shock front in a heated former cool core",
+          "url": "https://arxiv.org/abs/2503.13735",
+          "arxiv_id": "2503.13735"
+        }
+      ]
+    }
+  },
+  "gates": {
+    "minimum_secure_members_each": 50,
+    "minimum_history_statistic_significance_sigma_each": 5.0,
+    "one_common_time_ordered_observable_required": true,
+    "unique_causal_origin_required": true,
+    "projection_uncertainty_ensemble_required": true,
+    "member_and_temperature_uncertainty_products_required": true,
+    "equal_snapshot_different_history_sentinel_required": true,
+    "instantaneous_phase_space_controls_may_satisfy_history_gate": false
+  },
+  "authorization": {
+    "sample_is_spent": true,
+    "source_readiness_only": true,
+    "history_source_construction_authorized_before_audit": false,
+    "formula_selection_authorized": false,
+    "lensing_or_halo_input_authorized": false,
+    "new_lensing_target_access_authorized": false,
+    "holdout_access_authorized": false
+  },
+  "decision_rule": [
+    "A present-epoch member statistic may diagnose projected substructure but cannot satisfy the time-information gate.",
+    "The history source advances only if both clusters have the same directly measured time-ordered observable, unique causal attribution, at least five-sigma significance, member and temperature uncertainty products, and a declared projection uncertainty ensemble.",
+    "Failure caused by missing or ambiguous measurements is data insufficiency, not falsification of causal-history physics.",
+    "If readiness fails, do not construct a source, access a lensing target, or derive a history-dependent field action from these data."
+  ]
+}

@@ -278,6 +278,8 @@ results/sigma_v1_nonmetricity_cycle/*
 !results/p0752_final_holdout_velocity_field_test/**
 !results/p0753_cluster_evidence_registry/
 !results/p0753_cluster_evidence_registry/**
+!results/sigma_v19a_assembly_history_readiness/
+!results/sigma_v19a_assembly_history_readiness/report.json
 !results/p0731_real_velocity_field_adapter_parity/
 results/p0731_real_velocity_field_adapter_parity/*
 !results/p0731_real_velocity_field_adapter_parity/SUMMARY.md

@@ -1,5 +1,30 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v19A assembly-history readiness result
+
+The first causal-history audit did not authorize a source. Deterministic
+member-catalog controls found a stable projected line-of-sight gradient in
+MACS J0416 (`848.2 km/s/Mpc`, permutation-equivalent `3.353 sigma`) but no
+corresponding signal in PLCK G287 (`441.0 km/s/Mpc`, `-0.796 sigma`). The
+Dressler--Shectman controls are `2.636 sigma` and `0.096 sigma`, respectively.
+These are instantaneous phase-space diagnostics rather than time coordinates.
+
+Published evidence does not provide one common primary-event clock. MACS J0416
+has mutually incompatible pre-merger versus prior-passage/second-approach
+interpretations, and its detected outer discontinuity belongs to a smaller
+interaction. PLCK G287 has a measured `389 +/- 6 kpc` shock and approximate
+`180 Myr` propagation upper bound, but merger and AGN origins remain unresolved.
+The derived catalogs also lack member-redshift uncertainties, the matched
+resolved-temperature uncertainty maps are absent, and transverse velocity and
+line-of-sight depth ensembles are unavailable.
+
+This closes source construction on the current spent pair as **data
+insufficiency and causal non-identifiability**, not as a physics falsification.
+No formula, gravity parameter, lensing map, new target, or holdout was used.
+History is therefore not allowed into the root equation as a fitted merger-age
+or response-length parameter. See
+[`SIGMA_V19A_ASSEMBLY_HISTORY_READINESS.md`](SIGMA_V19A_ASSEMBLY_HISTORY_READINESS.md).
+
 ## 2026-08-04 Sigma v18B-v18D collisionless-stress result and v19 gate
 
 The AS295 public redshift releases remain 20 secure members short of the
