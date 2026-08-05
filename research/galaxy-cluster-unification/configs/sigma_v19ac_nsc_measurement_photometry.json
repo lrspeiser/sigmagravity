@@ -1,0 +1,125 @@
+{
+  "protocol_version": "SIGMA-V19AC-NSC-MEASUREMENT-PHOTOMETRY-1.0.0",
+  "status": "frozen_before_querying_per_measurement_photometry_for_all_candidates",
+  "purpose": "Acquire every NSC DR2 per-exposure measurement for the 226 already-retained HSC/NSC candidate objects so later work can form same-instrument, fixed-aperture colors without ranking or selecting a counterpart.",
+  "parent_artifacts": [
+    {
+      "path": "data/derived/sigma_v19aa_member_counterpart_association/unified_candidates.csv",
+      "sha256": "2059209cc9699f23857579bbb772f9e6427d76cb82437b8ec7f0f3449b4dacec"
+    },
+    {
+      "path": "configs/sigma_v19aa_member_counterpart_association.json",
+      "sha256": "bc07209be5ba4d5e66fbf1db9d113dbec4e53371607d829092da74e994ec9cf8"
+    },
+    {
+      "path": "results/sigma_v19aa_member_counterpart_association/report.json",
+      "sha256": "2b751c1e455171b6b37b844ea22b820a3faab65ddd898672b8802b8ca94cd860"
+    },
+    {
+      "path": "configs/sigma_v19z_nsc_member_photometry.json",
+      "sha256": "bcb3a5d2fad63081aa9854f2ff539a5f100dffa23d42d315d17ebd4e14c93aeb"
+    },
+    {
+      "path": "results/sigma_v19z_nsc_member_photometry/provenance.json",
+      "sha256": "7ce94eba8fdbbcf6d9f2c816de353aa283d8169f66840690a858fd21982bd477"
+    },
+    {
+      "path": "configs/sigma_v19ab_bessel_nsc_transform_commissioning.json",
+      "sha256": "1e346fb1b0097cd6b16058b125cf51ab94bc2a845b1cd0419c350a9476c78263"
+    },
+    {
+      "path": "results/sigma_v19ab_bessel_nsc_transform_commissioning/report.json",
+      "sha256": "f6364489e16dee9b44928dcaea70d69d11c7770df761470a7fa0cfa41e1f3176"
+    }
+  ],
+  "source": {
+    "authority": "NSF NOIRLab Astro Data Lab",
+    "endpoint": "https://datalab.noirlab.edu/tap/sync",
+    "measurement_table": "nsc_dr2.meas",
+    "exposure_table": "nsc_dr2.exposure",
+    "join": "m.exposure=e.exposure",
+    "format": "csv",
+    "batch_size": 25,
+    "timeout_seconds": 180,
+    "maximum_attempts": 3,
+    "expected_unique_object_ids": 226,
+    "query_columns": [
+      "objectid",
+      "measid",
+      "exposure",
+      "instrument",
+      "filter",
+      "mjd",
+      "mag_auto",
+      "magerr_auto",
+      "mag_aper1",
+      "magerr_aper1",
+      "mag_aper2",
+      "magerr_aper2",
+      "mag_aper4",
+      "magerr_aper4",
+      "mag_aper8",
+      "magerr_aper8",
+      "flags",
+      "class_star",
+      "kron_radius",
+      "asemi",
+      "bsemi",
+      "exposure_fwhm",
+      "zptermerr",
+      "zptermsig"
+    ],
+    "ordering": "objectid,filter,mjd,measid",
+    "metadata_basis": "TAP_SCHEMA.columns verified the measurement apertures and exposure instrument/filter fields before freeze.",
+    "pre_freeze_singleton_preflight": "The 15 already-opened V19AB singleton object IDs returned 1,032 measurement rows, all from instrument c4d (DECam): g=196, r=348, i=208, z=152, Y=128. No ambiguous candidate ID was queried in preflight."
+  },
+  "inputs": {
+    "unified_candidates": "data/derived/sigma_v19aa_member_counterpart_association/unified_candidates.csv",
+    "object_id_column": "nsc_id",
+    "candidate_selection": "all nonblank unique nsc_id values; no positional, photometric, morphology, lensing, or gravity selection"
+  },
+  "outputs": {
+    "raw_root": "data/raw/sigma_v19ac_nsc_measurement_photometry",
+    "combined_measurements": "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv",
+    "report": "results/sigma_v19ac_nsc_measurement_photometry/provenance.json"
+  },
+  "gates": {
+    "exact_unique_object_ids": 226,
+    "http_200_every_batch": true,
+    "exact_schema_every_batch": true,
+    "no_unrequested_object_ids": true,
+    "every_requested_object_has_at_least_one_measurement": true,
+    "all_rows_retained_without_quality_or_aperture_selection": true,
+    "every_raw_payload_query_and_request_form_hashed": true
+  },
+  "claim_boundary": [
+    "V19AC is lossless source-data acquisition; it does not choose an aperture, combine exposures, score a color, or select a counterpart.",
+    "Instrument identification and fixed-aperture measurements make a later aperture-invariant color test possible but do not prove any identity.",
+    "No stellar mass, current, lensing, halo, or gravity quantity is read or produced."
+  ],
+  "implementation": {
+    "runner": "scripts/download_sigma_v19ac_nsc_measurement_photometry.py",
+    "runner_sha256": "35391aaec34fb27fb0de446f7a1671c3e6c020d419c43be972f12d619cd3cd85"
+  },
+  "authorization": {
+    "query_all_retained_nsc_candidate_ids": true,
+    "retain_every_measurement_row": true,
+    "select_aperture_or_exposure": false,
+    "score_photometric_identity": false,
+    "select_counterpart": false,
+    "infer_stellar_mass": false,
+    "construct_mass_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "singleton_measurement_preflight_run_pre_freeze": true,
+    "ambiguous_candidate_measurements_queried_pre_freeze": false,
+    "aperture_selected_pre_freeze": false,
+    "photometric_identity_scored_pre_freeze": false,
+    "counterpart_selected_pre_freeze": false,
+    "lensing_target_opened_pre_freeze": false,
+    "gravity_result_opened_pre_freeze": false
+  }
+}
