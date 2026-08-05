@@ -279,6 +279,13 @@ FORMULA_FIELD_NAMES = {
     "total_lagrangian",
 }
 
+# Instrument/data-selection indicators are equations in a programming sense,
+# but they are not candidate gravity laws and must not inflate the physics
+# formula count merely because a protocol uses the JSON key "formula".
+NON_THEORY_FORMULA_PATHS = {
+    "science_support_rule.formula",
+}
+
 
 def extract_formula_fragments(value: Any, path: str = "") -> list[dict[str, str]]:
     fragments: list[dict[str, str]] = []
@@ -306,7 +313,11 @@ def sigma_protocol_inventory(addenda: dict[str, Any]) -> list[dict[str, Any]]:
     inventory: list[dict[str, Any]] = []
     for path in sorted((ROOT / "configs").glob("sigma_v*.json")):
         payload = load_json(path)
-        fragments = extract_formula_fragments(payload)
+        fragments = [
+            fragment
+            for fragment in extract_formula_fragments(payload)
+            if fragment["json_path"] not in NON_THEORY_FORMULA_PATHS
+        ]
         relative = path.relative_to(ROOT).as_posix()
         for entry in addenda_by_config.get(relative, []):
             fragments.append(

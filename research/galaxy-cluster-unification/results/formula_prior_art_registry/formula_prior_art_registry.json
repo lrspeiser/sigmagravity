@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 123,
+    "sigma_protocols": 125,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6851,6 +6851,30 @@
         "NEWTON-POISSON"
       ],
       "sha256": "f614fdf984b477d9b5d07dcc03ce63522974457e0d353c4dd83c9df38dc59ac6"
+    },
+    {
+      "config": "configs/sigma_v19p_exact_flux_obs_support.json",
+      "protocol_version": "SIGMA-V19P-EXACT-FLUX-OBS-SUPPORT-1.0.0",
+      "status": "frozen after the V19N and V19O fail-closed audits and a hash-only inventory, but before opening a per-observation flux_obs FITS array or FOV, filtering an event with that FOV, knowing whether the one-event Bullet discrepancy closes, changing a response-task membership, constructing a spectrum or response, fitting thermodynamics, opening lensing data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "3e89f4567918bf032cbda43bfd42a2af0e57478b2debe793183f224f348066b5"
+    },
+    {
+      "config": "configs/sigma_v19q_positive_exposure_response_workload.json",
+      "protocol_version": "SIGMA-V19Q-POSITIVE-EXPOSURE-RESPONSE-WORKLOAD-1.0.0",
+      "status": "frozen after V19P localized its sole nonconservation to a geometrically admitted Bullet event on an exact flux_obs exposure pixel equal to zero, but before applying the positive-exposure rule to an event table, knowing the cross-sample conservation result, changing task membership, constructing a spectrum or response, fitting thermodynamics, opening lensing data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "48e942f231886b7f8fcdfa266003315afdba05a4177e56730efeb5dbdb604cc7"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

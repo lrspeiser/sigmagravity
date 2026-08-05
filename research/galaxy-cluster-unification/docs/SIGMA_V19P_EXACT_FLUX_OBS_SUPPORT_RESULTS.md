@@ -37,7 +37,9 @@ observations: an event contributes to a regional response task only when the
 matching exact `flux_obs` broad-band exposure pixel is positive.  That rule
 reproduces the support actually used to make the frozen science image.  It must
 be frozen and rerun across both clusters before response extraction is
-authorized.
+authorized.  That follow-up was frozen as V19Q and passed every gate: it
+preserved all 5,082 task keys and achieved exact science-count conservation in
+both clusters.
 
 No spectrum, response, temperature, density, Mach number, lensing target, or
 gravity formula was constructed or changed in V19P.
