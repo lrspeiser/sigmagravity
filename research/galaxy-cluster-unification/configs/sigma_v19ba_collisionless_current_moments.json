@@ -1,0 +1,110 @@
+{
+  "protocol_version": "SIGMA-V19BA-COLLISIONLESS-CURRENT-MOMENTS-1.0.0",
+  "status": "frozen_before_rasterizing_any_member_ensemble_draw_or_computing_any_current_moment",
+  "purpose": "Project the target-blind V19AZ Bullet member ensemble onto the frozen V19H Chandra tangent grid as the three unsmoothed sufficient moment maps needed to test a long-wavelength collisionless-current or Reynolds-stress source, without selecting counterparts, fitting a propagation length, inferring absolute mass, opening lensing data, or changing gravity physics.",
+  "parents": {
+    "v19az_config": {
+      "path": "configs/sigma_v19az_probabilistic_member_current_ensemble.json",
+      "sha256": "4dd175be6d04f25bdd9413155548dfbcab2884c162cf2dc2ff4c37c7d34528d0"
+    },
+    "v19az_report": {
+      "path": "results/sigma_v19az_probabilistic_member_current_ensemble/report.json",
+      "sha256": "b059d6f7117c49640377b84053bef651f21686d405193405126497429ef381e0"
+    },
+    "v19az_ensemble": {
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/position_current_ensemble.csv.gz",
+      "sha256": "28f292af9afc4e8161bc5f0fce48d30dcf5c9c27c4412f6cba02c6fbb19bdc47"
+    },
+    "v19h_config": {
+      "path": "configs/sigma_v19h_causal_observable_protocol.json",
+      "sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479"
+    },
+    "v19h_source_map_report": {
+      "path": "results/sigma_v19h_source_maps/report.json",
+      "sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af"
+    },
+    "v19h_bullet_analysis_mask": {
+      "path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/analysis_mask.img",
+      "sha256": "874ffe6c028ab9340ff467811da79073ee6af2d00fc829fd6b89b65ba28717c4"
+    }
+  },
+  "population": {
+    "cluster": "BULLET",
+    "expected_draws": 8192,
+    "expected_members_per_draw": 72,
+    "expected_ensemble_rows": 589824,
+    "missing_bri_members": ["01", "02", "03", "04", "05", "67"],
+    "missing_bri_rule": "Remain explicit in V19AZ completeness accounting but cannot be assigned a luminosity moment here; no luminosity is imputed.",
+    "transverse_velocity_rule": "Remain unmeasured_not_imputed; V19BA constructs only line-of-sight current and stress moments."
+  },
+  "grid": {
+    "source": "the primary HDU WCS and shape of the frozen V19H Bullet analysis mask",
+    "expected_shape_yx": [626, 626],
+    "expected_pixel_scale_arcsec": 0.984,
+    "deposition": "four-pixel bilinear cloud-in-cell using zero-based floating WCS pixel coordinates",
+    "boundary_rule": "Every ensemble position must have all four cloud-in-cell neighbors inside the full grid; do not clip or renormalize a source at a boundary.",
+    "analysis_mask_role": "Report moment coverage inside the X-ray analysis mask but retain members elsewhere on the common full tangent grid.",
+    "known_mask_overlap": "Exactly member 66 lies outside the nearest-pixel V19H X-ray analysis mask in every frozen V19AZ draw; this is a precomputed parent-coverage fact, not permission to drop it."
+  },
+  "projected_moments": {
+    "dimensionless_velocity": "beta_parallel = v_los_rest_km_s / 299792.458",
+    "luminosity_density": "rho_L(x) = sum_i ell_i delta_2(x-x_i)",
+    "signed_current": "j_parallel(x) = sum_i ell_i beta_parallel_i delta_2(x-x_i)",
+    "second_moment": "Pi_parallel_parallel(x) = sum_i ell_i beta_parallel_i^2 delta_2(x-x_i)",
+    "ell_i": "the unchanged V19AZ relative Bessel-I luminosity 10^[-0.4*(I-20)]",
+    "sufficient_statistic_role": "For any later nonnegative long-wave operator H_L, the line-of-sight velocity-covariance source can be formed as H_L[Pi] - H_L[j]^2/H_L[rho]. V19BA does not select or fit H_L or L.",
+    "absolute_mass_or_pressure_claim": false
+  },
+  "uncertainty_summary": {
+    "per_pixel_outputs": "Across-draw mean, population standard deviation, and all three pairwise covariances of rho_L, j_parallel, and Pi_parallel_parallel.",
+    "sample_outputs": "For every draw, store total deposited luminosity, signed current, positive second moment, luminosity-weighted mean beta, nonnegative global beta variance, RMS speed, and analysis-mask luminosity fraction.",
+    "no_gaussian_approximation_claim": "The mean/covariance FITS is a compact summary; the authoritative non-Gaussian positional and velocity distribution remains the V19AZ ensemble."
+  },
+  "gates": {
+    "all_parent_hashes_exact": true,
+    "exact_draw_member_and_row_counts": true,
+    "all_positions_have_four_in_grid_neighbors": true,
+    "maximum_wcs_roundtrip_error_arcsec": 1e-6,
+    "maximum_per_draw_relative_deposition_error": 1e-12,
+    "minimum_normalized_pixel_cauchy_schwarz_margin": -1e-12,
+    "all_second_moment_pixels_nonnegative": true,
+    "all_global_beta_variances_nonnegative_with_tolerance": -1e-15,
+    "exact_outside_analysis_mask_member_ids": ["66"],
+    "no_smoothing_length_or_response_amplitude_selected": true,
+    "no_absolute_mass_or_transverse_velocity_inferred": true,
+    "no_lensing_halo_or_gravity_payload": true,
+    "failure_rule": "Fail closed without clipping a member, widening the grid, changing deposition, dropping member 66, imputing missing BRI or transverse velocities, smoothing the maps, or selecting a theory parameter after seeing the moments."
+  },
+  "outputs": {
+    "moment_maps": "data/derived/sigma_v19ba_collisionless_current_moments/collisionless_current_moments.fits",
+    "sample_global_moments": "data/derived/sigma_v19ba_collisionless_current_moments/sample_global_moments.csv",
+    "report": "results/sigma_v19ba_collisionless_current_moments/report.json",
+    "figure": "results/sigma_v19ba_collisionless_current_moments/collisionless_current_moments.png"
+  },
+  "claim_boundary": [
+    "V19BA measures projected luminosity, line-of-sight current, and line-of-sight second-moment morphology; it does not detect a new gravitational field.",
+    "The second moment is a collisionless luminosity-weighted stress proxy, not gas pressure, total pressure, absolute energy density, or a three-dimensional stress tensor.",
+    "A future long-wave covariance requires a separately frozen propagation operator and universal scale; V19BA deliberately supplies unsmoothed sufficient moments only.",
+    "Member 66 is retained on the full grid even though the V19H X-ray analysis mask does not cover its location.",
+    "No lensing coordinates, inferred dark-matter maps, halo fits, gravity residuals, or Sigma constants enter this protocol."
+  ],
+  "authorization": {
+    "read_frozen_v19az_ensemble_and_v19h_grid": true,
+    "rasterize_unsmoothed_luminosity_current_and_second_moment": true,
+    "summarize_ensemble_mean_variance_and_covariance": true,
+    "select_counterparts": false,
+    "impute_missing_luminosity_or_transverse_velocity": false,
+    "infer_absolute_mass": false,
+    "apply_or_fit_long_wave_operator": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "ensemble_row_rasterized_at_freeze": false,
+    "current_or_second_moment_computed_at_freeze": false,
+    "long_wave_length_or_amplitude_selected_at_freeze": false,
+    "lensing_or_halo_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  }
+}
