@@ -2445,3 +2445,20 @@ Only HST `/images/v1/` products and published Chandra observation identifiers
 are whitelisted. Lens maps, image coordinates, topology and residuals remain
 sealed, and no formula or constant is selected. See
 [`SIGMA_V19BT_BLIND_CLUSTER_SOURCE_READINESS.md`](SIGMA_V19BT_BLIND_CLUSTER_SOURCE_READINESS.md).
+
+## 2026-08-05 V19BU WALLABY source-only candidate universe
+
+The blind galaxy lane now has an actual, hash-bound WALLABY DR1 source catalog
+rather than only a survey-level protocol. A strict CASDA ADQL projection
+retrieved 711 source-finding rows representing the published 592 unique H I
+detections. The 21 retained columns contain identity/provenance, sky position,
+integrated H I source measurements, noise and quality metadata, moment-zero
+geometry, distance and H I mass.
+
+The separate kinematic table was inspected only at the schema-name level to
+freeze a deny-list. No row containing systemic velocity, fitted inclination,
+kinematic position angle, radial grid, rotation speed, velocity field,
+residual or halo result was read. The spectral cubes also remain sealed because
+they contain the target velocities. No final galaxy was selected, and no
+action, constant or Solar-System tuning changed. See
+[`SIGMA_V19BU_WALLABY_SOURCE_ONLY_METADATA.md`](SIGMA_V19BU_WALLABY_SOURCE_ONLY_METADATA.md).

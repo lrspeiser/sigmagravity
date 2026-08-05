@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 190,
+    "sigma_protocols": 191,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7334,6 +7334,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "53058f8bdc6d84c7109b125220ddbf582bb54c8877645c5be3f2ae62b6db4656"
+    },
+    {
+      "config": "configs/sigma_v19bu_wallaby_source_only_metadata.json",
+      "protocol_version": "SIGMA-V19BU-WALLABY-SOURCE-ONLY-METADATA-1.0.0",
+      "status": "completed source-only public-metadata acquisition; no kinematic target, final sample, action, universal constant or gravity score opened",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "da5ff0c63f7986f34b7f40aa6be8220d103fc13c57fd72f08194172fdd7e6839"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

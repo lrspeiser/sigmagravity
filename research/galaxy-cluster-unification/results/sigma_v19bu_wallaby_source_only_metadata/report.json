@@ -1,0 +1,175 @@
+{
+  "access_boundary_audit": {
+    "final_holdout_sample_selected": false,
+    "gravity_formula_or_constant_changed": false,
+    "inclination_or_kinematic_position_angle_values_read": false,
+    "kinematic_model_table_rows_read": false,
+    "kinematic_model_table_schema_names_read": true,
+    "model_residual_or_halo_result_read": false,
+    "rotation_speed_values_read": false,
+    "solar_system_optimization_performed": false,
+    "source_finding_table_read": true,
+    "systemic_velocity_values_read": false,
+    "velocity_field_or_cube_opened": false
+  },
+  "authorization_audit": {
+    "download_velocity_cubes_or_fields": false,
+    "fit_or_change_gravity": false,
+    "perform_detailed_solar_optimization": false,
+    "read_kinematic_schema_names_only": true,
+    "read_kinematic_values": false,
+    "read_source_catalog_metadata": true,
+    "select_final_holdout_galaxies": false
+  },
+  "claim_boundary": [
+    "V19BU acquires a 592-name source-side candidate universe; it does not claim that 592 or 109 galaxies meet the final baryon, nuisance, target-quality or morphology gates.",
+    "The 711 rows contain 119 duplicate team-release entries and are not silently deduplicated or outcome-selected here.",
+    "No velocity, inclination, kinematic position angle, rotation curve, velocity field, target residual, halo fit, Sigma score, action or universal constant enters this checkpoint.",
+    "The raw cubes encode both gas source structure and kinematic targets, so they remain sealed until the action and constants are frozen."
+  ],
+  "config": "configs/sigma_v19bu_wallaby_source_only_metadata.json",
+  "config_sha256": "da5ff0c63f7986f34b7f40aa6be8220d103fc13c57fd72f08194172fdd7e6839",
+  "decision": "passed_source_only_candidate_universe_not_holdout_selection",
+  "gate_results": {
+    "all_target_columns_absent": true,
+    "duplicate_release_rows_are_explicit": true,
+    "final_sample_theory_constants_and_solar_remain_unselected": true,
+    "kinematic_rows_and_values_remain_sealed": true,
+    "parent_hash_exact": true,
+    "published_592_unique_sources_recovered": true,
+    "source_columns_equal_whitelist": true,
+    "source_payload_hash_and_size_exact": true,
+    "source_summary_reproduces_exactly": true
+  },
+  "implementation": {
+    "runner": "scripts/check_sigma_v19bu_wallaby_source_only_metadata.py"
+  },
+  "next_work_after_action_freeze": [
+    "Deduplicate repeated team-release rows under a frozen provenance rule without inspecting any kinematic target.",
+    "Join source-only optical photometry and environment metadata to construct mass, gas-richness, surface-brightness, bulge and environment strata before opening target values.",
+    "Freeze at least 32 eligible WALLABY identifiers and their source/nuisance manifests, plus the non-WALLABY complement, before retrieving any target column.",
+    "Open the separate kinematic table exactly once after the action and universal constants are frozen, and forward-model at least 12 released cubes or velocity fields rather than relying only on catalog curves."
+  ],
+  "parent_audit": {
+    "actual_sha256": "c5cabc48d224d4a1021e8f3d65f8ec8236b3fecd8ac13c33734c82b3d1644b55",
+    "exact": true,
+    "expected_sha256": "c5cabc48d224d4a1021e8f3d65f8ec8236b3fecd8ac13c33734c82b3d1644b55",
+    "path": "results/sigma_v19bi_blind_galaxy_admission/report.json"
+  },
+  "protocol_version": "SIGMA-V19BU-WALLABY-SOURCE-ONLY-METADATA-1.0.0",
+  "source_payload_audit": {
+    "actual_sha256": "58e59cdfc48cf8192ff2038b949285adfa3ab0b1038603b31afcf81df8fbac4d",
+    "bytes": 210929,
+    "columns": [
+      "id",
+      "catalogue_id",
+      "name",
+      "ra",
+      "dec",
+      "f_sum",
+      "err_f_sum",
+      "rms",
+      "rel",
+      "qflag",
+      "kflag",
+      "n_pix",
+      "ell_maj",
+      "ell_min",
+      "ell_pa",
+      "ell3s_maj",
+      "ell3s_min",
+      "ell3s_pa",
+      "team_release",
+      "dist_h",
+      "log_m_hi"
+    ],
+    "duplicate_name_rows": 119,
+    "expected_sha256": "58e59cdfc48cf8192ff2038b949285adfa3ab0b1038603b31afcf81df8fbac4d",
+    "kflag_row_counts": {
+      "0": 470,
+      "1": 117,
+      "2": 124
+    },
+    "kflag_unique_name_counts": {
+      "0": 388,
+      "1": 107,
+      "2": 109
+    },
+    "maximum_rows_per_name": 2,
+    "path": "data/raw/sigma_v19bu_wallaby_source_metadata/wallaby_pilot_dr1_source_only.csv",
+    "qflag_row_counts": {
+      "0.0": 611,
+      "4.0": 100
+    },
+    "reliability_at_least_0_9_rows": 641,
+    "row_count": 711,
+    "rows_with_hi_mass": 711,
+    "team_release_row_counts": {
+      "Hydra TR1": 148,
+      "Hydra TR2": 272,
+      "NGC 4636 TR1": 147,
+      "Norma TR1": 144
+    },
+    "unique_source_names": 592
+  },
+  "source_target_boundary": {
+    "allowed_source_columns": [
+      "id",
+      "catalogue_id",
+      "name",
+      "ra",
+      "dec",
+      "f_sum",
+      "err_f_sum",
+      "rms",
+      "rel",
+      "qflag",
+      "kflag",
+      "n_pix",
+      "ell_maj",
+      "ell_min",
+      "ell_pa",
+      "ell3s_maj",
+      "ell3s_min",
+      "ell3s_pa",
+      "team_release",
+      "dist_h",
+      "log_m_hi"
+    ],
+    "final_sample_selected": false,
+    "kinematic_value_rows_read": false,
+    "sealed_target_columns": [
+      "freq",
+      "kin_pa",
+      "vsys_model",
+      "e_vsys_model",
+      "x_model",
+      "e_x_model",
+      "y_model",
+      "e_y_model",
+      "ra_model",
+      "e_ra_model",
+      "dec_model",
+      "e_dec_model",
+      "inc_model",
+      "e_inc_model",
+      "pa_model",
+      "e_pa_model",
+      "pa_model_g",
+      "e_pa_model_g",
+      "qflag_model",
+      "rad",
+      "vrot_model",
+      "e_vrot_model",
+      "e_vrot_model_inc",
+      "rad_sd",
+      "sd_model",
+      "e_sd_model",
+      "sd_fo_model",
+      "e_sd_fo_model_inc"
+    ],
+    "sealed_target_table": "AS102.wallaby_pilot_dr1_kinmodel_cat_v01",
+    "source_table": "AS102.wallaby_pilot_dr1_sourcefind_cat_v01"
+  },
+  "status": "completed_wallaby_source_only_metadata_checkpoint"
+}
