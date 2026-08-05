@@ -15,9 +15,13 @@ out-of-root path, changed report, or mutated product fails closed. This is only
 an implementation preflight. An unfrozen orchestration scaffold now preserves
 the original two integrated fits followed by the two abundance-fixed selected-
 region fits and blocks all 494 production regions if any gate fails. It also
-preserves each validated cell's base/recovery provenance. V19X2 is not frozen
-until V19W terminates and V19W4 produces its terminal report and unified index.
-No response was combined, no spectrum or temperature was fit, and no lensing or
+preserves each validated cell's base/recovery provenance. A mechanical freezer
+now refuses absent/failed terminal evidence and, after a pass, will copy the
+registered workload, combination, fit sequence, and gates exactly from V19X
+while hashing every parent. Its config hash is recorded in the execution report
+rather than circularly embedded in the config itself. V19X2 is not frozen until
+V19W terminates and V19W4 produces its terminal report and unified index. No
+response was combined, no spectrum or temperature was fit, and no lensing or
 gravity payload was opened. See
 [`SIGMA_V19X2_UNIFIED_RESPONSE_ADAPTER_PREFLIGHT.md`](SIGMA_V19X2_UNIFIED_RESPONSE_ADAPTER_PREFLIGHT.md).
 

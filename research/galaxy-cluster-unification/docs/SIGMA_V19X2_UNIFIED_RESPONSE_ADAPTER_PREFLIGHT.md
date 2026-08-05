@@ -47,8 +47,10 @@ quantity is derived, and no lensing, halo or gravity payload is opened.
 
 The scaffold itself refuses any configuration whose freeze state is not
 `frozen_after_terminal_v19w4_pass`, and it requires exact hashes for its future
-configuration, runner and adapter.  It therefore cannot become executable by
-mistaking the current draft for an authorized protocol.
+runner and adapter.  The executed report records the complete configuration
+hash; the configuration does not attempt the impossible operation of embedding
+and validating its own changing file hash. It therefore cannot become
+executable by mistaking the current draft for an authorized protocol.
 
 After V19W exits and V19W4 passes, the successor configuration will hash:
 
@@ -61,8 +63,15 @@ After V19W exits and V19W4 passes, the successor configuration will hash:
 Only that post-recovery configuration may authorize the integrated and
 selected-region commissioning fits.
 
+The freeze step is now executable rather than manual. The
+`freeze_sigma_v19x2_unified_spectral_combination.py` command refuses an absent
+or failed V19W4 report, verifies its index and immutable-base gates, copies the
+four scientific sections from V19X without structural change, hashes every
+parent, and emits the only configuration state the successor runner accepts.
+It deliberately cannot emit a configuration while V19W4 is pending.
+
 ## Reproduction
 
 ```powershell
-python -m pytest tests/test_sigma_v19x2_unified_response_adapter.py tests/test_sigma_v19x2_unified_spectral_combination_scaffold.py -q
+python -m pytest tests/test_sigma_v19x2_unified_response_adapter.py tests/test_sigma_v19x2_unified_spectral_combination_scaffold.py tests/test_freeze_sigma_v19x2_unified_spectral_combination.py -q
 ```

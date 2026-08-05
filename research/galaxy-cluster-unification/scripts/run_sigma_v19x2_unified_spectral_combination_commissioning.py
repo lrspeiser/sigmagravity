@@ -234,11 +234,9 @@ def execute(
     return result
 
 
-def validate_frozen_runner(config: dict[str, Any], config_path: Path) -> None:
+def validate_frozen_runner(config: dict[str, Any]) -> None:
     if config.get("freeze_state") != "frozen_after_terminal_v19w4_pass":
         raise RuntimeError("V19X2 configuration is not frozen after a terminal V19W4 pass")
-    if adapter.sha256(config_path) != config["implementation"]["config_sha256"]:
-        raise RuntimeError("V19X2 configuration hash changed after freeze")
     runner = ROOT / config["implementation"]["runner"]
     if runner.resolve() != Path(__file__).resolve():
         raise RuntimeError("V19X2 configuration names another runner")
@@ -247,6 +245,20 @@ def validate_frozen_runner(config: dict[str, Any], config_path: Path) -> None:
     adapter_path = ROOT / config["implementation"]["adapter"]
     if adapter.sha256(adapter_path) != config["implementation"]["adapter_sha256"]:
         raise RuntimeError("V19X2 adapter changed after freeze")
+
+
+def validate_frozen_parents_and_inheritance(config: dict[str, Any]) -> None:
+    parents = config["parents"]
+    for key, value in parents.items():
+        if key.endswith("_sha256"):
+            continue
+        expected = parents.get(f"{key}_sha256")
+        if expected is not None and adapter.sha256(ROOT / value) != expected:
+            raise RuntimeError(f"V19X2 parent changed after freeze: {value}")
+    legacy = load_json(ROOT / parents["legacy_v19x_config"])
+    for section in config["exact_legacy_sections"]:
+        if config[section] != legacy[section]:
+            raise RuntimeError(f"V19X2 changed inherited scientific section: {section}")
 
 
 def main() -> None:
@@ -259,7 +271,8 @@ def main() -> None:
     config_path = args.config.resolve()
     output = args.output.resolve()
     config = load_json(config_path)
-    validate_frozen_runner(config, config_path)
+    validate_frozen_runner(config)
+    validate_frozen_parents_and_inheritance(config)
     output.mkdir(parents=True, exist_ok=True)
     try:
         result = execute(

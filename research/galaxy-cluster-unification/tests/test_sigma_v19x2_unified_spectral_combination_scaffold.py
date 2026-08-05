@@ -212,7 +212,7 @@ def test_runner_refuses_an_unfrozen_configuration(tmp_path: Path) -> None:
     )
     config = json.loads(config_path.read_text(encoding="utf-8"))
     try:
-        runner.validate_frozen_runner(config, config_path)
+        runner.validate_frozen_runner(config)
     except RuntimeError as exc:
         assert "not frozen after a terminal V19W4 pass" in str(exc)
     else:
