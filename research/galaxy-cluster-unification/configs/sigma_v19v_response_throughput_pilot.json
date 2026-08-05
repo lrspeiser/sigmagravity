@@ -1,0 +1,118 @@
+{
+  "protocol_version": "SIGMA-V19V-RESPONSE-THROUGHPUT-PILOT-1.0.0",
+  "status": "frozen after the preregistered V19U plan selected four outcome-blind source-count strata, but before constructing any of their PHA/ARF/RMF products, measuring concurrent runtime or storage, reading a response output, fitting another temperature, opening lensing data, or changing gravity physics",
+  "purpose": "Execute the exact V19R response method concurrently on the four V19U pilot cells to validate isolation, atomic checkpointing, cross-cluster transfer and realistic full-run resource estimates.",
+  "parents": {
+    "v19u_config": "configs/sigma_v19u_response_production_plan.json",
+    "v19u_config_sha256": "38c7358b06ec5b6e84763d49e1eca75c3a447d08c27968a8b55e7efaddf1ae28",
+    "v19u_runner": "scripts/plan_sigma_v19u_response_production.py",
+    "v19u_runner_sha256": "337dcb2c5d35e9ee3797ee2ed9bf41aaaeb65dd910cc326d54d46f4606e1d694",
+    "v19u_report": "results/sigma_v19u_response_production_plan/report.json",
+    "v19u_report_sha256": "c5084fb98f9c9e635429663ce64cf025eaf26b0d5fa09a09fbc42385e174ab2c",
+    "v19u_manifest": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+    "v19u_manifest_sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd",
+    "input_inventory": "results/sigma_v19p_exact_flux_obs_support/input_inventory.json",
+    "input_inventory_sha256": "085d7ddcc855637dfce8cce2494f6c7d2d50b25950dabf8c0d8c10733369d983",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "region_report": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+    "region_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+    "repro_report": "results/sigma_v19f_chandra_repro/report.json",
+    "repro_report_sha256": "6541133c249103400e9cedffc8f8118e72fd75f2a6bda7c3db1d876614cd7ab9",
+    "astrometry_report": "results/sigma_v19g_chandra_astrometry/report.json",
+    "astrometry_report_sha256": "b6f77ad4dff16af66a1698f6d8e9310cadd98d1085c5d0965ec57cd2c58732a6",
+    "support_runner": "scripts/run_sigma_v19p_exact_flux_obs_support.py",
+    "support_runner_sha256": "660a19981a6ec1be7c03f136995c95b82fb17b12e6621ea8ba38f26f05118e75",
+    "positive_exposure_runner": "scripts/run_sigma_v19q_positive_exposure_response_workload.py",
+    "positive_exposure_runner_sha256": "87f6f99e7dc5802e6857f670c31f2ea72c4d1ba2ff2e40e619dae205afc0ed3d",
+    "response_commissioning_runner": "scripts/run_sigma_v19r_response_commissioning.py",
+    "response_commissioning_runner_sha256": "016a1480021179cce76d66324a739f881c15df269cec78fae8e67e7f9c7dc728",
+    "inherited_response_runner": "scripts/run_sigma_v17c_integrated_spectra.py",
+    "inherited_response_runner_sha256": "1116dff3c8da44c54a0402d20dbcf7094945579abdbcf89e9278a3017685dd21"
+  },
+  "pilot_cells": [
+    {
+      "cluster": "BULLET",
+      "quantile": 0.25,
+      "bin_id": 257,
+      "obsid": 5355,
+      "ccd_id": 2,
+      "source_band_events": 82,
+      "background_band_events": 98,
+      "blanksky_scale": 0.016302906
+    },
+    {
+      "cluster": "BULLET",
+      "quantile": 0.75,
+      "bin_id": 23,
+      "obsid": 5356,
+      "ccd_id": 2,
+      "source_band_events": 266,
+      "background_band_events": 38,
+      "blanksky_scale": 0.065704048
+    },
+    {
+      "cluster": "ABELL2146",
+      "quantile": 0.25,
+      "bin_id": 75,
+      "obsid": 13020,
+      "ccd_id": 0,
+      "source_band_events": 153,
+      "background_band_events": 57,
+      "blanksky_scale": 0.096840702
+    },
+    {
+      "cluster": "ABELL2146",
+      "quantile": 0.75,
+      "bin_id": 101,
+      "obsid": 13120,
+      "ccd_id": 2,
+      "source_band_events": 217,
+      "background_band_events": 146,
+      "blanksky_scale": 0.11622176
+    }
+  ],
+  "execution": {
+    "maximum_concurrent_cells": 4,
+    "maximum_attempts_per_cell": 2,
+    "maximum_pilot_wall_seconds": 600.0,
+    "minimum_observed_concurrency": 2,
+    "scratch_root": "/home/henry/sigma-v19v-response-throughput-pilot/v100",
+    "cell_private_pfiles_key": "cluster/obsid/ccd_id/bin_id",
+    "atomic_completion": "response products and a passing cell report are renamed from a cell-private partial directory to completed only after all audits pass",
+    "failure_retention": "each failed attempt is retained under failed_attempts and cannot be omitted from the pilot report",
+    "response_method": "identical V19R source/background geometry, centroid response reference, weighted ARF/RMF, energy grid, blank-sky scaling and response audits",
+    "snapshot_all_passing_pilot_products": true
+  },
+  "resource_gates": {
+    "v19r_four_response_product_bytes": 6641280,
+    "maximum_four_product_bytes_per_pilot_cell": 13282560,
+    "full_workload_cells": 5082,
+    "full_projection_uses_observed_pilot_median_bytes_and_throughput": true
+  },
+  "gates": {
+    "all_parent_and_external_input_hashes_exact": true,
+    "pilot_cells_exactly_equal_v19u_selection": true,
+    "pilot_cells_have_unique_observation_ccd_pairs": true,
+    "positive_exposure_source_and_background_preflight_counts_exact": true,
+    "response_reference_maps_to_the_frozen_ccd_for_science_and_background": true,
+    "all_four_cells_pass_on_at_most_two_unchanged_attempts": true,
+    "source_and_background_pha_channel_histograms_match_events": true,
+    "arf_is_finite_positive_and_rmf_is_finite_nonzero": true,
+    "pha_background_arf_and_rmf_links_are_present": true,
+    "effective_blanksky_scale_matches_manifest_within_1e_6_relative": true,
+    "at_least_two_cells_overlap_in_execution": true,
+    "pilot_wall_time_at_most_600_seconds": true,
+    "each_cell_four_product_bytes_at_most_twice_v19r": true,
+    "all_passing_products_are_hashed_and_snapshotted": true,
+    "failure_rule": "do not authorize full production and do not alter any region, event support, response, calibration or scaling choice"
+  },
+  "integrity": {
+    "pilot_pha_arf_or_rmf_existed_at_freeze": false,
+    "pilot_runtime_or_storage_observed_at_freeze": false,
+    "additional_temperature_density_mach_or_speed_fitted_at_freeze": false,
+    "full_response_production_started_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}
