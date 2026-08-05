@@ -1,15 +1,27 @@
 from __future__ import annotations
 
+import hashlib
+import importlib.util
 import json
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19h_causal_observable_protocol.json"
+RUNNER = ROOT / "scripts" / "run_sigma_v19h_source_maps.py"
+MAP_REPORT = ROOT / "results" / "sigma_v19h_source_maps" / "report.json"
 
 
 def load() -> dict:
     return json.loads(CONFIG.read_text(encoding="utf-8"))
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def test_v19h_is_frozen_before_any_registered_image_or_target_access() -> None:
@@ -83,3 +95,45 @@ def test_v19h_does_not_define_or_fit_gravity() -> None:
     forbidden = config["advance_gate"]["not_authorized"]
     assert "fitting a halo size or amplitude" in forbidden
     assert "choosing a gravity formula from these source measurements" in forbidden
+
+
+def test_v19h_source_map_gate_passes_without_inspection_or_target_access() -> None:
+    report = json.loads(MAP_REPORT.read_text(encoding="utf-8"))
+    assert report["status"] == "both_clusters_passed_frozen_v19h_source_map_gate"
+    assert report["failed_clusters"] == []
+    assert report["registered_science_images_visually_inspected"] is False
+    assert report["edge_search_run"] is False
+    assert report["spectrum_or_response_constructed"] is False
+    assert report["lensing_target_opened"] is False
+    assert report["gravity_parameter_changed"] is False
+    assert {row["cluster"] for row in report["clusters"]} == {
+        "BULLET",
+        "ABELL2146",
+    }
+    for row in report["clusters"]:
+        assert all(row["gates"].values())
+        assert len(row["observations"]) == 10
+        assert row["frozen_snapshot"]["files"] == 9
+        for product in row["frozen_snapshot"]["products"]:
+            path = ROOT / product["relative_path"]
+            assert path.stat().st_size == product["bytes"]
+            assert sha256(path) == product["sha256"]
+
+
+def test_v19h_source_map_runner_is_importable_without_ciao() -> None:
+    scripts = str(ROOT / "scripts")
+    sys.path.insert(0, scripts)
+    try:
+        spec = importlib.util.spec_from_file_location("sigma_v19h_map_test", RUNNER)
+        assert spec and spec.loader
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        config, astrometry, cleaning = module.validate(
+            module.DEFAULT_CONFIG,
+            module.DEFAULT_ASTROMETRY,
+            module.DEFAULT_CLEANING,
+        )
+        assert config["protocol_version"] == "SIGMA-V19H-CAUSAL-OBSERVABLES-1.0.0"
+        assert astrometry["observation_count"] == cleaning["observation_count"] == 20
+    finally:
+        sys.path.remove(scripts)

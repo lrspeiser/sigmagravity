@@ -1,0 +1,1759 @@
+{
+  "astrometry_report_sha256": "b6f77ad4dff16af66a1698f6d8e9310cadd98d1085c5d0965ec57cd2c58732a6",
+  "causal_source_constructed": false,
+  "cleaning_report_sha256": "b5ff9831f7ebf2b0b51fc6f00c75626f7e75ec03f52a8be12ae1774093f88dbc",
+  "clusters": [
+    {
+      "broad_background_components": [
+        {
+          "ccd_id": 0,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd0_broad_blanksky_counts.img",
+          "scale": 0.061731756
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd1_broad_blanksky_counts.img",
+          "scale": 0.060831409
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd2_broad_blanksky_counts.img",
+          "scale": 0.062195323
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd3_broad_blanksky_counts.img",
+          "scale": 0.060941048
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd6_broad_blanksky_counts.img",
+          "scale": 0.061091933
+        },
+        {
+          "ccd_id": 7,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd7_broad_blanksky_counts.img",
+          "scale": 0.3000302
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd0_broad_blanksky_counts.img",
+          "scale": 0.048822295
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd1_broad_blanksky_counts.img",
+          "scale": 0.049535967
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd2_broad_blanksky_counts.img",
+          "scale": 0.047976911
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd3_broad_blanksky_counts.img",
+          "scale": 0.051659655
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd6_broad_blanksky_counts.img",
+          "scale": 0.051298372
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd0_broad_blanksky_counts.img",
+          "scale": 0.052197907
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd1_broad_blanksky_counts.img",
+          "scale": 0.052837875
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd2_broad_blanksky_counts.img",
+          "scale": 0.050673857
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd3_broad_blanksky_counts.img",
+          "scale": 0.054451458
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd6_broad_blanksky_counts.img",
+          "scale": 0.054642249
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd0_broad_blanksky_counts.img",
+          "scale": 0.016975785
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd1_broad_blanksky_counts.img",
+          "scale": 0.01656837
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd2_broad_blanksky_counts.img",
+          "scale": 0.01671957
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd3_broad_blanksky_counts.img",
+          "scale": 0.016705671
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd6_broad_blanksky_counts.img",
+          "scale": 0.017306993
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd0_broad_blanksky_counts.img",
+          "scale": 0.028606227
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd1_broad_blanksky_counts.img",
+          "scale": 0.027327146
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd2_broad_blanksky_counts.img",
+          "scale": 0.027196763
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd3_broad_blanksky_counts.img",
+          "scale": 0.02967138
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd6_broad_blanksky_counts.img",
+          "scale": 0.029374318
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd0_broad_blanksky_counts.img",
+          "scale": 0.017103592
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd1_broad_blanksky_counts.img",
+          "scale": 0.015950641
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd2_broad_blanksky_counts.img",
+          "scale": 0.016302906
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd3_broad_blanksky_counts.img",
+          "scale": 0.016969049
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd6_broad_blanksky_counts.img",
+          "scale": 0.017383944
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd0_broad_blanksky_counts.img",
+          "scale": 0.066271715
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd1_broad_blanksky_counts.img",
+          "scale": 0.066957392
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd2_broad_blanksky_counts.img",
+          "scale": 0.065704048
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd3_broad_blanksky_counts.img",
+          "scale": 0.066995762
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd6_broad_blanksky_counts.img",
+          "scale": 0.068381511
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd0_broad_blanksky_counts.img",
+          "scale": 0.055408116
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd1_broad_blanksky_counts.img",
+          "scale": 0.054441027
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd2_broad_blanksky_counts.img",
+          "scale": 0.054249588
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd3_broad_blanksky_counts.img",
+          "scale": 0.057228211
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd6_broad_blanksky_counts.img",
+          "scale": 0.056621987
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd0_broad_blanksky_counts.img",
+          "scale": 0.022433897
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd1_broad_blanksky_counts.img",
+          "scale": 0.022686826
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd2_broad_blanksky_counts.img",
+          "scale": 0.020681661
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd3_broad_blanksky_counts.img",
+          "scale": 0.023749145
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd6_broad_blanksky_counts.img",
+          "scale": 0.023001371
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd0_broad_blanksky_counts.img",
+          "scale": 0.055325419
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd1_broad_blanksky_counts.img",
+          "scale": 0.05557353
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd2_broad_blanksky_counts.img",
+          "scale": 0.054726858
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd3_broad_blanksky_counts.img",
+          "scale": 0.058943931
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd6_broad_blanksky_counts.img",
+          "scale": 0.056789882
+        }
+      ],
+      "centroid_history": [
+        {
+          "displacement_output_pixels": 32.179512672063,
+          "iteration": 1,
+          "logical_x": 325.7777678419831,
+          "logical_y": 343.07283708446045,
+          "positive_weight_pixels": 102857,
+          "weight_sum": 0.0015177806019950075
+        },
+        {
+          "displacement_output_pixels": 5.006478282377466,
+          "iteration": 2,
+          "logical_x": 327.1596749808681,
+          "logical_y": 347.88481770073645,
+          "positive_weight_pixels": 102727,
+          "weight_sum": 0.001518510080031175
+        },
+        {
+          "displacement_output_pixels": 0.8366548811615588,
+          "iteration": 3,
+          "logical_x": 327.32234123305784,
+          "logical_y": 348.7055070942161,
+          "positive_weight_pixels": 102486,
+          "weight_sum": 0.0015174224886402268
+        },
+        {
+          "displacement_output_pixels": 0.1523883461122168,
+          "iteration": 4,
+          "logical_x": 327.3488766280428,
+          "logical_y": 348.8555673515923,
+          "positive_weight_pixels": 102436,
+          "weight_sum": 0.0015171749162397083
+        },
+        {
+          "displacement_output_pixels": 0.02722858502102165,
+          "iteration": 5,
+          "logical_x": 327.35366581319494,
+          "logical_y": 348.88237144732085,
+          "positive_weight_pixels": 102433,
+          "weight_sum": 0.001517131904390861
+        }
+      ],
+      "cluster": "BULLET",
+      "coverage_fraction_inside_1000_kpc": 1.0,
+      "exposure_threshold": 156309152.0,
+      "final_center": {
+        "dec": -55.94659781854907,
+        "logicalx": 327.353665813195,
+        "logicaly": 348.882371447321,
+        "ra": 104.6247543743987,
+        "x": 4222.20733162639,
+        "y": 4239.264742894642
+      },
+      "frozen_snapshot": {
+        "bytes": 20162880,
+        "files": 9,
+        "products": [
+          {
+            "bytes": 820800,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/analysis_mask.img",
+            "reused": false,
+            "role": "analysis_mask",
+            "sha256": "874ffe6c028ab9340ff467811da79073ee6af2d00fc829fd6b89b65ba28717c4"
+          },
+          {
+            "bytes": 3193920,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_background_variance.img",
+            "reused": false,
+            "role": "broad_background_variance",
+            "sha256": "430f92e22a2a7ff25e91d5d6c6f237ea4b4aeb34b6413101b6dfd856f451b741"
+          },
+          {
+            "bytes": 1679040,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_counts.img",
+            "reused": false,
+            "role": "broad_counts",
+            "sha256": "654b89272d2c4f3b3822ab1cc014cf4fd54e23eef380373cd461942ef6fb6868"
+          },
+          {
+            "bytes": 1604160,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_exposure.expmap",
+            "reused": false,
+            "role": "broad_exposure",
+            "sha256": "0013bb9ba275011663c82eaa58ed39e09d4df17d95139bef7d342f977545a90a"
+          },
+          {
+            "bytes": 3193920,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_scaled_background.img",
+            "reused": false,
+            "role": "broad_scaled_background",
+            "sha256": "9196d2f30004f3555415c8c55f168348a6ef310257160cd0d6725773d0202287"
+          },
+          {
+            "bytes": 3193920,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/soft_background_variance.img",
+            "reused": false,
+            "role": "soft_background_variance",
+            "sha256": "743428adf2c513c0f04b939efe9d79cde82ea0bacb60f1bcb5d1a5a6ebf72c8a"
+          },
+          {
+            "bytes": 1679040,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/soft_counts.img",
+            "reused": false,
+            "role": "soft_counts",
+            "sha256": "ffe043a92b40ed34094fc3a23078042df9ce9e9403a4014ee32c98b3b9c54013"
+          },
+          {
+            "bytes": 1604160,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/soft_exposure.expmap",
+            "reused": false,
+            "role": "soft_exposure",
+            "sha256": "610095fc3518364d3f50e5a63f95f43af06a42f267c069e1f0f8128cdc6a933f"
+          },
+          {
+            "bytes": 3193920,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/soft_scaled_background.img",
+            "reused": false,
+            "role": "soft_scaled_background",
+            "sha256": "c847bd9fbe066d8693e581f5dddaec904384432bc5aa7379194549ed79292d19"
+          }
+        ]
+      },
+      "gates": {
+        "all_observations_included": true,
+        "centroid_converged": true,
+        "minimum_net_morphology_counts_inside_1000_kpc": true,
+        "minimum_valid_area_fraction_inside_1000_kpc": true
+      },
+      "grid": {
+        "binsize": 2,
+        "xhi": 4820.5,
+        "xlo": 3568.5,
+        "yhi": 4794.5,
+        "ylo": 3542.5
+      },
+      "initial_center": {
+        "dec": -55.956299339461,
+        "logicalx": 313.3391747340252,
+        "logicaly": 313.3945211398836,
+        "ra": 104.631589228185,
+        "x": 4194.17834946805,
+        "y": 4168.289042279767
+      },
+      "net_morphology_counts_inside_1000_kpc": 428996.053726222,
+      "observations": [
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf554_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 554,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/554/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf554_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf3184_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 3184,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/3184/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf3184_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4984_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 4984,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/4984/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4984_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4985_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 4985,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/4985/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4985_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4986_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 4986,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/4986/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4986_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5355_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 5355,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/5355/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5355_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 5356,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/5356/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5357_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 5357,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/5357/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5357_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5358_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 5358,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/5358/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5358_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5361_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 5361,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/BULLET/5361/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5361_science_nosrc_reproj_evt.fits"
+        }
+      ],
+      "products": {
+        "analysis_mask": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/analysis_mask.img",
+        "broad_background_variance": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_scaled_blanksky_variance.img",
+        "broad_counts": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/0.5-7.0_thresh.img",
+        "broad_exposure": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/0.5-7.0_thresh.expmap",
+        "broad_scaled_background": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_scaled_blanksky_counts.img",
+        "soft_background_variance": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/soft_scaled_blanksky_variance.img",
+        "soft_counts": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/soft_flux/0.5-2.0_thresh.img",
+        "soft_exposure": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/soft_flux/0.5-2.0_thresh.expmap",
+        "soft_scaled_background": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/soft_scaled_blanksky_counts.img"
+      },
+      "reference_obsid": 5356,
+      "requested_xygrid": "3569.5:4819.5:2,3543.5:4793.5:2",
+      "soft_background_components": [
+        {
+          "ccd_id": 0,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd0_soft_blanksky_counts.img",
+          "scale": 0.061731756
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd1_soft_blanksky_counts.img",
+          "scale": 0.060831409
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd2_soft_blanksky_counts.img",
+          "scale": 0.062195323
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd3_soft_blanksky_counts.img",
+          "scale": 0.060941048
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd6_soft_blanksky_counts.img",
+          "scale": 0.061091933
+        },
+        {
+          "ccd_id": 7,
+          "obsid": 554,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf554_ccd7_soft_blanksky_counts.img",
+          "scale": 0.3000302
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd0_soft_blanksky_counts.img",
+          "scale": 0.048822295
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd1_soft_blanksky_counts.img",
+          "scale": 0.049535967
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd2_soft_blanksky_counts.img",
+          "scale": 0.047976911
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd3_soft_blanksky_counts.img",
+          "scale": 0.051659655
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 3184,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf3184_ccd6_soft_blanksky_counts.img",
+          "scale": 0.051298372
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd0_soft_blanksky_counts.img",
+          "scale": 0.052197907
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd1_soft_blanksky_counts.img",
+          "scale": 0.052837875
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd2_soft_blanksky_counts.img",
+          "scale": 0.050673857
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd3_soft_blanksky_counts.img",
+          "scale": 0.054451458
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 4984,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4984_ccd6_soft_blanksky_counts.img",
+          "scale": 0.054642249
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd0_soft_blanksky_counts.img",
+          "scale": 0.016975785
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd1_soft_blanksky_counts.img",
+          "scale": 0.01656837
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd2_soft_blanksky_counts.img",
+          "scale": 0.01671957
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd3_soft_blanksky_counts.img",
+          "scale": 0.016705671
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 4985,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4985_ccd6_soft_blanksky_counts.img",
+          "scale": 0.017306993
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd0_soft_blanksky_counts.img",
+          "scale": 0.028606227
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd1_soft_blanksky_counts.img",
+          "scale": 0.027327146
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd2_soft_blanksky_counts.img",
+          "scale": 0.027196763
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd3_soft_blanksky_counts.img",
+          "scale": 0.02967138
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 4986,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf4986_ccd6_soft_blanksky_counts.img",
+          "scale": 0.029374318
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd0_soft_blanksky_counts.img",
+          "scale": 0.017103592
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd1_soft_blanksky_counts.img",
+          "scale": 0.015950641
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd2_soft_blanksky_counts.img",
+          "scale": 0.016302906
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd3_soft_blanksky_counts.img",
+          "scale": 0.016969049
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5355,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5355_ccd6_soft_blanksky_counts.img",
+          "scale": 0.017383944
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd0_soft_blanksky_counts.img",
+          "scale": 0.066271715
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd1_soft_blanksky_counts.img",
+          "scale": 0.066957392
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd2_soft_blanksky_counts.img",
+          "scale": 0.065704048
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd3_soft_blanksky_counts.img",
+          "scale": 0.066995762
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5356,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5356_ccd6_soft_blanksky_counts.img",
+          "scale": 0.068381511
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd0_soft_blanksky_counts.img",
+          "scale": 0.055408116
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd1_soft_blanksky_counts.img",
+          "scale": 0.054441027
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd2_soft_blanksky_counts.img",
+          "scale": 0.054249588
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd3_soft_blanksky_counts.img",
+          "scale": 0.057228211
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5357,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5357_ccd6_soft_blanksky_counts.img",
+          "scale": 0.056621987
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd0_soft_blanksky_counts.img",
+          "scale": 0.022433897
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd1_soft_blanksky_counts.img",
+          "scale": 0.022686826
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd2_soft_blanksky_counts.img",
+          "scale": 0.020681661
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd3_soft_blanksky_counts.img",
+          "scale": 0.023749145
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5358,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5358_ccd6_soft_blanksky_counts.img",
+          "scale": 0.023001371
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd0_soft_blanksky_counts.img",
+          "scale": 0.055325419
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd1_soft_blanksky_counts.img",
+          "scale": 0.05557353
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd2_soft_blanksky_counts.img",
+          "scale": 0.054726858
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd3_soft_blanksky_counts.img",
+          "scale": 0.058943931
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 5361,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/acisf5361_ccd6_soft_blanksky_counts.img",
+          "scale": 0.056789882
+        }
+      ],
+      "steps": {
+        "broad_flux_obs": {
+          "command": [
+            "flux_obs",
+            "infiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/science_reprojected.lis",
+            "outroot=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/",
+            "bands=0.5:7.0:2.3",
+            "xygrid=3568.5:4820.5:#626,3542.5:4794.5:#626",
+            "asolfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/corrected_aspects.lis",
+            "badpixfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/badpix.lis",
+            "maskfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/detector_masks.lis",
+            "background=none",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/logs/broad_flux_obs.log",
+          "reused": false
+        },
+        "soft_flux_obs": {
+          "command": [
+            "flux_obs",
+            "infiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/science_reprojected.lis",
+            "outroot=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/soft_flux/",
+            "bands=0.5:2.0:1.5",
+            "xygrid=3569.5:4819.5:2,3543.5:4793.5:2",
+            "asolfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/corrected_aspects.lis",
+            "badpixfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/badpix.lis",
+            "maskfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/detector_masks.lis",
+            "background=none",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/logs/soft_flux_obs.log",
+          "reused": false
+        }
+      },
+      "xygrid": "3568.5:4820.5:#626,3542.5:4794.5:#626"
+    },
+    {
+      "broad_background_components": [
+        {
+          "ccd_id": 3,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd3_broad_blanksky_counts.img",
+          "scale": 0.085991628
+        },
+        {
+          "ccd_id": 5,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd5_broad_blanksky_counts.img",
+          "scale": 0.089852728
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd6_broad_blanksky_counts.img",
+          "scale": 0.089145347
+        },
+        {
+          "ccd_id": 7,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd7_broad_blanksky_counts.img",
+          "scale": 0.086949646
+        },
+        {
+          "ccd_id": 8,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd8_broad_blanksky_counts.img",
+          "scale": 0.23757917
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd3_broad_blanksky_counts.img",
+          "scale": 0.015020751
+        },
+        {
+          "ccd_id": 5,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd5_broad_blanksky_counts.img",
+          "scale": 0.016013948
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd6_broad_blanksky_counts.img",
+          "scale": 0.016334437
+        },
+        {
+          "ccd_id": 7,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd7_broad_blanksky_counts.img",
+          "scale": 0.015882602
+        },
+        {
+          "ccd_id": 8,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd8_broad_blanksky_counts.img",
+          "scale": 0.0441004
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd0_broad_blanksky_counts.img",
+          "scale": 0.11209316
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd1_broad_blanksky_counts.img",
+          "scale": 0.11558729
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd2_broad_blanksky_counts.img",
+          "scale": 0.11530263
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd3_broad_blanksky_counts.img",
+          "scale": 0.11812524
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd6_broad_blanksky_counts.img",
+          "scale": 0.082740605
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd0_broad_blanksky_counts.img",
+          "scale": 0.1089434
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd1_broad_blanksky_counts.img",
+          "scale": 0.11447296
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd2_broad_blanksky_counts.img",
+          "scale": 0.11053095
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd3_broad_blanksky_counts.img",
+          "scale": 0.11604434
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd6_broad_blanksky_counts.img",
+          "scale": 0.081257209
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd0_broad_blanksky_counts.img",
+          "scale": 0.15450987
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd1_broad_blanksky_counts.img",
+          "scale": 0.1549474
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd2_broad_blanksky_counts.img",
+          "scale": 0.15617484
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd3_broad_blanksky_counts.img",
+          "scale": 0.16596656
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd6_broad_blanksky_counts.img",
+          "scale": 0.11496963
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd0_broad_blanksky_counts.img",
+          "scale": 0.096840702
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd1_broad_blanksky_counts.img",
+          "scale": 0.096757136
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd2_broad_blanksky_counts.img",
+          "scale": 0.097369708
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd3_broad_blanksky_counts.img",
+          "scale": 0.1008557
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd6_broad_blanksky_counts.img",
+          "scale": 0.070607178
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd0_broad_blanksky_counts.img",
+          "scale": 0.11276129
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd1_broad_blanksky_counts.img",
+          "scale": 0.1129809
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd2_broad_blanksky_counts.img",
+          "scale": 0.11448128
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd3_broad_blanksky_counts.img",
+          "scale": 0.12022559
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd6_broad_blanksky_counts.img",
+          "scale": 0.082372926
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd0_broad_blanksky_counts.img",
+          "scale": 0.067652956
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd1_broad_blanksky_counts.img",
+          "scale": 0.065197274
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd2_broad_blanksky_counts.img",
+          "scale": 0.068407156
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd3_broad_blanksky_counts.img",
+          "scale": 0.069719955
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd6_broad_blanksky_counts.img",
+          "scale": 0.048863363
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd0_broad_blanksky_counts.img",
+          "scale": 0.11795361
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd1_broad_blanksky_counts.img",
+          "scale": 0.11466184
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd2_broad_blanksky_counts.img",
+          "scale": 0.11622176
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd3_broad_blanksky_counts.img",
+          "scale": 0.12395955
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd6_broad_blanksky_counts.img",
+          "scale": 0.083983108
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd0_broad_blanksky_counts.img",
+          "scale": 0.116541
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd1_broad_blanksky_counts.img",
+          "scale": 0.11864695
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd2_broad_blanksky_counts.img",
+          "scale": 0.11792315
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd3_broad_blanksky_counts.img",
+          "scale": 0.1243874
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd6_broad_blanksky_counts.img",
+          "scale": 0.084147938
+        }
+      ],
+      "centroid_history": [
+        {
+          "displacement_output_pixels": 30.678999734943606,
+          "iteration": 1,
+          "logical_x": 342.60729332329606,
+          "logical_y": 375.4328486656625,
+          "positive_weight_pixels": 59332,
+          "weight_sum": 0.000826513295003871
+        },
+        {
+          "displacement_output_pixels": 4.219273560908461,
+          "iteration": 2,
+          "logical_x": 338.40042476988805,
+          "logical_y": 375.75615402616233,
+          "positive_weight_pixels": 59664,
+          "weight_sum": 0.0008286034739174694
+        },
+        {
+          "displacement_output_pixels": 0.5678131500653937,
+          "iteration": 3,
+          "logical_x": 337.83318510028386,
+          "logical_y": 375.7816673680546,
+          "positive_weight_pixels": 59695,
+          "weight_sum": 0.000828828165274947
+        },
+        {
+          "displacement_output_pixels": 0.06955518687990275,
+          "iteration": 4,
+          "logical_x": 337.7645131816513,
+          "logical_y": 375.7927168754292,
+          "positive_weight_pixels": 59711,
+          "weight_sum": 0.000828920741111187
+        }
+      ],
+      "cluster": "ABELL2146",
+      "coverage_fraction_inside_1000_kpc": 0.9999369465937649,
+      "exposure_threshold": 114458704.0,
+      "final_center": {
+        "dec": 66.3559555600326,
+        "logicalx": 337.764513181651,
+        "logicaly": 375.792716875429,
+        "ra": 239.044229763915,
+        "x": 4025.029026363302,
+        "y": 4325.085433750858
+      },
+      "frozen_snapshot": {
+        "bytes": 28319040,
+        "files": 9,
+        "products": [
+          {
+            "bytes": 1149120,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/analysis_mask.img",
+            "reused": false,
+            "role": "analysis_mask",
+            "sha256": "c4177a5d8bffc28f47dd8607f82ce95c3b44a7f910890365f79d7faac35074f4"
+          },
+          {
+            "bytes": 4501440,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_background_variance.img",
+            "reused": false,
+            "role": "broad_background_variance",
+            "sha256": "8d4f71d28122f6d59f918dec85d2377dd47e5befc8344ee1706aca01db998eb1"
+          },
+          {
+            "bytes": 2327040,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_counts.img",
+            "reused": false,
+            "role": "broad_counts",
+            "sha256": "01fd16614d4f80d3aa7176f63c723625a1cc145ea2faecd5f2389c4e5885f5a9"
+          },
+          {
+            "bytes": 2255040,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_exposure.expmap",
+            "reused": false,
+            "role": "broad_exposure",
+            "sha256": "c4ea72739158c07eac7c913b9dc1725126ba0da683da75f254cc215f5f18466d"
+          },
+          {
+            "bytes": 4501440,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_scaled_background.img",
+            "reused": false,
+            "role": "broad_scaled_background",
+            "sha256": "6d45615edd26c215256db383b07bc73ff8d325a8572bcfb55b4007e774328e59"
+          },
+          {
+            "bytes": 4501440,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/soft_background_variance.img",
+            "reused": false,
+            "role": "soft_background_variance",
+            "sha256": "cf4eb7532b8b0335cc402c3df10237664f7e0d53f555453a339248379df63ff2"
+          },
+          {
+            "bytes": 2327040,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/soft_counts.img",
+            "reused": false,
+            "role": "soft_counts",
+            "sha256": "8b4b61d0427a50f5332abaf0b51e23925fefbd9c408c27ae49ee3113c4d1c030"
+          },
+          {
+            "bytes": 2255040,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/soft_exposure.expmap",
+            "reused": false,
+            "role": "soft_exposure",
+            "sha256": "0eaf9737c1ae158e114d8c5fafb41138414d660f905c3cf1703fd8a95e7baa2d"
+          },
+          {
+            "bytes": 4501440,
+            "relative_path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/soft_scaled_background.img",
+            "reused": false,
+            "role": "soft_scaled_background",
+            "sha256": "caa2772a39bcfb7d5fed5d703a5d9d3290fad6e3cd2fe8a970de03aba598ddfd"
+          }
+        ]
+      },
+      "gates": {
+        "all_observations_included": true,
+        "centroid_converged": true,
+        "minimum_net_morphology_counts_inside_1000_kpc": true,
+        "minimum_valid_area_fraction_inside_1000_kpc": true
+      },
+      "grid": {
+        "binsize": 2,
+        "xhi": 4840.5,
+        "xlo": 3350.5,
+        "yhi": 5064.5,
+        "ylo": 3574.5
+      },
+      "initial_center": {
+        "dec": 66.355157047638,
+        "logicalx": 373.1785862851159,
+        "logicaly": 372.8643721952126,
+        "ra": 239.02009370228,
+        "x": 4095.857172570232,
+        "y": 4319.228744390425
+      },
+      "net_morphology_counts_inside_1000_kpc": 166537.396230819,
+      "observations": [
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 10464,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/10464/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 10888,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/10888/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf12245_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 12245,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/12245/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf12245_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf12246_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 12246,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/12246/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf12246_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf12247_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 12247,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/12247/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf12247_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13020_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 13020,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/13020/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13020_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13021_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 13021,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/13021/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13021_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13023_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 13023,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/13023/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13023_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13120_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 13120,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/13120/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13120_science_nosrc_reproj_evt.fits"
+        },
+        {
+          "blanksky_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13138_blanksky_nosrc_reproj_evt.fits",
+          "obsid": 13138,
+          "point_source_region": "/home/henry/sigma-v19f-chandra/clean/ABELL2146/13138/source_detect_b2/point_sources_expanded.reg",
+          "science_reprojected": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13138_science_nosrc_reproj_evt.fits"
+        }
+      ],
+      "products": {
+        "analysis_mask": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/analysis_mask.img",
+        "broad_background_variance": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_scaled_blanksky_variance.img",
+        "broad_counts": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/0.5-7.0_thresh.img",
+        "broad_exposure": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/0.5-7.0_thresh.expmap",
+        "broad_scaled_background": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_scaled_blanksky_counts.img",
+        "soft_background_variance": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/soft_scaled_blanksky_variance.img",
+        "soft_counts": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/soft_flux/0.5-2.0_thresh.img",
+        "soft_exposure": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/soft_flux/0.5-2.0_thresh.expmap",
+        "soft_scaled_background": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/soft_scaled_blanksky_counts.img"
+      },
+      "reference_obsid": 12247,
+      "requested_xygrid": "3350.5:4840.5:2,3574.5:5064.5:2",
+      "soft_background_components": [
+        {
+          "ccd_id": 3,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd3_soft_blanksky_counts.img",
+          "scale": 0.085991628
+        },
+        {
+          "ccd_id": 5,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd5_soft_blanksky_counts.img",
+          "scale": 0.089852728
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd6_soft_blanksky_counts.img",
+          "scale": 0.089145347
+        },
+        {
+          "ccd_id": 7,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd7_soft_blanksky_counts.img",
+          "scale": 0.086949646
+        },
+        {
+          "ccd_id": 8,
+          "obsid": 10464,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10464_ccd8_soft_blanksky_counts.img",
+          "scale": 0.23757917
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd3_soft_blanksky_counts.img",
+          "scale": 0.015020751
+        },
+        {
+          "ccd_id": 5,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd5_soft_blanksky_counts.img",
+          "scale": 0.016013948
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd6_soft_blanksky_counts.img",
+          "scale": 0.016334437
+        },
+        {
+          "ccd_id": 7,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd7_soft_blanksky_counts.img",
+          "scale": 0.015882602
+        },
+        {
+          "ccd_id": 8,
+          "obsid": 10888,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf10888_ccd8_soft_blanksky_counts.img",
+          "scale": 0.0441004
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd0_soft_blanksky_counts.img",
+          "scale": 0.11209316
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd1_soft_blanksky_counts.img",
+          "scale": 0.11558729
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd2_soft_blanksky_counts.img",
+          "scale": 0.11530263
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd3_soft_blanksky_counts.img",
+          "scale": 0.11812524
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 12245,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12245_ccd6_soft_blanksky_counts.img",
+          "scale": 0.082740605
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd0_soft_blanksky_counts.img",
+          "scale": 0.1089434
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd1_soft_blanksky_counts.img",
+          "scale": 0.11447296
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd2_soft_blanksky_counts.img",
+          "scale": 0.11053095
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd3_soft_blanksky_counts.img",
+          "scale": 0.11604434
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 12246,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12246_ccd6_soft_blanksky_counts.img",
+          "scale": 0.081257209
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd0_soft_blanksky_counts.img",
+          "scale": 0.15450987
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd1_soft_blanksky_counts.img",
+          "scale": 0.1549474
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd2_soft_blanksky_counts.img",
+          "scale": 0.15617484
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd3_soft_blanksky_counts.img",
+          "scale": 0.16596656
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 12247,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf12247_ccd6_soft_blanksky_counts.img",
+          "scale": 0.11496963
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd0_soft_blanksky_counts.img",
+          "scale": 0.096840702
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd1_soft_blanksky_counts.img",
+          "scale": 0.096757136
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd2_soft_blanksky_counts.img",
+          "scale": 0.097369708
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd3_soft_blanksky_counts.img",
+          "scale": 0.1008557
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13020,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13020_ccd6_soft_blanksky_counts.img",
+          "scale": 0.070607178
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd0_soft_blanksky_counts.img",
+          "scale": 0.11276129
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd1_soft_blanksky_counts.img",
+          "scale": 0.1129809
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd2_soft_blanksky_counts.img",
+          "scale": 0.11448128
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd3_soft_blanksky_counts.img",
+          "scale": 0.12022559
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13021,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13021_ccd6_soft_blanksky_counts.img",
+          "scale": 0.082372926
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd0_soft_blanksky_counts.img",
+          "scale": 0.067652956
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd1_soft_blanksky_counts.img",
+          "scale": 0.065197274
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd2_soft_blanksky_counts.img",
+          "scale": 0.068407156
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd3_soft_blanksky_counts.img",
+          "scale": 0.069719955
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13023,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13023_ccd6_soft_blanksky_counts.img",
+          "scale": 0.048863363
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd0_soft_blanksky_counts.img",
+          "scale": 0.11795361
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd1_soft_blanksky_counts.img",
+          "scale": 0.11466184
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd2_soft_blanksky_counts.img",
+          "scale": 0.11622176
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd3_soft_blanksky_counts.img",
+          "scale": 0.12395955
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13120,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13120_ccd6_soft_blanksky_counts.img",
+          "scale": 0.083983108
+        },
+        {
+          "ccd_id": 0,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd0_soft_blanksky_counts.img",
+          "scale": 0.116541
+        },
+        {
+          "ccd_id": 1,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd1_soft_blanksky_counts.img",
+          "scale": 0.11864695
+        },
+        {
+          "ccd_id": 2,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd2_soft_blanksky_counts.img",
+          "scale": 0.11792315
+        },
+        {
+          "ccd_id": 3,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd3_soft_blanksky_counts.img",
+          "scale": 0.1243874
+        },
+        {
+          "ccd_id": 6,
+          "obsid": 13138,
+          "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/acisf13138_ccd6_soft_blanksky_counts.img",
+          "scale": 0.084147938
+        }
+      ],
+      "steps": {
+        "broad_flux_obs": {
+          "command": [
+            "flux_obs",
+            "infiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/science_reprojected.lis",
+            "outroot=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/",
+            "bands=0.5:7.0:2.3",
+            "xygrid=3350.5:4840.5:#745,3574.5:5064.5:#745",
+            "asolfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/corrected_aspects.lis",
+            "badpixfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/badpix.lis",
+            "maskfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/detector_masks.lis",
+            "background=none",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/logs/broad_flux_obs.log",
+          "reused": false
+        },
+        "soft_flux_obs": {
+          "command": [
+            "flux_obs",
+            "infiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/science_reprojected.lis",
+            "outroot=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/soft_flux/",
+            "bands=0.5:2.0:1.5",
+            "xygrid=3350.5:4840.5:2,3574.5:5064.5:2",
+            "asolfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/corrected_aspects.lis",
+            "badpixfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/badpix.lis",
+            "maskfiles=@/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/detector_masks.lis",
+            "background=none",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/logs/soft_flux_obs.log",
+          "reused": false
+        }
+      },
+      "xygrid": "3350.5:4840.5:#745,3574.5:5064.5:#745"
+    }
+  ],
+  "config_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+  "edge_search_run": false,
+  "failed_clusters": [],
+  "generated_utc": "2026-08-05T04:34:34.246187+00:00",
+  "gravity_parameter_changed": false,
+  "lensing_target_opened": false,
+  "projection_or_clock_drawn": false,
+  "protocol_version": "SIGMA-V19H-CAUSAL-OBSERVABLES-1.0.0",
+  "registered_science_images_visually_inspected": false,
+  "spectrum_or_response_constructed": false,
+  "status": "both_clusters_passed_frozen_v19h_source_map_gate",
+  "temperature_or_density_fitted": false
+}
