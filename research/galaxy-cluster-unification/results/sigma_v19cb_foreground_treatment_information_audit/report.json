@@ -1,0 +1,210 @@
+{
+  "access_boundary_audit": {
+    "candidate_or_galaxy_removed": false,
+    "development_validation_holdout_split_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "hard_star_mask_authorized": false,
+    "lensing_payload_opened": false,
+    "optical_counterpart_selected": false,
+    "rotation_speed_or_velocity_field_read": false,
+    "solar_system_optimization_performed": false,
+    "source_side_gaia_diagnostics_read": true,
+    "source_side_spatial_scores_read": true,
+    "treatment_branch_selected": false,
+    "wallaby_kinematic_table_row_read": false
+  },
+  "association_resolved_by_foreground_astrometry": false,
+  "best_robust_fraction": 0.057665260196905765,
+  "branch_summary": {
+    "mask_any_astrometry_diagnostic": {
+      "field_summary": {
+        "Hydra": {
+          "median_minimum_margin": 1.1138508536799998,
+          "median_positive_candidates": 5.0,
+          "release_rows": 420,
+          "robust_fraction": 0.05476190476190476,
+          "robust_margin_ge_3": 23,
+          "same_top_all_kernels": 331,
+          "zero_positive_candidate_rows": 1
+        },
+        "NGC 4636": {
+          "median_minimum_margin": 1.01726968787,
+          "median_positive_candidates": 4.0,
+          "release_rows": 147,
+          "robust_fraction": 0.10204081632653061,
+          "robust_margin_ge_3": 15,
+          "same_top_all_kernels": 107,
+          "zero_positive_candidate_rows": 0
+        },
+        "Norma": {
+          "median_minimum_margin": 1.0401895639199998,
+          "median_positive_candidates": 7.0,
+          "release_rows": 144,
+          "robust_fraction": 0.020833333333333332,
+          "robust_margin_ge_3": 3,
+          "same_top_all_kernels": 112,
+          "zero_positive_candidate_rows": 0
+        }
+      },
+      "median_minimum_margin": 1.06300656352,
+      "median_positive_candidates": 5.0,
+      "release_rows": 711,
+      "robust_fraction": 0.057665260196905765,
+      "robust_margin_ge_3": 41,
+      "same_top_all_kernels": 550,
+      "zero_positive_candidate_rows": 1
+    },
+    "mask_quality_diagnostic": {
+      "field_summary": {
+        "Hydra": {
+          "median_minimum_margin": 1.1138508536799998,
+          "median_positive_candidates": 5.0,
+          "release_rows": 420,
+          "robust_fraction": 0.04523809523809524,
+          "robust_margin_ge_3": 19,
+          "same_top_all_kernels": 331,
+          "zero_positive_candidate_rows": 1
+        },
+        "NGC 4636": {
+          "median_minimum_margin": 1.01726968787,
+          "median_positive_candidates": 4.0,
+          "release_rows": 147,
+          "robust_fraction": 0.10204081632653061,
+          "robust_margin_ge_3": 15,
+          "same_top_all_kernels": 107,
+          "zero_positive_candidate_rows": 0
+        },
+        "Norma": {
+          "median_minimum_margin": 1.03454739311,
+          "median_positive_candidates": 9.0,
+          "release_rows": 144,
+          "robust_fraction": 0.006944444444444444,
+          "robust_margin_ge_3": 1,
+          "same_top_all_kernels": 108,
+          "zero_positive_candidate_rows": 0
+        }
+      },
+      "median_minimum_margin": 1.05763834593,
+      "median_positive_candidates": 6.0,
+      "release_rows": 711,
+      "robust_fraction": 0.04922644163150492,
+      "robust_margin_ge_3": 35,
+      "same_top_all_kernels": 546,
+      "zero_positive_candidate_rows": 1
+    },
+    "retain_all": {
+      "field_summary": {
+        "Hydra": {
+          "median_minimum_margin": 1.05231786157,
+          "median_positive_candidates": 10.0,
+          "release_rows": 420,
+          "robust_fraction": 0.0,
+          "robust_margin_ge_3": 0,
+          "same_top_all_kernels": 321,
+          "zero_positive_candidate_rows": 0
+        },
+        "NGC 4636": {
+          "median_minimum_margin": 1.01789273739,
+          "median_positive_candidates": 6.0,
+          "release_rows": 147,
+          "robust_fraction": 0.02040816326530612,
+          "robust_margin_ge_3": 3,
+          "same_top_all_kernels": 102,
+          "zero_positive_candidate_rows": 0
+        },
+        "Norma": {
+          "median_minimum_margin": 1.006142799455,
+          "median_positive_candidates": 74.0,
+          "release_rows": 144,
+          "robust_fraction": 0.0,
+          "robust_margin_ge_3": 0,
+          "same_top_all_kernels": 69,
+          "zero_positive_candidate_rows": 0
+        }
+      },
+      "median_minimum_margin": 1.02220203882,
+      "median_positive_candidates": 11.0,
+      "release_rows": 711,
+      "robust_fraction": 0.004219409282700422,
+      "robust_margin_ge_3": 3,
+      "same_top_all_kernels": 492,
+      "zero_positive_candidate_rows": 0
+    },
+    "soft_quality_0p1": {
+      "field_summary": {
+        "Hydra": {
+          "median_minimum_margin": 1.1138508536799998,
+          "median_positive_candidates": 10.0,
+          "release_rows": 420,
+          "robust_fraction": 0.04285714285714286,
+          "robust_margin_ge_3": 18,
+          "same_top_all_kernels": 330,
+          "zero_positive_candidate_rows": 0
+        },
+        "NGC 4636": {
+          "median_minimum_margin": 1.02282854788,
+          "median_positive_candidates": 6.0,
+          "release_rows": 147,
+          "robust_fraction": 0.10204081632653061,
+          "robust_margin_ge_3": 15,
+          "same_top_all_kernels": 107,
+          "zero_positive_candidate_rows": 0
+        },
+        "Norma": {
+          "median_minimum_margin": 1.0346657806100001,
+          "median_positive_candidates": 74.0,
+          "release_rows": 144,
+          "robust_fraction": 0.006944444444444444,
+          "robust_margin_ge_3": 1,
+          "same_top_all_kernels": 107,
+          "zero_positive_candidate_rows": 0
+        }
+      },
+      "median_minimum_margin": 1.06196856092,
+      "median_positive_candidates": 11.0,
+      "release_rows": 711,
+      "robust_fraction": 0.04781997187060478,
+      "robust_margin_ge_3": 34,
+      "same_top_all_kernels": 544,
+      "zero_positive_candidate_rows": 0
+    }
+  },
+  "claim_boundary": [
+    "V19CB quantifies sensitivity to foreground treatment but authorizes no treatment or hard star mask.",
+    "All candidates remain in the parent tables and every release row appears in every branch.",
+    "A branch that improves a margin does not validate its top object as the galaxy.",
+    "No velocity, rotation curve, lensing result, halo map, gravity residual, action, constant, holdout label or Solar-System result enters V19CB."
+  ],
+  "config": "configs/sigma_v19cb_foreground_treatment_information_audit.json",
+  "config_sha256": "09d60e264cb9cd5a516c64b6937abd0109dd4d2f3abaf8aa2fe5ea313d27274d",
+  "decision": "foreground_astrometry_reduces_crowding_but_does_not_resolve_association",
+  "exploratory_resolution_threshold": 0.9,
+  "gate_results": {
+    "all_711_release_rows_and_four_branches_reported": true,
+    "all_four_spatial_kernel_branches_used": true,
+    "kinematic_gravity_lensing_and_solar_targets_remain_sealed": true,
+    "no_mask_treatment_counterpart_or_sample_selected": true,
+    "parent_hashes_exact": true,
+    "post_source_exploratory_status_reported_honestly": true
+  },
+  "honesty_boundary": {
+    "complete_v19ca_source_result_inspected_before_freeze": true,
+    "gravity_kinematic_or_lensing_target_inspected": false,
+    "this_is_a_preregistered_theory_or_holdout_gate": false
+  },
+  "next_evidence": [
+    "optical image pixels and survey bitmasks",
+    "source deblending and foreground-overlap uncertainty",
+    "independent source-only counterpart validation",
+    "probabilistic mixture propagation rather than a hard match"
+  ],
+  "output": {
+    "bytes": 566170,
+    "path": "data/derived/sigma_v19cb_foreground_treatment_information_audit/release_branch_information.csv",
+    "rows": 2844,
+    "sha256": "3ebd4088f253d49811b7fb6ab5e4c07aa0a069136e12cc492b6b2f81d7997b29"
+  },
+  "protocol_version": "SIGMA-V19CB-FOREGROUND-TREATMENT-INFORMATION-AUDIT-1.0.0",
+  "status": "completed_exploratory_foreground_treatment_information_audit"
+}

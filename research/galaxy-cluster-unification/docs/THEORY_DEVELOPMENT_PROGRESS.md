@@ -2619,3 +2619,14 @@ All 711 release rows appear in all four branches. The audit remains independent
 of WALLABY velocities, lensing, halo maps, gravity residuals, evidence splits,
 actions, constants and Solar-System results. See
 [`SIGMA_V19CB_FOREGROUND_TREATMENT_INFORMATION_AUDIT.md`](SIGMA_V19CB_FOREGROUND_TREATMENT_INFORMATION_AUDIT.md).
+
+The complete V19CB audit passed all six gates but did not resolve optical
+association. Kernel-stable 3:1 cases rise from 3/711 when all candidates are
+retained to 34/711 under a 0.1 foreground weight, 35/711 under a
+quality-controlled diagnostic mask and 41/711 under the most aggressive
+five-sigma diagnostic mask. That best branch is only 5.8% overall and 3/144 in
+Norma; one Hydra release map is left with no positive candidate.
+
+Gaia astrometry is therefore a useful foreground uncertainty layer, not a
+counterpart solution. Optical pixels and deblending remain required, and none
+of the exploratory treatments is selected for the future galaxy holdout.
