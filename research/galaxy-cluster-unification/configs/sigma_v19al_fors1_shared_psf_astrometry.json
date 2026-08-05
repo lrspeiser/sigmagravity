@@ -1,0 +1,143 @@
+{
+  "protocol_version": "SIGMA-V19AL-FORS1-SHARED-PSF-ASTROMETRY-1.0.0",
+  "status": "frozen_before_any_v19al_shared_psf_fit",
+  "purpose": "Test a per-filter shared point-spread model as a materially different solution to crowded, band-dependent FORS1 foreground-star astrometry.",
+  "parent_artifacts": [
+    {
+      "path": "results/sigma_v19ak_fors1_quadratic_astrometry/report.json",
+      "sha256": "0a4420953e558f133668d6b12fadb9b6cce7f5c8d6317fc2ffc7476526f6f27e"
+    },
+    {
+      "path": "results/sigma_v19ah_fors1_gaia_astrometry/report.json",
+      "sha256": "c850a9d412295980cb5b735b66d49c98512235854dc9ec4c418d1beb0424f1a1"
+    },
+    {
+      "path": "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_B_BESS.csv",
+      "sha256": "3b4e46f135af5e8319529eea2b813a7627c6b19afeaede658ebff78641a010f3"
+    },
+    {
+      "path": "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_I_BESS.csv",
+      "sha256": "e52ad659ad750f3a4b5e79536100217ae1abdb9a4bbeb085f485ecfbe674c162"
+    },
+    {
+      "path": "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_R_BESS.csv",
+      "sha256": "6347c67997373789c51358b07dc6f1c0ed0e747d37c61e6e0d880471d8a13589"
+    }
+  ],
+  "science_products": [
+    {
+      "filter": "B_BESS",
+      "path": "results/sigma_v19ag_fors1_role_calibration/calibrated_B_BESS_OFORS.1998-12-14T06_05_25.298.fits.gz",
+      "sha256": "5b8bb3863b0386a0de3b63617e3fabfb39d60136f44517b34501b9e7331e2343",
+      "matches": "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_B_BESS.csv"
+    },
+    {
+      "filter": "I_BESS",
+      "path": "results/sigma_v19ag_fors1_role_calibration/calibrated_I_BESS_OFORS.1998-12-14T05_54_16.814.fits.gz",
+      "sha256": "4d26f11531d7eb112d0229dcb735e72e3c7d1ebbc305f2d67814a8a7e92df677",
+      "matches": "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_I_BESS.csv"
+    },
+    {
+      "filter": "R_BESS",
+      "path": "results/sigma_v19ag_fors1_role_calibration/calibrated_R_BESS_OFORS.1998-12-14T05_44_56.445.fits.gz",
+      "sha256": "fa0ec4c8ae32030a2b66071df9dd328f373b51e8832cb05edec0cfa9e378e764",
+      "matches": "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_R_BESS.csv"
+    }
+  ],
+  "centroid": {
+    "initial_positions": "Use every V19AH RANSAC-inlier integer peak exactly; do not detect, rematch, add or substitute a source.",
+    "model": "Per-filter shared circular Gaussian PSF plus per-star amplitude and planar local background, fitted with a robust soft-L1 objective.",
+    "stamp_half_width_pixel": 6,
+    "fit_radius_pixel": 4.0,
+    "background_annulus_inner_pixel": 4.5,
+    "background_annulus_outer_pixel": 6.0,
+    "minimum_preliminary_sigma_pixel": 0.65,
+    "maximum_preliminary_sigma_pixel": 4.0,
+    "minimum_preliminary_psf_stars_per_filter": 20,
+    "maximum_shift_from_v19ah_peak_pixel": 2.0,
+    "minimum_centroid_bound_margin_pixel": 0.02,
+    "minimum_amplitude_snr": 5.0,
+    "maximum_normalized_rmse": 5.0,
+    "robust_loss": "soft_l1",
+    "robust_loss_scale": 1.0,
+    "maximum_function_evaluations": 1000,
+    "minimum_fwhm_pixel": 1.5,
+    "maximum_fwhm_pixel": 12.0,
+    "maximum_ellipticity": 0.7,
+    "rejection_rule": "Reject optimizer failures, solutions at the displacement bound, low-amplitude or poor-residual fits, or a shared PSF outside the unchanged shape gates. Never clip a position or replace an association."
+  },
+  "shared_psf": {
+    "derivation": "Fit the same circular Gaussian-plus-background model with a free width to every fixed foreground star; take the median width of all quality-passing preliminary fits separately in B, I and R.",
+    "stamp_half_width_pixel": 6,
+    "fit_radius_pixel": 4.0,
+    "background_annulus_inner_pixel": 4.5,
+    "background_annulus_outer_pixel": 6.0,
+    "minimum_preliminary_sigma_pixel": 0.65,
+    "maximum_preliminary_sigma_pixel": 4.0,
+    "minimum_preliminary_psf_stars_per_filter": 20,
+    "maximum_shift_from_v19ah_peak_pixel": 2.0,
+    "minimum_centroid_bound_margin_pixel": 0.02,
+    "minimum_amplitude_snr": 5.0,
+    "maximum_normalized_rmse": 5.0,
+    "robust_loss": "soft_l1",
+    "robust_loss_scale": 1.0,
+    "maximum_function_evaluations": 1000,
+    "minimum_fwhm_pixel": 1.5,
+    "maximum_fwhm_pixel": 12.0,
+    "maximum_ellipticity": 0.7
+  },
+  "wcs": {
+    "projection": "TAN",
+    "fit": "Fit one TAN WCS per filter from accepted shared-PSF centroids and unchanged propagated Gaia coordinates.",
+    "validation": "Compute fitted and exact leave-one-star-out residuals with no clipping or refitting."
+  },
+  "gates": {
+    "exact_filter_count": 3,
+    "minimum_accepted_centroids_per_filter": 30,
+    "minimum_shared_accepted_gaia_ids_all_filters": 20,
+    "maximum_fitted_median_residual_pixel": 1.0,
+    "maximum_fitted_p95_residual_pixel": 3.0,
+    "maximum_loo_median_residual_pixel": 1.0,
+    "maximum_loo_p95_residual_pixel": 3.0,
+    "maximum_loo_p95_residual_arcsec": 0.75,
+    "maximum_geometric_center_disagreement_arcsec": 1.0,
+    "r_fitted_median_must_improve_over_v19ah": 1.36869425444551,
+    "all_filters_must_pass": true,
+    "no_detection_rematching_member_candidate_photometry_mass_current_lensing_halo_or_gravity_access": true
+  },
+  "outputs": {
+    "directory": "results/sigma_v19al_fors1_shared_psf_astrometry",
+    "report": "results/sigma_v19al_fors1_shared_psf_astrometry/report.json",
+    "wcs": "one JSON WCS header per passing filter",
+    "refined_matches": "one CSV per passing filter containing shared-PSF fit and fitted/LOO residual diagnostics",
+    "diagnostic": "one fitted-versus-LOO residual PNG; no science-image or member cutout is emitted"
+  },
+  "claim_boundary": [
+    "The three per-filter PSF widths are imaging nuisance measurements, not universal or object-specific gravity parameters.",
+    "A pass establishes astrometric adequacy only; it is not a photometric, baryonic-map, lensing or gravity result.",
+    "A failure ends this FORS1 astrometric strategy unless independent calibrated imaging is introduced."
+  ],
+  "authorization": {
+    "read_passed_v19ag_full_frames": true,
+    "read_frozen_v19ah_foreground_matches": true,
+    "fit_foreground_star_psf_and_centroids": true,
+    "persist_wcs_refined_catalogs_and_residual_plot": true,
+    "detect_or_rematch_sources": false,
+    "inspect_member_or_candidate_coordinates_or_cutouts": false,
+    "fit_science_photometry_or_member_deblending": false,
+    "infer_stellar_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "v19al_shared_psf_fit_run_at_freeze": false,
+    "member_candidate_photometry_mass_current_lensing_halo_or_gravity_payload_opened_at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19al_fors1_shared_psf_astrometry.py",
+    "runner_sha256": "65ce6e377aba10304e1f804bde1f4420b9cf169c0396431a910ce5a709aa65a0",
+    "frozen_base_runner": "scripts/run_sigma_v19ai_fors1_subpixel_astrometry.py",
+    "frozen_base_runner_sha256": "aab62fb001cc8e5938d9a880467dc2c6f85356ad8811c193925ccedcd2a80f60"
+  }
+}

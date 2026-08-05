@@ -1,0 +1,69 @@
+{
+  "report_version": "SIGMA-V19AL-FORS1-SHARED-PSF-ASTROMETRY-1.0.0",
+  "status": "failed_preliminary_shared_psf_calibration",
+  "failure_stage": "per_filter_preliminary_free_width_psf_fits",
+  "failure": "I_BESS has only 2 preliminary PSF stars versus the frozen minimum of 20",
+  "filters": {
+    "B_BESS": {
+      "input_stars": 37,
+      "accepted_preliminary_psf_stars": 32,
+      "rejection_reasons": {
+        "centroid_at_optimizer_bound": 4,
+        "normalized_rmse": 1
+      },
+      "median_normalized_rmse": 3.0565561351810473,
+      "p95_normalized_rmse": 3.941273695831422,
+      "median_amplitude_snr": 147.1848379990353,
+      "median_centroid_shift_pixel": 0.45752078408952535
+    },
+    "I_BESS": {
+      "input_stars": 30,
+      "accepted_preliminary_psf_stars": 2,
+      "rejection_reasons": {
+        "amplitude_snr": 1,
+        "centroid_at_optimizer_bound": 6,
+        "normalized_rmse": 21
+      },
+      "median_normalized_rmse": 8.049335585812482,
+      "p95_normalized_rmse": 14.651869433933218,
+      "median_amplitude_snr": 141.71449012172957,
+      "median_centroid_shift_pixel": 0.8161015700007259
+    },
+    "R_BESS": {
+      "input_stars": 32,
+      "accepted_preliminary_psf_stars": 3,
+      "rejection_reasons": {
+        "centroid_at_optimizer_bound": 7,
+        "centroid_shift": 1,
+        "normalized_rmse": 20,
+        "optimizer_failure": 1
+      },
+      "median_normalized_rmse": 6.296150056751249,
+      "p95_normalized_rmse": 13.468461743312748,
+      "median_amplitude_snr": 100.99968821209313,
+      "median_centroid_shift_pixel": 0.9527859316595126
+    }
+  },
+  "frozen_gates": {
+    "minimum_preliminary_psf_stars_per_filter": 20,
+    "minimum_amplitude_snr": 5.0,
+    "maximum_normalized_rmse": 5.0,
+    "maximum_shift_from_v19ah_peak_pixel": 2.0,
+    "minimum_centroid_bound_margin_pixel": 0.02
+  },
+  "all_shared_psf_calibration_gates_pass": false,
+  "wcs_fit_run": false,
+  "source_detection_or_rematching_run": false,
+  "member_or_candidate_coordinate_or_cutout_opened": false,
+  "science_photometry_or_member_deblending_fitted": false,
+  "stellar_mass_or_current_inferred": false,
+  "lensing_or_halo_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false,
+  "gravity_parameters_fit": 0,
+  "interpretation": "The circular Gaussian plus planar background is an inadequate common image model in I and R. High median amplitude S/N but large normalized residuals show structured/asymmetric pixels, not a general lack of detected stellar flux. The frozen residual threshold is not relaxed.",
+  "claim_boundary": [
+    "This is an imaging-model failure before WCS evaluation.",
+    "It neither supports nor falsifies long-wavelength Sigma Gravity.",
+    "No physics parameter or holdout was accessed."
+  ]
+}
