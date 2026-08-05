@@ -45,12 +45,17 @@ def gradient_support_mask(
         if north_values.shape != east_values.shape:
             raise ValueError("gradient east/north components differ in shape")
         for region in range(regions):
-            support[region] &= (
-                gradient_detection_sigma(
-                    east_values[:, region], north_values[:, region]
-                )
-                >= threshold
+            finite = np.all(np.isfinite(east_values[:, region])) and np.all(
+                np.isfinite(north_values[:, region])
             )
+            support[region] &= finite
+            if finite:
+                support[region] &= (
+                    gradient_detection_sigma(
+                        east_values[:, region], north_values[:, region]
+                    )
+                    >= threshold
+                )
     return support
 
 

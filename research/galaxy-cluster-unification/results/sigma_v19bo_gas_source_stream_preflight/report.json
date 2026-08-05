@@ -1,0 +1,29 @@
+{
+  "protocol_version": "SIGMA-V19BO-GAS-SOURCE-STREAM-PREFLIGHT-1.0.0",
+  "decision": "passed_gas_source_stream_preflight",
+  "config_sha256": "06dfdf7ae4a11abf2eac785d24687a999c5337f0b11fb810cdde80d0b227f484",
+  "checker_sha256": "ab76d9e781f23f35d4cdded8946fad8dbdb8910c36f7737fa87bec20cc86dc1d",
+  "module_sha256": "5fe0e39ec0e416a85d86bdea8cb23d098d9ba094149497d86c6cf01a5439d7c2",
+  "input_hashes": {
+    "v19bn_config": "006ecf2e32f278b501446fa70a8828d834177926a8fa111382db87f36c6c753d",
+    "v19bn_report": "f797c5d7a4fc320284d468d62f475828a22d86c75afd6d627537196e1cbb262f",
+    "v19x4_config": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f"
+  },
+  "manufactured_feature_arrays": 56,
+  "manufactured_surface_density_relative_error": 0.0,
+  "gates": {
+    "all_parent_and_implementation_hashes_exact": true,
+    "exact_14_features_four_variants": true,
+    "every_feature_has_draw_region_shape": true,
+    "surface_density_conserved_to_1e_12": true,
+    "I5_finite_values_bounded_zero_one": true,
+    "observed_and_target_payloads_sealed": true
+  },
+  "terminal_v19x4_opened": false,
+  "observed_source_score_computed": false,
+  "lensing_halo_action_or_gravity_payload_opened": false,
+  "claim_boundary": [
+    "V19BO is a manufactured stream preflight, not an observed source or gravity result.",
+    "No terminal gas posterior, lensing, halo, action, formula, coupling, or gravity constant is opened or selected."
+  ]
+}

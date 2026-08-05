@@ -66,7 +66,7 @@
     "checker": "scripts/check_sigma_v19bn_source_score_engine_preflight.py",
     "checker_sha256": "906c82d7177fd1f68111a978a6bb295a5632ef2878953be78947d23dddf01246",
     "engine_module": "src/voidscreen/sigma_source_score_engine.py",
-    "engine_module_sha256": "106ac730467cd7590a358e2f1999c8e8c2fce9d3fb9ce8a4b79f829f4fa9f0b1"
+    "engine_module_sha256": "e2e50e18fc954eccc0ede5e4a14a4b48e0109e85d74abc44f74d33f0d4890755"
   },
   "outputs": {
     "report": "results/sigma_v19bn_source_score_engine_preflight/report.json"

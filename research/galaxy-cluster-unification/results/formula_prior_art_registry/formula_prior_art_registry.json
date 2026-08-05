@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 179,
+    "sigma_protocols": 180,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7249,7 +7249,19 @@
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "cc8920db3752d22ef337d3f5f84210a1e49679a615a22a385a5fbb87703f091b"
+      "sha256": "006ecf2e32f278b501446fa70a8828d834177926a8fa111382db87f36c6c753d"
+    },
+    {
+      "config": "configs/sigma_v19bo_gas_source_stream_preflight.json",
+      "protocol_version": "SIGMA-V19BO-GAS-SOURCE-STREAM-PREFLIGHT-1.0.0",
+      "status": "frozen before terminal V19X4 gas draws, observed source scores, lensing, halos, action selection, or gravity fitting",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "06dfdf7ae4a11abf2eac785d24687a999c5337f0b11fb810cdde80d0b227f484"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

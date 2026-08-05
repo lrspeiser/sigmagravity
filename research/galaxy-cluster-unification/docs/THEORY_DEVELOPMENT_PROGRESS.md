@@ -2259,3 +2259,18 @@ structure passes, a 2% transfer perturbation is admitted, a 45-degree I4-axis
 rotation is rejected, and a uniform tensor survives every region omission.
 This is still a preflight; the gas-map-to-region executor and observed score
 remain gated on terminal V19X4/V19BM products, with lensing sealed.
+
+## 2026-08-05 V19BO gas-source streaming layer
+
+The remaining gas-map-to-region mathematics is now implemented and frozen.
+Regional V19X4 draws are mapped and smoothed in bounded batches, differentiated
+into all I4/I5 and gas-control quantities, reduced inside each registered
+aperture, and concatenated only after their schemas agree. Full common-grid
+draw stacks are never retained.
+
+Manufactured execution produces all 14 quantities for every scale/aperture
+variant, conserves gas surface density per draw to $10^{-12}$, keeps finite I5
+values inside $[0,1]$, and leaves regions outside an aperture invalid so they
+cannot enter gradient support. The remaining integration task is wiring the
+terminal V19X4 and V19BM product manifests into this stream and the V19BN
+decision engine; source outcomes and lensing remain unopened.

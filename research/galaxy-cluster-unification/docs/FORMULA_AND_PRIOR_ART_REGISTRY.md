@@ -4,7 +4,7 @@ Registry version: `FORMULA-PRIOR-ART-REGISTRY-1.1.0`. Published-literature cutof
 
 ## What this file guarantees
 
-This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **179 Sigma protocol files** and their **147 explicit formula/action fragments** (including **16** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
+This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **180 Sigma protocol files** and their **147 explicit formula/action fragments** (including **16** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
 
 It does **not** claim to contain every equation ever published in gravitation. It is a reproducible scientific prior-art screen of the families that overlap mechanisms we have actually explored. It is not a legal novelty or patent opinion.
 
@@ -341,6 +341,7 @@ This appendix closes a gap in the older scorecard: later action-health and sourc
 | `configs/sigma_v19bl_source_invariant_scoring_protocol.json` | formula_or_action_protocol | `projected_invariants.I4_THERMODYNAMIC_GRADIENT_STRESS.dimensionless_equation`: `a_i=D_i ln(n_e); k_i=D_i ln(K); Q_ij=l^2[a_(i k_j)-delta_ij(a dot k)/2]`<br>`projected_invariants.I5_BAROCLINICITY.dimensionless_equation`: `Z5=\|D ln(n_e) cross D ln(p)\|^2/(\|D ln(n_e)\|^2 \|D ln(p)\|^2)` | NEWTON-POISSON |
 | `configs/sigma_v19bm_stellar_morphology_control.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19bn_source_score_engine_preflight.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19bo_gas_source_stream_preflight.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19c_source_archive_acquisition.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19d_member_catalog_extraction.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19e_chandra_acquisition.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
