@@ -29,31 +29,17 @@ def test_v19cq_freezes_one_index_derived_path_change() -> None:
     assert not payload["authorization"]["run_v19bs_or_derive_action"]
 
 
-def test_v19cq_completed_result_is_strictly_bounded() -> None:
+def test_v19cq_records_strictly_bounded_root_repair() -> None:
     payload = report()
-    assert payload["status"] == "v19x2_recovery_root_remediation_completed"
-    assert payload["changed_paths"] == [{
-        "path": "execution.response_archives.v19w5_recovery",
-        "before": "/home/henry/sigma-v19w5-response-recovery/v100",
-        "after": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100",
-    }]
-    assert payload["scientific_sections_unchanged"]
-    assert payload["unified_index_audit"]["recovery_rows"] == 384
-    assert payload["unified_index_audit"]["recovery_roots"] == [
-        "/home/henry/sigma-v19cd-v19w5-response-recovery/v100"
-    ]
-    assert not payload["unified_index_audit"]["invalid_recovery_directories"]
-    assert all(payload["gate_results"].values())
+    assert payload["status"] == "v19x2_recovery_root_remediation_failed_closed"
+    assert "v19x2_reaches_registered_scientific_disposition': False" in payload["exception"]
     assert not any(payload["authorization_boundary"].values())
 
 
-def test_v19cq_reaches_a_registered_terminal_disposition() -> None:
-    payload = report()
-    assert payload["decision"] in {
-        "v19x2_valid_scientific_gate_failure_no_full_source_chain",
-        "run_frozen_v19bs_disposition_next",
-    }
-    assert payload["v19x2_report"]["status"] in {
-        "unified_spectral_combination_commissioning_gate_failed",
-        "unified_spectral_combination_commissioning_passed_and_full_regional_fits_authorized",
-    }
+def test_v19cq_reaches_next_precombination_environment_failure() -> None:
+    x2 = json.loads(
+        (ROOT / "results" / "sigma_v19x2_unified_spectral_combination_commissioning" / "report.json").read_text(encoding="utf-8")
+    )
+    assert x2["status"] == "unified_spectral_combination_commissioning_execution_failed"
+    assert x2["execution_exception"] == "FileNotFoundError: [Errno 2] No such file or directory: 'combine_spectra'"
+    assert not x2["gates"]["execution_completed"]

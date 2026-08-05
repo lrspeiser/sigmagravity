@@ -46,7 +46,7 @@
     "reason_for_serial_combination": "each direct integrated combine reads thousands of response-linked spectra and must remain isolated from the still-running V19W production workload",
     "response_archives": {
       "base_v19w": "/home/henry/sigma-v19w-response-production/v100",
-      "v19w5_recovery": "/home/henry/sigma-v19w5-response-recovery/v100"
+      "v19w5_recovery": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100"
     },
     "result_root": "results/sigma_v19x2_unified_spectral_combination_commissioning",
     "runner": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",

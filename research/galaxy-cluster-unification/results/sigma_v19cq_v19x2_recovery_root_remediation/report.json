@@ -1,0 +1,18 @@
+{
+  "authorization_boundary": {
+    "action_derived": false,
+    "solar_optimized": false,
+    "target_or_gravity_opened": false,
+    "v19bs_run": false
+  },
+  "claim_boundary": [
+    "V19CQ repairs a source-archive path binding before any spectrum was combined.",
+    "The replacement root is not selected from spectral or gravity performance; it is the common parent encoded by every independently audited V19W5 recovery row.",
+    "A V19X2 scientific quality-gate failure after this repair is final for the frozen spectral rules and is not eligible for tuning.",
+    "No gravity theory is tested, no cluster lensing is opened, and V19BS remains a separate decision stage."
+  ],
+  "exception": "RuntimeError: V19CQ post-execution gates failed: {'failure_reports_and_unified_index_exact': True, 'all_384_recovery_rows_share_corrected_root': True, 'only_recovery_archive_root_changed': True, 'scientific_sections_unchanged': True, 'v19x2_reaches_registered_scientific_disposition': False, 'if_v19x2_passes_unchanged_v19br_reaches_source_decision': True, 'no_lensing_halo_action_gravity_holdout_or_solar_access': True}; decision=v19x2_or_source_chain_execution_incomplete; x2_status=unified_spectral_combination_commissioning_execution_failed",
+  "generated_utc": "2026-08-05T20:34:25.733028+00:00",
+  "protocol_version": "SIGMA-V19CQ-V19X2-RECOVERY-ROOT-REMEDIATION-1.0.0",
+  "status": "v19x2_recovery_root_remediation_failed_closed"
+}

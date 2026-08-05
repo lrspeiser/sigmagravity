@@ -1,10 +1,10 @@
 {
   "protocol_version": "SIGMA-V19X2-UNIFIED-SPECTRAL-COMBINATION-COMMISSIONING-1.1.0",
-  "generated_utc": "2026-08-05T20:27:56.571215+00:00",
-  "config_sha256": "44a107133c20404d6c54d57fbee1fd6b80185dc32f46a94dd40b0269d650a42d",
+  "generated_utc": "2026-08-05T20:34:25.706391+00:00",
+  "config_sha256": "60543254acdfa979b2e0ab86e346ea291e1a8b1346a13f48669a44974a42c559",
   "runner_sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea",
   "status": "unified_spectral_combination_commissioning_execution_failed",
-  "execution_exception": "RuntimeError: V19X2 cell path is outside frozen archive roots: ('BULLET', 45, 554, 3)",
+  "execution_exception": "FileNotFoundError: [Errno 2] No such file or directory: 'combine_spectra'",
   "gates": {
     "execution_completed": false
   },
