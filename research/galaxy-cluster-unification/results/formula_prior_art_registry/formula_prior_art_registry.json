@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 203,
+    "sigma_protocols": 204,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7502,6 +7502,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "48fc80b6a73e7b0dc1f7f638ddf8ef46615ec88c6959a43de0e95ed7f42e612a"
+    },
+    {
+      "config": "configs/sigma_v19ch_jwst_slice_clean_source_frame.json",
+      "protocol_version": "SIGMA-V19CH-JWST-SLICE-CLEAN-SOURCE-FRAME-1.0.0",
+      "status": "frozen source-identity audit after V19CG and before selecting replacement clusters, opening a sealed target payload, choosing an action or constants, or scoring gravity",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "2482ccb9bc868818cd42c0e1ba54e80a23b526d6628cf86295f433a340285b50"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",
