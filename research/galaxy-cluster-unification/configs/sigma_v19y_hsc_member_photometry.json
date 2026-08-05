@@ -1,7 +1,31 @@
 {
-  "protocol_version": "SIGMA-V19Y-HSC-MEMBER-PHOTOMETRY-1.0.0",
-  "status": "frozen before querying any of the 141 member coordinates, seeing any member-level HSC candidate response, selecting a counterpart, applying a photometric quality cut, deriving a stellar mass, constructing a mass-current map, opening replacement-cluster lensing targets, or changing gravity physics",
+  "protocol_version": "SIGMA-V19Y-HSC-MEMBER-PHOTOMETRY-1.0.1",
+  "status": "frozen before querying member 31 or any later member, after the original immutable protocol queried members 1 through 30 and failed closed on member 30's variable HSC filter schema, but before selecting a counterpart, applying a photometric quality cut, deriving a stellar mass, constructing a mass-current map, opening replacement-cluster lensing targets, or changing gravity physics",
   "purpose": "Acquire and hash every Hubble Source Catalog candidate around each published V19D spectroscopic member so that a later outcome-blind protocol can determine whether homogeneous physical member mass-current maps are supportable.",
+  "pre_execution_schema_gate_correction": {
+    "original_protocol_version": "SIGMA-V19Y-HSC-MEMBER-PHOTOMETRY-1.0.0",
+    "original_freeze_commit": "0507e870",
+    "original_runner_sha256": "956e6e5146538e9f93ed8c8d6749e59c0538699cf0a947bde2ffdbcf0d16d643",
+    "failure": "The original run completed Bullet members 01 through 29, then member 30 returned the frozen base columns and a complete F606W triplet but omitted the entirely empty F435W and F814W triplets. The exact-all-requested-columns assertion failed before a provenance report or any downstream calculation was written.",
+    "opened_member_cones": 30,
+    "opened_cluster": "BULLET",
+    "opened_member_ids": "01 through 30 inclusive",
+    "candidate_rows_seen": 247,
+    "members_with_candidates_seen": 20,
+    "members_without_candidates_seen": 10,
+    "failed_member_id": "30",
+    "failed_member_candidate_rows": 17,
+    "pre_correction_file_count": 60,
+    "pre_correction_tree_manifest_sha256": "da8e4b5257f4c2dd6d30b4ebe907f262b0d75fc8a53fc302bf0ffa9893a3c79b",
+    "correction": "Require the exact fixed non-filter schema. Permit only complete requested filter triplets, in their frozen order, to be omitted when a cone has no measurements in that filter. Preserve the untouched variable-schema response and record returned and missing columns for every cone.",
+    "scientific_settings_unchanged": "All 141 coordinates, both radii, endpoint, catalog release, magnitude type, requested columns, all-candidate retention, no-match handling, matching prohibition, downstream boundary, and gravity/lensing seals are unchanged.",
+    "counterpart_selected_before_correction": false,
+    "photometric_quality_cut_run_before_correction": false,
+    "stellar_mass_inferred_before_correction": false,
+    "mass_current_constructed_before_correction": false,
+    "lensing_or_halo_payload_opened_before_correction": false,
+    "gravity_formula_or_parameter_changed_before_correction": false
+  },
   "parents": {
     "v19h_config": "configs/sigma_v19h_causal_observable_protocol.json",
     "v19h_config_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
@@ -54,7 +78,8 @@
       "A_F814W_N"
     ],
     "empty_cone_behavior": "A valid HTTP-200 cone with no matches may have a zero-byte CSV body; retain and hash it as zero candidates.",
-    "pre_freeze_schema_check": "A non-member 0.02-degree cone at the frozen Abell 2146 cluster center returned HTTP 200 with the exact requested header; no member-level cone was opened."
+    "variable_filter_schema_behavior": "The endpoint can omit an entire requested filter triplet when every returned candidate lacks that filter. A nonempty response is valid only when it has the exact frozen base columns followed by zero or more complete F435W, F606W and F814W triplets in frozen order. Partial triplets, reordered columns, unknown columns and changed base columns fail closed.",
+    "pre_original_freeze_schema_check": "A non-member 0.02-degree cone at the frozen Abell 2146 cluster center returned HTTP 200 with the exact fully populated requested header; no member-level cone was opened before the original 1.0.0 freeze."
   },
   "member_catalogs": {
     "BULLET": {
@@ -79,7 +104,7 @@
   "gates": {
     "exact_member_query_count": 141,
     "http_200_required_for_every_query": true,
-    "exact_requested_schema_required_for_every_nonempty_response": true,
+    "exact_base_and_ordered_complete_filter_triplets_required_for_every_nonempty_response": true,
     "finite_icrs_position_required_for_every_returned_candidate": true,
     "every_csv_and_query_url_hashed": true,
     "all_candidate_rows_retained": true,
@@ -93,7 +118,7 @@
   },
   "implementation": {
     "runner": "scripts/download_sigma_v19y_hsc_member_photometry.py",
-    "runner_sha256": "956e6e5146538e9f93ed8c8d6749e59c0538699cf0a947bde2ffdbcf0d16d643"
+    "runner_sha256": "6b2689e643658ee0a1f4f39a69ead3d0856f6e32cf9afc75fbcbe1c745ba2c2e"
   },
   "authorization": {
     "query_only_frozen_member_cones": true,
@@ -107,8 +132,10 @@
     "open_holdout": false
   },
   "integrity": {
-    "member_level_query_executed_at_freeze": false,
-    "candidate_coverage_known_at_freeze": false,
+    "member_level_query_executed_at_original_freeze": false,
+    "candidate_coverage_known_at_original_freeze": false,
+    "member_level_queries_opened_before_schema_correction": 30,
+    "candidate_rows_seen_before_schema_correction": 247,
     "counterpart_selected_at_freeze": false,
     "stellar_mass_inferred_at_freeze": false,
     "mass_current_constructed_at_freeze": false,

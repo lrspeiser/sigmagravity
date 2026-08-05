@@ -42,8 +42,14 @@ def test_v19y_is_frozen_before_member_level_hsc_queries() -> None:
     assert config["member_catalogs"]["ABELL2146"]["expected_rows"] == 63
     assert config["member_catalogs"]["BULLET"]["query_radius_arcsec"] == 6.0
     assert config["member_catalogs"]["ABELL2146"]["query_radius_arcsec"] == 1.0
-    assert config["integrity"]["member_level_query_executed_at_freeze"] is False
-    assert config["integrity"]["candidate_coverage_known_at_freeze"] is False
+    assert config["integrity"]["member_level_query_executed_at_original_freeze"] is False
+    assert config["integrity"]["candidate_coverage_known_at_original_freeze"] is False
+    correction = config["pre_execution_schema_gate_correction"]
+    assert correction["opened_member_cones"] == 30
+    assert correction["candidate_rows_seen"] == 247
+    assert correction["pre_correction_file_count"] == 60
+    assert correction["counterpart_selected_before_correction"] is False
+    assert correction["gravity_formula_or_parameter_changed_before_correction"] is False
 
 
 def test_v19y_forbids_selection_mass_inference_and_target_opening() -> None:
@@ -99,9 +105,17 @@ def test_v19y_parser_accepts_documented_empty_cone_and_exact_schema() -> None:
     columns = json.loads(CONFIG.read_text(encoding="utf-8"))["source"][
         "query_columns"
     ]
-    assert module.parse_response(b"", columns) == 0
-    assert module.parse_response(response_payload(columns), columns) == 1
-    with pytest.raises(RuntimeError, match="schema changed"):
+    assert module.parse_response(b"", columns) == (0, [])
+    assert module.parse_response(response_payload(columns), columns) == (1, columns)
+    f606w_only = columns[:12] + columns[15:18]
+    assert module.parse_response(response_payload(f606w_only), columns) == (
+        1,
+        f606w_only,
+    )
+    partial_triplet = columns[:12] + columns[15:17]
+    with pytest.raises(RuntimeError, match="complete ordered"):
+        module.parse_response(response_payload(partial_triplet), columns)
+    with pytest.raises(RuntimeError, match="complete ordered"):
         module.parse_response(b"MatchID,MatchRA,MatchDec\n1,2,3\n", columns)
 
 

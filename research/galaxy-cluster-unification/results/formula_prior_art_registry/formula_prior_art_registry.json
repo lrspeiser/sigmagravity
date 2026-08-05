@@ -6962,15 +6962,15 @@
     },
     {
       "config": "configs/sigma_v19y_hsc_member_photometry.json",
-      "protocol_version": "SIGMA-V19Y-HSC-MEMBER-PHOTOMETRY-1.0.0",
-      "status": "frozen before querying any of the 141 member coordinates, seeing any member-level HSC candidate response, selecting a counterpart, applying a photometric quality cut, deriving a stellar mass, constructing a mass-current map, opening replacement-cluster lensing targets, or changing gravity physics",
+      "protocol_version": "SIGMA-V19Y-HSC-MEMBER-PHOTOMETRY-1.0.1",
+      "status": "frozen before querying member 31 or any later member, after the original immutable protocol queried members 1 through 30 and failed closed on member 30's variable HSC filter schema, but before selecting a counterpart, applying a photometric quality cut, deriving a stellar mass, constructing a mass-current map, opening replacement-cluster lensing targets, or changing gravity physics",
       "role": "gate_or_data_protocol_no_new_formula_fragment",
       "formula_fragments": [],
       "formula_fragment_count": 0,
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "868ba43f4203fc24fb9b5a8994a3882a0cde149802eda92141c2109e337f86c1"
+      "sha256": "9755dde1361b231121d5f36c55afc1cbd19e7a23f6b3954dcd218321df49b079"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

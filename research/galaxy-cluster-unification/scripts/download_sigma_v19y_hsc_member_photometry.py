@@ -144,19 +144,51 @@ def build_query_url(config: dict[str, Any], member: dict[str, Any]) -> str:
     return source["endpoint"] + "?" + urllib.parse.urlencode(parameters)
 
 
-def parse_response(payload: bytes, expected_columns: list[str]) -> int:
+def valid_response_schema(
+    actual_columns: list[str], expected_columns: list[str]
+) -> bool:
+    base_columns = [column for column in expected_columns if not column.startswith("A_F")]
+    filter_columns = expected_columns[len(base_columns) :]
+    if actual_columns[: len(base_columns)] != base_columns:
+        return False
+    actual_filters = actual_columns[len(base_columns) :]
+    if len(filter_columns) % 3 != 0 or len(actual_filters) % 3 != 0:
+        return False
+    expected_triplets = [
+        filter_columns[index : index + 3]
+        for index in range(0, len(filter_columns), 3)
+    ]
+    actual_triplets = [
+        actual_filters[index : index + 3]
+        for index in range(0, len(actual_filters), 3)
+    ]
+    cursor = 0
+    for triplet in actual_triplets:
+        while cursor < len(expected_triplets) and expected_triplets[cursor] != triplet:
+            cursor += 1
+        if cursor == len(expected_triplets):
+            return False
+        cursor += 1
+    return True
+
+
+def parse_response(
+    payload: bytes, expected_columns: list[str]
+) -> tuple[int, list[str]]:
     if not payload.strip():
         # The HSC CSV endpoint returns a zero-byte body, rather than a header-only
         # CSV, for a valid cone having no catalog matches.
-        return 0
+        return 0, []
     try:
         text = payload.decode("utf-8-sig")
     except UnicodeDecodeError as exc:
         raise RuntimeError("HSC response is not UTF-8 CSV") from exc
     reader = csv.DictReader(io.StringIO(text))
-    if reader.fieldnames != expected_columns:
+    actual_columns = reader.fieldnames or []
+    if not valid_response_schema(actual_columns, expected_columns):
         raise RuntimeError(
-            f"HSC response schema changed: {reader.fieldnames!r} != {expected_columns!r}"
+            "HSC response schema is not the frozen base plus complete ordered "
+            f"requested-filter triplets: {actual_columns!r}"
         )
     count = 0
     seen_matches: set[str] = set()
@@ -174,7 +206,7 @@ def parse_response(payload: bytes, expected_columns: list[str]) -> int:
         if not (math.isfinite(dec) and -90.0 <= dec <= 90.0):
             raise RuntimeError(f"invalid HSC MatchDec for {match_id}")
         count += 1
-    return count
+    return count, actual_columns
 
 
 def write_atomic(path: Path, payload: bytes) -> None:
@@ -202,6 +234,33 @@ def prior_records(report_path: Path) -> dict[tuple[str, str], dict[str, Any]]:
     }
 
 
+def directory_manifest_sha256(root: Path) -> tuple[int, str]:
+    files = sorted(path for path in root.rglob("*") if path.is_file())
+    lines = []
+    for path in files:
+        relative = path.relative_to(root).as_posix()
+        lines.append(f"{sha256(path)}  {relative}\n")
+    digest = hashlib.sha256("".join(lines).encode("utf-8")).hexdigest()
+    return len(files), digest
+
+
+def validate_pre_correction_cache(
+    config: dict[str, Any], raw_root: Path, report_path: Path
+) -> bool:
+    if report_path.exists() or not raw_root.exists():
+        return False
+    files = [path for path in raw_root.rglob("*") if path.is_file()]
+    if not files:
+        return False
+    correction = config["pre_execution_schema_gate_correction"]
+    count, digest = directory_manifest_sha256(raw_root)
+    if count != int(correction["pre_correction_file_count"]):
+        raise RuntimeError("V19Y pre-correction cache file count changed")
+    if digest != correction["pre_correction_tree_manifest_sha256"]:
+        raise RuntimeError("V19Y pre-correction cache hash changed")
+    return True
+
+
 def acquire(
     config_path: Path = DEFAULT_CONFIG,
     raw_override: Path | None = None,
@@ -223,6 +282,9 @@ def acquire(
     raw_root.mkdir(parents=True, exist_ok=True)
     output_root.mkdir(parents=True, exist_ok=True)
     report_path = output_root / "provenance.json"
+    pre_correction_cache_validated = validate_pre_correction_cache(
+        config, raw_root, report_path
+    )
     previous = prior_records(report_path)
     expected_columns = config["source"]["query_columns"]
     timeout = float(config["source"]["timeout_seconds"])
@@ -240,16 +302,19 @@ def acquire(
         reused = False
 
         if csv_path.exists() or url_path.exists():
-            if not (csv_path.exists() and url_path.exists() and prior is not None):
-                raise RuntimeError(f"unmanifested partial V19Y acquisition: {key}")
+            if not (csv_path.exists() and url_path.exists()):
+                raise RuntimeError(f"partial V19Y acquisition pair: {key}")
             if url_path.read_bytes() != url_payload:
                 raise RuntimeError(f"V19Y query URL changed for {key}")
-            if sha256(csv_path) != prior["csv_sha256"]:
-                raise RuntimeError(f"V19Y cached CSV hash changed for {key}")
-            if sha256(url_path) != prior["query_url_sha256"]:
-                raise RuntimeError(f"V19Y cached URL hash changed for {key}")
+            if prior is not None:
+                if sha256(csv_path) != prior["csv_sha256"]:
+                    raise RuntimeError(f"V19Y cached CSV hash changed for {key}")
+                if sha256(url_path) != prior["query_url_sha256"]:
+                    raise RuntimeError(f"V19Y cached URL hash changed for {key}")
+            elif not pre_correction_cache_validated:
+                raise RuntimeError(f"unmanifested V19Y acquisition pair: {key}")
             payload = csv_path.read_bytes()
-            http_status = int(prior["http_status"])
+            http_status = 200 if prior is None else int(prior["http_status"])
             reused = True
         else:
             request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
@@ -261,7 +326,7 @@ def acquire(
             write_atomic(csv_path, payload)
             write_atomic(url_path, url_payload)
 
-        candidate_rows = parse_response(payload, expected_columns)
+        candidate_rows, returned_columns = parse_response(payload, expected_columns)
         if http_status != 200:
             raise RuntimeError(f"cached HSC status is not 200 for {key}")
         records.append(
@@ -280,7 +345,12 @@ def acquire(
                 "csv_sha256": sha256(csv_path),
                 "http_status": http_status,
                 "candidate_rows": candidate_rows,
+                "returned_columns": returned_columns,
+                "missing_requested_columns": [
+                    column for column in expected_columns if column not in returned_columns
+                ],
                 "reused_verified_payload": reused,
+                "recovered_from_pre_correction_cache": prior is None and reused,
                 "counterpart_selected": False,
             }
         )
@@ -311,6 +381,10 @@ def acquire(
         "total_candidate_rows": sum(int(row["candidate_rows"]) for row in records),
         "by_cluster": by_cluster,
         "records": records,
+        "pre_correction_cache_validated": pre_correction_cache_validated,
+        "pre_correction_recovered_records": sum(
+            row["recovered_from_pre_correction_cache"] for row in records
+        ),
         "all_raw_candidate_rows_retained": True,
         "counterpart_selection_performed": False,
         "photometric_quality_cut_performed": False,

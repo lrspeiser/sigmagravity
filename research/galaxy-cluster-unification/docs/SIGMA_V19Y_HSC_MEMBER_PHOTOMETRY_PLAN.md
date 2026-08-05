@@ -65,6 +65,29 @@ joint physical current map.  The next source would then need to be frozen
 before acquisition (for example, calibrated HST mosaics/catalogs processed
 homogeneously), rather than loosening V19Y after seeing the data.
 
+## Pre-execution interface correction
+
+The original `1.0.0` protocol was committed as `0507e870`.  Its real run
+completed Bullet members 01--29 and then failed closed on member 30 before
+writing a report.  The HSC endpoint returned the exact fixed metadata columns
+and the complete F606W triplet, but omitted the F435W and F814W triplets
+because that cone had no values in those filters.  The original validator had
+incorrectly assumed that requested all-null filter columns would remain in
+the CSV header.
+
+Before resuming, version `1.0.1` records the 60-file cache hash, the 30 opened
+cones and their 247 candidate rows.  It permits only this documented API
+behavior: the fixed base schema must be exact, while complete requested filter
+triplets may be absent and any present triplets must remain in the frozen
+F435W/F606W/F814W order.  Partial triplets, reordering, unknown columns and
+changed base columns still fail.
+
+This is not a data-dependent scientific relaxation.  Coordinates, radii,
+release, endpoint, requested filters, candidate retention and every matching,
+mass, lensing and gravity prohibition remain unchanged.  No counterpart,
+quality cut, mass estimate, current map or gravity result existed when the
+correction was frozen.
+
 ## Relationship to the long-wavelength gravity idea
 
 The newly retained hypothesis is not that gravity receives an arbitrary boost
