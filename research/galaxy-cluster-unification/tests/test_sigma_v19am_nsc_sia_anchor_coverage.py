@@ -1,3 +1,4 @@
+import csv
 import importlib.util
 import json
 from pathlib import Path
@@ -6,6 +7,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "audit_sigma_v19am_nsc_sia_anchor_coverage.py"
 CONFIG = ROOT / "configs" / "sigma_v19am_nsc_sia_anchor_coverage.json"
+REPORT = ROOT / "results" / "sigma_v19am_nsc_sia_anchor_coverage" / "report.json"
+MANIFEST = (
+    ROOT
+    / "data"
+    / "derived"
+    / "sigma_v19am_nsc_sia_anchor_coverage"
+    / "exposure_cutout_manifest.csv"
+)
 SPEC = importlib.util.spec_from_file_location("sigma_v19am", SCRIPT)
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
@@ -50,3 +59,34 @@ def test_config_forbids_pixel_access_selection_and_science_inference():
     assert not authorization["infer_photometry_mass_or_current"]
     assert not authorization["read_lensing_or_halo_payload"]
     assert not authorization["change_gravity_physics_or_parameters"]
+
+
+def test_completed_report_and_manifest_prove_exact_metadata_coverage():
+    report = json.loads(REPORT.read_text(encoding="utf-8"))
+    with MANIFEST.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    assert report["gates"]["all_metadata_coverage_gates_pass"]
+    assert report["counts"]["anchors"] == 15
+    assert report["counts"]["measurement_descriptor_pairs"] == 1032
+    assert report["counts"]["unique_exposures"] == 82
+    assert report["counts"]["unique_exposure_extensions"] == 139
+    assert len(rows) == 1032
+    assert len({(row["nsc_id"], row["exposure"]) for row in rows}) == 1032
+    assert all(row["filter"] == row["sia_obs_bandpass"] for row in rows)
+    assert all(row["sia_instrument_name"] == "DECam" for row in rows)
+    assert all(row["sia_proctype"] == "InstCal" for row in rows)
+    assert MODULE.sha256(MANIFEST) == report["outputs"]["manifest_sha256"]
+    assert not report["image_pixels_downloaded"]
+    assert not report["exposures_ranked_or_selected"]
+    assert not report["ambiguous_candidates_queried"]
+    assert not report["lensing_or_halo_payload_opened"]
+    assert not report["gravity_formula_or_parameter_changed"]
+
+
+def test_every_preserved_raw_metadata_payload_matches_its_report_hash():
+    report = json.loads(REPORT.read_text(encoding="utf-8"))
+    assert len(report["query_records"]) == 15
+    for record in report["query_records"]:
+        path = ROOT / record["raw_metadata_path"]
+        assert path.is_file()
+        assert MODULE.sha256(path) == record["raw_metadata_sha256"]

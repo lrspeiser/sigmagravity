@@ -1,0 +1,187 @@
+{
+  "ambiguous_candidates_queried": false,
+  "claim_boundary": [
+    "A pass proves metadata-level image addressability for the fifteen already-open anchors only; it does not prove that every cutout URL downloads successfully or that the pixels support unbiased profile photometry.",
+    "The 0.01-degree SIA footprint is used only to obtain the exact detector extension and access descriptor. V19AM does not freeze the later science-cutout footprint or any PSF/deblending model.",
+    "Every measurement descriptor is retained. No exposure, band, object or validation row is ranked, rejected or selected using image quality or photometric performance.",
+    "This is source-data feasibility evidence, not a stellar-mass, mass-current, lensing, halo or gravity result."
+  ],
+  "config": "configs/sigma_v19am_nsc_sia_anchor_coverage.json",
+  "config_sha256": "23fc3c9bcd5651507e6333c7ba5f74b17022b189f272abc6dda886aa01530753",
+  "counts": {
+    "anchors": 15,
+    "development_anchors": 10,
+    "maximum_anchors_per_exposure_extension": 15,
+    "measurement_descriptor_pairs": 1032,
+    "minimum_anchors_per_exposure_extension": 1,
+    "unique_exposure_extensions": 139,
+    "unique_exposures": 82,
+    "validation_anchors": 5
+  },
+  "exposures_ranked_or_selected": false,
+  "filter_rows": {
+    "Y": 128,
+    "g": 196,
+    "i": 208,
+    "r": 348,
+    "z": 152
+  },
+  "gates": {
+    "all_measurements_retained_without_quality_or_exposure_selection": true,
+    "all_metadata_coverage_gates_pass": true,
+    "every_descriptor_is_required_calibrated_decam_image": true,
+    "every_measurement_has_exactly_one_sia_descriptor": true,
+    "exact_anchor_count": true,
+    "exact_anchor_measurement_rows": true,
+    "exact_development_anchor_count": true,
+    "exact_validation_anchor_count": true,
+    "measurement_and_sia_band_match": true,
+    "no_image_pixels_or_prohibited_payload_opened": true,
+    "raw_metadata_payload_and_query_hashed_for_every_anchor": true
+  },
+  "generated_utc": "2026-08-05T09:38:51.399946+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "image_pixels_downloaded": false,
+  "lensing_or_halo_payload_opened": false,
+  "outputs": {
+    "manifest": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+    "manifest_sha256": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f"
+  },
+  "parent_hashes": {
+    "data/derived/sigma_v19aa_member_counterpart_association/unified_candidates.csv": "2059209cc9699f23857579bbb772f9e6427d76cb82437b8ec7f0f3449b4dacec",
+    "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7",
+    "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv": "05ca7f66bc62184a84f6f980986eb303b9aaf5b3ae24f27d7183c70b8c7e27dd",
+    "results/sigma_v19ab_bessel_nsc_transform_commissioning/report.json": "f6364489e16dee9b44928dcaea70d69d11c7770df761470a7fa0cfa41e1f3176",
+    "results/sigma_v19ac_nsc_measurement_photometry/provenance.json": "9ec0342233d4b2781fb2acb0efb689ce5c15ae4a0379b78881cce51aaece32ee",
+    "runner": "dd0267f3fc03f849e9b9d992bc81b60efbd84ac935dd168bbd6a15ecd8cbdc9a"
+  },
+  "photometry_mass_or_current_inferred": false,
+  "query_records": [
+    {
+      "exact_measurement_matches": 69,
+      "nsc_id": "179969_163",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.629941251674%2C-55.947507774895&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_163.vot.xml",
+      "raw_metadata_sha256": "a303041a2ee4a36b7def50b7f9eea316eefa1e7a53dfaa3f5967eecf895b90ee",
+      "returned_metadata_rows": 226
+    },
+    {
+      "exact_measurement_matches": 63,
+      "nsc_id": "179969_8555",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.677178077127%2C-55.964049767720&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_8555.vot.xml",
+      "raw_metadata_sha256": "29bf652cb565805bf76a204c61ae0147868e753a04bdb3c8dfec310ec8816f56",
+      "returned_metadata_rows": 205
+    },
+    {
+      "exact_measurement_matches": 65,
+      "nsc_id": "179969_314",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.579404209077%2C-55.930921349411&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_314.vot.xml",
+      "raw_metadata_sha256": "d6fc0d9c37e2bd67f1bb17f8d8e498bdccdacfc8752f68b42fe111621c130d1d",
+      "returned_metadata_rows": 208
+    },
+    {
+      "exact_measurement_matches": 63,
+      "nsc_id": "179602_5033",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.550834537048%2C-55.908273946805&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179602_5033.vot.xml",
+      "raw_metadata_sha256": "dc745b8d530b3027419d3805b344a2de0275ec5c706741733011456dab20646b",
+      "returned_metadata_rows": 209
+    },
+    {
+      "exact_measurement_matches": 68,
+      "nsc_id": "179602_5094",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.531210650115%2C-55.925789327483&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179602_5094.vot.xml",
+      "raw_metadata_sha256": "95753be2c6f482a7e67079b5bc9f5deebc9ed8aab3b8d5721d8b885760cdcb9c",
+      "returned_metadata_rows": 220
+    },
+    {
+      "exact_measurement_matches": 60,
+      "nsc_id": "179969_60",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.654282077087%2C-55.921083118205&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_60.vot.xml",
+      "raw_metadata_sha256": "a5f275b2dcdd88fffabc2386c92547c2e6a10b2ce1e7d37500afb9a45ac33abc",
+      "returned_metadata_rows": 180
+    },
+    {
+      "exact_measurement_matches": 70,
+      "nsc_id": "179969_245",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.604686755219%2C-55.947433614553&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_245.vot.xml",
+      "raw_metadata_sha256": "40d905b27e0a1d386fa681abeed8e0f90c08cd284b4f0c24dee1f01d2988c7d1",
+      "returned_metadata_rows": 220
+    },
+    {
+      "exact_measurement_matches": 65,
+      "nsc_id": "179969_301",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.584093377802%2C-55.931907371824&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_301.vot.xml",
+      "raw_metadata_sha256": "45eb9a9c44d95c0312f9f6a4de019abb15ce00e35b2c73cc9255bd4334a3a94c",
+      "returned_metadata_rows": 214
+    },
+    {
+      "exact_measurement_matches": 73,
+      "nsc_id": "179969_218",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.615949670413%2C-55.929145988810&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_218.vot.xml",
+      "raw_metadata_sha256": "2b4308df0424a11242e0a711d9ba400974f470171a49635efa63608dc4ad4454",
+      "returned_metadata_rows": 226
+    },
+    {
+      "exact_measurement_matches": 74,
+      "nsc_id": "179969_192",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.622469992906%2C-55.932211643200&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_192.vot.xml",
+      "raw_metadata_sha256": "de33f1b0648641dd77c7fc6caa58b983e4034789d02c91974753997e3a0e134a",
+      "returned_metadata_rows": 232
+    },
+    {
+      "exact_measurement_matches": 75,
+      "nsc_id": "179969_189",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.623528372841%2C-55.934611585317&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_189.vot.xml",
+      "raw_metadata_sha256": "b1c42f283059dcbb2d1a737b164681fcdaa4a77b1b859151bfefb88423312c76",
+      "returned_metadata_rows": 232
+    },
+    {
+      "exact_measurement_matches": 73,
+      "nsc_id": "179969_8549",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.676958560454%2C-55.988737686606&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_8549.vot.xml",
+      "raw_metadata_sha256": "98d275b8c1c02ba516eedd0e65096242b6e749a8f6baddfe32f373c76481c978",
+      "returned_metadata_rows": 232
+    },
+    {
+      "exact_measurement_matches": 68,
+      "nsc_id": "179969_2346",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.713106765968%2C-56.006885056735&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_2346.vot.xml",
+      "raw_metadata_sha256": "1b4745515a23edc9f93570342ded1d22940975b596cd5d102ec0ba9a1d14c226",
+      "returned_metadata_rows": 234
+    },
+    {
+      "exact_measurement_matches": 71,
+      "nsc_id": "179969_134",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.637497833825%2C-55.943057408455&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_134.vot.xml",
+      "raw_metadata_sha256": "dd3803b3128f86dfe5bd894ab38054e2dad15cdde4d6bf86aa428b07cf833455",
+      "returned_metadata_rows": 226
+    },
+    {
+      "exact_measurement_matches": 75,
+      "nsc_id": "179969_256",
+      "query_url": "https://datalab.noirlab.edu/sia/nsc_dr2?POS=104.601222205348%2C-55.941193535834&SIZE=0.01000000",
+      "raw_metadata_path": "data/raw/sigma_v19am_nsc_sia_anchor_coverage/nsc_179969_256.vot.xml",
+      "raw_metadata_sha256": "01953fea7c26078ca09412c539f47dc711cc76f3d9c21ae049b0105370609258",
+      "returned_metadata_rows": 232
+    }
+  ],
+  "report_version": "SIGMA-V19AM-NSC-SIA-ANCHOR-COVERAGE-1.0.0",
+  "split_rows": {
+    "development": 670,
+    "validation": 362
+  },
+  "status": "completed_metadata_coverage_audit"
+}
