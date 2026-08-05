@@ -1,0 +1,95 @@
+{
+  "protocol_version": "SIGMA-V19CE-WALLABY-COUNTERPART-MIXTURE-PROPAGATION-1.0.0",
+  "status": "source-only uncertainty propagation frozen after V19CB demonstrated that no foreground treatment resolves the association, before reading a WALLABY kinematic row, rotation speed, velocity field, gravity residual, halo result, sample split or holdout score",
+  "purpose": "Replace an unjustified hard H I/optical counterpart choice with a deterministic discrete mixture over every source-only candidate, carrying all four foreground-treatment scenarios and all four beam-kernel scenarios separately into future baryonic inference.",
+  "parents": {
+    "v19cb_config": {
+      "path": "configs/sigma_v19cb_foreground_treatment_information_audit.json",
+      "sha256": "09d60e264cb9cd5a516c64b6937abd0109dd4d2f3abaf8aa2fe5ea313d27274d"
+    },
+    "v19cb_report": {
+      "path": "results/sigma_v19cb_foreground_treatment_information_audit/report.json",
+      "sha256": "48dfee4592fcd7e0f1b26b05c999ecfd65cefc8c29c2b7362b15ca48dddb2ab2"
+    },
+    "candidate_spatial_scores": {
+      "path": "data/derived/sigma_v19bz_hi_optical_spatial_information_audit/candidate_spatial_scores.csv",
+      "sha256": "bc6dfb4cd0a30d72269a44aae20c356c982bf8bd14f0c5e1b6f686fd61adfe20"
+    },
+    "release_information": {
+      "path": "data/derived/sigma_v19bz_hi_optical_spatial_information_audit/release_information.csv",
+      "sha256": "deb0185973d8d99948062bc8f4efecc5e0b2c5f33289c824a5bb70a4ce000cad"
+    },
+    "foreground_diagnostics": {
+      "path": "data/derived/sigma_v19ca_skymapper_gaia_foreground_diagnostics/candidate_foreground_diagnostics.csv",
+      "sha256": "a7b5b38bd7e1bf5fac88dda097be3fd8757d8428774d59682096595886f43d15"
+    }
+  },
+  "mixture_definition": {
+    "treatments_source": "parents.v19cb_config.treatment_branches",
+    "kernel_labels_source": "parents.v19cb_config.kernel_labels",
+    "unnormalized_candidate_weight": "q_i,b,k = max(0, spatial_lr_i,k) times the already declared V19CB foreground weight for candidate i in treatment branch b",
+    "normalized_candidate_weight": "p_i,b,k = q_i,b,k / sum_j q_j,b,k when the sum is positive",
+    "undefined_scenario_rule": "If every q is zero, retain every candidate, leave every normalized weight blank and flag that release/treatment/kernel scenario as undefined; do not invent a uniform fallback.",
+    "future_discrete_marginal_likelihood": "L_release,b,k(theta) = sum_i p_i,b,k times L(data_release given candidate_i, theta); gravity or kinematic likelihoods may never update p_i,b,k or choose b or k.",
+    "new_tunable_hyperparameters": 0,
+    "hard_counterpart_selected": false,
+    "treatment_selected": false,
+    "kernel_selected": false
+  },
+  "scenario_inventory": {
+    "expected_release_rows": 711,
+    "expected_candidate_rows": 18550,
+    "expected_treatments": 4,
+    "expected_kernels": 4,
+    "expected_release_scenarios": 11376,
+    "candidate_rows_retained_even_when_weight_is_zero": true,
+    "duplicate_team_releases_retained_separately": true
+  },
+  "future_use_contract": {
+    "source_mixture_frozen_before_target_access": true,
+    "all_sixteen_scenarios_reported_separately": true,
+    "primary_result_must_marginalize_counterpart_identity": true,
+    "foreground_treatment_and_kernel_spread_reported_as_source_systematic": true,
+    "candidate_identity_may_not_be_selected_by_gravity_fit": true,
+    "undefined_scenario_may_not_be_repaired_after_target_access": true,
+    "independent_optical_pixels_or_deblending_may_replace_the_mixture_only_under_a_new_source_only_protocol": true
+  },
+  "access_boundary": {
+    "source_spatial_scores_read": true,
+    "source_foreground_diagnostics_read": true,
+    "wallaby_kinematic_table_row_read": false,
+    "rotation_curve_or_velocity_field_read": false,
+    "gravity_formula_or_residual_read": false,
+    "halo_or_lensing_result_read": false,
+    "sample_split_or_holdout_label_selected": false,
+    "candidate_or_release_removed": false,
+    "counterpart_treatment_or_kernel_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "solar_system_optimization_performed": false
+  },
+  "required_gates": {
+    "all_parent_hashes_exact_and_v19cb_unresolved": true,
+    "all_711_releases_18550_candidates_and_16_scenarios_carried": true,
+    "every_defined_scenario_normalizes_to_one": true,
+    "every_undefined_scenario_is_explicit_and_has_blank_weights": true,
+    "no_candidate_release_treatment_or_kernel_selected_or_removed": true,
+    "kinematic_gravity_halo_lensing_holdout_and_solar_targets_sealed": true,
+    "future_likelihood_marginalizes_identity_without_target_feedback": true,
+    "no_new_tunable_parameter_or_gravity_formula": true
+  },
+  "outputs": {
+    "candidate_mixture_weights": "data/derived/sigma_v19ce_wallaby_counterpart_mixture_propagation/candidate_mixture_weights.csv",
+    "release_scenario_summary": "data/derived/sigma_v19ce_wallaby_counterpart_mixture_propagation/release_scenario_summary.csv",
+    "report": "results/sigma_v19ce_wallaby_counterpart_mixture_propagation/report.json"
+  },
+  "claim_boundary": [
+    "V19CE does not identify an optical counterpart and does not turn source-side ranking scores into a validated posterior probability.",
+    "The normalized weights are deterministic uncertainty scenarios for later marginalization, not evidence that their highest-weight object is the galaxy.",
+    "Hard-zero foreground branches remain counterfactual diagnostics and are never promoted to data masks.",
+    "No velocity, rotation curve, lensing result, halo map, gravity residual, action, constant, holdout label or Solar-System result enters the mixture."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ce_wallaby_counterpart_mixture_propagation.py",
+    "tests": "tests/test_sigma_v19ce_wallaby_counterpart_mixture_propagation.py"
+  }
+}

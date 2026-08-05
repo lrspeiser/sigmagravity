@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 200,
+    "sigma_protocols": 201,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7466,6 +7466,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "21dca31645754a3ed1ed456018859ad5a26c57dde109df53260828d93856723b"
+    },
+    {
+      "config": "configs/sigma_v19ce_wallaby_counterpart_mixture_propagation.json",
+      "protocol_version": "SIGMA-V19CE-WALLABY-COUNTERPART-MIXTURE-PROPAGATION-1.0.0",
+      "status": "source-only uncertainty propagation frozen after V19CB demonstrated that no foreground treatment resolves the association, before reading a WALLABY kinematic row, rotation speed, velocity field, gravity residual, halo result, sample split or holdout score",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "b499a51125fae4739170d68c1239833c2d8f9aa8173335e92f6ecc74eedcf9a1"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

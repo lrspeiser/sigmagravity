@@ -1,0 +1,84 @@
+{
+  "access_boundary_audit": {
+    "candidate_or_release_removed": false,
+    "counterpart_treatment_or_kernel_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "gravity_formula_or_residual_read": false,
+    "halo_or_lensing_result_read": false,
+    "rotation_curve_or_velocity_field_read": false,
+    "sample_split_or_holdout_label_selected": false,
+    "solar_system_optimization_performed": false,
+    "source_foreground_diagnostics_read": true,
+    "source_spatial_scores_read": true,
+    "wallaby_kinematic_table_row_read": false
+  },
+  "candidate_rows": 18550,
+  "claim_boundary": [
+    "V19CE does not identify an optical counterpart and does not turn source-side ranking scores into a validated posterior probability.",
+    "The normalized weights are deterministic uncertainty scenarios for later marginalization, not evidence that their highest-weight object is the galaxy.",
+    "Hard-zero foreground branches remain counterfactual diagnostics and are never promoted to data masks.",
+    "No velocity, rotation curve, lensing result, halo map, gravity residual, action, constant, holdout label or Solar-System result enters the mixture."
+  ],
+  "config": "configs/sigma_v19ce_wallaby_counterpart_mixture_propagation.json",
+  "config_sha256": "b499a51125fae4739170d68c1239833c2d8f9aa8173335e92f6ecc74eedcf9a1",
+  "decision": "counterpart_uncertainty_ready_for_target_blind_marginalization",
+  "defined_scenarios": 11374,
+  "gate_results": {
+    "all_711_releases_18550_candidates_and_16_scenarios_carried": true,
+    "all_parent_hashes_exact_and_v19cb_unresolved": true,
+    "every_defined_scenario_normalizes_to_one": true,
+    "every_undefined_scenario_is_explicit_and_has_blank_weights": true,
+    "future_likelihood_marginalizes_identity_without_target_feedback": true,
+    "kinematic_gravity_halo_lensing_holdout_and_solar_targets_sealed": true,
+    "no_candidate_release_treatment_or_kernel_selected_or_removed": true,
+    "no_new_tunable_parameter_or_gravity_formula": true
+  },
+  "kernels": 4,
+  "maximum_defined_normalization_error": 1.1102230246251565e-16,
+  "outputs": {
+    "candidate_mixture_weights": {
+      "bytes": 6775990,
+      "path": "data/derived/sigma_v19ce_wallaby_counterpart_mixture_propagation/candidate_mixture_weights.csv",
+      "rows": 18550,
+      "sha256": "3ccce16b1a871edb8d4f633ec4fbe51c91f30cd651d2bf7b2fa1fe479278b671"
+    },
+    "release_scenario_summary": {
+      "bytes": 1899523,
+      "path": "data/derived/sigma_v19ce_wallaby_counterpart_mixture_propagation/release_scenario_summary.csv",
+      "rows": 11376,
+      "sha256": "39c42aa4b2a0e56c867af007131b81a411bd3218d7e293c06b7a8dc7cab9dfca"
+    }
+  },
+  "protocol_version": "SIGMA-V19CE-WALLABY-COUNTERPART-MIXTURE-PROPAGATION-1.0.0",
+  "release_rows": 711,
+  "release_scenarios": 11376,
+  "status": "wallaby_counterpart_mixture_payload_completed",
+  "treatment_summary": {
+    "mask_any_astrometry_diagnostic": {
+      "defined_scenarios": 2843,
+      "median_effective_candidate_count": 3.861858968743853,
+      "scenarios": 2844,
+      "undefined_scenarios": 1
+    },
+    "mask_quality_diagnostic": {
+      "defined_scenarios": 2843,
+      "median_effective_candidate_count": 4.037379307536318,
+      "scenarios": 2844,
+      "undefined_scenarios": 1
+    },
+    "retain_all": {
+      "defined_scenarios": 2844,
+      "median_effective_candidate_count": 7.6300990721894815,
+      "scenarios": 2844,
+      "undefined_scenarios": 0
+    },
+    "soft_quality_0p1": {
+      "defined_scenarios": 2844,
+      "median_effective_candidate_count": 4.9024433895832455,
+      "scenarios": 2844,
+      "undefined_scenarios": 0
+    }
+  },
+  "treatments": 4,
+  "undefined_scenarios": 2
+}
