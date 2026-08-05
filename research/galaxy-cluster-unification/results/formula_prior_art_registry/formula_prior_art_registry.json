@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 214,
+    "sigma_protocols": 215,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7624,6 +7624,18 @@
       "sha256": "2106cd3923a2eef7ad232978cc1e1aa3b257707345a737733de5944c4f434185"
     },
     {
+      "config": "configs/sigma_v19cr_v19x2_ciao_launch_remediation.json",
+      "protocol_version": "SIGMA-V19CR-V19X2-CIAO-LAUNCH-REMEDIATION-1.0.0",
+      "status": "frozen after V19CQ corrected the recovery root and V19X2 then failed before spectrum combination because direct environment-Python launch did not expose combine_spectra on PATH",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "0c0704cb1f8295e0019e0c4ba893428518015ec6070d903254f295fa980c638e"
+    },
+    {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",
       "protocol_version": "SIGMA-V19D-MEMBER-CATALOG-EXTRACTION-1.0.0",
       "status": "frozen before parsing the acquired TeX member tables and while all replacement-cluster lensing target payloads remain sealed",
@@ -7946,7 +7958,7 @@
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "44a107133c20404d6c54d57fbee1fd6b80185dc32f46a94dd40b0269d650a42d"
+      "sha256": "60543254acdfa979b2e0ab86e346ea291e1a8b1346a13f48669a44974a42c559"
     },
     {
       "config": "configs/sigma_v19x3b_v19w5_regional_successor_preflight.json",
