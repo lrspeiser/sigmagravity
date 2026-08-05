@@ -1,0 +1,158 @@
+{
+  "action_placement_classes": [
+    {
+      "advance_condition": "A time-even local scalar and directional tensor pass, and a covariant constraint analysis shows no hidden free mode, acausal elliptic prescription, or matter-conservation failure.",
+      "description": "An auxiliary response is fixed by action-derived constraints and baryonic boundary data, with no independent halo-shaped initial condition.",
+      "id": "P1_CONSTRAINED_COMPOSITE_RESPONSE",
+      "mandatory_derivations": [
+        "complete diffeomorphism-invariant action",
+        "constraint algebra and degree-of-freedom count",
+        "bounded Hamiltonian",
+        "weak-field physical metric for matter and light"
+      ]
+    },
+    {
+      "advance_condition": "A robust time-odd current or independently clocked lag is identified, or a constrained placement cannot represent the measured state; no closed Proca, aether, massive-spin-two, material-memory, or linear Yukawa carrier may be replayed.",
+      "description": "A healthy response field carries energy and propagates a baryon-forced source state with one universal correlation length and universally fixed no-incoming initial data.",
+      "id": "P2_CAUSAL_DYNAMIC_RESPONSE",
+      "mandatory_derivations": [
+        "kinetic and gradient signs",
+        "characteristics and causal initial-value problem",
+        "field stress-energy and backreaction",
+        "luminal tensor sector and weak-field physical metric"
+      ]
+    },
+    {
+      "advance_condition": "A local covariant source tensor passes and the proposed vertex is demonstrably degenerate or second order, conserves the full source, and is not a renamed higher-derivative ghost or density-only interpolation.",
+      "description": "The new response begins in a nonlinear, source-state-sensitive metric interaction while the GR quadratic propagator is unchanged and no independent response-field initial data exist.",
+      "id": "P3_DEGENERATE_PURE_METRIC_NONLINEAR_VERTEX",
+      "mandatory_derivations": [
+        "Euler-Lagrange equations",
+        "Bianchi-compatible total conservation",
+        "absence of extra ghost degrees of freedom",
+        "two weak-field metric potentials from one metric"
+      ]
+    }
+  ],
+  "claim_boundary": [
+    "Passing V19BJ means only that the post-gas source-state decision is frozen and falsifiable; no source invariant or action has passed a scientific test.",
+    "The two spent merger clusters can reject unidentifiable source features but cannot establish a population law.",
+    "Projected thermodynamic and member-velocity maps do not fully determine a four-dimensional stress-energy tensor.",
+    "The action-placement classes are bookkeeping alternatives, not completed theories and not permission to revive closed carriers.",
+    "Solar and PPN work remains a later hard veto; it is not used to tune this galaxy/cluster source preselection."
+  ],
+  "config": "configs/sigma_v19bj_source_invariant_action_preselection.json",
+  "config_sha256": "34386255a39b73ce19a692aa9833dc6b6b59f394e379bfd307410cb9639ba93f",
+  "dark_matter_phenomenology_implications": [
+    {
+      "near_term_prediction": "The selected source tensor must predict convergence and shear orientation from the same quasistatic Weyl potential used for strong-lensing image roots; a wrong orientation is a source-geometry failure, not an amplitude problem.",
+      "observable": "weak_lensing_and_merger_offsets"
+    },
+    {
+      "near_term_prediction": "Component overlap and relative-current terms imply a calculable host-distance and orbital-state dependence, whereas a strictly local density term does not.",
+      "observable": "dwarf_satellites_and_environment"
+    },
+    {
+      "near_term_prediction": "A smooth long-wave response may alter precession but cannot reproduce compact dark-subhalo signatures unless the derived nonlinear field equations form stable compact structure.",
+      "observable": "streams_and_compact_substructure"
+    },
+    {
+      "near_term_prediction": "Only a dynamical placement with derived field energy and radiation can replace a dark-matter wake; a static constitutive response makes no such claim.",
+      "observable": "dynamical_friction"
+    },
+    {
+      "near_term_prediction": "No prediction is claimed until the selected covariant action is evolved on a cosmological background and through linear perturbations.",
+      "observable": "growth_and_CMB"
+    }
+  ],
+  "decision": "passed_target_blind_source_preselection_freeze",
+  "execution_prerequisites": {
+    "all_494_frozen_regional_temperature_fits_pass": true,
+    "collisionless_and_gas_maps_share_verified_astrometry": true,
+    "common_grid_gas_density_temperature_pressure_entropy_posterior_exists": true,
+    "current_state": "pending; this protocol freezes the later calculation but does not execute it",
+    "joint_projection_resolution_and_measurement_posterior_exists": true,
+    "terminal_v19w4_unified_response_pass": true,
+    "terminal_v19x2_commissioning_pass": true
+  },
+  "gate_results": {
+    "all_parent_hashes_exact": true,
+    "at_least_four_eligible_source_features": true,
+    "broad_contract_retains_galaxy_cluster_first_priority": true,
+    "collisionless_parent_is_source_only": true,
+    "covariant_baryon_frame_declared": true,
+    "density_only_is_an_ineligible_control": true,
+    "eligible_directional_features_exist": true,
+    "execution_remains_pending": true,
+    "lensing_and_halo_cannot_select_the_source": true,
+    "nothing_physical_selected_or_changed": true,
+    "parent_action_gate_passed_without_action_selection": true,
+    "projection_resolution_and_density_novelty_are_quantified": true,
+    "same_definition_must_pass_both_clusters": true,
+    "scalar_activation_and_direction_both_required": true,
+    "three_materially_distinct_placements_and_stop_rule": true
+  },
+  "identifiability_gates": {
+    "amplitude_equality_between_clusters_required": false,
+    "lensing_or_halo_agreement_used_for_selection": false,
+    "maximum_95_percent_axial_orientation_width_deg": 30.0,
+    "maximum_resolution_change_in_normalized_amplitude_fraction": 0.1,
+    "maximum_resolution_change_in_orientation_deg": 10.0,
+    "minimum_clusters_passing_each_advanced_feature": 2,
+    "minimum_cross_validated_variance_not_predicted_by_total_density_fraction": 0.2,
+    "minimum_eligible_directional_vector_or_tensor_features": 1,
+    "minimum_eligible_scalar_activation_features": 1,
+    "minimum_leave_one_region_out_pass_fraction": 0.9,
+    "minimum_projection_draw_pass_fraction": 0.9,
+    "minimum_within_cluster_detection_sigma": 3.0,
+    "rule": "An action-placement derivation is authorized only if at least one eligible scalar activation and one eligible direction pass every gate in both spent clusters. The same feature may satisfy both roles. If none does, stop and obtain a directly measured gas velocity or independent merger sample; do not relax thresholds, combine failed features after seeing them, or invent an action.",
+    "same_dimensionless_definition_and_thresholds_for_both_clusters": true
+  },
+  "implementation": {
+    "runner": "scripts/check_sigma_v19bj_source_invariant_action_preselection.py",
+    "runner_sha256": "2670b2e19d2f9082060bd3c51c235f9f512b46df21da3b84bd0bea4e0c3a710f"
+  },
+  "input_hashes": {
+    "broad_phenomenology_contract": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd",
+    "collisionless_source_uncertainty": "7de820f46b284c78a86aec616bca5d4309b4aec2b1f4daa25e00e4ada59edef8",
+    "frozen_v19x_commissioning_protocol": "e915f5d5be9d8dea5a2ecb1b8e00aeffd9fb10ed5b9aafccc258b040e8ad9afb",
+    "long_wave_action_admission_config": "9d0ab3e6d0d52a4e55871385607b2b006e78a4c99b4f64e8e772a0e88ad12c63",
+    "long_wave_action_admission_report": "7dc1ef7d3e0320d4d59040e8d0c10534f91d146a211740fb59b33b70c514f0bd"
+  },
+  "next_decision": {
+    "advance": "Require at least one scalar activation and one direction to pass every frozen gate in both clusters, then derive the least-field-content healthy compatible action placement.",
+    "stop": "If no registered feature passes, obtain direct gas velocity or another independent merger sample; do not tune an action. If three materially different action derivations fail the same gate, reconsider the mechanism.",
+    "when_authorized": "After V19W4, V19X2, all 494 regional fits, and the common-grid gas posterior pass, score only the registered source features on Bullet and Abell 2146 without opening lensing."
+  },
+  "protocol_version": "SIGMA-V19BJ-SOURCE-INVARIANT-ACTION-PRESELECTION-1.0.0",
+  "source_library_summary": {
+    "directional_after_gas": [
+      "I2_RELATIVE_CURRENT",
+      "I3_ANISOTROPIC_STRESS",
+      "I4_THERMODYNAMIC_GRADIENT_STRESS",
+      "I5_BAROCLINICITY"
+    ],
+    "eligible_after_gas": [
+      "I1_COMPONENT_OVERLAP",
+      "I2_RELATIVE_CURRENT",
+      "I3_ANISOTROPIC_STRESS",
+      "I4_THERMODYNAMIC_GRADIENT_STRESS",
+      "I5_BAROCLINICITY"
+    ],
+    "ineligible_controls_or_future_only": [
+      "D0_DENSITY_ONLY_CONTROL",
+      "I6_CAUSAL_RELAXATION_RATE"
+    ],
+    "total_registered": 7
+  },
+  "theory_state": {
+    "action_placement_selected": false,
+    "covariant_action_written": false,
+    "field_content_selected": false,
+    "gravity_formula_changed": false,
+    "lensing_or_halo_target_opened": false,
+    "scientific_source_test_executed": false,
+    "source_invariant_selected": false,
+    "universal_constants_selected": false
+  }
+}

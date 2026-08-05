@@ -1,0 +1,228 @@
+{
+  "protocol_version": "SIGMA-V19BJ-SOURCE-INVARIANT-ACTION-PRESELECTION-1.0.0",
+  "status": "frozen before terminal V19W/V19W4 evidence, before V19X2 commissioning or the 494-region thermodynamic map, before opening any lensing or halo target, and before selecting an action, operator, field content, wavelength, coupling, or universal constant",
+  "purpose": "Pre-register which covariant baryonic source-state features may be tested after the gas maps exist, the target-blind identifiability gates they must pass, and how those results may constrain an eventual action placement without fitting gravity to Bullet or Abell 2146 lensing.",
+  "parents": {
+    "long_wave_action_admission_config": {
+      "path": "configs/sigma_v19be_long_wave_action_admission.json",
+      "sha256": "9d0ab3e6d0d52a4e55871385607b2b006e78a4c99b4f64e8e772a0e88ad12c63"
+    },
+    "long_wave_action_admission_report": {
+      "path": "results/sigma_v19be_long_wave_action_admission/report.json",
+      "sha256": "7dc1ef7d3e0320d4d59040e8d0c10534f91d146a211740fb59b33b70c514f0bd"
+    },
+    "collisionless_source_uncertainty": {
+      "path": "results/sigma_v19bd_two_cluster_directional_source_uncertainty/report.json",
+      "sha256": "7de820f46b284c78a86aec616bca5d4309b4aec2b1f4daa25e00e4ada59edef8"
+    },
+    "broad_phenomenology_contract": {
+      "path": "results/sigma_v19bg_broad_phenomenology_contract/report.json",
+      "sha256": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd"
+    },
+    "frozen_v19x_commissioning_protocol": {
+      "path": "configs/sigma_v19x_spectral_combination_commissioning.json",
+      "sha256": "e915f5d5be9d8dea5a2ecb1b8e00aeffd9fb10ed5b9aafccc258b040e8ad9afb"
+    }
+  },
+  "execution_prerequisites": {
+    "terminal_v19w4_unified_response_pass": true,
+    "terminal_v19x2_commissioning_pass": true,
+    "all_494_frozen_regional_temperature_fits_pass": true,
+    "common_grid_gas_density_temperature_pressure_entropy_posterior_exists": true,
+    "collisionless_and_gas_maps_share_verified_astrometry": true,
+    "joint_projection_resolution_and_measurement_posterior_exists": true,
+    "current_state": "pending; this protocol freezes the later calculation but does not execute it"
+  },
+  "covariant_source_frame": {
+    "definition": "Define the timelike baryon frame by u^mu = J_b^mu/sqrt(-J_b^nu J^b_nu), where J_b^mu is the total baryonic rest-mass current, and h_mu_nu = g_mu_nu + u_mu u_nu. Decompose each measured baryonic species in that declared frame; never choose a frame from a lensing residual.",
+    "species": [
+      "collisional_plasma",
+      "collisionless_stars_and_member_galaxies"
+    ],
+    "observational_boundary": "The available data are projected noisy proxies for a four-dimensional state. Every candidate must be marginalized over the frozen projection and astrometric posterior; a two-dimensional feature is not silently promoted to an exact local tensor.",
+    "object_labels_used_in_equations": false
+  },
+  "invariant_library": [
+    {
+      "id": "D0_DENSITY_ONLY_CONTROL",
+      "tensor_character": "scalar",
+      "definition": "epsilon_b = T_b^{mu nu} u_mu u_nu",
+      "observable_proxy": "registered total stellar plus gas surface-density posterior",
+      "time_parity": "even",
+      "eligible_as_new_source_state": false,
+      "role": "negative control; density-only AQUAL, QUMOND, refracted-gravity, and linear filtered-source routes are prior art or closed controls"
+    },
+    {
+      "id": "I1_COMPONENT_OVERLAP",
+      "tensor_character": "scalar",
+      "definition": "Z_f = 4 f_g (1-f_g), with f_g = epsilon_g/(epsilon_g+epsilon_star)",
+      "observable_proxy": "co-registered gas and stellar baryon posterior maps",
+      "time_parity": "even",
+      "eligible_as_new_source_state": true,
+      "role": "tests whether nonlinear overlap of physically distinct baryonic components contains information not reducible to total density"
+    },
+    {
+      "id": "I2_RELATIVE_CURRENT",
+      "tensor_character": "spatial_vector_plus_scalar_norm",
+      "definition": "r^mu = h^mu_nu (u_g^nu-u_star^nu), with Z_r = h_mu_nu r^mu r^nu/(c_s^2+sigma_star^2)",
+      "observable_proxy": "gas shock/flow-direction posterior combined with member-galaxy signed-current and velocity-dispersion posterior",
+      "time_parity": "vector odd; norm even",
+      "eligible_as_new_source_state": true,
+      "role": "supplies a measured direction and a dimensionless drift activation without a cluster-specific orientation"
+    },
+    {
+      "id": "I3_ANISOTROPIC_STRESS",
+      "tensor_character": "symmetric_trace_free_spatial_tensor_plus_scalar_norm",
+      "definition": "Pi_mu_nu = h_mu^alpha h_nu^beta T^b_alpha_beta - p h_mu_nu, with Z_pi = Pi_mu_nu Pi^mu_nu/(epsilon_b+p)^2",
+      "observable_proxy": "collisionless velocity-second moments plus resolved gas thermodynamic stress posterior",
+      "time_parity": "even",
+      "eligible_as_new_source_state": true,
+      "role": "tests whether a local directional stress eigenframe transfers when density and merger orientation do not"
+    },
+    {
+      "id": "I4_THERMODYNAMIC_GRADIENT_STRESS",
+      "tensor_character": "symmetric_trace_free_spatial_tensor",
+      "definition": "Q_mu_nu = D_<mu ln(epsilon_g) D_nu> ln(K_g), where D_mu = h_mu^nu nabla_nu and K_g is the gas entropy proxy",
+      "observable_proxy": "common-grid gas-density and entropy posterior with derivatives evaluated only above frozen significance and resolution thresholds",
+      "time_parity": "even",
+      "eligible_as_new_source_state": true,
+      "role": "encodes shock/assembly geometry through a covariant tensor rather than a hand-assigned merger axis"
+    },
+    {
+      "id": "I5_BAROCLINICITY",
+      "tensor_character": "spatial_pseudovector_plus_scalar_norm",
+      "definition": "b^mu = epsilon^{mu nu rho sigma} u_nu D_rho epsilon_g D_sigma p_g; use its normalized squared magnitude and projected orientation posterior",
+      "observable_proxy": "gas-density, pressure, and temperature posterior with projection ambiguity retained",
+      "time_parity": "even under velocity reversal; orientation is parity odd",
+      "eligible_as_new_source_state": true,
+      "role": "tests non-equilibrium misalignment of pressure and density gradients; it may not advance if projection leaves its three-dimensional direction unidentified"
+    },
+    {
+      "id": "I6_CAUSAL_RELAXATION_RATE",
+      "tensor_character": "scalar_or_spatial_vector",
+      "definition": "Z_tau from u^alpha nabla_alpha p, u^alpha nabla_alpha Pi_mu_nu, or an equivalent action-derived material derivative",
+      "observable_proxy": "requires time-resolved or independently clocked flow information beyond a single projected thermodynamic snapshot",
+      "time_parity": "odd before squaring",
+      "eligible_as_new_source_state": false,
+      "role": "registered future discriminator; cannot be selected from V19X temperature maps alone"
+    }
+  ],
+  "identifiability_gates": {
+    "same_dimensionless_definition_and_thresholds_for_both_clusters": true,
+    "minimum_within_cluster_detection_sigma": 3.0,
+    "maximum_95_percent_axial_orientation_width_deg": 30.0,
+    "maximum_resolution_change_in_orientation_deg": 10.0,
+    "maximum_resolution_change_in_normalized_amplitude_fraction": 0.10,
+    "minimum_projection_draw_pass_fraction": 0.90,
+    "minimum_leave_one_region_out_pass_fraction": 0.90,
+    "minimum_cross_validated_variance_not_predicted_by_total_density_fraction": 0.20,
+    "minimum_clusters_passing_each_advanced_feature": 2,
+    "minimum_eligible_scalar_activation_features": 1,
+    "minimum_eligible_directional_vector_or_tensor_features": 1,
+    "amplitude_equality_between_clusters_required": false,
+    "lensing_or_halo_agreement_used_for_selection": false,
+    "rule": "An action-placement derivation is authorized only if at least one eligible scalar activation and one eligible direction pass every gate in both spent clusters. The same feature may satisfy both roles. If none does, stop and obtain a directly measured gas velocity or independent merger sample; do not relax thresholds, combine failed features after seeing them, or invent an action."
+  },
+  "action_placement_classes": [
+    {
+      "id": "P1_CONSTRAINED_COMPOSITE_RESPONSE",
+      "description": "An auxiliary response is fixed by action-derived constraints and baryonic boundary data, with no independent halo-shaped initial condition.",
+      "advance_condition": "A time-even local scalar and directional tensor pass, and a covariant constraint analysis shows no hidden free mode, acausal elliptic prescription, or matter-conservation failure.",
+      "mandatory_derivations": [
+        "complete diffeomorphism-invariant action",
+        "constraint algebra and degree-of-freedom count",
+        "bounded Hamiltonian",
+        "weak-field physical metric for matter and light"
+      ]
+    },
+    {
+      "id": "P2_CAUSAL_DYNAMIC_RESPONSE",
+      "description": "A healthy response field carries energy and propagates a baryon-forced source state with one universal correlation length and universally fixed no-incoming initial data.",
+      "advance_condition": "A robust time-odd current or independently clocked lag is identified, or a constrained placement cannot represent the measured state; no closed Proca, aether, massive-spin-two, material-memory, or linear Yukawa carrier may be replayed.",
+      "mandatory_derivations": [
+        "kinetic and gradient signs",
+        "characteristics and causal initial-value problem",
+        "field stress-energy and backreaction",
+        "luminal tensor sector and weak-field physical metric"
+      ]
+    },
+    {
+      "id": "P3_DEGENERATE_PURE_METRIC_NONLINEAR_VERTEX",
+      "description": "The new response begins in a nonlinear, source-state-sensitive metric interaction while the GR quadratic propagator is unchanged and no independent response-field initial data exist.",
+      "advance_condition": "A local covariant source tensor passes and the proposed vertex is demonstrably degenerate or second order, conserves the full source, and is not a renamed higher-derivative ghost or density-only interpolation.",
+      "mandatory_derivations": [
+        "Euler-Lagrange equations",
+        "Bianchi-compatible total conservation",
+        "absence of extra ghost degrees of freedom",
+        "two weak-field metric potentials from one metric"
+      ]
+    }
+  ],
+  "selection_order_and_stop_rule": {
+    "data_choose_source_not_lensing_response": true,
+    "mathematical_health_chooses_between_compatible_placements": true,
+    "first_preference": "the least-field-content placement that represents every passing source tensor and passes conservation, degree-of-freedom, stability, causality, and weak-field derivations",
+    "maximum_materially_distinct_action_derivations_before_mechanism_reconsideration": 3,
+    "forbidden_repair": "Do not add an object label, per-object scale, fitted orientation, lensing-only term, density switch, or another universal constant after a shared gate fails."
+  },
+  "dark_matter_phenomenology_implications": [
+    {
+      "observable": "weak_lensing_and_merger_offsets",
+      "near_term_prediction": "The selected source tensor must predict convergence and shear orientation from the same quasistatic Weyl potential used for strong-lensing image roots; a wrong orientation is a source-geometry failure, not an amplitude problem."
+    },
+    {
+      "observable": "dwarf_satellites_and_environment",
+      "near_term_prediction": "Component overlap and relative-current terms imply a calculable host-distance and orbital-state dependence, whereas a strictly local density term does not."
+    },
+    {
+      "observable": "streams_and_compact_substructure",
+      "near_term_prediction": "A smooth long-wave response may alter precession but cannot reproduce compact dark-subhalo signatures unless the derived nonlinear field equations form stable compact structure."
+    },
+    {
+      "observable": "dynamical_friction",
+      "near_term_prediction": "Only a dynamical placement with derived field energy and radiation can replace a dark-matter wake; a static constitutive response makes no such claim."
+    },
+    {
+      "observable": "growth_and_CMB",
+      "near_term_prediction": "No prediction is claimed until the selected covariant action is evolved on a cosmological background and through linear perturbations."
+    }
+  ],
+  "authorization": {
+    "verify_parent_hashes": true,
+    "freeze_invariant_library_and_thresholds": true,
+    "read_live_or_terminal_v19w_products": false,
+    "read_v19x_or_regional_temperature_results": false,
+    "compute_source_invariant_scores_now": false,
+    "read_lensing_or_halo_payload": false,
+    "select_source_invariant_now": false,
+    "select_action_placement_now": false,
+    "select_field_content_operator_or_constant_now": false,
+    "change_gravity_formula": false,
+    "open_holdout": false
+  },
+  "required_protocol_gates": {
+    "all_parent_hashes_exact": true,
+    "covariant_frame_declared": true,
+    "density_only_is_an_ineligible_control": true,
+    "multiple_materially_distinct_source_features_registered": true,
+    "projection_and_resolution_uncertainty_required": true,
+    "scalar_activation_and_direction_both_required": true,
+    "lensing_and_halo_targets_excluded_from_source_selection": true,
+    "three_action_reconsideration_stop_rule_retained": true,
+    "no_action_source_constant_holdout_or_formula_selected": true
+  },
+  "outputs": {
+    "report": "results/sigma_v19bj_source_invariant_action_preselection/report.json"
+  },
+  "claim_boundary": [
+    "Passing V19BJ means only that the post-gas source-state decision is frozen and falsifiable; no source invariant or action has passed a scientific test.",
+    "The two spent merger clusters can reject unidentifiable source features but cannot establish a population law.",
+    "Projected thermodynamic and member-velocity maps do not fully determine a four-dimensional stress-energy tensor.",
+    "The action-placement classes are bookkeeping alternatives, not completed theories and not permission to revive closed carriers.",
+    "Solar and PPN work remains a later hard veto; it is not used to tune this galaxy/cluster source preselection."
+  ],
+  "implementation": {
+    "runner": "scripts/check_sigma_v19bj_source_invariant_action_preselection.py",
+    "runner_sha256": "2670b2e19d2f9082060bd3c51c235f9f512b46df21da3b84bd0bea4e0c3a710f"
+  }
+}

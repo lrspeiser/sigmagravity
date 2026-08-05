@@ -1,5 +1,25 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19BJ source-invariant/action preselection
+
+The post-gas decision is now frozen before any V19X temperature, lensing or
+halo result is available.  Total density is an ineligible control; five
+covariant source-state candidates are registered: component overlap, relative
+gas--collisionless current, anisotropic stress, thermodynamic-gradient stress
+and baroclinicity.  They must use one definition in Bullet and Abell 2146 and
+pass fixed detection, projection, resolution, leave-one-region-out and
+density-nonredundancy gates.
+
+At least one scalar activation and one measured vector or tensor direction
+must pass in both clusters before an action may be derived.  If none passes,
+the response is not rescued with lensing or a tuned combination; direct gas
+velocity information or another independent merger is required.  Three
+action-placement classes are registered for later mathematical derivation,
+but none is selected.  This advances the physical-postulate/source-definition
+work while preserving V19W/V19W4, V19X2 and the 494-region gas map as mandatory
+prerequisites.  See
+[`SIGMA_V19BJ_SOURCE_INVARIANT_ACTION_PRESELECTION.md`](SIGMA_V19BJ_SOURCE_INVARIANT_ACTION_PRESELECTION.md).
+
 ## 2026-08-05 Sigma V19BI blind-galaxy admission protocol
 
 The future galaxy test is now protected from reusing the 131 SPARC systems,
