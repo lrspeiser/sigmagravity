@@ -22,24 +22,14 @@ def test_v19cr_freezes_environment_only_remediation() -> None:
     assert not payload["authorization"]["run_v19bs_or_derive_action"]
 
 
-def test_v19cr_completed_result_passes_every_boundary() -> None:
+def test_v19cr_records_the_historical_parent_mismatch() -> None:
     payload = load(REPORT)
-    assert payload["status"] == "v19x2_ciao_launch_remediation_completed"
-    assert all(payload["preflight"].values())
-    assert all(payload["environment_probe"]["checks"].values())
-    assert payload["preexecution_scratch_audit"]["only_permitted_files"]
-    assert not payload["preexecution_scratch_audit"]["combined_or_fit_products"]
-    assert all(payload["gate_results"].values())
+    assert payload["status"] == "v19x2_ciao_launch_remediation_failed_closed"
+    assert "prior_environment_contract_exact': False" in payload["exception"]
     assert not any(payload["authorization_boundary"].values())
 
 
-def test_v19cr_reaches_registered_scientific_or_source_disposition() -> None:
+def test_v19cr_failure_precedes_environment_probe_and_x2_rerun() -> None:
     payload = load(REPORT)
-    assert payload["decision"] in {
-        "v19x2_valid_scientific_gate_failure_no_full_source_chain",
-        "run_frozen_v19bs_disposition_next",
-    }
-    assert payload["v19x2_report"]["status"] in {
-        "unified_spectral_combination_commissioning_gate_failed",
-        "unified_spectral_combination_commissioning_passed_and_full_regional_fits_authorized",
-    }
+    assert "scratch_precedes_combination_and_fit': True" in payload["exception"]
+    assert "v19x2_environment_failure_exact': True" in payload["exception"]

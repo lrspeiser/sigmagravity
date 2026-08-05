@@ -1,0 +1,18 @@
+{
+  "authorization_boundary": {
+    "action_derived": false,
+    "solar_optimized": false,
+    "target_or_gravity_opened": false,
+    "v19bs_run": false
+  },
+  "claim_boundary": [
+    "V19CR changes only how the already-frozen runner is launched; it does not change its code, config, cells, spectra, grouping, fit rules or gates.",
+    "The launch contract was established independently during V19CD and is probed again before execution.",
+    "The only partial artifact from V19CQ is a deterministic source-path list created before combine_spectra was found; no combined spectrum or fit exists.",
+    "A valid spectral quality-gate failure is final for these rules. No gravity theory, lensing target, action, holdout or Solar-System optimization is opened."
+  ],
+  "exception": "RuntimeError: V19CR preflight failed: {'v19cq_failure_exact': True, 'v19x2_environment_failure_exact': True, 'corrected_x2_config_exact': True, 'prior_environment_contract_exact': False, 'v19w5_pass_exact': True, 'unchanged_runners_exact': True, 'scratch_precedes_combination_and_fit': True, 'authorization_environment_only': True}; scratch={'scratch': '/home/henry/sigma-v19x2-spectral-combination/v100', 'files': ['ABELL2146_integrated/source_spectra.lis'], 'permitted_files': ['ABELL2146_integrated/source_spectra.lis'], 'only_permitted_files': True, 'combined_or_fit_products': []}",
+  "generated_utc": "2026-08-05T20:39:11.750922+00:00",
+  "protocol_version": "SIGMA-V19CR-V19X2-CIAO-LAUNCH-REMEDIATION-1.0.0",
+  "status": "v19x2_ciao_launch_remediation_failed_closed"
+}
