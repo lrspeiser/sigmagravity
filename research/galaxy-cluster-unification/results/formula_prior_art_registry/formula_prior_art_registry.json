@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 125,
+    "sigma_protocols": 126,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6875,6 +6875,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "48e942f231886b7f8fcdfa266003315afdba05a4177e56730efeb5dbdb604cc7"
+    },
+    {
+      "config": "configs/sigma_v19r_response_commissioning.json",
+      "protocol_version": "SIGMA-V19R-RESPONSE-COMMISSIONING-1.0.0",
+      "status": "frozen after V19Q authorized all 5082 response tasks and selected one deterministic maximum-count commissioning cell, but before constructing a source PHA, background PHA, ARF or RMF, reading a response output, fitting a temperature, opening lensing data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "244454f6487512d03b78ef790e1dec6d3b77cb5396f674b23ffe2228680ae10e"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

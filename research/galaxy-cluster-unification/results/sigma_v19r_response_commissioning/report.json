@@ -1,0 +1,269 @@
+{
+  "status": "commissioning_response_passed_and_full_response_production_authorized",
+  "protocol_version": "SIGMA-V19R-RESPONSE-COMMISSIONING-1.0.0",
+  "generated_utc": "2026-08-05T06:20:14.495502+00:00",
+  "config_sha256": "244454f6487512d03b78ef790e1dec6d3b77cb5396f674b23ffe2228680ae10e",
+  "runner_sha256": "016a1480021179cce76d66324a739f881c15df269cec78fae8e67e7f9c7dc728",
+  "selected_manifest_row": {
+    "cluster": "BULLET",
+    "bin_id": "390",
+    "obsid": "5356",
+    "ccd_id": "2",
+    "source_band_events": "625",
+    "background_band_events": "232",
+    "blanksky_scale": "0.065704048",
+    "scaled_background_events": "15.243339136",
+    "expected_output_files": "4",
+    "flux_obs_support_fov_sha256": "06e94049e7264f65b3781dc4fc3be13a5e1c627207f9668814ac89233f582830",
+    "flux_obs_exposure_sha256": "c0e71b8c3b417eb613dc28d6de7a61692c11f0ccd65b80842b27c366778eb168"
+  },
+  "preflight": {
+    "positive_exposure_task_events": 625,
+    "source_band_events": 625,
+    "background_band_events": 232
+  },
+  "background_geometry": {
+    "source": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_blanksky_nosrc_reproj_evt.fits",
+    "source_sha256": "a5b46ec99096740dcf002d53ea88e262ea90acbc862a3ce7ef5a11defb889a9b",
+    "science_geometry_source": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits",
+    "science_geometry_source_sha256": "99c1b3705861e05e8d1321cd1ed773df7a28025fdc7b8f0ddd2e9359505d3ddb",
+    "corrected": "/home/henry/sigma-v19r-response-commissioning/v100/commissioning/background_geometry/acisf5356_blanksky_geometry.fits",
+    "corrected_sha256": "7b69b39261b19567d92b5bb4007ae1fda87ddb4bdd928853a1d79cec33bf8942",
+    "source_rows": 1933668,
+    "corrected_rows": 1933668,
+    "copied_keywords": {
+      "OBS_ID": "5356",
+      "DETNAM": "ACIS-01236",
+      "SIM_X": "-0.78090834371673",
+      "SIM_Y": "0.0",
+      "SIM_Z": "-224.59624294245",
+      "RA_PNT": "104.6554348455",
+      "DEC_PNT": "-55.966112810276",
+      "ROLL_PNT": "143.26096972081",
+      "RA_NOM": "104.6554348455",
+      "DEC_NOM": "-55.966112810276",
+      "ROLL_NOM": "143.26096972081",
+      "DY_AVG": "0",
+      "DZ_AVG": "0",
+      "DTH_AVG": "0"
+    },
+    "edit_list": "/home/henry/sigma-v19r-response-commissioning/v100/commissioning/background_geometry/acisf5356_blanksky_geometry.geometry.lis",
+    "edit_list_sha256": "af10dbd74b6fc800fbcfc72050e676c66dfba6cd2f71cc406d048432b0bb1c38",
+    "command": [
+      "dmhedit",
+      "infile=/home/henry/sigma-v19r-response-commissioning/v100/commissioning/background_geometry/acisf5356_blanksky_geometry.fits",
+      "filelist=/home/henry/sigma-v19r-response-commissioning/v100/commissioning/background_geometry/acisf5356_blanksky_geometry.geometry.lis",
+      "operation=",
+      "key=",
+      "value=",
+      "verbose=0",
+      "mode=h"
+    ],
+    "log": "/home/henry/sigma-v19r-response-commissioning/v100/commissioning/background_geometry/acisf5356_blanksky_geometry.geometry.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reused": false
+  },
+  "response_reference": {
+    "selection": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits[ccd_id=2][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5356.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_390.reg)][energy=500:7000][cols x,y]",
+    "events": 625,
+    "mean_sky_x": 4090.885766796875,
+    "mean_sky_y": 4286.318134375,
+    "ra_deg": 104.6568048430025,
+    "dec_deg": -55.94017099275123,
+    "dmcoords_chip_id": 2,
+    "command": [
+      "dmcoords",
+      "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits",
+      "option=sky",
+      "x=4090.88576679687503",
+      "y=4286.31813437500023",
+      "celfmt=deg",
+      "verbose=0",
+      "mode=h"
+    ],
+    "science_aspect_chip_id": 2,
+    "background_aspect_chip_id": 2
+  },
+  "extraction": {
+    "obsid": 5356,
+    "ccd_id": 2,
+    "source_band_events": 625,
+    "background_band_events": 232,
+    "response_reference": {
+      "selection": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits[ccd_id=2][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5356.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_390.reg)][energy=500:7000][cols x,y]",
+      "events": 625,
+      "mean_sky_x": 4090.885766796875,
+      "mean_sky_y": 4286.318134375,
+      "ra_deg": 104.6568048430025,
+      "dec_deg": -55.94017099275123,
+      "dmcoords_chip_id": 2,
+      "command": [
+        "dmcoords",
+        "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits",
+        "option=sky",
+        "x=4090.88576679687503",
+        "y=4286.31813437500023",
+        "celfmt=deg",
+        "verbose=0",
+        "mode=h"
+      ],
+      "science_aspect_chip_id": 2,
+      "background_aspect_chip_id": 2
+    },
+    "source_spectrum": "/home/henry/sigma-v19r-response-commissioning/v100/commissioning/products/BULLET_bin390_obs5356_ccd2.pi",
+    "source_spectrum_sha256": "edfb729ce0e328c743596fb3b784146fdc653fe61a695dfca5bd5f76206e49c6",
+    "background_spectrum": "/home/henry/sigma-v19r-response-commissioning/v100/commissioning/products/BULLET_bin390_obs5356_ccd2_bkg.pi",
+    "background_spectrum_sha256": "49d6cba8132da1b0a03a62b5d2349dd76591472ba2da3d8c06d3a1a5c5997019",
+    "arf_sha256": "887c506c0cf8c9397dd5a805efb0faefc421de517c8532796f03647ba6e8e367",
+    "rmf_sha256": "b10a656b61df5dfa44b14bcd9f1904ed5f0ce3f075eb4280b690a75e1397db2d",
+    "blanksky_scaling": {
+      "BKGSCALn": 0.065704048,
+      "source_exposure": 96212.411017543,
+      "background_exposure": 1500000.0,
+      "source_BACKSCAL": 1.6652047634125e-05,
+      "background_BACKSCAL": 1.6652047634125e-05,
+      "source_AREASCAL": 1.0,
+      "initial_background_AREASCAL": 15.219762410986,
+      "background_AREASCAL": 0.97622002445007,
+      "expected_background_AREASCAL": 0.9762200244500714,
+      "areascal_relative_error": 1.4432899320127035e-15,
+      "effective_background_scale": 0.0657040480000001,
+      "effective_scale_relative_error_from_BKGSCALn": 1.5543122344752192e-15,
+      "correction_command": [
+        "dmhedit",
+        "infile=/home/henry/sigma-v19r-response-commissioning/v100/commissioning/products/BULLET_bin390_obs5356_ccd2_bkg.pi",
+        "filelist=",
+        "operation=add",
+        "key=AREASCAL",
+        "value=0.9762200244500714",
+        "comment=Sigma v17C: enforce effective scale equal to BKGSCALn",
+        "verbose=0",
+        "mode=h"
+      ],
+      "correction_log": "/home/henry/sigma-v19r-response-commissioning/v100/commissioning/products/BULLET_bin390_obs5356_ccd2_bkg.areascal.log",
+      "correction_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "translated_fov": {
+      "role": "exact_flux_obs_fov",
+      "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5356.fov",
+      "sha256": "06e94049e7264f65b3781dc4fc3be13a5e1c627207f9668814ac89233f582830"
+    },
+    "step": {
+      "command": [
+        "specextract",
+        "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits[ccd_id=2][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5356.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_390.reg)]",
+        "outroot=/home/henry/sigma-v19r-response-commissioning/v100/commissioning/products/BULLET_bin390_obs5356_ccd2",
+        "bkgfile=/home/henry/sigma-v19r-response-commissioning/v100/commissioning/background_geometry/acisf5356_blanksky_geometry.fits[ccd_id=2][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_390.reg)]",
+        "asp=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5356/corrected_asol1.lis",
+        "mskfile=/home/henry/sigma-v19f-chandra/repro/BULLET/5356/acisf05356_000N004_msk1.fits",
+        "badpixfile=/home/henry/sigma-v19f-chandra/repro/BULLET/5356/acisf05356_repro_bpix1.fits",
+        "dafile=CALDB",
+        "bkgresp=no",
+        "weight=yes",
+        "weight_rmf=yes",
+        "resp_pos=CENTROID",
+        "refcoord=104.65680484300250,-55.94017099275123",
+        "correctpsf=no",
+        "combine=no",
+        "grouptype=NONE",
+        "binspec=NONE",
+        "bkg_grouptype=NONE",
+        "bkg_binspec=NONE",
+        "energy=0.3:11.0:0.01",
+        "energy_wmap=500:7000",
+        "binwmap=det=8",
+        "binarfwmap=1",
+        "parallel=no",
+        "nproc=1",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "reused": false,
+      "log": "/home/henry/sigma-v19r-response-commissioning/v100/commissioning/logs/specextract.log"
+    }
+  },
+  "source_pha_channel_audit": {
+    "event_rows": 656,
+    "pha_total_counts": 656,
+    "nonzero_event_channels": 274,
+    "nonzero_pha_channels": 274,
+    "mismatched_channel_count": 0,
+    "maximum_absolute_channel_delta": 0,
+    "exact": true
+  },
+  "background_pha_channel_audit": {
+    "event_rows": 470,
+    "pha_total_counts": 470,
+    "nonzero_event_channels": 345,
+    "nonzero_pha_channels": 345,
+    "mismatched_channel_count": 0,
+    "maximum_absolute_channel_delta": 0,
+    "exact": true
+  },
+  "response_audit": {
+    "arf_rows": 1070,
+    "arf_finite": true,
+    "arf_positive_bins": 1070,
+    "arf_maximum_cm2": 546.6547241210938,
+    "rmf_matrix_elements": 538171,
+    "rmf_finite": true,
+    "rmf_nonzero_elements": 538171,
+    "rmf_maximum": 0.14911480247974396
+  },
+  "source_pha_links": {
+    "BACKFILE": "BULLET_bin390_obs5356_ccd2_bkg.pi",
+    "ANCRFILE": "BULLET_bin390_obs5356_ccd2.arf",
+    "RESPFILE": "BULLET_bin390_obs5356_ccd2.rmf"
+  },
+  "frozen_snapshot": {
+    "source_pha": {
+      "relative_path": "results/sigma_v19r_response_commissioning/frozen_products/BULLET_bin390_obs5356_ccd2.pi",
+      "bytes": 2206080,
+      "sha256": "edfb729ce0e328c743596fb3b784146fdc653fe61a695dfca5bd5f76206e49c6",
+      "reused": false
+    },
+    "background_pha": {
+      "relative_path": "results/sigma_v19r_response_commissioning/frozen_products/BULLET_bin390_obs5356_ccd2_bkg.pi",
+      "bytes": 2160000,
+      "sha256": "49d6cba8132da1b0a03a62b5d2349dd76591472ba2da3d8c06d3a1a5c5997019",
+      "reused": false
+    },
+    "arf": {
+      "relative_path": "results/sigma_v19r_response_commissioning/frozen_products/BULLET_bin390_obs5356_ccd2.arf",
+      "bytes": 40320,
+      "sha256": "887c506c0cf8c9397dd5a805efb0faefc421de517c8532796f03647ba6e8e367",
+      "reused": false
+    },
+    "rmf": {
+      "relative_path": "results/sigma_v19r_response_commissioning/frozen_products/BULLET_bin390_obs5356_ccd2.rmf",
+      "bytes": 2234880,
+      "sha256": "b10a656b61df5dfa44b14bcd9f1904ed5f0ce3f075eb4280b690a75e1397db2d",
+      "reused": false
+    },
+    "specextract_log": {
+      "relative_path": "results/sigma_v19r_response_commissioning/frozen_products/specextract.log",
+      "bytes": 892,
+      "sha256": "0d9e9b1bbb334198729c02e59cd96fba44a711926d3233552b96dd792deda5d8",
+      "reused": false
+    }
+  },
+  "gates": {
+    "selected_row_is_unique_deterministic_manifest_maximum": true,
+    "all_frozen_input_hashes_exact": true,
+    "source_preflight_count_equals_625": true,
+    "background_preflight_count_equals_232": true,
+    "positive_exposure_and_extraction_source_counts_equal": true,
+    "response_reference_maps_to_ccd_2_in_science_and_background": true,
+    "source_pha_background_pha_arf_and_rmf_exist_and_are_nonempty": true,
+    "source_and_background_pha_channel_histograms_match_events": true,
+    "arf_has_finite_positive_spectral_response": true,
+    "rmf_has_finite_nonzero_matrix": true,
+    "pha_response_and_background_links_are_present": true,
+    "effective_blanksky_scale_matches_frozen_scale_within_1e_6_relative": true
+  },
+  "full_response_production_authorized": true,
+  "temperature_density_mach_or_speed_fitted": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}
