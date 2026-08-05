@@ -140,6 +140,14 @@ The result controls the next action:
 5. If v17F fails or lands on its upper endpoint, do not extend the grid or add
    another length.
 
+The collisionless fallback has now received a public-data readiness audit.
+Ruel (2014) and Bayliss (2016) are almost completely duplicate AS295 releases:
+38 spectra cross-match one-to-one and their deduplicated union contains only 30
+members under the declared velocity window, 20 short of the frozen 50-member
+minimum. Stage B is therefore not presently authorized. This is a data
+shortfall, not a physics rejection; see
+`SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md`.
+
 ## Covariant action still required
 
 The static functional is useful because it states exactly what must generate

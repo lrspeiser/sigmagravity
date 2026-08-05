@@ -1876,3 +1876,12 @@ and the full file contains 639 redshifts. A derived 129-row table records only
 measured coordinates, F160W magnitude, redshift, and the standard
 cluster-rest-frame line-of-sight velocity about the sample median. It commissions data
 ingestion only; no spatial kernel, mass weighting, or gravity score is selected.
+
+The AS295 collisionless fallback has now been audited against both cited public
+spectroscopic releases. Ruel (2014) contains 39 spectra and reports 30 members;
+Bayliss (2016) contains 38 spectra and reports 29. All 38 Bayliss spectra match
+Ruel within the frozen 1-arcsec radius, so the union contains 39 spectra and 30
+fixed-window members rather than an additive 77 spectra or 59 members. The
+frozen 50-member stage-B gate therefore remains closed by a 20-member shortfall;
+the threshold is not lowered and PLCKG287 is not analyzed alone. See
+[`SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md`](SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md).

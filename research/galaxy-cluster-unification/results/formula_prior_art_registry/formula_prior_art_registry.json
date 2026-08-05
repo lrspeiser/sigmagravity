@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 101,
+    "sigma_protocols": 102,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 121,
     "eligibility": {
@@ -6457,6 +6457,18 @@
         "EMERGENT-GRAVITY"
       ],
       "sha256": "d86265531f97ab71cea5f35131b0c6a02a3c5884ec98a0e3d0f0c177c1cf6a6b"
+    },
+    {
+      "config": "configs/sigma_v18a_collisionless_stress_readiness.json",
+      "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.0",
+      "status": "evidence audit fixed after locating the public AS295 catalogs and reading their aggregate sample sizes; no collisionless-stress feature, lensing target, or gravity score is opened",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "a5d96c26c758079c2a6c37c81c5cc4f2ac506cdc8b02e804bd686dd39e87feec"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

@@ -1,0 +1,360 @@
+{
+  "catalogs": {
+    "bayliss_2016": {
+      "fixed_velocity_window_member_count": 29,
+      "published_member_count": 29,
+      "published_spectra_count": 38,
+      "spectra_rows": 38
+    },
+    "ruel_2014": {
+      "fixed_velocity_window_member_count": 30,
+      "published_member_count": 30,
+      "spectra_rows": 39
+    }
+  },
+  "claim_boundary": [
+    "The fixed velocity window is a transparent readiness count, not a replacement for the papers' membership algorithms.",
+    "The same galaxies appearing in two releases do not provide independent phase-space information.",
+    "A source-readiness pass would not be evidence for a modified-gravity formula."
+  ],
+  "decision": "AS295 remains below the frozen matched collisionless-stress gate; do not double-count catalogs, lower the member threshold, or run PLCKG287 alone",
+  "deduplication": {
+    "combined_unique_fixed_window_members": 30,
+    "combined_unique_spectra": 39,
+    "matched_spectra": 38,
+    "matches": [
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024536.91-530248.1",
+        "bayliss_index": 27,
+        "ruel_galaxy": "J024536.91-530248.1",
+        "ruel_index": 0,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024540.75-530018.4",
+        "bayliss_index": 20,
+        "ruel_galaxy": "J024540.74-530018.4",
+        "ruel_index": 1,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024520.61-530121.2",
+        "bayliss_index": 21,
+        "ruel_galaxy": "J024520.61-530121.2",
+        "ruel_index": 2,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024515.79-530108.6",
+        "bayliss_index": 22,
+        "ruel_galaxy": "J024515.79-530108.5",
+        "ruel_index": 3,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024521.05-530056.8",
+        "bayliss_index": 23,
+        "ruel_galaxy": "J024521.04-530056.7",
+        "ruel_index": 4,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024518.99-530129.9",
+        "bayliss_index": 24,
+        "ruel_galaxy": "J024518.99-530129.8",
+        "ruel_index": 5,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024540.12-530238.4",
+        "bayliss_index": 25,
+        "ruel_galaxy": "J024540.11-530238.4",
+        "ruel_index": 6,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024535.66-530202.8",
+        "bayliss_index": 28,
+        "ruel_galaxy": "J024535.65-530202.7",
+        "ruel_index": 8,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024533.20-530324.1",
+        "bayliss_index": 34,
+        "ruel_galaxy": "J024533.20-530324.1",
+        "ruel_index": 9,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024527.27-530218.9",
+        "bayliss_index": 29,
+        "ruel_galaxy": "J024527.26-530218.8",
+        "ruel_index": 10,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024538.79-530154.5",
+        "bayliss_index": 30,
+        "ruel_galaxy": "J024538.79-530154.5",
+        "ruel_index": 11,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024519.24-530258.4",
+        "bayliss_index": 31,
+        "ruel_galaxy": "J024519.23-530258.4",
+        "ruel_index": 12,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024545.30-530309.4",
+        "bayliss_index": 32,
+        "ruel_galaxy": "J024545.29-530309.4",
+        "ruel_index": 13,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024532.52-530337.1",
+        "bayliss_index": 33,
+        "ruel_galaxy": "J024532.51-530337.0",
+        "ruel_index": 14,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024547.24-530414.3",
+        "bayliss_index": 35,
+        "ruel_galaxy": "J024547.23-530414.2",
+        "ruel_index": 15,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024543.35-530402.0",
+        "bayliss_index": 36,
+        "ruel_galaxy": "J024543.34-530401.9",
+        "ruel_index": 16,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024530.60-530451.2",
+        "bayliss_index": 37,
+        "ruel_galaxy": "J024530.60-530451.2",
+        "ruel_index": 18,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024543.17-530420.4",
+        "bayliss_index": 18,
+        "ruel_galaxy": "J024543.16-530420.3",
+        "ruel_index": 19,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024528.75-530146.1",
+        "bayliss_index": 6,
+        "ruel_galaxy": "J024528.74-530146.1",
+        "ruel_index": 20,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024540.08-530324.5",
+        "bayliss_index": 16,
+        "ruel_galaxy": "J024540.07-530324.5",
+        "ruel_index": 21,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024543.06-530348.0",
+        "bayliss_index": 17,
+        "ruel_galaxy": "J024543.06-530347.9",
+        "ruel_index": 22,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024515.80-525959.5",
+        "bayliss_index": 0,
+        "ruel_galaxy": "J024515.79-525959.4",
+        "ruel_index": 23,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024529.16-525947.7",
+        "bayliss_index": 1,
+        "ruel_galaxy": "J024529.15-525947.7",
+        "ruel_index": 24,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024535.38-530038.9",
+        "bayliss_index": 2,
+        "ruel_galaxy": "J024535.37-530038.8",
+        "ruel_index": 25,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024534.32-530215.7",
+        "bayliss_index": 5,
+        "ruel_galaxy": "J024534.32-530215.7",
+        "ruel_index": 28,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024531.95-530158.8",
+        "bayliss_index": 7,
+        "ruel_galaxy": "J024531.95-530158.7",
+        "ruel_index": 29,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024527.96-530115.2",
+        "bayliss_index": 3,
+        "ruel_galaxy": "J024527.95-530115.1",
+        "ruel_index": 30,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024530.76-530241.6",
+        "bayliss_index": 9,
+        "ruel_galaxy": "J024530.75-530241.6",
+        "ruel_index": 31,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024536.08-530251.7",
+        "bayliss_index": 10,
+        "ruel_galaxy": "J024536.08-530251.7",
+        "ruel_index": 32,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024519.70-530303.1",
+        "bayliss_index": 11,
+        "ruel_galaxy": "J024519.70-530303.1",
+        "ruel_index": 33,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024535.72-530312.2",
+        "bayliss_index": 12,
+        "ruel_galaxy": "J024535.72-530312.2",
+        "ruel_index": 34,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024542.66-530410.3",
+        "bayliss_index": 13,
+        "ruel_galaxy": "J024542.66-530410.2",
+        "ruel_index": 35,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024537.09-530338.9",
+        "bayliss_index": 14,
+        "ruel_galaxy": "J024537.08-530338.8",
+        "ruel_index": 36,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024529.72-530225.8",
+        "bayliss_index": 8,
+        "ruel_galaxy": "J024529.71-530225.7",
+        "ruel_index": 37,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024537.77-530356.5",
+        "bayliss_index": 15,
+        "ruel_galaxy": "J024537.77-530356.5",
+        "ruel_index": 38,
+        "separation_arcsec": 0.0
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024524.82-530145.4",
+        "bayliss_index": 26,
+        "ruel_galaxy": "J024524.82-530145.3",
+        "ruel_index": 7,
+        "separation_arcsec": 0.003073585126505738
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024541.90-525956.8",
+        "bayliss_index": 19,
+        "ruel_galaxy": "J024541.89-525956.8",
+        "ruel_index": 17,
+        "separation_arcsec": 0.003073585126505738
+      },
+      {
+        "absolute_redshift_difference": 0.0,
+        "bayliss_galaxy": "J024529.58-530131.8",
+        "bayliss_index": 4,
+        "ruel_galaxy": "J024529.57-530131.7",
+        "ruel_index": 27,
+        "separation_arcsec": 0.003073585126505738
+      }
+    ],
+    "member_projected_aperture_kpc": 1800.0,
+    "radius_arcsec": 1.0,
+    "unmatched_bayliss_spectra": 0,
+    "unmatched_ruel_spectra": 1
+  },
+  "formula_or_kernel_selection_authorized": false,
+  "frozen_member_requirement": 50,
+  "generated_utc": "2026-08-05T00:07:52.922314+00:00",
+  "input_hashes": {
+    "bayliss_2016_galaxies": "852fe1f5868e13ca85fa3d3a744568c6c0c2ae1686ee2f632e75ad73a96e65fa",
+    "bayliss_2016_summary": "4caca45cbd2c6225a7aacac2de97a941c2f1f73af461a151fed849cbbb5b21d1",
+    "config": "a5d96c26c758079c2a6c37c81c5cc4f2ac506cdc8b02e804bd686dd39e87feec",
+    "parent_gate": "c2705e1078711ba50c10dc9e5d1f2ff67d45aeccb8eb0787b7ae016bfc0a2417",
+    "ruel_2014_galaxies": "18099ed701b205f6fff941a7b8d208c96a6bd8ac95c3e2b80cc0bc34dabde6a1",
+    "ruel_2014_summary": "26ec1dd4bd646fa3540daf3b138ca75354b626b16b3ba24bfad47d301361ee0d"
+  },
+  "lensing_target_opened": false,
+  "member_shortfall": 20,
+  "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.0",
+  "stage_b_prerequisites": {
+    "declared_redshift_quality_selection": true,
+    "minimum_secure_members_inside_1_8_Mpc": false,
+    "photometry_tied_stellar_mass_weights": false,
+    "secure_member_positions": true,
+    "secure_member_spectroscopic_redshifts": true,
+    "universal_spatial_kernel_and_membership_rule": false
+  },
+  "stage_b_source_construction_authorized": false,
+  "status": "completed Sigma v18A AS295 collisionless-stress readiness audit"
+}

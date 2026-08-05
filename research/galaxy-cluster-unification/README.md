@@ -2106,3 +2106,27 @@ control confirm the corrected failure. The next frozen question uses measured
 thermal and collisionless baryonic stress rather than another static density
 multiplier. See
 [`docs/SIGMA_V16_BOUNDARY_FALSIFICATION_AND_V17_DYNAMICAL_GATE.md`](docs/SIGMA_V16_BOUNDARY_FALSIFICATION_AND_V17_DYNAMICAL_GATE.md).
+
+## Sigma v17-v18 pressure reset and source-state selection
+
+Three physically distinct pressure completions failed the same Solar/cluster
+gate: unscreened pressure propagation, a conserved kinetic-flux screen, and a
+symmetry-restoring pressure symmetron. The direct pressure-only reciprocal
+metric mechanism is therefore retired rather than receiving another screen.
+See [`docs/SIGMA_V17Q_PRESSURE_SYMMETRON_NO_GO.md`](docs/SIGMA_V17Q_PRESSURE_SYMMETRON_NO_GO.md).
+
+V18 now starts from baryon-sourced gravitational flux,
+`div(D)=4 pi G rho_b`, and treats an apparent halo as the output
+`rho_Sigma,eff=-(4 pi G)^-1 div(g+D)`. A local constitutive function of
+`|D|` alone is Legendre-dual AQUAL, so any distinct advance must be selected by
+independent spatial-state evidence and later derived from one healthy covariant
+metric action. The frozen Chandra temperature/thermal-stress chain is running
+that selection; it cannot tune a gravity formula or open a holdout. See
+[`docs/SIGMA_V18_POST_PRESSURE_FLUX_SELECTION.md`](docs/SIGMA_V18_POST_PRESSURE_FLUX_SELECTION.md).
+
+The declared collisionless-stress fallback is not yet data-ready. Ruel (2014)
+and Bayliss (2016) contain almost exactly the same AS295 spectra: 38 objects
+cross-match one-to-one, leaving 39 unique spectra and 30 fixed-window members.
+That is 20 below the frozen 50-member minimum, so the code prohibits a
+PLCKG287-only selection or a lowered threshold. See
+[`docs/SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md`](docs/SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md).

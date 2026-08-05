@@ -1,0 +1,59 @@
+{
+  "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.0",
+  "status": "evidence audit fixed after locating the public AS295 catalogs and reading their aggregate sample sizes; no collisionless-stress feature, lensing target, or gravity score is opened",
+  "purpose": "Determine whether the public Ruel 2014 and Bayliss 2016 AS295 spectroscopy supplies an independent, deduplicated sample large enough to satisfy the already-frozen matched v17 stage-B collisionless-stress gate.",
+  "parent_gate": "configs/sigma_v17_dynamical_stress_data_gate.json",
+  "cluster_identity": {
+    "project_name": "AS295",
+    "catalog_name": "SPT-CL J0245-5302",
+    "redshift": 0.3001,
+    "center_ra_deg": 41.37358333333333,
+    "center_dec_deg": -53.037325,
+    "kpc_per_arcsec_Planck18": 4.59823408036604
+  },
+  "public_inputs": {
+    "ruel_2014_galaxies": {
+      "catalog": "J/ApJ/792/45/table3",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FApJ%2F792%2F45%2Ftable3&SPT-CL=J0245-5302&-out.max=unlimited",
+      "raw_path": "data/raw/sigma_v18a_collisionless_stress/AS295/ruel2014_table3.tsv"
+    },
+    "ruel_2014_summary": {
+      "catalog": "J/ApJ/792/45/table4",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FApJ%2F792%2F45%2Ftable4&SPT-CL=J0245-5302&-out.max=unlimited",
+      "raw_path": "data/raw/sigma_v18a_collisionless_stress/AS295/ruel2014_table4.tsv"
+    },
+    "bayliss_2016_galaxies": {
+      "catalog": "J/ApJS/227/3/table3",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FApJS%2F227%2F3%2Ftable3&SPT-CL=J0245-5302&-out.max=unlimited",
+      "raw_path": "data/raw/sigma_v18a_collisionless_stress/AS295/bayliss2016_table3.tsv"
+    },
+    "bayliss_2016_summary": {
+      "catalog": "J/ApJS/227/3/table2",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FApJS%2F227%2F3%2Ftable2&SPT-CL=J0245-5302&-out.max=unlimited",
+      "raw_path": "data/raw/sigma_v18a_collisionless_stress/AS295/bayliss2016_table2.tsv"
+    }
+  },
+  "audit_rules": {
+    "cluster_name_must_equal": "J0245-5302",
+    "catalog_crossmatch_radius_arcsec": 1.0,
+    "member_velocity_window_km_s": 4500.0,
+    "member_projected_aperture_kpc": 1800.0,
+    "speed_of_light_km_s": 299792.458,
+    "deduplication": "Maximum-cardinality one-to-one sky matching within the fixed radius, ordered by increasing angular separation. A matched object is one spectrum, never two members.",
+    "minimum_unique_secure_members": 50,
+    "minimum_is_inherited_unchanged": true,
+    "formula_or_kernel_selection_authorized": false,
+    "lensing_target_access_authorized": false
+  },
+  "known_before_this_file_was_written": [
+    "Ruel table 4 reports N=30 for AS295.",
+    "Bayliss table 2 reports 38 spectra and 29 members for AS295.",
+    "An exploratory coordinate comparison indicated that the two object tables overlap almost completely."
+  ],
+  "decision_rule": [
+    "Stage B remains prohibited unless the deduplicated AS295 sample has at least 50 secure spectroscopic members and every other frozen stage-B prerequisite is met for both spent clusters.",
+    "Do not add the Ruel and Bayliss member totals: duplicated sky positions represent the same galaxies.",
+    "Do not lower the 50-member threshold, select PLCKG287 alone, or use photometric redshifts as velocity measurements after a shortfall.",
+    "A readiness pass would authorize construction of a target-blind source proxy only; it would not validate a gravity formula or open a holdout."
+  ]
+}
