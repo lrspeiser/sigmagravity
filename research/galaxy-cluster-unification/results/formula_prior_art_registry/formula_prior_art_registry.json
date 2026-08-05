@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 161,
+    "sigma_protocols": 162,
     "project_formula_addenda": 16,
-    "sigma_formula_fragments": 140,
+    "sigma_formula_fragments": 145,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -7043,6 +7043,54 @@
         "NEWTON-POISSON"
       ],
       "sha256": "adeb7846207b1e930a8a306e208fa9a49c3a66c81aa3846fb50ba871e53a7909"
+    },
+    {
+      "config": "configs/sigma_v19bb_abell2146_luminosity_current_ensemble.json",
+      "protocol_version": "SIGMA-V19BB-ABELL2146-LUMINOSITY-CURRENT-ENSEMBLE-1.0.0",
+      "status": "frozen_before_fitting_the_catalog_level_astrometric_scale_or_generating_any_abell2146_luminosity_current_draw",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "catalog_level_astrometric_calibration.candidate_sigma_equation",
+          "formula": "sigma_i(sigma_extra)=sqrt(astrometric_sigma_i^2+0.1^2+sigma_extra^2) arcsec",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "catalog_level_astrometric_calibration.candidate_density_equation",
+          "formula": "f_mi(sigma_extra)=the V19AA uniform rounding-rectangle density convolved with the candidate Gaussian at the measured east/north offset",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "catalog_level_astrometric_calibration.member_evidence_equation",
+          "formula": "Z_m=(1-q)+q sum_i[f_mi/rho_bg]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "catalog_level_astrometric_calibration.candidate_posterior_equation",
+          "formula": "p_mi=q(f_mi/rho_bg)/Z_m",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "catalog_level_astrometric_calibration.null_posterior_equation",
+          "formula": "p_m0=(1-q)/Z_m",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 5,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "83636ce8b5232635c1152df493356c5121331ea0352f7a05cecb733379569848"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

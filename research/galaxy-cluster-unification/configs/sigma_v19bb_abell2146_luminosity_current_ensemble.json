@@ -1,0 +1,149 @@
+{
+  "protocol_version": "SIGMA-V19BB-ABELL2146-LUMINOSITY-CURRENT-ENSEMBLE-1.0.0",
+  "status": "frozen_before_fitting_the_catalog_level_astrometric_scale_or_generating_any_abell2146_luminosity_current_draw",
+  "purpose": "Test whether one source-only catalog-level astrometric uncertainty reconciles the Abell 2146 spectroscopic coordinates with the frozen HSC/NSC candidate excess, then propagate the resulting candidate/null posterior, HST F814W luminosity availability, and quoted redshift errors into a deterministic luminosity-current ensemble without choosing hard counterparts or reading lensing, halo, or gravity targets.",
+  "parents": {
+    "v19aa_config": {
+      "path": "configs/sigma_v19aa_member_counterpart_association.json",
+      "sha256": "bc07209be5ba4d5e66fbf1db9d113dbec4e53371607d829092da74e994ec9cf8"
+    },
+    "v19aa_report": {
+      "path": "results/sigma_v19aa_member_counterpart_association/report.json",
+      "sha256": "2b751c1e455171b6b37b844ea22b820a3faab65ddd898672b8802b8ca94cd860"
+    },
+    "unified_candidates": {
+      "path": "data/derived/sigma_v19aa_member_counterpart_association/unified_candidates.csv",
+      "sha256": "2059209cc9699f23857579bbb772f9e6427d76cb82437b8ec7f0f3449b4dacec"
+    },
+    "candidate_posteriors": {
+      "path": "data/derived/sigma_v19aa_member_counterpart_association/candidate_posteriors.csv",
+      "sha256": "14a9fa01df2fef961caa22eaf38846ffb8c92a655bfd277935838f2d44c3b69b"
+    },
+    "member_associations": {
+      "path": "data/derived/sigma_v19aa_member_counterpart_association/member_associations.csv",
+      "sha256": "107e4d82ee35774ee47b81e8e3452ada33577cfac050cce0f80c4ab35b8a6840"
+    },
+    "v19y_hsc_provenance": {
+      "path": "results/sigma_v19y_hsc_member_photometry/provenance.json",
+      "sha256": "a03ef4bb091a9df269b396b0410d2c4fccb7cc2e6bab445de067cc1c68908222"
+    },
+    "spectroscopic_members": {
+      "path": "data/derived/sigma_v19d_assembly_members/abell2146_members.csv",
+      "sha256": "cf7c61854f4aa0317a9dd3ea8e91618e90fa7823a6cb30634147f8af39243360"
+    }
+  },
+  "population": {
+    "cluster": "ABELL2146",
+    "expected_spectroscopic_members": 63,
+    "expected_candidate_hypotheses": 64,
+    "expected_unique_candidates": 64,
+    "expected_shared_candidates": 0,
+    "expected_member_candidate_count_distribution": {
+      "0": 4,
+      "1": 54,
+      "2": 5
+    },
+    "expected_candidates_with_hsc_match": 62,
+    "expected_candidates_with_finite_hsc_f814w": 60,
+    "candidate_inventory_role": "These aggregate facts were already exposed by V19Y/V19AA. They verify inventory only and do not select the astrometric width or a counterpart."
+  },
+  "catalog_level_astrometric_calibration": {
+    "question": "Does one additional publication-to-HST centroid scatter, shared by all 63 Abell 2146 members, predict the source-only candidate offsets better than the V19AA quantization-plus-0.1-arcsec control?",
+    "baseline_published_centroid_floor_arcsec": 0.1,
+    "coordinate_model": "the unchanged V19AA decimal-degree rounding rectangle convolved with candidate astrometric uncertainty and one additional isotropic Gaussian sigma_extra",
+    "candidate_sigma_equation": "sigma_i(sigma_extra)=sqrt(astrometric_sigma_i^2+0.1^2+sigma_extra^2) arcsec",
+    "candidate_density_equation": "f_mi(sigma_extra)=the V19AA uniform rounding-rectangle density convolved with the candidate Gaussian at the measured east/north offset",
+    "background_density_per_arcsec2": 0.02778895831763252,
+    "counterpart_prior_sensitivity": [0.8, 0.9, 0.95, 0.99],
+    "primary_counterpart_prior": 0.9,
+    "member_evidence_equation": "Z_m=(1-q)+q sum_i[f_mi/rho_bg]",
+    "candidate_posterior_equation": "p_mi=q(f_mi/rho_bg)/Z_m",
+    "null_posterior_equation": "p_m0=(1-q)/Z_m",
+    "sigma_extra_grid_arcsec": [0.0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.45, 0.65, 0.9, 1.2],
+    "primary_selection": "maximize the summed source-only log evidence at q=0.9; ties choose the smaller sigma_extra",
+    "cross_validation": {
+      "folds": 7,
+      "assignment": "sort members by numeric object_id and assign index modulo 7",
+      "within_fold_rule": "select sigma_extra on the other six folds and score the held-out fold against the sigma_extra=0 control",
+      "no_photometry_in_scale_selection": true
+    },
+    "interpretation": "sigma_extra is a catalog measurement nuisance shared by this published table, not a gravitational constant, physical smoothing scale, galaxy size, cluster parameter, or Sigma wavelength"
+  },
+  "luminosity_and_current": {
+    "photometry_source": "the exact HSC V3 summary A_F814W value attached to the sampled unified candidate's frozen hsc_match_id",
+    "relative_f814w_luminosity": "10^[-0.4*(A_F814W-20.0)]",
+    "reference_magnitude": 20.0,
+    "missing_rule": "A sampled null state or candidate without finite HSC F814W remains missing_photometry; do not infer a luminosity from the spectroscopic selection limit or another member.",
+    "cluster_systemic_cz": "median heliocentric cz over all 63 spectroscopic members, recomputed in every draw after perturbing every row by its quoted Gaussian cz uncertainty",
+    "rest_frame_los_velocity": "(cz_i-cz_median)/(1+cz_median/c)",
+    "los_current_proxy": "relative_f814w_luminosity times rest_frame_los_velocity",
+    "transverse_velocities": "unmeasured_not_imputed",
+    "claim": "candidate-marginalized relative F814W line-of-sight luminosity-current proxy, not stellar mass or a three-dimensional current"
+  },
+  "null_position_model": {
+    "coordinate_source": "the published Abell 2146 member coordinate",
+    "east_half_width_arcsec": "0.5*0.0001*3600*cos(dec_deg)",
+    "north_half_width_arcsec": "0.5*0.0001*3600",
+    "conditional_distribution": "uniform in east and north over the original V19AA decimal-degree rounding rectangle",
+    "interpretation": "The null state retains the spectroscopic galaxy and measured velocity but has no identified catalog luminosity."
+  },
+  "ensemble": {
+    "draws": 8192,
+    "random_generator": "numpy.random.Generator(PCG64)",
+    "seed": 190127,
+    "state_sampling": "draw each member independently from its exact candidate/null posterior because the frozen Abell candidate inventory contains no candidate shared between members",
+    "redshift_sampling": "independent Gaussian using each catalogued cz uncertainty",
+    "null_sampling": "sample a fresh coordinate from the frozen rounding rectangle",
+    "row_rule": "all 63 spectroscopic members appear in every draw; luminosity/current fields are blank only when the sampled state has missing photometry"
+  },
+  "gates": {
+    "all_parent_and_raw_hsc_hashes_exact": true,
+    "inventory_counts_exact": true,
+    "primary_sigma_extra_must_be_interior": true,
+    "minimum_cross_validation_folds_improving_over_zero": 5,
+    "maximum_primary_selected_grid_index_difference_across_prior_sensitivity": 3,
+    "posterior_normalization_tolerance": 1e-12,
+    "minimum_expected_members_with_finite_f814w_per_draw": 50.0,
+    "sampled_vs_exact_state_marginal_max_absolute_difference": 0.03,
+    "all_63_members_must_appear_in_every_draw": true,
+    "missing_photometry_states_must_remain_explicit": true,
+    "lensing_halo_and_gravity_payload_forbidden": true,
+    "failure_rule": "Fail closed without extending the sigma grid, changing q, selecting a width from coverage or photometry, forcing a candidate, assigning luminosity to a null state, changing the ensemble size or seed, or reading lensing, halo, or gravity targets."
+  },
+  "outputs": {
+    "calibration_scores": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/calibration_scores.csv",
+    "state_marginals": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/state_marginals.csv",
+    "member_summary": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/member_summary.csv",
+    "ensemble": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/position_current_ensemble.csv.gz",
+    "figure": "results/sigma_v19bb_abell2146_luminosity_current_ensemble/astrometric_calibration_and_coverage.png",
+    "report": "results/sigma_v19bb_abell2146_luminosity_current_ensemble/report.json"
+  },
+  "claim_boundary": [
+    "V19BB tests and propagates a catalog measurement uncertainty; it does not fit a gravitational length or an object-specific physics parameter.",
+    "The primary width is selected without HSC magnitude, lensing, halo, gravity residual, published subcluster label, BCG flag, or spectral type.",
+    "A finite F814W flux is a relative luminosity proxy, not stellar mass, total baryonic mass, or a fitted mass-to-light ratio.",
+    "Null and missing-F814W states remain explicit and contribute no invented luminosity.",
+    "Only line-of-sight velocity is measured; transverse currents remain unmeasured.",
+    "Passing would supply the Abell collisionless input needed for a matched two-cluster source test, not evidence for the long-wavelength gravity hypothesis."
+  ],
+  "authorization": {
+    "read_frozen_abell_member_association_hsc_and_spectroscopy": true,
+    "fit_one_catalog_level_measurement_scale_by_source_likelihood": true,
+    "construct_exact_candidate_null_marginals_and_ensemble": true,
+    "select_hard_counterparts": false,
+    "infer_missing_photometry_or_stellar_mass": false,
+    "impute_transverse_velocity": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "sigma_extra_score_computed_at_freeze": false,
+    "selected_sigma_extra_known_at_freeze": false,
+    "recalibrated_candidate_or_null_probability_computed_at_freeze": false,
+    "expected_finite_luminosity_count_computed_at_freeze": false,
+    "ensemble_drawn_at_freeze": false,
+    "lensing_or_halo_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  }
+}
