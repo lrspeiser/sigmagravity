@@ -343,6 +343,40 @@ cluster.  A long wavelength alone does not screen the ordinary GR near field;
 the low-pass source equation is the additional physical assumption that makes
 the new component locally smooth.
 
+#### Scale check in ordinary units
+
+This separation of scales is numerically large enough to be meaningful.  As a
+worked control, take one universal correlation length `L_Sigma = 6 kpc`, or a
+literal wavelength `lambda_Sigma = 2 pi L_Sigma = 37.7 kpc`.  At a galactic
+radius of `10 kpc`, the sourced low-pass response above has reached
+
+\[
+1-(1+r/L_\Sigma)e^{-r/L_\Sigma}=0.496,
+\]
+
+or about half of its eventual amplitude `alpha_Sigma`.  Across a deliberately
+large `100 AU` planetary baseline, however,
+
+\[
+{1\over2}\left({100\ {\rm AU}\over6\ {\rm kpc}}\right)^2
+\simeq 3.3\times10^{-15}.
+\]
+
+The literal-wave tidal scaling is similarly tiny:
+
+\[
+\left({100\ {\rm AU}\over37.7\ {\rm kpc}}\right)^2
+\simeq1.7\times10^{-16}.
+\]
+
+These numbers show that one universal galactic wavelength can be effectively
+constant inside a planetary system yet vary across a galaxy.  They are only a
+scale-separation check, not a Solar-System proof: the coefficient, tensor
+polarization, time dependence, PPN metric, and wave propagation speed must
+still be derived and tested.  In particular, a constant metric offset or
+uniform acceleration is not the observable; relative acceleration and tidal
+curvature are.
+
 This point-mass acceleration is **not novel**.  It is the standard Yukawa-like
 STVG/MOG form `1+alpha-alpha(1+mu r)exp(-mu r)`, with `mu=1/L_Sigma`, already
 represented by `STVG-MOG` in the prior-art registry.  Moffat's original STVG
