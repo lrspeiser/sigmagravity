@@ -4,7 +4,7 @@ Registry version: `FORMULA-PRIOR-ART-REGISTRY-1.1.0`. Published-literature cutof
 
 ## What this file guarantees
 
-This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **183 Sigma protocol files** and their **147 explicit formula/action fragments** (including **16** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
+This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **184 Sigma protocol files** and their **147 explicit formula/action fragments** (including **16** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
 
 It does **not** claim to contain every equation ever published in gravitation. It is a reproducible scientific prior-art screen of the families that overlap mechanisms we have actually explored. It is not a legal novelty or patent opinion.
 
@@ -370,6 +370,7 @@ This appendix closes a gap in the older scorecard: later action-health and sourc
 | `configs/sigma_v19w4_hardened_response_recovery.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19w5_ccd7_hardened_response_recovery.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19w_full_response_production.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19x3b_v19w5_regional_successor_preflight.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19x4_gas_state_math_preflight.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19x_spectral_combination_commissioning.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19y_hsc_member_photometry.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |

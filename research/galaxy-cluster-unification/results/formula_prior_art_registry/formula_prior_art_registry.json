@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 183,
+    "sigma_protocols": 184,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7599,6 +7599,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
+    },
+    {
+      "config": "configs/sigma_v19x3b_v19w5_regional_successor_preflight.json",
+      "protocol_version": "SIGMA-V19X3B-V19W5-REGIONAL-SUCCESSOR-PREFLIGHT-1.0.0",
+      "status": "frozen while V19W base production is active and before a V19W5 terminal report, V19X2 configuration or report, any regional temperature result, gas source state, lensing target, halo target, gravity change or holdout access",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "aba38ff5e7ece24f8aa1e51b0fa480f9f0a37c3c16f327907edb23903c704b99"
     },
     {
       "config": "configs/sigma_v19x4_gas_state_math_preflight.json",

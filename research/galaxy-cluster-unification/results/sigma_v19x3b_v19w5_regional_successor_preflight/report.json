@@ -1,0 +1,53 @@
+{
+  "protocol_version": "SIGMA-V19X3B-V19W5-REGIONAL-SUCCESSOR-PREFLIGHT-1.0.0",
+  "status": "v19x3b_v19w5_regional_successor_preflight_passed",
+  "config_sha256": "aba38ff5e7ece24f8aa1e51b0fa480f9f0a37c3c16f327907edb23903c704b99",
+  "hashes": {
+    "v19w5_config": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a",
+    "v19w5_runner": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72",
+    "v19x2_freezer": "6a939dc7af9c82bae8f3216c53b633dd3df4800e57271c7d9d957c4fb9d89147",
+    "v19x2_runner": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea",
+    "original_v19x3_freezer": "dbb87ec8e58e015b619536cca3f6e5b983c92f581f7095b09dda518a58932101",
+    "original_v19x3_runner": "3d321a5f658d1e40ce84bf9ad2c51c9627cfd7d6838d552bb2a1a078ba232017",
+    "v19x4_config": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f",
+    "v19bp_config": "43a966ea04300222a018c9667f2feb50c600509a522bd05fc3dcf9a197075b6a",
+    "runner": "5d270c641abc04365fc5df7fadebe7bfdc19dd5783b905be92a28f5e2330127a",
+    "freezer": "1547acb7e5dfd33042dfa1b1daaed73ddf71038d81d0177e292c03518f6c1e9b",
+    "checker": "0df736dc06793f72c30ecf7787f97ab32b4f16873fbe129db7f59ca5ae787dde",
+    "adapter": "10c4cc60a9e17ad0569f421ccc5c530403647d763fda7de7c2eaca6f5d4dcdf1",
+    "inherited_v19x3_runner": "3d321a5f658d1e40ce84bf9ad2c51c9627cfd7d6838d552bb2a1a078ba232017"
+  },
+  "hash_gates": {
+    "v19w5_config": true,
+    "v19w5_runner": true,
+    "v19x2_freezer": true,
+    "v19x2_runner": true,
+    "original_v19x3_freezer": true,
+    "original_v19x3_runner": true,
+    "v19x4_config": true,
+    "v19bp_config": true,
+    "runner": true,
+    "freezer": true,
+    "checker": true,
+    "adapter": true,
+    "inherited_v19x3_runner": true
+  },
+  "gates": {
+    "all_parent_and_implementation_hashes_exact": true,
+    "original_hash_bound_v19x3_chain_preserved": true,
+    "successor_paths_are_distinct": true,
+    "v19w5_authority_is_mandatory": true,
+    "all_494_regions_and_quality_rule_unchanged": true,
+    "terminal_measurements_and_targets_sealed": true,
+    "runtime_freeze_requires_passing_v19x2": true
+  },
+  "terminal_v19x2_or_regional_measurement_opened": false,
+  "lensing_halo_or_gravity_payload_opened": false,
+  "claim_boundary": [
+    "This preflight proves an implementation handoff, not a gas measurement or Sigma Gravity result.",
+    "V19X3B reuses the existing regional combination, checkpoint, plasma-fit, uncertainty and quality engine; it does not alter scientific settings.",
+    "The future terminal configuration cannot exist until V19W5 and V19X2 both pass their complete gates.",
+    "The existing V19X3/V19X4/V19BP files remain valid historical preregistrations and are not retroactively redirected.",
+    "No lensing, halo, gravity or holdout outcome enters this preflight."
+  ]
+}

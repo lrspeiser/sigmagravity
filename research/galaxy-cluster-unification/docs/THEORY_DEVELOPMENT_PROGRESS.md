@@ -1,5 +1,22 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19X3B V19W5 regional-successor preflight
+
+The 494-region production handoff is now prepared without mutating the
+hash-bound V19X3/V19X4/V19BP preregistration chain. V19X3B accepts only a
+passing V19X2 report whose configuration carries the explicit V19W5 terminal
+status and `v19w5_recovery` archive. It then reuses the existing V19X3 regional
+engine byte-for-byte, preserving every combination, checkpoint, plasma-fit,
+uncertainty, retention and quality rule.
+
+The preflight passes and synthetic tests prove both directions: a V19W5
+authority is propagated into response validation, while a V19W4 authority is
+rejected. The unchanged original V19X3 runner/freezer still match the hashes in
+V19X4. V19X3B remains runtime-closed until V19W5 and V19X2 pass. No terminal
+temperature, gas source, lensing, halo, gravity or holdout result was opened.
+See
+[`SIGMA_V19X3B_V19W5_REGIONAL_SUCCESSOR_PREFLIGHT.md`](SIGMA_V19X3B_V19W5_REGIONAL_SUCCESSOR_PREFLIGHT.md).
+
 ## 2026-08-05 Sigma V19BP observed source-invariant executor preflight
 
 The terminal source-only integration is now implemented and frozen before any
