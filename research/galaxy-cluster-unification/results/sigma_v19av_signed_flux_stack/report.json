@@ -1,0 +1,79 @@
+{
+  "candidate_association_or_bri_score_computed": false,
+  "candidate_complete_griz_fraction": 0.352112676056338,
+  "claim_boundary": [
+    "V19AV is a derived flux-combination and source-sufficiency test, not a candidate association.",
+    "The 10/5 anchor check tests whether stacking preserves the already-validated measurement behavior; the five anchors are not a newly untouched holdout.",
+    "A three-sigma stacked detection is evidence that a source flux is measurable, not that it belongs to the spectroscopic member.",
+    "A pass authorizes a separately frozen candidate color/position likelihood with null and ambiguous states; it does not authorize a stellar-mass, mass-current, lensing or gravity claim."
+  ],
+  "counts": {
+    "anchor_stack_rows": 75,
+    "candidate_complete_griz": 200,
+    "candidate_stack_rows": 2840,
+    "members_with_at_least_one_complete_candidate": 57
+  },
+  "decision": "failed_closed",
+  "development_color_model": {
+    "parameters": {
+      "g_minus_r": [
+        0.34607041016379547,
+        0.5595499058647461,
+        0.10358140396418047
+      ],
+      "i_minus_z": [
+        0.08055929250390877,
+        0.11200530619376015,
+        0.014871480513485958
+      ],
+      "r_minus_i": [
+        -0.0083546311612772,
+        0.20774844867681028,
+        0.03130641108555796
+      ]
+    },
+    "predictive_scales": {
+      "g_minus_r": 0.05327303467365886,
+      "i_minus_z": 0.05,
+      "r_minus_i": 0.05
+    }
+  },
+  "gate_results": {
+    "all_stack_rows_present": true,
+    "candidate_complete_griz_fraction": false,
+    "every_member_has_complete_candidate": true,
+    "no_candidate_association_scored": true,
+    "validation_color_error": true,
+    "validation_mrr": true,
+    "validation_top1": true
+  },
+  "outputs": {
+    "anchor_stacks": "data/derived/sigma_v19av_signed_flux_stack/anchor_stacks.csv",
+    "anchor_stacks_sha256": "102340cfe9f61ae6e36344768f98781c832255e50715882cb7731fe270ac26cd",
+    "candidate_stacks": "data/derived/sigma_v19av_signed_flux_stack/candidate_stacks.csv",
+    "candidate_stacks_sha256": "271772b5a68652bf5ffec0c4ffefbed37d3f40bbadc35125c5ba0ae5a156712e",
+    "development_color_fit": "data/derived/sigma_v19av_signed_flux_stack/development_color_fit.csv",
+    "development_color_fit_sha256": "321f4605d872b574673d5fb68a04d4577efd8965497669307aa4ba1d824f4e94",
+    "validation_predictions": "data/derived/sigma_v19av_signed_flux_stack/validation_predictions.csv",
+    "validation_predictions_sha256": "d0ab0211f34f5d960fc284a95144c8a3f8ce8b48b31c454ef6705d2e4795ad63",
+    "validation_retrieval": "data/derived/sigma_v19av_signed_flux_stack/validation_retrieval.csv",
+    "validation_retrieval_sha256": "6cefd2b8449c7eb745833a7325306b71039a3186fc1d70deb150f1f42dec1f38"
+  },
+  "protocol_version": "SIGMA-V19AV-SIGNED-FLUX-STACK-1.0.0",
+  "validation_metrics": {
+    "mean_reciprocal_rank": 0.7333333333333334,
+    "median_absolute_error_mag": {
+      "g_minus_r": 0.09219905765576092,
+      "i_minus_z": 0.05641252905554604,
+      "r_minus_i": 0.045717985944039086
+    },
+    "top1_retrievals": 3,
+    "true_pair_ranks": {
+      "21": 3,
+      "26": 1,
+      "57": 1,
+      "66": 3,
+      "71": 1
+    }
+  }
+}
