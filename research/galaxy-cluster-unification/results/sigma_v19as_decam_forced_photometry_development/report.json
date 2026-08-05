@@ -1,0 +1,97 @@
+{
+  "claim_boundary": [
+    "V19AS is development-only measurement commissioning, not a validation result and not a baryonic mass, lensing, halo or gravity test.",
+    "The five validation anchors remain unmeasured. Their coordinates are used only to exclude their pixels before development background estimation and segmentation.",
+    "The 180-degree rule assumes local point symmetry and may be biased for intrinsically asymmetric galaxies; validation and injection tests are required before scientific use.",
+    "A winning development variant only recommends one exact rule for a separately frozen validation run. It does not authorize ambiguous-member association or a mass-current map."
+  ],
+  "counts": {
+    "development_anchors": 10,
+    "development_image_groups": 122,
+    "development_measurements": 670,
+    "output_measurement_rows": 4020,
+    "validation_anchors_measured": 0
+  },
+  "decision": "development_completed_validation_still_sealed",
+  "leakage_controls": {
+    "lensing_halo_gravity_data_read": false,
+    "validation_coordinate_masks_applied_before_detection": true,
+    "validation_rows_rejected_by_runner": true
+  },
+  "outputs": {
+    "aggregates": "data/derived/sigma_v19as_decam_forced_photometry_development/aggregates.csv",
+    "aggregates_sha256": "2cc51be76305352fb05bb4bafb0c09a919eee82f52cb75c4b90625f4e3814fb0",
+    "group_audit": "data/derived/sigma_v19as_decam_forced_photometry_development/group_audit.csv",
+    "group_audit_sha256": "3e73e53af5fc6a7940c2af958238dad429b6651e14917e1e3c0ab5e7285fdd5c",
+    "measurements": "data/derived/sigma_v19as_decam_forced_photometry_development/measurements.csv",
+    "measurements_sha256": "4b67f5ed12825424d638594eb6c347867390863312f415b3f60119a117fae13b",
+    "ranking": "data/derived/sigma_v19as_decam_forced_photometry_development/ranking.csv",
+    "ranking_sha256": "3cf998fbe767aa22f966975c1adb6b62d4ec310f95f1aa6ae65747db32210075"
+  },
+  "protocol_version": "SIGMA-V19AS-DECAM-FORCED-PHOTOMETRY-DEVELOPMENT-1.0.0",
+  "ranking": [
+    {
+      "aperture_diameter_arcsec": 4.0,
+      "complete_griz_development_objects": 10,
+      "leave_one_out_color_mae_mag": 0.032023699233675235,
+      "median_absolute_catalog_aper4_delta_mag": 0.5206155857998578,
+      "median_repeatability_scatter_mag": 0.030814649996194703,
+      "valid_measurement_fraction": 1.0,
+      "variant": "raw"
+    },
+    {
+      "aperture_diameter_arcsec": 8.0,
+      "complete_griz_development_objects": 10,
+      "leave_one_out_color_mae_mag": 0.0544971047278701,
+      "median_absolute_catalog_aper4_delta_mag": NaN,
+      "median_repeatability_scatter_mag": 0.06254604260221254,
+      "valid_measurement_fraction": 0.9985074626865672,
+      "variant": "raw"
+    },
+    {
+      "aperture_diameter_arcsec": 4.0,
+      "complete_griz_development_objects": 10,
+      "leave_one_out_color_mae_mag": 0.030902238475231672,
+      "median_absolute_catalog_aper4_delta_mag": 0.5179183581277744,
+      "median_repeatability_scatter_mag": 0.030814649996194703,
+      "valid_measurement_fraction": 1.0,
+      "variant": "area_scaled"
+    },
+    {
+      "aperture_diameter_arcsec": 8.0,
+      "complete_griz_development_objects": 10,
+      "leave_one_out_color_mae_mag": 0.06089409104705336,
+      "median_absolute_catalog_aper4_delta_mag": NaN,
+      "median_repeatability_scatter_mag": 0.06565734035524617,
+      "valid_measurement_fraction": 0.9985074626865672,
+      "variant": "area_scaled"
+    },
+    {
+      "aperture_diameter_arcsec": 4.0,
+      "complete_griz_development_objects": 10,
+      "leave_one_out_color_mae_mag": 0.03193341152626,
+      "median_absolute_catalog_aper4_delta_mag": 0.5211725827105909,
+      "median_repeatability_scatter_mag": 0.030876746150755443,
+      "valid_measurement_fraction": 1.0,
+      "variant": "rotate180"
+    },
+    {
+      "aperture_diameter_arcsec": 8.0,
+      "complete_griz_development_objects": 10,
+      "leave_one_out_color_mae_mag": 0.06289985915236623,
+      "median_absolute_catalog_aper4_delta_mag": NaN,
+      "median_repeatability_scatter_mag": 0.06882145351023783,
+      "valid_measurement_fraction": 0.9985074626865672,
+      "variant": "rotate180"
+    }
+  ],
+  "recommendation_for_separate_validation_freeze": {
+    "aperture_diameter_arcsec": 4.0,
+    "complete_griz_development_objects": 10,
+    "leave_one_out_color_mae_mag": 0.030902238475231672,
+    "median_absolute_catalog_aper4_delta_mag": 0.5179183581277744,
+    "median_repeatability_scatter_mag": 0.030814649996194703,
+    "valid_measurement_fraction": 1.0,
+    "variant": "area_scaled"
+  }
+}
