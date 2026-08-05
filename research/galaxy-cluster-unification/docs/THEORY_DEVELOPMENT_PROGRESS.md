@@ -2593,3 +2593,16 @@ remove or weight a candidate. The schema and three source-only pilot rows were
 inspected before freezing and are disclosed; the full population and all
 kinematic/gravity targets remain unopened. See
 [`SIGMA_V19CA_SKYMAPPER_GAIA_FOREGROUND_DIAGNOSTICS.md`](SIGMA_V19CA_SKYMAPPER_GAIA_FOREGROUND_DIAGNOSTICS.md).
+
+V19CA subsequently returned all 17,034 unique SkyMapper objects in 43 exact-ID
+batches with no missing or duplicate row. There are 13,958 exact Gaia matches,
+12,801 objects with five-sigma foreground astrometry and 12,347 with the
+stricter quality-controlled contamination flag. The fraction is sharply
+field-dependent: 1,830/3,846 in Hydra, 304/1,417 in NGC 4636 and
+10,213/11,771 in Norma.
+
+This directly explains much of Norma's V19BZ crowding without pretending to
+resolve it. All candidates remain represented because a moving foreground star
+can overlap a background galaxy. Any future mask must be supported by optical
+image and deblending evidence, and foreground-treatment uncertainty must be
+propagated. No kinematic or force target was opened.

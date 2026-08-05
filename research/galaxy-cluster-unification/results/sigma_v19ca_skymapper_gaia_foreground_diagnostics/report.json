@@ -1,0 +1,113 @@
+{
+  "access_boundary_audit": {
+    "candidate_removed_or_weighted": false,
+    "development_validation_holdout_split_selected": false,
+    "gaia_astrometry_read": true,
+    "gaia_radial_velocity_read": false,
+    "gravity_action_or_constant_changed": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "hard_star_mask_applied": false,
+    "lensing_payload_opened": false,
+    "optical_counterpart_selected": false,
+    "rotation_speed_or_velocity_field_read": false,
+    "skymapper_gaia_crossmatch_read": true,
+    "solar_system_optimization_performed": false,
+    "wallaby_kinematic_table_row_read": false
+  },
+  "claim_boundary": [
+    "V19CA reports foreground-astrometry evidence; it does not declare that a candidate is or is not the H I galaxy.",
+    "A moving Gaia source can overlap a background galaxy, so even quality-controlled flags remain uncertainty inputs rather than hard masks.",
+    "Every unique SkyMapper object and all 17094 candidate occurrences remain represented.",
+    "No Gaia radial velocity, WALLABY velocity, rotation curve, lensing result, halo map, gravity residual, action, constant, holdout label or Solar-System result enters V19CA."
+  ],
+  "config": "configs/sigma_v19ca_skymapper_gaia_foreground_diagnostics.json",
+  "config_sha256": "fcc66b61bf5d105cf5f731b00502b7571e7e1720cb1f5957b2da9cd5d8224a2d",
+  "decision": "foreground_diagnostics_acquired_without_candidate_assignment",
+  "diagnostic_policy": {
+    "interpretation": "Astrometric evidence flags foreground contamination associated with a SkyMapper detection. It does not prove that no galaxy lies underneath or nearby, and it cannot remove or downweight the candidate in V19CA.",
+    "maximum_exact_match_distance_arcsec": 1.0,
+    "maximum_quality_controlled_ruwe": 1.4,
+    "minimum_absolute_component_proper_motion_significance": 5.0,
+    "minimum_positive_parallax_significance": 5.0,
+    "quality_controlled_astrometric_solutions": [
+      31,
+      95
+    ]
+  },
+  "diagnostic_summary": {
+    "evidence_channel_counts": {
+      "pmdec": 11858,
+      "pmra": 11138,
+      "positive_parallax": 2742
+    },
+    "exact_gaia_matches": 13958,
+    "field_summary": {
+      "Hydra": {
+        "candidate_occurrences": 3906,
+        "foreground_astrometric_evidence_objects": 1890,
+        "quality_controlled_foreground_contamination_objects": 1830,
+        "unique_objects": 3846
+      },
+      "NGC 4636": {
+        "candidate_occurrences": 1417,
+        "foreground_astrometric_evidence_objects": 315,
+        "quality_controlled_foreground_contamination_objects": 304,
+        "unique_objects": 1417
+      },
+      "Norma": {
+        "candidate_occurrences": 11771,
+        "foreground_astrometric_evidence_objects": 10596,
+        "quality_controlled_foreground_contamination_objects": 10213,
+        "unique_objects": 11771
+      }
+    },
+    "foreground_astrometric_evidence": 12801,
+    "quality_controlled_foreground_contamination": 12347,
+    "unflagged_or_unresolved": 4687
+  },
+  "gate_results": {
+    "all_17034_unique_objects_returned_once": true,
+    "all_17094_candidate_occurrences_represented": true,
+    "exact_source_only_projection_used": true,
+    "kinematic_gravity_lensing_and_solar_targets_remain_sealed": true,
+    "no_query_failure_or_duplicate_object": true,
+    "no_radial_velocity_candidate_removal_or_counterpart_assignment": true,
+    "parent_and_input_hashes_exact": true,
+    "pilot_and_freeze_state_reported_honestly": true,
+    "raw_and_derived_outputs_reproduce": true
+  },
+  "honesty_boundary": {
+    "complete_candidate_population_queried_before_freeze": false,
+    "gravity_kinematic_or_lensing_target_inspected": false,
+    "pilot_used_to_fit_thresholds": false,
+    "tap_schema_inspected_before_freeze": true,
+    "three_candidate_rows_piloted_before_freeze": true,
+    "threshold_basis": "fixed five-sigma astrometric evidence and one-arcsecond exact-source association, with RUWE<=1.4 and a five- or six-parameter Gaia solution reported as a stricter quality-controlled flag"
+  },
+  "input_audit": {
+    "candidate_occurrences": 17094,
+    "duplicates": [],
+    "missing": [],
+    "query_batches": 43,
+    "query_hashes_sha256": "a891888cd067fdd5fb36d8c6e3b6c1168f9ce9d6229cb2e75e22b9434cd36d86",
+    "returned_rows": 17034,
+    "unexpected": [],
+    "unique_object_ids": 17034
+  },
+  "outputs": {
+    "derived_diagnostics": {
+      "bytes": 2454946,
+      "path": "data/derived/sigma_v19ca_skymapper_gaia_foreground_diagnostics/candidate_foreground_diagnostics.csv",
+      "rows": 17034,
+      "sha256": "a7b5b38bd7e1bf5fac88dda097be3fd8757d8428774d59682096595886f43d15"
+    },
+    "raw_crossmatch": {
+      "bytes": 4246720,
+      "path": "data/raw/sigma_v19ca_skymapper_gaia_foreground_diagnostics/skymapper_gaia_dr3_nearest.csv",
+      "rows": 17034,
+      "sha256": "41aaa5f42b796094db769c11473f2a0e6d933253742e27557a67fdd33bc0fffc"
+    }
+  },
+  "protocol_version": "SIGMA-V19CA-SKYMAPPER-GAIA-FOREGROUND-DIAGNOSTICS-1.0.0",
+  "status": "completed_skymapper_gaia_source_only_foreground_diagnostics"
+}

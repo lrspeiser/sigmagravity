@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import csv
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -13,9 +15,23 @@ assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
 
+REPORT_PATH = ROOT / "results" / "sigma_v19ca_skymapper_gaia_foreground_diagnostics" / "report.json"
+RAW_PATH = ROOT / "data" / "raw" / "sigma_v19ca_skymapper_gaia_foreground_diagnostics" / "skymapper_gaia_dr3_nearest.csv"
+DERIVED_PATH = ROOT / "data" / "derived" / "sigma_v19ca_skymapper_gaia_foreground_diagnostics" / "candidate_foreground_diagnostics.csv"
+RAW_SHA256 = "41aaa5f42b796094db769c11473f2a0e6d933253742e27557a67fdd33bc0fffc"
+DERIVED_SHA256 = "a7b5b38bd7e1bf5fac88dda097be3fd8757d8428774d59682096595886f43d15"
+
 
 def config() -> dict:
     return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def test_v19ca_query_is_exact_id_join_and_excludes_radial_velocity() -> None:
@@ -97,3 +113,44 @@ def test_v19ca_discloses_pilot_and_keeps_all_targets_sealed() -> None:
         "solar_system_optimization_performed",
     ):
         assert not boundary[key]
+
+
+def test_v19ca_complete_acquisition_passes_and_quantifies_foreground() -> None:
+    report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
+    assert report["decision"] == "foreground_diagnostics_acquired_without_candidate_assignment"
+    assert all(report["gate_results"].values())
+    assert report["input_audit"]["candidate_occurrences"] == 17_094
+    assert report["input_audit"]["unique_object_ids"] == 17_034
+    assert report["input_audit"]["returned_rows"] == 17_034
+    assert report["input_audit"]["query_batches"] == 43
+    assert report["input_audit"]["missing"] == []
+    assert report["input_audit"]["unexpected"] == []
+    assert report["input_audit"]["duplicates"] == []
+    summary = report["diagnostic_summary"]
+    assert summary["exact_gaia_matches"] == 13_958
+    assert summary["foreground_astrometric_evidence"] == 12_801
+    assert summary["quality_controlled_foreground_contamination"] == 12_347
+    assert summary["unflagged_or_unresolved"] == 4_687
+    assert summary["field_summary"]["Norma"][
+        "quality_controlled_foreground_contamination_objects"
+    ] == 10_213
+
+
+def test_v19ca_outputs_are_exact_unique_and_contain_no_radial_velocity() -> None:
+    report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
+    assert sha256(RAW_PATH) == RAW_SHA256
+    assert sha256(DERIVED_PATH) == DERIVED_SHA256
+    assert report["outputs"]["raw_crossmatch"]["sha256"] == RAW_SHA256
+    assert report["outputs"]["derived_diagnostics"]["sha256"] == DERIVED_SHA256
+    with RAW_PATH.open(encoding="utf-8", newline="") as stream:
+        reader = csv.DictReader(stream)
+        assert reader.fieldnames is not None
+        raw_fields = list(reader.fieldnames)
+        raw_rows = list(reader)
+    assert len(raw_rows) == 17_034
+    assert len({row["object_id"] for row in raw_rows}) == 17_034
+    assert not any("radial_velocity" in field.lower() for field in raw_fields)
+    with DERIVED_PATH.open(encoding="utf-8", newline="") as stream:
+        derived_rows = list(csv.DictReader(stream))
+    assert len(derived_rows) == 17_034
+    assert len({row["object_id"] for row in derived_rows}) == 17_034

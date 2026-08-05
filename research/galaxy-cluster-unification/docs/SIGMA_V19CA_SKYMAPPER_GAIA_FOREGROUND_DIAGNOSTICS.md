@@ -41,6 +41,29 @@ No WALLABY kinematic row, galaxy velocity, lensing result, halo map, gravity
 residual, action, constant, evidence split or Solar-System calculation enters
 this acquisition.
 
+## Acquisition result
+
+All 43 exact-ID batches passed. The service returned every one of the 17,034
+unique SkyMapper objects exactly once, and all 17,094 original candidate
+occurrences remain represented. Of the unique objects, 13,958 have a Gaia
+source within one arcsecond, 12,801 have at least one five-sigma foreground
+astrometric channel and 12,347 pass the stricter RUWE/solution-quality rule.
+
+The foreground distribution is strongly field dependent:
+
+| Field | Unique objects | Five-sigma astrometry | Quality-controlled contamination |
+|---|---:|---:|---:|
+| Hydra | 3,846 | 1,890 | 1,830 |
+| NGC 4636 | 1,417 | 315 | 304 |
+| Norma | 11,771 | 10,596 | 10,213 |
+
+Thus 86.8% of the Norma candidate universe has quality-controlled foreground
+motion, compared with 47.6% in Hydra and 21.5% in NGC 4636. This explains why
+the V19BZ spatial ranking was especially indecisive in Norma. It does not
+authorize deletion: an astrometric foreground source can be superposed on a
+background galaxy. The next association audit must carry foreground-treatment
+branches and require image/deblending evidence for any hard mask.
+
 ## Reproduction after the contract commit
 
 ```powershell
