@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 169,
+    "sigma_protocols": 170,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 145,
     "eligibility": {
@@ -7416,6 +7416,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "0a29329b3f87f3c400582abb36dbc7782407ecf3490a7f0f3da5e6072f06f28e"
+    },
+    {
+      "config": "configs/sigma_v19w4_hardened_response_recovery.json",
+      "protocol_version": "SIGMA-V19W4-HARDENED-RESPONSE-RECOVERY-1.0.0",
+      "status": "frozen after V19W2B passed cross-detector commissioning and while the unchanged base V19W process was still running, before reading the base terminal report, enumerating the terminal missing workload, creating a V19W4 product, combining a spectrum, fitting a temperature, opening a lensing payload, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "9b6f21033cd995acedfa4618e7445468c6f0b63ee2011891f45eee01b1353ed8"
     },
     {
       "config": "configs/sigma_v19w_full_response_production.json",
