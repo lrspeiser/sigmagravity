@@ -1,0 +1,58 @@
+{
+  "report_version": "SIGMA-V19K-MANDATORY-FIXTURE-FAILURE-1.0.0",
+  "status": "mandatory_pre_science_fixture_failed",
+  "config": "configs/sigma_v19k_smooth_null_front_likelihood.json",
+  "config_sha256": "cb72cac4c7970184941fa4649de47bdc6a2ab9f35c5dd0a63203e15f9d900bdc",
+  "runner": "scripts/run_sigma_v19k_smooth_null_fronts.py",
+  "runner_sha256": "6f2f32a80ff5d6d5b8bbf092a2b43bad1574fa9822e89c26696532d64b68931e",
+  "mandatory_pre_science_fixtures": {
+    "uniform": {
+      "v19j_candidate_pixels": 0,
+      "v19k_seed_count": 0,
+      "passing_seed_count": 0,
+      "retained_arc_count": 0,
+      "passed": true
+    },
+    "linear": {
+      "v19j_candidate_pixels": 9230,
+      "v19k_seed_count": 1752,
+      "passing_seed_count": 0,
+      "retained_arc_count": 0,
+      "passed": true
+    },
+    "radial": {
+      "v19j_candidate_pixels": 3120,
+      "v19k_seed_count": 236,
+      "passing_seed_count": 52,
+      "retained_arc_count": 0,
+      "passed": true
+    },
+    "step": {
+      "v19j_candidate_pixels": 516,
+      "v19k_seed_count": 64,
+      "passing_seed_count": 64,
+      "retained_arc_count": 0,
+      "passed": false
+    },
+    "masked_step": {
+      "v19j_candidate_pixels": 380,
+      "v19k_seed_count": 27,
+      "passing_seed_count": 25,
+      "retained_arc_count": 0,
+      "passed": true
+    }
+  },
+  "failed_fixtures": [
+    "step"
+  ],
+  "successful_core_observation": "the smooth-null likelihood rejected every one of 1752 high-count linear-gradient seeds and produced no smooth-radial arc, while all 64 injected-step seeds exceeded the step threshold",
+  "failure_class": "arc-graph sampling implementation",
+  "root_cause": "the protocol incorrectly used the inherited 20-kpc maximum empty ridge gap as the maximum separation between likelihood seeds; local-max seed sampling placed adjacent injected-circle seeds roughly 30 kpc apart even though the underlying candidate ridge was continuous",
+  "science_cluster_array_read_by_v19k": false,
+  "science_seed_profile_or_likelihood_evaluated": false,
+  "scientific_threshold_changed": false,
+  "published_front_coordinate_used": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false,
+  "decision": "stop before science execution and issue V19L; preserve the 20-kpc physical empty-gap rule by measuring continuity along the complete underlying candidate path instead of treating it as a seed-spacing limit"
+}

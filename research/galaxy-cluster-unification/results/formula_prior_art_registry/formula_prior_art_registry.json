@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 118,
+    "sigma_protocols": 119,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6791,6 +6791,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "13e50f4d2465c108ca61adde3ef445bc41312a8a25b596ed399213b04d8b5c14"
+    },
+    {
+      "config": "configs/sigma_v19k_smooth_null_front_likelihood.json",
+      "protocol_version": "SIGMA-V19K-SMOOTH-NULL-FRONT-LIKELIHOOD-1.0.0",
+      "status": "frozen after the immutable V19J formal pass and required post-hash topology failure but before re-reading a science array for V19K, selecting a V19K seed, extracting a science profile, evaluating a continuous or discontinuous science likelihood, linking a V19K arc, fitting a final front profile, running a front bootstrap, constructing a spectrum, opening a lensing target, or selecting a gravity formula",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "cb72cac4c7970184941fa4649de47bdc6a2ab9f35c5dd0a63203e15f9d900bdc"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

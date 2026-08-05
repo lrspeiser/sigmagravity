@@ -1,0 +1,153 @@
+{
+  "protocol_version": "SIGMA-V19K-SMOOTH-NULL-FRONT-LIKELIHOOD-1.0.0",
+  "status": "frozen after the immutable V19J formal pass and required post-hash topology failure but before re-reading a science array for V19K, selecting a V19K seed, extracting a science profile, evaluating a continuous or discontinuous science likelihood, linking a V19K arc, fitting a final front profile, running a front bootstrap, constructing a spectrum, opening a lensing target, or selecting a gravity formula",
+  "purpose": "Correct the single audited V19J failure class by requiring an automatically seeded brightness discontinuity to improve exact Poisson likelihood over a continuous local profile with both gradient and curvature, while preserving every V19H scientific threshold and using no published front coordinate or hand sector.",
+  "parents": {
+    "v19h_config": "configs/sigma_v19h_causal_observable_protocol.json",
+    "v19h_config_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "v19j_config": "configs/sigma_v19j_automated_front_implementation.json",
+    "v19j_config_sha256": "13e50f4d2465c108ca61adde3ef445bc41312a8a25b596ed399213b04d8b5c14",
+    "v19j_runner": "scripts/run_sigma_v19j_automated_fronts.py",
+    "v19j_runner_sha256": "f67be696dd5098a718751fda2bb3d02bc9599ea62219cb9a6ed7b9be3c135964",
+    "v19j_report": "results/sigma_v19j_automated_fronts/report.json",
+    "v19j_report_sha256": "06eb0add35583f8ee45c17ba65432b0d082922cb842a28631ff78a73cf8f4923",
+    "v19j_visual_audit": "results/sigma_v19j_automated_fronts/visual_audit.json",
+    "v19j_visual_audit_sha256": "08383713738991c913e9839f957719ec96d0870f802c76a3abec5a37050241f5"
+  },
+  "sample": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "same_algorithm_thresholds_models_and_optimizer": true,
+    "published_front_coordinates_or_sectors_forbidden": true,
+    "lensing_targets_sealed": true
+  },
+  "complete_prefilter": {
+    "input": "every true pixel in the immutable V19J nonmaximum_candidate array, with its immutable best scale, best signed faint-to-bright normal and best two-sided score",
+    "minimum_score_sigma": 5.0,
+    "candidate_scales_kpc": [
+      8.0,
+      16.0,
+      32.0,
+      64.0
+    ],
+    "seed_rule": "within the complete candidate mask, retain a best-score local maximum in a Euclidean disk of radius 10 kpc; exact score plateaus retain only the lexicographically first row then column",
+    "maximum_seed_count": "none",
+    "visual_or_coordinate_selection": false
+  },
+  "profile_extraction": {
+    "normal_coordinate": "t=(x-x_seed) dot n, positive from the V19J fainter side toward the brighter side",
+    "tangent_coordinate": "s=(x-x_seed) dot (-n_y,n_x)",
+    "normal_extent_each_side_kpc": 200.0,
+    "tangent_half_width_kpc": 75.0,
+    "normal_bin_width_kpc": 10.0,
+    "normal_bins": 40,
+    "pixel_assignment": "assign a frozen native pixel by its center to exactly one half-open normal bin when abs(s)<=75 kpc and -200<=t<200 kpc",
+    "per_bin_data": "sum integer soft counts C, frozen scaled background B, background variance V_B, exposure E, valid pixel count and total geometric pixel count",
+    "minimum_overall_valid_pixel_fraction": 0.9,
+    "minimum_bins_with_positive_exposure": 36,
+    "failure_rule": "discard the seed without filling, shifting, widening, rotating or merging profile bins"
+  },
+  "poisson_models": {
+    "normalized_coordinate": "tau=t/200 kpc",
+    "expected_counts": "lambda_j=B_j+E_j S_j",
+    "continuous_null": "S0_j=exp(a+b tau_j+c tau_j^2)",
+    "discontinuous_alternative": "S1_j=exp(a+b tau_j+c tau_j^2+d H(t_j-delta)), with d nonnegative and the positive-t side defined as brighter",
+    "step_location_grid_kpc": [
+      -20.0,
+      -15.0,
+      -10.0,
+      -5.0,
+      0.0,
+      5.0,
+      10.0,
+      15.0,
+      20.0
+    ],
+    "cash_log_likelihood_without_constant": "sum_j [C_j log(lambda_j)-lambda_j] over positive-exposure bins",
+    "parameter_bounds": {
+      "a": [
+        -40.0,
+        -8.0
+      ],
+      "b": [
+        -10.0,
+        10.0
+      ],
+      "c": [
+        -10.0,
+        10.0
+      ],
+      "d": [
+        0.0,
+        2.772588722239781
+      ]
+    },
+    "density_compression": "C_density=exp(d/2), capped at the gamma=5/3 hydrodynamic limit four only through the frozen d bound",
+    "optimizer": "L-BFGS-B with analytic log-likelihood and gradient, maximum 500 iterations and ftol 1e-12; initialize a from the total positive net rate and b=c=0; initialize each alternative from the null with d=ln(4); if and only if nonfinite or unsuccessful, run bounded Powell then one L-BFGS-B polish",
+    "step_grid_selection": "largest finite alternative likelihood; exact ties choose smaller abs(delta), then smaller signed delta",
+    "likelihood_improvement": "DeltaC=2(logL_alternative-logL_null)",
+    "discontinuity_score": "Z_step=sqrt(max(0,DeltaC))",
+    "minimum_discontinuity_score_sigma": 5.0,
+    "no_BIC_or_post_map_threshold_adjustment": true
+  },
+  "arc_linking": {
+    "nodes": "only profile-valid seeds with Z_step at least five",
+    "maximum_node_separation_kpc": 20.0,
+    "maximum_normal_difference_deg": 30.0,
+    "tangent_alignment": "the node-to-node vector must lie within 30 degrees of the local tangent at both nodes",
+    "components": "undirected connected components under all three fixed edge rules",
+    "circle_fit": "unweighted algebraic circle fit to every node in the component; reject rank-deficient fits",
+    "maximum_rms_radial_residual_kpc": 20.0,
+    "curvature_radius_kpc": [
+      50.0,
+      2000.0
+    ],
+    "arc_length": "radius times the smallest circular angular span containing every component node, obtained by removing the largest cyclic angular gap",
+    "minimum_projected_length_kpc": 100.0,
+    "minimum_component_nodes": 6,
+    "component_score": "sum DeltaC across all component nodes, used only for automatic ranking",
+    "primary_rule": "largest component score; exact ties choose longer arc then lexicographic representative x/y",
+    "representative_position_and_normal": "DeltaC-weighted circular/linear means over every node; no node may be discarded after component formation"
+  },
+  "mandatory_pre_science_fixtures": {
+    "uniform_field": "zero retained arcs",
+    "linear_gradient": "zero retained arcs even at the science-map peak count scale",
+    "smooth_radial_beta_profile": "zero retained arcs for a curved centrally concentrated profile with no discontinuity",
+    "curved_compression_two_step": "at least one retained arc with fitted density compression central value between 1.5 and 2.5 and median node distance no more than 16 kpc from the injected circle",
+    "masked_step": "zero retained arcs when the inherited 90-percent profile-validity gate fails",
+    "same_random_seed": 19010001,
+    "failure_rule": "do not execute on either science cluster if any fixture fails; do not change a model, optimizer, seed, scale, bin, score or arc threshold in response to the science maps"
+  },
+  "science_gates": {
+    "all_seed_fit_likelihoods_finite_or_explicitly_failed": true,
+    "maximum_failed_seed_fraction": 0.01,
+    "minimum_retained_arcs_per_cluster": 1,
+    "every_retained_arc_passes_length_curvature_residual_and_node_gates": true,
+    "required_post_hash_visual_audit": "a retained arc must be a sparse simple ridge rather than a contour forest, chip edge, point-source residual or branched network; an audit failure preserves the machine report and triggers a new protocol rather than an in-place threshold change",
+    "advance_only_if_both_clusters_pass": "run the inherited projected broken-power-law profile fit and exactly 1000 parametric bootstraps on every retained arc before any spectra or shock claim"
+  },
+  "claim_boundary": {
+    "this_is_source_measurement_not_gravity": true,
+    "shock_claim_before_temperature_spectra": false,
+    "causal_source_map_authorized": false,
+    "published_front_coordinate_used": false,
+    "lensing_target_opened": false,
+    "gravity_formula_selected": false,
+    "gravity_parameter_changed": false
+  },
+  "integrity": {
+    "v19j_failure_preserved": true,
+    "v19k_science_array_read_at_freeze": false,
+    "v19k_seed_or_profile_known_at_freeze": false,
+    "v19k_fixture_outcome_known_at_freeze": false,
+    "v19j_diagnostics_inspected_only_under_mandatory_post_hash_audit": true,
+    "science_location_or_known_front_used_to_choose_v19k_rules": false,
+    "published_front_coordinate_used": false,
+    "lensing_target_opened": false,
+    "gravity_parameter_changed": false
+  }
+}
