@@ -1,0 +1,60 @@
+{
+  "report_version": "SIGMA-V19AN-NSC-DECAM-GROUP-CUTOUTS-FAILURE-1.0.0",
+  "status": "failed_closed_at_first_transport_gate",
+  "generated_utc": "2026-08-05T09:51:33.6244663Z",
+  "config": "configs/sigma_v19an_nsc_decam_group_cutouts.json",
+  "config_sha256": "2fa4042b8901aad463005d64f6dccbd9ca03706483c38d1b57980a3fff2c6e42",
+  "runner": "scripts/acquire_sigma_v19an_nsc_decam_group_cutouts.py",
+  "runner_sha256": "6c50e5c0af1836aeea5e6bcbec8b4f9d76ee32e0c2cbbad40a45941a1f92cc0c",
+  "frozen_group_plan": "data/derived/sigma_v19an_nsc_decam_group_cutouts/group_plan.csv",
+  "frozen_group_plan_sha256": "a4b82c98ecab29b4ab2174619ca50f88399fafddc427ab40cf997b42e231df22",
+  "first_failed_group": {
+    "group_id": "c4d_121208_034504_ooi_r_d2_ext35",
+    "exposure": "c4d_121208_034504_ooi_r_d2",
+    "sia_extension": 35,
+    "measurement_memberships": 14,
+    "frozen_request_size_degrees": [
+      0.21762866,
+      0.10580194
+    ],
+    "maximum_attempts": 3,
+    "failure": "HTTP 500 Internal Server Error on every attempt",
+    "output_file_written": false
+  },
+  "failure_localization": {
+    "same_sia_descriptor_at_original_0_01_degree_size": "HTTP 500",
+    "same_stale_sia_ref_without_cutout_parameters": "HTTP 200 with zero-byte body",
+    "affected_stale_d2_exposures": 22,
+    "affected_exposure_extension_groups": 37,
+    "affected_measurement_memberships": 275,
+    "remaining_non_d2_groups_in_frozen_plan": 102,
+    "control_largest_tu_group_request": "HTTP 200 with 66,286,080-byte FITS payload",
+    "current_archive_fallback": {
+      "archive_product": "c4d_121208_034504_ooi_r_bullet.fits.fz",
+      "archive_md5": "0fd3776025534b82ef390843b3bb6cef",
+      "archive_hdu_index_at_failed_anchor": 34,
+      "public_subset_url_content_length_bytes": 5296320,
+      "interpretation": "The NSC SIA filename is stale; the authoritative archive has a current calibrated product and selected-HDU retrieval route. Old SIA extension 35 must not be assumed to equal current archive HDU 34."
+    }
+  },
+  "gates": {
+    "http_200_every_group": false,
+    "fits_integrity_every_group": false,
+    "celestial_wcs_every_group": false,
+    "all_frozen_anchors_contained": false,
+    "all_acquisition_integrity_gates_pass": false
+  },
+  "image_files_persisted_by_frozen_runner": 0,
+  "exposures_ranked_or_selected": false,
+  "photometry_fitted_or_compared": false,
+  "psf_or_deblend_model_selected": false,
+  "ambiguous_candidates_queried": false,
+  "mass_or_current_inferred": false,
+  "lensing_or_halo_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false,
+  "claim_boundary": [
+    "V19AN did not pass and cannot authorize photometry.",
+    "The failure is an archive-transport identity failure, not evidence about image quality, galaxy photometry or gravity.",
+    "A successor must freeze authoritative archive file and HDU identities for all stale descriptors before retrieving pixels; it may not drop the affected exposures."
+  ]
+}
