@@ -1,0 +1,111 @@
+{
+  "authorization_boundary": {
+    "diagnostic_products_admitted": false,
+    "final_retry_authorized": false,
+    "target_or_gravity_accessed": false
+  },
+  "claim_boundary": [
+    "V19CM tests one numerical response-map resolution change; it does not alter or test the gravity theory.",
+    "No output from this workspace is a final V19W5 checkpoint.",
+    "Failure does not authorize an unweighted response, a moved response position, or cell exclusion.",
+    "Success requires a separate frozen recovery-and-equivalence audit before V19BR may resume."
+  ],
+  "command": [
+    "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/specextract",
+    "infile=/home/henry/sigma-v19cm-fine-wmap-diagnostic/v100/c3432/e/s.fits[sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5358.fov)]",
+    "outroot=/home/henry/sigma-v19cm-fine-wmap-diagnostic/v100/c3432/products/BULLET_bin384_obs5358_ccd0",
+    "bkgfile=/home/henry/sigma-v19cm-fine-wmap-diagnostic/v100/c3432/e/b.fits[sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5358.fov)]",
+    "asp=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5358/corrected_asol1.lis",
+    "mskfile=/home/henry/sigma-v19f-chandra/repro/BULLET/5358/acisf05358_000N004_msk1.fits",
+    "badpixfile=/home/henry/sigma-v19f-chandra/repro/BULLET/5358/acisf05358_repro_bpix1.fits",
+    "dafile=CALDB",
+    "bkgresp=no",
+    "weight=yes",
+    "weight_rmf=yes",
+    "resp_pos=CENTROID",
+    "refcoord=104.60277454729300,-55.96447902904857",
+    "correctpsf=no",
+    "combine=no",
+    "grouptype=NONE",
+    "binspec=NONE",
+    "bkg_grouptype=NONE",
+    "bkg_binspec=NONE",
+    "energy=0.3:11.0:0.01",
+    "energy_wmap=500:7000",
+    "binwmap=det=1",
+    "binarfwmap=1",
+    "parallel=no",
+    "nproc=1",
+    "tmpdir=/home/henry/sigma-v19cm-fine-wmap-diagnostic/v100/c3432/tmp",
+    "clobber=no",
+    "verbose=5",
+    "mode=h"
+  ],
+  "config_sha256": "bbcd6418f822d5996b838592a738d4be9a2b18649c29658308fc3248dc93e7f4",
+  "decision": "fine_wmap_physically_equivalent_recovery_candidate_passed_separate_final_protocol_required",
+  "gate_results": {
+    "all_four_products_nonempty": true,
+    "arf_finite_with_positive_bins": true,
+    "recovery_inputs_and_logs_unchanged": true,
+    "rmf_finite_with_nonzero_elements": true,
+    "source_pha_links_all_four_products": true,
+    "specextract_returncode_zero": true,
+    "success_authorizes_only_separate_final_recovery_preregistration": true
+  },
+  "generated_utc": "2026-08-05T20:13:09.081604+00:00",
+  "log": "results/sigma_v19cm_fine_wmap_edge_diagnostic/specextract_det1.log",
+  "log_sha256": "61372e853ae72b431e4b70d8e72fcc15649f27ae4c5855e941eb3a1cd7a0178b",
+  "preflight": {
+    "exact_diagnostic_error_bound": true,
+    "input_hashes_exact": true,
+    "no_final_or_scientific_authorization": true,
+    "parent_hash_and_decision_exact": true,
+    "specextract_hash_exact": true,
+    "workspace_absent": true
+  },
+  "products": {
+    "arf": {
+      "bytes": 40320,
+      "path": "/home/henry/sigma-v19cm-fine-wmap-diagnostic/v100/c3432/products/BULLET_bin384_obs5358_ccd0.arf",
+      "sha256": "d34170afefe52a189deb51e0bb5662f6ab6c89def9c9ee86e031c1299340b29c"
+    },
+    "background_pha": {
+      "bytes": 134683200,
+      "path": "/home/henry/sigma-v19cm-fine-wmap-diagnostic/v100/c3432/products/BULLET_bin384_obs5358_ccd0_bkg.pi",
+      "sha256": "8b5e7b9eacac046f7507163ca27114bfc389ec5bc49985b45c5c7e966e968e29"
+    },
+    "rmf": {
+      "bytes": 2243520,
+      "path": "/home/henry/sigma-v19cm-fine-wmap-diagnostic/v100/c3432/products/BULLET_bin384_obs5358_ccd0.rmf",
+      "sha256": "d71464e2a1d5c5ccab580e47a361def10b56922ad350b2620b03bf7d3eaed207"
+    },
+    "source_pha": {
+      "bytes": 134712000,
+      "path": "/home/henry/sigma-v19cm-fine-wmap-diagnostic/v100/c3432/products/BULLET_bin384_obs5358_ccd0.pi",
+      "sha256": "e1758648a9f86807167f8dac0ad498e9270520f8417bd291342f071024931393"
+    }
+  },
+  "protocol_version": "SIGMA-V19CM-FINE-WMAP-EDGE-DIAGNOSTIC-1.0.0",
+  "recovery_inputs_after": {
+    "background": "90b33f88b3841f60587377cbed17e9d6a2784a44caec0277a23f10e5ae40c6d3",
+    "source": "482177e164e8d8ea51a1a85934420289ae8997389b24ab5874cce421d6d8a7c2",
+    "v19ck_log": "3999c84ef113c7c10873f9385aa3c524c7513ce74e5302f621fc1294e5817cbb"
+  },
+  "response_audit": {
+    "arf_finite": true,
+    "arf_maximum_cm2": 215.15423583984375,
+    "arf_positive_bins": 1070,
+    "arf_rows": 1070,
+    "rmf_finite": true,
+    "rmf_matrix_elements": 539687,
+    "rmf_maximum": 0.16489431262016296,
+    "rmf_nonzero_elements": 539687
+  },
+  "returncode": 0,
+  "source_pha_links": {
+    "ANCRFILE": "BULLET_bin384_obs5358_ccd0.arf",
+    "BACKFILE": "BULLET_bin384_obs5358_ccd0_bkg.pi",
+    "RESPFILE": "BULLET_bin384_obs5358_ccd0.rmf"
+  },
+  "status": "completed_fine_wmap_edge_diagnostic"
+}

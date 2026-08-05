@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 206,
+    "sigma_protocols": 209,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7538,6 +7538,42 @@
         "NEWTON-POISSON"
       ],
       "sha256": "d72b447c41b6bbf80f2ac267a7aff49778cd636e59220abbf789283734991db8"
+    },
+    {
+      "config": "configs/sigma_v19ck_single_rmf_diagnostic.json",
+      "protocol_version": "SIGMA-V19CK-SINGLE-RMF-DIAGNOSTIC-1.0.0",
+      "status": "frozen after two byte-identical one-cell RMF failures and before any diagnostic rerun, response-placement change, cell exclusion, final retry, V19BR resumption, target access, action selection, or gravity-parameter change",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "35fd24c91b9a9f5beceee68b73e7e31aa20f60bdabe8dd20b24bff8e840c6f6c"
+    },
+    {
+      "config": "configs/sigma_v19cl_registered_cluster_morphology_acquisition.json",
+      "protocol_version": "SIGMA-V19CL-REGISTERED-CLUSTER-MORPHOLOGY-ACQUISITION-1.0.0",
+      "status": "post-preregistration acquisition and deterministic crossmatch; no cluster admitted and no lensing, halo, Sigma, action, constant, or Solar-System outcome opened",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "6c4a8c5b8301260bd33ab47578c383ad99eb879fc8add038ffbc9d47b06259f6"
+    },
+    {
+      "config": "configs/sigma_v19cm_fine_wmap_edge_diagnostic.json",
+      "protocol_version": "SIGMA-V19CM-FINE-WMAP-EDGE-DIAGNOSTIC-1.0.0",
+      "status": "frozen after V19CK identified the exact coarse-WMAP chip-edge failure and before changing WMAP binning, creating a diagnostic response, authorizing a final retry, or resuming any scientific chain",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "bbcd6418f822d5996b838592a738d4be9a2b18649c29658308fc3248dc93e7f4"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

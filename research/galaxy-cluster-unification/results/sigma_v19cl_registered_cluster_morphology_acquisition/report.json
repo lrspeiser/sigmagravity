@@ -1,0 +1,104 @@
+{
+  "access_boundary_audit": {
+    "action_or_constants_changed": false,
+    "clusters_selected_or_admitted": 0,
+    "detailed_solar_optimization_performed": false,
+    "raw_lensing_coordinates_or_halo_maps_opened": false,
+    "sigma_gravity_scored_or_fit": false
+  },
+  "claim_boundary": [
+    "This is a source-selection result, not evidence for Sigma Gravity.",
+    "The eligible morphology pool may be filtered only by the remaining preregistered source completeness, redshift, source-side mass, gas/BCG concentration, and multipeak-layout axes.",
+    "No object is admitted to the final six and no raw lensing value is opened here.",
+    "Solar-System consistency remains a later hard veto rather than a tuning target."
+  ],
+  "clean_finite_primary_medians": {
+    "logP3_P0": -5.915,
+    "logc": -0.665,
+    "logw": -1.7850000000000001
+  },
+  "config": "configs/sigma_v19cl_registered_cluster_morphology_acquisition.json",
+  "config_sha256": "6c4a8c5b8301260bd33ab47578c383ad99eb879fc8add038ffbc9d47b06259f6",
+  "crossmatch": {
+    "clean_candidates": 162,
+    "coordinate_matching_used": false,
+    "overlap_candidate_ids": [],
+    "primary_all_required_metrics_finite": 18,
+    "primary_exact_one_to_one": 24,
+    "primary_secondary_same_candidate_overlap": 0,
+    "secondary_exact_one_to_one": 13
+  },
+  "decision": "balanced_source_morphology_pool_established_source_completeness_required",
+  "diversity_gate_inputs": {
+    "boundary_or_discordant": 5,
+    "confirmed_disturbed": 10,
+    "confirmed_relaxed": 3,
+    "eligible_pool_size": 18
+  },
+  "eligible_balanced_metadata_pool_ids": [
+    "ACT-CL_J0206.2-0114",
+    "ACT-CL_J0248.2+0238",
+    "SPT-CLJ0234-5831",
+    "SPT-CLJ0304-4401",
+    "SPT-CLJ0313-5334",
+    "SPT-CLJ0446-5849",
+    "SPT-CLJ0449-4901",
+    "SPT-CLJ0533-5005",
+    "SPT-CLJ0607-4448",
+    "SPT-CLJ0640-5113",
+    "SPT-CLJ0646-6236",
+    "SPT-CLJ2034-5936",
+    "SPT-CLJ2040-4451",
+    "SPT-CLJ2329-5831",
+    "SPT-CLJ2337-5942",
+    "SPT-CLJ2341-5724",
+    "SPT-CLJ2344-4243",
+    "Z2089"
+  ],
+  "gate_results": {
+    "all_four_source_files_hash_exact_and_tables_not_html": true,
+    "crossmatch_is_one_to_one_and_coordinate_free": true,
+    "frozen_primary_state_and_multimetric_rules_reproduced": true,
+    "minimum_balanced_morphology_pool_passes": true,
+    "no_cluster_lensing_target_formula_constant_or_solar_setting_selected": true,
+    "parent_and_clean_frame_hashes_and_decisions_exact": true,
+    "registered_row_counts_and_required_columns_exact": true
+  },
+  "missing_or_unconfirmed_primary_ids": [
+    "SPT-CLJ0151-5954",
+    "SPT-CLJ0156-5541",
+    "SPT-CLJ0329-2330",
+    "SPT-CLJ0459-4947",
+    "SPT-CLJ2236-4555",
+    "SPT-CLJ2258-4044"
+  ],
+  "morphology_class_counts": {
+    "confirmed_disturbed": 10,
+    "confirmed_relaxed": 3,
+    "discordant_extreme": 5,
+    "secure_disturbed_missing_multimetric": 6
+  },
+  "outputs": {
+    "primary_ledger": "results/sigma_v19cl_registered_cluster_morphology_acquisition/primary_crossmatch.csv",
+    "report": "results/sigma_v19cl_registered_cluster_morphology_acquisition/report.json",
+    "secondary_ledger": "results/sigma_v19cl_registered_cluster_morphology_acquisition/secondary_crossmatch.csv"
+  },
+  "protocol_version": "SIGMA-V19CL-REGISTERED-CLUSTER-MORPHOLOGY-ACQUISITION-1.0.0",
+  "required_next_work": [
+    "Apply the already frozen source-completeness, redshift, source-side mass, gas/BCG concentration, and single-core/multipeak metadata gates without opening lensing outcomes.",
+    "Seal raw image positions and comparator predictions separately before admitting the balanced final six.",
+    "Complete the independent V19W5 response recovery and unchanged source-only chain before V19BS can authorize any new action."
+  ],
+  "secondary_crosscheck_disposition": "No same-candidate primary/secondary overlap; preserve secondary rows for later independent descriptive checks without inventing coordinate or lensing-based aliases.",
+  "source_integrity": {
+    "hashes_exact": {
+      "primary_readme": true,
+      "primary_table": true,
+      "secondary_readme": true,
+      "secondary_table": true
+    },
+    "primary_rows": 964,
+    "secondary_rows": 150
+  },
+  "status": "completed_registered_cluster_morphology_acquisition"
+}

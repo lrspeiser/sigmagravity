@@ -1,0 +1,72 @@
+{
+  "protocol_version": "SIGMA-V19CM-FINE-WMAP-EDGE-DIAGNOSTIC-1.0.0",
+  "status": "frozen after V19CK identified the exact coarse-WMAP chip-edge failure and before changing WMAP binning, creating a diagnostic response, authorizing a final retry, or resuming any scientific chain",
+  "purpose": "Test whether a uniformly finer detector-coordinate WMAP resolves the diagnosed bin-center aliasing while retaining the exact events, region, energy range, weighted ARF, weighted RMF, response reference, calibration, and source/background treatment.",
+  "parent": {
+    "path": "results/sigma_v19ck_single_rmf_diagnostic/report.json",
+    "sha256": "00a7558e2192d733c86425fc7e9904080e8348a3b7dbf0388452adee22ed447d",
+    "required_decision": "direct_mkacisrmf_failure_captured_remediation_preregistration_required",
+    "direct_log_sha256": "3999c84ef113c7c10873f9385aa3c524c7513ce74e5302f621fc1294e5817cbb",
+    "required_error": "No non-zero pixels map to valid chip coordinates in the supplied wmap"
+  },
+  "input": {
+    "source": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100/partial/c3432/e/s.fits",
+    "source_sha256": "482177e164e8d8ea51a1a85934420289ae8997389b24ab5874cce421d6d8a7c2",
+    "background": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100/partial/c3432/e/b.fits",
+    "background_sha256": "90b33f88b3841f60587377cbed17e9d6a2784a44caec0277a23f10e5ae40c6d3",
+    "cell": "BULLET_bin384_obs5358_ccd0"
+  },
+  "environment": {
+    "prefix": "/home/henry/miniforge3/envs/sigma-ciao-4.18",
+    "specextract_sha256": "eeba3a0b148409c9f0d1d324e4527cfa7071c0834d6edd5a14321b9acf6a89d2"
+  },
+  "diagnostic": {
+    "workspace": "/home/henry/sigma-v19cm-fine-wmap-diagnostic/v100/c3432",
+    "only_science_setting_difference_from_failed_attempt": "binwmap=det=1 instead of binwmap=det=8",
+    "reason": "Finer detector bins move the WMAP samples from invalid coarse-bin centers back to the actually observed valid chip pixels without changing or discarding an event.",
+    "unchanged_settings": {
+      "fov": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5358.fov",
+      "aspect": "/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5358/corrected_asol1.lis",
+      "mask": "/home/henry/sigma-v19f-chandra/repro/BULLET/5358/acisf05358_000N004_msk1.fits",
+      "badpix": "/home/henry/sigma-v19f-chandra/repro/BULLET/5358/acisf05358_repro_bpix1.fits",
+      "refcoord": "104.60277454729300,-55.96447902904857",
+      "weight": "yes",
+      "weight_rmf": "yes",
+      "energy": "0.3:11.0:0.01",
+      "energy_wmap": "500:7000",
+      "binarfwmap": 1,
+      "background_response": "no"
+    }
+  },
+  "success_rule": {
+    "specextract_returncode_zero": true,
+    "all_four_products_nonempty": true,
+    "arf_finite_with_positive_bins": true,
+    "rmf_finite_with_nonzero_elements": true,
+    "source_pha_links_all_four_products": true,
+    "recovery_inputs_and_logs_unchanged": true,
+    "success_authorizes_only_separate_final_recovery_preregistration": true
+  },
+  "authorization": {
+    "run_one_fine_wmap_diagnostic": true,
+    "modify_recovery_archive": false,
+    "admit_diagnostic_products": false,
+    "authorize_final_retry": false,
+    "fallback_to_unweighted_or_move_response_position": false,
+    "open_target_or_change_gravity_physics": false
+  },
+  "outputs": {
+    "report": "results/sigma_v19cm_fine_wmap_edge_diagnostic/report.json",
+    "log": "results/sigma_v19cm_fine_wmap_edge_diagnostic/specextract_det1.log"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19cm_fine_wmap_edge_diagnostic.py",
+    "tests": "tests/test_sigma_v19cm_fine_wmap_edge_diagnostic.py"
+  },
+  "claim_boundary": [
+    "V19CM tests one numerical response-map resolution change; it does not alter or test the gravity theory.",
+    "No output from this workspace is a final V19W5 checkpoint.",
+    "Failure does not authorize an unweighted response, a moved response position, or cell exclusion.",
+    "Success requires a separate frozen recovery-and-equivalence audit before V19BR may resume."
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "protocol_version": "SIGMA-V19CK-SINGLE-RMF-DIAGNOSTIC-1.0.0",
+  "status": "frozen after two byte-identical one-cell RMF failures and before any diagnostic rerun, response-placement change, cell exclusion, final retry, V19BR resumption, target access, action selection, or gravity-parameter change",
+  "purpose": "Capture the underlying CIAO mkacisrmf error for the sole failed response cell at maximum verbosity in a copied, non-admitted diagnostic workspace without modifying either recovery attempt or any completed checkpoint.",
+  "parent": {
+    "v19ci_report": {
+      "path": "results/sigma_v19ci_single_rmf_retry/report.json",
+      "sha256": "3f6d5724915faa820bce027725af13b28bc80b662ebd924d83b002951163c355",
+      "required_status": "single_rmf_retry_failed_closed"
+    },
+    "v19ci_config": {
+      "path": "configs/sigma_v19ci_single_rmf_retry.json",
+      "sha256": "a1d0d8ad341b09b59c73acda351e1894316243c44a09f47a91ce571d75e538ba"
+    },
+    "v19ci_runner": {
+      "path": "scripts/run_sigma_v19ci_single_rmf_retry.py",
+      "sha256": "67e3e69966a5f7351b7c7660726055822cef3999d75336f604f79f9907f386b4"
+    }
+  },
+  "failure_boundary": {
+    "cell": "BULLET_bin384_obs5358_ccd0",
+    "token": "c3432",
+    "scratch": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100",
+    "current_partial": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100/partial/c3432",
+    "preserved_attempt1": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100/failed_attempts/c3432_rmf_attempt1",
+    "failed_log_relative": "logs/specextract.log",
+    "failed_log_sha256_both_attempts": "ee083a7ff3e68d11498a68ede5a111c92b518907c3e10dd1fcbd84989a72933c",
+    "current_source_subset_sha256": "482177e164e8d8ea51a1a85934420289ae8997389b24ab5874cce421d6d8a7c2",
+    "current_background_subset_sha256": "90b33f88b3841f60587377cbed17e9d6a2784a44caec0277a23f10e5ae40c6d3",
+    "completed_recovery_checkpoints": 383,
+    "failed_cell_completed_checkpoint_absent": true
+  },
+  "environment": {
+    "name": "sigma-ciao-4.18",
+    "prefix": "/home/henry/miniforge3/envs/sigma-ciao-4.18",
+    "specextract_sha256": "eeba3a0b148409c9f0d1d324e4527cfa7071c0834d6edd5a14321b9acf6a89d2",
+    "mkacisrmf_sha256": "eb233033a203ff89f64de54f0cef5c568fb908430fd57c5481d02bad458a983a"
+  },
+  "diagnostic": {
+    "workspace": "/home/henry/sigma-v19ck-rmf-diagnostic/v100/c3432",
+    "copy_only_materialized_source_and_background_subsets": true,
+    "same_scientific_inputs_and_response_settings": true,
+    "allowed_operational_differences": [
+      "fresh diagnostic-only output root",
+      "verbose=5 instead of verbose=1",
+      "tmpdir and PFILES isolated inside diagnostic workspace"
+    ],
+    "response_settings": {
+      "fov": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5358.fov",
+      "aspect": "/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5358/corrected_asol1.lis",
+      "mask": "/home/henry/sigma-v19f-chandra/repro/BULLET/5358/acisf05358_000N004_msk1.fits",
+      "badpix": "/home/henry/sigma-v19f-chandra/repro/BULLET/5358/acisf05358_repro_bpix1.fits",
+      "refcoord": "104.60277454729300,-55.96447902904857",
+      "weight": "yes",
+      "weight_rmf": "yes",
+      "energy": "0.3:11.0:0.01",
+      "energy_wmap": "500:7000",
+      "binwmap": "det=8",
+      "ccd_id": 0
+    },
+    "direct_mkacisrmf_after_failed_specextract": true,
+    "direct_mkacisrmf_role": "Expose the swallowed underlying error using the PHA WMAP created by the failed verbose specextract; it is diagnostic only and never admitted as a final response."
+  },
+  "authorization": {
+    "create_one_fresh_nonadmitted_diagnostic_workspace": true,
+    "run_verbose_specextract_once_on_copied_subsets": true,
+    "run_direct_verbose_mkacisrmf_once_if_needed": true,
+    "modify_recovery_scratch_or_completed_checkpoints": false,
+    "drop_cell_or_change_manifest": false,
+    "change_response_position_weighting_energy_or_science_setting": false,
+    "authorize_final_recovery_retry": false,
+    "resume_v19br": false,
+    "open_lensing_halo_action_gravity_or_holdout": false,
+    "derive_or_select_action_or_change_gravity_parameter": false
+  },
+  "required_gates": {
+    "parents_and_ciao_executables_hash_exact": true,
+    "two_failed_logs_byte_identical_and_exact": true,
+    "current_copied_subsets_hash_exact": true,
+    "recovery_has_383_completed_and_failed_checkpoint_absent": true,
+    "diagnostic_workspace_absent_before_single_run": true,
+    "diagnostic_inputs_copied_without_modifying_recovery": true,
+    "verbose_error_and_direct_mkacisrmf_disposition_recorded": true,
+    "no_final_retry_target_action_or_gravity_access": true
+  },
+  "outputs": {
+    "report": "results/sigma_v19ck_single_rmf_diagnostic/report.json",
+    "specextract_log": "results/sigma_v19ck_single_rmf_diagnostic/specextract_verbose.log",
+    "mkacisrmf_log": "results/sigma_v19ck_single_rmf_diagnostic/mkacisrmf_direct_verbose.log"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ck_single_rmf_diagnostic.py",
+    "tests": "tests/test_sigma_v19ck_single_rmf_diagnostic.py"
+  },
+  "claim_boundary": [
+    "V19CK diagnoses one response-generation failure; it does not change or test Sigma Gravity.",
+    "A successful diagnostic product is not a recovered final response and cannot enter V19W5.",
+    "Any remediation must be separately preregistered after the exact cause is known and must retain the failed cell under physically equivalent response rules.",
+    "No additional blind retry is authorized."
+  ]
+}

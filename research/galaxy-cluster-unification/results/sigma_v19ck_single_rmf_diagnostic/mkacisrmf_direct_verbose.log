@@ -1,0 +1,480 @@
+
+	*** mkacisrmf parameter inputs ***
+	          input file: CALDB
+	         output file: /home/henry/sigma-v19ck-rmf-diagnostic/v100/c3432/direct_mkacisrmf.rmf
+	           wmap file: /home/henry/sigma-v19ck-rmf-diagnostic/v100/c3432/products/BULLET_bin384_obs5358_ccd0.pi[WMAP]
+	              energy: 0.3:11.0:0.01
+	             channel: 1:1024:1
+	            chantype: PI
+	              ccd_id: 
+	               chipx: 
+	               chipy: 
+	         contour lvl: 100
+	            log file: 
+	           gain file: CALDB
+	            asolfile: 
+	             obsfile: 
+	  pixlib param. file: geom
+	           threshold: 1.00e-06
+	clobber(1=yes, 0=no): 0
+	       verbose level: 5
+
+
+caldblib.cc:152#:  setTimeZoneUTC(True): set TZ to UTC from 'NONE'.
+
+caldblib.cc:167#:  setTimeZoneUTC(False): revert TZ to default 'NONE' 
+
+Set 'StartTime=2004-08-15T22:07:30'
+caldblib.cc:152#:  setTimeZoneUTC(True): set TZ to UTC from 'NONE'.
+
+caldblib.cc:167#:  setTimeZoneUTC(False): revert TZ to default 'NONE' 
+
+Set 'StopTime=2004-08-16T07:28:03'
+
+Set  'GRATING=NONE'
+
+Set  'CTI_APP=PPPPPBPBPP'
+
+Set  'FP_TEMP=153.446'
+
+
+   Telescope: CHANDRA
+  Instrument: ACIS
+        Data: SC_MATRIX
+    Detector: -
+  Start-Date: 2004-08-15
+  Start-Time: 22:07:30
+   Stop-Date: 2004-08-16
+   Stop-Time: 07:28:03
+  Expression: GRATING=NONE
+              CTI_APP=PPPPPBPBPP
+              FP_TEMP=153.446
+      Config: /home/henry/miniforge3/envs/sigma-ciao-4.18/CALDB/software/tools/caldb.config
+   CXC-caldb: v4.1.1
+
+caldblib.cc:668#:  querying: GRATING = NONE
+caldblib.cc:693#:  The valid data-set after product/param querying (Spec-r1) are:
+   CAL_VSD  STRING -- 21 Rows
+                                                  1999-09-14
+                                                  2000-01-29
+                                                  2020-07-01
+                                                  2000-01-29
+                                                  2020-07-01
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+   CAL_VED  STRING -- 21 Rows
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+  CAL_FILE  STRING -- 21 Rows
+                            acisD1999-09-16p2_respN0005.fits
+                            acisD2000-01-29p2_respN0005.fits
+                            acisD2000-01-29p2_respN0005.fits
+                            acisD2000-01-29p2_respN0005.fits
+                            acisD2000-01-29p2_respN0005.fits
+                    acisD2000-01-29p2_respN0009_105-107.fits
+                    acisD2000-01-29p2_respN0009_105-107.fits
+                    acisD2000-01-29p2_respN0009_107-109.fits
+                    acisD2000-01-29p2_respN0009_107-109.fits
+                    acisD2000-01-29p2_respN0009_109-111.fits
+                    acisD2000-01-29p2_respN0009_109-111.fits
+                    acisD2000-01-29p2_respN0009_111-113.fits
+                    acisD2000-01-29p2_respN0009_111-113.fits
+                    acisD2000-01-29p2_respN0009_113-115.fits
+                    acisD2000-01-29p2_respN0009_113-115.fits
+                    acisD2000-01-29p2_respN0009_115-117.fits
+                    acisD2000-01-29p2_respN0009_115-117.fits
+                    acisD2000-01-29p2_respN0009_117-119.fits
+                    acisD2000-01-29p2_respN0009_117-119.fits
+                    acisD2000-01-29p2_respN0009_119-120.fits
+                    acisD2000-01-29p2_respN0009_119-120.fits
+
+
+caldbindex.cc:1143#:  Reject 5 column rows from CBD querying 'CTI_APP=PPPPPBPBPP'.
+
+caldbindex.cc:1143#:  Reject 14 column rows from CBD querying 'FP_TEMP=153.446'.
+
+caldblib.cc:640#:  The valid data-set after boundary-condition querying (Spec-r2) are:
+   CAL_VSD  STRING -- 2 Rows
+                                                  2000-01-29
+                                                  2000-01-29
+   CAL_CBD  STRING -- 2 Rows
+                    CTI_APP(PPPPPBPBPP) CCD_ID(0-4,6-6,8-9) FP_TEMP(148.15-153.96)K NONE NONE NONE NONE NONE NONE
+                    FP_TEMP(148.15-153.96)K CTI_APP(PPPPPBPBPP) CCD_ID(5-5,7-7) NONE NONE NONE NONE NONE NONE
+  CAL_FILE  STRING -- 2 Rows
+                    acisD2000-01-29p2_respN0009_119-120.fits
+                    acisD2000-01-29p2_respN0009_119-120.fits
+
+
+caldblib.cc:152#:  setTimeZoneUTC(True): set TZ to UTC from 'NONE'.
+
+caldblib.cc:545#:  retrieved 'Start-Stop' querying at 2004-08-15T22:07:30 - 2004-08-16T07:28:03
+
+caldbindex.cc:1355#:  has both vsd and ref cols.
+
+caldbindex.cc:1373#:  REF_TIME nullval is defined in key-config with 0.0.
+
+caldbindex.cc:1442#:  END_TIME nullval is defined in key-config with 0.0. set nullval to 999999.
+
+caldbindex.cc:1518#:  ref_nul-end_nul: 0 - 999999
+
+caldbindex.cc:1655#:  
+  START Time input: '2004-08-15T22:07:30' or mjd: 53232.921875000000
+    END Time input: '2004-08-16T07:28:03' or mjd: 53233.311145833330
+
+caldbindex.cc:1720#:  ref-mjd - end-mjd: 51572.833333299997 - 999999.000000000000 or vsd='2000-01-29T20:00:00'
+
+caldbindex.cc:1720#:  ref-mjd - end-mjd: 51572.833333299997 - 999999.000000000000 or vsd='2000-01-29T20:00:00'
+
+caldbindex.cc:2088#:  largest start-time at 2000-01-29T20:00:00 or MJD=51572.833333299997
+
+caldbindex.cc:2170#:  all have open-ends and all valid.
+
+caldblib.cc:589#:  The valid data-set after time querying (Spec-r3) are:
+   CAL_VSD  STRING -- 2 Rows
+                                                  2000-01-29
+                                                  2000-01-29
+   CAL_VST  STRING -- 2 Rows
+                                                    20:00:00
+                                                    20:00:00
+   CAL_VED  STRING -- 2 Rows
+                                                            
+                                                            
+   CAL_VET  STRING -- 2 Rows
+                                                            
+                                                            
+  CAL_FILE  STRING -- 2 Rows
+                    acisD2000-01-29p2_respN0009_119-120.fits
+                    acisD2000-01-29p2_respN0009_119-120.fits
+
+
+caldblib.cc:167#:  setTimeZoneUTC(False): revert TZ to default 'NONE' 
+
+caldbindex.cc:1989#:  0> cal_qual = 0
+
+caldbindex.cc:1989#:  1> cal_qual = 0
+
+caldbindex.cc:2001#:  the best quality at 0
+
+caldbindex.cc:2231#:  FIDELITY column key-config nullval is '0.000000000000'.
+
+caldbindex.cc:2231#:  FIDELITY column key-config nullval is '0.000000000000'.
+
+caldbindex.cc:1860#:  
+0> Fidelity = 8.00000000000000
+
+caldbindex.cc:1860#:  
+1> Fidelity = 8.00000000000000
+
+caldbindex.cc:1875#:  the highest-lowest fidelity at 8.000000000000 - 8.000000000000
+
+caldbindex.cc:2246#:  fidel ranged at 8.000000000000 - 8.000000000000
+
+caldblib.cc:471#:  The valid data-set after fidelity querying (Spec-r5) are:
+   CAL_VSD  STRING -- 2 Rows
+                                                  2000-01-29
+                                                  2000-01-29
+   CAL_VED  STRING -- 2 Rows
+                                                            
+                                                            
+  FIDELITY  DOUBLE -- 2 Rows
+                                            8.00000000000000
+                                            8.00000000000000
+  CAL_FILE  STRING -- 2 Rows
+                    acisD2000-01-29p2_respN0009_119-120.fits
+                    acisD2000-01-29p2_respN0009_119-120.fits
+
+
+WARNING: find multiple files(2) and give the first file.
+CALDB -> /home/henry/miniforge3/envs/sigma-ciao-4.18/CALDB/data/chandra/acis/p2_resp/acisD2000-01-29p2_respN0009_119-120.fits
+
+others -> /home/henry/miniforge3/envs/sigma-ciao-4.18/CALDB/data/chandra/acis/p2_resp/acisD2000-01-29p2_respN0009_119-120.fits
+caldblib.cc:152#:  setTimeZoneUTC(True): set TZ to UTC from 'NONE'.
+
+caldblib.cc:167#:  setTimeZoneUTC(False): revert TZ to default 'NONE' 
+
+Set 'StartTime=2004-08-15T22:07:30'
+caldblib.cc:152#:  setTimeZoneUTC(True): set TZ to UTC from 'NONE'.
+
+caldblib.cc:167#:  setTimeZoneUTC(False): revert TZ to default 'NONE' 
+
+Set 'StopTime=2004-08-16T07:28:03'
+
+Set  'GRATING=NONE'
+
+Set  'CTI_APP=PPPPPBPBPP'
+
+Set  'FP_TEMP=153.446'
+
+Set  'OBS_MODE=POINTING'
+
+
+   Telescope: CHANDRA
+  Instrument: ACIS
+        Data: DET_GAIN
+    Detector: -
+  Start-Date: 2004-08-15
+  Start-Time: 22:07:30
+   Stop-Date: 2004-08-16
+   Stop-Time: 07:28:03
+  Expression: GRATING=NONE
+              CTI_APP=PPPPPBPBPP
+              FP_TEMP=153.446
+              OBS_MODE=POINTING
+      Config: /home/henry/miniforge3/envs/sigma-ciao-4.18/CALDB/software/tools/caldb.config
+   CXC-caldb: v4.1.1
+
+caldblib.cc:668#:  querying: GRATING = NONE
+caldblib.cc:693#:  The valid data-set after product/param querying (Spec-r1) are:
+   CAL_VSD  STRING -- 19 Rows
+                                                  1999-07-22
+                                                  1999-08-13
+                                                  1999-09-14
+                                                  1999-09-14
+                                                  1999-09-11
+                                                  2000-01-29
+                                                  2000-08-12
+                                                  2000-08-12
+                                                  2000-01-29
+                                                  2020-07-01
+                                                  2000-01-29
+                                                  2020-07-01
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2020-07-01
+   CAL_VED  STRING -- 19 Rows
+                                                  1999-08-13
+                                                  1999-09-16
+                                                  2000-01-29
+                                                  2000-08-12
+                                                  2000-08-12
+                                                  2000-08-13
+                                                            
+                                                            
+                                                  2000-08-13
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+  CAL_FILE  STRING -- 19 Rows
+                               acisD1999-07-22gainN0002.fits
+                               acisD1999-08-13gainN0002.fits
+                               acisD1999-09-16gainN0005.fits
+                               acisD1999-09-16gainN0006.fits
+                               acisD1999-09-16gainN0006.fits
+                               acisD2000-01-29gainN0005.fits
+                               acisD2000-01-29gainN0005.fits
+                               acisD2000-01-29gainN0005.fits
+                               acisD2000-01-29gainN0005.fits
+                               acisD2000-01-29gainN0005.fits
+                           acisD2000-01-29gain_ctiN0005.fits
+                           acisD2000-01-29gain_ctiN0005.fits
+                           acisD2000-01-29gain_ctiN0006.fits
+                           acisD2000-01-29gain_ctiN0006.fits
+                           acisD2000-01-29gain_ctiN0007.fits
+                           acisD2000-01-29gain_ctiN0007.fits
+                           acisD2000-01-29gain_ctiN0008.fits
+                           acisD2000-01-29gain_ctiN0008.fits
+                           acisD2000-01-29gain_ctiN0008.fits
+
+
+caldbindex.cc:1143#:  Reject 12 column rows from CBD querying 'CTI_APP=PPPPPBPBPP'.
+
+caldbindex.cc:1143#:  Reject 3 column rows from CBD querying 'OBS_MODE=POINTING'.
+
+caldblib.cc:640#:  The valid data-set after boundary-condition querying (Spec-r2) are:
+   CAL_VSD  STRING -- 4 Rows
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2020-07-01
+   CAL_CBD  STRING -- 4 Rows
+                    FP_TEMP(151.16-164.16)K CTI_APP(PPPPPBPBPP) OBS_MODE(POINTING,RASTER,SCAN,SLEW) NONE NONE NONE NONE NONE NONE
+                    CTI_APP(PPPPPBPBPP) FP_TEMP(151.16-164.16)K OBS_MODE(POINTING,RASTER,SCAN,SLEW) NONE NONE NONE NONE NONE NONE
+                    CTI_APP(PPPPPBPBPP) FP_TEMP(151.16-164.16)K OBS_MODE(POINTING,RASTER,SCAN,SLEW) NONE NONE NONE NONE NONE NONE
+                    CTI_APP(PPPPPBPBPP) FP_TEMP(147.15-178.16)K OBS_MODE(POINTING,RASTER,SCAN,SLEW) NONE NONE NONE NONE NONE NONE
+  CAL_FILE  STRING -- 4 Rows
+                           acisD2000-01-29gain_ctiN0006.fits
+                           acisD2000-01-29gain_ctiN0007.fits
+                           acisD2000-01-29gain_ctiN0008.fits
+                           acisD2000-01-29gain_ctiN0008.fits
+
+
+caldblib.cc:152#:  setTimeZoneUTC(True): set TZ to UTC from 'NONE'.
+
+caldblib.cc:545#:  retrieved 'Start-Stop' querying at 2004-08-15T22:07:30 - 2004-08-16T07:28:03
+
+caldbindex.cc:1655#:  
+  START Time input: '2004-08-15T22:07:30' or mjd: 53232.921875000000
+    END Time input: '2004-08-16T07:28:03' or mjd: 53233.311145833330
+
+caldbindex.cc:1720#:  ref-mjd - end-mjd: 51572.833333299997 - 999999.000000000000 or vsd='2000-01-29T20:00:00'
+
+caldbindex.cc:1720#:  ref-mjd - end-mjd: 51572.833333299997 - 999999.000000000000 or vsd='2000-01-29T20:00:00'
+
+caldbindex.cc:1720#:  ref-mjd - end-mjd: 51572.833333299997 - 999999.000000000000 or vsd='2000-01-29T20:00:00'
+
+caldbindex.cc:1720#:  ref-mjd - end-mjd: 59031.000000000000 - 999999.000000000000 or vsd='2020-07-01T00:00:00'
+
+caldbindex.cc:1757#:  remove '2020-07-01T00:00:00' - '' as it doesn't cover user's spec of '2004-08-15T22:07:30' - '2004-08-16T07:28:03'.
+
+caldbindex.cc:1810#:  Reject 1 column rows in date/time querying from previous data set rows 4
+
+caldbindex.cc:2088#:  largest start-time at 2000-01-29T20:00:00 or MJD=51572.833333299997
+
+caldbindex.cc:2170#:  all have open-ends and all valid.
+
+caldblib.cc:589#:  The valid data-set after time querying (Spec-r3) are:
+   CAL_VSD  STRING -- 3 Rows
+                                                  2000-01-29
+                                                  2000-01-29
+                                                  2000-01-29
+   CAL_VST  STRING -- 3 Rows
+                                                    20:00:00
+                                                    20:00:00
+                                                    20:00:00
+   CAL_VED  STRING -- 3 Rows
+                                                            
+                                                            
+                                                            
+   CAL_VET  STRING -- 3 Rows
+                                                            
+                                                            
+                                                            
+  CAL_FILE  STRING -- 3 Rows
+                           acisD2000-01-29gain_ctiN0006.fits
+                           acisD2000-01-29gain_ctiN0007.fits
+                           acisD2000-01-29gain_ctiN0008.fits
+
+
+caldblib.cc:167#:  setTimeZoneUTC(False): revert TZ to default 'NONE' 
+
+caldbindex.cc:1989#:  0> cal_qual = 5
+
+caldbindex.cc:1989#:  1> cal_qual = 4
+
+caldbindex.cc:1989#:  2> cal_qual = 0
+
+caldbindex.cc:2001#:  the best quality at 0
+
+caldbindex.cc:2009#:  remove row#1 for 'qualilty>best': 5 > 0
+
+caldbindex.cc:2009#:  remove row#2 for 'qualilty>best': 4 > 0
+
+caldbindex.cc:2025#:  Remove 2 column rows from 3
+
+caldbindex.cc:2028#:  the updated index - 
+  CAL_QUAL   SHORT -- 1 Rows
+                                                           0
+  CAL_FILE  STRING -- 1 Rows
+                           acisD2000-01-29gain_ctiN0008.fits
+
+
+caldbindex.cc:2231#:  FIDELITY column key-config nullval is '0.000000000000'.
+
+caldbindex.cc:2231#:  FIDELITY column key-config nullval is '0.000000000000'.
+
+caldbindex.cc:1860#:  
+0> Fidelity = 1.00000000000000
+
+caldbindex.cc:1875#:  the highest-lowest fidelity at 1.000000000000 - 1.000000000000
+
+caldbindex.cc:2246#:  fidel ranged at 1.000000000000 - 1.000000000000
+
+caldblib.cc:471#:  The valid data-set after fidelity querying (Spec-r5) are:
+   CAL_VSD  STRING -- 1 Rows
+                                                  2000-01-29
+   CAL_VED  STRING -- 1 Rows
+                                                            
+  FIDELITY  DOUBLE -- 1 Rows
+                                            1.00000000000000
+  CAL_FILE  STRING -- 1 Rows
+                           acisD2000-01-29gain_ctiN0008.fits
+
+
+CALDB -> /home/henry/miniforge3/envs/sigma-ciao-4.18/CALDB/data/chandra/acis/det_gain/acisD2000-01-29gain_ctiN0008.fits
+
+Reading detector image.
+
+WARNING: Can't find ONTIME1 in wmap. Take 'ONTIME' value as default.
+
+WARNING: Can't find ONTIME2 in wmap. Take 'ONTIME' value as default.
+
+WARNING: Can't find ONTIME3 in wmap. Take 'ONTIME' value as default.
+
+WARNING: Can't find ONTIME4 in wmap. Take 'ONTIME' value as default.
+
+WARNING: Can't find ONTIME5 in wmap. Take 'ONTIME' value as default.
+
+WARNING: Can't find ONTIME6 in wmap. Take 'ONTIME' value as default.
+
+WARNING: Can't find ONTIME7 in wmap. Take 'ONTIME' value as default.
+
+WARNING: Can't find ONTIME8 in wmap. Take 'ONTIME' value as default.
+
+WARNING: Can't find ONTIME9 in wmap. Take 'ONTIME' value as default.
+
+CCDID=0, (chipx_bin, chipy_bin) = (32,32)
+CCDID=1, (chipx_bin, chipy_bin) = (32,32)
+CCDID=2, (chipx_bin, chipy_bin) = (32,32)
+CCDID=3, (chipx_bin, chipy_bin) = (32,32)
+CCDID=4, (chipx_bin, chipy_bin) = (32,32)
+CCDID=5, (chipx_bin, chipy_bin) = (32,32)
+CCDID=6, (chipx_bin, chipy_bin) = (32,32)
+CCDID=7, (chipx_bin, chipy_bin) = (32,32)
+CCDID=8, (chipx_bin, chipy_bin) = (32,32)
+CCDID=9, (chipx_bin, chipy_bin) = (32,32)
+Initializing Pixlib
+Asol alignments: dy=-0	dz=-0	dtheta=0
+
+WARNING: Couldn't determine chip position for det at (4044.500000,4196.500000). Skipping pixel
+
+WARNING: Couldn't determine chip position for det at (4044.500000,4212.500000). Skipping pixel
+
+WARNING: Did not find 'GRATTYPE' in supplied header, skipping it
+WARNING: Did not find 'CCD_ID' in supplied header, skipping it
+WARNING: Did not find 'GRATTYPE' in supplied header, skipping it
+# /home/henry/miniforge3/envs/sigma-ciao-4.18/bin/mkacisrmf (CIAO 4.18.0): 
+ERROR: No non-zero pixels map to valid chip coordinates in the supplied wmap='/home/henry/sigma-v19ck-rmf-diagnostic/v100/c3432/products/BULLET_bin384_obs5358_ccd0.pi[WMAP]' file

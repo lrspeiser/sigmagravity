@@ -1,0 +1,82 @@
+{
+  "protocol_version": "SIGMA-V19CL-REGISTERED-CLUSTER-MORPHOLOGY-ACQUISITION-1.0.0",
+  "status": "post-preregistration acquisition and deterministic crossmatch; no cluster admitted and no lensing, halo, Sigma, action, constant, or Solar-System outcome opened",
+  "purpose": "Acquire the two V19CJ-registered source-side morphology catalogs, verify their provenance byte-for-byte, and apply the frozen identifier, uncertainty, and multimetric rules to the 162 clean V19CH candidates.",
+  "parent": {
+    "path": "results/sigma_v19cj_cluster_morphology_preregistration/report.json",
+    "sha256": "2af2b76c025fa18e0412cf77d0f5e1efd0c2e94b62efaae73b2d37600f713ce4",
+    "required_decision": "registered_morphology_tables_may_be_acquired_under_frozen_rule"
+  },
+  "clean_frame": {
+    "path": "results/sigma_v19ch_jwst_slice_clean_source_frame/report.json",
+    "sha256": "4a3e70f4bb91681a4ab2e9b1bd63faa62a7e9667b91db0d932a8e437921b7292",
+    "required_candidates": 162
+  },
+  "sources": {
+    "primary_readme": {
+      "path": "data/raw/sigma_v19cl_registered_cluster_morphology/yuan_han_2020/ReadMe",
+      "sha256": "35a29e01d3b5244ac91b6b39feae4f67b6e8a1bc3d65b8061dd50796783b130d"
+    },
+    "primary_table": {
+      "path": "data/raw/sigma_v19cl_registered_cluster_morphology/yuan_han_2020/table1.vizier.tsv",
+      "sha256": "651c62f158fcfb7965f4881b4e5d7b8f2c53efbd55721b7fafc909b885e61910",
+      "rows": 964,
+      "catalog": "J/MNRAS/497/5485/table1",
+      "retrieval_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=J%2FMNRAS%2F497%2F5485%2Ftable1"
+    },
+    "secondary_readme": {
+      "path": "data/raw/sigma_v19cl_registered_cluster_morphology/zhang_2023/ReadMe",
+      "sha256": "a2f0b3f10cfd65797e22a5eb1ae92c52c52429fc55ac2c39ee249114eacaeaf7"
+    },
+    "secondary_table": {
+      "path": "data/raw/sigma_v19cl_registered_cluster_morphology/zhang_2023/tablea1.vizier.tsv",
+      "sha256": "906ca12980e966f17d80f0a8442d58ba0fba52ccfb2327a618e166b118de1983",
+      "rows": 150,
+      "catalog": "J/A+A/672/A42/tablea1",
+      "retrieval_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=J%2FA%2BA%2F672%2FA42%2Ftablea1"
+    }
+  },
+  "frozen_rule_reference": {
+    "crossmatch": "normalized exact catalog identifier equality only; no coordinates",
+    "secure_relaxed": "delta+e_delta < 0",
+    "secure_disturbed": "delta-e_delta > 0",
+    "boundary_intermediate": "delta-e_delta <= 0 <= delta+e_delta",
+    "relaxed_multimetric_directions": "logc at or above clean finite median, logw and logP3/P0 at or below their clean finite medians",
+    "disturbed_multimetric_directions": "opposite directions",
+    "confirmation": "at least two of three multimetric direction votes",
+    "secondary_role": "independent descriptive cross-check only; never replaces primary state"
+  },
+  "required_gates": {
+    "parent_and_clean_frame_hashes_and_decisions_exact": true,
+    "all_four_source_files_hash_exact_and_tables_not_html": true,
+    "registered_row_counts_and_required_columns_exact": true,
+    "crossmatch_is_one_to_one_and_coordinate_free": true,
+    "frozen_primary_state_and_multimetric_rules_reproduced": true,
+    "minimum_balanced_morphology_pool_passes": true,
+    "no_cluster_lensing_target_formula_constant_or_solar_setting_selected": true
+  },
+  "authorization": {
+    "report_source_side_morphology_values": true,
+    "construct_morphology_eligible_pool": true,
+    "select_or_admit_final_cluster": false,
+    "open_raw_lensing_coordinates_or_halo_map": false,
+    "score_or_fit_sigma_gravity": false,
+    "select_or_modify_action_or_constants": false,
+    "perform_detailed_solar_optimization": false
+  },
+  "outputs": {
+    "report": "results/sigma_v19cl_registered_cluster_morphology_acquisition/report.json",
+    "primary_ledger": "results/sigma_v19cl_registered_cluster_morphology_acquisition/primary_crossmatch.csv",
+    "secondary_ledger": "results/sigma_v19cl_registered_cluster_morphology_acquisition/secondary_crossmatch.csv"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19cl_registered_cluster_morphology_acquisition.py",
+    "tests": "tests/test_sigma_v19cl_registered_cluster_morphology_acquisition.py"
+  },
+  "claim_boundary": [
+    "This is a source-selection result, not evidence for Sigma Gravity.",
+    "The eligible morphology pool may be filtered only by the remaining preregistered source completeness, redshift, source-side mass, gas/BCG concentration, and multipeak-layout axes.",
+    "No object is admitted to the final six and no raw lensing value is opened here.",
+    "Solar-System consistency remains a later hard veto rather than a tuning target."
+  ]
+}
