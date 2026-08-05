@@ -1,0 +1,43 @@
+{
+  "candidate_coverage": {
+    "candidates": 568,
+    "complete_signed_flux_griz_candidates": 56,
+    "complete_signed_flux_griz_fraction": 0.09859154929577464,
+    "matches": 108,
+    "matching_states": {
+      "multiple": 0,
+      "no_match": 460,
+      "unique": 108
+    },
+    "members_with_at_least_one_complete_candidate": 38
+  },
+  "candidate_selected_or_ranked": false,
+  "claim_boundary": [
+    "V19AW is a catalog coverage and deterministic sky-match audit, not a candidate association or stellar-mass inference.",
+    "A complete signed-flux match establishes that all four flux observables exist; it does not establish membership in the Bullet Cluster.",
+    "Flags and morphology are preserved for a later preregistered likelihood but are not used to improve this gate.",
+    "A pass authorizes a separately frozen color-position-morphology likelihood with explicit null and ambiguous states; it does not authorize a mass, current, lensing, halo or gravity claim."
+  ],
+  "decision": "failed_closed",
+  "field": {
+    "raw_adql_sha256": "1b7c9e014d2513895802b5c365758b2372645033e8a881e9873a3aa874439c7e",
+    "raw_csv_sha256": "ca335600eeb45d2bcd6ae8a4422787d96d4cc077bb835d4899078e7bb77b0de9",
+    "raw_query_url_sha256": "7e43f800499a15a93b7c25e3a1d5dda2619f438db1127f83e04cc61ed260b885",
+    "reused_verified_payload": true,
+    "rows": 2351
+  },
+  "gate_results": {
+    "all_candidates_evaluated": true,
+    "complete_candidate_fraction": false,
+    "every_member_has_complete_candidate": false,
+    "exact_field_rows": true,
+    "no_counterpart_selected": true
+  },
+  "outputs": {
+    "candidate_coverage": "data/derived/sigma_v19aw_delve_candidate_coverage/candidate_coverage.csv",
+    "candidate_coverage_sha256": "8ce26ff2e95c31799ad6a8e6df7363722b849e16ce493206954274c325b31dd7",
+    "candidate_matches": "data/derived/sigma_v19aw_delve_candidate_coverage/candidate_matches.csv",
+    "candidate_matches_sha256": "737a4919b0493e04b82b340aac134eef3d823c52f669648eb3f34fd5b4b6d692"
+  },
+  "protocol_version": "SIGMA-V19AW-DELVE-DR3-CANDIDATE-COVERAGE-1.0.0"
+}
