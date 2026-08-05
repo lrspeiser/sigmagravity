@@ -67,3 +67,5 @@ research/galaxy-cluster-unification/results/sigma_v19r_response_commissioning/fr
 research/galaxy-cluster-unification/configs/sigma_v19s_hi4pi_acquisition.json -text
 research/galaxy-cluster-unification/scripts/download_sigma_v19s_hi4pi.py -text
 research/galaxy-cluster-unification/results/sigma_v19s_hi4pi_acquisition/provenance.json -text -diff
+research/galaxy-cluster-unification/configs/sigma_v19t_temperature_fit_commissioning.json -text
+research/galaxy-cluster-unification/scripts/fit_sigma_v19t_temperature_commissioning.py -text

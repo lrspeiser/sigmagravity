@@ -1,0 +1,85 @@
+{
+  "protocol_version": "SIGMA-V19T-TEMPERATURE-FIT-COMMISSIONING-1.0.0",
+  "status": "frozen after V19R response commissioning and V19S HI4PI acquisition passed, but before grouping the commissioning PHA, loading it in Sherpa, evaluating APEC, fitting a temperature or normalization, reading a fit statistic, opening lensing data, or changing gravity physics",
+  "purpose": "Commission the frozen thermal spectral fit on the deterministic V19R response cell before scheduling the 5082-cell response-and-temperature production batch.",
+  "parents": {
+    "v19r_report": "results/sigma_v19r_response_commissioning/report.json",
+    "v19r_report_sha256": "5653b646c43ca17a36e602e012c6e92f589f0b4e3984365761927af13e44423f",
+    "v19s_provenance": "results/sigma_v19s_hi4pi_acquisition/provenance.json",
+    "v19s_provenance_sha256": "ff37ee2ed99aa3df88815b7564cb72b6881f232175f22d5abbfe045d8919db4e",
+    "inherited_spectral_config": "configs/sigma_v17c_spectral_temperature.json",
+    "inherited_spectral_config_sha256": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86",
+    "inherited_temperature_fitter": "scripts/fit_sigma_v17c_integrated_temperatures.py",
+    "inherited_temperature_fitter_sha256": "aff18b05f20eaa41db1a7be5535a7be96380c938af0f036392b3d6a4d56a390f"
+  },
+  "commissioning_cell": {
+    "cluster": "BULLET",
+    "bin_id": 390,
+    "obsid": 5356,
+    "ccd_id": 2,
+    "selection_rule": "the already-frozen unique maximum source-count V19Q task",
+    "source_events_0p5_7_keV": 625,
+    "background_events_0p5_7_keV": 232
+  },
+  "grouping": {
+    "tool": "CIAO dmgroup 4.18",
+    "grouptype": "NUM_CTS",
+    "minimum_counts": 25,
+    "xcolumn": "CHANNEL",
+    "ycolumn": "COUNTS",
+    "performed_at_freeze": false
+  },
+  "model": {
+    "engine": "Sherpa 4.18 with XSPEC 12.14 and installed AtomDB",
+    "expression": "xstbabs * xsapec",
+    "abundance_table": "aspl (Asplund et al. 2009)",
+    "fit_energy_keV": [
+      0.5,
+      7.0
+    ],
+    "statistic": "chi2xspecvar",
+    "background_treatment": "subtract using the V19R effective blank-sky AREASCAL",
+    "galactic_nh_cm2_fixed": 4.38e20,
+    "redshift_fixed": 0.296,
+    "abundance_solar_fixed": 0.3,
+    "temperature_keV": {
+      "primary_initial": 8.0,
+      "alternate_initials": [
+        3.0,
+        15.0
+      ],
+      "minimum": 1.0,
+      "maximum": 30.0
+    },
+    "normalization": {
+      "initial_rule": "max(1e-8, 0.01 times the background-unsubtracted 0.5-7.0 count rate in counts per second)",
+      "minimum": 1e-10,
+      "maximum": 1.0
+    },
+    "optimization": "levmar; if it fails or returns a non-finite statistic, run neldermead and then one levmar polish",
+    "uncertainty": "Sherpa conf 68-percent profile-likelihood interval for temperature with normalization profiled"
+  },
+  "gates": {
+    "grouped_pha_retains_v19r_background_arf_and_rmf_links": true,
+    "apec_probe_is_finite_positive": true,
+    "all_three_initial_temperatures_fit_successfully": true,
+    "maximum_multistart_fractional_temperature_spread": 0.05,
+    "finite_ordered_68_percent_temperature_interval": true,
+    "maximum_fractional_68_percent_half_width": 0.5,
+    "maximum_reduced_statistic": 1.5,
+    "temperature_and_normalization_not_on_bounds": true,
+    "failure_rule": "retain and report the failed commissioning fit; do not change grouping, energy band, nH, redshift, abundance, statistic, optimizer sequence or parameter bounds"
+  },
+  "interpretation": {
+    "scientific_temperature_map_claimed": false,
+    "reason": "one response cell is an engineering fit commissioning target; thermodynamic science requires every admitted region combined over all supporting observations and CCDs"
+  },
+  "integrity": {
+    "grouped_pha_existed_at_freeze": false,
+    "spectrum_loaded_in_sherpa_at_freeze": false,
+    "temperature_or_normalization_fit_at_freeze": false,
+    "fit_statistic_or_interval_known_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}
