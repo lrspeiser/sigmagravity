@@ -42,5 +42,23 @@ The executable mode is intentionally reserved until the base PIDs disappear:
 python scripts/run_sigma_v19br_target_sealed_terminal_chain.py --execute
 ```
 
+For a long unattended V19W run, the guarded handoff can wait on the exact
+protected PIDs and launch that same executable mode once. It verifies that a
+live PID still belongs to the expected V19W runner, uses an atomic lock
+directory to prevent duplicate launches, and records heartbeats plus the full
+terminal-chain output in a separate log. It does not read science products or
+change any frozen protocol:
+
+```bash
+python scripts/watch_sigma_v19w_then_run_v19br.py \
+  --pid <conda-parent-pid> --pid <python-parent-pid> \
+  --lock-dir /absolute/path/to/v19br-start-lock \
+  --log /absolute/path/to/v19br-watcher.log
+```
+
+The lock is deliberately not removed after a failed launch. A retry therefore
+requires a human audit of the log and terminal artifacts rather than an
+automatic rerun.
+
 The frozen preflight evidence is
 `results/sigma_v19br_target_sealed_terminal_chain/preflight_report.json`.
