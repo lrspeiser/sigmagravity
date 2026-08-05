@@ -1,0 +1,120 @@
+{
+  "protocol_version": "SIGMA-V19U-RESPONSE-PRODUCTION-PLAN-1.0.0",
+  "status": "frozen after V19R response commissioning and V19T temperature-fit commissioning passed and host storage/cpu capacity was inspected, but before constructing the production manifest, selecting throughput-pilot cells, executing another response cell, fitting another spectrum, aggregating any regional temperature, opening lensing data, or changing gravity physics",
+  "purpose": "Freeze deterministic batching, resource bounds, checkpoint semantics and an outcome-blind throughput pilot before the 5082-cell response-and-temperature production run.",
+  "parents": {
+    "v19q_config": "configs/sigma_v19q_positive_exposure_response_workload.json",
+    "v19q_config_sha256": "48e942f231886b7f8fcdfa266003315afdba05a4177e56730efeb5dbdb604cc7",
+    "v19q_runner": "scripts/run_sigma_v19q_positive_exposure_response_workload.py",
+    "v19q_runner_sha256": "87f6f99e7dc5802e6857f670c31f2ea72c4d1ba2ff2e40e619dae205afc0ed3d",
+    "v19q_report": "results/sigma_v19q_positive_exposure_response_workload/report.json",
+    "v19q_report_sha256": "75dd38c6c37369050fa4548c3ba3ddedd6b94b9a96df536b24d0eb877e045b78",
+    "v19q_manifest": "results/sigma_v19q_positive_exposure_response_workload/response_task_manifest.csv",
+    "v19q_manifest_sha256": "ee2403f10540fb90a9915eadcf0704dfcbff848e6bfc74e73938dda260a380c6",
+    "v19r_config": "configs/sigma_v19r_response_commissioning.json",
+    "v19r_config_sha256": "244454f6487512d03b78ef790e1dec6d3b77cb5396f674b23ffe2228680ae10e",
+    "v19r_runner": "scripts/run_sigma_v19r_response_commissioning.py",
+    "v19r_runner_sha256": "016a1480021179cce76d66324a739f881c15df269cec78fae8e67e7f9c7dc728",
+    "v19r_report": "results/sigma_v19r_response_commissioning/report.json",
+    "v19r_report_sha256": "5653b646c43ca17a36e602e012c6e92f589f0b4e3984365761927af13e44423f",
+    "v19t_config": "configs/sigma_v19t_temperature_fit_commissioning.json",
+    "v19t_config_sha256": "844d8bd8f3bdbbb9292ffd0e1df44c55fec5868310b0b552083e711fc1fd6f26",
+    "v19t_runner": "scripts/fit_sigma_v19t_temperature_commissioning.py",
+    "v19t_runner_sha256": "dd31ed84ed457adb48c863f3a603b7434716b737e56ce57eac925958ed37b02d",
+    "v19t_report": "results/sigma_v19t_temperature_fit_commissioning/report.json",
+    "v19t_report_sha256": "9073cc96bbfa87fd4264ea6c2ddf893c3f8f6fa34257381fcf757757cf6ad363"
+  },
+  "workload": {
+    "cluster_order": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "expected_task_count_by_cluster": {
+      "BULLET": 3812,
+      "ABELL2146": 1270
+    },
+    "expected_task_count_total": 5082,
+    "task_order": "cluster_order, obsid ascending, bin_id ascending, ccd_id ascending",
+    "batch_size": 64,
+    "expected_batch_count": 80,
+    "maximum_concurrent_cells": 4,
+    "one_ciao_process_per_cell": true,
+    "scientific_subsampling": false
+  },
+  "throughput_pilot": {
+    "purpose": "measure concurrent wall time, peak storage and failure behavior before authorizing the full workload",
+    "quantiles_of_source_band_events_per_cluster": [
+      0.25,
+      0.75
+    ],
+    "quantile_index_rule": "floor(q*(n-1)+0.5) after sorting by source_band_events, obsid, bin_id and ccd_id ascending",
+    "expected_new_cell_count": 4,
+    "maximum_concurrent_cells": 4,
+    "selection_uses_response_temperature_or_lensing_outcome": false,
+    "reuse_v19r_commissioning_cell_as_a_pilot_cell": false,
+    "minimum_success_fraction": 1.0,
+    "maximum_any_cell_attempts": 2,
+    "maximum_observed_peak_bytes_multiplier_over_v19r": 2.0,
+    "full_production_is_authorized_at_freeze": false
+  },
+  "resource_model": {
+    "v19r_frozen_product_bytes_including_log": 6642172,
+    "v19r_four_response_product_bytes": 6641280,
+    "v19t_grouped_pha_bytes": 126720,
+    "projected_four_response_product_bytes_all_cells": 33750984960,
+    "projected_response_storage_decimal_gb": 33.75098496,
+    "projected_response_storage_gib": 31.433054208755493,
+    "projected_response_plus_grouped_pha_decimal_gb": 34.394976,
+    "minimum_free_space_multiplier_over_response_projection": 2.5,
+    "minimum_free_space_bytes_before_full_run": 84377462400,
+    "commissioning_response_wall_seconds_approximate": 42.0,
+    "commissioning_timing_source": "operator-observed V19R wall clock; approximate because V19R report did not emit monotonic timing",
+    "projected_serial_hours_at_commissioning_rate": 59.29,
+    "projected_four_worker_ideal_hours_at_commissioning_rate": 14.8225,
+    "timing_is_planning_only_until_pilot": true,
+    "capacity_snapshot_utc": "2026-08-05T06:33:17.4906862Z",
+    "host_cpu_physical_cores": 24,
+    "host_cpu_logical_processors": 24,
+    "wsl_target_free_bytes_at_snapshot": 777892818944,
+    "windows_c_free_bytes_at_snapshot": 184895741952,
+    "production_output_root": "/home/henry/sigma-v19u-response-production/v100"
+  },
+  "checkpoint_and_retention": {
+    "completion_unit": "one manifest cell",
+    "complete_cell_requires": [
+      "source PHA",
+      "background PHA",
+      "ARF",
+      "RMF",
+      "cell report with exact hashes and every V19R-equivalent audit passing"
+    ],
+    "atomic_completion_rule": "write products under a temporary cell directory and rename only after every audit passes",
+    "resume_rule": "reuse a completed cell only when its task key, parent hashes, product sizes, product hashes and audit record all match; otherwise retain it as a failed artifact and recompute without overwriting",
+    "failure_rule": "record every failed attempt, continue the current pilot or batch, prohibit regional aggregation and full completion claims until every frozen task has a passing cell; no failed cell may be silently omitted",
+    "retry_rule": "at most one unchanged rerun for an execution failure; no region, event, response, grouping, absorption, redshift, abundance, optimizer or parameter bound may change",
+    "retention_rule": "retain all four calibrated response products and cell reports through map construction and robustness audits; keep transient CIAO pfiles and temporary detector maps out of the scientific archive",
+    "git_rule": "commit compact manifests, reports and derived maps; keep the approximately 34 GB response archive in the hashed production store rather than Git LFS unless a later archival protocol explicitly requires it"
+  },
+  "gates": {
+    "all_parent_hashes_exact": true,
+    "v19q_authorizes_exactly_5082_tasks": true,
+    "v19r_authorizes_response_production": true,
+    "v19t_authorizes_response_and_fit_production": true,
+    "production_task_key_set_equals_v19q": true,
+    "batch_count_equals_80_and_no_batch_exceeds_64": true,
+    "each_task_occurs_exactly_once": true,
+    "pilot_has_two_outcome_blind_source_count_strata_per_cluster": true,
+    "capacity_snapshot_exceeds_2p5_times_projected_response_storage": true,
+    "failure_or_retry_cannot_change_scientific_inputs": true,
+    "pilot_pass_required_before_full_execution": true
+  },
+  "integrity": {
+    "production_manifest_constructed_at_freeze": false,
+    "pilot_cells_selected_at_freeze": false,
+    "pilot_or_production_response_executed_at_freeze": false,
+    "additional_spectrum_fit_at_freeze": false,
+    "regional_thermodynamic_value_aggregated_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}

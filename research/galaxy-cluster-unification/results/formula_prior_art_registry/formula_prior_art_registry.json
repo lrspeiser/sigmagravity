@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 128,
+    "sigma_protocols": 129,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6911,6 +6911,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "844d8bd8f3bdbbb9292ffd0e1df44c55fec5868310b0b552083e711fc1fd6f26"
+    },
+    {
+      "config": "configs/sigma_v19u_response_production_plan.json",
+      "protocol_version": "SIGMA-V19U-RESPONSE-PRODUCTION-PLAN-1.0.0",
+      "status": "frozen after V19R response commissioning and V19T temperature-fit commissioning passed and host storage/cpu capacity was inspected, but before constructing the production manifest, selecting throughput-pilot cells, executing another response cell, fitting another spectrum, aggregating any regional temperature, opening lensing data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "38c7358b06ec5b6e84763d49e1eca75c3a447d08c27968a8b55e7efaddf1ae28"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

@@ -474,3 +474,7 @@ def test_v19_observability_gate_does_not_pretend_to_be_a_formula() -> None:
     v19t = protocols["sigma_v19t_temperature_fit_commissioning.json"]
     assert v19t["role"] == "gate_or_data_protocol_no_new_formula_fragment"
     assert v19t["formula_fragment_count"] == 0
+
+    v19u = protocols["sigma_v19u_response_production_plan.json"]
+    assert v19u["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19u["formula_fragment_count"] == 0
