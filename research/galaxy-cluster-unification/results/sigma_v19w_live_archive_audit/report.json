@@ -1,0 +1,364 @@
+{
+  "active_partial_directories_observed_after_snapshot": 4,
+  "attempt_counts": {
+    "1": 2569
+  },
+  "audited_product_bytes": 16991812800,
+  "audited_product_files": 10276,
+  "claim_boundary": "This is a point-in-time integrity audit of the completed checkpoints present when the snapshot began. It does not authorize V19X or claim that V19W has completed.",
+  "cluster_counts": {
+    "BULLET": 2569
+  },
+  "config_sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197",
+  "exhausted_failed_cells_observed_after_snapshot": [
+    "BULLET_bin36_obs4984_ccd3"
+  ],
+  "expected_final_cells": 5082,
+  "failed_attempt_directories_observed_after_snapshot": 2,
+  "failed_attempts_by_cell_observed_after_snapshot": {
+    "BULLET_bin36_obs4984_ccd3": 2
+  },
+  "gates": {
+    "every_snapshot_arf_and_rmf_audit_passes": true,
+    "every_snapshot_cell_gate_passes": true,
+    "every_snapshot_cell_is_a_unique_manifest_task": true,
+    "every_snapshot_pha_histogram_audit_is_exact": true,
+    "every_snapshot_pha_link_matches": true,
+    "every_snapshot_preflight_count_matches_manifest": true,
+    "every_snapshot_product_size_and_sha256_matches": true,
+    "no_quarantine_directory_observed": true,
+    "retained_failed_attempts_are_not_completed_products": true
+  },
+  "gravity_formula_or_parameter_changed": false,
+  "lensing_halo_or_gravity_payload_opened": false,
+  "maximum_completed_production_index": 2632,
+  "missing_manifest_tasks_at_or_before_maximum_completed_index": [
+    {
+      "batch_id": 1,
+      "cell_name": "BULLET_bin45_obs554_ccd3",
+      "production_index": 27
+    },
+    {
+      "batch_id": 3,
+      "cell_name": "BULLET_bin230_obs554_ccd3",
+      "production_index": 173
+    },
+    {
+      "batch_id": 6,
+      "cell_name": "BULLET_bin25_obs3184_ccd3",
+      "production_index": 353
+    },
+    {
+      "batch_id": 6,
+      "cell_name": "BULLET_bin52_obs3184_ccd3",
+      "production_index": 375
+    },
+    {
+      "batch_id": 7,
+      "cell_name": "BULLET_bin90_obs3184_ccd3",
+      "production_index": 404
+    },
+    {
+      "batch_id": 7,
+      "cell_name": "BULLET_bin130_obs3184_ccd3",
+      "production_index": 441
+    },
+    {
+      "batch_id": 7,
+      "cell_name": "BULLET_bin135_obs3184_ccd3",
+      "production_index": 445
+    },
+    {
+      "batch_id": 8,
+      "cell_name": "BULLET_bin177_obs3184_ccd3",
+      "production_index": 481
+    },
+    {
+      "batch_id": 8,
+      "cell_name": "BULLET_bin199_obs3184_ccd3",
+      "production_index": 503
+    },
+    {
+      "batch_id": 10,
+      "cell_name": "BULLET_bin318_obs3184_ccd3",
+      "production_index": 622
+    },
+    {
+      "batch_id": 11,
+      "cell_name": "BULLET_bin339_obs3184_ccd3",
+      "production_index": 643
+    },
+    {
+      "batch_id": 11,
+      "cell_name": "BULLET_bin365_obs3184_ccd3",
+      "production_index": 669
+    },
+    {
+      "batch_id": 12,
+      "cell_name": "BULLET_bin9_obs4984_ccd3",
+      "production_index": 705
+    },
+    {
+      "batch_id": 12,
+      "cell_name": "BULLET_bin36_obs4984_ccd3",
+      "production_index": 728
+    },
+    {
+      "batch_id": 12,
+      "cell_name": "BULLET_bin65_obs4984_ccd3",
+      "production_index": 752
+    },
+    {
+      "batch_id": 12,
+      "cell_name": "BULLET_bin66_obs4984_ccd3",
+      "production_index": 753
+    },
+    {
+      "batch_id": 14,
+      "cell_name": "BULLET_bin184_obs4984_ccd3",
+      "production_index": 858
+    },
+    {
+      "batch_id": 15,
+      "cell_name": "BULLET_bin232_obs4984_ccd3",
+      "production_index": 906
+    },
+    {
+      "batch_id": 16,
+      "cell_name": "BULLET_bin311_obs4984_ccd3",
+      "production_index": 985
+    },
+    {
+      "batch_id": 16,
+      "cell_name": "BULLET_bin347_obs4984_ccd3",
+      "production_index": 1021
+    },
+    {
+      "batch_id": 17,
+      "cell_name": "BULLET_bin370_obs4984_ccd3",
+      "production_index": 1044
+    },
+    {
+      "batch_id": 17,
+      "cell_name": "BULLET_bin6_obs4985_ccd2",
+      "production_index": 1072
+    },
+    {
+      "batch_id": 19,
+      "cell_name": "BULLET_bin144_obs4985_ccd3",
+      "production_index": 1188
+    },
+    {
+      "batch_id": 19,
+      "cell_name": "BULLET_bin154_obs4985_ccd3",
+      "production_index": 1198
+    },
+    {
+      "batch_id": 20,
+      "cell_name": "BULLET_bin212_obs4985_ccd2",
+      "production_index": 1257
+    },
+    {
+      "batch_id": 21,
+      "cell_name": "BULLET_bin244_obs4985_ccd3",
+      "production_index": 1291
+    },
+    {
+      "batch_id": 23,
+      "cell_name": "BULLET_bin354_obs4985_ccd2",
+      "production_index": 1412
+    },
+    {
+      "batch_id": 23,
+      "cell_name": "BULLET_bin380_obs4985_ccd3",
+      "production_index": 1442
+    },
+    {
+      "batch_id": 24,
+      "cell_name": "BULLET_bin25_obs4986_ccd0",
+      "production_index": 1477
+    },
+    {
+      "batch_id": 24,
+      "cell_name": "BULLET_bin69_obs4986_ccd1",
+      "production_index": 1514
+    },
+    {
+      "batch_id": 24,
+      "cell_name": "BULLET_bin79_obs4986_ccd1",
+      "production_index": 1523
+    },
+    {
+      "batch_id": 24,
+      "cell_name": "BULLET_bin82_obs4986_ccd1",
+      "production_index": 1528
+    },
+    {
+      "batch_id": 25,
+      "cell_name": "BULLET_bin102_obs4986_ccd1",
+      "production_index": 1545
+    },
+    {
+      "batch_id": 25,
+      "cell_name": "BULLET_bin147_obs4986_ccd1",
+      "production_index": 1591
+    },
+    {
+      "batch_id": 25,
+      "cell_name": "BULLET_bin155_obs4986_ccd1",
+      "production_index": 1598
+    },
+    {
+      "batch_id": 26,
+      "cell_name": "BULLET_bin161_obs4986_ccd1",
+      "production_index": 1604
+    },
+    {
+      "batch_id": 26,
+      "cell_name": "BULLET_bin190_obs4986_ccd0",
+      "production_index": 1636
+    },
+    {
+      "batch_id": 27,
+      "cell_name": "BULLET_bin229_obs4986_ccd1",
+      "production_index": 1678
+    },
+    {
+      "batch_id": 27,
+      "cell_name": "BULLET_bin256_obs4986_ccd0",
+      "production_index": 1708
+    },
+    {
+      "batch_id": 28,
+      "cell_name": "BULLET_bin294_obs4986_ccd0",
+      "production_index": 1748
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin336_obs4986_ccd0",
+      "production_index": 1795
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin339_obs4986_ccd0",
+      "production_index": 1799
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin339_obs4986_ccd1",
+      "production_index": 1800
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin341_obs4986_ccd1",
+      "production_index": 1803
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin366_obs4986_ccd0",
+      "production_index": 1829
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin384_obs4986_ccd0",
+      "production_index": 1848
+    },
+    {
+      "batch_id": 30,
+      "cell_name": "BULLET_bin25_obs5355_ccd2",
+      "production_index": 1878
+    },
+    {
+      "batch_id": 34,
+      "cell_name": "BULLET_bin310_obs5355_ccd3",
+      "production_index": 2152
+    },
+    {
+      "batch_id": 35,
+      "cell_name": "BULLET_bin334_obs5355_ccd2",
+      "production_index": 2178
+    },
+    {
+      "batch_id": 35,
+      "cell_name": "BULLET_bin335_obs5355_ccd3",
+      "production_index": 2181
+    },
+    {
+      "batch_id": 35,
+      "cell_name": "BULLET_bin353_obs5355_ccd2",
+      "production_index": 2199
+    },
+    {
+      "batch_id": 36,
+      "cell_name": "BULLET_bin60_obs5356_ccd2",
+      "production_index": 2292
+    },
+    {
+      "batch_id": 36,
+      "cell_name": "BULLET_bin61_obs5356_ccd2",
+      "production_index": 2293
+    },
+    {
+      "batch_id": 37,
+      "cell_name": "BULLET_bin76_obs5356_ccd2",
+      "production_index": 2305
+    },
+    {
+      "batch_id": 40,
+      "cell_name": "BULLET_bin310_obs5356_ccd3",
+      "production_index": 2539
+    },
+    {
+      "batch_id": 40,
+      "cell_name": "BULLET_bin321_obs5356_ccd2",
+      "production_index": 2551
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin335_obs5356_ccd3",
+      "production_index": 2567
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin353_obs5356_ccd2",
+      "production_index": 2585
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin357_obs5356_ccd2",
+      "production_index": 2590
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin367_obs5356_ccd2",
+      "production_index": 2603
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin368_obs5356_ccd3",
+      "production_index": 2605
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin375_obs5356_ccd2",
+      "production_index": 2612
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin384_obs5356_ccd2",
+      "production_index": 2624
+    }
+  ],
+  "protocol_version": "SIGMA-V19W-FULL-RESPONSE-PRODUCTION-1.0.0",
+  "quarantine_directories_observed_after_snapshot": 0,
+  "read_only": true,
+  "scientific_spectrum_combined_or_fitted": false,
+  "scratch_root": "/home/henry/sigma-v19w-response-production/v100",
+  "snapshot_cell_names_sha256": "f777f583f719329d6381a1961e785f827413a4079342712d9d839ff330df6bf3",
+  "snapshot_completed_cells": 2569,
+  "snapshot_completed_utc": "2026-08-05T12:57:13.153952+00:00",
+  "snapshot_started_utc": "2026-08-05T12:57:09.812187+00:00",
+  "status": "completed_checkpoint_snapshot_passed_with_exhausted_base_production_cell",
+  "temperature_density_mach_or_speed_fitted": false,
+  "v19w_runner_sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
+}
