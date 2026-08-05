@@ -60,3 +60,5 @@ research/galaxy-cluster-unification/configs/sigma_v19q_positive_exposure_respons
 research/galaxy-cluster-unification/scripts/run_sigma_v19q_positive_exposure_response_workload.py -text
 research/galaxy-cluster-unification/results/sigma_v19q_positive_exposure_response_workload/report.json -text
 research/galaxy-cluster-unification/results/sigma_v19q_positive_exposure_response_workload/response_task_manifest.csv text eol=crlf
+research/galaxy-cluster-unification/configs/sigma_v19r_response_commissioning.json -text
+research/galaxy-cluster-unification/scripts/run_sigma_v19r_response_commissioning.py -text

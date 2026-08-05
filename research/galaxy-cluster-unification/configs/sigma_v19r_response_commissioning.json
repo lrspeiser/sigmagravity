@@ -1,0 +1,127 @@
+{
+  "protocol_version": "SIGMA-V19R-RESPONSE-COMMISSIONING-1.0.0",
+  "status": "frozen after V19Q authorized all 5082 response tasks and selected one deterministic maximum-count commissioning cell, but before constructing a source PHA, background PHA, ARF or RMF, reading a response output, fitting a temperature, opening lensing data, or changing gravity physics",
+  "purpose": "Commission the exact V19Q regional spectral/response geometry on one deterministic high-information cell before scheduling the 5082-cell production workload.",
+  "parents": {
+    "v19q_config": "configs/sigma_v19q_positive_exposure_response_workload.json",
+    "v19q_config_sha256": "48e942f231886b7f8fcdfa266003315afdba05a4177e56730efeb5dbdb604cc7",
+    "v19q_runner": "scripts/run_sigma_v19q_positive_exposure_response_workload.py",
+    "v19q_runner_sha256": "87f6f99e7dc5802e6857f670c31f2ea72c4d1ba2ff2e40e619dae205afc0ed3d",
+    "v19q_report": "results/sigma_v19q_positive_exposure_response_workload/report.json",
+    "v19q_report_sha256": "75dd38c6c37369050fa4548c3ba3ddedd6b94b9a96df536b24d0eb877e045b78",
+    "v19q_manifest": "results/sigma_v19q_positive_exposure_response_workload/response_task_manifest.csv",
+    "v19q_manifest_sha256": "ee2403f10540fb90a9915eadcf0704dfcbff848e6bfc74e73938dda260a380c6",
+    "input_inventory": "results/sigma_v19p_exact_flux_obs_support/input_inventory.json",
+    "input_inventory_sha256": "085d7ddcc855637dfce8cce2494f6c7d2d50b25950dabf8c0d8c10733369d983",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "v19m_report": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+    "v19m_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+    "repro_report": "results/sigma_v19f_chandra_repro/report.json",
+    "repro_report_sha256": "6541133c249103400e9cedffc8f8118e72fd75f2a6bda7c3db1d876614cd7ab9",
+    "astrometry_report": "results/sigma_v19g_chandra_astrometry/report.json",
+    "astrometry_report_sha256": "b6f77ad4dff16af66a1698f6d8e9310cadd98d1085c5d0965ec57cd2c58732a6",
+    "inherited_response_runner": "scripts/run_sigma_v17c_integrated_spectra.py",
+    "inherited_response_runner_sha256": "1116dff3c8da44c54a0402d20dbcf7094945579abdbcf89e9278a3017685dd21"
+  },
+  "selection": {
+    "rule": "sort all frozen V19Q tasks by descending source_band_events, then cluster, bin_id, obsid and ccd_id ascending; select the first row",
+    "selection_uses_response_or_temperature_outcome": false,
+    "unique_maximum": true,
+    "cluster": "BULLET",
+    "bin_id": 390,
+    "obsid": 5356,
+    "ccd_id": 2,
+    "source_band_events": 625,
+    "background_band_events": 232,
+    "blanksky_scale": 0.065704048
+  },
+  "frozen_inputs": {
+    "science_event": {
+      "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits",
+      "sha256": "99c1b3705861e05e8d1321cd1ed773df7a28025fdc7b8f0ddd2e9359505d3ddb"
+    },
+    "blanksky_event": {
+      "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_blanksky_nosrc_reproj_evt.fits",
+      "sha256": "a5b46ec99096740dcf002d53ea88e262ea90acbc862a3ce7ef5a11defb889a9b"
+    },
+    "exact_flux_obs_fov": {
+      "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5356.fov",
+      "sha256": "06e94049e7264f65b3781dc4fc3be13a5e1c627207f9668814ac89233f582830"
+    },
+    "exact_flux_obs_exposure": {
+      "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5356_0.5-7.0_thresh.expmap",
+      "sha256": "c0e71b8c3b417eb613dc28d6de7a61692c11f0ccd65b80842b27c366778eb168"
+    },
+    "spectral_region": {
+      "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_390.reg",
+      "sha256": "3c5f9c56b698cd5a5a9ee07d3533ec064aafbf3ae39c29a8a6c0e9b49e1b927e"
+    },
+    "mask": {
+      "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/5356/acisf05356_000N004_msk1.fits",
+      "sha256": "7aa1884e4e8682ec8eb931529e390c73b4985d5dcc69b4da9723d40ca40dd167"
+    },
+    "badpix": {
+      "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/5356/acisf05356_repro_bpix1.fits",
+      "sha256": "b5f8ec30bf4c0f4ae1eac4838cdb4e9e68ef0123b02789b7bb888a650f2f35f7"
+    },
+    "corrected_aspect_list": {
+      "path": "/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5356/corrected_asol1.lis",
+      "sha256": "e7d17ae3a453f6351dd922d7cdf5403c25af15fe47525bb8d63db39cf38ed344"
+    },
+    "corrected_aspect": {
+      "path": "/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5356/pcadf05356_000N001_gaia_asol1.fits",
+      "sha256": "d7577e030609ce6b4aa811a7610afbbb80918912cbb72226e7e8f09acc306801"
+    }
+  },
+  "extraction": {
+    "source_filter": "science[ccd_id=2][sky=region(exact flux_obs FOV)][sky=region(xaf_390.reg)]",
+    "background_filter": "geometry-corrected blanksky[ccd_id=2][sky=region(xaf_390.reg)]",
+    "positive_exposure_preflight": "the V19Q positive-exposure count for this exact task must equal the unmasked extraction count of 625; otherwise abort",
+    "response_reference": "mean X,Y of the 500-7000 eV source events, converted to ICRS and required to map to CCD 2 for both science and background geometry",
+    "specextract": {
+      "background_response": false,
+      "weight_arf": true,
+      "weight_rmf": true,
+      "response_position": "CENTROID",
+      "correct_psf": false,
+      "combine": false,
+      "grouping": "NONE",
+      "energy_keV": [
+        0.3,
+        11.0,
+        0.01
+      ],
+      "weight_map_energy_eV": [
+        500,
+        7000
+      ],
+      "detector_weight_map_bin": 8,
+      "parallel": false
+    }
+  },
+  "gates": {
+    "selected_row_is_unique_deterministic_manifest_maximum": true,
+    "all_frozen_input_hashes_exact": true,
+    "source_preflight_count_equals_625": true,
+    "background_preflight_count_equals_232": true,
+    "positive_exposure_and_extraction_source_counts_equal": true,
+    "response_reference_maps_to_ccd_2_in_science_and_background": true,
+    "source_pha_background_pha_arf_and_rmf_exist_and_are_nonempty": true,
+    "source_and_background_pha_band_counts_match_preflight": true,
+    "arf_has_finite_positive_spectral_response": true,
+    "rmf_has_finite_nonzero_matrix": true,
+    "pha_response_and_background_links_are_present": true,
+    "effective_blanksky_scale_matches_frozen_scale_within_1e_6_relative": true,
+    "failure_rule": "abort without temperature fitting; do not alter the region, task, support rule, response reference, calibration files or event counts"
+  },
+  "integrity": {
+    "commissioning_cell_selected_at_freeze": true,
+    "source_or_background_pha_existed_at_freeze": false,
+    "arf_or_rmf_existed_at_freeze": false,
+    "response_output_opened_at_freeze": false,
+    "temperature_density_mach_or_speed_fitted_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}
