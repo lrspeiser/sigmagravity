@@ -79,3 +79,7 @@ research/galaxy-cluster-unification/scripts/run_sigma_v19v_response_throughput_p
 research/galaxy-cluster-unification/results/sigma_v19v_response_throughput_pilot/report.json -text -diff
 research/galaxy-cluster-unification/results/sigma_v19v_response_throughput_pilot/**/specextract.log -text -diff
 research/galaxy-cluster-unification/results/sigma_v19v_response_throughput_pilot/**/cell_report.json -text -diff
+research/galaxy-cluster-unification/configs/sigma_v19w_full_response_production.json -text
+research/galaxy-cluster-unification/scripts/run_sigma_v19w_full_response_production.py -text
+research/galaxy-cluster-unification/results/sigma_v19w_full_response_production/*.json -text -diff
+research/galaxy-cluster-unification/results/sigma_v19w_full_response_production/product_index.csv text eol=crlf

@@ -1,0 +1,89 @@
+{
+  "protocol_version": "SIGMA-V19W-FULL-RESPONSE-PRODUCTION-1.0.0",
+  "status": "frozen after V19V passed all four concurrent cross-cluster pilot cells and before starting any of the 5082 production cells, observing a production batch outcome, fitting a regional temperature, opening lensing data, or changing gravity physics",
+  "purpose": "Produce the complete calibrated response archive for every frozen V19Q task with deterministic batches, exact per-cell count and detector preflight, atomic checkpoints, bounded unchanged retries and no silent cell exclusion.",
+  "parents": {
+    "v19u_config": "configs/sigma_v19u_response_production_plan.json",
+    "v19u_config_sha256": "38c7358b06ec5b6e84763d49e1eca75c3a447d08c27968a8b55e7efaddf1ae28",
+    "v19u_manifest": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+    "v19u_manifest_sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd",
+    "v19v_config": "configs/sigma_v19v_response_throughput_pilot.json",
+    "v19v_config_sha256": "2085286a9f208c2cb2e5d7d38b7154cbf44c110493b712f603c6eca8c2272152",
+    "v19v_runner": "scripts/run_sigma_v19v_response_throughput_pilot.py",
+    "v19v_runner_sha256": "3123f21fae56f468c8c7ac42050a79cae9019c799a9d3f726112c6e34740d9bd",
+    "v19v_report": "results/sigma_v19v_response_throughput_pilot/report.json",
+    "v19v_report_sha256": "edaba622cea948ddcf63d5e078407131a19d08626488ea1225962dd24a2ec413",
+    "input_inventory": "results/sigma_v19p_exact_flux_obs_support/input_inventory.json",
+    "input_inventory_sha256": "085d7ddcc855637dfce8cce2494f6c7d2d50b25950dabf8c0d8c10733369d983",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "region_report": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+    "region_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+    "repro_report": "results/sigma_v19f_chandra_repro/report.json",
+    "repro_report_sha256": "6541133c249103400e9cedffc8f8118e72fd75f2a6bda7c3db1d876614cd7ab9",
+    "astrometry_report": "results/sigma_v19g_chandra_astrometry/report.json",
+    "astrometry_report_sha256": "b6f77ad4dff16af66a1698f6d8e9310cadd98d1085c5d0965ec57cd2c58732a6"
+  },
+  "workload": {
+    "expected_task_count": 5082,
+    "expected_task_count_by_cluster": {
+      "BULLET": 3812,
+      "ABELL2146": 1270
+    },
+    "expected_batch_count": 80,
+    "batch_size": 64,
+    "maximum_concurrent_cells": 4,
+    "maximum_total_attempts_per_cell": 2,
+    "task_order_and_batch_membership": "exactly as frozen in the V19U production manifest",
+    "scientific_subsampling_or_exclusion": false
+  },
+  "known_positive_exposure_edge_case": {
+    "cluster": "BULLET",
+    "obsid": 554,
+    "bin_id": 24,
+    "ccd_id": 3,
+    "zero_exposure_event_count": 1,
+    "bin_passed_v19m_region_admission": false,
+    "task_exists_in_v19u_manifest": false,
+    "production_consequence": "none; every admitted production task must still match its V19Q source count exactly before response construction"
+  },
+  "execution": {
+    "scratch_root": "/home/henry/sigma-v19w-response-production/v100",
+    "progress_report": "results/sigma_v19w_full_response_production/progress.json",
+    "final_report": "results/sigma_v19w_full_response_production/report.json",
+    "product_index": "results/sigma_v19w_full_response_production/product_index.csv",
+    "observation_background_geometry_prepared_once": true,
+    "cell_private_pfiles_key": "cluster/obsid/ccd_id/bin_id/attempt",
+    "atomic_completion": "rename a cell-private partial directory to completed only after all V19V response audits pass",
+    "resume": "reuse only a completed cell whose task key, counts, gates, product sizes and SHA256 hashes all match; quarantine an invalid checkpoint without overwriting it",
+    "failure": "retain failed attempts, continue remaining frozen tasks, prohibit final completion until all 5082 cells pass",
+    "retry": "at most two total attempts per cell with identical inputs and response settings"
+  },
+  "resources": {
+    "minimum_free_bytes_at_launch": 84377462400,
+    "pilot_median_four_product_bytes": 6596640,
+    "projected_full_product_bytes": 33524124480,
+    "pilot_projected_full_hours": 16.990742495243126,
+    "response_archive_is_not_committed_to_git_lfs": true
+  },
+  "gates": {
+    "all_parent_hashes_exact_and_v19v_authorizes_full_response_production": true,
+    "manifest_has_5082_unique_tasks_in_80_frozen_batches": true,
+    "known_zero_exposure_event_has_no_admitted_task": true,
+    "launch_free_space_at_least_84377462400_bytes": true,
+    "every_cell_source_and_background_count_matches_manifest_exactly": true,
+    "every_response_reference_maps_to_the_manifest_ccd": true,
+    "every_cell_passes_all_v19v_pha_arf_rmf_link_and_scale_audits": true,
+    "every_completed_checkpoint_hashes_exactly": true,
+    "no_cell_excluded_and_no_cell_exceeds_two_total_attempts": true,
+    "final_product_index_has_5082_unique_rows": true,
+    "failure_rule": "do not fit regional thermodynamics or alter any scientific input until all production cells pass"
+  },
+  "integrity": {
+    "production_cell_started_at_freeze": false,
+    "production_runtime_failure_or_storage_observed_at_freeze": false,
+    "regional_temperature_density_mach_or_speed_fitted_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}

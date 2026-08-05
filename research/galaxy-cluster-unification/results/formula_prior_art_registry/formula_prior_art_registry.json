@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 130,
+    "sigma_protocols": 131,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6935,6 +6935,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "2085286a9f208c2cb2e5d7d38b7154cbf44c110493b712f603c6eca8c2272152"
+    },
+    {
+      "config": "configs/sigma_v19w_full_response_production.json",
+      "protocol_version": "SIGMA-V19W-FULL-RESPONSE-PRODUCTION-1.0.0",
+      "status": "frozen after V19V passed all four concurrent cross-cluster pilot cells and before starting any of the 5082 production cells, observing a production batch outcome, fitting a regional temperature, opening lensing data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",
