@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 202,
+    "sigma_protocols": 203,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7490,6 +7490,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "471f7b428a74ae98d7ca81067fc49e9715642bda8a451dfd38ded87972b310d8"
+    },
+    {
+      "config": "configs/sigma_v19cg_whole_repo_cluster_holdout_contamination.json",
+      "protocol_version": "SIGMA-V19CG-WHOLE-REPO-CLUSTER-HOLDOUT-CONTAMINATION-1.0.0",
+      "status": "fail-closed correction after whole-repository prior-use evidence and an accidental raw-coordinate exposure were discovered; frozen before selecting any replacement cluster, opening another lensing coordinate or map, selecting an action or constant, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "48fc80b6a73e7b0dc1f7f638ddf8ef46615ec88c6959a43de0e95ed7f42e612a"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

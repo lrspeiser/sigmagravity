@@ -1,0 +1,171 @@
+{
+  "protocol_version": "SIGMA-V19CG-WHOLE-REPO-CLUSTER-HOLDOUT-CONTAMINATION-1.0.0",
+  "status": "fail-closed correction after whole-repository prior-use evidence and an accidental raw-coordinate exposure were discovered; frozen before selecting any replacement cluster, opening another lensing coordinate or map, selecting an action or constant, or changing gravity physics",
+  "purpose": "Correct the prospective cluster evidence ledger. A cluster is not an untouched whole-object holdout if any earlier Sigma analysis used its derived lensing or mass properties, and it is not a raw-lensing holdout after its multiple-image coordinates have been exposed to the project.",
+  "parents": {
+    "cross_scale_data_readiness": {
+      "path": "results/sigma_v19cf_cross_scale_data_readiness/report.json",
+      "sha256": "6852a5ad4d0b74df3272ed0c1e38799cd11eb3f5d7f9593b64acc1d99230f829"
+    },
+    "blind_cluster_source_readiness": {
+      "path": "results/sigma_v19bt_blind_cluster_source_readiness/report.json",
+      "sha256": "28189dbe2580c92eaa59e9a41bd6fbe47f88c7797a265e8c0aa6f6725855fe60"
+    },
+    "blind_cluster_admission": {
+      "path": "results/sigma_v19bh_blind_cluster_admission/report.json",
+      "sha256": "3aba06b1360e976794b6dd2ded4bd65e2e472e184e84abb46b187baea2bf07d8"
+    },
+    "legacy_cluster_catalog": {
+      "path": "../../data/clusters/fox2022_clusters.csv",
+      "sha256": "88cd2f169daca1fd579795c930db548848e7016e4d8facc285fec0e59b1b6040"
+    },
+    "legacy_sigma_cluster_results": {
+      "path": "../../data/clusters/fox2022_sigma_results.csv",
+      "sha256": "9b5e0ef678a27ee0da1b022edeb497403f55b3aa73e913862cb9686b1d4a2bc7"
+    },
+    "legacy_cluster_coherence_derivation": {
+      "path": "../../derivations/cluster_coherence_report/cluster_physics.json",
+      "sha256": "56f049b7c05f69240cae1b496a6aa92a28299d3ccd29abaff01e776d9f84cbf9"
+    }
+  },
+  "whole_repository_spend_rule": {
+    "scope": "every tracked file in the repository, not only research/galaxy-cluster-unification",
+    "whole_object_holdout_disqualifier": "any previous Sigma fit, score, parameter selection, residual analysis or mechanism derivation using the system's observed or model-derived gravity information",
+    "raw_lensing_holdout_disqualifier": "any project exposure to that system's multiple-image coordinate values before the final action and constants are frozen",
+    "source_only_use_does_not_disqualify_by_itself": true,
+    "inferred_halo_or_lens_map_is_never_validation_truth": true
+  },
+  "coordinate_exposure_incident": {
+    "recorded_utc": "2026-08-05T19:19:30Z",
+    "source": "https://arxiv.org/abs/1904.05940",
+    "trigger": "A metadata query for cluster constraint sufficiency returned the paper's raw multiple-image table inline.",
+    "systems_whose_raw_multiple_image_rows_were_exposed": [
+      "SDSS_J0108+0624",
+      "SDSS_J0146-0929",
+      "SDSS_J0150+2725",
+      "SDSS_J0333-0651",
+      "SDSS_J0851+3331",
+      "SDSS_J0915+3826",
+      "SDSS_J0928+2031",
+      "SDSS_J0952+3434",
+      "SDSS_J0957+0509",
+      "SDSS_J1002+2031"
+    ],
+    "original_v19bh_shortlist_systems_exposed": [
+      "SDSS_J0851+3331",
+      "SDSS_J0952+3434",
+      "SDSS_J1002+2031"
+    ],
+    "coordinate_values_copied_into_repository": false,
+    "coordinate_values_used_for_a_score_or_selection": false,
+    "disposition": "Every exposed system is permanently ineligible as a future raw-coordinate holdout for this project."
+  },
+  "original_shortlist_disposition": [
+    {
+      "id": "SDSS_J0851+3331",
+      "prior_sigma_gravity_information_used": true,
+      "raw_multiple_image_coordinates_exposed": true,
+      "future_role": "spent_development_only"
+    },
+    {
+      "id": "SDSS_J0952+3434",
+      "prior_sigma_gravity_information_used": true,
+      "raw_multiple_image_coordinates_exposed": true,
+      "future_role": "spent_development_only"
+    },
+    {
+      "id": "SDSS_J1002+2031",
+      "prior_sigma_gravity_information_used": false,
+      "raw_multiple_image_coordinates_exposed": true,
+      "future_role": "spent_and_lens_metadata_inadequate"
+    },
+    {
+      "id": "SDSS_J1038+4849",
+      "prior_sigma_gravity_information_used": true,
+      "raw_multiple_image_coordinates_exposed": false,
+      "future_role": "spent_development_only"
+    },
+    {
+      "id": "SDSS_J1050+0017",
+      "prior_sigma_gravity_information_used": true,
+      "raw_multiple_image_coordinates_exposed": false,
+      "future_role": "spent_development_only"
+    },
+    {
+      "id": "SDSS_J1207+5254",
+      "prior_sigma_gravity_information_used": true,
+      "raw_multiple_image_coordinates_exposed": false,
+      "future_role": "spent_development_only"
+    },
+    {
+      "id": "SDSS_J1209+2640",
+      "prior_sigma_gravity_information_used": true,
+      "raw_multiple_image_coordinates_exposed": false,
+      "future_role": "spent_development_only"
+    },
+    {
+      "id": "SDSS_J1226+2149",
+      "prior_sigma_gravity_information_used": false,
+      "raw_multiple_image_coordinates_exposed": false,
+      "future_role": "source_incomplete_reserve_not_admitted"
+    }
+  ],
+  "supersession": {
+    "v19bh_metadata_shortlist_remains_useful_for_development_source_diversity": true,
+    "v19bh_shortlist_may_supply_final_whole_object_holdouts": false,
+    "v19bt_six_source_imaging_preflights_may_supply_final_whole_object_holdouts": false,
+    "v19cf_cluster_source_universe_ready_for_prospective_core": false,
+    "v19cf_galaxy_readiness_conclusion_unchanged": true,
+    "replacement_cluster_universe_selected_here": false
+  },
+  "required_next_cluster_work": [
+    {
+      "rank": 1,
+      "task": "build_a_new_candidate_universe_from_systems_absent_from_all_prior_sigma_gravity_analysis",
+      "done_when": "the identity and alias audit covers the entire repository and yields at least eight source-state-balanced candidates"
+    },
+    {
+      "rank": 2,
+      "task": "separate_source_products_from_raw_lensing_targets_at_acquisition",
+      "done_when": "source manifests and sealed target containers are different files and no mixed manuscript or table is queried interactively"
+    },
+    {
+      "rank": 3,
+      "task": "admit_six_complete_clusters_before_any_coordinate_opening",
+      "done_when": "six systems pass baryon completeness, family-count, spectroscopic-family, positional-uncertainty and same-catalog comparator metadata gates while coordinate payloads remain hash-only"
+    }
+  ],
+  "required_gates": {
+    "all_parent_and_evidence_hashes_exact": true,
+    "whole_repository_audit_finds_all_six_prior_used_shortlist_systems": true,
+    "coordinate_exposure_incident_is_complete_and_fail_closed": true,
+    "every_prior_used_or_coordinate_exposed_shortlist_system_is_removed_from_holdout_role": true,
+    "only_one_original_shortlist_system_remains_prospective_and_it_is_not_admitted": true,
+    "v19bh_v19bt_and_v19cf_cluster_holdout_conclusions_are_superseded": true,
+    "galaxy_readiness_is_unchanged": true,
+    "no_replacement_target_action_constant_formula_or_solar_setting_selected": true
+  },
+  "authorization": {
+    "read_existing_repository_evidence": true,
+    "record_the_exposure_without_coordinate_values": true,
+    "open_another_raw_lensing_coordinate_or_map": false,
+    "select_replacement_clusters": false,
+    "select_or_change_action_or_gravity_formula": false,
+    "fit_universal_constants": false,
+    "perform_detailed_solar_optimization": false
+  },
+  "claim_boundary": [
+    "V19CG corrects evidence roles; it is not a result for or against Sigma Gravity.",
+    "Six of eight V19BH systems had already entered earlier Sigma cluster analyses outside the project subfolder, so a subfolder-only alias audit was insufficient.",
+    "Three V19BH systems also lost raw-coordinate blindness in the recorded arXiv metadata-query incident; none of those coordinate values is stored or used.",
+    "Only SDSS J1226+2149 remains unspent among the original eight, and it is source-incomplete and not admitted.",
+    "A new whole-repository-clean cluster universe is required before a six-cluster prospective test can be claimed."
+  ],
+  "implementation": {
+    "runner": "scripts/audit_sigma_v19cg_whole_repo_cluster_holdout_contamination.py",
+    "tests": "tests/test_sigma_v19cg_whole_repo_cluster_holdout_contamination.py"
+  },
+  "outputs": {
+    "report": "results/sigma_v19cg_whole_repo_cluster_holdout_contamination/report.json"
+  }
+}
