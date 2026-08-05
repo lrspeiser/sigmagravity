@@ -1,0 +1,137 @@
+{
+  "protocol_version": "SIGMA-V19BD-TWO-CLUSTER-DIRECTIONAL-SOURCE-UNCERTAINTY-1.0.0",
+  "status": "frozen_before_computing_any_per_draw_directional_morphology_or_cross_cluster_uncertainty_interval",
+  "purpose": "Determine whether the target-blind directional collisionless-source morphology seen in the V19BA Bullet and V19BC Abell 2146 ensemble means survives each catalog's full positional, photometric-state, and redshift uncertainty after normalizing angular separations by each draw's own luminosity RMS radius, without reading lensing, halo, gas-response, or gravity targets.",
+  "parents": {
+    "v19az_config": {
+      "path": "configs/sigma_v19az_probabilistic_member_current_ensemble.json",
+      "sha256": "4dd175be6d04f25bdd9413155548dfbcab2884c162cf2dc2ff4c37c7d34528d0"
+    },
+    "v19az_report": {
+      "path": "results/sigma_v19az_probabilistic_member_current_ensemble/report.json",
+      "sha256": "b059d6f7117c49640377b84053bef651f21686d405193405126497429ef381e0"
+    },
+    "v19az_bullet_ensemble": {
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/position_current_ensemble.csv.gz",
+      "sha256": "28f292af9afc4e8161bc5f0fce48d30dcf5c9c27c4412f6cba02c6fbb19bdc47"
+    },
+    "v19bb_config": {
+      "path": "configs/sigma_v19bb_abell2146_luminosity_current_ensemble.json",
+      "sha256": "c22b5ca8cd9f35adec28165bf112f4de56c943c389fe2a7fd0bff6d917e83bf4"
+    },
+    "v19bb_report": {
+      "path": "results/sigma_v19bb_abell2146_luminosity_current_ensemble/report.json",
+      "sha256": "84c24a0515fe3e29aaaa660ae96de45d0f2e0c66555d4b8b2c46bd3f632aa6a5"
+    },
+    "v19bb_abell_ensemble": {
+      "path": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/position_current_ensemble.csv.gz",
+      "sha256": "234937ccef9b6ce5fa1540b7e698a3c8b2440baf875822d7b91df6768aab124d"
+    },
+    "v19ba_report": {
+      "path": "results/sigma_v19ba_collisionless_current_moments/report.json",
+      "sha256": "3cc9a80e55710f553f2957cc182326953d02d4129106456103ec71f3d775c2b4"
+    },
+    "v19bc_report": {
+      "path": "results/sigma_v19bc_abell2146_collisionless_current_moments/report.json",
+      "sha256": "e870d11437511f4fdf3c7542aedcf45cb3df67d30d2541f758d9d3f51b0cb0f4"
+    },
+    "v19h_bullet_grid": {
+      "path": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/analysis_mask.img",
+      "sha256": "874ffe6c028ab9340ff467811da79073ee6af2d00fc829fd6b89b65ba28717c4"
+    },
+    "v19h_abell_grid": {
+      "path": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/analysis_mask.img",
+      "sha256": "c4177a5d8bffc28f47dd8607f82ce95c3b44a7f910890365f79d7faac35074f4"
+    }
+  },
+  "cluster_inputs": {
+    "BULLET": {
+      "ensemble_parent": "v19az_bullet_ensemble",
+      "grid_parent": "v19h_bullet_grid",
+      "moment_report_parent": "v19ba_report",
+      "expected_draws": 8192,
+      "expected_members_per_draw": 72,
+      "luminosity_field": "relative_i_luminosity",
+      "missing_luminosity_state": "none in the frozen ensemble",
+      "photometric_role": "relative Bessel-I luminosity"
+    },
+    "ABELL2146": {
+      "ensemble_parent": "v19bb_abell_ensemble",
+      "grid_parent": "v19h_abell_grid",
+      "moment_report_parent": "v19bc_report",
+      "expected_draws": 8192,
+      "expected_members_per_draw": 63,
+      "luminosity_field": "relative_f814w_luminosity",
+      "missing_luminosity_state": "blank rows retained in membership accounting but excluded from weighted morphology",
+      "photometric_role": "relative HST F814W luminosity"
+    }
+  },
+  "per_draw_statistics": {
+    "coordinates": "zero-based floating pixel coordinates from each cluster's frozen V19H WCS, multiplied by its 0.984-arcsec pixel scale",
+    "luminosity_centroid": "r_L=sum_i ell_i r_i/sum_i ell_i over finite-luminosity rows",
+    "luminosity_covariance": "C_L=sum_i ell_i (r_i-r_L)(r_i-r_L)^T/sum_i ell_i",
+    "luminosity_rms_radius": "R_L=sqrt(trace(C_L))",
+    "luminosity_axis_angle": "position angle of the largest-eigenvalue eigenvector of C_L, interpreted as a spin-2 axis",
+    "luminosity_axis_ellipticity": "e_L=(lambda_max-lambda_min)/(lambda_max+lambda_min)",
+    "second_moment_centroid": "r_Pi=sum_i ell_i beta_i^2 r_i/sum_i ell_i beta_i^2",
+    "opposite_current_centroids": "r_plus and r_minus weighted by ell_i max(beta_i,0) and ell_i max(-beta_i,0)",
+    "normalized_second_offset": "norm(r_Pi-r_L)/R_L",
+    "normalized_current_separation": "norm(r_plus-r_minus)/R_L",
+    "current_axis_alignment": "cos[2(theta_current-theta_luminosity_major)], with +1 parallel to the light major axis and -1 parallel to its minor axis",
+    "second_current_axis_alignment": "absolute cosine between r_Pi-r_L and r_plus-r_minus; undefined only if either vector has zero norm"
+  },
+  "uncertainty_and_comparison": {
+    "cluster_summaries": "report 2.5, 16, 50, 84, and 97.5 percentiles over the 8192 authoritative ensemble draws",
+    "cross_cluster_pairing": "pair equal sample_id values only as a deterministic Monte Carlo pairing of independent posterior draws",
+    "primary_scale_free_comparisons": [
+      "ABELL2146 minus BULLET normalized_second_offset",
+      "ABELL2146 minus BULLET normalized_current_separation",
+      "ABELL2146 minus BULLET current_axis_alignment"
+    ],
+    "interpretation": "Intervals quantify source uncertainty and scale-free similarity or difference; they are not detection significances, population statistics, or gravity fits."
+  },
+  "gates": {
+    "all_parent_hashes_exact": true,
+    "both_parent_moment_reports_passed": true,
+    "exact_draw_member_and_row_counts": true,
+    "every_draw_has_positive_finite_luminosity_and_second_moment": true,
+    "every_draw_has_both_positive_and_negative_los_current_weight": true,
+    "every_draw_has_positive_finite_luminosity_rms_radius": true,
+    "all_dimensionless_statistics_finite_and_within_mathematical_bounds": true,
+    "aggregate_centroid_diagnostics_match_parent_reports_arcsec": 1e-6,
+    "no_cross_cluster_photometric_amplitude_comparison": true,
+    "no_lensing_halo_gas_response_or_gravity_payload": true,
+    "failure_rule": "Fail closed without dropping a draw, clipping a member, imputing Abell luminosity, changing a coordinate or weight definition, comparing relative luminosity amplitudes across filters, adding a smoothing length, or reading any lensing, halo, gas-response, or gravity target."
+  },
+  "outputs": {
+    "per_draw_morphology": "data/derived/sigma_v19bd_two_cluster_directional_source_uncertainty/per_draw_morphology.csv",
+    "paired_comparison": "data/derived/sigma_v19bd_two_cluster_directional_source_uncertainty/paired_comparison.csv",
+    "report": "results/sigma_v19bd_two_cluster_directional_source_uncertainty/report.json",
+    "figure": "results/sigma_v19bd_two_cluster_directional_source_uncertainty/directional_source_uncertainty.png"
+  },
+  "claim_boundary": [
+    "V19BD quantifies uncertainty in measured collisionless source morphology; it does not test or fit a gravitational response.",
+    "The two catalogs use different photometric bands, membership selections, redshifts, and completeness, so relative luminosity amplitudes are not compared.",
+    "Two merging clusters do not establish a population law or a galaxy-cluster transition.",
+    "A narrow uncertainty interval for a source statistic does not show that lensing follows that statistic.",
+    "No propagation length, response amplitude, source exponent, phase, polarization, or Sigma constant is selected."
+  ],
+  "authorization": {
+    "read_frozen_member_ensembles_grids_and_source_reports": true,
+    "compute_unsmoothed_per_draw_dimensionless_source_morphology": true,
+    "compare_source_uncertainty_between_the_two_development_clusters": true,
+    "impute_missing_luminosity_or_transverse_velocity": false,
+    "compare_cross_filter_luminosity_amplitudes": false,
+    "apply_or_fit_long_wave_operator": false,
+    "read_lensing_halo_or_gas_response_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "per_draw_morphology_computed_at_freeze": false,
+    "cross_cluster_uncertainty_interval_computed_at_freeze": false,
+    "long_wave_operator_or_parameter_selected_at_freeze": false,
+    "lensing_halo_or_gas_response_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  }
+}
