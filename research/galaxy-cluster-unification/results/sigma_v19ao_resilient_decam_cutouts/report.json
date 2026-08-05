@@ -1,0 +1,59 @@
+{
+  "report_version": "SIGMA-V19AO-RESILIENT-DECAM-CUTOUTS-1.0.0",
+  "status": "failed_closed_before_any_group_was_accepted",
+  "generated_utc": "2026-08-05T09:59:50.9403050Z",
+  "frozen_config": {
+    "path": "configs/sigma_v19ao_resilient_decam_cutouts.json",
+    "sha256": "b380b81379ba5aeda3083f56f90c4f9b2fc4507bfd79f16fe7eeea7c41dfdf46"
+  },
+  "frozen_runner": {
+    "path": "scripts/acquire_sigma_v19ao_resilient_decam_cutouts.py",
+    "sha256": "55d926cfece235a4ad949d04098ebba2ae2e583b2747468b607e3bb4e4b87909"
+  },
+  "frozen_hybrid_plan": {
+    "path": "data/derived/sigma_v19ao_resilient_decam_cutouts/hybrid_plan.csv",
+    "sha256": "52c254325ea1af47b7265f418cd878feb82cb9a50e95c79771060faa04e18f89"
+  },
+  "counts": {
+    "planned_groups": 139,
+    "planned_measurement_memberships": 1032,
+    "download_attempts_completed": 1,
+    "groups_accepted": 0,
+    "groups_rejected_by_structural_gate": 1,
+    "science_or_photometric_selections": 0
+  },
+  "first_failure": {
+    "group_id": "c4d_121208_034504_ooi_r_d2_ext35",
+    "retrieval_method": "archive_selected_hdu",
+    "vohdu_hdu_index": 34,
+    "retrieval_url": "https://astroarchive.noirlab.edu/api/retrieve/0fd3776025534b82ef390843b3bb6cef/?hdus=0,34",
+    "http_status": 200,
+    "download_bytes": 5296320,
+    "payload_sha256": "ebdde71f1d6ed7b2dc648ab7a12658fd631dce4748fd176c5929b65456d9099a",
+    "returned_image_hdu_index": 1,
+    "returned_ccdnum": 34,
+    "returned_extname": "N3",
+    "frozen_anchor_count": 14,
+    "anchors_contained": 0,
+    "failure": "one or more frozen anchors fall outside the returned cutout"
+  },
+  "metadata_only_diagnosis": {
+    "archive_header_endpoint": "https://astroarchive.noirlab.edu/api/header/0fd3776025534b82ef390843b3bb6cef/?format=json",
+    "header_count": 62,
+    "unique_header_containing_all_14_frozen_anchors": 35,
+    "containing_ccdnum": 35,
+    "containing_extname": "N4",
+    "contained_anchor_count": 14,
+    "interpretation": "For this file, the vohdu hdu_idx value and the FITS HDU selector accepted by the retrieve endpoint use different indexing semantics. The V19AO protocol incorrectly treated them as identical."
+  },
+  "gates": {
+    "all_139_groups_retrieved": false,
+    "fits_integrity_every_group": false,
+    "celestial_wcs_every_group": false,
+    "all_frozen_anchors_contained": false,
+    "no_group_was_silently_dropped": true,
+    "no_photometry_psf_mass_current_lensing_halo_or_gravity_payload_interpreted": true,
+    "v19ao_passed": false
+  },
+  "next_protocol_requirement": "Resolve the FITS HDU selector by requiring a unique full-header WCS that contains every frozen anchor; do not assume an arithmetic offset from vohdu hdu_idx. Freeze all corrected URLs before any new image-pixel retrieval."
+}

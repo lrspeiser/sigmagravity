@@ -1,0 +1,106 @@
+{
+  "protocol_version": "SIGMA-V19AP-HEADER-WCS-RESOLVED-DECAM-CUTOUTS-1.0.0",
+  "status": "frozen_before_v19ap_pixel_retrieval",
+  "purpose": "Preserve all 139 frozen V19AO groups while resolving each stale Archive detector by the unique full-header celestial WCS containing every frozen anchor, rather than treating vohdu hdu_idx as a FITS retrieval selector.",
+  "parent_artifacts": [
+    {
+      "path": "results/sigma_v19ao_resilient_decam_cutouts/report.json",
+      "sha256": "be40b6c598d0dde169d7b228ee2609c2041eeebf588c0995f54877523d3af009"
+    },
+    {
+      "path": "configs/sigma_v19ao_resilient_decam_cutouts.json",
+      "sha256": "b380b81379ba5aeda3083f56f90c4f9b2fc4507bfd79f16fe7eeea7c41dfdf46"
+    },
+    {
+      "path": "data/derived/sigma_v19ao_resilient_decam_cutouts/hybrid_plan.csv",
+      "sha256": "52c254325ea1af47b7265f418cd878feb82cb9a50e95c79771060faa04e18f89"
+    },
+    {
+      "path": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+      "sha256": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f"
+    }
+  ],
+  "inputs": {
+    "v19ao_hybrid_plan": "data/derived/sigma_v19ao_resilient_decam_cutouts/hybrid_plan.csv",
+    "v19am_manifest": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv"
+  },
+  "archive_header_resolution": {
+    "authority": "NSF NOIRLab Astro Data Archive public REST API",
+    "header_endpoint": "https://astroarchive.noirlab.edu/api/header/{md5}/?format=json",
+    "retrieval_endpoint": "https://astroarchive.noirlab.edu/api/retrieve/{md5}/?hdus=0,{fits_hdu_index}",
+    "timeout_seconds": 180,
+    "wcs_containment_tolerance_pixel": 1.0,
+    "eligibility_rule": "Resolve a header-WCS selector if and only if the frozen V19AO method is archive_selected_hdu; keep all frozen NSC SIA routes unchanged.",
+    "selection_rule": "Require exactly one two-dimensional celestial-WCS header in the current Archive file to contain every frozen anchor assigned to the exposure-extension group.",
+    "no_arithmetic_index_mapping": true,
+    "no_pixel_quality_or_science_selection": true
+  },
+  "retrieval": {
+    "timeout_seconds": 300,
+    "maximum_attempts": 3,
+    "wcs_containment_tolerance_pixel": 1.0,
+    "resume_rule": "Reuse an existing exact V19AP output path only after reopening and revalidating its FITS, finite-pixel, WCS containment and frozen detector identity."
+  },
+  "frozen_resolved_plan": {
+    "path": "data/derived/sigma_v19ap_header_wcs_resolved_decam_cutouts/resolved_plan.csv",
+    "sha256": "f267d200b0a95c03b16eaeedbfa2957034a4332c51fb84b5db8dda4135530193"
+  },
+  "gates": {
+    "exact_groups": 139,
+    "exact_measurement_memberships": 1032,
+    "exact_sia_groups": 102,
+    "exact_archive_groups": 37,
+    "unique_header_wcs_candidate_every_archive_group": true,
+    "http_200_every_group": true,
+    "fits_integrity_every_group": true,
+    "celestial_wcs_every_group": true,
+    "all_frozen_anchors_contained": true,
+    "archive_detector_identity_every_group": true,
+    "at_least_one_finite_pixel_every_group": true,
+    "all_groups_retained_without_selection": true,
+    "no_photometric_model_or_prohibited_payload_opened": true
+  },
+  "outputs": {
+    "archive_header_directory": "data/raw/sigma_v19ap_archive_headers",
+    "resolved_plan": "data/derived/sigma_v19ap_header_wcs_resolved_decam_cutouts/resolved_plan.csv",
+    "cutout_directory": "data/raw/sigma_v19ap_header_wcs_resolved_decam_cutouts",
+    "download_manifest": "data/derived/sigma_v19ap_header_wcs_resolved_decam_cutouts/download_manifest.csv",
+    "report": "results/sigma_v19ap_header_wcs_resolved_decam_cutouts/report.json"
+  },
+  "claim_boundary": [
+    "V19AP repairs an Archive transport-index ambiguity only; it does not establish exposure quality or astrophysical validity.",
+    "The WCS containment rule operates on frozen coordinates and Archive headers, never flux, PSF, morphology, lensing, halo, or gravity outcomes.",
+    "A pass establishes complete calibrated-image retrieval and structural integrity only. It does not establish photometry, color, stellar mass, mass current, or any Sigma-field prediction.",
+    "No ambiguous counterpart, lensing/halo payload, gravity result, or untouched holdout is accessed."
+  ],
+  "authorization": {
+    "query_and_persist_full_archive_headers_for_frozen_archive_groups": true,
+    "freeze_wcs_resolved_plan_before_new_pixel_access": true,
+    "download_every_frozen_group": true,
+    "open_pixels_for_fits_wcs_finite_value_and_detector_identity_only": true,
+    "persist_raw_cutouts_hashes_and_integrity_metadata": true,
+    "rank_or_select_exposures": false,
+    "fit_or_compare_photometry": false,
+    "choose_psf_or_deblend_model": false,
+    "query_ambiguous_candidates": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "v19ao_failed_closed_before_any_group_was_accepted": true,
+    "one_incorrect_selected_hdu_opened_for_structural_diagnosis": true,
+    "all_37_archive_groups_have_exactly_one_header_wcs_candidate": true,
+    "unique_current_archive_files_with_persisted_full_headers": 22,
+    "resolved_plan_sha256_at_freeze": "f267d200b0a95c03b16eaeedbfa2957034a4332c51fb84b5db8dda4135530193",
+    "new_image_pixels_downloaded_at_v19ap_freeze": false,
+    "photometry_psf_mass_current_lensing_halo_or_gravity_payload_interpreted": false
+  },
+  "implementation": {
+    "runner": "scripts/acquire_sigma_v19ap_header_wcs_resolved_decam_cutouts.py",
+    "runner_sha256": "397575cc7bb813d47adb046587383d5280cd23180426be76ca1dc00ab31afe8a",
+    "frozen_v19ao_runner": "scripts/acquire_sigma_v19ao_resilient_decam_cutouts.py",
+    "frozen_v19ao_runner_sha256": "55d926cfece235a4ad949d04098ebba2ae2e583b2747468b607e3bb4e4b87909"
+  }
+}
