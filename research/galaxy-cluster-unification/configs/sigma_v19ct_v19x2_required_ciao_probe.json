@@ -1,0 +1,86 @@
+{
+  "protocol_version": "SIGMA-V19CT-V19X2-REQUIRED-CIAO-PROBE-1.0.0",
+  "status": "frozen after V19CS failed only because its probe required unused Astropy, while a direct diagnostic confirmed combine_spectra, dmgroup, Sherpa and NumPy are present",
+  "purpose": "Remove only the unused Astropy probe requirement in memory, verify the frozen V19X2 import closure contains no Astropy dependency, rerun the live CIAO probe, and execute the unchanged scientific source chain.",
+  "parents": {
+    "v19cs_config": {
+      "path": "configs/sigma_v19cs_v19x2_independent_ciao_probe.json",
+      "sha256": "ee08b4235f92da8225f7354a305b64c3fe6c5f9a124b2de9fd41b46905a06ce7"
+    },
+    "v19cs_runner": {
+      "path": "scripts/run_sigma_v19cs_v19x2_independent_ciao_probe.py",
+      "sha256": "998ec344746dcd6ec1bf901d4278507591d3d7b91c4291a9adc3431bd0b7160c"
+    },
+    "v19cs_failure_report": {
+      "path": "results/sigma_v19cs_v19x2_independent_ciao_probe/report.json",
+      "sha256": "bb543927edbf70cbf72bc4ccdacaf05b80987d03ae300b13044fca760e1dd652",
+      "required_status": "v19x2_independent_ciao_probe_failed_closed",
+      "required_exception_fragment": "V19CR environment probe failed"
+    },
+    "v19cs_probe_log": {
+      "path": "results/sigma_v19cs_v19x2_independent_ciao_probe/environment_probe.log",
+      "sha256": "4b886694c082da54c813af712bff9957ffc757b8f28d2479d4e4bd5838942e8a",
+      "required_text": "ModuleNotFoundError: No module named 'astropy'"
+    }
+  },
+  "effective_config_correction": {
+    "json_path": "environment.required_python_modules",
+    "before": [
+      "sherpa",
+      "astropy",
+      "numpy"
+    ],
+    "after": [
+      "sherpa",
+      "numpy"
+    ],
+    "mutation_scope": "in-memory execution copy only; the frozen V19CS config remains byte-identical",
+    "scientific_config_or_code_changed": false
+  },
+  "source_import_audit": [
+    {
+      "path": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+      "sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea"
+    },
+    {
+      "path": "scripts/run_sigma_v19x_spectral_combination_commissioning.py",
+      "sha256": "2370ac2790162c8b9120c5f475905c4be44a98e8201b84f7ee105244db5a979a"
+    },
+    {
+      "path": "scripts/sigma_v19x2_unified_response_adapter.py",
+      "sha256": "10c4cc60a9e17ad0569f421ccc5c530403647d763fda7de7c2eaca6f5d4dcdf1"
+    },
+    {
+      "path": "scripts/fit_sigma_v17c_integrated_temperatures.py",
+      "sha256": "aff18b05f20eaa41db1a7be5535a7be96380c938af0f036392b3d6a4d56a390f"
+    },
+    {
+      "path": "scripts/run_sigma_v17c_integrated_spectra.py",
+      "sha256": "1116dff3c8da44c54a0402d20dbcf7094945579abdbcf89e9278a3017685dd21"
+    }
+  ],
+  "effective_outputs": {
+    "report": "results/sigma_v19ct_v19x2_required_ciao_probe/report.json",
+    "environment_probe_log": "results/sigma_v19ct_v19x2_required_ciao_probe/environment_probe.log",
+    "v19x2_log": "results/sigma_v19ct_v19x2_required_ciao_probe/v19x2_commissioning.log",
+    "v19br_log": "results/sigma_v19ct_v19x2_required_ciao_probe/v19br_continuation.log"
+  },
+  "authorization": {
+    "remove_unused_probe_module": true,
+    "change_installed_environment": false,
+    "change_x2_config_runner_scientific_rules_or_data": false,
+    "retry_or_tune_valid_scientific_fit_failure": false,
+    "run_v19bs_or_derive_action": false,
+    "open_lensing_halo_gravity_holdout_or_solar_optimization": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ct_v19x2_required_ciao_probe.py",
+    "tests": "tests/test_sigma_v19ct_v19x2_required_ciao_probe.py"
+  },
+  "claim_boundary": [
+    "Astropy is removed from the environment probe only because no frozen V19X2 import-closure file references it.",
+    "Sherpa and NumPy remain required, and combine_spectra and dmgroup must resolve from the exact CIAO environment bin directory.",
+    "No package is installed and no source, response, grouping, fit, target, gravity or Solar-System rule changes.",
+    "A valid V19X2 scientific gate failure remains final."
+  ]
+}
