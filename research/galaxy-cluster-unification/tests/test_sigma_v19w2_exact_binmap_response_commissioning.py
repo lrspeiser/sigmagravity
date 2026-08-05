@@ -36,6 +36,13 @@ def test_frozen_selection_covers_all_observed_implementation_classes():
     assert "source and background polygons" in classes
     assert "adjacent CCD" in classes
     assert "AF_UNIX path too long" in classes
+    off_ccd = next(
+        item
+        for item in config["commissioning_cells"]
+        if item["cell_name"] == "BULLET_bin154_obs4985_ccd3"
+    )
+    assert off_ccd["expected_source_band_events"] == 2
+    assert off_ccd["expected_background_band_events"] == 14
     assert config["execution"]["attempts_per_commissioning_cell"] == 1
     assert config["execution"]["base_v19w_archive_is_read_only"]
     assert not config["advance"]["v19x_authorized_here"]

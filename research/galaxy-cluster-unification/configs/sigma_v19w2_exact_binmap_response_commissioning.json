@@ -1,5 +1,5 @@
 {
-  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.0.1",
+  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.0.2",
   "status": "frozen after the read-only V19W live archive audit identified three implementation failure classes and before constructing any exact-bin mask, running a corrected response, reading a spectral fit, changing a scientific region or event assignment, opening lensing data, or changing gravity physics",
   "purpose": "Commission one implementation correction that restores the frozen disjoint V19P/V19Q binmap event partition, removes the invalid manually transformed low-count response coordinate, and shortens CIAO runtime paths without changing any admitted region, event, energy band, response weighting, background scaling or scientific threshold.",
   "parents": {
@@ -47,7 +47,7 @@
       "cell_name": "BULLET_bin154_obs4985_ccd3",
       "failure_class": "two-event reprojected-sky centroid transforms to adjacent CCD",
       "expected_source_band_events": 2,
-      "expected_background_band_events": 7
+      "expected_background_band_events": 14
     },
     {
       "cell_name": "BULLET_bin36_obs4984_ccd3",
@@ -69,6 +69,12 @@
   "implementation_dependency_correction": {
     "reason": "The first invocation stopped at module import because the frozen runner imported Astropy, which is not installed in the CIAO environment. No scratch directory, mask, response, spectrum or report was created.",
     "change": "Remove the Astropy dependency and create the same predefined binary mask with CIAO dmimgcalc, then verify its pixels independently through CIAO pycrates before response extraction.",
+    "scientific_output_existed": false,
+    "scientific_selection_or_setting_changed": false
+  },
+  "preflight_metadata_correction": {
+    "reason": "Protocol 1.0.1 stopped in manifest validation because the background count for BULLET_bin154_obs4985_ccd3 was transcribed as 7 rather than the authoritative frozen V19U manifest value 14. No scratch directory, mask, response, spectrum or report was created.",
+    "change": "Replace the transcription with the frozen manifest value; the runner continues to verify it before any CIAO mask or response command.",
     "scientific_output_existed": false,
     "scientific_selection_or_setting_changed": false
   },

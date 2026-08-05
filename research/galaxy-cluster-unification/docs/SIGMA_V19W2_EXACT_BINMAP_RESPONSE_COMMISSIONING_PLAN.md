@@ -19,6 +19,12 @@ CIAO `dmimgcalc` writes the already-declared binary mask while propagating the
 frozen binmap WCS, and CIAO `pycrates` plus NumPy independently checks every
 output pixel. No selection, count, response or gravity setting changes.
 
+Protocol 1.0.1 then stopped in the manifest-validation gate, also before any
+scratch directory or product existed: the background count for
+`BULLET_bin154_obs4985_ccd3` had been transcribed as 7 rather than the frozen
+V19U manifest value 14. Protocol 1.0.2 corrects only that metadata transcription;
+the executable mask and event-count gates remain unchanged.
+
 ## Why the binmap remains authoritative
 
 The V19P/V19Q manifest assigns every event to exactly one integer binmap pixel.
