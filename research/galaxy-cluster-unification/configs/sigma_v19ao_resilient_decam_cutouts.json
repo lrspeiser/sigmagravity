@@ -1,0 +1,100 @@
+{
+  "protocol_version": "SIGMA-V19AO-RESILIENT-DECAM-CUTOUTS-1.0.0",
+  "status": "frozen_before_v19ao_pixel_retrieval",
+  "purpose": "Preserve all 139 V19AN exposure-extension groups while replacing only the 37 stale NSC _d2 descriptors with authoritative NOIRLab Archive primary-plus-HDU retrieval identities determined from frozen sky coordinates.",
+  "parent_artifacts": [
+    {
+      "path": "results/sigma_v19an_nsc_decam_group_cutouts/report.json",
+      "sha256": "3936b34c296422ae6518198d47ed6e43a172d838a14e84598336ff41ab16e230"
+    },
+    {
+      "path": "data/derived/sigma_v19an_nsc_decam_group_cutouts/group_plan.csv",
+      "sha256": "a4b82c98ecab29b4ab2174619ca50f88399fafddc427ab40cf997b42e231df22"
+    },
+    {
+      "path": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+      "sha256": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f"
+    }
+  ],
+  "inputs": {
+    "v19an_group_plan": "data/derived/sigma_v19an_nsc_decam_group_cutouts/group_plan.csv",
+    "v19am_manifest": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv"
+  },
+  "archive_fallback": {
+    "authority": "NSF NOIRLab Astro Data Archive public REST API",
+    "vohdu_endpoint": "https://astroarchive.noirlab.edu/api/sia/vohdu",
+    "timeout_seconds": 180,
+    "eligibility_rule": "Use archive fallback if and only if the already-frozen NSC exposure identifier ends in _d2; do not test pixel quality or HTTP outcome to choose a route.",
+    "filename_query_rule": "Remove only the terminal d2 token from the stale exposure identifier and require exactly one spatially matching current archive image whose basename starts with the remaining prefix.",
+    "representative_coordinate_rule": "Use the lexicographically smallest frozen NSC object ID in the exposure-extension group for the metadata-only spatial identity query.",
+    "required_instrument": "decam",
+    "required_proc_type": "instcal",
+    "required_prod_type": "image",
+    "required_retrieval_shape": "public URL containing exactly the primary header and authoritative spatially matched HDU: ?hdus=0,<hdu_idx>",
+    "no_arithmetic_extension_mapping": true
+  },
+  "retrieval": {
+    "timeout_seconds": 300,
+    "maximum_attempts": 3,
+    "wcs_containment_tolerance_pixel": 1.0,
+    "resume_rule": "Reuse an existing exact output path only after reopening and revalidating its FITS, finite-pixel and WCS containment properties."
+  },
+  "frozen_hybrid_plan": {
+    "path": "data/derived/sigma_v19ao_resilient_decam_cutouts/hybrid_plan.csv",
+    "sha256": "52c254325ea1af47b7265f418cd878feb82cb9a50e95c79771060faa04e18f89"
+  },
+  "gates": {
+    "exact_groups": 139,
+    "exact_measurement_memberships": 1032,
+    "exact_sia_groups": 102,
+    "exact_archive_groups": 37,
+    "http_200_every_group": true,
+    "fits_integrity_every_group": true,
+    "celestial_wcs_every_group": true,
+    "all_frozen_anchors_contained": true,
+    "at_least_one_finite_pixel_every_group": true,
+    "all_groups_retained_without_selection": true,
+    "no_photometric_model_or_prohibited_payload_opened": true
+  },
+  "outputs": {
+    "identity_payload_directory": "data/raw/sigma_v19ao_archive_identity",
+    "hybrid_plan": "data/derived/sigma_v19ao_resilient_decam_cutouts/hybrid_plan.csv",
+    "cutout_directory": "data/raw/sigma_v19ao_resilient_decam_cutouts",
+    "download_manifest": "data/derived/sigma_v19ao_resilient_decam_cutouts/download_manifest.csv",
+    "report": "results/sigma_v19ao_resilient_decam_cutouts/report.json"
+  },
+  "claim_boundary": [
+    "The source route is a transport identity, not an exposure-quality choice: 102 non-d2 groups keep their frozen NSC SIA URLs and all 37 d2 groups use authoritative archive HDU discovery.",
+    "A pass establishes complete calibrated-image retrieval and structural/WCS integrity only. It does not establish PSF quality, deblending, galaxy flux, color, stellar mass or mass current.",
+    "Archive subset products may contain a larger detector footprint than SIA group cutouts; no pixels outside structural validation may be interpreted in V19AO.",
+    "No ambiguous counterpart, lensing/halo payload, gravity result or untouched holdout is accessed."
+  ],
+  "authorization": {
+    "query_and_persist_archive_identity_metadata_for_all_stale_groups": true,
+    "freeze_hybrid_plan_before_pixel_access": true,
+    "download_every_frozen_group": true,
+    "open_pixels_for_fits_wcs_and_finite_value_integrity_only": true,
+    "persist_raw_cutouts_hashes_and_integrity_metadata": true,
+    "rank_or_select_exposures": false,
+    "fit_or_compare_photometry": false,
+    "choose_psf_or_deblend_model": false,
+    "query_ambiguous_candidates": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "one_archive_fallback_identity_diagnosed_before_protocol": true,
+    "all_37_archive_identities_queried_and_hashed_before_pixel_access": true,
+    "hybrid_plan_sha256_at_freeze": "52c254325ea1af47b7265f418cd878feb82cb9a50e95c79771060faa04e18f89",
+    "image_pixels_downloaded_at_freeze": false,
+    "photometry_psf_mass_current_lensing_halo_or_gravity_payload_opened_at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/acquire_sigma_v19ao_resilient_decam_cutouts.py",
+    "runner_sha256": "55d926cfece235a4ad949d04098ebba2ae2e583b2747468b607e3bb4e4b87909",
+    "frozen_base_runner": "scripts/acquire_sigma_v19an_nsc_decam_group_cutouts.py",
+    "frozen_base_runner_sha256": "6c50e5c0af1836aeea5e6bcbec8b4f9d76ee32e0c2cbbad40a45941a1f92cc0c"
+  }
+}
