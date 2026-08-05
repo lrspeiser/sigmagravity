@@ -48,3 +48,7 @@ research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_re
 research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/**/regions/*.csv text eol=crlf
 research/galaxy-cluster-unification/results/sigma_v19n_regional_response_workload/*.csv text eol=crlf
 research/galaxy-cluster-unification/results/sigma_v19o_fov_filtered_response_workload/*.csv text eol=crlf
+research/galaxy-cluster-unification/configs/sigma_v19p_exact_flux_obs_support.json -text
+research/galaxy-cluster-unification/results/sigma_v19p_exact_flux_obs_support/input_inventory.json -text
+research/galaxy-cluster-unification/scripts/freeze_sigma_v19p_flux_obs_inventory.py -text
+research/galaxy-cluster-unification/scripts/run_sigma_v19p_exact_flux_obs_support.py -text

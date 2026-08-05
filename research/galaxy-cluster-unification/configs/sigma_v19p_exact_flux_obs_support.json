@@ -1,0 +1,89 @@
+{
+  "protocol_version": "SIGMA-V19P-EXACT-FLUX-OBS-SUPPORT-1.0.0",
+  "status": "frozen after the V19N and V19O fail-closed audits and a hash-only inventory, but before opening a per-observation flux_obs FITS array or FOV, filtering an event with that FOV, knowing whether the one-event Bullet discrepancy closes, changing a response-task membership, constructing a spectrum or response, fitting thermodynamics, opening lensing data, or changing gravity physics",
+  "purpose": "Use the exact per-observation support products produced inside the already-frozen V19H flux_obs call, rather than a translated approximation, and require exact image/event conservation before commissioning any regional response.",
+  "parents": {
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "v19m_report": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+    "v19m_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+    "v19n_config": "configs/sigma_v19n_regional_response_workload.json",
+    "v19n_config_sha256": "dffb878e6abe8c444a39024be639c392414488d54c4d5859d1b37e867776e69e",
+    "v19n_report": "results/sigma_v19n_regional_response_workload/report.json",
+    "v19n_report_sha256": "1ead26fe0b6c08f47160a47e481c067268b2fce40ddd520fd146e25db2175351",
+    "v19n_manifest": "results/sigma_v19n_regional_response_workload/response_task_manifest.csv",
+    "v19n_manifest_sha256": "dc3a64aafe1cc81e0c02b9d3d371fa38e91cf6dfc2c38b2f8ad9f3e197205f4c",
+    "v19o_config": "configs/sigma_v19o_fov_filtered_response_workload.json",
+    "v19o_config_sha256": "f614fdf984b477d9b5d07dcc03ce63522974457e0d353c4dd83c9df38dc59ac6",
+    "v19o_report": "results/sigma_v19o_fov_filtered_response_workload/report.json",
+    "v19o_report_sha256": "515c6dd930d171c4901050a2da1a5a69adaabecd479fc7a12f87689bfffb54d0",
+    "input_inventory": "results/sigma_v19p_exact_flux_obs_support/input_inventory.json",
+    "input_inventory_sha256": "085d7ddcc855637dfce8cce2494f6c7d2d50b25950dabf8c0d8c10733369d983",
+    "inventory_generator": "scripts/freeze_sigma_v19p_flux_obs_inventory.py",
+    "inventory_generator_sha256": "902dfaafa05679402c82bfea6e23db1b8120fc56a0c23567460dc45e97be63fc"
+  },
+  "sample": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "observation_count": 20,
+    "admitted_region_count": 494,
+    "expected_response_task_count_by_cluster": {
+      "BULLET": 3812,
+      "ABELL2146": 1270
+    },
+    "expected_response_task_count_total": 5082,
+    "task_membership_must_equal_v19n": true
+  },
+  "exact_support": {
+    "science_event_filter": "registered point-source-excluded science event[sky=region(the exact ObsID.fov created by the frozen broad-band flux_obs call)][energy=500:7000]",
+    "science_count_truth": "the matching ObsID_0.5-7.0_thresh.img produced by the same flux_obs call",
+    "background_rule": "retain V19N's registered blank-sky event assignment without a science-only flux_obs support cut because V19H constructed the frozen background images directly by ObsID and CCD without that cut",
+    "energy_eV": [
+      500,
+      7000
+    ],
+    "coordinate_columns": [
+      "X",
+      "Y"
+    ],
+    "ccd_column": "CCD_ID",
+    "image_index": "column=floor((X-xlo)/binsize), row=floor((Y-ylo)/binsize)",
+    "bin_inclusion": "the V19M binmap integer at the event or image pixel is nonnegative",
+    "task_key": [
+      "cluster",
+      "bin_id",
+      "obsid",
+      "ccd_id"
+    ]
+  },
+  "conservation_gates": {
+    "inventory_hashes_and_sizes_exact": true,
+    "per_observation_count_images_sum_pixelwise_to_frozen_combined_image": true,
+    "exact_fov_filtered_science_events_equal_per_observation_count_image_in_every_region": true,
+    "exact_total_science_count_delta": 0,
+    "v19n_scaled_background_conservation_retained": true,
+    "task_key_set_equals_v19n": true,
+    "task_count_equals_5082": true,
+    "all_494_admitted_regions_have_at_least_one_task": true,
+    "no_unexpected_ccd_id": true,
+    "failure_rule": "fail before response construction; zero tolerance is retained and no event, observation, chip, region, or image pixel may be deleted to force agreement"
+  },
+  "engineering_report": {
+    "files_per_response_cell": 4,
+    "provisional_upper_storage_megabytes_per_cell": 25.0,
+    "storage_is_planning_only": true
+  },
+  "integrity": {
+    "hash_only_inventory_completed_at_freeze": true,
+    "per_observation_fits_array_opened_at_freeze": false,
+    "flux_obs_fov_applied_at_freeze": false,
+    "corrected_science_count_known_at_freeze": false,
+    "corrected_task_membership_known_at_freeze": false,
+    "spectrum_or_response_constructed_at_freeze": false,
+    "temperature_density_mach_or_speed_fitted_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}
