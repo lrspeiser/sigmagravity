@@ -1,0 +1,280 @@
+{
+  "protocol_version": "SIGMA-V19T-TEMPERATURE-FIT-COMMISSIONING-1.0.0",
+  "generated_utc": "2026-08-05T06:28:56.599695+00:00",
+  "config_sha256": "844d8bd8f3bdbbb9292ffd0e1df44c55fec5868310b0b552083e711fc1fd6f26",
+  "runner_sha256": "dd31ed84ed457adb48c863f3a603b7434716b737e56ce57eac925958ed37b02d",
+  "status": "temperature_fit_commissioning_passed_and_full_fit_pipeline_authorized",
+  "grouping_step": {
+    "command": [
+      "dmgroup",
+      "infile=/home/henry/sigma-v19t-temperature-commissioning/v100/inputs/BULLET_bin390_obs5356_ccd2.pi",
+      "outfile=/home/henry/sigma-v19t-temperature-commissioning/v100/inputs/BULLET_bin390_obs5356_ccd2_grp.pi",
+      "grouptype=NUM_CTS",
+      "grouptypeval=25",
+      "binspec=",
+      "xcolumn=CHANNEL",
+      "ycolumn=COUNTS",
+      "tabspec=",
+      "tabcolumn=",
+      "stopspec=",
+      "stopcolumn=",
+      "clobber=no",
+      "verbose=1",
+      "mode=h"
+    ],
+    "reused": false,
+    "log": "/home/henry/sigma-v19t-temperature-commissioning/v100/logs/dmgroup.log"
+  },
+  "grouped_pha_links": {
+    "BACKFILE": "BULLET_bin390_obs5356_ccd2_bkg.pi",
+    "ANCRFILE": "BULLET_bin390_obs5356_ccd2.arf",
+    "RESPFILE": "BULLET_bin390_obs5356_ccd2.rmf"
+  },
+  "expected_grouped_pha_links": {
+    "BACKFILE": "BULLET_bin390_obs5356_ccd2_bkg.pi",
+    "ANCRFILE": "BULLET_bin390_obs5356_ccd2.arf",
+    "RESPFILE": "BULLET_bin390_obs5356_ccd2.rmf"
+  },
+  "fits": [
+    {
+      "initial_temperature_keV": 8.0,
+      "temperature_keV": 15.238254838689814,
+      "normalization": 7.761251792527193e-05,
+      "normalization_initial": 6.766278831545954e-05,
+      "fixed_nh_1e22_cm2": 0.0438,
+      "fixed_redshift": 0.296,
+      "fixed_abundance_solar": 0.3,
+      "filtered_source_counts": 651.0,
+      "filtered_grouped_bins": 25,
+      "source_exposure_s": 96212.411017543,
+      "statval": 16.973297852574138,
+      "dof": 23,
+      "reduced_statistic": 0.7379694718510494,
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "fit_raw": {
+        "datasets": [
+          1
+        ],
+        "methodname": "levmar",
+        "statname": "chi2xspecvar",
+        "succeeded": true,
+        "message": "successful termination",
+        "nfev": 15,
+        "istatval": 28.33568662418143,
+        "statval": 16.973297852574138,
+        "dstatval": 11.362388771607293,
+        "numpoints": 25,
+        "dof": 23,
+        "parnames": [
+          "apec_v19t_8p0.kT",
+          "apec_v19t_8p0.norm"
+        ],
+        "parvals": [
+          15.238254838689814,
+          7.761251792527193e-05
+        ]
+      },
+      "confidence_68_percent": {
+        "lower_delta_keV": -4.144865524615085,
+        "upper_delta_keV": 7.534725821217483,
+        "lower_keV": 11.093389314074729,
+        "upper_keV": 22.772980659907297,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "methodname": "confidence",
+          "fitname": "levmar",
+          "statname": "chi2xspecvar",
+          "sigma": 1.0,
+          "percent": 68.26894921370858,
+          "parnames": [
+            "apec_v19t_8p0.kT"
+          ],
+          "parvals": [
+            15.238254838689814
+          ],
+          "parmins": [
+            -4.144865524615085
+          ],
+          "parmaxes": [
+            7.534725821217483
+          ],
+          "nfits": 12
+        }
+      },
+      "xspec_atomic_data": {
+        "atomdb_version": "3.0.9",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+      },
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 8.681680328662802e-06
+      }
+    },
+    {
+      "initial_temperature_keV": 3.0,
+      "temperature_keV": 15.23825483878428,
+      "normalization": 7.761251792531073e-05,
+      "normalization_initial": 6.766278831545954e-05,
+      "fixed_nh_1e22_cm2": 0.0438,
+      "fixed_redshift": 0.296,
+      "fixed_abundance_solar": 0.3,
+      "filtered_source_counts": 651.0,
+      "filtered_grouped_bins": 25,
+      "source_exposure_s": 96212.411017543,
+      "statval": 16.97329785257415,
+      "dof": 23,
+      "reduced_statistic": 0.73796947185105,
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "fit_raw": {
+        "datasets": [
+          1
+        ],
+        "methodname": "levmar",
+        "statname": "chi2xspecvar",
+        "succeeded": true,
+        "message": "successful termination",
+        "nfev": 19,
+        "istatval": 100.69367378958792,
+        "statval": 16.97329785257415,
+        "dstatval": 83.72037593701377,
+        "numpoints": 25,
+        "dof": 23,
+        "parnames": [
+          "apec_v19t_3p0.kT",
+          "apec_v19t_3p0.norm"
+        ],
+        "parvals": [
+          15.23825483878428,
+          7.761251792531073e-05
+        ]
+      },
+      "confidence_68_percent": null,
+      "xspec_atomic_data": {
+        "atomdb_version": "3.0.9",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+      },
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 9.867119261771627e-06
+      }
+    },
+    {
+      "initial_temperature_keV": 15.0,
+      "temperature_keV": 15.238254838805538,
+      "normalization": 7.761251792531723e-05,
+      "normalization_initial": 6.766278831545954e-05,
+      "fixed_nh_1e22_cm2": 0.0438,
+      "fixed_redshift": 0.296,
+      "fixed_abundance_solar": 0.3,
+      "filtered_source_counts": 651.0,
+      "filtered_grouped_bins": 25,
+      "source_exposure_s": 96212.411017543,
+      "statval": 16.973297852574145,
+      "dof": 23,
+      "reduced_statistic": 0.7379694718510498,
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "fit_raw": {
+        "datasets": [
+          1
+        ],
+        "methodname": "levmar",
+        "statname": "chi2xspecvar",
+        "succeeded": true,
+        "message": "successful termination",
+        "nfev": 9,
+        "istatval": 26.45603770413612,
+        "statval": 16.973297852574145,
+        "dstatval": 9.482739851561973,
+        "numpoints": 25,
+        "dof": 23,
+        "parnames": [
+          "apec_v19t_15p0.kT",
+          "apec_v19t_15p0.norm"
+        ],
+        "parvals": [
+          15.238254838805538,
+          7.761251792531723e-05
+        ]
+      },
+      "confidence_68_percent": null,
+      "xspec_atomic_data": {
+        "atomdb_version": "3.0.9",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+      },
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 7.6008913226622265e-06
+      }
+    }
+  ],
+  "multistart_fractional_temperature_spread": 7.594328894006126e-12,
+  "primary_fractional_68_percent_half_width": 0.383232577137973,
+  "frozen_grouped_pha": {
+    "relative_path": "results/sigma_v19t_temperature_fit_commissioning/frozen_products/BULLET_bin390_obs5356_ccd2_grp.pi",
+    "bytes": 126720,
+    "sha256": "0a301e38789f4f727f069f2fd27cdc596c17bc901982c798c09443f07d7ef58c",
+    "reused": false
+  },
+  "gates": {
+    "grouped_pha_retains_v19r_background_arf_and_rmf_links": true,
+    "apec_probe_is_finite_positive": true,
+    "all_three_initial_temperatures_fit_successfully": true,
+    "multistart_fractional_temperature_spread_at_most_0_05": true,
+    "finite_ordered_68_percent_temperature_interval": true,
+    "fractional_68_percent_half_width_at_most_0_5": true,
+    "reduced_statistic_at_most_1_5": true,
+    "temperature_and_normalization_not_on_bounds": true
+  },
+  "full_response_and_fit_production_authorized": true,
+  "scientific_temperature_map_claimed": false,
+  "thermal_stress_constructed": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 127,
+    "sigma_protocols": 128,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6899,6 +6899,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "93dcd0a9690dbff7e23fa946c894ac6816f38c13396d77e4dfe1917c81a5eadf"
+    },
+    {
+      "config": "configs/sigma_v19t_temperature_fit_commissioning.json",
+      "protocol_version": "SIGMA-V19T-TEMPERATURE-FIT-COMMISSIONING-1.0.0",
+      "status": "frozen after V19R response commissioning and V19S HI4PI acquisition passed, but before grouping the commissioning PHA, loading it in Sherpa, evaluating APEC, fitting a temperature or normalization, reading a fit statistic, opening lensing data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "844d8bd8f3bdbbb9292ffd0e1df44c55fec5868310b0b552083e711fc1fd6f26"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

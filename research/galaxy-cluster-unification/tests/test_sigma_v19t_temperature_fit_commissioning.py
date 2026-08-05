@@ -6,6 +6,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19t_temperature_fit_commissioning.json"
+RUNNER = ROOT / "scripts" / "fit_sigma_v19t_temperature_commissioning.py"
+REPORT = ROOT / "results" / "sigma_v19t_temperature_fit_commissioning" / "report.json"
 
 
 def sha256(path: Path) -> str:
@@ -40,3 +42,35 @@ def test_v19t_freezes_model_and_gates_before_loading_spectrum() -> None:
     assert config["integrity"]["spectrum_loaded_in_sherpa_at_freeze"] is False
     assert config["integrity"]["temperature_or_normalization_fit_at_freeze"] is False
     assert config["integrity"]["fit_statistic_or_interval_known_at_freeze"] is False
+
+
+def test_v19t_temperature_fit_commissioning_passes_all_gates() -> None:
+    report = json.loads(REPORT.read_text(encoding="utf-8"))
+    assert report["config_sha256"] == sha256(CONFIG)
+    assert report["runner_sha256"] == sha256(RUNNER)
+    assert report["status"] == (
+        "temperature_fit_commissioning_passed_and_full_fit_pipeline_authorized"
+    )
+    assert all(report["gates"].values())
+    assert [row["initial_temperature_keV"] for row in report["fits"]] == [
+        8.0,
+        3.0,
+        15.0,
+    ]
+    primary = report["fits"][0]
+    assert abs(primary["temperature_keV"] - 15.238254838689814) < 1e-9
+    assert primary["optimization_attempts"] == ["levmar"]
+    assert primary["dof"] == 23
+    assert primary["reduced_statistic"] < 0.738
+    confidence = primary["confidence_68_percent"]
+    assert confidence["lower_keV"] < primary["temperature_keV"] < confidence["upper_keV"]
+    assert report["multistart_fractional_temperature_spread"] < 1e-10
+    assert report["primary_fractional_68_percent_half_width"] < 0.5
+    product = report["frozen_grouped_pha"]
+    path = ROOT / product["relative_path"]
+    assert path.stat().st_size == product["bytes"]
+    assert sha256(path) == product["sha256"]
+    assert report["full_response_and_fit_production_authorized"] is True
+    assert report["scientific_temperature_map_claimed"] is False
+    assert report["thermal_stress_constructed"] is False
+    assert report["gravity_formula_or_parameter_changed"] is False
