@@ -1,0 +1,102 @@
+{
+  "protocol_version": "SIGMA-V19AD-FIXED-APERTURE-COLOR-COMMISSIONING-1.0.0",
+  "status": "frozen_before_fixed_aperture_aggregation_or_validation_scoring",
+  "purpose": "Test whether same-instrument, same-aperture DECam colors repair V19AB's failed color-only retrieval without using absolute magnitude or opening any ambiguous candidate.",
+  "parent_artifacts": [
+    {
+      "path": "configs/sigma_v19ac_nsc_measurement_photometry.json",
+      "sha256": "6b56b4a72c1ccfd6d839ae98234aa43a576694707cd231b70d751be01d723d6c"
+    },
+    {
+      "path": "results/sigma_v19ac_nsc_measurement_photometry/provenance.json",
+      "sha256": "9ec0342233d4b2781fb2acb0efb689ce5c15ae4a0379b78881cce51aaece32ee"
+    },
+    {
+      "path": "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv",
+      "sha256": "05ca7f66bc62184a84f6f980986eb303b9aaf5b3ae24f27d7183c70b8c7e27dd"
+    },
+    {
+      "path": "configs/sigma_v19ab_bessel_nsc_transform_commissioning.json",
+      "sha256": "1e346fb1b0097cd6b16058b125cf51ab94bc2a845b1cd0419c350a9476c78263"
+    },
+    {
+      "path": "results/sigma_v19ab_bessel_nsc_transform_commissioning/report.json",
+      "sha256": "f6364489e16dee9b44928dcaea70d69d11c7770df761470a7fa0cfa41e1f3176"
+    },
+    {
+      "path": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+      "sha256": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7"
+    }
+  ],
+  "inputs": {
+    "measurements": "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv",
+    "commissioning_sample": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+    "expected_rows": 15,
+    "expected_development_ids": ["29", "78", "14", "07", "06", "37", "22", "16", "23", "24"],
+    "expected_validation_ids": ["26", "57", "66", "71", "21"]
+  },
+  "aggregation": {
+    "instrument": "c4d",
+    "filters": ["g", "r", "i", "z"],
+    "primary_aperture_diameter_arcsec": 4,
+    "sensitivity_aperture_diameters_arcsec": [2, 8],
+    "measurement_rule": "retain instrument c4d rows with SExtractor flags=0, finite magnitude below 90, and finite 0<reported magnitude error<=1; take the unweighted median per object/filter",
+    "uncertainty_diagnostic": "max(median reported error/sqrt(N), 1.4826*MAD/sqrt(N), 0.02 mag)",
+    "no_exposure_or_seeing_tuning": true
+  },
+  "model": {
+    "input_features": ["1", "(B-R-2.4)/1.0", "(R-I-1.1)/0.5"],
+    "feature_centers": {"B_minus_R": 2.4, "R_minus_I": 1.1},
+    "feature_scales": {"B_minus_R": 1.0, "R_minus_I": 0.5},
+    "outputs": ["g_minus_r", "r_minus_i", "i_minus_z"],
+    "fit": "independent affine regressions on the ten unchanged V19AB development IDs",
+    "robust_residual_scale_mag": 0.15,
+    "ridge_penalty": 0.25,
+    "predictive_scale_floor_mag": 0.05,
+    "maximum_function_evaluations": 5000
+  },
+  "validation_gates": {
+    "maximum_validation_median_absolute_error_each_color_mag": 0.25,
+    "minimum_color_only_top1_retrievals_out_of_5": 3,
+    "minimum_color_only_mean_reciprocal_rank": 0.65,
+    "all_primary_rows_must_have_griz": true,
+    "all_optimizers_must_succeed": true,
+    "sensitivity_apertures_are_diagnostic_and_cannot_rescue_primary_failure": true
+  },
+  "outputs": {
+    "aggregated_sample": "data/derived/sigma_v19ad_fixed_aperture_color_commissioning/aggregated_sample.csv",
+    "primary_validation_retrieval": "data/derived/sigma_v19ad_fixed_aperture_color_commissioning/primary_validation_retrieval.csv",
+    "report": "results/sigma_v19ad_fixed_aperture_color_commissioning/report.json"
+  },
+  "claim_boundary": [
+    "V19AD is an internal measurement commissioning test on the unchanged provisional singleton split.",
+    "Only the 4-arcsec primary aperture can authorize the next stage; 2- and 8-arcsec results are sensitivity diagnostics.",
+    "A pass authorizes a separately frozen ambiguous-candidate color likelihood, not a counterpart, mass, current, lensing, halo, or gravity result.",
+    "A failure preserves every V19AA ambiguous state and requires synthetic SEDs, forced photometry on original images, or better coordinates."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ad_fixed_aperture_color_commissioning.py",
+    "runner_sha256": "8a8714c8c6e96103027483563b322cc89cac79f3ef22dd0258e6101535b60984"
+  },
+  "authorization": {
+    "aggregate_provisional_singleton_measurements": true,
+    "fit_development_colors": true,
+    "score_validation_singletons": true,
+    "score_ambiguous_candidates": false,
+    "select_counterpart": false,
+    "infer_stellar_mass": false,
+    "construct_mass_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "per_measurement_data_acquired_pre_freeze": true,
+    "primary_aperture_selected_pre_freeze": true,
+    "fixed_aperture_validation_scores_computed_pre_freeze": false,
+    "ambiguous_candidate_photometry_scored_pre_freeze": false,
+    "counterpart_selected_pre_freeze": false,
+    "lensing_target_opened_pre_freeze": false,
+    "gravity_result_opened_pre_freeze": false
+  }
+}
