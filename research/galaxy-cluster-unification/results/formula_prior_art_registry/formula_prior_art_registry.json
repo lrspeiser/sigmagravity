@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 126,
+    "sigma_protocols": 127,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6887,6 +6887,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "244454f6487512d03b78ef790e1dec6d3b77cb5396f674b23ffe2228680ae10e"
+    },
+    {
+      "config": "configs/sigma_v19s_hi4pi_acquisition.json",
+      "protocol_version": "SIGMA-V19S-HI4PI-ACQUISITION-1.0.0",
+      "status": "frozen after V19R passed response commissioning but before querying either cluster's Galactic hydrogen column, reading a V19S HEASARC response, fitting a temperature, opening lensing data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "93dcd0a9690dbff7e23fa946c894ac6816f38c13396d77e4dfe1917c81a5eadf"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

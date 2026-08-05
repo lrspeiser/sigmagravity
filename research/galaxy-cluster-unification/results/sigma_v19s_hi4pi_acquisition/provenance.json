@@ -1,0 +1,52 @@
+{
+  "status": "both_frozen_hi4pi_columns_acquired_and_hashed",
+  "protocol_version": "SIGMA-V19S-HI4PI-ACQUISITION-1.0.0",
+  "generated_utc": "2026-08-05T06:24:40.001921+00:00",
+  "config_sha256": "93dcd0a9690dbff7e23fa946c894ac6816f38c13396d77e4dfe1917c81a5eadf",
+  "runner_sha256": "f7b3ae4d87a668e9983bab1093f07181cc83c3e404e086e74a5df0b08eb056a9",
+  "source": {
+    "authority": "NASA HEASARC nH version 3 web interface",
+    "endpoint": "https://heasarc.gsfc.nasa.gov/cgi-bin/Tools/w3nh/w3nh.pl",
+    "map": "h1_nh_HI4PI.fits",
+    "coordinate_system": "Equatorial",
+    "equinox": 2000,
+    "cone_radius_deg": 0.1,
+    "usemap": 0,
+    "selected_statistic": "inverse-distance weighted average nH within the cone"
+  },
+  "records": [
+    {
+      "cluster": "BULLET",
+      "query_url": "https://heasarc.gsfc.nasa.gov/cgi-bin/Tools/w3nh/w3nh.pl?Entry=104.62475437439871%2C-55.94659781854907&NR=GRB%2FSIMBAD%2BSesame%2FNED&CoordSys=Equatorial&equinox=2000&radius=0.1&usemap=0",
+      "center_ra_deg": 104.6247543743987,
+      "center_dec_deg": -55.94659781854907,
+      "cone_radius_deg": 0.1,
+      "map": "h1_nh_HI4PI.fits",
+      "average_nh_cm2": 4.39e+20,
+      "weighted_average_nh_cm2": 4.38e+20,
+      "relative_path": "data/raw/sigma_v19s_hi4pi/BULLET_HI4PI.html",
+      "bytes": 28029,
+      "sha256": "c0372f7de1be4253b0b2970dc425ede7eaf61169ce25e21b4abd3fa27d1d465f",
+      "reused": false
+    },
+    {
+      "cluster": "ABELL2146",
+      "query_url": "https://heasarc.gsfc.nasa.gov/cgi-bin/Tools/w3nh/w3nh.pl?Entry=239.04422976391501%2C66.35595556003260&NR=GRB%2FSIMBAD%2BSesame%2FNED&CoordSys=Equatorial&equinox=2000&radius=0.1&usemap=0",
+      "center_ra_deg": 239.044229763915,
+      "center_dec_deg": 66.3559555600326,
+      "cone_radius_deg": 0.1,
+      "map": "h1_nh_HI4PI.fits",
+      "average_nh_cm2": 2.63e+20,
+      "weighted_average_nh_cm2": 2.62e+20,
+      "relative_path": "data/raw/sigma_v19s_hi4pi/ABELL2146_HI4PI.html",
+      "bytes": 27986,
+      "sha256": "5dfd32d614c76b7c46a44b8aee3f9669caf661afb4d65a0afd4f95c70694b897",
+      "reused": false
+    }
+  ],
+  "temperature_fit_authorized": true,
+  "spectrum_or_response_constructed": false,
+  "temperature_or_abundance_fit_run": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}
