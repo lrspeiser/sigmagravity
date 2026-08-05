@@ -1,0 +1,121 @@
+{
+  "protocol_version": "SIGMA-V19CF-CROSS-SCALE-DATA-READINESS-1.0.0",
+  "status": "frozen source-and-metadata-only readiness audit before terminal V19BQ, action selection, universal-constant selection, final galaxy or cluster sample selection, or opening any new kinematic or lensing target",
+  "purpose": "Measure whether the preregistered broad galaxy and cluster tests can actually be executed, while keeping source availability, spent evidence, inferred halo products, and prospective raw validation targets in distinct scientific roles.",
+  "parents": {
+    "cross_scale_prediction_gates": {
+      "path": "results/sigma_v19cc_cross_scale_prediction_gates/report.json",
+      "sha256": "a95fd836472400f2136c9722779a1cfc012929100ffdd94ef1c91959e3f54a39"
+    },
+    "blind_cluster_admission": {
+      "path": "results/sigma_v19bh_blind_cluster_admission/report.json",
+      "sha256": "3aba06b1360e976794b6dd2ded4bd65e2e472e184e84abb46b187baea2bf07d8"
+    },
+    "blind_galaxy_admission": {
+      "path": "results/sigma_v19bi_blind_galaxy_admission/report.json",
+      "sha256": "c5cabc48d224d4a1021e8f3d65f8ec8236b3fecd8ac13c33734c82b3d1644b55"
+    },
+    "wallaby_counterpart_mixture": {
+      "path": "results/sigma_v19ce_wallaby_counterpart_mixture_propagation/report.json",
+      "sha256": "58e66d538495d7b752902ba3821c86238cc46c2174bd1d0317b5515698c2bdff"
+    },
+    "spent_cluster_evidence_registry": {
+      "path": "results/p0753_cluster_evidence_registry/registry.json",
+      "sha256": "be1721ab8b6d6c1a16b601b110c2ff5d3c63c2908fdbae585d128f9c0e3055fa"
+    },
+    "wallaby_source_only_variety_frame": {
+      "path": "data/derived/sigma_v19bw_wallaby_source_only_variety_frame/wallaby_source_only_variety_frame.csv",
+      "sha256": "a21d0c9f0452e9c77e39bf6065ad60d0f00280dbdce9432df9a45ede01190f3f"
+    }
+  },
+  "expected_inventory": {
+    "galaxy": {
+      "wallaby_canonical_source_rows": 592,
+      "wallaby_release_rows_with_counterpart_mixtures": 711,
+      "wallaby_candidates_in_mixture": 18550,
+      "wallaby_kinematic_available_all_policies": 103,
+      "wallaby_kinematic_available_some_policies": 6,
+      "wallaby_kinematic_available_any_policy": 109,
+      "selected_prospective_galaxies": 0,
+      "opened_new_kinematic_targets": 0
+    },
+    "cluster": {
+      "metadata_shortlist": 8,
+      "relaxed_side": 4,
+      "disturbed_side": 4,
+      "admitted_prospective_holdouts": 0,
+      "selected_final_clusters": 0,
+      "spent_registry_clusters": 4,
+      "spent_raw_forward_score_ready": 0,
+      "opened_new_raw_lensing_targets": 0
+    }
+  },
+  "readiness_definitions": {
+    "source_universe_ready": "Enough outcome-blind source-side candidates exist to satisfy the future sample size and state-balance minima.",
+    "prospective_sample_admitted": "Every selected object has passed source completeness and target-likelihood metadata gates, with target values still sealed.",
+    "execution_ready": "A frozen action, constants, solver and nuisance policy exist and all admitted raw target payloads are content-addressed for one-time opening.",
+    "spent_development_only": "The data may reject or diagnose a mechanism but cannot provide a new blind validation claim.",
+    "model_derived_discovery_only": "A halo or lens reconstruction may generate hypotheses or serve as a disclosed comparator but cannot be validation truth."
+  },
+  "next_data_actions": [
+    {
+      "rank": 1,
+      "task": "complete_the_protected_v19w5_to_v19bq_source_chain",
+      "done_when": "V19BR reports terminal_chain_complete and frozen V19BS issues a source disposition"
+    },
+    {
+      "rank": 2,
+      "task": "admit_six_source_complete_cluster_holdouts_without_opening_coordinates",
+      "done_when": "six content-addressed cluster source manifests pass the frozen baryon, family-count, uncertainty and comparator metadata gates with at least two relaxed and two disturbed systems"
+    },
+    {
+      "rank": 3,
+      "task": "admit_a_48_galaxy_morphology_balanced_holdout_without_opening_velocities",
+      "done_when": "at least 48 identities satisfy all eight strata and observation-mode quotas, including at least 32 WALLABY systems, with target payload hashes sealed"
+    },
+    {
+      "rank": 4,
+      "task": "freeze_a_mathematically_healthy_one_metric_action_and_constants",
+      "done_when": "the V19BS-authorized action route passes conservation, degree-of-freedom, boundedness, hyperbolicity and weak-field derivation gates with no more than five universal constants"
+    },
+    {
+      "rank": 5,
+      "task": "open_once_and_score_the_broad_core_then_same_metric_extensions",
+      "done_when": "the frozen theory is scored on every registered galaxy and raw cluster gate before weak lensing, merger transfer and broader dark-matter-attributed phenomena"
+    }
+  ],
+  "required_gates": {
+    "all_parent_hashes_exact": true,
+    "wallaby_source_inventory_is_large_and_kinematically_stratifiable": true,
+    "wallaby_identity_uncertainty_is_preserved": true,
+    "cluster_shortlist_is_state_balanced_but_not_misrepresented_as_admitted": true,
+    "spent_cluster_products_are_not_misrepresented_as_blind_or_score_ready": true,
+    "prospective_galaxy_and_cluster_execution_is_truthfully_not_ready": true,
+    "broad_core_thresholds_and_later_solar_veto_are_preserved": true,
+    "no_target_action_constant_formula_or_sample_selected": true
+  },
+  "authorization": {
+    "read_existing_source_and_metadata_reports": true,
+    "read_wallaby_source_only_variety_rows": true,
+    "read_new_kinematic_values": false,
+    "read_new_lensing_coordinates_or_maps": false,
+    "select_final_galaxy_or_cluster_sample": false,
+    "select_or_change_action_or_gravity_formula": false,
+    "fit_universal_constants": false,
+    "perform_detailed_solar_optimization": false
+  },
+  "claim_boundary": [
+    "V19CF measures data readiness; it is not evidence for Sigma Gravity or any source invariant.",
+    "The WALLABY source universe is large enough for a broad holdout, but no new velocity target has been opened and no final galaxy has been selected.",
+    "The cluster shortlist is balanced in source-side state, but zero clusters are admitted or raw-score-ready for prospective validation today.",
+    "The four locally registered resolved cluster systems are spent development evidence, and their inferred lens maps remain discovery products or comparators rather than truth.",
+    "Solar-System optimization remains deferred while local consistency remains a mandatory later veto."
+  ],
+  "implementation": {
+    "runner": "scripts/audit_sigma_v19cf_cross_scale_data_readiness.py",
+    "tests": "tests/test_sigma_v19cf_cross_scale_data_readiness.py"
+  },
+  "outputs": {
+    "report": "results/sigma_v19cf_cross_scale_data_readiness/report.json"
+  }
+}
