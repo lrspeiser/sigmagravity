@@ -2515,3 +2515,12 @@ all 50 declared columns exist. Five manufactured contract tests pass. No
 WALLABY kinematic row, evidence split, force result, action, constant or Solar
 calculation was opened. See
 [`SIGMA_V19BX_SKYMAPPER_SOURCE_ONLY_CANDIDATES.md`](SIGMA_V19BX_SKYMAPPER_SOURCE_ONLY_CANDIDATES.md).
+
+V19BX subsequently executed without changing its frozen query. All 592 cones
+passed, yielding 17,094 candidate rows. Hydra contributes 3,906 candidates,
+NGC 4636 contributes 1,417 and Norma contributes 11,771. The 109-name
+kinematic-availability lane alone contains 3,616 candidates, including 2,459
+around the 31 Norma sources. This is direct evidence that a nearest optical
+neighbor cannot be treated as the counterpart: the next source-only step must
+combine H I footprints, optical cutouts and star masks under a frozen
+probabilistic association model. No counterpart or target was selected.

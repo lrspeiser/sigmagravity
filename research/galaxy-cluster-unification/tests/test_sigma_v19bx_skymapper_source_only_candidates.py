@@ -4,6 +4,7 @@ import csv
 import importlib.util
 import io
 import json
+import hashlib
 from pathlib import Path
 
 
@@ -80,3 +81,33 @@ def test_v19bx_diagnostic_flags_do_not_select_a_counterpart() -> None:
     assert MODULE.usable_r(row)
     assert MODULE.extended(row)
     assert config()["query_policy"]["counterpart_selection"].startswith("forbidden")
+
+
+def test_v19bx_committed_source_only_outputs_pass_and_match_hashes() -> None:
+    report_path = ROOT / "results/sigma_v19bx_skymapper_source_only_candidates/report.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["decision"] == "passed_source_only_candidates_no_counterpart_selected"
+    assert all(report["gate_results"].values())
+    for key in ("candidate_output", "coverage_output"):
+        output = report[key]
+        payload = (ROOT / output["path"]).read_bytes()
+        assert hashlib.sha256(payload).hexdigest() == output["sha256"]
+
+
+def test_v19bx_committed_outputs_cover_all_sources_without_target_columns() -> None:
+    report = json.loads(
+        (ROOT / "results/sigma_v19bx_skymapper_source_only_candidates/report.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert report["candidate_output"]["rows"] == 17094
+    assert report["candidate_output"]["sources_with_any_candidate"] == 592
+    assert report["coverage_output"]["rows"] == 592
+    lane = report["coverage_output"]["kinematic_availability_lane_summary"]
+    assert lane["wallaby_sources"] == 109
+    assert lane["optical_candidate_rows"] == 3616
+    candidate_path = ROOT / report["candidate_output"]["path"]
+    with candidate_path.open("r", encoding="utf-8", newline="") as stream:
+        columns = next(csv.reader(stream))
+    forbidden = [token.lower() for token in config()["forbidden_target_tokens"]]
+    assert not any(token in " ".join(columns).lower() for token in forbidden)

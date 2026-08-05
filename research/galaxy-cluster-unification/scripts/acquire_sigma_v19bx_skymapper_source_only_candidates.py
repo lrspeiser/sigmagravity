@@ -188,6 +188,9 @@ def acquire(config_path: Path = DEFAULT_CONFIG) -> tuple[bytes, bytes, dict[str,
     row_cap_sources: list[str] = []
     outside_radius: list[str] = []
     field_by_name = {row["name"]: row["release_field"] for row in input_rows}
+    availability_by_name = {
+        row["name"]: row["canonical_kflag"] for row in input_rows
+    }
     for name in sorted(positions):
         source = positions[name]
         if name in failures:
@@ -322,6 +325,24 @@ def acquire(config_path: Path = DEFAULT_CONFIG) -> tuple[bytes, bytes, dict[str,
             "sources_with_extended_candidate": sum(int(row["extended_candidate_count"]) > 0 for row in subset),
             "optical_candidate_rows": sum(int(row["candidate_count"]) for row in subset),
         }
+    availability_rows = [
+        row for row in coverage_rows if availability_by_name[row["name"]] == "2"
+    ]
+    availability_counts = sorted(int(row["candidate_count"]) for row in availability_rows)
+    availability_field_summary: dict[str, dict[str, int | float]] = {}
+    for field in sorted(set(field_by_name.values())):
+        subset = [row for row in availability_rows if row["release_field"] == field]
+        counts = sorted(int(row["candidate_count"]) for row in subset)
+        availability_field_summary[field] = {
+            "wallaby_sources": len(subset),
+            "optical_candidate_rows": sum(counts),
+            "mean_candidates_per_source": sum(counts) / len(counts),
+            "median_candidates_per_source": counts[len(counts) // 2],
+            "maximum_candidates_per_source": max(counts),
+            "sources_with_extended_candidate": sum(
+                int(row["extended_candidate_count"]) > 0 for row in subset
+            ),
+        }
     report = {
         "protocol_version": config["protocol_version"],
         "status": "completed_skymapper_source_only_candidate_acquisition",
@@ -361,6 +382,19 @@ def acquire(config_path: Path = DEFAULT_CONFIG) -> tuple[bytes, bytes, dict[str,
             "bytes": len(coverage_payload),
             "rows": len(coverage_rows),
             "field_summary": field_summary,
+            "kinematic_availability_lane_summary": {
+                "wallaby_sources": len(availability_rows),
+                "optical_candidate_rows": sum(availability_counts),
+                "median_candidates_per_source": availability_counts[
+                    len(availability_counts) // 2
+                ],
+                "maximum_candidates_per_source": max(availability_counts),
+                "sources_with_extended_candidate": sum(
+                    int(row["extended_candidate_count"]) > 0
+                    for row in availability_rows
+                ),
+                "field_summary": availability_field_summary,
+            },
             "candidate_count_histogram": dict(sorted(Counter(candidate_counts).items())),
         },
         "diagnostic_only_flags": config["diagnostic_only_flags"],
