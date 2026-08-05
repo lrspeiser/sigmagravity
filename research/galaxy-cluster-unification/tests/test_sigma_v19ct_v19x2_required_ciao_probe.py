@@ -21,28 +21,14 @@ def test_v19ct_freezes_only_unused_probe_removal() -> None:
     assert not payload["authorization"]["change_x2_config_runner_scientific_rules_or_data"]
 
 
-def test_v19ct_completed_result_passes_every_boundary() -> None:
+def test_v19ct_records_the_real_astropy_import_dependency() -> None:
     payload = load(REPORT)
-    assert payload["status"] == "v19x2_required_ciao_probe_completed"
-    assert all(payload["wrapper_preflight"].values())
-    assert all(payload["preflight"].values())
-    assert all(payload["environment_probe"]["checks"].values())
-    assert all(payload["gate_results"].values())
-    assert payload["effective_config_changes"] == [{
-        "path": "environment.required_python_modules",
-        "before": ["sherpa", "astropy", "numpy"],
-        "after": ["sherpa", "numpy"],
-    }]
+    assert payload["status"] == "v19x2_required_ciao_probe_failed_closed"
+    assert "import_closure_exact_and_astropy_absent': False" in payload["exception"]
     assert not any(payload["authorization_boundary"].values())
 
 
-def test_v19ct_reaches_registered_scientific_or_source_disposition() -> None:
+def test_v19ct_failure_precedes_environment_or_scientific_change() -> None:
     payload = load(REPORT)
-    assert payload["decision"] in {
-        "v19x2_valid_scientific_gate_failure_no_full_source_chain",
-        "run_frozen_v19bs_disposition_next",
-    }
-    assert payload["v19x2_report"]["status"] in {
-        "unified_spectral_combination_commissioning_gate_failed",
-        "unified_spectral_combination_commissioning_passed_and_full_regional_fits_authorized",
-    }
+    assert "v19cs_failure_exact': True" in payload["exception"]
+    assert "authorization_probe_only': True" in payload["exception"]

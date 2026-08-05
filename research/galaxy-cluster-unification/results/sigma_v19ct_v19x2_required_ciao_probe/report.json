@@ -1,0 +1,18 @@
+{
+  "authorization_boundary": {
+    "action_derived": false,
+    "solar_optimized": false,
+    "target_or_gravity_opened": false,
+    "v19bs_run": false
+  },
+  "claim_boundary": [
+    "Astropy is removed from the environment probe only because no frozen V19X2 import-closure file references it.",
+    "Sherpa and NumPy remain required, and combine_spectra and dmgroup must resolve from the exact CIAO environment bin directory.",
+    "No package is installed and no source, response, grouping, fit, target, gravity or Solar-System rule changes.",
+    "A valid V19X2 scientific gate failure remains final."
+  ],
+  "exception": "RuntimeError: V19CT preflight failed: {'v19cs_config_exact': True, 'v19cs_runner_exact': True, 'v19cs_failure_exact': True, 'v19cs_probe_log_exact': True, 'import_closure_exact_and_astropy_absent': False, 'authorization_probe_only': True}",
+  "generated_utc": "2026-08-05T20:45:40.124447+00:00",
+  "protocol_version": "SIGMA-V19CT-V19X2-REQUIRED-CIAO-PROBE-1.0.0",
+  "status": "v19x2_required_ciao_probe_failed_closed"
+}
