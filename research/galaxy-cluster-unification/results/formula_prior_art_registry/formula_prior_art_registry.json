@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 132,
+    "sigma_protocols": 133,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6959,6 +6959,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "e915f5d5be9d8dea5a2ecb1b8e00aeffd9fb10ed5b9aafccc258b040e8ad9afb"
+    },
+    {
+      "config": "configs/sigma_v19y_hsc_member_photometry.json",
+      "protocol_version": "SIGMA-V19Y-HSC-MEMBER-PHOTOMETRY-1.0.0",
+      "status": "frozen before querying any of the 141 member coordinates, seeing any member-level HSC candidate response, selecting a counterpart, applying a photometric quality cut, deriving a stellar mass, constructing a mass-current map, opening replacement-cluster lensing targets, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "868ba43f4203fc24fb9b5a8994a3882a0cde149802eda92141c2109e337f86c1"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",
