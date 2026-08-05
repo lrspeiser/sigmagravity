@@ -1,0 +1,119 @@
+{
+  "protocol_version": "SIGMA-V19CI-SINGLE-RMF-RETRY-1.0.0",
+  "status": "frozen after the V19CD environment remediation completed 383 of 384 recovery cells and failed only while creating one RMF, before moving the failed partial attempt, retrying any cell, resuming V19BR, opening a target payload, selecting an action, or changing gravity physics",
+  "purpose": "Permit one operational retry of the exact failed RMF cell while reusing and later independently re-auditing the 383 completed recovery checkpoints, preserving the failed attempt, keeping the protected base archive immutable, and resuming the unchanged target-sealed V19BR chain only after all 5,082 cells pass.",
+  "parents": {
+    "v19cd_failure_report": {
+      "path": "results/sigma_v19cd_v19w5_environment_remediation/report.json",
+      "sha256": "fb1c44d928f2b1de5765464309e991c9b36c7efe6ae1b8703e54dca5132f6880"
+    },
+    "v19w5_failure_report": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/failure_report.json",
+      "sha256": "7c591ea28536a30566cf66070f0f6e3fabe963b7828419d172f3857e0e6a7034"
+    },
+    "v19w5_config": {
+      "path": "configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+      "sha256": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a"
+    },
+    "v19w5_runner": {
+      "path": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+      "sha256": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72"
+    },
+    "v19br_config": {
+      "path": "configs/sigma_v19br_target_sealed_terminal_chain.json",
+      "sha256": "8a5205d978ab25d53b8befb11472ff420e2e8116ad06cd9c43e4d158a9d580ed"
+    },
+    "v19br_runner": {
+      "path": "scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+      "sha256": "d0f4c2f48a0a22e898fadaf3f637785df5d8cbfeb50f81164aec5e39c2c30bcc"
+    }
+  },
+  "initial_failure_boundary": {
+    "v19cd_failure_path": "results/sigma_v19cd_v19w5_environment_remediation/report.json",
+    "v19cd_status": "v19w5_environment_remediation_failed_closed",
+    "v19cd_exception": "RuntimeError: V19CD remediated V19W5 exited 1",
+    "v19w5_failure_path": "results/sigma_v19w5_ccd7_hardened_response_recovery/failure_report.json",
+    "v19w5_status": "v19w5_execution_failed_closed",
+    "progress_path": "results/sigma_v19w5_ccd7_hardened_response_recovery/progress.json",
+    "progress_sha256_before_retry": "552d2c438381ed33a6785c3139b064f5da9f1c564874c536ad0ca46d79ca6dc7",
+    "missing_cells_at_launch": 384,
+    "completed_recovery_cells": 383,
+    "failed_cells": 1,
+    "failed_cell": "BULLET_bin384_obs5358_ccd0",
+    "failed_token": "c3432",
+    "failed_stage": "specextract RMF creation",
+    "failed_log_sha256": "ee083a7ff3e68d11498a68ede5a111c92b518907c3e10dd1fcbd84989a72933c",
+    "failed_log_bytes": 1137,
+    "protected_base_completed_cells": 4698,
+    "protected_base_modified": false,
+    "lensing_halo_or_gravity_payload_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  },
+  "environment": {
+    "conda_executable": "/home/henry/miniforge3/bin/conda",
+    "environment_name": "sigma-ciao-4.18",
+    "environment_prefix": "/home/henry/miniforge3/envs/sigma-ciao-4.18"
+  },
+  "retry": {
+    "scratch": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100",
+    "failed_attempt_destination": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100/failed_attempts/c3432_rmf_attempt1",
+    "protected_base_scratch": "/home/henry/sigma-v19w-response-production/v100",
+    "v19w5_runner": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+    "v19w5_config": "configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+    "v19w5_output": "results/sigma_v19w5_ccd7_hardened_response_recovery",
+    "v19w5_report": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+    "v19br_runner": "scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+    "v19br_config": "configs/sigma_v19br_target_sealed_terminal_chain.json",
+    "v19br_report": "results/sigma_v19br_target_sealed_terminal_chain/report.json",
+    "maximum_additional_failed_cell_attempts": 1,
+    "reuse_383_completed_checkpoints": true,
+    "reexecute_only_missing_completed_checkpoint": true,
+    "same_v19w5_manifest_masks_response_rules_and_final_audits": true,
+    "same_v19br_stage_commands": true
+  },
+  "authorization": {
+    "execution_failure_not_scientific_failure": true,
+    "one_exact_cell_retry_authorized": true,
+    "preserve_failed_partial_attempt": true,
+    "modify_or_delete_383_completed_recovery_checkpoints": false,
+    "modify_protected_base_archive": false,
+    "change_manifest_or_drop_failed_cell": false,
+    "change_response_placement_or_science_setting": false,
+    "open_lensing_halo_action_gravity_or_holdout": false,
+    "derive_or_select_action": false,
+    "change_gravity_formula_or_parameter": false,
+    "automatic_second_retry_if_this_fails": false
+  },
+  "required_gates": {
+    "all_static_parent_and_runner_hashes_exact": true,
+    "no_prior_recovery_process_remains": true,
+    "v19cd_and_v19w5_failure_signatures_exact": true,
+    "scratch_has_383_completed_and_one_exact_failed_partial": true,
+    "failed_log_is_exact_rmf_creation_failure": true,
+    "failed_attempt_is_moved_not_deleted": true,
+    "byte_identical_v19w5_reaches_5082_cells_and_20328_products": true,
+    "full_checkpoint_product_and_protected_base_audits_pass": true,
+    "unchanged_v19br_terminal_chain_passes_target_sealed": true,
+    "no_target_action_or_gravity_access": true
+  },
+  "claim_boundary": [
+    "V19CI repairs one response-generation execution failure; it does not relax a scientific gate or change a measured value.",
+    "The failed partial directory is moved into a preserved failed-attempt directory and is not deleted.",
+    "The byte-identical V19W5 runner reuses 383 completed checkpoints, regenerates only the absent completed checkpoint, then independently validates all 5,082 checkpoints and 20,328 products.",
+    "The protected 4,698-cell base archive must remain byte-identical.",
+    "No target lensing, halo, action, gravity parameter or holdout payload is opened, and a second retry is not authorized automatically.",
+    "Only a complete V19W5 pass may resume the unchanged source-only V19BR chain; V19BS remains a separate frozen scientific disposition."
+  ],
+  "implementation": {
+    "runner": {
+      "path": "scripts/run_sigma_v19ci_single_rmf_retry.py",
+      "sha256": "67e3e69966a5f7351b7c7660726055822cef3999d75336f604f79f9907f386b4"
+    },
+    "tests": "tests/test_sigma_v19ci_single_rmf_retry.py"
+  },
+  "outputs": {
+    "report": "results/sigma_v19ci_single_rmf_retry/report.json",
+    "v19w5_log": "results/sigma_v19ci_single_rmf_retry/v19w5_execution.log",
+    "v19br_log": "results/sigma_v19ci_single_rmf_retry/v19br_execution.log"
+  }
+}

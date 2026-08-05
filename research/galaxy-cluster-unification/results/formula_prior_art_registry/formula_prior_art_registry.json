@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 204,
+    "sigma_protocols": 205,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7514,6 +7514,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "2482ccb9bc868818cd42c0e1ba54e80a23b526d6628cf86295f433a340285b50"
+    },
+    {
+      "config": "configs/sigma_v19ci_single_rmf_retry.json",
+      "protocol_version": "SIGMA-V19CI-SINGLE-RMF-RETRY-1.0.0",
+      "status": "frozen after the V19CD environment remediation completed 383 of 384 recovery cells and failed only while creating one RMF, before moving the failed partial attempt, retrying any cell, resuming V19BR, opening a target payload, selecting an action, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "a1d0d8ad341b09b59c73acda351e1894316243c44a09f47a91ce571d75e538ba"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",
