@@ -1,0 +1,140 @@
+{
+  "protocol_version": "SIGMA-V19BK-SOURCE-OBSERVABILITY-ADMISSION-1.0.0",
+  "decision": "passed_source_observability_restricted_to_I4_direction_and_I5_scalar",
+  "config_sha256": "345ae564b9bad575bc6fb6d7d3d62e1bfcc06803ad50be1fe9a2e8f86d6a6efc",
+  "runner_sha256": "557e84a8d2a2a5b15f0e74b363edb5bdbc447e743a50ba744a8b97df6dd87d19",
+  "parent_hashes": {
+    "v19bj_config": "3a66d06c49d2a8d9481453d8ce23582468a0a81d0a796c5f7e918d04f7229bf4",
+    "v19bj_report": "98e3d9a7f7d1c867b9fb40b089b9d2d8557178e9213e2f9e48e5be2492890a46",
+    "v19x4_config": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f",
+    "v19x4_preflight_report": "01c206e11e93411995d60537aae90c432b8980285bafeea0ddc51154cf749e1b",
+    "bullet_collisionless_config": "adeb7846207b1e930a8a306e208fa9a49c3a66c81aa3846fb50ba871e53a7909",
+    "bullet_collisionless_report": "3cc9a80e55710f553f2957cc182326953d02d4129106456103ec71f3d775c2b4",
+    "bullet_collisionless_maps": "33b9059439b2db14c1ca0dafc79d5554f60b50c06ed2704dc3eb1d547aa09ede",
+    "abell_collisionless_config": "dd14ef970780cdc7160217acd45686961331a1103fdfb5a791e4230d4bf061ce",
+    "abell_collisionless_report": "e870d11437511f4fdf3c7542aedcf45cb3df67d30d2541f758d9d3f51b0cb0f4",
+    "abell_collisionless_maps": "78b91004592bdd555fb5b06bb76865276b7ebe457d33434ca2bbc29da368dee0",
+    "directional_source_report": "7de820f46b284c78a86aec616bca5d4309b4aec2b1f4daa25e00e4ada59edef8",
+    "front_fixture_failure": "987b65b6b7e361b9c2563d342d65631f815e8c43c0ce2340311bf2cdf8fac833"
+  },
+  "collisionless_map_evidence": {
+    "BULLET": {
+      "shape_yx": [
+        626,
+        626
+      ],
+      "hdu_names": [
+        "LUM_MEAN",
+        "JLOS_MEAN",
+        "PLOS_MEAN",
+        "LUM_STD",
+        "JLOS_STD",
+        "PLOS_STD",
+        "COV_LUM_JLOS",
+        "COV_LUM_PLOS",
+        "COV_JLOS_PLOS",
+        "ANALYSIS_MASK"
+      ],
+      "units": {
+        "LUM_MEAN": "relative_I_luminosity/pixel",
+        "JLOS_MEAN": "relative_I_luminosity*beta/pixel",
+        "PLOS_MEAN": "relative_I_luminosity*beta^2/pixel"
+      },
+      "all_primary_moments_finite": true,
+      "luminosity_nonnegative": true,
+      "second_moment_nonnegative": true,
+      "minimum_normalized_cauchy_margin": -2.0260738754918538e-16,
+      "analysis_mask_pixels": 225224,
+      "transverse_current_hdu_present": false
+    },
+    "ABELL2146": {
+      "shape_yx": [
+        745,
+        745
+      ],
+      "hdu_names": [
+        "LUM_MEAN",
+        "JLOS_MEAN",
+        "PLOS_MEAN",
+        "LUM_STD",
+        "JLOS_STD",
+        "PLOS_STD",
+        "COV_LUM_JLOS",
+        "COV_LUM_PLOS",
+        "COV_JLOS_PLOS",
+        "ANALYSIS_MASK"
+      ],
+      "units": {
+        "LUM_MEAN": "relative_F814W_luminosity/pixel",
+        "JLOS_MEAN": "relative_F814W_luminosity*beta/pixel",
+        "PLOS_MEAN": "relative_F814W_luminosity*beta^2/pixel"
+      },
+      "all_primary_moments_finite": true,
+      "luminosity_nonnegative": true,
+      "second_moment_nonnegative": true,
+      "minimum_normalized_cauchy_margin": 0.0,
+      "analysis_mask_pixels": 319720,
+      "transverse_current_hdu_present": false
+    }
+  },
+  "eligible_source_ids_after_observability_audit": [
+    "I4_THERMODYNAMIC_GRADIENT_STRESS",
+    "I5_BAROCLINICITY"
+  ],
+  "withheld_source_ids": [
+    "I1_COMPONENT_OVERLAP",
+    "I2_RELATIVE_CURRENT",
+    "I3_ANISOTROPIC_STRESS",
+    "I6_CAUSAL_RELAXATION_RATE"
+  ],
+  "density_novelty_control": {
+    "unit_of_scoring": "one V19M adaptive gas region, not one common-grid pixel",
+    "stellar_amplitude": "within each cluster and posterior draw, normalize nonnegative member luminosity to unit total before common-grid smoothing",
+    "predictors_at_matching_resolution": [
+      "log gas surface density",
+      "within-cluster stellar-light percentile rank",
+      "log gas-density gradient magnitude",
+      "gas-density Hessian trace",
+      "gas-density Hessian anisotropy",
+      "quadratic terms and pairwise interactions of those five predictors"
+    ],
+    "estimator": "ordinary least squares with the fixed quadratic basis",
+    "cross_validation": "analytic leave-one-region-out PRESS residuals within each cluster and posterior draw",
+    "response": "candidate scalar amplitude or each independent projected tensor component",
+    "required_cross_validated_residual_variance_fraction": 0.2,
+    "reason": "A thermodynamic-gradient feature must add information beyond local density, stellar morphology, and density derivatives; merely differentiating density cannot pass as novel physics."
+  },
+  "front_measurement_decision": {
+    "automatic_front_route_status": "paused_after_three implementation attempts failed before a valid science front catalog",
+    "v19j": "formal science pass invalidated by mandatory visual audit because smooth gradients formed contour forests",
+    "v19k": "mandatory pre-science fixture failure",
+    "v19l": "mandatory pre-science curved-step connectivity failure; cluster science was not read",
+    "effect": "I2 is unavailable; do not tune a fourth front detector during I4/I5 scoring",
+    "future_reconsideration": "Use independently released X-ray-only front regions or a new cluster sample under a separate preregistration if I4/I5 do not identify a source."
+  },
+  "gates": {
+    "all_parent_hashes_exact": true,
+    "both_collisionless_moment_reports_pass": true,
+    "moment_maps_are_finite_nonnegative_and_cauchy_consistent": true,
+    "only_line_of_sight_collisionless_moments_exist": true,
+    "directional_parent_forbids_cross_filter_amplitudes_and_transverse_imputation": true,
+    "I1_I2_I3_I6_are_withheld": true,
+    "only_I4_and_I5_remain_conditionally_eligible": true,
+    "I5_is_scalar_only": true,
+    "front_route_stopped_before_cluster_science_reopen": true,
+    "v19x4_preflight_passed_without_observed_spectra": true,
+    "density_control_is_region_level_and_cross_validated": true,
+    "lensing_halo_action_and_gravity_selection_remain_sealed": true
+  },
+  "observed_v19x4_gas_posterior_opened": false,
+  "invariant_score_computed": false,
+  "lensing_or_halo_payload_opened": false,
+  "action_or_gravity_parameter_selected": false,
+  "claim_boundary": [
+    "V19BK is a source-data identifiability audit, not a gravitational test.",
+    "A future I4 or I5 pass would identify an informative projected baryonic state, not demonstrate that lensing follows it.",
+    "Relative single-band member light is a morphology nuisance, not an absolute stellar-mass map.",
+    "The present data do not identify a relative-current vector, full anisotropic stress, causal time derivative or 3D source orientation.",
+    "No formula, action, operator, wavelength, coupling or universal constant is selected."
+  ]
+}

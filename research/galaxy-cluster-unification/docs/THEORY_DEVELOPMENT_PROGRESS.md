@@ -2179,3 +2179,28 @@ This closes a major pre-lensing implementation gap: the density, overlap,
 thermodynamic-gradient and baroclinicity candidates can later be compared on
 the same axes and physical resolutions. No regional spectral value, invariant
 score, lensing/halo target, action or gravity constant was opened or selected.
+
+## 2026-08-05 V19BK source-observability admission
+
+The pre-result observability audit now restricts the V19BJ source library to
+quantities the registered two-cluster data can identify. I4
+thermodynamic-gradient stress remains eligible as a projected 2D tensor, and
+I5 baroclinicity remains eligible as a scalar activation. I1 component
+overlap, I2 relative current, I3 full anisotropic stress and I6 causal
+relaxation are withheld: the member maps have only cluster-relative
+single-filter light and line-of-sight velocity moments, the gas data have no
+validated velocity vector, and there is only one thermodynamic snapshot.
+
+The density null is correspondingly stricter. At the adaptive-region level, a
+fixed quadratic nuisance model controls for physical gas surface density,
+within-cluster normalized stellar-light morphology, gas-density gradient, and
+gas-density Hessian invariants. Analytic leave-one-region-out PRESS must still
+leave at least 20% of the candidate variance unexplained. This avoids calling
+a differentiated density map new physics and forbids a spurious absolute
+mass comparison between Bullet Bessel-I and Abell 2146 F814W light.
+
+The automatic shock-front route remains paused after three pre-science
+implementations failed their registered validation. No fourth detector will be
+tuned while I4/I5 are scored. This audit is not a gravity result: a future
+source pass would authorize a covariant derivation, after which raw lensing and
+the broader galaxy/cluster gates can be opened under one frozen equation.
