@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 155,
+    "sigma_protocols": 156,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6934,6 +6934,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "a857125d7dbc9d95482cdf6148bb777f16ec067d258495f139ffbe8d4f878eb6"
+    },
+    {
+      "config": "configs/sigma_v19av_signed_flux_stack.json",
+      "protocol_version": "SIGMA-V19AV-SIGNED-FLUX-STACK-1.0.0",
+      "status": "frozen_before_signed_flux_stacking_or_candidate_detection_scoring",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "3006568a5e558a490abec991bad513b60eca3683e2e487ec79ccd0ef26ca0ec2"
     },
     {
       "config": "configs/sigma_v19b_replacement_cluster_screen.json",

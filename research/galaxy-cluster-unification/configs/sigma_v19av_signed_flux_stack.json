@@ -1,0 +1,122 @@
+{
+  "protocol_version": "SIGMA-V19AV-SIGNED-FLUX-STACK-1.0.0",
+  "status": "frozen_before_signed_flux_stacking_or_candidate_detection_scoring",
+  "purpose": "Replace V19AU's failed positive-single-exposure requirement with one robust signed-flux multi-epoch observable, verify it against the unchanged 10/5 anchor split, and test candidate source sufficiency without computing a candidate association.",
+  "parent_artifacts": [
+    {
+      "path": "configs/sigma_v19au_ambiguous_candidate_image_measurement.json",
+      "sha256": "a857125d7dbc9d95482cdf6148bb777f16ec067d258495f139ffbe8d4f878eb6"
+    },
+    {
+      "path": "results/sigma_v19au_ambiguous_candidate_image_measurement/report.json",
+      "sha256": "225c2ec2307e2ce42ced5bdffc85ea58d36b86120fd4a065cd92bd4a6b2e777f"
+    },
+    {
+      "path": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/measurements.csv",
+      "sha256": "4f6c98b042361b261a50bb5bbc0ffdafb7b1bc8d77ef9c548290911ee7931e15"
+    },
+    {
+      "path": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_hypotheses.csv",
+      "sha256": "ea7628d0daab8774bbe346ca721304e0ec8712025a89ac9f9508451317c3be9e"
+    },
+    {
+      "path": "data/derived/sigma_v19as_decam_forced_photometry_development/measurements.csv",
+      "sha256": "4b67f5ed12825424d638594eb6c347867390863312f415b3f60119a117fae13b"
+    },
+    {
+      "path": "data/derived/sigma_v19at_decam_forced_photometry_validation/measurements.csv",
+      "sha256": "225b6f6b4cae1f2e1cbcc41faa64ae9dfe1c76498c677b1fd69a004493c76479"
+    },
+    {
+      "path": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+      "sha256": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7"
+    },
+    {
+      "path": "scripts/run_sigma_v19as_decam_forced_photometry_development.py",
+      "sha256": "2d547ceced44f6e44784602a5b7ec73ed3284aaf8a75c2dcb02a9c15dafb3c5d"
+    },
+    {
+      "path": "scripts/run_sigma_v19at_decam_forced_photometry_validation.py",
+      "sha256": "446ef09121b7ed9b83253dd5cf6a125b252724b207d49732ab6eacd56c4a4ac1"
+    }
+  ],
+  "inputs": {
+    "development_measurements": "data/derived/sigma_v19as_decam_forced_photometry_development/measurements.csv",
+    "validation_measurements": "data/derived/sigma_v19at_decam_forced_photometry_validation/measurements.csv",
+    "candidate_measurements": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/measurements.csv",
+    "candidate_hypotheses": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_hypotheses.csv",
+    "commissioning_sample": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv"
+  },
+  "split": {
+    "development_ids": ["29", "78", "14", "07", "06", "37", "22", "16", "23", "24"],
+    "validation_ids": ["26", "57", "66", "71", "21"]
+  },
+  "stack": {
+    "reference_zero_point_mag": 30.0,
+    "normalization": "F30 = F times 10^(0.4 times (30 - MAGZERO)); apply the same factor to the flux uncertainty.",
+    "estimator": "Iteratively reweighted inverse-variance mean with Huber influence on per-exposure standardized residuals.",
+    "huber_threshold_sigma": 2.5,
+    "maximum_iterations": 10,
+    "uncertainty": "max(formal reweighted standard error, robust repeated-exposure flux scatter divided by sqrt(N))",
+    "filters": ["g", "r", "i", "z", "Y"],
+    "candidate_detection_signal_to_noise": 3.0,
+    "signed_flux_rule": "Every finite positive or negative V19AU flux enters. No exposure is dropped merely because its flux is non-positive."
+  },
+  "color_model": {
+    "features": ["1", "(B-R-2.4)/1.0", "(R-I-1.1)/0.5"],
+    "outputs": ["g-r", "r-i", "i-z"],
+    "fit": "Independent soft-L1 affine regressions on only the ten stacked development anchors.",
+    "ridge_penalty": 0.25,
+    "predictive_scale_floor_mag": 0.05,
+    "validation_values_used_to_fit_or_calibrate": false
+  },
+  "gates": {
+    "exact_anchor_stack_rows": 75,
+    "exact_candidate_stack_rows": 2840,
+    "exact_members": 57,
+    "maximum_validation_median_absolute_error_each_color_mag": 0.25,
+    "minimum_validation_top1_retrievals": 3,
+    "minimum_validation_mean_reciprocal_rank": 0.65,
+    "minimum_candidate_complete_griz_fraction": 0.90,
+    "every_member_must_have_at_least_one_complete_griz_candidate": true,
+    "no_candidate_bri_positional_association_mass_lensing_halo_or_gravity_score": true,
+    "failure_rule": "Fail closed without changing the stack, SNR threshold, candidate list, validation gates or exposure membership."
+  },
+  "outputs": {
+    "anchor_stacks": "data/derived/sigma_v19av_signed_flux_stack/anchor_stacks.csv",
+    "candidate_stacks": "data/derived/sigma_v19av_signed_flux_stack/candidate_stacks.csv",
+    "development_color_fit": "data/derived/sigma_v19av_signed_flux_stack/development_color_fit.csv",
+    "validation_predictions": "data/derived/sigma_v19av_signed_flux_stack/validation_predictions.csv",
+    "validation_retrieval": "data/derived/sigma_v19av_signed_flux_stack/validation_retrieval.csv",
+    "report": "results/sigma_v19av_signed_flux_stack/report.json"
+  },
+  "claim_boundary": [
+    "V19AV is a derived flux-combination and source-sufficiency test, not a candidate association.",
+    "The 10/5 anchor check tests whether stacking preserves the already-validated measurement behavior; the five anchors are not a newly untouched holdout.",
+    "A three-sigma stacked detection is evidence that a source flux is measurable, not that it belongs to the spectroscopic member.",
+    "A pass authorizes a separately frozen candidate color/position likelihood with null and ambiguous states; it does not authorize a stellar-mass, mass-current, lensing or gravity claim."
+  ],
+  "authorization": {
+    "combine_all_signed_flux_measurements": true,
+    "fit_development_anchor_color_model": true,
+    "score_anchor_validation_consistency": true,
+    "score_candidate_stack_signal_to_noise_only": true,
+    "compare_candidate_colors_to_bri": false,
+    "combine_candidate_stack_with_positional_posterior": false,
+    "select_or_rank_counterparts": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "all_input_flux_rows_acquired_and_hash_bound_before_freeze": true,
+    "signed_flux_stack_computed_before_v19av_freeze": false,
+    "candidate_color_or_association_score_computed_before_v19av_freeze": false,
+    "mass_lensing_halo_or_gravity_payload_opened_before_v19av_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19av_signed_flux_stack.py",
+    "runner_sha256": "d408e937417efd6450ade327f7224238fa9e14bbe658e6fa71f246c1f3e785f3"
+  }
+}
