@@ -1,0 +1,91 @@
+{
+  "protocol_version": "SIGMA-V19AM-NSC-SIA-ANCHOR-COVERAGE-1.0.0",
+  "status": "frozen_before_v19am_metadata_audit",
+  "purpose": "Determine whether every retained per-exposure measurement of the fifteen already-open V19AB singleton anchors has one exact calibrated DECam image descriptor in the NSC DR2 Simple Image Access service, without downloading pixels or selecting exposures.",
+  "parent_artifacts": [
+    {
+      "path": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+      "sha256": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7"
+    },
+    {
+      "path": "data/derived/sigma_v19aa_member_counterpart_association/unified_candidates.csv",
+      "sha256": "2059209cc9699f23857579bbb772f9e6427d76cb82437b8ec7f0f3449b4dacec"
+    },
+    {
+      "path": "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv",
+      "sha256": "05ca7f66bc62184a84f6f980986eb303b9aaf5b3ae24f27d7183c70b8c7e27dd"
+    },
+    {
+      "path": "results/sigma_v19ab_bessel_nsc_transform_commissioning/report.json",
+      "sha256": "f6364489e16dee9b44928dcaea70d69d11c7770df761470a7fa0cfa41e1f3176"
+    },
+    {
+      "path": "results/sigma_v19ac_nsc_measurement_photometry/provenance.json",
+      "sha256": "9ec0342233d4b2781fb2acb0efb689ce5c15ae4a0379b78881cce51aaece32ee"
+    }
+  ],
+  "inputs": {
+    "commissioning_sample": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+    "unified_candidates": "data/derived/sigma_v19aa_member_counterpart_association/unified_candidates.csv",
+    "all_measurements": "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv"
+  },
+  "source": {
+    "authority": "NSF NOIRLab Astro Data Lab",
+    "service": "NSC DR2 Simple Image Access metadata",
+    "endpoint": "https://datalab.noirlab.edu/sia/nsc_dr2",
+    "query_size_degrees": 0.01,
+    "timeout_seconds": 180,
+    "exact_match_key": "NSC measurement exposure equals the basename of the SIA siaRef value",
+    "required_instrument_name": "DECam",
+    "required_proctype": "InstCal",
+    "required_prodtype": "image",
+    "required_access_format": "image/fits",
+    "required_calib_level": 2,
+    "retention_rule": "Retain one descriptor for every anchor measurement. Fail on zero or multiple exact exposure matches. Apply no flag, seeing, filter, date, depth, PSF, photometric or validation-performance selection."
+  },
+  "gates": {
+    "exact_anchor_count": 15,
+    "exact_development_anchor_count": 10,
+    "exact_validation_anchor_count": 5,
+    "exact_anchor_measurement_rows": 1032,
+    "every_measurement_has_exactly_one_sia_descriptor": true,
+    "measurement_and_sia_band_match": true,
+    "every_descriptor_is_required_calibrated_decam_image": true,
+    "all_measurements_retained_without_quality_or_exposure_selection": true,
+    "raw_metadata_payload_and_query_hashed_for_every_anchor": true,
+    "no_image_pixels_or_prohibited_payload_opened": true
+  },
+  "outputs": {
+    "raw_metadata_directory": "data/raw/sigma_v19am_nsc_sia_anchor_coverage",
+    "manifest": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+    "report": "results/sigma_v19am_nsc_sia_anchor_coverage/report.json"
+  },
+  "claim_boundary": [
+    "A pass proves metadata-level image addressability for the fifteen already-open anchors only; it does not prove that every cutout URL downloads successfully or that the pixels support unbiased profile photometry.",
+    "The 0.01-degree SIA footprint is used only to obtain the exact detector extension and access descriptor. V19AM does not freeze the later science-cutout footprint or any PSF/deblending model.",
+    "Every measurement descriptor is retained. No exposure, band, object or validation row is ranked, rejected or selected using image quality or photometric performance.",
+    "This is source-data feasibility evidence, not a stellar-mass, mass-current, lensing, halo or gravity result."
+  ],
+  "authorization": {
+    "query_sia_metadata_for_exact_fifteen_anchor_coordinates": true,
+    "persist_raw_metadata_and_exact_measurement_descriptors": true,
+    "download_image_pixels": false,
+    "rank_or_select_exposures": false,
+    "inspect_image_pixels": false,
+    "query_ambiguous_candidates": false,
+    "infer_photometry_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "informal_metadata_preflight_run_before_freeze": true,
+    "preflight_result_used_only_to_establish_service_feasibility_and_expected_row_count": true,
+    "image_pixels_downloaded_at_freeze": false,
+    "ambiguous_candidates_lensing_halo_or_gravity_payload_opened_at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/audit_sigma_v19am_nsc_sia_anchor_coverage.py",
+    "runner_sha256": "dd0267f3fc03f849e9b9d992bc81b60efbd84ac935dd168bbd6a15ecd8cbdc9a"
+  }
+}
