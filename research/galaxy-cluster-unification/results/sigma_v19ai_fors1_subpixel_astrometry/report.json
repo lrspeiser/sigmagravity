@@ -1,0 +1,84 @@
+{
+  "all_subpixel_astrometry_gates_pass": false,
+  "claim_boundary": [
+    "V19AI isolates the subpixel-centroid hypothesis using the already frozen V19AH Gaia associations.",
+    "A pass establishes astrometric adequacy only. It does not establish a science mask, PSF, photometric calibration, member deblend, stellar mass, baryonic current, lensing result or gravity result.",
+    "A failure leaves V19AH's astrometric preparation unresolved and does not falsify Sigma Gravity."
+  ],
+  "diagnostic_path": "results/sigma_v19ai_fors1_subpixel_astrometry/subpixel_astrometric_residuals.png",
+  "diagnostic_sha256": "757ad0c06d9fa9678f436f3c71173edbef356fab7788a8d47cbf025dabf6c104",
+  "failures": [
+    {
+      "error": "RuntimeError: only 27 accepted centroids",
+      "filter": "I_BESS"
+    },
+    {
+      "error": "RuntimeError: only 27 accepted centroids",
+      "filter": "R_BESS"
+    }
+  ],
+  "filters": {
+    "B_BESS": {
+      "gates": {
+        "fitted_median_residual": true,
+        "fitted_p95_residual": true,
+        "loo_median_residual": true,
+        "loo_p95_residual": true,
+        "loo_p95_residual_arcsec": true,
+        "minimum_accepted_centroids": true,
+        "r_improves_v19ah": true
+      },
+      "metrics": {
+        "accepted_centroids": 36,
+        "fitted_median_residual_pixel": 0.3612972129060347,
+        "fitted_p95_residual_pixel": 1.5349598143197318,
+        "input_v19ah_matches": 37,
+        "loo_median_residual_pixel": 0.375332015222285,
+        "loo_p95_residual_arcsec": 0.34625604540881116,
+        "loo_p95_residual_pixel": 1.7349951987636487,
+        "median_centroid_shift_pixel": 0.47542452853340345,
+        "median_ellipticity": 0.07456333805764692,
+        "median_fwhm_pixel": 3.7949633501787305,
+        "p95_centroid_shift_pixel": 1.5389220375942232,
+        "pixel_scale_arcsec": 0.19957176,
+        "rejected_centroids": 1,
+        "rejection_reasons": {
+          "centroid_shift": 1
+        }
+      },
+      "refined_matches_path": "results/sigma_v19ai_fors1_subpixel_astrometry/refined_matches_B_BESS.csv",
+      "refined_matches_sha256": "1e4e263f56ce919691c3ca2e5454186a5f44f77e2b11943c5cbb701455e438bd",
+      "wcs_path": "results/sigma_v19ai_fors1_subpixel_astrometry/wcs_B_BESS.json",
+      "wcs_sha256": "090efaef9c338fd13ed6eea410400de17cfd974e8d5e4d950bdda765d959a462"
+    }
+  },
+  "generated_utc": "2026-08-05T09:10:10.569804+00:00",
+  "geometric_center_separation_arcsec": {},
+  "global_gates": {
+    "all_filter_gates": true,
+    "exact_filter_solutions": false,
+    "geometric_center_consistency": false,
+    "minimum_shared_accepted_gaia_ids": false,
+    "no_detection_rematching_or_prohibited_access": true
+  },
+  "gravity_formula_or_parameter_changed": false,
+  "input_hashes": {
+    "config": "f4f997398d70ad6485df760278eb02ac7c19604f653aaabea141f254a7134871",
+    "results/sigma_v19ag_fors1_role_calibration/calibrated_B_BESS_OFORS.1998-12-14T06_05_25.298.fits.gz": "5b8bb3863b0386a0de3b63617e3fabfb39d60136f44517b34501b9e7331e2343",
+    "results/sigma_v19ag_fors1_role_calibration/calibrated_I_BESS_OFORS.1998-12-14T05_54_16.814.fits.gz": "4d26f11531d7eb112d0229dcb735e72e3c7d1ebbc305f2d67814a8a7e92df677",
+    "results/sigma_v19ag_fors1_role_calibration/calibrated_R_BESS_OFORS.1998-12-14T05_44_56.445.fits.gz": "fa0ec4c8ae32030a2b66071df9dd328f373b51e8832cb05edec0cfa9e378e764",
+    "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_B_BESS.csv": "3b4e46f135af5e8319529eea2b813a7627c6b19afeaede658ebff78641a010f3",
+    "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_I_BESS.csv": "e52ad659ad750f3a4b5e79536100217ae1abdb9a4bbeb085f485ecfbe674c162",
+    "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_R_BESS.csv": "6347c67997373789c51358b07dc6f1c0ed0e747d37c61e6e0d880471d8a13589",
+    "results/sigma_v19ah_fors1_gaia_astrometry/report.json": "c850a9d412295980cb5b735b66d49c98512235854dc9ec4c418d1beb0424f1a1",
+    "runner": "aab62fb001cc8e5938d9a880467dc2c6f85356ad8811c193925ccedcd2a80f60"
+  },
+  "lensing_or_halo_payload_opened": false,
+  "member_or_candidate_coordinate_or_cutout_opened": false,
+  "photometry_or_deblending_fitted": false,
+  "report_version": "SIGMA-V19AI-FORS1-SUBPIXEL-ASTROMETRY-1.0.0",
+  "shared_accepted_gaia_ids_all_filters": 0,
+  "source_detection_or_rematching_run": false,
+  "status": "failed_subpixel_astrometry",
+  "stellar_mass_or_current_inferred": false
+}
