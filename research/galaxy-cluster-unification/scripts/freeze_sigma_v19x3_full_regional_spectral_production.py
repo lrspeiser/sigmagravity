@@ -123,7 +123,7 @@ def freeze_config(
     )
     runtime_x2 = x2_config["runtime_authorization"]
     config: dict[str, Any] = {
-        "protocol_version": "SIGMA-V19X3-FULL-REGIONAL-SPECTRAL-PRODUCTION-1.0.0",
+        "protocol_version": "SIGMA-V19X3-FULL-REGIONAL-SPECTRAL-PRODUCTION-1.0.1",
         "freeze_state": "frozen_after_terminal_v19x2_pass",
         "status": "frozen mechanically after V19X2 passed both integrated and both target-blind commissioning-region fits, before combining or fitting any other region, constructing a gas source state, opening lensing or halo data, or changing gravity physics",
         "purpose": "Combine and fit every one of the 494 frozen thermodynamic regions with the exact V19X2 response, grouping, plasma-model, abundance and uncertainty rules, retaining every outcome.",
@@ -162,7 +162,7 @@ def freeze_config(
             "every_region_attempted": True,
             "every_region_requires_finite_temperature_abundance_and_normalization_best_fit": True,
             "minimum_quality_passes_per_cluster": minimum_quality,
-            "quality_pass_definition": "the unchanged V19X2 ordered 68-percent temperature interval, fractional half-width, reduced-statistic and free-parameter-bound gates",
+            "quality_pass_definition": "the V19X2 ordered 68-percent temperature interval, fractional half-width, reduced-statistic and free-parameter-bound gates, plus an ordered 68-percent APEC-normalization profile interval required for downstream gas uncertainty",
             "retention_rule": "A finite best fit remains in the gas-map posterior even if its individual quality subgate fails; report that uncertainty and never drop the region.",
         },
         "advance": {

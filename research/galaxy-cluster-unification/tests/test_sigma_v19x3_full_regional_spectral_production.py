@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import json
+import math
 import sys
 from pathlib import Path
+from types import ModuleType, SimpleNamespace
 
 import pytest
 
@@ -123,7 +125,7 @@ def test_full_production_requires_finite_fits_but_not_every_quality_subgate(
             fit["gates"]["all_passed"] = False
         return fit
 
-    monkeypatch.setattr(runner.inherited_v19x, "fit_spectrum", one_quality_failure)
+    monkeypatch.setattr(runner, "fit_regional_gas_spectrum", one_quality_failure)
     result = runner.run_full_regional_production(
         config,
         tmp_path / "output",
@@ -150,7 +152,7 @@ def test_nonfinite_or_failed_best_fit_blocks_source_map(tmp_path: Path, monkeypa
             fit["gates"]["all_passed"] = False
         return fit
 
-    monkeypatch.setattr(runner.inherited_v19x, "fit_spectrum", failed_best_fit)
+    monkeypatch.setattr(runner, "fit_regional_gas_spectrum", failed_best_fit)
     result = runner.run_full_regional_production(
         config,
         tmp_path / "output",
@@ -179,7 +181,7 @@ def test_region_checkpoints_prevent_recombination_and_refitting(
         return passing_fit(*args)
 
     monkeypatch.setattr(runner.inherited_v19x, "combine_aperture", combine)
-    monkeypatch.setattr(runner.inherited_v19x, "fit_spectrum", fit)
+    monkeypatch.setattr(runner, "fit_regional_gas_spectrum", fit)
     first = runner.process_region(
         config, tmp_path / "output", tmp_path / "scratch", "BULLET", 0, [cell], 0.3
     )
@@ -237,3 +239,64 @@ def test_x2_authorization_extracts_only_passing_integrated_abundances(
     path.write_text(json.dumps(report), encoding="utf-8")
     with pytest.raises(RuntimeError, match="integrated fit did not pass"):
         runner.validate_x2_authorization(config, path)
+
+
+def test_profile_interval_converts_sherpa_deltas_and_rejects_bad_order() -> None:
+    result = SimpleNamespace(
+        parnames=["xsapec.component.norm"], parmins=[-0.25], parmaxes=[0.5]
+    )
+    lower, upper, width = runner.confidence_interval_from_profile(
+        1.0, "xsapec.component.norm", result
+    )
+    assert (lower, upper, width) == pytest.approx((0.75, 1.5, 0.375))
+
+    result.parmins = [0.0]
+    _, _, width = runner.confidence_interval_from_profile(
+        1.0, "xsapec.component.norm", result
+    )
+    assert math.isnan(width)
+
+
+def test_regional_fit_profiles_apec_normalization(monkeypatch) -> None:
+    combination = {"label": "BULLET_bin7"}
+    monkeypatch.setattr(runner.inherited_v19x, "fit_spectrum", passing_fit)
+
+    class FakeSherpaError(Exception):
+        pass
+
+    norm = SimpleNamespace(fullname="xsapec.apec_bullet_bin7.norm")
+    thermal = SimpleNamespace(norm=norm)
+    profile = SimpleNamespace(
+        parnames=[norm.fullname],
+        parmins=[-0.0002],
+        parmaxes=[0.0004],
+    )
+    ui = SimpleNamespace(
+        get_model_component=lambda name: thermal,
+        set_conf_opt=lambda *_args: None,
+        conf=lambda *_args: None,
+        get_conf_results=lambda: profile,
+    )
+    sherpa = ModuleType("sherpa")
+    astro = ModuleType("sherpa.astro")
+    astro.ui = ui
+    utils = ModuleType("sherpa.utils")
+    errors = ModuleType("sherpa.utils.err")
+    errors.SherpaErr = FakeSherpaError
+    sherpa.astro = astro
+    sherpa.utils = utils
+    utils.err = errors
+    for name, module in (
+        ("sherpa", sherpa),
+        ("sherpa.astro", astro),
+        ("sherpa.utils", utils),
+        ("sherpa.utils.err", errors),
+    ):
+        monkeypatch.setitem(sys.modules, name, module)
+
+    fit = runner.fit_regional_gas_spectrum({}, "BULLET", combination, 0.3)
+    interval = fit["normalization_confidence_68_percent"]
+    assert interval["lower"] == pytest.approx(0.0008)
+    assert interval["upper"] == pytest.approx(0.0014)
+    assert fit["gates"]["finite_and_ordered_normalization_interval"]
+    assert fit["gates"]["all_passed"]

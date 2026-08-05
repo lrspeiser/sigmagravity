@@ -1,0 +1,101 @@
+{
+  "status": "gas_state_math_preflight_passed_awaiting_v19x3_measurements",
+  "config_sha256": "5a7037c29ca25edf2a2b8b1da2c5ad8edca6220ff27f18ac61f21eb6081c448e",
+  "parent_hash_checks": {
+    "v19h_source_protocol": true,
+    "v19m_region_report": true,
+    "v19x3_runner": true,
+    "v19x3_freezer": true,
+    "gas_math_module": true
+  },
+  "historical_error": {
+    "surface_density_understatement_fraction": 0.16666666666666663,
+    "corrected_surface_density_increase_fraction": 0.19999999999999996,
+    "historical_parent_was_not_mutated": true
+  },
+  "clusters": {
+    "BULLET": {
+      "inventory": {
+        "accepted_regions": 366,
+        "pixel_count_minimum": 35,
+        "pixel_count_median": 128.0,
+        "pixel_count_maximum": 1821,
+        "projected_area_kpc2_minimum": 703.0389094538763,
+        "projected_area_kpc2_median": 2571.1137260027476,
+        "projected_area_kpc2_maximum": 36578.110117585966,
+        "reference_depth_kpc_median": 50.70615077091484
+      },
+      "representative_algebra_check": {
+        "synthetic_input_only": {
+          "normalization": 0.001,
+          "temperature_keV": 8.0,
+          "angular_diameter_distance_cm": 2.8989200537782334e+27,
+          "projected_area_kpc2": 2571.1137260027476,
+          "reference_depth_kpc": 50.70615077091484
+        },
+        "corrected_state": {
+          "emission_measure_cm3": 1.7737497377043913e+67,
+          "emission_measure_per_area_cm5": 7.24552679600523e+20,
+          "electron_density_cm3": 0.07454525628243358,
+          "gas_surface_density_msun_kpc2": 109297449.63891354,
+          "gas_mass_msun": 281016172983.70465,
+          "thermal_pressure_erg_cm3": 1.8326368697150221e-09,
+          "entropy_proxy_keV_cm2": 45.16582826650952,
+          "sound_speed_km_s": 1446.974091104635
+        },
+        "historical_surface_density_msun_kpc2": 91081208.03242795,
+        "corrected_to_historical_surface_density_ratio": 1.2
+      }
+    },
+    "ABELL2146": {
+      "inventory": {
+        "accepted_regions": 128,
+        "pixel_count_minimum": 39,
+        "pixel_count_median": 153.0,
+        "pixel_count_maximum": 1701,
+        "projected_area_kpc2_minimum": 551.8234551675592,
+        "projected_area_kpc2_median": 2164.845862580424,
+        "projected_area_kpc2_maximum": 24067.992236923543,
+        "reference_depth_kpc_median": 46.52790412838756
+      },
+      "representative_algebra_check": {
+        "synthetic_input_only": {
+          "normalization": 0.001,
+          "temperature_keV": 8.0,
+          "angular_diameter_distance_cm": 2.4330349892844112e+27,
+          "projected_area_kpc2": 2164.845862580424,
+          "reference_depth_kpc": 46.52790412838756
+        },
+        "corrected_state": {
+          "emission_measure_cm3": 1.1296384599202043e+67,
+          "emission_measure_per_area_cm5": 5.4803891728628495e+20,
+          "electron_density_cm3": 0.06768061638083682,
+          "gas_surface_density_msun_kpc2": 91055706.37631276,
+          "gas_mass_msun": 197121569213.09863,
+          "thermal_pressure_erg_cm3": 1.6638750623463664e-09,
+          "entropy_proxy_keV_cm2": 48.17042190683166,
+          "sound_speed_km_s": 1446.974091104635
+        },
+        "historical_surface_density_msun_kpc2": 75879755.31359397,
+        "corrected_to_historical_surface_density_ratio": 1.2
+      }
+    }
+  },
+  "shock_identity_check": {
+    "density_compression": 3.0,
+    "mach_number": 2.9999999999999996,
+    "temperature_jump": 3.6666666666666656
+  },
+  "gates": {
+    "all_parent_hashes_match": true,
+    "registered_region_inventory_is_366_plus_128": true,
+    "corrected_to_historical_ratio_is_exactly_1_2": true,
+    "representative_gas_states_are_finite_positive": true,
+    "rankine_hugoniot_compression_three_returns_mach_three": true,
+    "shock_temperature_jump_is_finite_positive": true,
+    "lensing_halo_and_gravity_selection_remain_sealed": true
+  },
+  "observed_regional_spectra_opened": false,
+  "source_invariant_selected": false,
+  "gravity_theory_tested": false
+}

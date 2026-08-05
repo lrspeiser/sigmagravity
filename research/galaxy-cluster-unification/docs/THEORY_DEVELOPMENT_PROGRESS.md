@@ -2125,3 +2125,36 @@ crossmatch contains 4,995 AS295 objects but only photometric `zPhot`, so it adds
 no measured velocities and is explicitly excluded from the member-stress
 count. See
 [`SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md`](SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md).
+
+## 2026-08-05 V19X3 uncertainty completion and V19X4 gas-state correction
+
+The full 494-region V19X3 executor now records an independent 68% Sherpa
+profile-likelihood interval for APEC normalization in addition to temperature.
+An ordered normalization interval is part of an individual region's quality
+gate because normalization sets emission measure and gas mass. A finite
+best-fit region that fails this subgate is still retained, consistent with the
+frozen minimum of 12 complete quality passes per cluster.
+
+The pre-result V19X4 gas-state audit found a material algebra error in the
+hash-bound V19H prose. For $R=n_e/n_H$, the uniform-slab identities are
+
+$$
+n_e=\sqrt{R E_A/L},\qquad
+\Sigma_{\rm gas}=\mu_e m_p\sqrt{R E_A L}.
+$$
+
+V19H had $R$ in the denominator. The historical file remains untouched; V19X4
+freezes the correction prospectively. Corrected surface densities are exactly
+1.2 times the historical expression. The executable audit admits all 366
+Bullet and 128 Abell 2146 accepted region geometries, validates the official
+APEC normalization and Rankine-Hugoniot shock identities, and leaves regional
+spectra, lensing, halos, invariant selection and gravity fitting sealed.
+
+The project priority is now explicit in
+[`SIGMA_BROAD_PHENOMENOLOGY_ROADMAP.md`](SIGMA_BROAD_PHENOMENOLOGY_ROADMAP.md):
+stratified galaxy morphology, raw cluster topology, measured component
+geometry, merger offsets and joint lensing/dynamics come before expensive
+Solar-System optimization. Solar and PPN consistency remain mandatory later
+vetoes. Cosmological dark-matter observables require perturbing a final
+covariant action and cannot be predicted uniquely from the current empirical
+bridge.

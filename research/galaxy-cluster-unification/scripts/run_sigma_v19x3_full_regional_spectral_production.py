@@ -169,6 +169,10 @@ def validate_fit_checkpoint(
         )
         if fit.get("source_spectrum_sha256") != adapter.sha256(source):
             raise RuntimeError("V19X3 changed fitted source spectrum")
+        if "normalization_confidence_68_percent" not in fit:
+            raise RuntimeError("V19X3 fit checkpoint lacks normalization uncertainty")
+        if "finite_and_ordered_normalization_interval" not in fit.get("gates", {}):
+            raise RuntimeError("V19X3 fit checkpoint lacks normalization gate")
     return fit
 
 
@@ -177,6 +181,95 @@ def write_checkpoint(path: Path, payload: dict[str, Any]) -> None:
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     temporary.replace(path)
+
+
+def confidence_interval_from_profile(
+    best_value: float, parameter_fullname: str, result: Any
+) -> tuple[float, float, float]:
+    """Convert Sherpa's profile deltas to an ordered absolute interval."""
+
+    index = list(result.parnames).index(parameter_fullname)
+    lower = best_value + float(result.parmins[index])
+    upper = best_value + float(result.parmaxes[index])
+    ordered = all(
+        inherited_v19x.inherited_fit.finite_number(value)
+        for value in (lower, best_value, upper)
+    ) and lower < best_value < upper
+    fractional_half_width = (
+        (upper - lower) / (2.0 * best_value)
+        if ordered and best_value > 0.0
+        else math.nan
+    )
+    return lower, upper, fractional_half_width
+
+
+def fit_regional_gas_spectrum(
+    config: dict[str, Any],
+    cluster: str,
+    combination: dict[str, Any],
+    abundance: float,
+) -> dict[str, Any]:
+    """Run the frozen fit and add the APEC-normalization profile it omitted."""
+
+    fit = inherited_v19x.fit_spectrum(config, cluster, combination, abundance)
+    if not fit.get("fit_completed"):
+        return fit
+
+    from sherpa.astro import ui
+    from sherpa.utils.err import SherpaErr
+
+    best = float(fit["parameters"]["normalization"])
+    suffix = combination["label"].lower().replace("-", "_")
+    thermal = ui.get_model_component(f"apec_{suffix}")
+    result = None
+    error = ""
+    lower = math.nan
+    upper = math.nan
+    fractional_half_width = math.nan
+    try:
+        ui.set_conf_opt("sigma", 1.0)
+        ui.conf(thermal.norm)
+        result = ui.get_conf_results()
+        lower, upper, fractional_half_width = confidence_interval_from_profile(
+            best, thermal.norm.fullname, result
+        )
+    except (SherpaErr, RuntimeError, TypeError, ValueError) as exc:
+        error = f"{type(exc).__name__}: {exc}"
+
+    interval_ordered = all(
+        inherited_v19x.inherited_fit.finite_number(value)
+        for value in (lower, best, upper)
+    ) and lower < best < upper
+    fit["normalization_confidence_68_percent"] = {
+        "lower": inherited_v19x.inherited_fit.json_value(lower),
+        "upper": inherited_v19x.inherited_fit.json_value(upper),
+        "fractional_half_width": inherited_v19x.inherited_fit.json_value(
+            fractional_half_width
+        ),
+        "error": error,
+        "raw": inherited_v19x.inherited_fit.result_attributes(
+            result,
+            (
+                "datasets",
+                "methodname",
+                "fitname",
+                "statname",
+                "sigma",
+                "percent",
+                "parnames",
+                "parvals",
+                "parmins",
+                "parmaxes",
+                "nfits",
+            ),
+        )
+        if result is not None
+        else None,
+    }
+    prior_all_passed = bool(fit["gates"].get("all_passed"))
+    fit["gates"]["finite_and_ordered_normalization_interval"] = interval_ordered
+    fit["gates"]["all_passed"] = prior_all_passed and interval_ordered
+    return fit
 
 
 def process_region(
@@ -214,9 +307,7 @@ def process_region(
         fit_reused = True
     else:
         try:
-            fit = inherited_v19x.fit_spectrum(
-                config, cluster, combination, abundance
-            )
+            fit = fit_regional_gas_spectrum(config, cluster, combination, abundance)
         except Exception as exc:  # noqa: BLE001 - retain terminal regional failure
             fit = inherited_v19x.failed_fit(cluster, label, exc)
         write_checkpoint(fit_checkpoint, {"input_digest": digest, "fit": fit})

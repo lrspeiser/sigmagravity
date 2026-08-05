@@ -28,6 +28,12 @@ configuration without changing them:
 - response, count-conservation, fit-statistic, interval and parameter-bound
   gates.
 
+Each regional result includes separate 68% profile-likelihood intervals for
+temperature and APEC normalization. The normalization profile is required
+because it controls emission measure and therefore the gas surface-density
+posterior. A finite best fit without an ordered normalization interval is
+retained but does not count toward the individual-quality minimum.
+
 Every manifest cell is grouped by its already-frozen cluster and `bin_id`.
 Duplicate task keys, changed cluster/region counts or a cell not represented
 exactly once fail before combination.
@@ -76,7 +82,7 @@ can V19BJ score source invariants.  Lensing remains sealed throughout.
 
 ## Verification
 
-Seven synthetic tests currently prove region grouping, cell accounting,
+Nine synthetic tests currently prove region grouping, interval parsing, cell accounting,
 finite-fit versus quality-gate behavior, checkpoint reuse, V19X2 authorization
 and mechanical inheritance of the 494-region/12-quality-pass rules.
 

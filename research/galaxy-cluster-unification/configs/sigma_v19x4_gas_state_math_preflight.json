@@ -1,0 +1,122 @@
+{
+  "protocol_version": "SIGMA-V19X4-GAS-STATE-MATH-PREFLIGHT-1.0.0",
+  "freeze_state": "preregistered_before_v19x3_regional_results",
+  "status": "gas-state algebra corrected and frozen before any regional spectral result, source-invariant score, lensing target, halo target or gravity parameter is opened",
+  "purpose": "Convert future V19X3 temperature and APEC-normalization measurements into a common-grid gas-state posterior for the Bullet Cluster and Abell 2146 without hydrostatic equilibrium or lensing calibration.",
+  "parents": {
+    "v19h_source_protocol": "configs/sigma_v19h_causal_observable_protocol.json",
+    "v19h_source_protocol_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+    "v19m_region_report": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+    "v19m_region_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+    "v19x3_runner": "scripts/run_sigma_v19x3_full_regional_spectral_production.py",
+    "v19x3_runner_sha256": "3d321a5f658d1e40ce84bf9ad2c51c9627cfd7d6838d552bb2a1a078ba232017",
+    "v19x3_freezer": "scripts/freeze_sigma_v19x3_full_regional_spectral_production.py",
+    "v19x3_freezer_sha256": "dbb87ec8e58e015b619536cca3f6e5b983c92f581f7095b09dda518a58932101",
+    "gas_math_module": "src/voidscreen/sigma_gas_thermodynamics.py",
+    "gas_math_module_sha256": "9e2ff77df812a9233331741d162cf64cdb867de339cefff799ae7c1b67c91b99"
+  },
+  "official_definition": {
+    "source": "NASA HEASARC XSPEC APEC manual",
+    "url": "https://heasarc.gsfc.nasa.gov/docs/software/xspec/manual/XSmodelApec.html",
+    "apec_normalization": "norm = 1e-14 / (4 pi [D_A (1+z)]^2) integral(n_e n_H dV)",
+    "retrieved_utc": "2026-08-05"
+  },
+  "algebra_correction": {
+    "historical_v19h_text_retained_for_provenance": "Sigma_gas = mu_e m_p sqrt(EM_area * L / (n_e/n_H))",
+    "correct_uniform_slab_density": "n_e = sqrt((n_e/n_H) * EM_area / L)",
+    "correct_surface_density": "Sigma_gas = mu_e m_p sqrt((n_e/n_H) * EM_area * L)",
+    "corrected_to_historical_surface_density_ratio": 1.2,
+    "reason": "Because n_e n_H = n_e^2/(n_e/n_H), the electron-to-hydrogen ratio multiplies rather than divides the recovered n_e squared.",
+    "historical_config_mutated": false
+  },
+  "physical_constants_and_composition": {
+    "electron_to_hydrogen_ratio": 1.2,
+    "mean_mass_per_electron_proton_masses": 1.17,
+    "mean_particle_mass_proton_masses": 0.61,
+    "adiabatic_index": 1.6666666666666667,
+    "proton_mass_g": 1.67262192595e-24,
+    "kpc_cm": 3.0856775814913673e21,
+    "keV_erg": 1.602176634e-9,
+    "classification": "measurement-conversion constants, not adjustable gravity parameters"
+  },
+  "geometry": {
+    "output_pixel_arcsec": 0.984,
+    "angular_diameter_distance_rule": "D_A = kpc_per_arcsec * 206264.80624709636 kpc",
+    "projected_area_rule": "A_kpc2 = valid_region_pixels * (output_pixel_arcsec * kpc_per_arcsec)^2",
+    "reference_depth_rule": "L_ref_kpc = sqrt(A_kpc2), the area-preserving geometric-mean sky-plane extent",
+    "clusters": {
+      "BULLET": {
+        "redshift": 0.296,
+        "kpc_per_arcsec": 4.554708213666332,
+        "expected_valid_regions": 366,
+        "region_statistics": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/region_statistics.csv"
+      },
+      "ABELL2146": {
+        "redshift": 0.2323,
+        "kpc_per_arcsec": 3.822721649528813,
+        "expected_valid_regions": 128,
+        "region_statistics": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/region_statistics.csv"
+      }
+    }
+  },
+  "posterior": {
+    "sampler": "scrambled Sobol",
+    "draws": 4096,
+    "seed": 19008003,
+    "line_of_sight_depth_factor": {
+      "distribution": "log-uniform",
+      "minimum": 0.5,
+      "maximum": 2.0,
+      "multiplies": "reference_depth_rule"
+    },
+    "ordered_profile_rule": "draw temperature and normalization from their bounded asymmetric 68-percent profile-likelihood approximations and report dependence sensitivity",
+    "failed_profile_rule": "retain a finite best fit and use the complete frozen fit-bound log-uniform prior for the parameter whose ordered interval failed; flag the region and do not narrow, merge, split, drop or selectively refit it",
+    "temperature_bounds_keV": [
+      1.0,
+      30.0
+    ],
+    "normalization_bounds": [
+      1e-10,
+      1.0
+    ],
+    "outputs_per_draw": [
+      "emission_measure_cm3",
+      "electron_density_cm3",
+      "gas_surface_density_msun_kpc2",
+      "gas_mass_msun",
+      "thermal_pressure_erg_cm3",
+      "entropy_proxy_keV_cm2",
+      "sound_speed_km_s"
+    ],
+    "dependence_sensitivity": "repeat with rank correlations -0.9, 0 and +0.9 between temperature and normalization when a joint likelihood surface is unavailable"
+  },
+  "front_state": {
+    "density_jump": "Rankine-Hugoniot compression inversion",
+    "temperature_jump": "independent Rankine-Hugoniot temperature inversion",
+    "shock_speed": "upstream Mach number times upstream sound speed",
+    "no_hydrostatic_equilibrium": true,
+    "no_dark_matter_or_lensing_calibration": true
+  },
+  "future_runtime_gates": {
+    "v19x3_terminal_source_map_authorization_required": true,
+    "all_494_finite_best_fits_retained": true,
+    "minimum_individual_quality_passes_per_cluster": 12,
+    "exact_draws_per_region": 4096,
+    "all_common_grid_posterior_summaries_finite": true,
+    "depth_and_temperature_normalization_dependence_sensitivities_reported": true,
+    "same_rules_both_clusters": true
+  },
+  "authorization": {
+    "run_v19x3_before_v19w4_and_v19x2_pass": false,
+    "construct_observed_gas_map_before_v19x3_pass": false,
+    "open_lensing_or_halo_payload": false,
+    "select_source_invariant_or_action": false,
+    "fit_gravity_parameter": false
+  },
+  "claim_boundary": [
+    "This preflight validates conversion algebra and frozen region geometry only; it is not a Sigma Gravity result.",
+    "Line-of-sight depth and profile dependence remain measurement nuisances and must not count as gravity constants.",
+    "The historical V19H formula error is corrected prospectively and is not hidden by rewriting a hashed parent.",
+    "A future gas map is a baryonic source reconstruction, not a dark-matter map and not a lensing-derived target."
+  ]
+}
