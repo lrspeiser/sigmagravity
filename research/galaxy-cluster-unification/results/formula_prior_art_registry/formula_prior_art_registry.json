@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 189,
+    "sigma_protocols": 190,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7322,6 +7322,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "518f4a9aea20a6a026ee5ba333df79ddac6a7f92105dee6060258cbe1f67e93d"
+    },
+    {
+      "config": "configs/sigma_v19bt_blind_cluster_source_readiness.json",
+      "protocol_version": "SIGMA-V19BT-BLIND-CLUSTER-SOURCE-READINESS-1.0.0",
+      "status": "source-only public-metadata checkpoint derived from the V19BH shortlist",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "53058f8bdc6d84c7109b125220ddbf582bb54c8877645c5be3f2ae62b6db4656"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

@@ -2424,3 +2424,24 @@ values inside $[0,1]$, and leaves regions outside an aperture invalid so they
 cannot enter gradient support. The remaining integration task is wiring the
 terminal V19X4 and V19BM product manifests into this stream and the V19BN
 decision engine; source outcomes and lensing remain unopened.
+
+## 2026-08-05 V19BT blind-cluster source readiness
+
+The balanced V19BH future-cluster shortlist now has an executable source-only
+acquisition boundary. Six of eight systems have direct public SGAS HST F160W
+images plus published Chandra observations with more than 1,000 counts inside
+R500. They divide evenly into three relaxed-side and three disturbed-side
+systems and span a factor 7.22 in nominal M500.
+
+J1002+2031 remains a reserve because its published strong-lens evidence is not
+well constrained and it lacks a direct source-only SGAS HLSP manifest.
+J1226+2149 remains a reserve because its published BCG/ICL analysis uses only
+F606W and because the projected J1226 pair needs separate component
+deprojection. No final six are selected. Every system still lacks at least an
+independent member-probability catalog, full stellar/ICL uncertainty and a gas
+line-of-sight posterior, so the strict complete-baryon count remains zero.
+
+Only HST `/images/v1/` products and published Chandra observation identifiers
+are whitelisted. Lens maps, image coordinates, topology and residuals remain
+sealed, and no formula or constant is selected. See
+[`SIGMA_V19BT_BLIND_CLUSTER_SOURCE_READINESS.md`](SIGMA_V19BT_BLIND_CLUSTER_SOURCE_READINESS.md).

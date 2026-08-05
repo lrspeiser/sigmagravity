@@ -1,0 +1,301 @@
+{
+  "access_boundary_audit": {
+    "allowed_now": [
+      "public HST science images and their exposure, WCS, PSF and mask metadata",
+      "public Chandra events, calibration, exposure and detector metadata",
+      "source-side redshift, mass-range and dynamical-state metadata",
+      "stellar-population, gas-conversion and astrometric calibration inputs independent of a lensing outcome"
+    ],
+    "final_six_selected": false,
+    "forbidden_now": [
+      "multiple-image coordinate values",
+      "image parity or topology",
+      "critical-curve coordinates",
+      "kappa, gamma, deflection or magnification maps",
+      "lensing residuals or halo parameters",
+      "member selection imported from a target-fitted lens model"
+    ],
+    "gravity_formula_scored": false,
+    "lens_map_downloaded": false,
+    "raw_lens_coordinate_values_ingested": false,
+    "temporary_mixed_manuscript_container_removed": true
+  },
+  "authorization_audit": {
+    "change_gravity_formula": false,
+    "download_lens_maps": false,
+    "download_source_images_or_events_now": false,
+    "fit_action_or_constant": false,
+    "open_raw_lensing_coordinates": false,
+    "perform_detailed_solar_optimization": false,
+    "select_final_six": false
+  },
+  "claim_boundary": [
+    "V19BT establishes only that six balanced systems have directly addressable public HST F160W and Chandra inputs; it does not establish complete baryons, lens likelihood readiness or holdout admission.",
+    "The six passing imaging preflights are not the final six. A system may still fail member, ICL, gas, covariance, family-count, positional-error or comparator requirements.",
+    "J1002 and J1226 remain in the metadata universe as reserves; they are not silently replaced or outcome-selected.",
+    "No lens map, image coordinate, lensing residual, halo parameter, gravity formula, universal constant or Solar-System optimization enters this checkpoint."
+  ],
+  "config": "configs/sigma_v19bt_blind_cluster_source_readiness.json",
+  "config_sha256": "53058f8bdc6d84c7109b125220ddbf582bb54c8877645c5be3f2ae62b6db4656",
+  "decision": "passed_source_imaging_preflight_not_holdout_admission",
+  "gate_results": {
+    "candidate_set_matches_v19bh": true,
+    "complete_baryons_and_holdout_admission_not_claimed": true,
+    "mass_and_state_range_is_broad": true,
+    "no_theory_constant_holdout_or_solar_selection": true,
+    "parent_hash_exact": true,
+    "raw_lensing_and_gravity_payload_remain_unused": true,
+    "reserve_blockers_are_explicit": true,
+    "six_balanced_direct_source_imaging_systems_exist": true,
+    "source_urls_are_strictly_whitelisted": true,
+    "source_urls_were_live_at_freeze": true
+  },
+  "implementation": {
+    "runner": "scripts/check_sigma_v19bt_blind_cluster_source_readiness.py"
+  },
+  "next_source_only_work": [
+    "After the active V19W production process exits, download only the whitelisted HST image URLs and the listed Chandra observations for the six preflight systems.",
+    "Build residual-blind PSF, WCS, mask, sky, dust, stellar-population, BCG/ICL and member-segmentation uncertainty ensembles without a lens map or image coordinate.",
+    "Use spectroscopy or photometric membership independent of a target-fitted lens model and retain membership probabilities rather than a hard residual-informed selection.",
+    "Infer gas surface-density and line-of-sight-depth ensembles from Chandra products with the same physical pipeline across all six systems.",
+    "Only after source readiness passes, audit family/image counts and positional-error metadata without opening coordinates; the final six still are not selected here."
+  ],
+  "parent_audit": {
+    "actual_sha256": "3aba06b1360e976794b6dd2ded4bd65e2e472e184e84abb46b187baea2bf07d8",
+    "exact": true,
+    "expected_sha256": "3aba06b1360e976794b6dd2ded4bd65e2e472e184e84abb46b187baea2bf07d8",
+    "path": "results/sigma_v19bh_blind_cluster_admission/report.json"
+  },
+  "protocol_version": "SIGMA-V19BT-BLIND-CLUSTER-SOURCE-READINESS-1.0.0",
+  "source_image_HEAD_audit": {
+    "checked_utc": "2026-08-05T16:49:55Z",
+    "http_200_or_206": 28,
+    "total_content_length_bytes": 4782516480,
+    "urls_checked": 28
+  },
+  "source_imaging_preflight": {
+    "admitted_holdouts": 0,
+    "complete_baryon_models": 0,
+    "direct_HST_F160W_plus_Chandra_systems": 6,
+    "direct_disturbed_side": 3,
+    "direct_mass_range_1e14_solar": [
+      0.79,
+      5.7
+    ],
+    "direct_mass_span_ratio": 7.215189873417722,
+    "direct_relaxed_side": 3,
+    "final_six_selected": false,
+    "reserve_systems": [
+      "SDSS_J1002+2031",
+      "SDSS_J1226+2149"
+    ],
+    "shortlist_systems": 8
+  },
+  "status": "completed_blind_cluster_source_readiness_checkpoint",
+  "systems": [
+    {
+      "HST_filters": [
+        "F390W",
+        "F814W",
+        "F125W",
+        "F160W"
+      ],
+      "M500_1e14_solar_nominal": 5.4,
+      "chandra_counts_within_R500": 3786,
+      "chandra_obsids": [
+        4205
+      ],
+      "complete_baryon_model_ready": false,
+      "direct_source_only_HLSP": true,
+      "id": "SDSS_J0851+3331",
+      "published_classification": "disturbed",
+      "remaining_source_blockers": [
+        "independent member catalog",
+        "multiband stellar-mass posterior",
+        "ICL decomposition uncertainty",
+        "gas density and line-of-sight posterior"
+      ],
+      "source_imaging_preflight": "passed_not_admitted",
+      "state_side": "disturbed"
+    },
+    {
+      "HST_filters": [
+        "F390W",
+        "F606W",
+        "F105W",
+        "F160W"
+      ],
+      "M500_1e14_solar_nominal": 2.8,
+      "chandra_counts_within_R500": 3306,
+      "chandra_obsids": [
+        20564,
+        20981
+      ],
+      "complete_baryon_model_ready": false,
+      "direct_source_only_HLSP": true,
+      "id": "SDSS_J0952+3434",
+      "published_classification": "disturbed",
+      "remaining_source_blockers": [
+        "independent member catalog",
+        "multiband stellar-mass posterior",
+        "ICL decomposition uncertainty",
+        "gas density and line-of-sight posterior"
+      ],
+      "source_imaging_preflight": "passed_not_admitted",
+      "state_side": "disturbed"
+    },
+    {
+      "HST_filters": [
+        "F390W",
+        "F606W",
+        "F105W",
+        "F160W"
+      ],
+      "M500_1e14_solar_nominal": 1.96,
+      "chandra_counts_within_R500": 2535,
+      "chandra_obsids": [
+        20566
+      ],
+      "complete_baryon_model_ready": false,
+      "direct_source_only_HLSP": false,
+      "id": "SDSS_J1002+2031",
+      "published_classification": "disturbed",
+      "remaining_source_blockers": [
+        "direct source-only archive manifest",
+        "published statement that the strong-lens model is not well constrained",
+        "independent member catalog",
+        "complete baryonic posterior"
+      ],
+      "source_imaging_preflight": "reserve_not_admitted",
+      "state_side": "disturbed"
+    },
+    {
+      "HST_filters": [
+        "F390W",
+        "F450W",
+        "F606W",
+        "F814W",
+        "F110W",
+        "F160W"
+      ],
+      "M500_1e14_solar_nominal": 0.79,
+      "chandra_counts_within_R500": 5508,
+      "chandra_obsids": [
+        11756,
+        12098
+      ],
+      "complete_baryon_model_ready": false,
+      "direct_source_only_HLSP": true,
+      "id": "SDSS_J1038+4849",
+      "published_classification": "moderately relaxed",
+      "remaining_source_blockers": [
+        "independent member catalog",
+        "multiband stellar-mass posterior",
+        "ICL decomposition uncertainty",
+        "gas density and line-of-sight posterior"
+      ],
+      "source_imaging_preflight": "passed_not_admitted",
+      "state_side": "relaxed"
+    },
+    {
+      "HST_filters": [
+        "F390W",
+        "F606W",
+        "F110W",
+        "F160W"
+      ],
+      "M500_1e14_solar_nominal": 5.7,
+      "chandra_counts_within_R500": 3035,
+      "chandra_obsids": [
+        20567,
+        22081
+      ],
+      "complete_baryon_model_ready": false,
+      "direct_source_only_HLSP": true,
+      "id": "SDSS_J1050+0017",
+      "published_classification": "relaxed",
+      "remaining_source_blockers": [
+        "independent member catalog",
+        "multiband stellar-mass posterior",
+        "ICL decomposition uncertainty",
+        "gas density and line-of-sight posterior"
+      ],
+      "source_imaging_preflight": "passed_not_admitted",
+      "state_side": "relaxed"
+    },
+    {
+      "HST_filters": [
+        "F390W",
+        "F606W",
+        "F105W",
+        "F160W"
+      ],
+      "M500_1e14_solar_nominal": 1.56,
+      "chandra_counts_within_R500": 1916,
+      "chandra_obsids": [
+        18220
+      ],
+      "complete_baryon_model_ready": false,
+      "direct_source_only_HLSP": true,
+      "id": "SDSS_J1207+5254",
+      "published_classification": "disturbed",
+      "remaining_source_blockers": [
+        "independent member catalog with adequate completeness",
+        "multiband stellar-mass posterior",
+        "ICL decomposition uncertainty",
+        "gas density and line-of-sight posterior"
+      ],
+      "source_imaging_preflight": "passed_not_admitted",
+      "state_side": "disturbed"
+    },
+    {
+      "HST_filters": [
+        "F390W",
+        "F450W",
+        "F606W",
+        "F814W",
+        "F105W",
+        "F160W"
+      ],
+      "M500_1e14_solar_nominal": 3.85,
+      "chandra_counts_within_R500": 2117,
+      "chandra_obsids": [
+        18291
+      ],
+      "complete_baryon_model_ready": false,
+      "direct_source_only_HLSP": true,
+      "id": "SDSS_J1209+2640",
+      "published_classification": "moderately relaxed",
+      "remaining_source_blockers": [
+        "independent member catalog",
+        "multiband stellar-mass posterior",
+        "ICL decomposition uncertainty",
+        "gas density and line-of-sight posterior"
+      ],
+      "source_imaging_preflight": "passed_not_admitted",
+      "state_side": "relaxed"
+    },
+    {
+      "HST_filters": [
+        "F606W"
+      ],
+      "M500_1e14_solar_nominal": 3.59,
+      "chandra_counts_within_R500": 18046,
+      "chandra_obsids": [
+        12878
+      ],
+      "complete_baryon_model_ready": false,
+      "direct_source_only_HLSP": false,
+      "id": "SDSS_J1226+2149",
+      "published_classification": "moderately relaxed",
+      "remaining_source_blockers": [
+        "no comparable near-infrared BCG/ICL image",
+        "projected J1226+2149/J1226+2152 pre-merger pair requires separate gas and stellar deprojection",
+        "independent member catalog",
+        "complete baryonic posterior"
+      ],
+      "source_imaging_preflight": "reserve_not_admitted",
+      "state_side": "relaxed"
+    }
+  ]
+}
