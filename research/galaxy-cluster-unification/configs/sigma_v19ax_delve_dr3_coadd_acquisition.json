@@ -1,0 +1,103 @@
+{
+  "protocol_version": "SIGMA-V19AX-DELVE-DR3-COADD-ACQUISITION-1.0.0",
+  "status": "frozen_before_full_coadd_pixel_acquisition",
+  "purpose": "Acquire one homogeneous DELVE DR3 coadd image, mask, and inverse-variance weight cutout in each griz band that contains every unchanged V19AU candidate position, without measuring source flux or choosing a deblending model.",
+  "parent_artifacts": [
+    {
+      "path": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_hypotheses.csv",
+      "sha256": "ea7628d0daab8774bbe346ca721304e0ec8712025a89ac9f9508451317c3be9e"
+    },
+    {
+      "path": "configs/sigma_v19aw_delve_candidate_coverage.json",
+      "sha256": "935a1a7ab5cad870a01b944281e42e08419d1bfab50ce6b8ecbf49ba8882c1fb"
+    },
+    {
+      "path": "results/sigma_v19aw_delve_candidate_coverage/report.json",
+      "sha256": "d7cbdd6c4dd2985d916c0fdec6696489e7128b76f7e3f6e063bba49e3a562bda"
+    }
+  ],
+  "inputs": {
+    "candidate_hypotheses": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_hypotheses.csv"
+  },
+  "source": {
+    "survey": "DELVE Data Release 3",
+    "release_url": "https://datalab.noirlab.edu/data/delve",
+    "sia_documentation_url": "https://datalab.noirlab.edu/docs/manual/UsingAstroDataLab/DataAccessInterfaces/SimpleImageAccessSIA/SimpleImageAccessSIA.html",
+    "endpoint": "https://datalab.noirlab.edu/sia/delve_dr3",
+    "center_ra_deg": 104.6247543743987,
+    "center_dec_deg": -55.94659781854907,
+    "cutout_size_deg": 0.17,
+    "timeout_seconds": 300
+  },
+  "selection": {
+    "bands": ["g", "r", "i", "z"],
+    "products": ["image", "mask", "weight"],
+    "extension_by_product": {
+      "image": 1,
+      "mask": 2,
+      "weight": 3
+    },
+    "filename_rule": "For each band and plane, select the unique standard coadd whose siaRef ends in _{band}.fits.fz and whose extn matches the declared plane.",
+    "excluded_filename_token": "_nobkg",
+    "background_rule": "Acquire the standard image plane. Any later local-background model must be frozen and validated as part of a separate photometry protocol."
+  },
+  "acquisition": {
+    "workers": 4,
+    "partial_file_suffix": ".partial",
+    "reuse_rule": "Reuse an existing file only after the same frozen SIA query and all FITS integrity gates pass."
+  },
+  "gates": {
+    "exact_sia_rows": 27,
+    "exact_products": 12,
+    "exact_candidates": 568,
+    "expected_pixel_scale_arcsec": 0.26295,
+    "pixel_scale_tolerance_arcsec": 0.0001,
+    "minimum_image_dimension_pixels": 2200,
+    "maximum_image_dimension_pixels": 2400,
+    "minimum_candidate_edge_margin_pixels": 10,
+    "minimum_finite_pixel_fraction": 0.99,
+    "minimum_positive_weight_fraction": 0.99,
+    "expected_image_magzero": 30.0,
+    "all_products_must_share_one_shape": true,
+    "all_candidates_must_be_inside_every_product": true,
+    "no_source_photometry_or_candidate_association": true,
+    "failure_rule": "Fail closed without changing the cutout center or size after pixel inspection, substituting products, dropping a band or plane, measuring source flux, or selecting a photometry/deblending model."
+  },
+  "outputs": {
+    "sia_response": "data/raw/sigma_v19ax_delve_dr3_coadd_acquisition/sia_response.xml",
+    "sia_query_url": "data/raw/sigma_v19ax_delve_dr3_coadd_acquisition/sia_query_url.txt",
+    "coadd_directory": "data/raw/sigma_v19ax_delve_dr3_coadd_acquisition/coadds",
+    "product_manifest": "data/derived/sigma_v19ax_delve_dr3_coadd_acquisition/product_manifest.csv",
+    "report": "results/sigma_v19ax_delve_dr3_coadd_acquisition/report.json"
+  },
+  "claim_boundary": [
+    "V19AX is an image acquisition and geometric/integrity audit, not a source measurement.",
+    "Opening pixels to verify FITS structure, WCS, dimensions, finite values and weight support does not authorize flux measurement at any anchor or candidate position.",
+    "The acquired coadds do not establish that a candidate is a cluster member and do not create a baryonic mass map.",
+    "A pass authorizes a separately frozen development-anchor photometry and crowded-field deblending comparison; it does not authorize candidate interpretation, mass, lensing, halo or gravity claims."
+  ],
+  "authorization": {
+    "query_exact_sia_field": true,
+    "download_all_frozen_products": true,
+    "inspect_fits_wcs_shape_pixel_type_and_finite_support": true,
+    "verify_candidate_positions_are_geometrically_inside": true,
+    "measure_anchor_or_candidate_flux": false,
+    "choose_photometry_or_deblend_model": false,
+    "select_or_rank_counterparts": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "sia_schema_row_count_and_small_center_cutouts_preflighted": true,
+    "full_field_pixels_downloaded_before_freeze": false,
+    "anchor_or_candidate_flux_measured_before_freeze": false,
+    "photometry_or_deblending_model_chosen_before_freeze": false,
+    "mass_lensing_halo_or_gravity_payload_opened_before_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/acquire_sigma_v19ax_delve_dr3_coadds.py",
+    "runner_sha256": "dd16d4984ea8d64cd1cb2ef70ffbc78631f25a46f512709e899fddae94911fe9"
+  }
+}
