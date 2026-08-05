@@ -15,8 +15,11 @@ the source response, create and link a zero-count background PHA, and pass every
 mask, histogram, detector-medoid, ARF/RMF, link, scaling, size and hash gate.
 V19W5 now supersedes the unexecuted V19W4 terminal launcher and makes this CCD7
 pass mandatory. It remains blocked until the unchanged base process exits and
-its full-interval report passes. No spectrum was combined, no gas state was fit
-and no lensing or gravity result was opened. See
+its full-interval report passes. The response adapter now has an explicit,
+fail-closed V19W5 status and archive-label mode while retaining V19W4 as its
+default; the terminal freezer still must be superseded after V19W5 passes. No
+spectrum was combined, no gas state was fit and no lensing or gravity result
+was opened. See
 [`SIGMA_V19W2C_CCD7_RESPONSE_COMMISSIONING_RESULTS.md`](SIGMA_V19W2C_CCD7_RESPONSE_COMMISSIONING_RESULTS.md)
 and
 [`SIGMA_V19W5_CCD7_HARDENED_RESPONSE_RECOVERY_PLAN.md`](SIGMA_V19W5_CCD7_HARDENED_RESPONSE_RECOVERY_PLAN.md).

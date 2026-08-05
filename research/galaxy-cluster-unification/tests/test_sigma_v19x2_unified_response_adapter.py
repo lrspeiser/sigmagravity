@@ -120,6 +120,32 @@ def test_adapter_accepts_base_and_recovery_cells(tmp_path: Path) -> None:
     assert all(row["source_pha"].is_file() for row in validated.values())
 
 
+def test_adapter_accepts_v19w5_recovery_only_when_declared(tmp_path: Path) -> None:
+    base = tmp_path / "base"
+    recovery = tmp_path / "recovery"
+    manifest_base, row_base = make_cell(base, "base_v19w", obsid=41)
+    manifest_recovery, row_recovery = make_cell(
+        recovery, "v19w5_recovery", obsid=42, ccd_id=7
+    )
+    index = tmp_path / "index.csv"
+    write_index(index, [row_base, row_recovery])
+    roots = {"base_v19w": base, "v19w5_recovery": recovery}
+    validated = adapter.validate_unified_archive(
+        [manifest_base, manifest_recovery],
+        index,
+        roots,
+        recovery_archive="v19w5_recovery",
+    )
+    assert {row["archive"] for row in validated.values()} == {
+        "base_v19w",
+        "v19w5_recovery",
+    }
+    with pytest.raises(RuntimeError, match="archive-root mapping|unknown response"):
+        adapter.validate_unified_archive(
+            [manifest_base, manifest_recovery], index, roots
+        )
+
+
 def test_adapter_refuses_paths_outside_frozen_roots(tmp_path: Path) -> None:
     archive = tmp_path / "archive"
     manifest, row = make_cell(archive, "base_v19w")
@@ -218,3 +244,52 @@ def test_terminal_authorization_checks_report_and_index(tmp_path: Path) -> None:
             expected_products=4,
             root=root,
         )
+
+
+def test_terminal_authorization_accepts_v19w5_status_only_when_declared(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "root"
+    index = root / "results" / "index.csv"
+    index.parent.mkdir(parents=True)
+    index.write_text("fixture\n", encoding="utf-8")
+    report = {
+        "status": adapter.V19W5_AUTHORIZED_STATUS,
+        "config_sha256": "c" * 64,
+        "runner_sha256": "d" * 64,
+        "gates": {"all": True},
+        "unified_cells": 1,
+        "unified_product_files": 4,
+        "base_v19w_archive_modified": False,
+        "original_v19x_authorized": False,
+        "v19x_successor_configuration_may_be_frozen": True,
+        "unified_product_index": {
+            "path": "results/index.csv",
+            "rows": 1,
+            "bytes": index.stat().st_size,
+            "sha256": sha256(index),
+        },
+    }
+    report_path = root / "report.json"
+    write_json(report_path, report)
+    with pytest.raises(RuntimeError, match="status does not authorize"):
+        adapter.authorize_unified_index(
+            report_path,
+            expected_config_sha256="c" * 64,
+            expected_runner_sha256="d" * 64,
+            expected_cells=1,
+            expected_products=4,
+            root=root,
+        )
+    loaded, authorized_index = adapter.authorize_unified_index(
+        report_path,
+        expected_config_sha256="c" * 64,
+        expected_runner_sha256="d" * 64,
+        expected_cells=1,
+        expected_products=4,
+        root=root,
+        expected_status=adapter.V19W5_AUTHORIZED_STATUS,
+        authority_label="V19W5",
+    )
+    assert loaded == report
+    assert authorized_index == index

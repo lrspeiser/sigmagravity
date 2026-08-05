@@ -71,11 +71,14 @@ validated a second time.
 
 ## Downstream boundary
 
-The existing V19X2 adapter preflight names the superseded `v19w4_recovery`
-archive. It must not be used unchanged with a V19W5 index. After V19W5 passes,
-the mechanical freezer/adapter must be superseded with hashes for the V19W5
-report and index and explicit support for `v19w5_recovery`. This is a schema
-update, not permission to alter any spectrum, region or fit setting.
+The shared V19X2 adapter now accepts `v19w5_recovery` only when a caller
+explicitly declares that archive label and the V19W5 terminal status; its
+default remains the historical V19W4 contract, so the two authorities cannot be
+silently interchanged. The current mechanical freezer and orchestration
+scaffold still name V19W4. After V19W5 passes, they must be superseded with
+hashes for the V19W5 report and index and the explicit V19W5 adapter options.
+This is a schema update, not permission to alter any spectrum, region or fit
+setting.
 
 V19W5 itself does not combine or fit a spectrum, infer a gas state, open a
 lensing target or change a gravity formula.

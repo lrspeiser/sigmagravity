@@ -1,8 +1,8 @@
-"""Independent V19W4 unified-response adapter for the future V19X successor.
+"""Independent unified-response adapter for a future V19X successor.
 
 This module contains no spectral fit, gravity equation, or data-selection rule.
-It only validates that a terminal V19W4 report and mixed base/recovery index can
-be consumed without assuming every cell lives under the original V19W archive.
+It validates that a named terminal response report and mixed base/recovery index
+can be consumed without assuming every cell lives under the original archive.
 """
 
 from __future__ import annotations
@@ -18,6 +18,7 @@ PRODUCT_ROLES = ("source_pha", "background_pha", "arf", "rmf")
 AUTHORIZED_STATUS = (
     "hardened_unified_5082_response_archive_passed_and_v19x_successor_may_be_frozen"
 )
+V19W5_AUTHORIZED_STATUS = "ccd7_hardened_unified_5082_response_archive_passed"
 
 
 def sha256(path: Path) -> str:
@@ -54,39 +55,52 @@ def authorize_unified_index(
     expected_cells: int = 5082,
     expected_products: int = 20328,
     root: Path = ROOT,
+    expected_status: str = AUTHORIZED_STATUS,
+    authority_label: str = "V19W4",
 ) -> tuple[dict[str, Any], Path]:
-    """Validate the terminal V19W4 authority and return its immutable index."""
+    """Validate a terminal response authority and return its immutable index."""
     if not report_path.is_file():
-        raise RuntimeError("V19W4 terminal authorization report is absent")
+        raise RuntimeError(f"{authority_label} terminal authorization report is absent")
     report = load_json(report_path)
-    if report.get("status") != AUTHORIZED_STATUS:
-        raise RuntimeError(f"V19W4 status does not authorize V19X2: {report.get('status')}")
+    if report.get("status") != expected_status:
+        raise RuntimeError(
+            f"{authority_label} status does not authorize V19X2: "
+            f"{report.get('status')}"
+        )
     if report.get("config_sha256") != expected_config_sha256:
-        raise RuntimeError("V19W4 terminal report names another config")
+        raise RuntimeError(f"{authority_label} terminal report names another config")
     if report.get("runner_sha256") != expected_runner_sha256:
-        raise RuntimeError("V19W4 terminal report names another runner")
+        raise RuntimeError(f"{authority_label} terminal report names another runner")
     if not report.get("gates") or not all(report["gates"].values()):
-        raise RuntimeError("V19W4 terminal report contains a failed gate")
+        raise RuntimeError(f"{authority_label} terminal report contains a failed gate")
     if int(report.get("unified_cells", -1)) != expected_cells:
-        raise RuntimeError("V19W4 unified-cell count does not authorize V19X2")
+        raise RuntimeError(
+            f"{authority_label} unified-cell count does not authorize V19X2"
+        )
     if int(report.get("unified_product_files", -1)) != expected_products:
-        raise RuntimeError("V19W4 product count does not authorize V19X2")
+        raise RuntimeError(f"{authority_label} product count does not authorize V19X2")
     if report.get("base_v19w_archive_modified") is not False:
-        raise RuntimeError("V19W4 did not prove the base archive remained immutable")
+        raise RuntimeError(
+            f"{authority_label} did not prove the base archive remained immutable"
+        )
     if report.get("original_v19x_authorized") is not False:
-        raise RuntimeError("V19W4 unexpectedly authorized the obsolete V19X protocol")
+        raise RuntimeError(
+            f"{authority_label} unexpectedly authorized the obsolete V19X protocol"
+        )
     if report.get("v19x_successor_configuration_may_be_frozen") is not True:
-        raise RuntimeError("V19W4 withheld authority to freeze a V19X successor")
+        raise RuntimeError(
+            f"{authority_label} withheld authority to freeze a V19X successor"
+        )
     item = report.get("unified_product_index", {})
     if int(item.get("rows", -1)) != expected_cells:
-        raise RuntimeError("V19W4 unified index row count changed")
+        raise RuntimeError(f"{authority_label} unified index row count changed")
     index_path = root / str(item.get("path", ""))
     if not index_path.is_file():
-        raise RuntimeError("V19W4 unified product index is absent")
+        raise RuntimeError(f"{authority_label} unified product index is absent")
     if index_path.stat().st_size != int(item.get("bytes", -1)):
-        raise RuntimeError("V19W4 unified product index size changed")
+        raise RuntimeError(f"{authority_label} unified product index size changed")
     if sha256(index_path) != item.get("sha256"):
-        raise RuntimeError("V19W4 unified product index hash changed")
+        raise RuntimeError(f"{authority_label} unified product index hash changed")
     return report, index_path
 
 
@@ -141,15 +155,18 @@ def validate_unified_cell(
     manifest_row: dict[str, str],
     index_row: dict[str, str],
     allowed_archive_roots: dict[str, Path],
+    *,
+    recovery_archive: str = "v19w4_recovery",
 ) -> dict[str, Any]:
     """Independently validate one base or recovery checkpoint from its index row."""
     key = task_key(manifest_row)
     if task_key(index_row) != key:
         raise RuntimeError(f"V19X2 unified index identity mismatch: {key}")
     archive = index_row["archive"]
-    if archive not in {"base_v19w", "v19w4_recovery"}:
+    expected_archives = {"base_v19w", recovery_archive}
+    if archive not in expected_archives:
         raise RuntimeError(f"V19X2 unknown response archive: {index_row['archive']}")
-    if set(allowed_archive_roots) != {"base_v19w", "v19w4_recovery"}:
+    if set(allowed_archive_roots) != expected_archives:
         raise RuntimeError("V19X2 allowed archive-root mapping is incomplete")
     cell_directory = Path(index_row["cell_directory"])
     if not cell_directory.is_absolute() or not path_is_within(
@@ -227,6 +244,8 @@ def validate_unified_archive(
     manifest: list[dict[str, str]],
     index_path: Path,
     allowed_archive_roots: dict[str, Path],
+    *,
+    recovery_archive: str = "v19w4_recovery",
 ) -> dict[tuple[str, int, int, int], dict[str, Any]]:
     indexed = load_unified_index(index_path, len(manifest))
     validated: dict[tuple[str, int, int, int], dict[str, Any]] = {}
@@ -235,7 +254,10 @@ def validate_unified_archive(
         if key not in indexed:
             raise RuntimeError(f"V19X2 unified index lacks manifest task: {key}")
         validated[key] = validate_unified_cell(
-            manifest_row, indexed[key], allowed_archive_roots
+            manifest_row,
+            indexed[key],
+            allowed_archive_roots,
+            recovery_archive=recovery_archive,
         )
     if len(validated) != len(manifest):
         raise RuntimeError("V19X2 did not validate every manifest task")
