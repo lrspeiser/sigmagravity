@@ -76,7 +76,8 @@
   ],
   "implementation": {
     "runner": "scripts/run_sigma_v19ad_fixed_aperture_color_commissioning.py",
-    "runner_sha256": "8a8714c8c6e96103027483563b322cc89cac79f3ef22dd0258e6101535b60984"
+    "runner_sha256": "5dd00bdd114c97d28df5dd6e9e3fc6cde56740ef815b92f7b4a47ead075aa552",
+    "post_freeze_correction": "The first execution stopped before fitting when the primary sample lacked complete accepted griz. The runner was changed only to serialize that preregistered failure and missing-band evidence; no aperture, flag, error, split, model, threshold, or authorization changed."
   },
   "authorization": {
     "aggregate_provisional_singleton_measurements": true,

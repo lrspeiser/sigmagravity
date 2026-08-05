@@ -275,15 +275,88 @@ def run(config_path: Path) -> dict[str, Any]:
 
     primary_aperture = int(aggregation["primary_aperture_diameter_arcsec"])
     primary_rows = aggregated_by_aperture[primary_aperture]
-    if primary_aperture not in evaluations:
-        raise RuntimeError("V19AD primary aperture lacks complete griz")
-    primary = evaluations[primary_aperture]
-    gate_spec = config["validation_gates"]
-    gates = {
+    primary_complete = primary_aperture in evaluations
+    base_gates = {
         "exact_sample_and_split": len(sample) == 15,
         "all_primary_rows_have_griz": all(
             row[band] is not None for row in primary_rows for band in aggregation["filters"]
         ),
+        "no_ambiguous_association_mass_lensing_or_gravity": True,
+    }
+    aggregated_path = ROOT / config["outputs"]["aggregated_sample"]
+    write_csv(aggregated_path, all_output_rows)
+    report_path = ROOT / config["outputs"]["report"]
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    parent_hashes = {
+        artifact["path"]: artifact["sha256"] for artifact in config["parent_artifacts"]
+    }
+    if not primary_complete:
+        missing = [
+            {
+                "object_id": row["object_id"],
+                "nsc_id": row["nsc_id"],
+                "split": row["split"],
+                "missing_filters": [band for band in aggregation["filters"] if row[band] is None],
+                "accepted_measurements": {
+                    band: row[f"{band}_measurements"] for band in aggregation["filters"]
+                },
+            }
+            for row in primary_rows
+            if any(row[band] is None for band in aggregation["filters"])
+        ]
+        gates = {
+            **base_gates,
+            "all_optimizers_succeeded": False,
+            "validation_median_absolute_error_each_color": False,
+            "color_only_top1_retrieval": False,
+            "color_only_mean_reciprocal_rank": False,
+            "all_commissioning_gates_pass": False,
+        }
+        report = {
+            "report_version": "SIGMA-V19AD-FIXED-APERTURE-COLOR-COMMISSIONING-1.0.0",
+            "status": "failed_before_fit_incomplete_primary_photometry",
+            "generated_utc": datetime.now(UTC).isoformat(),
+            "config": config_path.relative_to(ROOT).as_posix(),
+            "config_sha256": sha256(config_path),
+            "implementation": config["implementation"],
+            "parent_hashes": parent_hashes,
+            "primary": {
+                "aperture_diameter_arcsec": primary_aperture,
+                "complete_griz": False,
+                "missing_rows": missing,
+                "fit_or_validation_scoring_performed": False,
+            },
+            "sensitivity": [
+                {
+                    "aperture_diameter_arcsec": aperture,
+                    "complete_griz": aperture in evaluations,
+                }
+                for aperture in apertures
+                if aperture != primary_aperture
+            ],
+            "gates": gates,
+            "ambiguous_likelihood_application_authorized": False,
+            "outputs": {
+                "aggregated_sample": aggregated_path.relative_to(ROOT).as_posix(),
+                "aggregated_sample_sha256": sha256(aggregated_path),
+            },
+            "claim_boundary": config["claim_boundary"],
+            "ambiguous_candidate_photometry_scored": False,
+            "counterpart_selected": False,
+            "stellar_mass_inferred": False,
+            "mass_current_constructed": False,
+            "lensing_or_halo_payload_opened": False,
+            "gravity_formula_or_parameter_changed": False,
+        }
+        report_path.write_text(
+            json.dumps(strict_json(report), indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        return report
+
+    primary = evaluations[primary_aperture]
+    gate_spec = config["validation_gates"]
+    gates = {
+        **base_gates,
         "all_optimizers_succeeded": all(row["success"] for row in primary["model"]["optimizers"]),
         "validation_median_absolute_error_each_color": all(
             value <= float(gate_spec["maximum_validation_median_absolute_error_each_color_mag"])
@@ -293,12 +366,9 @@ def run(config_path: Path) -> dict[str, Any]:
         >= int(gate_spec["minimum_color_only_top1_retrievals_out_of_5"]),
         "color_only_mean_reciprocal_rank": primary["mean_reciprocal_rank"]
         >= float(gate_spec["minimum_color_only_mean_reciprocal_rank"]),
-        "no_ambiguous_association_mass_lensing_or_gravity": True,
     }
     gates["all_commissioning_gates_pass"] = all(gates.values())
-    aggregated_path = ROOT / config["outputs"]["aggregated_sample"]
     retrieval_path = ROOT / config["outputs"]["primary_validation_retrieval"]
-    write_csv(aggregated_path, all_output_rows)
     write_csv(retrieval_path, primary["retrieval_rows"])
 
     def summarized_evaluation(aperture: int, evaluation: dict[str, Any]) -> dict[str, Any]:
@@ -313,8 +383,6 @@ def run(config_path: Path) -> dict[str, Any]:
             "optimizers": evaluation["model"]["optimizers"],
         }
 
-    report_path = ROOT / config["outputs"]["report"]
-    report_path.parent.mkdir(parents=True, exist_ok=True)
     report = {
         "report_version": "SIGMA-V19AD-FIXED-APERTURE-COLOR-COMMISSIONING-1.0.0",
         "status": "completed_fixed_aperture_color_commissioning",
@@ -322,9 +390,7 @@ def run(config_path: Path) -> dict[str, Any]:
         "config": config_path.relative_to(ROOT).as_posix(),
         "config_sha256": sha256(config_path),
         "implementation": config["implementation"],
-        "parent_hashes": {
-            artifact["path"]: artifact["sha256"] for artifact in config["parent_artifacts"]
-        },
+        "parent_hashes": parent_hashes,
         "primary": summarized_evaluation(primary_aperture, primary),
         "sensitivity": [
             summarized_evaluation(aperture, evaluations[aperture])
