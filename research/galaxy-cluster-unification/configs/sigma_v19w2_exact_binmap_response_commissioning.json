@@ -1,5 +1,5 @@
 {
-  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.0.0",
+  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.0.1",
   "status": "frozen after the read-only V19W live archive audit identified three implementation failure classes and before constructing any exact-bin mask, running a corrected response, reading a spectral fit, changing a scientific region or event assignment, opening lensing data, or changing gravity physics",
   "purpose": "Commission one implementation correction that restores the frozen disjoint V19P/V19Q binmap event partition, removes the invalid manually transformed low-count response coordinate, and shortens CIAO runtime paths without changing any admitted region, event, energy band, response weighting, background scaling or scientific threshold.",
   "parents": {
@@ -63,7 +63,14 @@
     "response_position": "leave refcoord unset and use resp_pos=CENTROID, the CIAO-supported mode for a pixel-mask filter",
     "response_weighting": "unchanged weight=yes, weight_rmf=yes, energy_wmap=500:7000 eV, binwmap=det=8, binarfwmap=1",
     "runtime_path": "use a short scratch root and production-index cell token for PFILES, TMPDIR and partial directories; retain canonical cell and product names",
+    "mask_writer": "CIAO dmimgcalc constructs the exact binary image and propagates the frozen binmap WCS; NumPy independently checks every written pixel against binmap equals bin_id",
     "scientific_values_changed": false
+  },
+  "implementation_dependency_correction": {
+    "reason": "The first invocation stopped at module import because the frozen runner imported Astropy, which is not installed in the CIAO environment. No scratch directory, mask, response, spectrum or report was created.",
+    "change": "Remove the Astropy dependency and create the same predefined binary mask with CIAO dmimgcalc, then verify its pixels independently through CIAO pycrates before response extraction.",
+    "scientific_output_existed": false,
+    "scientific_selection_or_setting_changed": false
   },
   "execution": {
     "scratch_root": "/home/henry/sv19w2",
@@ -100,6 +107,6 @@
   },
   "implementation": {
     "runner": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
-    "runner_sha256": "bddad544ec1674c7f29de52c971c242588c6a9a66597083aa312523f05d498dd"
+    "runner_sha256": "dc80881093461d7ae7aa2548afa9313fb9790edf4d1dd05848d327255b35afe4"
   }
 }

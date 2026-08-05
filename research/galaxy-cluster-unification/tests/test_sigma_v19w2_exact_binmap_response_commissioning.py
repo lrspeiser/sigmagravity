@@ -7,7 +7,6 @@ import types
 from pathlib import Path
 
 import numpy as np
-from astropy.io import fits
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19w2_exact_binmap_response_commissioning.json"
@@ -20,20 +19,12 @@ sys.modules.setdefault("pycrates", types.ModuleType("pycrates"))
 SPEC.loader.exec_module(MODULE)
 
 
-def test_exact_bin_mask_is_binary_disjoint_and_reusable(tmp_path: Path):
-    source = tmp_path / "binmap.fits"
+def test_exact_bin_mask_values_are_binary_and_disjoint():
     values = np.asarray([[0, 0, 1], [2, 1, -1]], dtype=np.int16)
-    fits.PrimaryHDU(values).writeto(source)
-    destination = tmp_path / "mask.fits"
-    first = MODULE.write_exact_bin_mask(source, 1, destination)
-    second = MODULE.write_exact_bin_mask(source, 1, destination)
-    with fits.open(destination, memmap=False) as hdus:
-        mask = np.asarray(hdus[0].data)
+    mask = MODULE.exact_mask_values(values, 1)
     assert set(np.unique(mask)) == {0, 1}
     assert int(mask.sum()) == 2
-    assert first["sha256"] == second["sha256"]
-    assert first["reused"] is False
-    assert second["reused"] is True
+    assert not np.any(MODULE.exact_mask_values(values, 0) & mask)
 
 
 def test_frozen_selection_covers_all_observed_implementation_classes():
@@ -57,6 +48,8 @@ def test_implementation_change_preserves_scientific_settings():
     assert "same exact bin mask" in correction["background_selection"]
     assert "refcoord unset" in correction["response_position"]
     assert "weight=yes" in correction["response_weighting"]
+    assert "CIAO dmimgcalc" in correction["mask_writer"]
+    assert config["implementation_dependency_correction"]["scientific_output_existed"] is False
     assert correction["scientific_values_changed"] is False
 
 

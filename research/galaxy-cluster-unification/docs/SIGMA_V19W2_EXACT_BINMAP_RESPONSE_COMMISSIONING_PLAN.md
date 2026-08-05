@@ -12,6 +12,13 @@ CIAO's supported `resp_pos=CENTROID` pixel-mask mode. Runtime-only directories
 use the short production-index token so CIAO's internal Unix socket remains
 below the operating-system path limit.
 
+The first invocation stopped during Python import because Astropy is absent
+from the CIAO environment. It created no scratch directory or scientific
+product. Protocol 1.0.1 therefore makes a pre-execution dependency correction:
+CIAO `dmimgcalc` writes the already-declared binary mask while propagating the
+frozen binmap WCS, and CIAO `pycrates` plus NumPy independently checks every
+output pixel. No selection, count, response or gravity setting changes.
+
 ## Why the binmap remains authoritative
 
 The V19P/V19Q manifest assigns every event to exactly one integer binmap pixel.

@@ -15,7 +15,6 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from astropy.io import fits
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
@@ -66,27 +65,49 @@ def select_rows(config: dict[str, Any], manifest: list[dict[str, str]]) -> list[
     return rows
 
 
+def exact_mask_values(values: np.ndarray, bin_id: int) -> np.ndarray:
+    """Return the disjoint binary partition represented by one frozen bin ID."""
+    return np.asarray(np.asarray(values) == int(bin_id), dtype=np.uint8)
+
+
 def write_exact_bin_mask(
     binmap_path: Path,
     bin_id: int,
     destination: Path,
+    env: dict[str, str],
+    log: Path,
 ) -> dict[str, Any]:
-    with fits.open(binmap_path, memmap=False) as hdus:
-        source = np.asarray(hdus[0].data)
-        header = hdus[0].header.copy()
-    mask = (source == int(bin_id)).astype(np.uint8)
+    source = v19p.image(binmap_path)
+    mask = exact_mask_values(source, bin_id)
     if int(mask.sum()) <= 0:
         raise RuntimeError(f"V19W2 bin {bin_id} has an empty exact mask")
     if destination.exists():
-        with fits.open(destination, memmap=False) as hdus:
-            existing = np.asarray(hdus[0].data, dtype=np.uint8)
+        existing = np.asarray(v19p.image(destination), dtype=np.uint8)
         if not np.array_equal(existing, mask):
             raise RuntimeError(f"V19W2 existing mask changed: {destination}")
         reused = True
+        step = None
     else:
         destination.parent.mkdir(parents=True, exist_ok=True)
-        temporary = destination.with_suffix(destination.suffix + ".tmp")
-        fits.PrimaryHDU(data=mask, header=header).writeto(temporary, overwrite=False)
+        temporary = destination.with_suffix(".tmp.fits")
+        step = v19w.inherited.run_step(
+            [
+                "dmimgcalc",
+                f"infile={binmap_path}",
+                "infile2=none",
+                f"outfile={temporary}",
+                f"operation=imgout=(img1=={int(bin_id)})",
+                "clobber=no",
+                "verbose=1",
+                "mode=h",
+            ],
+            log,
+            [temporary],
+            env,
+        )
+        written = np.asarray(v19p.image(temporary), dtype=np.uint8)
+        if not np.array_equal(written, mask):
+            raise RuntimeError(f"V19W2 CIAO mask differs from binmap: {temporary}")
         temporary.replace(destination)
         reused = False
     return {
@@ -95,6 +116,8 @@ def write_exact_bin_mask(
         "bytes": destination.stat().st_size,
         "selected_pixels": int(mask.sum()),
         "definition": f"frozen V19M binmap == {int(bin_id)}",
+        "writer": "CIAO dmimgcalc with input WCS propagated to output",
+        "step": step,
         "reused": reused,
     }
 
@@ -108,17 +131,19 @@ def prepare_mask_cell(
     name = v19w.cell_name(row)
     token = f"c{int(row['production_index'])}"
     binmap = v19p.region_product(context["region_row"], "binmap")
-    mask_record = write_exact_bin_mask(
-        binmap,
-        bin_id,
-        scratch / "masks" / cluster / f"bin{bin_id}.fits",
-    )
-    exact_mask = Path(mask_record["path"])
     env = v19w.inherited.isolated_environment(
         os.environ,
         scratch / "pf" / token,
         scratch / "tmp" / token,
     )
+    mask_record = write_exact_bin_mask(
+        binmap,
+        bin_id,
+        scratch / "masks" / cluster / f"bin{bin_id}.fits",
+        env,
+        scratch / "mask_logs" / token / "dmimgcalc.log",
+    )
+    exact_mask = Path(mask_record["path"])
     source_filter = (
         f"{context['science']}[ccd_id={ccd_id}]"
         f"[sky=region({context['fov']})][sky=mask({exact_mask})]"
