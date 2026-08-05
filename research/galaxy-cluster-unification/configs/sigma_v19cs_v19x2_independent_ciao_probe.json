@@ -1,0 +1,97 @@
+{
+  "protocol_version": "SIGMA-V19CS-V19X2-INDEPENDENT-CIAO-PROBE-1.0.0",
+  "status": "frozen after V19CR failed in preflight because it incorrectly required the historical V19CD response-production stage to have a terminal pass, before the CIAO probe or V19X2 rerun",
+  "purpose": "Bind the launch syntax only to the frozen V19CD environment configuration, establish current CIAO availability with an independent live probe, and then run the unchanged V19X2 and conditional V19BR source chain.",
+  "failure_parents": {
+    "v19cr_report": {
+      "path": "results/sigma_v19cr_v19x2_ciao_launch_remediation/report.json",
+      "sha256": "d396da84479e90875cd5626a85e8dfdeddb215589ab030449b52248e8256dd58",
+      "required_status": "v19x2_ciao_launch_remediation_failed_closed",
+      "required_exception_fragment": "prior_environment_contract_exact': False"
+    },
+    "v19x2_failure_report": {
+      "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/report.json",
+      "sha256": "23a393820617f3c755fb386c293423e52054606588d90ccfb86fe7a540e22372",
+      "required_status": "unified_spectral_combination_commissioning_execution_failed",
+      "required_exception": "FileNotFoundError: [Errno 2] No such file or directory: 'combine_spectra'"
+    },
+    "v19x2_config": {
+      "path": "configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+      "sha256": "60543254acdfa979b2e0ab86e346ea291e1a8b1346a13f48669a44974a42c559",
+      "required_completed_cells": 5082,
+      "required_recovery_root": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100"
+    },
+    "v19cd_environment_config": {
+      "path": "configs/sigma_v19cd_v19w5_environment_remediation.json",
+      "sha256": "21dca31645754a3ed1ed456018859ad5a26c57dde109df53260828d93856723b"
+    },
+    "v19w5_report": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+      "sha256": "9e90fcb397c80010562b8fbd441fff91a716ced4bb0ef895704ca449dca7c85f",
+      "required_status": "ccd7_hardened_unified_5082_response_archive_passed"
+    }
+  },
+  "environment": {
+    "conda_executable": "/home/henry/miniforge3/bin/conda",
+    "environment_name": "sigma-ciao-4.18",
+    "environment_prefix": "/home/henry/miniforge3/envs/sigma-ciao-4.18",
+    "launch_prefix": [
+      "/home/henry/miniforge3/bin/conda",
+      "run",
+      "--no-capture-output",
+      "-n",
+      "sigma-ciao-4.18",
+      "python"
+    ],
+    "required_executables": [
+      "combine_spectra",
+      "dmgroup"
+    ],
+    "required_python_modules": [
+      "sherpa",
+      "astropy",
+      "numpy"
+    ],
+    "require_python_and_executables_from_environment_bin": true
+  },
+  "unchanged_execution": {
+    "v19x2_runner": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+    "v19x2_runner_sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea",
+    "v19x2_output": "results/sigma_v19x2_unified_spectral_combination_commissioning",
+    "v19x2_scratch": "/home/henry/sigma-v19x2-spectral-combination/v100",
+    "permitted_preexisting_scratch_files": [
+      "ABELL2146_integrated/source_spectra.lis"
+    ],
+    "v19br_config": "configs/sigma_v19br_target_sealed_terminal_chain.json",
+    "v19br_config_sha256": "8a5205d978ab25d53b8befb11472ff420e2e8116ad06cd9c43e4d158a9d580ed",
+    "v19br_runner": "scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+    "v19br_runner_sha256": "d0f4c2f48a0a22e898fadaf3f637785df5d8cbfeb50f81164aec5e39c2c30bcc"
+  },
+  "authorization": {
+    "remove_invalid_historical_terminal_pass_requirement": true,
+    "require_independent_live_environment_probe": true,
+    "change_x2_config_runner_or_scientific_rules": false,
+    "resume_v19br_only_after_v19x2_pass": true,
+    "retry_or_tune_valid_scientific_fit_failure": false,
+    "run_v19bs_or_derive_action": false,
+    "open_lensing_halo_gravity_holdout_or_solar_optimization": false
+  },
+  "outputs": {
+    "report": "results/sigma_v19cs_v19x2_independent_ciao_probe/report.json",
+    "environment_probe_log": "results/sigma_v19cs_v19x2_independent_ciao_probe/environment_probe.log",
+    "v19x2_log": "results/sigma_v19cs_v19x2_independent_ciao_probe/v19x2_commissioning.log",
+    "v19br_log": "results/sigma_v19cs_v19x2_independent_ciao_probe/v19br_continuation.log"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19cs_v19x2_independent_ciao_probe.py",
+    "tests": "tests/test_sigma_v19cs_v19x2_independent_ciao_probe.py",
+    "reused_environment_helpers": "scripts/run_sigma_v19cr_v19x2_ciao_launch_remediation.py",
+    "reused_environment_helpers_sha256": "0268617ac2c0cca1203d0d732cc994b9b3cf68071e61c3b53633fe55a6bb9f3b"
+  },
+  "claim_boundary": [
+    "V19CS removes one false historical-success premise from the wrapper preflight and replaces it with a stricter current executable/module probe.",
+    "The V19X2 config, runner, response archive, spectra, grouping, model, fit sequence and scientific gates remain byte-identical.",
+    "The source list is the only preexisting scratch file and no combined spectrum or fit exists before this run.",
+    "No gravity theory, lensing target, action, holdout or Solar-System optimization is opened."
+  ]
+}

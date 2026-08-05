@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 215,
+    "sigma_protocols": 216,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7634,6 +7634,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "0c0704cb1f8295e0019e0c4ba893428518015ec6070d903254f295fa980c638e"
+    },
+    {
+      "config": "configs/sigma_v19cs_v19x2_independent_ciao_probe.json",
+      "protocol_version": "SIGMA-V19CS-V19X2-INDEPENDENT-CIAO-PROBE-1.0.0",
+      "status": "frozen after V19CR failed in preflight because it incorrectly required the historical V19CD response-production stage to have a terminal pass, before the CIAO probe or V19X2 rerun",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "ee08b4235f92da8225f7354a305b64c3fe6c5f9a124b2de9fd41b46905a06ce7"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",
