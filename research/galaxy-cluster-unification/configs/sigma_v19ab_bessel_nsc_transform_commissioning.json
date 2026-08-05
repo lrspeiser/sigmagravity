@@ -1,0 +1,125 @@
+{
+  "protocol_version": "SIGMA-V19AB-BESSEL-NSC-TRANSFORM-COMMISSIONING-1.0.0",
+  "status": "frozen_before_transform_fit_or_validation_scoring",
+  "purpose": "Commission a lensing-blind empirical transformation from the Bullet paper's Bessel B/R/I photometry to NSC g/r/i/z using only the 15 preregistered full-color singleton cones, without scoring any ambiguous member candidate.",
+  "parent_artifacts": [
+    {
+      "path": "configs/sigma_v19aa_member_counterpart_association.json",
+      "sha256": "bc07209be5ba4d5e66fbf1db9d113dbec4e53371607d829092da74e994ec9cf8"
+    },
+    {
+      "path": "scripts/run_sigma_v19aa_member_counterpart_association.py",
+      "sha256": "3fabf505018b2737c06402e9e50ffd4b2ab8b57363ac9a202fb2883304148b8b"
+    },
+    {
+      "path": "results/sigma_v19aa_member_counterpart_association/report.json",
+      "sha256": "2b751c1e455171b6b37b844ea22b820a3faab65ddd898672b8802b8ca94cd860"
+    },
+    {
+      "path": "data/derived/sigma_v19aa_member_counterpart_association/member_associations.csv",
+      "sha256": "107e4d82ee35774ee47b81e8e3452ada33577cfac050cce0f80c4ab35b8a6840"
+    },
+    {
+      "path": "configs/sigma_v19z_nsc_member_photometry.json",
+      "sha256": "bcb3a5d2fad63081aa9854f2ff539a5f100dffa23d42d315d17ebd4e14c93aeb"
+    },
+    {
+      "path": "results/sigma_v19z_nsc_member_photometry/provenance.json",
+      "sha256": "7ce94eba8fdbbcf6d9f2c816de353aa283d8169f66840690a858fd21982bd477"
+    },
+    {
+      "path": "data/derived/sigma_v19z_member_photometry/bullet_published_bri.csv",
+      "sha256": "396af209b9ba466f9396f7f0fcf4af1ced3d0725fffc143b07e0e0218d3c63a7"
+    }
+  ],
+  "inputs": {
+    "nsc_report": "results/sigma_v19z_nsc_member_photometry/provenance.json",
+    "bullet_bri": "data/derived/sigma_v19z_member_photometry/bullet_published_bri.csv",
+    "cluster": "BULLET",
+    "eligibility": [
+      "complete published Bessel B/R/I",
+      "exactly one unique NSC candidate in the frozen cone",
+      "finite NSC g/r/i/z with valid detection counts",
+      "not jointly flagged at proper-motion significance >=5 and class_star >=0.8"
+    ],
+    "expected_eligible_rows": 15,
+    "singleton_rows_are_provisional_anchors_not_ground_truth": true
+  },
+  "split": {
+    "algorithm": "sort by sha256(salt + object_id), take the first 10 for development and the remaining 5 for validation",
+    "salt": "SIGMA-V19AB:",
+    "development_count": 10,
+    "validation_count": 5,
+    "expected_development_ids": ["29", "78", "14", "07", "06", "37", "22", "16", "23", "24"],
+    "expected_validation_ids": ["26", "57", "66", "71", "21"]
+  },
+  "model": {
+    "input_features": [
+      "1",
+      "(B-R-2.4)/1.0",
+      "(R-I-1.1)/0.5"
+    ],
+    "feature_centers": {
+      "B_minus_R": 2.4,
+      "R_minus_I": 1.1
+    },
+    "feature_scales": {
+      "B_minus_R": 1.0,
+      "R_minus_I": 0.5
+    },
+    "output_offsets": ["g_minus_B", "r_minus_R", "i_minus_I", "z_minus_I"],
+    "fit": "independent affine regressions with scipy least_squares soft_l1 loss and fixed ridge penalty on slopes",
+    "robust_residual_scale_mag": 0.25,
+    "ridge_penalty": 0.25,
+    "predictive_scale": "max(0.15 mag, 1.4826 times the median absolute centered development residual)",
+    "predictive_scale_floor_mag": 0.15,
+    "maximum_function_evaluations": 5000,
+    "validation_retrieval": "For each validation B/R/I row, rank all five validation NSC detections by full-offset and color-only standardized residual scores. No ambiguous-member candidate is opened."
+  },
+  "validation_gates": {
+    "maximum_validation_median_absolute_error_each_offset_mag": 0.45,
+    "minimum_full_offset_top1_retrievals_out_of_5": 4,
+    "minimum_full_offset_mean_reciprocal_rank": 0.8,
+    "minimum_color_only_top1_retrievals_out_of_5": 3,
+    "minimum_color_only_mean_reciprocal_rank": 0.65,
+    "all_optimizers_must_succeed": true,
+    "exact_split_must_match": true
+  },
+  "outputs": {
+    "commissioning_sample": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+    "validation_predictions": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/validation_predictions.csv",
+    "validation_retrieval": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/validation_retrieval.csv",
+    "report": "results/sigma_v19ab_bessel_nsc_transform_commissioning/report.json"
+  },
+  "claim_boundary": [
+    "V19AB commissions a measurement transformation; it does not select any ambiguous counterpart.",
+    "The five validation singleton candidates are provisional internal checks, not external identity ground truth.",
+    "Passing authorizes a separately frozen ambiguous-candidate likelihood; it does not authorize stellar mass, mass current, lensing, halo, or gravity inference.",
+    "Failing leaves all V19AA ambiguous states unchanged and requires a synthetic-SED/filter-curve model or new source imaging."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ab_bessel_nsc_transform_commissioning.py",
+    "runner_sha256": "426e9b67acd94d7870c5a8d895d0995015838bad99996845a266bf9d51c1972b"
+  },
+  "authorization": {
+    "fit_development_singletons": true,
+    "score_validation_singletons": true,
+    "score_ambiguous_candidates": false,
+    "select_counterparts": false,
+    "infer_stellar_mass": false,
+    "construct_mass_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "aggregate_singleton_inventory_known_pre_freeze": true,
+    "some_raw_singleton_photometry_inspected_pre_freeze": true,
+    "transform_fitted_pre_freeze": false,
+    "validation_scores_computed_pre_freeze": false,
+    "ambiguous_candidate_photometry_scored_pre_freeze": false,
+    "counterpart_selected_pre_freeze": false,
+    "lensing_target_opened_pre_freeze": false,
+    "gravity_result_opened_pre_freeze": false
+  }
+}
