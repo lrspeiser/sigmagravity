@@ -1,0 +1,26 @@
+{
+  "audit_version": "SIGMA-V19BA-REPRODUCIBILITY-AUDIT-1.0.0",
+  "protocol_version": "SIGMA-V19BA-COLLISIONLESS-CURRENT-MOMENTS-1.0.2",
+  "config_sha256": "adeb7846207b1e930a8a306e208fa9a49c3a66c81aa3846fb50ba871e53a7909",
+  "runner_sha256": "6b7d168748bb5626fdecdf684c074e5af75d346626a2e09084707bad95719a23",
+  "method": "Run the unchanged frozen runner twice and compare SHA-256 hashes of every scientific output. The generated report is excluded because it contains an intentional run timestamp.",
+  "runs_compared": 2,
+  "all_scientific_outputs_byte_identical": true,
+  "outputs": {
+    "moment_maps": {
+      "path": "data/derived/sigma_v19ba_collisionless_current_moments/collisionless_current_moments.fits",
+      "sha256_run_1": "33b9059439b2db14c1ca0dafc79d5554f60b50c06ed2704dc3eb1d547aa09ede",
+      "sha256_run_2": "33b9059439b2db14c1ca0dafc79d5554f60b50c06ed2704dc3eb1d547aa09ede"
+    },
+    "sample_global_moments": {
+      "path": "data/derived/sigma_v19ba_collisionless_current_moments/sample_global_moments.csv",
+      "sha256_run_1": "d2412b5b661cb142186ad60794b415ccc09ead943b96ddea8140a21e27910f78",
+      "sha256_run_2": "d2412b5b661cb142186ad60794b415ccc09ead943b96ddea8140a21e27910f78"
+    },
+    "figure": {
+      "path": "results/sigma_v19ba_collisionless_current_moments/collisionless_current_moments.png",
+      "sha256_run_1": "8f6c179d3ad2056cc699d83290e41e74883ae934b66243f23b98f733f8b9fee4",
+      "sha256_run_2": "8f6c179d3ad2056cc699d83290e41e74883ae934b66243f23b98f733f8b9fee4"
+    }
+  }
+}

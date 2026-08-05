@@ -1,0 +1,112 @@
+{
+  "absolute_mass_inferred": false,
+  "claim_boundary": [
+    "V19BA measures projected luminosity, line-of-sight current, and line-of-sight second-moment morphology; it does not detect a new gravitational field.",
+    "The second moment is a collisionless luminosity-weighted stress proxy, not gas pressure, total pressure, absolute energy density, or a three-dimensional stress tensor.",
+    "A future long-wave covariance requires a separately frozen propagation operator and universal scale; V19BA deliberately supplies unsmoothed sufficient moments only.",
+    "Member 66 is retained on the full grid even though the V19H X-ray analysis mask does not cover its location.",
+    "No lensing coordinates, inferred dark-matter maps, halo fits, gravity residuals, or Sigma constants enter this protocol."
+  ],
+  "config": "configs/sigma_v19ba_collisionless_current_moments.json",
+  "config_sha256": "adeb7846207b1e930a8a306e208fa9a49c3a66c81aa3846fb50ba871e53a7909",
+  "decision": "passed",
+  "ensemble": {
+    "draws": 8192,
+    "maximum_per_draw_relative_deposition_error": 2.6739112566685843e-15,
+    "maximum_wcs_roundtrip_error_arcsec": 1.8133784214540282e-10,
+    "members_per_draw": 72,
+    "minimum_global_beta_variance": 1.0382464567526567e-05,
+    "minimum_normalized_pixel_cauchy_schwarz_margin": -3.308638326746684e-16,
+    "minimum_second_moment_pixel": 1.7789111635395562e-17,
+    "rows": 589824
+  },
+  "gate_results": {
+    "all_parent_hashes_exact": true,
+    "all_positions_have_four_in_grid_neighbors": true,
+    "deposition_conservation": true,
+    "exact_draw_member_and_row_counts": true,
+    "exact_outside_analysis_mask_members": true,
+    "global_beta_variance_nonnegative": true,
+    "no_absolute_mass_or_transverse_velocity": true,
+    "no_lensing_halo_or_gravity_payload": true,
+    "no_smoothing_or_response_parameter": true,
+    "pixel_cauchy_schwarz": true,
+    "second_moment_nonnegative": true,
+    "wcs_roundtrip": true
+  },
+  "generated_utc": "2026-08-05T12:06:43.285752+00:00",
+  "global_moment_diagnostics": {
+    "analysis_mask_luminosity_fraction_maximum": 0.9835901448405074,
+    "analysis_mask_luminosity_fraction_median": 0.9835901448405062,
+    "analysis_mask_luminosity_fraction_minimum": 0.9835901448405051,
+    "luminosity_weighted_rms_speed_km_s_mean": 998.2375044334357,
+    "luminosity_weighted_rms_speed_km_s_standard_deviation": 8.988532821809535,
+    "positive_second_moment_mean": 0.0055756405543581165,
+    "positive_second_moment_standard_deviation": 0.00010016242776181937,
+    "signed_current_mean": -0.0385483531900767,
+    "signed_current_standard_deviation": 0.044501666273200124,
+    "total_relative_i_luminosity": 502.22144376223537
+  },
+  "gravity_formula_or_parameter_changed": false,
+  "grid": {
+    "all_rows_have_four_neighbors": true,
+    "outside_analysis_mask_member_ids": [
+      "66"
+    ],
+    "pixel_scale_arcsec": 0.9839999999999881,
+    "shape_yx": [
+      626,
+      626
+    ]
+  },
+  "input_hashes": {
+    "v19az_config": "4dd175be6d04f25bdd9413155548dfbcab2884c162cf2dc2ff4c37c7d34528d0",
+    "v19az_ensemble": "28f292af9afc4e8161bc5f0fce48d30dcf5c9c27c4412f6cba02c6fbb19bdc47",
+    "v19az_report": "b059d6f7117c49640377b84053bef651f21686d405193405126497429ef381e0",
+    "v19h_bullet_analysis_mask": "874ffe6c028ab9340ff467811da79073ee6af2d00fc829fd6b89b65ba28717c4",
+    "v19h_config": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+    "v19h_source_map_report": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af"
+  },
+  "lensing_or_halo_payload_opened": false,
+  "outputs": {
+    "figure": {
+      "bytes": 177150,
+      "path": "results/sigma_v19ba_collisionless_current_moments/collisionless_current_moments.png",
+      "sha256": "8f6c179d3ad2056cc699d83290e41e74883ae934b66243f23b98f733f8b9fee4"
+    },
+    "moment_maps": {
+      "bytes": 28676160,
+      "path": "data/derived/sigma_v19ba_collisionless_current_moments/collisionless_current_moments.fits",
+      "sha256": "33b9059439b2db14c1ca0dafc79d5554f60b50c06ed2704dc3eb1d547aa09ede"
+    },
+    "sample_global_moments": {
+      "bytes": 1630544,
+      "path": "data/derived/sigma_v19ba_collisionless_current_moments/sample_global_moments.csv",
+      "sha256": "d2412b5b661cb142186ad60794b415ccc09ead943b96ddea8140a21e27910f78"
+    }
+  },
+  "protocol_version": "SIGMA-V19BA-COLLISIONLESS-CURRENT-MOMENTS-1.0.2",
+  "smoothing_length_or_response_amplitude_selected": false,
+  "target_blind_morphology": {
+    "luminosity_centroid_pixel_xy": [
+      296.17075682251993,
+      320.2612596614537
+    ],
+    "negative_current_centroid_pixel_xy": [
+      311.2077494608991,
+      343.1413551384185
+    ],
+    "opposite_current_centroid_separation_arcsec": 51.633771918236455,
+    "pearson_luminosity_vs_second_moment_nonzero_pixels": 0.5996217934026186,
+    "positive_current_centroid_pixel_xy": [
+      275.59619733188487,
+      304.6021629155541
+    ],
+    "second_moment_centroid_pixel_xy": [
+      295.4088810513561,
+      333.04642859964144
+    ],
+    "second_moment_to_luminosity_centroid_offset_arcsec": 12.602923548984531
+  },
+  "transverse_velocity_imputed": false
+}

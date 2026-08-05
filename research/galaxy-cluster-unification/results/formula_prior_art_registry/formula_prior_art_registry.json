@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 160,
-    "project_formula_addenda": 14,
-    "sigma_formula_fragments": 138,
+    "sigma_protocols": 161,
+    "project_formula_addenda": 16,
+    "sigma_formula_fragments": 140,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -23,7 +23,7 @@
   "source_hashes": {
     "formula_scorecard_sha256": "8bbe6e783224fe940f5ba454e19eee3bea5ae332d2d172da5513c14c5820800b",
     "published_registry_sha256": "980c61239929f2ed8b885485d72ea0f78c2783b321e364b041e6e3b241494a12",
-    "project_formula_addenda_sha256": "d93fc6c484259faeb32ddbed1fdb35b0d85c31594e053befd57bc7dc18fb5fc5"
+    "project_formula_addenda_sha256": "c6259d9fbfbc4afcf8fbba1f22d49d48286188f40d7bc84b1124cb96f00b7f4a"
   },
   "published_families": [
     {
@@ -7006,6 +7006,43 @@
         "NEWTON-POISSON"
       ],
       "sha256": "bb0e6fdb1d5fc60947575964a741c9b08918635005abaeb51b418f2bfa5066b4"
+    },
+    {
+      "config": "configs/sigma_v19ba_collisionless_current_moments.json",
+      "protocol_version": "SIGMA-V19BA-COLLISIONLESS-CURRENT-MOMENTS-1.0.2",
+      "status": "frozen_before_rasterizing_any_member_ensemble_draw_or_computing_any_current_moment",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "addendum:SIGMA-LONG-WAVE-METRIC-MODE",
+          "formula": "delta g_mn=A_Sigma e_mn cos(2 pi s/lambda_Sigma+phi)",
+          "name": "Literal long-wavelength metric mode",
+          "kind": "exploratory metric perturbation, not a sourced theory",
+          "status": "recorded hypothesis; wavelength longer than a star system suppresses intra-system variation, but unexplained phase, polarization, and source data prevent use as the root equation",
+          "evidence_doc": "docs/FORMULA_MODIFICATION_PHOTON_AND_FRAME_DRAGGING_AUDIT.md",
+          "provenance": "project_formula_addenda.json",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "addendum:SIGMA-LONG-WAVE-SOURCED-RESPONSE",
+          "formula": "(1-L_Sigma^2 Box) X_mn=S_mn[T,j,Pi], with lambda_Sigma approximately 2 pi L_Sigma",
+          "name": "Sourced long-wavelength tensor response",
+          "kind": "exploratory covariant response equation requiring an action and source closure",
+          "status": "active source-state lane; the standard isotropic point-source reduction overlaps Yukawa/STVG-MOG and the exact linear isotropic wavelength-only realization is closed, while directional collisionless-current sourcing remains untested",
+          "evidence_doc": "docs/FORMULA_MODIFICATION_PHOTON_AND_FRAME_DRAGGING_AUDIT.md",
+          "provenance": "project_formula_addenda.json",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 2,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "adeb7846207b1e930a8a306e208fa9a49c3a66c81aa3846fb50ba871e53a7909"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

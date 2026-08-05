@@ -127,6 +127,24 @@
       "kind": "source postulate and inverse diagnostic, not yet an action",
       "evidence_doc": "docs/SIGMA_V16_BOUNDARY_FALSIFICATION_AND_V17_DYNAMICAL_GATE.md",
       "status": "current frozen data gate; no theory or novelty claim"
+    },
+    {
+      "id": "SIGMA-LONG-WAVE-METRIC-MODE",
+      "config": "configs/sigma_v19ba_collisionless_current_moments.json",
+      "name": "Literal long-wavelength metric mode",
+      "formula": "delta g_mn=A_Sigma e_mn cos(2 pi s/lambda_Sigma+phi)",
+      "kind": "exploratory metric perturbation, not a sourced theory",
+      "evidence_doc": "docs/FORMULA_MODIFICATION_PHOTON_AND_FRAME_DRAGGING_AUDIT.md",
+      "status": "recorded hypothesis; wavelength longer than a star system suppresses intra-system variation, but unexplained phase, polarization, and source data prevent use as the root equation"
+    },
+    {
+      "id": "SIGMA-LONG-WAVE-SOURCED-RESPONSE",
+      "config": "configs/sigma_v19ba_collisionless_current_moments.json",
+      "name": "Sourced long-wavelength tensor response",
+      "formula": "(1-L_Sigma^2 Box) X_mn=S_mn[T,j,Pi], with lambda_Sigma approximately 2 pi L_Sigma",
+      "kind": "exploratory covariant response equation requiring an action and source closure",
+      "evidence_doc": "docs/FORMULA_MODIFICATION_PHOTON_AND_FRAME_DRAGGING_AUDIT.md",
+      "status": "active source-state lane; the standard isotropic point-source reduction overlaps Yukawa/STVG-MOG and the exact linear isotropic wavelength-only realization is closed, while directional collisionless-current sourcing remains untested"
     }
   ]
 }

@@ -4,7 +4,7 @@ Registry version: `FORMULA-PRIOR-ART-REGISTRY-1.1.0`. Published-literature cutof
 
 ## What this file guarantees
 
-This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **160 Sigma protocol files** and their **138 explicit formula/action fragments** (including **14** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
+This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **161 Sigma protocol files** and their **140 explicit formula/action fragments** (including **16** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
 
 It does **not** claim to contain every equation ever published in gravitation. It is a reproducible scientific prior-art screen of the families that overlap mechanisms we have actually explored. It is not a legal novelty or patent opinion.
 
@@ -327,6 +327,7 @@ This appendix closes a gap in the older scorecard: later action-health and sourc
 | `configs/sigma_v19ay_signed_flux_likelihood_validation.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19az_probabilistic_member_current_ensemble.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19b_replacement_cluster_screen.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ba_collisionless_current_moments.json` | formula_or_action_protocol | `addendum:SIGMA-LONG-WAVE-METRIC-MODE`: `delta g_mn=A_Sigma e_mn cos(2 pi s/lambda_Sigma+phi)`<br>`addendum:SIGMA-LONG-WAVE-SOURCED-RESPONSE`: `(1-L_Sigma^2 Box) X_mn=S_mn[T,j,Pi], with lambda_Sigma approximately 2 pi L_Sigma` | NEWTON-POISSON |
 | `configs/sigma_v19c_source_archive_acquisition.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19d_member_catalog_extraction.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19e_chandra_acquisition.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
@@ -399,6 +400,6 @@ Source hashes:
 
 - formula scorecard: `8bbe6e783224fe940f5ba454e19eee3bea5ae332d2d172da5513c14c5820800b`
 - published registry: `980c61239929f2ed8b885485d72ea0f78c2783b321e364b041e6e3b241494a12`
-- project formula addenda: `d93fc6c484259faeb32ddbed1fdb35b0d85c31594e053befd57bc7dc18fb5fc5`
+- project formula addenda: `c6259d9fbfbc4afcf8fbba1f22d49d48286188f40d7bc84b1124cb96f00b7f4a`
 
 Machine-readable output: `results/formula_prior_art_registry/formula_prior_art_registry.json` and `formula_prior_art_registry.csv`.
