@@ -13,6 +13,13 @@ blocker without freezing or running V19X2.  It consumes the V19W4 unified index
 and resolves each cell through its explicit `cell_directory`, whether the row
 is labeled `base_v19w` or `v19w4_recovery`.
 
+An unfrozen orchestration scaffold now carries those validated records into
+the unchanged V19X aperture membership, `combine_spectra`, grouping,
+cluster-wide abundance fit and selected-region temperature fit sequence.  Its
+validated-cell index preserves the source archive and absolute cell directory,
+and the final commissioning authorization remains conjunctive: one failed
+integrated or regional fit blocks all 494 production regions.
+
 ## Independent checks
 
 The adapter does not merely trust the V19W4 report.  Before any spectrum can be
@@ -38,6 +45,11 @@ or runner is frozen because the terminal V19W4 report and unified index do not
 yet exist.  No spectrum is combined, no temperature is fit, no source-state
 quantity is derived, and no lensing, halo or gravity payload is opened.
 
+The scaffold itself refuses any configuration whose freeze state is not
+`frozen_after_terminal_v19w4_pass`, and it requires exact hashes for its future
+configuration, runner and adapter.  It therefore cannot become executable by
+mistaking the current draft for an authorized protocol.
+
 After V19W exits and V19W4 passes, the successor configuration will hash:
 
 - the terminal V19W4 config, runner, report and unified index;
@@ -52,5 +64,5 @@ selected-region commissioning fits.
 ## Reproduction
 
 ```powershell
-python -m pytest tests/test_sigma_v19x2_unified_response_adapter.py -q
+python -m pytest tests/test_sigma_v19x2_unified_response_adapter.py tests/test_sigma_v19x2_unified_spectral_combination_scaffold.py -q
 ```
