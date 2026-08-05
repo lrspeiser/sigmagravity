@@ -1,0 +1,87 @@
+{
+  "all_subpixel_astrometry_gates_pass": false,
+  "claim_boundary": [
+    "V19AK tests a local quadratic peak estimator on already frozen foreground-star associations with unchanged evidence gates.",
+    "A pass establishes astrometric adequacy only; it is not a photometric, baryonic-map, lensing or gravity result.",
+    "A failure ends this centroid-estimator branch rather than authorizing a looser acceptance gate."
+  ],
+  "diagnostic_path": "results/sigma_v19ak_fors1_quadratic_astrometry/subpixel_astrometric_residuals.png",
+  "diagnostic_sha256": "0ca5eafadffdad3f93a23f19e82b2e50feb0b875102ac95143a93f68da2bf033",
+  "failures": [
+    {
+      "error": "RuntimeError: only 29 accepted centroids",
+      "filter": "I_BESS"
+    },
+    {
+      "error": "RuntimeError: only 27 accepted centroids",
+      "filter": "R_BESS"
+    }
+  ],
+  "filters": {
+    "B_BESS": {
+      "gates": {
+        "fitted_median_residual": true,
+        "fitted_p95_residual": true,
+        "loo_median_residual": true,
+        "loo_p95_residual": true,
+        "loo_p95_residual_arcsec": true,
+        "minimum_accepted_centroids": true,
+        "r_improves_v19ah": true
+      },
+      "metrics": {
+        "accepted_centroids": 35,
+        "fitted_median_residual_pixel": 0.4422707265447483,
+        "fitted_p95_residual_pixel": 2.2402639951541463,
+        "input_v19ah_matches": 37,
+        "loo_median_residual_pixel": 0.46914004300586404,
+        "loo_p95_residual_arcsec": 0.5651956924002602,
+        "loo_p95_residual_pixel": 2.832042431255105,
+        "median_centroid_shift_pixel": 0.4040147979282124,
+        "median_ellipticity": 0.06436943654213656,
+        "median_fwhm_pixel": 2.8582558809790113,
+        "p95_centroid_shift_pixel": 0.7552526689658545,
+        "pixel_scale_arcsec": 0.19957176,
+        "rejected_centroids": 2,
+        "rejection_reasons": {
+          "centroid_shift": 1,
+          "nonconcave_peak": 1
+        }
+      },
+      "refined_matches_path": "results/sigma_v19ak_fors1_quadratic_astrometry/refined_matches_B_BESS.csv",
+      "refined_matches_sha256": "40cadfad991a4e7782a75a6abc85d96b6f98be8375b9fd84bdd47fd4ba0079a5",
+      "wcs_path": "results/sigma_v19ak_fors1_quadratic_astrometry/wcs_B_BESS.json",
+      "wcs_sha256": "3295e7ef2f7c6e0fc2c8daa84c8d51bc2dcb7383fb63529b4f7bb2f746c58569"
+    }
+  },
+  "generated_utc": "2026-08-05T09:17:27.036003+00:00",
+  "geometric_center_separation_arcsec": {},
+  "global_gates": {
+    "all_filter_gates": true,
+    "exact_filter_solutions": false,
+    "geometric_center_consistency": false,
+    "minimum_shared_accepted_gaia_ids": false,
+    "no_detection_rematching_or_prohibited_access": true
+  },
+  "gravity_formula_or_parameter_changed": false,
+  "input_hashes": {
+    "config": "46596fb6e77e9fa27d8accc64645601d3508433c197e2a17376b47ea1012c90c",
+    "frozen_base_runner": "aab62fb001cc8e5938d9a880467dc2c6f85356ad8811c193925ccedcd2a80f60",
+    "results/sigma_v19ag_fors1_role_calibration/calibrated_B_BESS_OFORS.1998-12-14T06_05_25.298.fits.gz": "5b8bb3863b0386a0de3b63617e3fabfb39d60136f44517b34501b9e7331e2343",
+    "results/sigma_v19ag_fors1_role_calibration/calibrated_I_BESS_OFORS.1998-12-14T05_54_16.814.fits.gz": "4d26f11531d7eb112d0229dcb735e72e3c7d1ebbc305f2d67814a8a7e92df677",
+    "results/sigma_v19ag_fors1_role_calibration/calibrated_R_BESS_OFORS.1998-12-14T05_44_56.445.fits.gz": "fa0ec4c8ae32030a2b66071df9dd328f373b51e8832cb05edec0cfa9e378e764",
+    "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_B_BESS.csv": "3b4e46f135af5e8319529eea2b813a7627c6b19afeaede658ebff78641a010f3",
+    "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_I_BESS.csv": "e52ad659ad750f3a4b5e79536100217ae1abdb9a4bbeb085f485ecfbe674c162",
+    "results/sigma_v19ah_fors1_gaia_astrometry/matched_stars_R_BESS.csv": "6347c67997373789c51358b07dc6f1c0ed0e747d37c61e6e0d880471d8a13589",
+    "results/sigma_v19ah_fors1_gaia_astrometry/report.json": "c850a9d412295980cb5b735b66d49c98512235854dc9ec4c418d1beb0424f1a1",
+    "results/sigma_v19aj_fors1_core_astrometry/report.json": "8061d7ca76b7708aa928215f16bc15d652db2a4fd991c0a4a37cd9609c55502d",
+    "runner": "f4887ccd7ae3d888e6465b24eef9ab4b854f1c394eb36d93f7125cb64341db69"
+  },
+  "lensing_or_halo_payload_opened": false,
+  "member_or_candidate_coordinate_or_cutout_opened": false,
+  "photometry_or_deblending_fitted": false,
+  "report_version": "SIGMA-V19AK-FORS1-QUADRATIC-ASTROMETRY-1.0.0",
+  "shared_accepted_gaia_ids_all_filters": 0,
+  "source_detection_or_rematching_run": false,
+  "status": "failed_subpixel_astrometry",
+  "stellar_mass_or_current_inferred": false
+}
