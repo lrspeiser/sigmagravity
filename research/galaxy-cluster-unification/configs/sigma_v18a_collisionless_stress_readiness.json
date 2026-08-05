@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.0",
-  "status": "evidence audit fixed after locating the public AS295 catalogs and reading their aggregate sample sizes; no collisionless-stress feature, lensing target, or gravity score is opened",
+  "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.1",
+  "status": "evidence audit updated after locating and querying the public SPT and ACT spectroscopy releases; no collisionless-stress feature, lensing target, or gravity score is opened",
   "purpose": "Determine whether the public Ruel 2014 and Bayliss 2016 AS295 spectroscopy supplies an independent, deduplicated sample large enough to satisfy the already-frozen matched v17 stage-B collisionless-stress gate.",
   "parent_gate": "configs/sigma_v17_dynamical_stress_data_gate.json",
   "cluster_identity": {
@@ -33,6 +33,25 @@
       "raw_path": "data/raw/sigma_v18a_collisionless_stress/AS295/bayliss2016_table2.tsv"
     }
   },
+  "coverage_inputs": {
+    "sifon_2013_cluster_exact_query": {
+      "catalog": "J/ApJ/772/25/table1",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FApJ%2F772%2F25%2Ftable1&ACT-CL=J0245-5302&-out.max=unlimited",
+      "raw_path": "data/raw/sigma_v18a_collisionless_stress/AS295/sifon2013_table1_as295_query.tsv"
+    },
+    "sifon_2013_member_exact_query": {
+      "catalog": "J/ApJ/772/25/table8",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FApJ%2F772%2F25%2Ftable8&ACT-CL=J0245-5302&-out.max=unlimited",
+      "raw_path": "data/raw/sigma_v18a_collisionless_stress/AS295/sifon2013_table8_as295_query.tsv"
+    },
+    "sifon_2016_cone_query": {
+      "catalog": "J/MNRAS/461/248/tableb1",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FMNRAS%2F461%2F248%2Ftableb1&-c=41.3735833333%20-53.037325&-c.rd=0.15&-out.max=unlimited",
+      "raw_path": "data/raw/sigma_v18a_collisionless_stress/AS295/sifon2016_tableb1_as295_0p15deg_query.tsv",
+      "cone_radius_deg": 0.15,
+      "interpretation": "Nine arcmin exceeds the 1.8-Mpc stage-B aperture at the frozen AS295 angular scale."
+    }
+  },
   "audit_rules": {
     "cluster_name_must_equal": "J0245-5302",
     "catalog_crossmatch_radius_arcsec": 1.0,
@@ -48,7 +67,8 @@
   "known_before_this_file_was_written": [
     "Ruel table 4 reports N=30 for AS295.",
     "Bayliss table 2 reports 38 spectra and 29 members for AS295.",
-    "An exploratory coordinate comparison indicated that the two object tables overlap almost completely."
+    "An exploratory coordinate comparison indicated that the two object tables overlap almost completely.",
+    "Exploratory exact-name and cone queries indicated no AS295 coverage in the Sifon 2013 or 2016 public object tables."
   ],
   "decision_rule": [
     "Stage B remains prohibited unless the deduplicated AS295 sample has at least 50 secure spectroscopic members and every other frozen stage-B prerequisite is met for both spent clusters.",

@@ -6460,15 +6460,15 @@
     },
     {
       "config": "configs/sigma_v18a_collisionless_stress_readiness.json",
-      "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.0",
-      "status": "evidence audit fixed after locating the public AS295 catalogs and reading their aggregate sample sizes; no collisionless-stress feature, lensing target, or gravity score is opened",
+      "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.1",
+      "status": "evidence audit updated after locating and querying the public SPT and ACT spectroscopy releases; no collisionless-stress feature, lensing target, or gravity score is opened",
       "role": "gate_or_data_protocol_no_new_formula_fragment",
       "formula_fragments": [],
       "formula_fragment_count": 0,
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "a5d96c26c758079c2a6c37c81c5cc4f2ac506cdc8b02e804bd686dd39e87feec"
+      "sha256": "4bcce6f461e70907f1b3aabdfee18a95dcc3d03b0fab99b14d8edc32f413b432"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

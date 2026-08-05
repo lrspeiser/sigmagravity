@@ -66,6 +66,10 @@ def test_report_proves_public_samples_are_duplicates_and_gate_fails() -> None:
     assert report["deduplication"]["member_projected_aperture_kpc"] == 1800.0
     assert report["frozen_member_requirement"] == 50
     assert report["member_shortfall"] == 20
+    assert all(
+        item["matching_rows"] == 0
+        for item in report["independent_act_catalog_coverage"].values()
+    )
     assert report["stage_b_source_construction_authorized"] is False
     assert report["formula_or_kernel_selection_authorized"] is False
     assert report["lensing_target_opened"] is False
@@ -76,5 +80,6 @@ def test_report_hashes_all_inputs() -> None:
     report = json.loads(REPORT.read_text(encoding="utf-8"))
     assert report["input_hashes"]["config"] == digest(CONFIG)
     assert report["input_hashes"]["parent_gate"] == digest(ROOT / config["parent_gate"])
-    for name, source in config["public_inputs"].items():
-        assert report["input_hashes"][name] == digest(ROOT / source["raw_path"])
+    for group in ("public_inputs", "coverage_inputs"):
+        for name, source in config[group].items():
+            assert report["input_hashes"][name] == digest(ROOT / source["raw_path"])

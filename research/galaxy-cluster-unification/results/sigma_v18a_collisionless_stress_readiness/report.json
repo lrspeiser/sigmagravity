@@ -335,18 +335,35 @@
   },
   "formula_or_kernel_selection_authorized": false,
   "frozen_member_requirement": 50,
-  "generated_utc": "2026-08-05T00:07:52.922314+00:00",
+  "generated_utc": "2026-08-05T00:19:24.310446+00:00",
+  "independent_act_catalog_coverage": {
+    "sifon_2013_cluster_exact_query": {
+      "catalog": "J/ApJ/772/25/table1",
+      "matching_rows": 0
+    },
+    "sifon_2013_member_exact_query": {
+      "catalog": "J/ApJ/772/25/table8",
+      "matching_rows": 0
+    },
+    "sifon_2016_cone_query": {
+      "catalog": "J/MNRAS/461/248/tableb1",
+      "matching_rows": 0
+    }
+  },
   "input_hashes": {
     "bayliss_2016_galaxies": "852fe1f5868e13ca85fa3d3a744568c6c0c2ae1686ee2f632e75ad73a96e65fa",
     "bayliss_2016_summary": "4caca45cbd2c6225a7aacac2de97a941c2f1f73af461a151fed849cbbb5b21d1",
-    "config": "a5d96c26c758079c2a6c37c81c5cc4f2ac506cdc8b02e804bd686dd39e87feec",
+    "config": "4bcce6f461e70907f1b3aabdfee18a95dcc3d03b0fab99b14d8edc32f413b432",
     "parent_gate": "c2705e1078711ba50c10dc9e5d1f2ff67d45aeccb8eb0787b7ae016bfc0a2417",
     "ruel_2014_galaxies": "18099ed701b205f6fff941a7b8d208c96a6bd8ac95c3e2b80cc0bc34dabde6a1",
-    "ruel_2014_summary": "26ec1dd4bd646fa3540daf3b138ca75354b626b16b3ba24bfad47d301361ee0d"
+    "ruel_2014_summary": "26ec1dd4bd646fa3540daf3b138ca75354b626b16b3ba24bfad47d301361ee0d",
+    "sifon_2013_cluster_exact_query": "0ae6e953fa23cdf70e9ce27e682791e445117e612faffb4f0161b45b9067485e",
+    "sifon_2013_member_exact_query": "2d4866c2e2f1e4ab1c172bcfbe2dec15cce8fd19effa25c7de0dfb03ca595303",
+    "sifon_2016_cone_query": "627d4535620c71b12692aa9419fe37e0bdd99b1d61d2cb57651e7deaf9088fa8"
   },
   "lensing_target_opened": false,
   "member_shortfall": 20,
-  "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.0",
+  "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.1",
   "stage_b_prerequisites": {
     "declared_redshift_quality_selection": true,
     "minimum_secure_members_inside_1_8_Mpc": false,

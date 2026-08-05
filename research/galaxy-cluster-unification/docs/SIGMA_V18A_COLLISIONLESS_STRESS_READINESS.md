@@ -26,6 +26,14 @@ The raw VizieR query responses are stored and hashed under
 `scripts/audit_sigma_v18a_collisionless_stress_readiness.py`; its authoritative
 result is `results/sigma_v18a_collisionless_stress_readiness/report.json`.
 
+The obvious independent ACT releases do not fill the gap. An exact
+`J0245-5302` query returns zero rows from both the Sifon et al. (2013) cluster
+table and its 961-member object table. A 0.15-degree (9-arcmin) cone around
+AS295 likewise returns zero rows from the 9,203-object Sifon et al. (2016)
+catalog. That cone is wider than the frozen 1.8-Mpc aperture. These negative
+query products are retained alongside the SPT tables so catalog coverage can
+be rechecked if VizieR changes.
+
 ## What this changes
 
 It closes a data-accounting loophole. The two citations used by later papers
@@ -44,7 +52,8 @@ keep the following boundaries:
 - do not open any holdout or interpret catalog readiness as theory evidence.
 
 If v17E thermal stress fails, the defensible next options are to locate a truly
-independent AS295 velocity release that supplies at least 20 new secure members,
+independent AS295 velocity release beyond the checked SPT/ACT catalogs that
+supplies at least 20 new secure members,
 freeze a different matched spent pair before constructing its stress field, or
 move to the materially different causal-state branch already allowed by v18.
 

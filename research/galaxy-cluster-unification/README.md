@@ -2128,5 +2128,6 @@ The declared collisionless-stress fallback is not yet data-ready. Ruel (2014)
 and Bayliss (2016) contain almost exactly the same AS295 spectra: 38 objects
 cross-match one-to-one, leaving 39 unique spectra and 30 fixed-window members.
 That is 20 below the frozen 50-member minimum, so the code prohibits a
-PLCKG287-only selection or a lowered threshold. See
+PLCKG287-only selection or a lowered threshold. Exact Sifon 2013 queries and a
+9-arcmin Sifon 2016 cone provide no additional AS295 spectra. See
 [`docs/SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md`](docs/SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md).

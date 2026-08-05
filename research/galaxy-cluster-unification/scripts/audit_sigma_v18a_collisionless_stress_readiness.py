@@ -42,7 +42,8 @@ def fetch(url: str) -> bytes:
 
 def acquire_inputs(config: dict[str, Any], refresh: bool) -> dict[str, Path]:
     paths: dict[str, Path] = {}
-    for name, source in config["public_inputs"].items():
+    sources = {**config["public_inputs"], **config["coverage_inputs"]}
+    for name, source in sources.items():
         path = ROOT / source["raw_path"]
         path.parent.mkdir(parents=True, exist_ok=True)
         if refresh or not path.is_file():
@@ -54,14 +55,30 @@ def acquire_inputs(config: dict[str, Any], refresh: bool) -> dict[str, Path]:
     return paths
 
 
+def noncomment_lines(path: Path) -> list[str]:
+    return [
+        line
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line and not line.startswith("#")
+    ]
+
+
 def parse_vizier_tsv(path: Path) -> list[dict[str, str]]:
-    text = path.read_text(encoding="utf-8")
-    lines = [line for line in text.splitlines() if line and not line.startswith("#")]
+    lines = noncomment_lines(path)
     if len(lines) < 4:
         raise RuntimeError(f"no tabular data in {path}")
     header = lines[0]
     rows = list(csv.DictReader(io.StringIO("\n".join([header, *lines[3:]])), delimiter="\t"))
     return [{key: value.strip() for key, value in row.items()} for row in rows]
+
+
+def vizier_row_count(path: Path) -> int:
+    lines = noncomment_lines(path)
+    if not lines:
+        return 0
+    if len(lines) < 3:
+        raise RuntimeError(f"malformed VizieR table in {path}")
+    return len(lines) - 3
 
 
 def angular_separation_arcsec(a: dict[str, str], b: dict[str, str]) -> float:
@@ -205,6 +222,15 @@ def run(config_path: Path, output: Path, refresh: bool) -> dict[str, Any]:
         "universal_spatial_kernel_and_membership_rule": False,
     }
     stage_b_authorized = all(prerequisites.values())
+    coverage = {
+        name: {
+            "catalog": config["coverage_inputs"][name]["catalog"],
+            "matching_rows": vizier_row_count(paths[name]),
+        }
+        for name in config["coverage_inputs"]
+    }
+    if any(item["matching_rows"] != 0 for item in coverage.values()):
+        raise RuntimeError("an ACT coverage query now contains rows; re-audit before use")
     if stage_b_authorized:
         decision = (
             "AS295 spectroscopy is source-ready; stage B still requires the unchanged "
@@ -238,6 +264,7 @@ def run(config_path: Path, output: Path, refresh: bool) -> dict[str, Any]:
                 "fixed_velocity_window_member_count": len(bayliss_members),
             },
         },
+        "independent_act_catalog_coverage": coverage,
         "deduplication": {
             "radius_arcsec": radius,
             "member_projected_aperture_kpc": aperture_kpc,
@@ -275,7 +302,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--refresh",
         action="store_true",
-        help="redownload the four public VizieR query products before auditing",
+        help="redownload all public VizieR query products before auditing",
     )
     return parser.parse_args()
 

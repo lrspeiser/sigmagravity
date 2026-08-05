@@ -1883,5 +1883,7 @@ Bayliss (2016) contains 38 spectra and reports 29. All 38 Bayliss spectra match
 Ruel within the frozen 1-arcsec radius, so the union contains 39 spectra and 30
 fixed-window members rather than an additive 77 spectra or 59 members. The
 frozen 50-member stage-B gate therefore remains closed by a 20-member shortfall;
-the threshold is not lowered and PLCKG287 is not analyzed alone. See
+the threshold is not lowered and PLCKG287 is not analyzed alone. Exact Sifon
+2013 cluster/member queries and a 9-arcmin Sifon 2016 cone return no AS295 rows,
+so the obvious independent ACT releases do not close the gap. See
 [`SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md`](SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md).
