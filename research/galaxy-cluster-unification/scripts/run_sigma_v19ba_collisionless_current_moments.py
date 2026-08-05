@@ -504,6 +504,7 @@ def run(config_path: Path) -> dict[str, Any]:
         "no_absolute_mass_or_transverse_velocity": True,
         "no_lensing_halo_or_gravity_payload": True,
     }
+    gate_results = {name: bool(value) for name, value in gate_results.items()}
     decision = "passed" if all(gate_results.values()) else "failed_closed"
     luminosity_fractions = np.asarray(
         [row["analysis_mask_luminosity_fraction"] for row in sample_rows], dtype=float
