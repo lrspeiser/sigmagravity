@@ -1,0 +1,77 @@
+{
+  "protocol_version": "SIGMA-V19CO-CHECKPOINT-ATTEMPT-METADATA-CORRECTION-1.0.0",
+  "status": "frozen after V19CN produced a scientifically valid edge checkpoint but failed the independent audit solely because its wrapper rewrote attempt=1 to attempt=3, and before changing that JSON field or resuming V19W5",
+  "purpose": "Restore the original producer's frozen attempt=1 checkpoint semantics without changing a product or scientific field, independently audit the corrected checkpoint, then resume the unchanged V19W5 and target-sealed V19BR chains.",
+  "parent_failure": {
+    "path": "results/sigma_v19cn_fine_wmap_final_recovery/report.json",
+    "sha256": "6d13592e8e0514fcbd4a43200c8af9a2b20ca0b79052c79e305f56eba5f59052",
+    "required_status": "fine_wmap_final_recovery_failed_closed",
+    "required_exception": "RuntimeError: checkpoint attempt outside frozen range: BULLET_bin384_obs5358_ccd0"
+  },
+  "checkpoint": {
+    "path": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100/completed/BULLET_bin384_obs5358_ccd0/cell_report.json",
+    "sha256_before": "b95c20ae80f68bd3332dbdf1c88f925c5cabf6e260988631751f0a0ed0e2007a",
+    "attempt_before": 3,
+    "attempt_after": 1,
+    "reason": "execute_mask_cell produced attempt=1 under the frozen auditor's definition; V19CN incorrectly replaced it with a count of historical failed launches even though those failures are separately preserved and were not successful checkpoints.",
+    "required_command_argument": "binwmap=det=1",
+    "required_all_original_gates": true,
+    "product_hashes": {
+      "source_pha": "0d86f31b56ca6083b6e9ae084d530ec0298b23ddd3e21914d04b3d581a32ad11",
+      "background_pha": "21fb9599f0261b0a2efee09f5f4ac7383df911e411496727b24b4a60938fb333",
+      "arf": "94a6f720f8e74e08fb4639fde76c925f1d047b302741b7b3e7e20712d3b9deeb",
+      "rmf": "d5f833951150257ce2f0e7b66b9f76005d1cc6485d5e7f832b5f47627e2471ce"
+    }
+  },
+  "archive": {
+    "scratch": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100",
+    "base_scratch": "/home/henry/sigma-v19w-response-production/v100",
+    "required_completed": 384,
+    "required_failed_attempt_directories": [
+      "c3432_rmf_attempt1",
+      "c3432_rmf_attempt2"
+    ]
+  },
+  "unchanged_chain": {
+    "v19w5_config": "configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+    "v19w5_config_sha256": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a",
+    "v19w5_runner": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+    "v19w5_runner_sha256": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72",
+    "v19w5_output": "results/sigma_v19w5_ccd7_hardened_response_recovery",
+    "v19br_config": "configs/sigma_v19br_target_sealed_terminal_chain.json",
+    "v19br_config_sha256": "8a5205d978ab25d53b8befb11472ff420e2e8116ad06cd9c43e4d158a9d580ed",
+    "v19br_runner": "scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+    "v19br_runner_sha256": "d0f4c2f48a0a22e898fadaf3f637785df5d8cbfeb50f81164aec5e39c2c30bcc"
+  },
+  "required_gates": {
+    "v19cn_failure_and_checkpoint_boundary_exact": true,
+    "all_four_product_hashes_unchanged": true,
+    "only_attempt_field_changes_from_3_to_1": true,
+    "corrected_checkpoint_passes_independent_manifest_audit": true,
+    "v19w5_passes_5082_cells_and_20328_products": true,
+    "v19br_reaches_terminal_source_decision": true,
+    "no_target_action_gravity_holdout_or_solar_access": true
+  },
+  "authorization": {
+    "change_only_checkpoint_attempt_3_to_1": true,
+    "change_product_or_other_scientific_metadata": false,
+    "run_unchanged_v19w5_and_v19br": true,
+    "run_v19bs_or_derive_action": false,
+    "open_lensing_halo_gravity_holdout_or_solar_optimization": false
+  },
+  "outputs": {
+    "report": "results/sigma_v19co_checkpoint_attempt_metadata_correction/report.json",
+    "v19w5_log": "results/sigma_v19co_checkpoint_attempt_metadata_correction/v19w5_full_audit.log",
+    "v19br_log": "results/sigma_v19co_checkpoint_attempt_metadata_correction/v19br_source_chain.log"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19co_checkpoint_attempt_metadata_correction.py",
+    "tests": "tests/test_sigma_v19co_checkpoint_attempt_metadata_correction.py"
+  },
+  "claim_boundary": [
+    "V19CO corrects one invalid bookkeeping value; the response products and science selections are immutable.",
+    "The two failed launches remain represented by their preserved directories and the V19CK/V19CI evidence.",
+    "The corrected attempt=1 means the successful checkpoint producer's attempt under the frozen archive schema, not that earlier failures did not occur.",
+    "V19BS remains separate and no action is derived here."
+  ]
+}

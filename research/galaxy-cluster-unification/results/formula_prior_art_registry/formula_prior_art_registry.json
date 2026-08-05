@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 210,
+    "sigma_protocols": 211,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7586,6 +7586,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "890f2f117c873b17de9c910e2f78cf080d7425de02839fd9d47d7e6cf10a6e2c"
+    },
+    {
+      "config": "configs/sigma_v19co_checkpoint_attempt_metadata_correction.json",
+      "protocol_version": "SIGMA-V19CO-CHECKPOINT-ATTEMPT-METADATA-CORRECTION-1.0.0",
+      "status": "frozen after V19CN produced a scientifically valid edge checkpoint but failed the independent audit solely because its wrapper rewrote attempt=1 to attempt=3, and before changing that JSON field or resuming V19W5",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "ce9016c87e00d25964f7c5dc4f1fa9055de5e2580406f1a2ece9224e031d5fd0"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

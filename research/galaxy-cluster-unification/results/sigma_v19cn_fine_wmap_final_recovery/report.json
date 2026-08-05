@@ -1,0 +1,18 @@
+{
+  "authorization_boundary": {
+    "action_derived": false,
+    "lensing_halo_gravity_or_holdout_opened": false,
+    "solar_optimized": false
+  },
+  "claim_boundary": [
+    "V19CN is an instrument-response recovery and source-only chain; it is not a gravity-theory result.",
+    "The response-map refinement is applied because of a directly observed detector-edge alias, not because of a physics score.",
+    "V19BR may end in a valid source-invariant pass or failure; neither outcome may be retried or tuned here.",
+    "V19BS remains the separate frozen authority for whether action derivation may begin."
+  ],
+  "config_sha256": "890f2f117c873b17de9c910e2f78cf080d7425de02839fd9d47d7e6cf10a6e2c",
+  "exception": "RuntimeError: checkpoint attempt outside frozen range: BULLET_bin384_obs5358_ccd0",
+  "generated_utc": "2026-08-05T20:18:36.429912+00:00",
+  "protocol_version": "SIGMA-V19CN-FINE-WMAP-FINAL-RECOVERY-1.0.0",
+  "status": "fine_wmap_final_recovery_failed_closed"
+}
