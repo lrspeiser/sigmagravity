@@ -1,0 +1,33 @@
+{
+  "protocol_version": "SIGMA-V19BB-ABELL2146-LUMINOSITY-CURRENT-ENSEMBLE-1.0.1",
+  "runs_compared": 2,
+  "all_scientific_outputs_byte_identical": true,
+  "report_excluded_reason": "report.json contains an intentional generated_utc timestamp",
+  "outputs": {
+    "calibration_scores": {
+      "path": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/calibration_scores.csv",
+      "sha256_run_1": "06953362cef7fd9abbec53fda7197b38c380ef3fa6c40fda7e2965bf6a5bf1bd",
+      "sha256_run_2": "06953362cef7fd9abbec53fda7197b38c380ef3fa6c40fda7e2965bf6a5bf1bd"
+    },
+    "state_marginals": {
+      "path": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/state_marginals.csv",
+      "sha256_run_1": "949650d7e91a0cbbc94e2ce9fd5c076b45366d9e930baca6b88bf02a7b73d7f3",
+      "sha256_run_2": "949650d7e91a0cbbc94e2ce9fd5c076b45366d9e930baca6b88bf02a7b73d7f3"
+    },
+    "member_summary": {
+      "path": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/member_summary.csv",
+      "sha256_run_1": "115754cf1e14b050764348c12f9f16387df95b9751bd49854aa3661e130c96a7",
+      "sha256_run_2": "115754cf1e14b050764348c12f9f16387df95b9751bd49854aa3661e130c96a7"
+    },
+    "position_current_ensemble": {
+      "path": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/position_current_ensemble.csv.gz",
+      "sha256_run_1": "234937ccef9b6ce5fa1540b7e698a3c8b2440baf875822d7b91df6768aab124d",
+      "sha256_run_2": "234937ccef9b6ce5fa1540b7e698a3c8b2440baf875822d7b91df6768aab124d"
+    },
+    "figure": {
+      "path": "results/sigma_v19bb_abell2146_luminosity_current_ensemble/astrometric_calibration_and_coverage.png",
+      "sha256_run_1": "810a74c89bf9914b05d92909890744771a2711501e61648d0ce54e3ac2309785",
+      "sha256_run_2": "810a74c89bf9914b05d92909890744771a2711501e61648d0ce54e3ac2309785"
+    }
+  }
+}

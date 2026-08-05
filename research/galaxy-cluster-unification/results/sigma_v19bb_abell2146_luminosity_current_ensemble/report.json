@@ -1,0 +1,198 @@
+{
+  "catalog_astrometric_calibration": {
+    "cross_validation_folds": 7,
+    "cross_validation_folds_improving_over_zero": 7,
+    "cross_validation_rows": [
+      {
+        "counterpart_prior": 0.9,
+        "fold": 0,
+        "heldout_log_evidence": 19.66096116910403,
+        "heldout_log_evidence_improvement_over_zero": 20.595003800870444,
+        "heldout_zero_log_evidence": -0.9340426317664128,
+        "row_type": "cross_validation_fold",
+        "selected": true,
+        "sigma_extra_arcsec": 0.45,
+        "training_log_evidence": 100.22045822892089
+      },
+      {
+        "counterpart_prior": 0.9,
+        "fold": 1,
+        "heldout_log_evidence": 14.044641661215003,
+        "heldout_log_evidence_improvement_over_zero": 28.96734677922494,
+        "heldout_zero_log_evidence": -14.922705118009937,
+        "row_type": "cross_validation_fold",
+        "selected": true,
+        "sigma_extra_arcsec": 0.45,
+        "training_log_evidence": 105.8367777368099
+      },
+      {
+        "counterpart_prior": 0.9,
+        "fold": 2,
+        "heldout_log_evidence": 19.44990952347394,
+        "heldout_log_evidence_improvement_over_zero": 21.2156881942841,
+        "heldout_zero_log_evidence": -1.765778670810157,
+        "row_type": "cross_validation_fold",
+        "selected": true,
+        "sigma_extra_arcsec": 0.45,
+        "training_log_evidence": 100.43150987455097
+      },
+      {
+        "counterpart_prior": 0.9,
+        "fold": 3,
+        "heldout_log_evidence": 15.863672526992994,
+        "heldout_log_evidence_improvement_over_zero": 17.80097242239869,
+        "heldout_zero_log_evidence": -1.9372998954056944,
+        "row_type": "cross_validation_fold",
+        "selected": true,
+        "sigma_extra_arcsec": 0.45,
+        "training_log_evidence": 104.01774687103192
+      },
+      {
+        "counterpart_prior": 0.9,
+        "fold": 4,
+        "heldout_log_evidence": 19.781827375100104,
+        "heldout_log_evidence_improvement_over_zero": 30.154357433346533,
+        "heldout_zero_log_evidence": -10.372530058246427,
+        "row_type": "cross_validation_fold",
+        "selected": true,
+        "sigma_extra_arcsec": 0.45,
+        "training_log_evidence": 100.09959202292481
+      },
+      {
+        "counterpart_prior": 0.9,
+        "fold": 5,
+        "heldout_log_evidence": 11.819772118998667,
+        "heldout_log_evidence_improvement_over_zero": 27.00007221752226,
+        "heldout_zero_log_evidence": -15.180300098523594,
+        "row_type": "cross_validation_fold",
+        "selected": true,
+        "sigma_extra_arcsec": 0.45,
+        "training_log_evidence": 108.06164727902625
+      },
+      {
+        "counterpart_prior": 0.9,
+        "fold": 6,
+        "heldout_log_evidence": 19.260635023140175,
+        "heldout_log_evidence_improvement_over_zero": 30.472301720529387,
+        "heldout_zero_log_evidence": -11.211666697389212,
+        "row_type": "cross_validation_fold",
+        "selected": true,
+        "sigma_extra_arcsec": 0.45,
+        "training_log_evidence": 100.62078437488475
+      }
+    ],
+    "measurement_nuisance_not_gravity_length": true,
+    "primary_counterpart_prior": 0.9,
+    "selected_grid_index": 6,
+    "selected_grid_index_spread_across_priors": 0,
+    "selected_sigma_by_prior": {
+      "0.8": 0.45,
+      "0.9": 0.45,
+      "0.95": 0.45,
+      "0.99": 0.45
+    },
+    "selected_sigma_extra_arcsec": 0.45
+  },
+  "claim_boundary": [
+    "V19BB tests and propagates a catalog measurement uncertainty; it does not fit a gravitational length or an object-specific physics parameter.",
+    "The primary width is selected without HSC magnitude, lensing, halo, gravity residual, published subcluster label, BCG flag, or spectral type.",
+    "A finite F814W flux is a relative luminosity proxy, not stellar mass, total baryonic mass, or a fitted mass-to-light ratio.",
+    "Null and missing-F814W states remain explicit and contribute no invented luminosity.",
+    "Only line-of-sight velocity is measured; transverse currents remain unmeasured.",
+    "Passing would supply the Abell collisionless input needed for a matched two-cluster source test, not evidence for the long-wavelength gravity hypothesis."
+  ],
+  "config": "configs/sigma_v19bb_abell2146_luminosity_current_ensemble.json",
+  "config_sha256": "c22b5ca8cd9f35adec28165bf112f4de56c943c389fe2a7fd0bff6d917e83bf4",
+  "decision": "passed",
+  "ensemble": {
+    "all_members_present_every_draw": true,
+    "draws": 8192,
+    "maximum_sampled_vs_exact_state_marginal_difference": 0.007577667925943277,
+    "members_per_draw": 63,
+    "rows": 516096
+  },
+  "gate_results": {
+    "all_63_members_in_every_draw": true,
+    "all_parent_and_raw_hsc_hashes_exact": true,
+    "cross_validation_improves_over_zero": true,
+    "expected_measured_f814w_coverage": true,
+    "inventory_counts_exact": true,
+    "missing_photometry_states_explicit": true,
+    "no_lensing_halo_or_gravity_payload": true,
+    "posterior_normalization": true,
+    "primary_sigma_extra_interior": true,
+    "prior_sensitivity_grid_index_stable": true,
+    "sampled_vs_exact_state_marginal": true
+  },
+  "generated_utc": "2026-08-05T12:24:24.149104+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "hard_counterpart_selected": false,
+  "implementation": {
+    "runner": "scripts/run_sigma_v19bb_abell2146_luminosity_current_ensemble.py",
+    "runner_sha256": "5892b3be6cdce9d5677a40e78715afc94f7ec8126333240f7a2c1041ab31a85c"
+  },
+  "input_hashes": {
+    "candidate_posteriors": "14a9fa01df2fef961caa22eaf38846ffb8c92a655bfd277935838f2d44c3b69b",
+    "member_associations": "107e4d82ee35774ee47b81e8e3452ada33577cfac050cce0f80c4ab35b8a6840",
+    "spectroscopic_members": "cf7c61854f4aa0317a9dd3ea8e91618e90fa7823a6cb30634147f8af39243360",
+    "unified_candidates": "2059209cc9699f23857579bbb772f9e6427d76cb82437b8ec7f0f3449b4dacec",
+    "v19aa_config": "bc07209be5ba4d5e66fbf1db9d113dbec4e53371607d829092da74e994ec9cf8",
+    "v19aa_report": "2b751c1e455171b6b37b844ea22b820a3faab65ddd898672b8802b8ca94cd860",
+    "v19y_hsc_provenance": "a03ef4bb091a9df269b396b0410d2c4fccb7cc2e6bab445de067cc1c68908222"
+  },
+  "inventory": {
+    "candidate_hypotheses": 64,
+    "candidates_with_finite_hsc_f814w": 60,
+    "candidates_with_hsc_match": 62,
+    "member_candidate_count_distribution": {
+      "0": 4,
+      "1": 54,
+      "2": 5
+    },
+    "shared_candidates": 0,
+    "spectroscopic_members": 63,
+    "unique_candidates": 64
+  },
+  "lensing_or_halo_payload_opened": false,
+  "missing_photometry_or_stellar_mass_inferred": false,
+  "outputs": {
+    "calibration_scores": {
+      "bytes": 3198,
+      "path": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/calibration_scores.csv",
+      "sha256": "06953362cef7fd9abbec53fda7197b38c380ef3fa6c40fda7e2965bf6a5bf1bd"
+    },
+    "ensemble": {
+      "bytes": 19097859,
+      "path": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/position_current_ensemble.csv.gz",
+      "sha256": "234937ccef9b6ce5fa1540b7e698a3c8b2440baf875822d7b91df6768aab124d"
+    },
+    "figure": {
+      "bytes": 184907,
+      "path": "results/sigma_v19bb_abell2146_luminosity_current_ensemble/astrometric_calibration_and_coverage.png",
+      "sha256": "810a74c89bf9914b05d92909890744771a2711501e61648d0ce54e3ac2309785"
+    },
+    "member_summary": {
+      "bytes": 16030,
+      "path": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/member_summary.csv",
+      "sha256": "115754cf1e14b050764348c12f9f16387df95b9751bd49854aa3661e130c96a7"
+    },
+    "state_marginals": {
+      "bytes": 15675,
+      "path": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/state_marginals.csv",
+      "sha256": "949650d7e91a0cbbc94e2ce9fd5c076b45366d9e930baca6b88bf02a7b73d7f3"
+    }
+  },
+  "posterior": {
+    "expected_members_with_finite_f814w_per_draw": 56.23056738551786,
+    "expected_missing_photometry_members_per_draw": 6.769432614482142,
+    "maximum_finite_f814w_probability": 0.9960511727702214,
+    "maximum_normalization_error": 2.220446049250313e-16,
+    "median_finite_f814w_probability": 0.9844385555436717,
+    "members_top_candidate": 59,
+    "members_top_null": 4,
+    "minimum_finite_f814w_probability": 0.0
+  },
+  "protocol_version": "SIGMA-V19BB-ABELL2146-LUMINOSITY-CURRENT-ENSEMBLE-1.0.1",
+  "raw_hsc_files_verified": 126,
+  "transverse_velocity_imputed": false
+}
