@@ -1,0 +1,92 @@
+{
+  "protocol_version": "SIGMA-V19CQ-V19X2-RECOVERY-ROOT-REMEDIATION-1.0.0",
+  "status": "frozen after V19CP added the required count alias and V19X2 then failed before spectrum combination because the configured recovery archive root did not contain an audited recovery cell",
+  "purpose": "Replace the stale V19X2 recovery-archive root with the single root independently encoded by all 384 V19W5 recovery rows, rerun the byte-identical V19X2 commissioning stage, and resume the unchanged source-only terminal chain only if commissioning passes.",
+  "failure_parents": {
+    "v19cp_report": {
+      "path": "results/sigma_v19cp_v19x2_runtime_alias_remediation/report.json",
+      "sha256": "1c92076b2088942353f46dbb43435e25b08979f2f5cc5c7646547575cbae00d7",
+      "required_status": "v19x2_runtime_alias_remediation_completed",
+      "required_decision": "v19x2_or_source_chain_execution_incomplete"
+    },
+    "v19x2_failure_report": {
+      "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/report.json",
+      "sha256": "2162f94dc608b89f2d74db892a23683f01c98336049b0ffbd7dbeef590f77091",
+      "required_status": "unified_spectral_combination_commissioning_execution_failed",
+      "required_exception": "RuntimeError: V19X2 cell path is outside frozen archive roots: ('BULLET', 45, 554, 3)"
+    },
+    "v19w5_report": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+      "sha256": "9e90fcb397c80010562b8fbd441fff91a716ced4bb0ef895704ca449dca7c85f",
+      "required_status": "ccd7_hardened_unified_5082_response_archive_passed"
+    },
+    "v19w5_unified_index": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+      "sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4",
+      "required_rows": 5082,
+      "required_archive_counts": {
+        "base_v19w": 4698,
+        "v19w5_recovery": 384
+      }
+    }
+  },
+  "config_correction": {
+    "path": "configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+    "sha256_before": "44a107133c20404d6c54d57fbee1fd6b80185dc32f46a94dd40b0269d650a42d",
+    "json_path_changed": "execution.response_archives.v19w5_recovery",
+    "value_before": "/home/henry/sigma-v19w5-response-recovery/v100",
+    "value_after": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100",
+    "required_base_root_unchanged": "/home/henry/sigma-v19w-response-production/v100",
+    "all_other_values_byte_for_canonical_json_unchanged": true,
+    "scientific_sections_unchanged": [
+      "registered_workload",
+      "combination",
+      "fit_sequence",
+      "gates"
+    ]
+  },
+  "unchanged_execution": {
+    "v19x2_runner": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+    "v19x2_runner_sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea",
+    "v19x2_output": "results/sigma_v19x2_unified_spectral_combination_commissioning",
+    "v19x2_scratch": "/home/henry/sigma-v19x2-spectral-combination/v100",
+    "v19br_config": "configs/sigma_v19br_target_sealed_terminal_chain.json",
+    "v19br_config_sha256": "8a5205d978ab25d53b8befb11472ff420e2e8116ad06cd9c43e4d158a9d580ed",
+    "v19br_runner": "scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+    "v19br_runner_sha256": "d0f4c2f48a0a22e898fadaf3f637785df5d8cbfeb50f81164aec5e39c2c30bcc"
+  },
+  "required_gates": {
+    "failure_reports_and_unified_index_exact": true,
+    "all_384_recovery_rows_share_corrected_root": true,
+    "only_recovery_archive_root_changed": true,
+    "scientific_sections_unchanged": true,
+    "v19x2_reaches_registered_scientific_disposition": true,
+    "if_v19x2_passes_unchanged_v19br_reaches_source_decision": true,
+    "no_lensing_halo_action_gravity_holdout_or_solar_access": true
+  },
+  "authorization": {
+    "change_one_recovery_archive_root": true,
+    "change_base_archive_root": false,
+    "change_scientific_section_or_value": false,
+    "rerun_v19x2_after_precombination_path_failure": true,
+    "resume_v19br_only_after_v19x2_pass": true,
+    "retry_or_tune_valid_scientific_fit_failure": false,
+    "run_v19bs_or_derive_action": false,
+    "open_lensing_halo_gravity_holdout_or_solar_optimization": false
+  },
+  "outputs": {
+    "report": "results/sigma_v19cq_v19x2_recovery_root_remediation/report.json",
+    "v19x2_log": "results/sigma_v19cq_v19x2_recovery_root_remediation/v19x2_commissioning.log",
+    "v19br_log": "results/sigma_v19cq_v19x2_recovery_root_remediation/v19br_continuation.log"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19cq_v19x2_recovery_root_remediation.py",
+    "tests": "tests/test_sigma_v19cq_v19x2_recovery_root_remediation.py"
+  },
+  "claim_boundary": [
+    "V19CQ repairs a source-archive path binding before any spectrum was combined.",
+    "The replacement root is not selected from spectral or gravity performance; it is the common parent encoded by every independently audited V19W5 recovery row.",
+    "A V19X2 scientific quality-gate failure after this repair is final for the frozen spectral rules and is not eligible for tuning.",
+    "No gravity theory is tested, no cluster lensing is opened, and V19BS remains a separate decision stage."
+  ]
+}
