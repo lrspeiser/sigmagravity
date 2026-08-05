@@ -1,0 +1,82 @@
+{
+  "protocol_version": "SIGMA-V19BQ-V19X4B-OBSERVED-SOURCE-SUCCESSOR-PREFLIGHT-1.0.0",
+  "status": "frozen before terminal V19X4B or V19BMB products, observed source scores, lensing or halo targets, action derivation, gravity parameters or holdout access",
+  "purpose": "Prepare a separately named executor that applies the exact V19BP I4/I5 source decision after the V19W5-authorized V19X4B and V19BMB chains pass.",
+  "parents": {
+    "original_v19bp_config": "configs/sigma_v19bp_observed_source_invariant_scoring.json",
+    "original_v19bp_config_sha256": "43a966ea04300222a018c9667f2feb50c600509a522bd05fc3dcf9a197075b6a",
+    "original_v19bp_preflight_report": "results/sigma_v19bp_observed_source_invariant_scoring/preflight_report.json",
+    "original_v19bp_preflight_report_sha256": "4f57fbce06554741188108d3c49c7a469af3ff05d73d7f0da795aef940ddecbd",
+    "original_v19bp_runner": "scripts/run_sigma_v19bp_observed_source_invariant_scoring.py",
+    "original_v19bp_runner_sha256": "51375ade6f78c11d6c1944012039aef4406470c66dfff238bf9635ef2ecebd64",
+    "gas_stream_module": "src/voidscreen/sigma_gas_source_stream.py",
+    "gas_stream_module_sha256": "5fe0e39ec0e416a85d86bdea8cb23d098d9ba094149497d86c6cf01a5439d7c2",
+    "score_engine_module": "src/voidscreen/sigma_source_score_engine.py",
+    "score_engine_module_sha256": "e2e50e18fc954eccc0ede5e4a14a4b48e0109e85d74abc44f74d33f0d4890755",
+    "v19x4b_preflight_config": "configs/sigma_v19x4b_v19x3b_gas_successor_preflight.json",
+    "v19x4b_preflight_config_sha256": "a699d5af275e244ef0a027f12f512472373fb5c4022561448cb4415d090e6367",
+    "v19x4b_preflight_report": "results/sigma_v19x4b_v19x3b_gas_successor_preflight/report.json",
+    "v19x4b_preflight_report_sha256": "e52ac6afd7795cc02e74fb0a34c8b477a967de45aacfd9ea318e6d386eed76a3",
+    "v19bmb_preflight_config": "configs/sigma_v19bmb_v19x4b_stellar_successor_preflight.json",
+    "v19bmb_preflight_config_sha256": "b668dda1a6505edf4e5039cd2460686ee7913956995716f4c9a9bd9a9c9d9c62",
+    "v19bmb_preflight_report": "results/sigma_v19bmb_v19x4b_stellar_successor_preflight/report.json",
+    "v19bmb_preflight_report_sha256": "b17246186c53105790b3bbe335304bbb06d3e5217035388b5dfdfdd07e08034a"
+  },
+  "successor_contract": {
+    "science_sections": [
+      "registered_inputs",
+      "variants",
+      "thresholds",
+      "inherited_v19bl_thresholds",
+      "decision_rule",
+      "execution"
+    ],
+    "science_section_sha256": {
+      "registered_inputs": "6cef427b46342820b9765064c89927e481833fe053d8c4048bcb0fd425c6cc5f",
+      "variants": "3a2e849df63a9a24e60ef40eca9cd5dd9eadda855e88f25b256702547223e9a1",
+      "thresholds": "1fd2ae55c10eeff4d325e747fd394fd55b7214b8ae2b38a5db72aea54c7f44a3",
+      "inherited_v19bl_thresholds": "1fd2ae55c10eeff4d325e747fd394fd55b7214b8ae2b38a5db72aea54c7f44a3",
+      "decision_rule": "261e0307cadf66d9c7f4cbb614de3ea99aa742ac016429664b104a01be259cc4",
+      "execution": "5a84d68f7b9c7dd065cde3fa28f95309709ccbdef5e3596a7ef7906330cd65b8"
+    },
+    "terminal_parents": "V19X4B gas posterior and V19BMB stellar control after every gate and product hash passes",
+    "conditions_per_candidate": 36,
+    "total_candidate_evaluations": 72,
+    "I4_direction_rule": "must pass both clusters, all three rank-correlation branches and all six spatial variants",
+    "amplitude_rule": "after I4 direction passes, either I4 amplitude or I5 scalar must pass everywhere",
+    "future_decision": "derive the least-field-content action only if the source-only decision authorizes it; otherwise record the source falsification before opening lensing"
+  },
+  "authorization": {
+    "run_preflight_now": true,
+    "freeze_after_terminal_v19x4b_and_v19bmb_pass": true,
+    "freeze_before_terminal_v19x4b_and_v19bmb_pass": false,
+    "run_observed_source_score_now": false,
+    "open_lensing_or_halo_payload": false,
+    "derive_action_now": false,
+    "change_gravity_formula_or_parameter": false,
+    "open_holdout": false
+  },
+  "claim_boundary": [
+    "This is a target-blind implementation preflight, not an observed I4/I5 result or a Sigma Gravity test.",
+    "V19BQ changes only terminal data authority; candidates, variants, thresholds and decision logic are byte-equivalent in meaning to V19BP.",
+    "A future pass identifies a robust projected baryonic source candidate but does not prove how gravity couples to it.",
+    "No terminal gas, stellar or source value, lensing, halo, galaxy rotation, action, gravity parameter or holdout enters this preflight."
+  ],
+  "outputs": {
+    "report": "results/sigma_v19bq_v19x4b_observed_source_successor_preflight/report.json"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19bq_v19x4b_observed_source_invariant_scoring.py",
+    "runner_sha256": "98b8008e3b5071e32b122be23bb6f934affa7c49cd72a4d4331ad5852fd616f9",
+    "freezer": "scripts/freeze_sigma_v19bq_v19x4b_observed_source_invariant_scoring.py",
+    "freezer_sha256": "0058cebec8d862622218439d34dcdbf5e5b927aa355fcb5d17b092a4f4a48e69",
+    "checker": "scripts/check_sigma_v19bq_v19x4b_observed_source_successor_preflight.py",
+    "checker_sha256": "d32d74792513c4a212a9dea0c60c0f3501bff688433b55654e4f0178e6e3aa6e",
+    "inherited_v19bp_runner": "scripts/run_sigma_v19bp_observed_source_invariant_scoring.py",
+    "inherited_v19bp_runner_sha256": "51375ade6f78c11d6c1944012039aef4406470c66dfff238bf9635ef2ecebd64",
+    "gas_stream_module": "src/voidscreen/sigma_gas_source_stream.py",
+    "gas_stream_module_sha256": "5fe0e39ec0e416a85d86bdea8cb23d098d9ba094149497d86c6cf01a5439d7c2",
+    "score_engine_module": "src/voidscreen/sigma_source_score_engine.py",
+    "score_engine_module_sha256": "e2e50e18fc954eccc0ede5e4a14a4b48e0109e85d74abc44f74d33f0d4890755"
+  }
+}

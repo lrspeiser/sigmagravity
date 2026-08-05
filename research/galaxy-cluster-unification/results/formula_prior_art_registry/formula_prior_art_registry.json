@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 185,
+    "sigma_protocols": 187,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7240,6 +7240,18 @@
       "sha256": "d2db22b08684aa42aba85659da8367a1633ea039a7e5200a96297b087bafce31"
     },
     {
+      "config": "configs/sigma_v19bmb_v19x4b_stellar_successor_preflight.json",
+      "protocol_version": "SIGMA-V19BMB-V19X4B-STELLAR-SUCCESSOR-PREFLIGHT-1.0.0",
+      "status": "frozen before terminal V19X4B gas products, stellar controls, source scores, lensing or halo targets, gravity parameters or holdout access",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "b668dda1a6505edf4e5039cd2460686ee7913956995716f4c9a9bd9a9c9d9c62"
+    },
+    {
       "config": "configs/sigma_v19bn_source_score_engine_preflight.json",
       "protocol_version": "SIGMA-V19BN-SOURCE-SCORE-ENGINE-PREFLIGHT-1.0.0",
       "status": "frozen before terminal V19X4, V19BM products, observed invariant scores, lensing, halos, action selection, or gravity fitting",
@@ -7274,6 +7286,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "43a966ea04300222a018c9667f2feb50c600509a522bd05fc3dcf9a197075b6a"
+    },
+    {
+      "config": "configs/sigma_v19bq_v19x4b_observed_source_successor_preflight.json",
+      "protocol_version": "SIGMA-V19BQ-V19X4B-OBSERVED-SOURCE-SUCCESSOR-PREFLIGHT-1.0.0",
+      "status": "frozen before terminal V19X4B or V19BMB products, observed source scores, lensing or halo targets, action derivation, gravity parameters or holdout access",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "d443b2bb5c9664c60ef08fa7d798e7abf0f6dff7bbedcc172f96955e1574f2d5"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

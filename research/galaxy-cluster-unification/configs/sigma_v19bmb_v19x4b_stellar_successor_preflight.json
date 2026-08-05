@@ -1,0 +1,75 @@
+{
+  "protocol_version": "SIGMA-V19BMB-V19X4B-STELLAR-SUCCESSOR-PREFLIGHT-1.0.0",
+  "status": "frozen before terminal V19X4B gas products, stellar controls, source scores, lensing or halo targets, gravity parameters or holdout access",
+  "purpose": "Prepare a separately named stellar-morphology successor that consumes terminal V19X4B common grids while preserving every V19BM stellar calculation exactly.",
+  "parents": {
+    "original_v19bm_config": "configs/sigma_v19bm_stellar_morphology_control.json",
+    "original_v19bm_config_sha256": "d2db22b08684aa42aba85659da8367a1633ea039a7e5200a96297b087bafce31",
+    "original_v19bm_preflight_report": "results/sigma_v19bm_stellar_morphology_control/preflight_report.json",
+    "original_v19bm_preflight_report_sha256": "1ff44f795d3f74af930cb932fda001815c4da247cc9b03e9ddf07c8137dbfdfa",
+    "original_v19bm_runner": "scripts/run_sigma_v19bm_stellar_morphology_control.py",
+    "original_v19bm_runner_sha256": "f69d17403299935b0bb539f881eb2610bcc84044d80b53ec0f5584f2c3d11875",
+    "stellar_module": "src/voidscreen/sigma_stellar_control.py",
+    "stellar_module_sha256": "6f45a3f485cb5e18d1b45a16e2600c75ff4ca0ae1b8f718919b5de1321c54ae9",
+    "v19x4b_preflight_config": "configs/sigma_v19x4b_v19x3b_gas_successor_preflight.json",
+    "v19x4b_preflight_config_sha256": "a699d5af275e244ef0a027f12f512472373fb5c4022561448cb4415d090e6367",
+    "v19x4b_preflight_report": "results/sigma_v19x4b_v19x3b_gas_successor_preflight/report.json",
+    "v19x4b_preflight_report_sha256": "e52ac6afd7795cc02e74fb0a34c8b477a967de45aacfd9ea318e6d386eed76a3",
+    "v19x4b_runner": "scripts/run_sigma_v19x4b_v19x3b_gas_state_posterior.py",
+    "v19x4b_runner_sha256": "50b26761105f51e2403cb8fdad997a98b533d3360a005d667b033a398b182941",
+    "v19x4b_freezer": "scripts/freeze_sigma_v19x4b_v19x3b_gas_state_posterior.py",
+    "v19x4b_freezer_sha256": "497fe2c51e800c89c3fbecdb5e555c7556b7968dd9f16826b6796627f2ddd28d"
+  },
+  "successor_contract": {
+    "science_sections": [
+      "clusters",
+      "construction",
+      "future_runtime_gates"
+    ],
+    "science_section_sha256": {
+      "clusters": "f7ea69a92fcd24825fb9bfc3e979cc9478eed59d201722642571e7a10aae9e0e",
+      "construction": "11e806f40c15e15491baca8c9110b5f1e38e47f18c8fdbe5060e85f896b2c8ee",
+      "future_runtime_gates": "8b46f4fd8f3c919ff29424b7aa555bf83ee187cad7eed3f756e65368f984f414"
+    },
+    "terminal_parent": "V19X4B only after every gas-posterior and common-grid gate passes",
+    "draws": 4096,
+    "common_grid_cells_per_axis": 241,
+    "smoothing_fwhm_kpc": [
+      50.0,
+      100.0
+    ],
+    "output": "within-cluster within-draw stellar-light percentile ranks only",
+    "future_downstream_rule": "Freeze a separately named V19BQ source executor after both V19X4B and V19BMB pass; never rewrite V19BP."
+  },
+  "authorization": {
+    "run_preflight_now": true,
+    "freeze_after_terminal_v19x4b_pass": true,
+    "freeze_before_terminal_v19x4b_pass": false,
+    "construct_observed_stellar_control_now": false,
+    "open_source_score_now": false,
+    "open_lensing_or_halo_payload": false,
+    "change_gravity_formula_or_parameter": false,
+    "open_holdout": false
+  },
+  "claim_boundary": [
+    "This is a target-blind implementation preflight, not a stellar-control result or a Sigma Gravity test.",
+    "V19BMB changes only the terminal common-grid authority; member light normalization, deposition, smoothing, ranking and draw pairing are unchanged from V19BM.",
+    "No cross-filter light amplitude or stellar mass is inferred.",
+    "No observed terminal gas, source score, lensing, halo, galaxy, gravity or holdout result enters this preflight."
+  ],
+  "outputs": {
+    "report": "results/sigma_v19bmb_v19x4b_stellar_successor_preflight/report.json"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19bmb_v19x4b_stellar_morphology_control.py",
+    "runner_sha256": "9a1ff827b7f4df39e3ea1cdcf495e8d0363000414ebf701992db273d9983b30e",
+    "freezer": "scripts/freeze_sigma_v19bmb_v19x4b_stellar_morphology_control.py",
+    "freezer_sha256": "ba8d30b416a310cdb773c530a0d3f609493e82c1fe87186f449d3d305236a5ab",
+    "checker": "scripts/check_sigma_v19bmb_v19x4b_stellar_successor_preflight.py",
+    "checker_sha256": "8fd45a66b56d65bd7a2ccc1afa5116a863fe2d9a577740b70b411dedb330b98a",
+    "inherited_v19bm_runner": "scripts/run_sigma_v19bm_stellar_morphology_control.py",
+    "inherited_v19bm_runner_sha256": "f69d17403299935b0bb539f881eb2610bcc84044d80b53ec0f5584f2c3d11875",
+    "stellar_module": "src/voidscreen/sigma_stellar_control.py",
+    "stellar_module_sha256": "6f45a3f485cb5e18d1b45a16e2600c75ff4ca0ae1b8f718919b5de1321c54ae9"
+  }
+}

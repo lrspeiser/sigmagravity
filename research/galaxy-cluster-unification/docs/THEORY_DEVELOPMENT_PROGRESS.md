@@ -1,5 +1,36 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19BQ observed-source successor preflight
+
+The final target-sealed handoff from the V19W5-authorized gas chain to the
+source-physics decision is now prepared. V19BQ requires terminal V19X4B and
+V19BMB products and copies the complete V19BP registered inputs, six spatial
+variants, thresholds, I4-before-I5 decision rule and streaming execution
+contract without modification. It cannot be frozen until both terminal parents
+pass every gate and product hash.
+
+The preflight passes. The eventual run evaluates two merging clusters, three
+temperature--density dependence branches and six spatial variants for each of
+I4 and I5: 36 conditions per candidate and 72 candidate evaluations. I4 must
+carry a stable direction everywhere; scalar I5 can rescue amplitude only. No
+terminal source result, lensing, halo, galaxy rotation, action, gravity
+parameter or holdout was opened. See
+[`SIGMA_V19BQ_V19X4B_OBSERVED_SOURCE_SUCCESSOR_PREFLIGHT.md`](SIGMA_V19BQ_V19X4B_OBSERVED_SOURCE_SUCCESSOR_PREFLIGHT.md).
+
+## 2026-08-05 Sigma V19BMB V19X4B stellar-successor preflight
+
+The stellar nuisance control is now safely routed to the future V19X4B common
+grids without editing the already hash-bound V19BM/V19BP chain. V19BMB retains
+all 4,096 member-posterior draws, exact physical grid, cloud-in-cell deposition,
+unit-light conservation, 50/100-kpc smoothing and within-draw percentile ranks.
+Cross-filter amplitudes and stellar-mass inference remain forbidden.
+
+The preflight and manufactured fail-closed tests pass. V19BMB cannot be frozen
+or executed until V19X4B supplies all 12 passing, hash-bound products. No
+terminal gas or stellar value, source score, lensing, halo, gravity parameter or
+holdout was opened. See
+[`SIGMA_V19BMB_V19X4B_STELLAR_SUCCESSOR_PREFLIGHT.md`](SIGMA_V19BMB_V19X4B_STELLAR_SUCCESSOR_PREFLIGHT.md).
+
 ## 2026-08-05 Sigma V19X4B V19X3B gas-successor preflight
 
 The full gas-posterior stage is now prepared behind V19X3B without rewriting
