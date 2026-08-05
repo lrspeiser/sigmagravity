@@ -1,5 +1,5 @@
 {
-  "protocol_version": "SIGMA-V19AZ-PROBABILISTIC-MEMBER-CURRENT-ENSEMBLE-1.0.2",
+  "protocol_version": "SIGMA-V19AZ-PROBABILISTIC-MEMBER-CURRENT-ENSEMBLE-1.0.3",
   "status": "frozen_before_joint_assignment_or_ensemble_generation",
   "purpose": "Construct an exact one-to-one positional posterior and a deterministic Monte Carlo ensemble of the Bullet Cluster spectroscopic members that have published Bessel BRI photometry, preserving candidate ambiguity, private null states, coordinate quantization, redshift uncertainty, and missing transverse velocities without reading lensing, halo, or gravity residuals.",
   "parents": {
@@ -108,7 +108,7 @@
   },
   "implementation": {
     "runner": "scripts/run_sigma_v19az_probabilistic_member_current_ensemble.py",
-    "runner_sha256": "a27499c340493d008ff0dcb3944622855610e147d820f6cc428d50be975aad13"
+    "runner_sha256": "dba3e889638b306b977b630c4c98a63811f3869f1c0a79f351b9a983f14849c3"
   },
   "claim_boundary": [
     "V19AZ propagates positional identity and spectroscopic measurement uncertainty; it does not identify a hard counterpart for an ambiguous member.",

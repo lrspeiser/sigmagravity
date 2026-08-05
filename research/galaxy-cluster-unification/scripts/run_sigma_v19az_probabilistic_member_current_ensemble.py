@@ -7,6 +7,7 @@ import argparse
 import csv
 import gzip
 import hashlib
+import io
 import itertools
 import json
 import math
@@ -717,7 +718,11 @@ def run(config_path: Path) -> dict[str, Any]:
     ensemble_path.parent.mkdir(parents=True, exist_ok=True)
     all_samples_one_to_one = True
     all_samples_have_72 = True
-    with gzip.open(ensemble_path, "wt", newline="", encoding="utf-8") as handle:
+    with (
+        ensemble_path.open("wb") as raw_handle,
+        gzip.GzipFile(filename="", mode="wb", fileobj=raw_handle, mtime=0) as compressed_handle,
+    ):
+        handle = io.TextIOWrapper(compressed_handle, newline="", encoding="utf-8")
         writer = csv.DictWriter(handle, fieldnames=ensemble_fields, extrasaction="raise")
         writer.writeheader()
         for sample_id in range(draws):
@@ -789,6 +794,8 @@ def run(config_path: Path) -> dict[str, Any]:
                         "transverse_velocity_state": "unmeasured_not_imputed",
                     }
                 )
+        handle.flush()
+        handle.detach()
 
     sampled_differences: list[float] = []
     for row in state_rows:
