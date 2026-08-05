@@ -1,0 +1,51 @@
+{
+  "protocol_version": "SIGMA-V19BL-SOURCE-INVARIANT-SCORING-PROTOCOL-1.0.0",
+  "decision": "passed_source_invariant_scoring_math_frozen_awaiting_observed_v19x4",
+  "config_sha256": "91914a009129cc8155b2601a4396cb7bebdfd8abef298511b1e748de6dc3f515",
+  "checker_sha256": "202573d77bf52b36fd4bae4851ca511e35e4475efd24594e54566a9aaecfaef5",
+  "math_module_sha256": "cb0a1c2c3b1e6a551a0f22c08c06d5fbd6127568f54a9e6828e2f6ab487f243c",
+  "parent_hashes": {
+    "v19bj_config": "3a66d06c49d2a8d9481453d8ce23582468a0a81d0a796c5f7e918d04f7229bf4",
+    "v19bj_report": "98e3d9a7f7d1c867b9fb40b089b9d2d8557178e9213e2f9e48e5be2492890a46",
+    "v19bk_config": "345ae564b9bad575bc6fb6d7d3d62e1bfcc06803ad50be1fe9a2e8f86d6a6efc",
+    "v19bk_report": "21af89f3b0de860e37fb84f4c5f8a9f344c0c9202b3dd77c871848bc7eac0d8a",
+    "v19x4_config": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f",
+    "v19x4_preflight_report": "01c206e11e93411995d60537aae90c432b8980285bafeea0ddc51154cf749e1b"
+  },
+  "manufactured_evidence": {
+    "maximum_polynomial_derivative_absolute_error": 0.0,
+    "parallel_gradient_baroclinicity": 0.0,
+    "perpendicular_gradient_baroclinicity": 1.0,
+    "joint_PRESS_rotation_absolute_error": 4.440892098500626e-16,
+    "axial_wrap_width_95_deg": 3.8,
+    "spin_two_test_angles_deg": [
+      0.0,
+      45.0,
+      90.0
+    ]
+  },
+  "gates": {
+    "all_parent_and_implementation_hashes_exact": true,
+    "observability_restricted_to_I4_and_I5": true,
+    "thresholds_inherit_or_strengthen_v19bj": true,
+    "fixed_quadratic_density_control_has_21_coefficients": true,
+    "three_dependence_branches_two_scales_three_radii_frozen": true,
+    "manufactured_derivatives_exact": true,
+    "baroclinicity_parallel_zero_perpendicular_one": true,
+    "joint_tensor_PRESS_is_rotation_invariant": true,
+    "axial_wrap_and_spin_two_are_correct": true,
+    "all_branches_and_both_clusters_required": true,
+    "lensing_action_gravity_and_holdouts_sealed": true
+  },
+  "observed_v19x4_gas_posterior_opened": false,
+  "source_invariant_score_computed": false,
+  "lensing_or_halo_payload_opened": false,
+  "action_or_gravity_parameter_selected": false,
+  "claim_boundary": [
+    "V19BL freezes a source-only scoring calculation; its present preflight is not an observed source result.",
+    "A future I4 or I5 pass identifies a robust projected baryonic state not reducible to the registered density controls; it does not show that gravity or lensing follows that state.",
+    "I5 has no measured in-plane orientation, and I4 supplies only a projected 2D tensor rather than a complete 3D stress.",
+    "The two development clusters can reject candidates but cannot establish population universality.",
+    "No field content, action placement, propagation wavelength, coupling, gravity constant, lensing multiplier or object-specific parameter is selected."
+  ]
+}

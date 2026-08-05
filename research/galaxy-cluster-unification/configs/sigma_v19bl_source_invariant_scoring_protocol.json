@@ -1,0 +1,166 @@
+{
+  "protocol_version": "SIGMA-V19BL-SOURCE-INVARIANT-SCORING-PROTOCOL-1.0.0",
+  "status": "frozen after V19BK observability admission but before terminal V19X3 measurements, observed V19X4 gas-state products, any source-invariant score, any lensing or halo target, or any action or gravity selection",
+  "purpose": "Freeze the coordinate-safe projected I4 and I5 algebra and the complete source-only decision gates that will be applied unchanged to both merger clusters.",
+  "parents": {
+    "v19bj_config": {
+      "path": "configs/sigma_v19bj_source_invariant_action_preselection.json",
+      "sha256": "3a66d06c49d2a8d9481453d8ce23582468a0a81d0a796c5f7e918d04f7229bf4"
+    },
+    "v19bj_report": {
+      "path": "results/sigma_v19bj_source_invariant_action_preselection/report.json",
+      "sha256": "98e3d9a7f7d1c867b9fb40b089b9d2d8557178e9213e2f9e48e5be2492890a46"
+    },
+    "v19bk_config": {
+      "path": "configs/sigma_v19bk_source_observability_admission.json",
+      "sha256": "345ae564b9bad575bc6fb6d7d3d62e1bfcc06803ad50be1fe9a2e8f86d6a6efc"
+    },
+    "v19bk_report": {
+      "path": "results/sigma_v19bk_source_observability_admission/report.json",
+      "sha256": "21af89f3b0de860e37fb84f4c5f8a9f344c0c9202b3dd77c871848bc7eac0d8a"
+    },
+    "v19x4_config": {
+      "path": "configs/sigma_v19x4_gas_state_math_preflight.json",
+      "sha256": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f"
+    },
+    "v19x4_preflight_report": {
+      "path": "results/sigma_v19x4_gas_state_math_preflight/report.json",
+      "sha256": "01c206e11e93411995d60537aae90c432b8980285bafeea0ddc51154cf749e1b"
+    }
+  },
+  "registered_inputs": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "posterior_draws": 4096,
+    "temperature_normalization_rank_correlations": [
+      -0.9,
+      0.0,
+      0.9
+    ],
+    "common_grid_spacing_kpc": 10.0,
+    "smoothing_fwhm_kpc": [
+      50.0,
+      100.0
+    ],
+    "primary_radius_kpc": 350.0,
+    "radius_robustness_kpc": [
+      250.0,
+      500.0
+    ],
+    "stellar_draw_pairing": "Use member-ensemble sample_id 0 through 4095, paired by equal sample_id to the 4096 V19X4 gas draws. This pairing represents independent Monte Carlo nuisance draws and no physical gas-star covariance.",
+    "stellar_normalization": "Within every cluster and draw, divide finite nonnegative member luminosities by their total before cloud-in-cell deposition and mask-normalized Gaussian smoothing. Never compare Bullet Bessel-I and Abell 2146 F814W amplitudes.",
+    "derivative_rule": "Second-order centered differences on the common east/north physical grid; a derivative pixel is invalid unless every required stencil pixel is finite."
+  },
+  "projected_invariants": {
+    "I4_THERMODYNAMIC_GRADIENT_STRESS": {
+      "inputs": [
+        "electron_density_cm3",
+        "entropy_proxy_keV_cm2"
+      ],
+      "dimensionless_equation": "a_i=D_i ln(n_e); k_i=D_i ln(K); Q_ij=l^2[a_(i k_j)-delta_ij(a dot k)/2]",
+      "stored_components": "q_plus=Q_EE=l^2(a_E k_E-a_N k_N)/2; q_cross=Q_EN=l^2(a_E k_N+a_N k_E)/2",
+      "dimensionless_amplitude": "A4=sqrt(2(q_plus^2+q_cross^2))",
+      "axial_direction": "theta4=atan2(q_cross,q_plus)/2 modulo 180 degrees",
+      "coordinate_rule": "The tensor components transform as spin two; amplitude, axial differences and the joint PRESS novelty score are rotation invariant."
+    },
+    "I5_BAROCLINICITY": {
+      "inputs": [
+        "electron_density_cm3",
+        "thermal_pressure_erg_cm3"
+      ],
+      "dimensionless_equation": "Z5=|D ln(n_e) cross D ln(p)|^2/(|D ln(n_e)|^2 |D ln(p)|^2)",
+      "range": [
+        0.0,
+        1.0
+      ],
+      "interpretation": "squared sine of the projected density-pressure gradient angle; scalar activation only, never an inferred in-plane direction"
+    }
+  },
+  "gradient_support": {
+    "statistic": "For each adaptive region and gradient, compute sqrt(mu^T Cov^+ mu) from the two posterior gradient components.",
+    "minimum_gradient_detection_sigma": 3.0,
+    "I4_required_gradients": [
+      "electron density",
+      "entropy"
+    ],
+    "I5_required_gradients": [
+      "electron density",
+      "thermal pressure"
+    ],
+    "minimum_supported_regions": 32,
+    "reason": "The fixed quadratic density control has 21 coefficients; requiring 32 supported regions prevents an underdetermined or nearly saturated novelty score."
+  },
+  "density_novelty_control": {
+    "unit": "adaptive gas region",
+    "five_base_predictors": [
+      "log gas surface density",
+      "within-cluster stellar-light percentile rank",
+      "log of max(l times |D ln gas surface density|, 1e-12)",
+      "l^2 times the gas-surface-density log-Hessian trace",
+      "l^2 times the gas-surface-density log-Hessian anisotropy"
+    ],
+    "standardization": "center and scale each base predictor within cluster, draw, scale, radius and supported-region set",
+    "fixed_basis": "intercept plus five linear terms plus five squares plus all ten pairwise interactions; exactly 21 coefficients",
+    "estimator": "ordinary least squares using a Moore-Penrose inverse with rcond 1e-12",
+    "cross_validation": "analytic leave-one-region-out PRESS residual e_i/(1-h_ii); fail if any 1-h_ii is at most 1e-6",
+    "I4_response": "joint two-component q_plus/q_cross response; report component scores and gate on the rotation-invariant sum of component PRESS divided by the sum of component total variance",
+    "I5_response": "scalar Z5 response",
+    "minimum_unexplained_variance_fraction": 0.2,
+    "minimum_posterior_draw_pass_fraction": 0.9
+  },
+  "cluster_feature_summary": {
+    "I4_activation_per_draw": "root mean square of the supported region A4 values",
+    "I4_direction_per_draw": "axial angle of the supported-region mean q_plus/q_cross tensor; a vanishing resultant fails",
+    "I5_activation_per_draw": "mean supported-region Z5",
+    "detection_sigma": "posterior median divided by half the 16th-to-84th percentile width",
+    "orientation_width": "2.5th-to-97.5th percentile width after wrapping axial residuals about the doubled-angle circular mean"
+  },
+  "robustness_and_decision_gates": {
+    "minimum_within_cluster_detection_sigma": 3.0,
+    "maximum_95_percent_I4_axial_orientation_width_deg": 30.0,
+    "maximum_resolution_change_in_orientation_deg": 10.0,
+    "maximum_resolution_change_in_activation_fraction": 0.1,
+    "maximum_radius_change_in_orientation_deg": 10.0,
+    "maximum_radius_change_in_activation_fraction": 0.1,
+    "minimum_projection_draw_pass_fraction": 0.9,
+    "projection_draw_pass_definition": "A draw passes when its activation changes by at most 10% across 50/100 kpc and 250/350/500 kpc, and for I4 its axial direction changes by at most 10 degrees across those same comparisons.",
+    "minimum_leave_one_region_out_pass_fraction": 0.9,
+    "leave_one_region_out_definition": "On posterior-median region features, an omission passes when activation changes by at most 10% and, for I4, axial direction changes by at most 10 degrees.",
+    "all_three_rank_correlation_branches_must_pass": true,
+    "both_clusters_must_pass": true,
+    "action_derivation_authorization": "Authorize an action derivation only if I4 passes as a direction in both clusters and at least one of I4 amplitude or I5 scalar activation passes every gate in both clusters. The same I4 tensor may satisfy both roles.",
+    "failed_source_action": "If neither eligible feature passes, do not open lensing and do not invent an action. Obtain a direct gas-velocity measurement or preregister a new independent merger sample."
+  },
+  "future_outputs": {
+    "per_branch_region_summary": "hash-bound NPZ containing posterior region features, support masks, control predictors and PRESS scores",
+    "report": "results/sigma_v19bl_source_invariant_scores/report.json",
+    "source_only_figure": "results/sigma_v19bl_source_invariant_scores/source_invariant_diagnostics.png"
+  },
+  "authorization": {
+    "verify_parent_and_math_contracts": true,
+    "run_scoring_after_terminal_v19x4": true,
+    "run_scoring_before_terminal_v19x4": false,
+    "read_lensing_or_halo_payload": false,
+    "select_action_or_gravity_parameter": false,
+    "change_formula_or_constant": false,
+    "open_holdout": false
+  },
+  "claim_boundary": [
+    "V19BL freezes a source-only scoring calculation; its present preflight is not an observed source result.",
+    "A future I4 or I5 pass identifies a robust projected baryonic state not reducible to the registered density controls; it does not show that gravity or lensing follows that state.",
+    "I5 has no measured in-plane orientation, and I4 supplies only a projected 2D tensor rather than a complete 3D stress.",
+    "The two development clusters can reject candidates but cannot establish population universality.",
+    "No field content, action placement, propagation wavelength, coupling, gravity constant, lensing multiplier or object-specific parameter is selected."
+  ],
+  "implementation": {
+    "checker": "scripts/check_sigma_v19bl_source_invariant_scoring_protocol.py",
+    "checker_sha256": "202573d77bf52b36fd4bae4851ca511e35e4475efd24594e54566a9aaecfaef5",
+    "math_module": "src/voidscreen/sigma_source_invariants.py",
+    "math_module_sha256": "cb0a1c2c3b1e6a551a0f22c08c06d5fbd6127568f54a9e6828e2f6ab487f243c"
+  },
+  "outputs": {
+    "preflight_report": "results/sigma_v19bl_source_invariant_scoring_protocol/report.json"
+  }
+}

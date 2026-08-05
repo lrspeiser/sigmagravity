@@ -2204,3 +2204,26 @@ implementations failed their registered validation. No fourth detector will be
 tuned while I4/I5 are scored. This audit is not a gravity result: a future
 source pass would authorize a covariant derivation, after which raw lensing and
 the broader galaxy/cluster gates can be opened under one frozen equation.
+
+## 2026-08-05 V19BL invariant-scoring math freeze
+
+The exact source-only scoring algebra is now executable and hash frozen. I4 is
+represented by the two spin-two components of the dimensionless projected
+thermodynamic-gradient tensor, while I5 is the bounded squared sine of the
+projected density-pressure gradient angle. Manufactured polynomial,
+parallel/perpendicular-gradient, axial-wrap and coordinate-rotation checks all
+pass. The earlier V19BJ functions and tests remain intact.
+
+A region enters only when both gradients required by its candidate have at
+least three-sigma two-component Mahalanobis support. At least 32 regions must
+survive. The fixed 21-term density nuisance basis is evaluated with analytic
+leave-one-region-out PRESS; I4 uses a joint two-component residual fraction so
+rotating the map cannot change the novelty verdict. At least 20% unexplained
+variance must remain in 90% of posterior draws.
+
+Both clusters, all three temperature-normalization dependence branches, 50-
+and 100-kpc smoothing, and 250/350/500-kpc apertures must pass. Activation must
+remain within 10%, I4 direction within 10 degrees, its 95% axial interval
+within 30 degrees, and at least 90% of region omissions and projection draws
+must remain stable. These are source-identifiability tests only; observed V19X4
+gas maps, lensing, action selection and gravity parameters remain unopened.

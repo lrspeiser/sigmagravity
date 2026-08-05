@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 171,
+    "sigma_protocols": 177,
     "project_formula_addenda": 16,
-    "sigma_formula_fragments": 145,
+    "sigma_formula_fragments": 147,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -7153,6 +7153,81 @@
       "sha256": "d877284d92a35083e7976126ec7c67f9cfe00ec2187efd3018d1676edc98eb7d"
     },
     {
+      "config": "configs/sigma_v19bh_blind_cluster_admission.json",
+      "protocol_version": "SIGMA-V19BH-BLIND-CLUSTER-ADMISSION-1.0.0",
+      "status": "frozen metadata-only admission protocol; no new lensing coordinates, lens maps, residuals, Sigma action, or universal constants opened or selected",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "96bcb2ae2038fcc234e73722fb8cbb390aeb48a1be9b1cbe9c631b8013340ef1"
+    },
+    {
+      "config": "configs/sigma_v19bi_blind_galaxy_admission.json",
+      "protocol_version": "SIGMA-V19BI-BLIND-GALAXY-ADMISSION-1.0.0",
+      "status": "frozen survey- and observable-level admission protocol; no new galaxy velocity target, action, or universal constant opened or selected",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "ca85ddd9f48443f5e684e0b1a1ed0d6cf5fe92608f446661e75c6b37e82242fb"
+    },
+    {
+      "config": "configs/sigma_v19bj_source_invariant_action_preselection.json",
+      "protocol_version": "SIGMA-V19BJ-SOURCE-INVARIANT-ACTION-PRESELECTION-1.0.1",
+      "status": "frozen before terminal V19W/V19W4 evidence, before V19X2 commissioning or the 494-region thermodynamic map, before opening any lensing or halo target, and before selecting an action, operator, field content, wavelength, coupling, or universal constant; version 1.0.1 corrects the prerequisite wording before any regional fit existed so it matches frozen V19H: all 494 regions are attempted and require finite best fits, while at least 12 regions per cluster—not all 494—must pass the individual quality gate",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "3a66d06c49d2a8d9481453d8ce23582468a0a81d0a796c5f7e918d04f7229bf4"
+    },
+    {
+      "config": "configs/sigma_v19bk_source_observability_admission.json",
+      "protocol_version": "SIGMA-V19BK-SOURCE-OBSERVABILITY-ADMISSION-1.0.0",
+      "status": "frozen after V19X4 posterior/common-grid implementation but before any V19X3 regional measurement, V19X4 observed gas posterior, invariant score, lensing or halo target, action selection, or gravity fit",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "345ae564b9bad575bc6fb6d7d3d62e1bfcc06803ad50be1fe9a2e8f86d6a6efc"
+    },
+    {
+      "config": "configs/sigma_v19bl_source_invariant_scoring_protocol.json",
+      "protocol_version": "SIGMA-V19BL-SOURCE-INVARIANT-SCORING-PROTOCOL-1.0.0",
+      "status": "frozen after V19BK observability admission but before terminal V19X3 measurements, observed V19X4 gas-state products, any source-invariant score, any lensing or halo target, or any action or gravity selection",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "projected_invariants.I4_THERMODYNAMIC_GRADIENT_STRESS.dimensionless_equation",
+          "formula": "a_i=D_i ln(n_e); k_i=D_i ln(K); Q_ij=l^2[a_(i k_j)-delta_ij(a dot k)/2]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "projected_invariants.I5_BAROCLINICITY.dimensionless_equation",
+          "formula": "Z5=|D ln(n_e) cross D ln(p)|^2/(|D ln(n_e)|^2 |D ln(p)|^2)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 2,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "91914a009129cc8155b2601a4396cb7bebdfd8abef298511b1e748de6dc3f515"
+    },
+    {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",
       "protocol_version": "SIGMA-V19C-SOURCE-ARCHIVE-ACQUISITION-1.0.0",
       "status": "frozen before downloading any Bullet Cluster or Abell 2146 source archive and while all replacement-cluster lensing target payloads remain sealed",
@@ -7452,6 +7527,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
+    },
+    {
+      "config": "configs/sigma_v19x4_gas_state_math_preflight.json",
+      "protocol_version": "SIGMA-V19X4-GAS-STATE-POSTERIOR-1.1.0",
+      "status": "gas-state algebra, regional posterior sampler and common-grid reconstruction frozen before any regional spectral result, source-invariant score, lensing target, halo target or gravity parameter is opened",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f"
     },
     {
       "config": "configs/sigma_v19x_spectral_combination_commissioning.json",
