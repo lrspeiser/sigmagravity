@@ -1,0 +1,131 @@
+{
+  "protocol_version": "SIGMA-V19BS-SOURCE-DISPOSITION-1.0.0",
+  "freeze_state": "frozen_before_terminal_v19bq_source_result",
+  "status": "frozen before terminal V19BQ source evidence, any action selection or derivation, lensing, halo, galaxy rotation, gravity parameter or holdout access",
+  "purpose": "Mechanically separate a valid source pass from a valid source falsification before the result is known, and constrain any pass to mathematically selected action placements without using gravity targets.",
+  "parents": {
+    "v19bj_config": {
+      "path": "configs/sigma_v19bj_source_invariant_action_preselection.json",
+      "sha256": "3a66d06c49d2a8d9481453d8ce23582468a0a81d0a796c5f7e918d04f7229bf4"
+    },
+    "v19bj_report": {
+      "path": "results/sigma_v19bj_source_invariant_action_preselection/report.json",
+      "sha256": "98e3d9a7f7d1c867b9fb40b089b9d2d8557178e9213e2f9e48e5be2492890a46"
+    },
+    "v19bq_preflight_config": {
+      "path": "configs/sigma_v19bq_v19x4b_observed_source_successor_preflight.json",
+      "sha256": "d443b2bb5c9664c60ef08fa7d798e7abf0f6dff7bbedcc172f96955e1574f2d5"
+    },
+    "v19bq_preflight_report": {
+      "path": "results/sigma_v19bq_v19x4b_observed_source_successor_preflight/report.json",
+      "sha256": "1336fe9d9693433f69d25d4661a71e382f8c21cd8521f33eeb967e91ca8c2c62"
+    },
+    "v19bq_runner": {
+      "path": "scripts/run_sigma_v19bq_v19x4b_observed_source_invariant_scoring.py",
+      "sha256": "98b8008e3b5071e32b122be23bb6f934affa7c49cd72a4d4331ad5852fd616f9"
+    },
+    "v19bq_freezer": {
+      "path": "scripts/freeze_sigma_v19bq_v19x4b_observed_source_invariant_scoring.py",
+      "sha256": "0058cebec8d862622218439d34dcdbf5e5b927aa355fcb5d17b092a4f4a48e69"
+    }
+  },
+  "source_decision_logic": {
+    "direction_required": "I4_direction_pass",
+    "amplitude_required": "I4_amplitude_pass or I5_scalar_pass",
+    "authorization": "I4_direction_pass and (I4_amplitude_pass or I5_scalar_pass)",
+    "I5_never_substitutes_for_direction": true,
+    "both_clusters_all_three_dependence_branches_and_all_six_spatial_variants_required": true
+  },
+  "action_placement_classes": [
+    {
+      "id": "P1_CONSTRAINED_COMPOSITE_RESPONSE",
+      "description": "An auxiliary response is fixed by action-derived constraints and baryonic boundary data, with no independent halo-shaped initial condition.",
+      "advance_condition": "A time-even local scalar and directional tensor pass, and a covariant constraint analysis shows no hidden free mode, acausal elliptic prescription, or matter-conservation failure.",
+      "mandatory_derivations": [
+        "complete diffeomorphism-invariant action",
+        "constraint algebra and degree-of-freedom count",
+        "bounded Hamiltonian",
+        "weak-field physical metric for matter and light"
+      ]
+    },
+    {
+      "id": "P2_CAUSAL_DYNAMIC_RESPONSE",
+      "description": "A healthy response field carries energy and propagates a baryon-forced source state with one universal correlation length and universally fixed no-incoming initial data.",
+      "advance_condition": "A robust time-odd current or independently clocked lag is identified, or a constrained placement cannot represent the measured state; no closed Proca, aether, massive-spin-two, material-memory, or linear Yukawa carrier may be replayed.",
+      "mandatory_derivations": [
+        "kinetic and gradient signs",
+        "characteristics and causal initial-value problem",
+        "field stress-energy and backreaction",
+        "luminal tensor sector and weak-field physical metric"
+      ]
+    },
+    {
+      "id": "P3_DEGENERATE_PURE_METRIC_NONLINEAR_VERTEX",
+      "description": "The new response begins in a nonlinear, source-state-sensitive metric interaction while the GR quadratic propagator is unchanged and no independent response-field initial data exist.",
+      "advance_condition": "A local covariant source tensor passes and the proposed vertex is demonstrably degenerate or second order, conserves the full source, and is not a renamed higher-derivative ghost or density-only interpolation.",
+      "mandatory_derivations": [
+        "Euler-Lagrange equations",
+        "Bianchi-compatible total conservation",
+        "absence of extra ghost degrees of freedom",
+        "two weak-field metric potentials from one metric"
+      ]
+    }
+  ],
+  "pass_route": {
+    "compatible_without_time_odd_evidence": [
+      "P1_CONSTRAINED_COMPOSITE_RESPONSE",
+      "P3_DEGENERATE_PURE_METRIC_NONLINEAR_VERTEX"
+    ],
+    "excluded_without_time_odd_evidence": [
+      "P2_CAUSAL_DYNAMIC_RESPONSE"
+    ],
+    "selection_rule": "Derive the minimum representatives needed to compare compatible placements; select only by constraint closure, degree-of-freedom count, conservation, bounded Hamiltonian, hyperbolicity, stability and one-metric weak-field derivation, choosing the least field content that is mathematically healthy rather than a target fit.",
+    "maximum_distinct_action_derivations": 3,
+    "lensing_or_galaxy_score_used_for_selection": false,
+    "universal_constant_selected_here": false
+  },
+  "failure_route": {
+    "action_derivation_authorized": false,
+    "authorized_action_placement_classes": [],
+    "required_next_evidence": [
+      "directly measured gas velocity or independently clocked merger lag",
+      "a preregistered independent merger sample evaluated with the unchanged source definitions"
+    ],
+    "forbidden_repairs": [
+      "relax a source threshold",
+      "drop a cluster, dependence branch or spatial variant",
+      "combine failed features after seeing the result",
+      "open lensing or a halo map to choose a source",
+      "invent or tune an action"
+    ]
+  },
+  "authorization": {
+    "run_after_terminal_v19bq": true,
+    "run_before_terminal_v19bq": false,
+    "select_action_now": false,
+    "write_gravity_formula_now": false,
+    "open_lensing_or_halo_payload": false,
+    "open_galaxy_rotation_payload": false,
+    "open_holdout": false
+  },
+  "outputs": {
+    "terminal_report": "results/sigma_v19bs_source_disposition/report.json"
+  },
+  "claim_boundary": [
+    "V19BS decides only whether source evidence authorizes mathematical action work; it does not select or derive an action.",
+    "A V19BQ failure falsifies the registered I4/I5 source route on the two development mergers and cannot be repaired with gravity targets.",
+    "A V19BQ pass leaves P1 and P3 as mathematical alternatives; constraint and stability derivations, not observational fit quality, must choose between them.",
+    "The time-even I4/I5 snapshot cannot authorize P2 causal memory without independent time-odd or clocked evidence.",
+    "No lensing, halo, galaxy rotation, action, gravity parameter, Solar-System result or holdout enters this disposition."
+  ],
+  "implementation": {
+    "runner": {
+      "path": "scripts/run_sigma_v19bs_source_disposition.py",
+      "sha256": "ee7becae65557d0e44fb17110864dc90d69dc1b5507ba78d568fbac6e1ddbbdd"
+    },
+    "checker": {
+      "path": "scripts/check_sigma_v19bs_source_disposition_preflight.py",
+      "sha256": "29cc1aa51cb09ae4ea9975d406b10f0542c1f820eca1fe0700b2d382b95f12be"
+    }
+  }
+}

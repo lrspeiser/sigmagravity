@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 188,
+    "sigma_protocols": 189,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7310,6 +7310,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "8a5205d978ab25d53b8befb11472ff420e2e8116ad06cd9c43e4d158a9d580ed"
+    },
+    {
+      "config": "configs/sigma_v19bs_source_disposition.json",
+      "protocol_version": "SIGMA-V19BS-SOURCE-DISPOSITION-1.0.0",
+      "status": "frozen before terminal V19BQ source evidence, any action selection or derivation, lensing, halo, galaxy rotation, gravity parameter or holdout access",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "518f4a9aea20a6a026ee5ba333df79ddac6a7f92105dee6060258cbe1f67e93d"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

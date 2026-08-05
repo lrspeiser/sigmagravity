@@ -1,5 +1,21 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19BS source disposition
+
+The post-source decision is now frozen before terminal I4/I5 evidence exists.
+A valid source failure excludes every action-placement class for this route and
+requires new direct temporal gas evidence or a preregistered independent merger
+sample; it cannot be repaired with lensing, halo maps or threshold changes. A
+source pass authorizes mathematical comparison of the time-even P1 constrained
+composite and P3 degenerate pure-metric placements, but does not select either.
+
+The P2 causal-memory route is excluded unless independent time-odd or clocked
+evidence is later obtained. P1 versus P3 must be chosen only by constraints,
+degrees of freedom, conservation, boundedness, hyperbolicity, stability and the
+one-metric weak-field limit. The preflight and pass/fail logic tests pass with
+all gravity targets sealed. See
+[`SIGMA_V19BS_SOURCE_DISPOSITION.md`](SIGMA_V19BS_SOURCE_DISPOSITION.md).
+
 ## 2026-08-05 Sigma V19BR target-sealed terminal chain
 
 The final execution sequence from the live response archive to the I4/I5 source
