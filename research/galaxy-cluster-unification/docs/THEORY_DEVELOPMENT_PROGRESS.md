@@ -1,5 +1,28 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19BP observed source-invariant executor preflight
+
+The terminal source-only integration is now implemented and frozen before any
+observed source score or target field is available. Passing V19X4 gas
+posteriors and V19BM stellar ranks will be streamed through the commissioned
+V19BO map mathematics and V19BN decision engine. The executor preserves full
+draw-level activation, I4 direction and PRESS novelty evidence plus regional
+posterior summaries and independently verifies every terminal product hash.
+
+Each I4 and I5 candidate must survive 2 clusters, 3 gas-correlation branches
+and 6 smoothing/aperture variants: 36 conditions per candidate and 72 candidate
+evaluations in total. The 50-kpc/350-kpc setting is primary, but all five
+alternatives are mandatory. Branches cannot be averaged. I4 direction must
+pass everywhere; only then may either I4 amplitude or scalar I5 satisfy the
+strength requirement. Thus a scalar signal cannot manufacture the direction a
+single-metric lensing theory will need.
+
+The preflight passes, with lensing, halos, galaxy rotation, action selection,
+gravity parameters and holdouts sealed. Observed execution remains blocked on
+terminal V19X4 and V19BM. Solar/PPN remains a later hard veto rather than an
+optimization input. See
+[`SIGMA_V19BP_OBSERVED_SOURCE_INVARIANT_EXECUTOR_PREFLIGHT.md`](SIGMA_V19BP_OBSERVED_SOURCE_INVARIANT_EXECUTOR_PREFLIGHT.md).
+
 ## 2026-08-05 Sigma V19W2C/V19W5 CCD7 response boundary
 
 The live response build exposed a detector boundary not present in the earlier

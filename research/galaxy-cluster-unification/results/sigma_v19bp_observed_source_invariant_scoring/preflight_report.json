@@ -1,0 +1,40 @@
+{
+  "protocol_version": "SIGMA-V19BP-OBSERVED-SOURCE-INVARIANT-SCORING-1.0.0",
+  "decision": "passed_observed_source_executor_preflight_awaiting_terminal_inputs",
+  "config_sha256": "43a966ea04300222a018c9667f2feb50c600509a522bd05fc3dcf9a197075b6a",
+  "runner_sha256": "51375ade6f78c11d6c1944012039aef4406470c66dfff238bf9635ef2ecebd64",
+  "input_hashes": {
+    "v19bl_config": "91914a009129cc8155b2601a4396cb7bebdfd8abef298511b1e748de6dc3f515",
+    "v19bl_report": "570f36a2c0772d6da48a77fb07ed50b014b191ae7d53194726b05e3e79238156",
+    "v19bm_config": "d2db22b08684aa42aba85659da8367a1633ea039a7e5200a96297b087bafce31",
+    "v19bm_preflight_report": "1ff44f795d3f74af930cb932fda001815c4da247cc9b03e9ddf07c8137dbfdfa",
+    "v19bn_config": "006ecf2e32f278b501446fa70a8828d834177926a8fa111382db87f36c6c753d",
+    "v19bn_report": "f797c5d7a4fc320284d468d62f475828a22d86c75afd6d627537196e1cbb262f",
+    "v19bo_config": "06dfdf7ae4a11abf2eac785d24687a999c5337f0b11fb810cdde80d0b227f484",
+    "v19bo_report": "f23878775236bd778607d83c09bc03d9a44adf0d14b34fc3ccd939aaac0c312f",
+    "v19x4_config": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f",
+    "runner": "51375ade6f78c11d6c1944012039aef4406470c66dfff238bf9635ef2ecebd64",
+    "gas_stream_module": "5fe0e39ec0e416a85d86bdea8cb23d098d9ba094149497d86c6cf01a5439d7c2",
+    "score_engine_module": "e2e50e18fc954eccc0ede5e4a14a4b48e0109e85d74abc44f74d33f0d4890755"
+  },
+  "gates": {
+    "all_parent_and_implementation_hashes_exact": true,
+    "all_parent_preflight_gates_pass": true,
+    "two_clusters_three_branches_and_six_variants_frozen": true,
+    "primary_variant_is_50kpc_r350kpc": true,
+    "all_v19bl_thresholds_copied_exactly": true,
+    "i4_direction_required_before_any_action_derivation": true,
+    "lensing_halo_action_gravity_and_holdout_sealed": true,
+    "terminal_inputs_not_authorized_before_both_pass": true
+  },
+  "terminal_v19x4_or_v19bm_opened": false,
+  "observed_source_score_computed": false,
+  "lensing_halo_action_or_gravity_payload_opened": false,
+  "claim_boundary": [
+    "V19BP can identify a robust projected baryonic source state; it does not establish that gravity or lensing follows that state.",
+    "I4 supplies a projected 2D axial tensor, not a full 3D stress; I5 is scalar and can never substitute for the required direction.",
+    "A pass authorizes deriving the least-field-content covariant action from the source result. It does not authorize fitting that action to lensing or galaxy targets.",
+    "The two development clusters can reject a source candidate but cannot establish population universality.",
+    "No lensing, halo, galaxy rotation, action placement, coupling, wavelength, gravity constant or holdout enters this score."
+  ]
+}

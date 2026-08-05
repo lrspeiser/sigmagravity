@@ -1,0 +1,162 @@
+{
+  "protocol_version": "SIGMA-V19BP-OBSERVED-SOURCE-INVARIANT-SCORING-1.0.0",
+  "status": "frozen before terminal V19X4 or V19BM products, any observed I4 or I5 score, lensing, halos, action derivation, gravity fitting, or holdout access",
+  "purpose": "Execute the already frozen V19BL I4/I5 source-only decision on every cluster, temperature-normalization correlation branch, smoothing scale and aperture, with an explicit separation between the directional I4 requirement and the scalar amplitude requirement.",
+  "parents": {
+    "v19bl_config": {
+      "path": "configs/sigma_v19bl_source_invariant_scoring_protocol.json",
+      "sha256": "91914a009129cc8155b2601a4396cb7bebdfd8abef298511b1e748de6dc3f515"
+    },
+    "v19bl_report": {
+      "path": "results/sigma_v19bl_source_invariant_scoring_protocol/report.json",
+      "sha256": "570f36a2c0772d6da48a77fb07ed50b014b191ae7d53194726b05e3e79238156"
+    },
+    "v19bm_config": {
+      "path": "configs/sigma_v19bm_stellar_morphology_control.json",
+      "sha256": "d2db22b08684aa42aba85659da8367a1633ea039a7e5200a96297b087bafce31"
+    },
+    "v19bm_preflight_report": {
+      "path": "results/sigma_v19bm_stellar_morphology_control/preflight_report.json",
+      "sha256": "1ff44f795d3f74af930cb932fda001815c4da247cc9b03e9ddf07c8137dbfdfa"
+    },
+    "v19bn_config": {
+      "path": "configs/sigma_v19bn_source_score_engine_preflight.json",
+      "sha256": "006ecf2e32f278b501446fa70a8828d834177926a8fa111382db87f36c6c753d"
+    },
+    "v19bn_report": {
+      "path": "results/sigma_v19bn_source_score_engine_preflight/report.json",
+      "sha256": "f797c5d7a4fc320284d468d62f475828a22d86c75afd6d627537196e1cbb262f"
+    },
+    "v19bo_config": {
+      "path": "configs/sigma_v19bo_gas_source_stream_preflight.json",
+      "sha256": "06dfdf7ae4a11abf2eac785d24687a999c5337f0b11fb810cdde80d0b227f484"
+    },
+    "v19bo_report": {
+      "path": "results/sigma_v19bo_gas_source_stream_preflight/report.json",
+      "sha256": "f23878775236bd778607d83c09bc03d9a44adf0d14b34fc3ccd939aaac0c312f"
+    },
+    "v19x4_config": {
+      "path": "configs/sigma_v19x4_gas_state_math_preflight.json",
+      "sha256": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f"
+    }
+  },
+  "registered_inputs": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "rank_correlations": [
+      -0.9,
+      0.0,
+      0.9
+    ],
+    "draws": 4096,
+    "candidates": [
+      "I4_THERMODYNAMIC_GRADIENT_STRESS",
+      "I5_BAROCLINICITY"
+    ],
+    "gas_fields": [
+      "electron_density_cm3",
+      "entropy_proxy_keV_cm2",
+      "thermal_pressure_erg_cm3",
+      "gas_surface_density_msun_kpc2"
+    ],
+    "stellar_control": "within-cluster, within-draw stellar-light percentile rank paired by equal sample_id"
+  },
+  "variants": {
+    "grid_spacing_kpc": 10.0,
+    "smoothing_fwhm_kpc": [
+      50.0,
+      100.0
+    ],
+    "radii_kpc": [
+      250.0,
+      350.0,
+      500.0
+    ],
+    "primary_smoothing_fwhm_kpc": 50.0,
+    "primary_radius_kpc": 350.0,
+    "primary_choice_reason": "Use the least-smoothed preregistered field at the preregistered primary aperture to retain the most measured source topology; all other five variants remain mandatory simultaneous stability tests and cannot be dropped."
+  },
+  "thresholds": {
+    "minimum_gradient_detection_sigma": 3.0,
+    "minimum_supported_regions": 32,
+    "minimum_unexplained_variance_fraction": 0.2,
+    "minimum_novelty_draw_pass_fraction": 0.9,
+    "minimum_detection_sigma": 3.0,
+    "maximum_I4_axial_width_deg": 30.0,
+    "maximum_activation_change_fraction": 0.1,
+    "maximum_axis_change_deg": 10.0,
+    "minimum_variant_draw_pass_fraction": 0.9,
+    "minimum_leave_one_region_out_pass_fraction": 0.9
+  },
+  "inherited_v19bl_thresholds": {
+    "minimum_gradient_detection_sigma": 3.0,
+    "minimum_supported_regions": 32,
+    "minimum_unexplained_variance_fraction": 0.2,
+    "minimum_novelty_draw_pass_fraction": 0.9,
+    "minimum_detection_sigma": 3.0,
+    "maximum_I4_axial_width_deg": 30.0,
+    "maximum_activation_change_fraction": 0.1,
+    "maximum_axis_change_deg": 10.0,
+    "minimum_variant_draw_pass_fraction": 0.9,
+    "minimum_leave_one_region_out_pass_fraction": 0.9
+  },
+  "decision_rule": {
+    "requires_I4_direction_in_both_clusters_all_branches": true,
+    "amplitude_requirement": "After I4 direction passes every cluster and correlation branch, require either I4 amplitude or I5 scalar activation to pass every cluster and branch.",
+    "variant_requirement": "Every core gate passes separately in all six scale-radius variants and at least 90 percent of draws remain within the frozen primary-to-all-variants tolerance.",
+    "correlation_requirement": "Every decision must pass rho=-0.9, 0.0 and +0.9; branches are robustness alternatives and are never averaged.",
+    "failure_action": "If the gate fails, do not open lensing or invent an action. Record which source component failed and obtain direct gas velocities or a preregistered independent merger sample."
+  },
+  "terminal_authorization": {
+    "v19x4_report": "results/sigma_v19x4_gas_state_posterior/report.json",
+    "required_v19x4_status": "gas_state_posterior_and_common_grids_passed_source_invariant_scoring_authorized",
+    "v19bm_report": "results/sigma_v19bm_stellar_morphology_control/report.json",
+    "required_v19bm_status": "stellar_morphology_control_passed_invariant_scoring_ready",
+    "require_every_report_gate": true,
+    "require_every_product_size_and_sha256": true,
+    "require_target_sealed_reports": true
+  },
+  "execution": {
+    "draw_batch_size": 16,
+    "one_branch_and_one_variant_in_memory": true,
+    "preserve_full_draw_outputs": [
+      "candidate activation",
+      "I4 axial direction",
+      "PRESS unexplained fraction"
+    ],
+    "preserve_region_outputs": "q16, median and q84 of candidate components and all five density-control predictors plus support masks",
+    "never_average_correlation_branches": true
+  },
+  "outputs": {
+    "root": "results/sigma_v19bp_observed_source_invariant_scoring",
+    "preflight_report": "results/sigma_v19bp_observed_source_invariant_scoring/preflight_report.json",
+    "terminal_report": "results/sigma_v19bp_observed_source_invariant_scoring/report.json",
+    "branch_products": "one hash-bound source-only NPZ per cluster and rank-correlation branch"
+  },
+  "authorization": {
+    "run_preflight_now": true,
+    "run_after_terminal_v19x4_and_v19bm": true,
+    "run_before_terminal_inputs": false,
+    "read_lensing_or_halo_payload": false,
+    "derive_action_now": false,
+    "change_gravity_formula_or_parameter": false,
+    "open_holdout": false
+  },
+  "claim_boundary": [
+    "V19BP can identify a robust projected baryonic source state; it does not establish that gravity or lensing follows that state.",
+    "I4 supplies a projected 2D axial tensor, not a full 3D stress; I5 is scalar and can never substitute for the required direction.",
+    "A pass authorizes deriving the least-field-content covariant action from the source result. It does not authorize fitting that action to lensing or galaxy targets.",
+    "The two development clusters can reject a source candidate but cannot establish population universality.",
+    "No lensing, halo, galaxy rotation, action placement, coupling, wavelength, gravity constant or holdout enters this score."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19bp_observed_source_invariant_scoring.py",
+    "runner_sha256": "51375ade6f78c11d6c1944012039aef4406470c66dfff238bf9635ef2ecebd64",
+    "gas_stream_module": "src/voidscreen/sigma_gas_source_stream.py",
+    "gas_stream_module_sha256": "5fe0e39ec0e416a85d86bdea8cb23d098d9ba094149497d86c6cf01a5439d7c2",
+    "score_engine_module": "src/voidscreen/sigma_source_score_engine.py",
+    "score_engine_module_sha256": "e2e50e18fc954eccc0ede5e4a14a4b48e0109e85d74abc44f74d33f0d4890755"
+  }
+}
