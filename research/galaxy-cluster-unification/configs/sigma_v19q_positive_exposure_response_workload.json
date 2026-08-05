@@ -1,0 +1,74 @@
+{
+  "protocol_version": "SIGMA-V19Q-POSITIVE-EXPOSURE-RESPONSE-WORKLOAD-1.0.0",
+  "status": "frozen after V19P localized its sole nonconservation to a geometrically admitted Bullet event on an exact flux_obs exposure pixel equal to zero, but before applying the positive-exposure rule to an event table, knowing the cross-sample conservation result, changing task membership, constructing a spectrum or response, fitting thermodynamics, opening lensing data, or changing gravity physics",
+  "purpose": "Reproduce the full pixel support of the frozen per-observation flux_obs science images by requiring both exact FOV membership and strictly positive exact broad-band exposure at the event's mapped image pixel.",
+  "parents": {
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "v19m_report": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+    "v19m_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+    "v19n_manifest": "results/sigma_v19n_regional_response_workload/response_task_manifest.csv",
+    "v19n_manifest_sha256": "dc3a64aafe1cc81e0c02b9d3d371fa38e91cf6dfc2c38b2f8ad9f3e197205f4c",
+    "input_inventory": "results/sigma_v19p_exact_flux_obs_support/input_inventory.json",
+    "input_inventory_sha256": "085d7ddcc855637dfce8cce2494f6c7d2d50b25950dabf8c0d8c10733369d983",
+    "v19p_config": "configs/sigma_v19p_exact_flux_obs_support.json",
+    "v19p_config_sha256": "3e89f4567918bf032cbda43bfd42a2af0e57478b2debe793183f224f348066b5",
+    "v19p_runner": "scripts/run_sigma_v19p_exact_flux_obs_support.py",
+    "v19p_runner_sha256": "660a19981a6ec1be7c03f136995c95b82fb17b12e6621ea8ba38f26f05118e75",
+    "v19p_report": "results/sigma_v19p_exact_flux_obs_support/report.json",
+    "v19p_report_sha256": "9e548c2375010be155edd403f2c65f50306ff070c663f5157b3c10f15ae86605",
+    "v19p_pixel_diagnostic": "results/sigma_v19p_exact_flux_obs_support/pixel_diagnostic.json",
+    "v19p_pixel_diagnostic_sha256": "f06f6af1196f16cb435d4e110da853cccaa2a59a3c18a780276ff93b8896ac33"
+  },
+  "sample": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "observation_count": 20,
+    "admitted_region_count": 494,
+    "expected_response_task_count_by_cluster": {
+      "BULLET": 3812,
+      "ABELL2146": 1270
+    },
+    "expected_response_task_count_total": 5082,
+    "task_membership_must_equal_v19n": true
+  },
+  "science_support_rule": {
+    "formula": "I_event = I[500 <= ENERGY <= 7000] I[sky in exact flux_obs FOV] I[0 <= row < ny, 0 <= col < nx] I[exact flux_obs broad exposure(row,col) > 0]",
+    "row": "floor((Y-ylo)/binsize)",
+    "column": "floor((X-xlo)/binsize)",
+    "exposure_threshold": 0.0,
+    "comparison": "strictly_greater_than",
+    "same_rule_for_every_cluster_observation_region_and_ccd": true,
+    "event_identity_obsid_region_ccd_or_position_exception": false,
+    "science_count_truth": "the matching ObsID_0.5-7.0_thresh.img produced by the frozen V19H flux_obs call",
+    "background_rule": "retain the exact V19N blank-sky assignment because the frozen V19H background image was constructed directly by observation and CCD without the science exposure mask"
+  },
+  "gates": {
+    "every_observation_and_region_event_count_equals_exact_flux_obs_count_image": true,
+    "total_science_count_delta": 0,
+    "per_observation_count_images_sum_pixelwise_to_combined_image": true,
+    "v19n_scaled_background_conservation_retained": true,
+    "task_key_set_equals_v19n": true,
+    "task_count_equals_5082": true,
+    "all_494_admitted_regions_have_at_least_one_task": true,
+    "no_unexpected_ccd_id": true,
+    "failure_rule": "fail before response construction with zero count tolerance and no event-specific or object-specific exception"
+  },
+  "engineering_report": {
+    "files_per_response_cell": 4,
+    "provisional_upper_storage_megabytes_per_cell": 25.0,
+    "storage_is_planning_only": true
+  },
+  "integrity": {
+    "v19p_failure_and_diagnostic_known_at_freeze": true,
+    "positive_exposure_event_filter_applied_at_freeze": false,
+    "cross_sample_conservation_outcome_known_at_freeze": false,
+    "corrected_manifest_constructed_at_freeze": false,
+    "spectrum_or_response_constructed_at_freeze": false,
+    "temperature_density_mach_or_speed_fitted_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}
