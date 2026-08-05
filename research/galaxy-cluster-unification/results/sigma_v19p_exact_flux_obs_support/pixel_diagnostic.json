@@ -1,0 +1,72 @@
+{
+  "status": "post_v19p_failure_pixel_diagnostic",
+  "generated_utc": "2026-08-05T06:08:28.790218+00:00",
+  "v19p_config_sha256": "3e89f4567918bf032cbda43bfd42a2af0e57478b2debe793183f224f348066b5",
+  "v19p_report_sha256": "9e548c2375010be155edd403f2c65f50306ff070c663f5157b3c10f15ae86605",
+  "delta_pixel_count_inside_regions": 1,
+  "deltas": [
+    {
+      "cluster": "BULLET",
+      "obsid": 554,
+      "image_row_zero_based": 353,
+      "image_column_zero_based": 592,
+      "bin_id": 24,
+      "event_count": 1,
+      "flux_obs_image_count": 0,
+      "event_minus_image": 1,
+      "flux_obs_exposure": 0.0,
+      "events_in_pixel": [
+        {
+          "x": 4753.28076171875,
+          "y": 4250.0283203125,
+          "time": 88106634.15366144,
+          "energy": 3402.91748046875,
+          "pi": 234,
+          "ccd_id": 3,
+          "chipx": 2,
+          "chipy": 528,
+          "detx": 4559.6865234375,
+          "dety": 5076.24560546875,
+          "grade": 0,
+          "status": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "gate_or_threshold_changed": false,
+  "spectrum_or_response_constructed": false,
+  "gravity_formula_or_parameter_changed": false
+}

@@ -52,3 +52,7 @@ research/galaxy-cluster-unification/configs/sigma_v19p_exact_flux_obs_support.js
 research/galaxy-cluster-unification/results/sigma_v19p_exact_flux_obs_support/input_inventory.json -text
 research/galaxy-cluster-unification/scripts/freeze_sigma_v19p_flux_obs_inventory.py -text
 research/galaxy-cluster-unification/scripts/run_sigma_v19p_exact_flux_obs_support.py -text
+research/galaxy-cluster-unification/scripts/diagnose_sigma_v19p_support_delta.py -text
+research/galaxy-cluster-unification/results/sigma_v19p_exact_flux_obs_support/report.json -text
+research/galaxy-cluster-unification/results/sigma_v19p_exact_flux_obs_support/pixel_diagnostic.json -text
+research/galaxy-cluster-unification/results/sigma_v19p_exact_flux_obs_support/response_task_manifest.csv text eol=crlf
