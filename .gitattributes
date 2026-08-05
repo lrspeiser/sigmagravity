@@ -64,3 +64,5 @@ research/galaxy-cluster-unification/configs/sigma_v19r_response_commissioning.js
 research/galaxy-cluster-unification/scripts/run_sigma_v19r_response_commissioning.py -text
 research/galaxy-cluster-unification/results/sigma_v19r_response_commissioning/report.json -text
 research/galaxy-cluster-unification/results/sigma_v19r_response_commissioning/frozen_products/specextract.log -text -diff
+research/galaxy-cluster-unification/configs/sigma_v19s_hi4pi_acquisition.json -text
+research/galaxy-cluster-unification/scripts/download_sigma_v19s_hi4pi.py -text

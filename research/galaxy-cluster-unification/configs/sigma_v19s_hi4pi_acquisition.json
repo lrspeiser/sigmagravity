@@ -1,0 +1,48 @@
+{
+  "protocol_version": "SIGMA-V19S-HI4PI-ACQUISITION-1.0.0",
+  "status": "frozen after V19R passed response commissioning but before querying either cluster's Galactic hydrogen column, reading a V19S HEASARC response, fitting a temperature, opening lensing data, or changing gravity physics",
+  "purpose": "Acquire the fixed Galactic neutral-hydrogen absorption input for the Bullet Cluster and Abell 2146 using the same HI4PI cone statistic inherited from the passed V17C temperature pipeline.",
+  "parents": {
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "v19r_report": "results/sigma_v19r_response_commissioning/report.json",
+    "v19r_report_sha256": "5653b646c43ca17a36e602e012c6e92f589f0b4e3984365761927af13e44423f",
+    "inherited_downloader": "scripts/download_sigma_v17c_hi4pi.py",
+    "inherited_downloader_sha256": "a66d26c57f6a9a3e6e39f6122e7336afeb69b317ffca2e5fc7602ccce0848bd8"
+  },
+  "source": {
+    "authority": "NASA HEASARC nH version 3 web interface",
+    "endpoint": "https://heasarc.gsfc.nasa.gov/cgi-bin/Tools/w3nh/w3nh.pl",
+    "map": "h1_nh_HI4PI.fits",
+    "coordinate_system": "Equatorial",
+    "equinox": 2000,
+    "cone_radius_deg": 0.1,
+    "usemap": 0,
+    "selected_statistic": "inverse-distance weighted average nH within the cone"
+  },
+  "targets": {
+    "BULLET": {
+      "center_ra_deg": 104.6247543743987,
+      "center_dec_deg": -55.94659781854907
+    },
+    "ABELL2146": {
+      "center_ra_deg": 239.044229763915,
+      "center_dec_deg": 66.3559555600326
+    }
+  },
+  "gates": {
+    "both_targets_return_hi4pi_map": true,
+    "average_and_weighted_average_are_finite_positive": true,
+    "target_centers_equal_frozen_v19h_centers": true,
+    "raw_responses_and_query_urls_are_hashed": true,
+    "failure_rule": "fail before temperature fitting; do not substitute another map, cone radius, center or absorption value"
+  },
+  "integrity": {
+    "query_executed_at_freeze": false,
+    "v19s_nh_value_known_at_freeze": false,
+    "spectrum_or_response_constructed_at_freeze": false,
+    "temperature_or_abundance_fit_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}
