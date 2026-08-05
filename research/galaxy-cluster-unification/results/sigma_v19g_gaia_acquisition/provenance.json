@@ -1,0 +1,35 @@
+{
+  "astrometric_offset_fit": false,
+  "bytes": 2093220,
+  "config_sha256": "446c2818eef81b4bec2f5322490081dcbae57dbfe0896f2193552eb4871f9de3",
+  "files": 2,
+  "generated_utc": "2026-08-05T04:16:16.428421+00:00",
+  "lensing_target_opened": false,
+  "protocol_version": "SIGMA-V19G-GAIA-HIERARCHICAL-ASTROMETRY-1.0.0",
+  "records": [
+    {
+      "bytes": 1620729,
+      "cluster": "BULLET",
+      "query": "SELECT source_id,designation,ref_epoch,ra,dec,ra_error,dec_error,pmra,pmdec,pmra_error,pmdec_error,astrometric_params_solved,phot_g_mean_mag,ruwe,duplicated_source,visibility_periods_used FROM gaiadr3.gaia_source WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',104.63158922818499,-55.956299339461,0.4)) ORDER BY source_id",
+      "query_sha256": "0d39f43f7fe122d28717000385f8318882c1397824fc9e3ca1a0b641835efd7b",
+      "relative_path": "data/raw/sigma_v19g_gaia_dr3/BULLET_gaia_dr3.csv",
+      "rows": 8101,
+      "sha256": "cd55229dcd4cf14f0d703cee8e3488b16e984a933472075ea9a27c22ca871b8c"
+    },
+    {
+      "bytes": 472491,
+      "cluster": "ABELL2146",
+      "query": "SELECT source_id,designation,ref_epoch,ra,dec,ra_error,dec_error,pmra,pmdec,pmra_error,pmdec_error,astrometric_params_solved,phot_g_mean_mag,ruwe,duplicated_source,visibility_periods_used FROM gaiadr3.gaia_source WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',239.02009370228,66.3551570476385,0.4)) ORDER BY source_id",
+      "query_sha256": "9fc0baaabb87957a7c38b87af9b83507ec3cfbbf61b4e34e25ea484b98b0a33e",
+      "relative_path": "data/raw/sigma_v19g_gaia_dr3/ABELL2146_gaia_dr3.csv",
+      "rows": 2404,
+      "sha256": "4e54816e569644a2423036ce3ac5bdae74c69fc28f0cff4809da891522611b05"
+    }
+  ],
+  "registered_science_image_inspected": false,
+  "rows": 10505,
+  "shock_front_fitted": false,
+  "source_constructed": false,
+  "status": "frozen_v19g_Gaia_DR3_reference_cones_downloaded_and_hashed",
+  "xray_source_crossmatch_run": false
+}

@@ -16,15 +16,19 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The current causal-assembly checkpoint is
+[`docs/SIGMA_V19G_ASTROMETRY_GATE.md`](docs/SIGMA_V19G_ASTROMETRY_GATE.md),
+following the source-readiness record in
 [`docs/SIGMA_V19B_V19F_CAUSAL_SOURCE_READINESS.md`](docs/SIGMA_V19B_V19F_CAUSAL_SOURCE_READINESS.md).
 The target-blind Bullet Cluster/Abell 2146 development pair now has 141 member
 rows with quoted velocity uncertainties and 20 current-CALDB Chandra
 observations. All 20 passed reprocessing, flare, compact-source, and matched
 blank-sky gates, retaining 979.141 ks; the worst retained fraction is 85.6%.
+All 20 also passed the frozen translation-only Gaia registration gate, with
+239 accepted pairs and 0.176--0.350 arcsec radial RMS.
 No replacement-cluster lensing target has been opened. This makes a causal
 source measurable but does not yet show that it predicts halo size. The next
-required freeze covers registration, X-ray edge/thermodynamic uncertainties,
-and the projection/clock ensemble before any source is constructed.
+required freeze covers X-ray edge/thermodynamic uncertainties and the
+projection/clock ensemble before any source is constructed.
 
 The earlier mechanism-discovery result is
 [`docs/SIGMA_V15_SPENT_INVARIANT_INFERENCE.md`](docs/SIGMA_V15_SPENT_INVARIANT_INFERENCE.md).

@@ -61,6 +61,16 @@ amplitude, centroid, or shear direction. V19 asks whether a genuinely causal
 assembly coordinate supplies the missing phase information. The new data make
 that question testable; they do not answer it yet.
 
+## V19G astrometry update
+
+The next gate has now passed.  Frozen 0.4-degree Gaia DR3 cones supplied 8,101
+Bullet and 2,404 Abell 2146 reference sources.  All twenty Chandra observations
+passed translation-only hierarchical registration: 239 pairs were retained,
+the per-observation minimum was three, and radial RMS values ranged from 0.1763
+to 0.3499 arcsec against a 0.5-arcsec ceiling.  No rotation, scale, or shear was
+fitted, and no registered science image was inspected.  Full details are in
+`docs/SIGMA_V19G_ASTROMETRY_GATE.md`.
+
 ## What remains sealed and unknown
 
 We do not yet know whether the causal variable is identifiable from these
@@ -68,7 +78,7 @@ data, whether it transfers between the two systems, or whether it improves on
 baryons-only gravity. In particular, the following work must precede any
 lensing comparison:
 
-1. freeze absolute and relative astrometric registration;
+1. ~~freeze absolute and relative astrometric registration;~~ completed in V19G;
 2. freeze a common exposure/background-corrected source-map grid;
 3. freeze an automated surface-brightness edge and shock-normal estimator;
 4. freeze adaptive spectral regions and density/temperature uncertainties;
@@ -97,3 +107,5 @@ Machine-readable records:
 - `results/sigma_v19e_chandra_acquisition/provenance.json`
 - `results/sigma_v19f_chandra_repro/report.json`
 - `results/sigma_v19f_chandra_cleaning/report.json`
+- `results/sigma_v19g_gaia_acquisition/provenance.json`
+- `results/sigma_v19g_chandra_astrometry/report.json`

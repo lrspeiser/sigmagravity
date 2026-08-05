@@ -418,3 +418,11 @@ def test_v19_observability_gate_does_not_pretend_to_be_a_formula() -> None:
     v19f = protocols["sigma_v19f_chandra_source_reduction.json"]
     assert v19f["role"] == "gate_or_data_protocol_no_new_formula_fragment"
     assert v19f["formula_fragment_count"] == 0
+
+    v19g = protocols["sigma_v19g_gaia_hierarchical_astrometry.json"]
+    assert v19g["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19g["formula_fragment_count"] == 0
+
+    v19h = protocols["sigma_v19h_causal_observable_protocol.json"]
+    assert v19h["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19h["formula_fragment_count"] == 0

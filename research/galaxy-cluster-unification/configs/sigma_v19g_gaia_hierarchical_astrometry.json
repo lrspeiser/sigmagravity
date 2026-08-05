@@ -1,0 +1,132 @@
+{
+  "protocol_version": "SIGMA-V19G-GAIA-HIERARCHICAL-ASTROMETRY-1.0.0",
+  "status": "frozen before any v19 Gaia query, X-ray/Gaia cross-match, relative X-ray cross-match, transform application, registered science-image inspection, shock fit, source construction, or replacement-cluster lensing access",
+  "purpose": "Place every cleaned Bullet Cluster and Abell 2146 Chandra observation on one external ICRS frame without allowing astrometric scale, rotation, or shear to mimic a halo size or direction.",
+  "parents": {
+    "reduction_config": "configs/sigma_v19f_chandra_source_reduction.json",
+    "reduction_config_sha256": "ef10d042d5a1a34b90044dcc93ec2820ae6808610df489f6972a7a06a7396c06",
+    "repro_report": "results/sigma_v19f_chandra_repro/report.json",
+    "repro_report_sha256": "6541133c249103400e9cedffc8f8118e72fd75f2a6bda7c3db1d876614cd7ab9",
+    "cleaning_report": "results/sigma_v19f_chandra_cleaning/report.json",
+    "cleaning_report_sha256": "b5ff9831f7ebf2b0b51fc6f00c75626f7e75ec03f52a8be12ae1774093f88dbc",
+    "shared_gaia_downloader": "scripts/download_sigma_v17a_gaia_astrometry.py",
+    "shared_gaia_downloader_sha256": "a1b40e5315cb534aa3aabeb2bbcfab6948692a6ad39c0c2f4dea4164dd9e0082",
+    "shared_direct_astrometry": "scripts/run_sigma_v17a_chandra_astrometry.py",
+    "shared_direct_astrometry_sha256": "f2c40698792bf76d6f108fbc02d6b54ed7b1cb9c2d8079f977cd97102d21e370",
+    "shared_hierarchical_astrometry": "scripts/run_sigma_v17a2_hierarchical_astrometry.py",
+    "shared_hierarchical_astrometry_sha256": "1be967d69577e312528c0baf60795d813cbdaceb94b104490f7c4a47df90f84f"
+  },
+  "archive": {
+    "release": "Gaia DR3",
+    "tap_sync_url": "https://gea.esac.esa.int/tap-server/tap/sync",
+    "table": "gaiadr3.gaia_source",
+    "format": "csv",
+    "cone_radius_deg": 0.4,
+    "columns": [
+      "source_id",
+      "designation",
+      "ref_epoch",
+      "ra",
+      "dec",
+      "ra_error",
+      "dec_error",
+      "pmra",
+      "pmdec",
+      "pmra_error",
+      "pmdec_error",
+      "astrometric_params_solved",
+      "phot_g_mean_mag",
+      "ruwe",
+      "duplicated_source",
+      "visibility_periods_used"
+    ],
+    "selection": "all Gaia DR3 sources in each frozen cone; no magnitude, proper-motion, color, RUWE, or morphology cut",
+    "raw_directory": "data/raw/sigma_v19g_gaia_dr3"
+  },
+  "clusters": {
+    "BULLET": {
+      "center_ra_deg": 104.63158922818499,
+      "center_dec_deg": -55.956299339461,
+      "center_definition": "component-wise median RA_NOM and DEC_NOM across the ten frozen archived event headers",
+      "reference_obsid": 5356
+    },
+    "ABELL2146": {
+      "center_ra_deg": 239.02009370228,
+      "center_dec_deg": 66.3551570476385,
+      "center_definition": "component-wise median RA_NOM and DEC_NOM across the ten frozen archived event headers",
+      "reference_obsid": 12247
+    }
+  },
+  "reference_selection": {
+    "rule": "greatest cleaned exposure within each cluster, with lower ObsID breaking an exact tie",
+    "reference_must_pass_absolute_gaia_gate": true,
+    "resolved_from_frozen_cleaning_report": {
+      "BULLET": {
+        "obsid": 5356,
+        "clean_exposure_seconds": 96212.411017543
+      },
+      "ABELL2146": {
+        "obsid": 12247,
+        "clean_exposure_seconds": 64942.42168339
+      }
+    }
+  },
+  "epoch_propagation": {
+    "target_epoch": "midpoint of DATE-OBS and DATE-END for the Gaia anchor ObsID, expressed as Julian year",
+    "five_or_six_parameter_sources": "linear tangent-plane propagation using Gaia DR3 pmra=mu_alpha*cos(dec) and pmdec",
+    "two_parameter_sources": "retain the Gaia DR3 reference-epoch position and uncertainty; do not invent a proper motion",
+    "parallax_and_perspective_acceleration": "not applied because the 2-arcsec candidate radius and 0.5-arcsec residual gate dominate them for this registration"
+  },
+  "xray_source_selection": {
+    "minimum_source_significance": 3.0,
+    "minimum_net_counts_exclusive": 0.0,
+    "catalog": "the frozen binsize-2 0.5-7 keV wavdetect catalogs from v19F cleaning",
+    "additional_morphology_or_brightness_cut": "none"
+  },
+  "matching": {
+    "role": "absolute Gaia match for the one source-blind reference observation per cluster",
+    "tool": "CIAO wcs_match 4.18.0",
+    "method": "trans",
+    "initial_radius_arcsec": 2.0,
+    "residual_limit_arcsec": 0.5,
+    "residual_type": 0,
+    "residual_factor": 0.0,
+    "minimum_final_source_pairs": 3,
+    "maximum_final_radial_rms_arcsec": 0.5,
+    "rotation_deg": 0.0,
+    "scale": 1.0,
+    "shear": 0.0
+  },
+  "relative_matching": {
+    "role": "relative match of each remaining observation to its Gaia-corrected reference catalog",
+    "input_sources": "the same frozen wavdetect catalogs with SRC_SIGNIFICANCE>=3 and NET_COUNTS>0",
+    "method": "trans",
+    "initial_radius_arcsec": 2.0,
+    "residual_limit_arcsec": 0.5,
+    "residual_type": 0,
+    "residual_factor": 0.0,
+    "minimum_final_source_pairs": 3,
+    "maximum_final_radial_rms_arcsec": 0.5,
+    "rotation_deg": 0.0,
+    "scale": 1.0,
+    "shear": 0.0
+  },
+  "application": {
+    "all_matches_must_pass_before_any_transform_is_applied": true,
+    "reference_observation": "apply only its frozen Gaia translation",
+    "other_observations": "apply only their frozen translation into the Gaia-anchored reference frame",
+    "files": "update every aspect solution and copied clean science/blank-sky event WCS; set ASOLFILE to the corrected aspect list",
+    "derived_products": "recreate all later images, exposure maps, FOVs, masks, and spectra from the corrected products",
+    "failure_rule": "Fail the cluster map if either Gaia anchor or any relative observation has fewer than three final pairs, exceeds 0.5-arcsec RMS, or requires non-translation freedom; do not widen the radius, lower source significance, or fit rotation, scale, or shear."
+  },
+  "integrity": {
+    "gaia_rows_or_matches_known_at_freeze": false,
+    "relative_match_outcomes_known_at_freeze": false,
+    "registered_science_image_inspected": false,
+    "shock_front_fitted": false,
+    "source_constructed": false,
+    "lensing_target_opened": false,
+    "gravity_parameter_changed": false
+  },
+  "next_protocol_boundary": "If all v19G gates pass, freeze the common map grid, edge likelihood, adaptive spectral bins, thermodynamic uncertainty propagation, and projection-clock ensemble before inspecting a registered science image."
+}

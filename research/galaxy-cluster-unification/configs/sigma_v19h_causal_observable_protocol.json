@@ -1,0 +1,364 @@
+{
+  "protocol_version": "SIGMA-V19H-CAUSAL-OBSERVABLES-1.0.0",
+  "status": "frozen after the v19G astrometric gate passed and before any registered science-image inspection, merged image construction, edge search, spectrum extraction, temperature or density fit, projection draw, causal-source construction, replacement-cluster lensing access, or gravity fit",
+  "purpose": "Measure source-side gas morphology, merger fronts, thermodynamic state, member phase structure, and assembly-clock uncertainty for the Bullet Cluster and Abell 2146 under one target-blind protocol.",
+  "parents": {
+    "source_screen_config": "configs/sigma_v19b_replacement_cluster_screen.json",
+    "source_screen_config_sha256": "bb0e6fdb1d5fc60947575964a741c9b08918635005abaeb51b418f2bfa5066b4",
+    "source_archive_manifest": "data/raw/sigma_v19c_assembly_sources/provenance.json",
+    "source_archive_manifest_sha256": "398ec0167777e0050616909f6c4f9fd1cf7256a7577984156b617bf6ddd4c73b",
+    "member_report": "results/sigma_v19d_member_catalog_extraction/report.json",
+    "member_report_sha256": "f13992494779593794cb3cd7b42e4dada54ff3356198e2a02c3dacd633366dd1",
+    "reduction_config": "configs/sigma_v19f_chandra_source_reduction.json",
+    "reduction_config_sha256": "ef10d042d5a1a34b90044dcc93ec2820ae6808610df489f6972a7a06a7396c06",
+    "cleaning_report": "results/sigma_v19f_chandra_cleaning/report.json",
+    "cleaning_report_sha256": "b5ff9831f7ebf2b0b51fc6f00c75626f7e75ec03f52a8be12ae1774093f88dbc",
+    "astrometry_config": "configs/sigma_v19g_gaia_hierarchical_astrometry.json",
+    "astrometry_config_sha256": "446c2818eef81b4bec2f5322490081dcbae57dbfe0896f2193552eb4871f9de3",
+    "gaia_acquisition": "results/sigma_v19g_gaia_acquisition/provenance.json",
+    "gaia_acquisition_sha256": "83df2a8bca31b9c65e3ad580f4c31fb7a7a9a23980dee6bdf785b8fcab2aa200",
+    "astrometry_report": "results/sigma_v19g_chandra_astrometry/report.json",
+    "astrometry_report_sha256": "b6f77ad4dff16af66a1698f6d8e9310cadd98d1085c5d0965ec57cd2c58732a6",
+    "inherited_map_runner": "scripts/run_sigma_v17b_temperature_regions.py",
+    "inherited_map_runner_sha256": "fb2e5be4d2c302fed2ec77173e45e7d3659c0161cc7341f2e3251b66bbd386a0",
+    "inherited_hi4pi_downloader": "scripts/download_sigma_v17c_hi4pi.py",
+    "inherited_hi4pi_downloader_sha256": "a66d26c57f6a9a3e6e39f6122e7336afeb69b317ffca2e5fc7602ccce0848bd8"
+  },
+  "sample": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "role": "mechanism-development pair selected using source observability only",
+    "same_rules_for_both_clusters": true,
+    "lensing_targets_sealed": true
+  },
+  "coordinates": {
+    "cosmology": "Planck18",
+    "native_acis_pixel_arcsec": 0.492,
+    "output_pixel_arcsec": 0.984,
+    "image_binsize_native_pixels": 2,
+    "grid_half_width_kpc": 1400.0,
+    "centroid_aperture_kpc": 1000.0,
+    "analysis_radius_kpc": 1200.0,
+    "clusters": {
+      "BULLET": {
+        "redshift": 0.296,
+        "initial_center_ra_deg": 104.63158922818499,
+        "initial_center_dec_deg": -55.956299339461,
+        "kpc_per_arcsec_Planck18": 4.554708213666332,
+        "reference_obsid": 5356,
+        "member_catalog": "data/derived/sigma_v19d_assembly_members/bullet_members.csv",
+        "member_catalog_sha256": "36a87b48f77e4998fc8b4136ab1b1c559b90d1b18d7d65633e8dacf167dea64b"
+      },
+      "ABELL2146": {
+        "redshift": 0.2323,
+        "initial_center_ra_deg": 239.02009370228,
+        "initial_center_dec_deg": 66.3551570476385,
+        "kpc_per_arcsec_Planck18": 3.822721649528813,
+        "reference_obsid": 12247,
+        "member_catalog": "data/derived/sigma_v19d_assembly_members/abell2146_members.csv",
+        "member_catalog_sha256": "cf7c61854f4aa0317a9dd3ea8e91618e90fa7823a6cb30634147f8af39243360"
+      }
+    }
+  },
+  "registered_inputs": {
+    "root": "/home/henry/sigma-v19f-chandra/astrometry_v102",
+    "science_events": "the v19G Gaia-corrected, flare-cleaned event for every observation",
+    "blank_sky_events": "the matching v19G Gaia-corrected blank-sky event for every observation",
+    "point_sources": "exclude the already frozen v19F 1.5-times-wavdetect ellipses from science and blank-sky events before reprojection",
+    "reprojection": "CIAO reproject_events with aspect=none onto the Gaia-anchored reference event; science uses random=-1 to preserve EDSER positions and TIME-less blank sky uses deterministic random=integer ObsID",
+    "all_twenty_observations_required": true,
+    "observation_selection_after_image_creation": "forbidden"
+  },
+  "image_products": {
+    "morphology_energy_keV": [
+      0.5,
+      2.0
+    ],
+    "spectral_support_energy_keV": [
+      0.5,
+      7.0
+    ],
+    "particle_normalization_energy_keV": [
+      9.0,
+      12.0
+    ],
+    "morphology_effective_energy_keV": 1.5,
+    "exposure_tool": "CIAO flux_obs 4.18.2",
+    "exposure_map": "sum of per-observation effective-area-times-exposure maps on the exact common tangent grid",
+    "blank_sky_normalization": "use each frozen v19F BKGSCALn once for its matching CCD_ID; do not rescale event rows or apply a second area factor",
+    "scaled_background_counts": "sum over observation and CCD of BKGSCALn times raw blank-sky counts",
+    "background_variance": "sum over observation and CCD of BKGSCALn squared times raw blank-sky counts",
+    "valid_pixel_mask": "relative exposure at least 0.5, inside 1200 kpc, and covered by at least one science FOV after point-source exclusion",
+    "centroid": {
+      "weight": "positive part of background-subtracted 0.5-2.0 keV counts divided by exposure within the current 1000-kpc aperture",
+      "initialization": "the frozen component-wise median RA_NOM and DEC_NOM used by v19G",
+      "convergence_output_pixels": 0.1,
+      "maximum_iterations": 100,
+      "failure_rule": "fail rather than alter the aperture, energy band, exposure mask, or weighting"
+    },
+    "coverage_gate": {
+      "minimum_valid_area_fraction_inside_1000_kpc": 0.8,
+      "minimum_net_morphology_counts_inside_1000_kpc": 10000.0,
+      "failure_rule": "fail the source-observability gate; never drop an observation or shrink the common physical aperture based on morphology"
+    }
+  },
+  "automated_front_estimator": {
+    "input": "unviewed background-subtracted 0.5-2.0 keV count and exposure arrays on the common grid",
+    "candidate_scales_kpc": [
+      8.0,
+      16.0,
+      32.0,
+      64.0
+    ],
+    "statistic": "at each physical Gaussian scale, compute the exposure-aware Poisson score for a step in surface brightness across the local gradient normal; retain scale-space nonmaximum ridges",
+    "ridge_linking": {
+      "minimum_single_scale_significance_sigma": 5.0,
+      "minimum_projected_length_kpc": 100.0,
+      "maximum_link_gap_kpc": 20.0,
+      "minimum_curvature_radius_kpc": 50.0,
+      "maximum_curvature_radius_kpc": 2000.0,
+      "minimum_valid_pixel_fraction": 0.9
+    },
+    "profile_fit": {
+      "model": "Poisson forward fit of a projected broken-power-law emissivity density with a discontinuous compression and additive scaled blank-sky background",
+      "fit_extent_each_side_kpc": 200.0,
+      "normal_sector_half_width_kpc": 75.0,
+      "statistic": "Cash",
+      "free_measurement_parameters": [
+        "front_position",
+        "local_normal",
+        "upstream_density_slope",
+        "downstream_density_slope",
+        "emissivity_normalization",
+        "density_compression"
+      ],
+      "not_gravity_parameters": true
+    },
+    "uncertainty": {
+      "poisson_parametric_bootstraps": 1000,
+      "bootstrap_seed": 19008001,
+      "reported_interval": "central 68 percent and 95 percent",
+      "normal_covariance": "circular bootstrap covariance of accepted ridge normals",
+      "position_covariance": "full sky-plane covariance from bootstrap ridge refits"
+    },
+    "shock_classification_after_spectra": {
+      "density_compression_greater_than_one_at_95_percent": true,
+      "brighter_side_temperature_greater_than_fainter_side_at_68_percent": true,
+      "rankine_hugoniot_density_and_temperature_mach_intervals_must_overlap": true,
+      "adiabatic_index": 1.6666666666666667,
+      "mean_molecular_weight": 0.61,
+      "primary_front_rule": "among automatically confirmed shocks, select the ridge with the greatest integrated Poisson log-likelihood improvement over no discontinuity; retain and report every other ridge",
+      "published_front_coordinates_used": false
+    },
+    "gates": {
+      "minimum_confirmed_shocks_per_cluster": 1,
+      "maximum_primary_front_68_percent_position_half_width_kpc": 25.0,
+      "maximum_primary_front_68_percent_normal_half_width_deg": 20.0,
+      "finite_density_temperature_mach_and_speed_intervals": true,
+      "failure_rule": "fail identifiability; do not lower significance, hand-draw a sector, insert a published front coordinate, or choose a different ridge because it later predicts lensing better"
+    }
+  },
+  "adaptive_thermodynamics": {
+    "spatial_binning": {
+      "implementation": "Jeremy Sanders contbin 1.7 at commit 420d390a889750ec81f0888989912a86f6169c00",
+      "target_signal_to_noise": 40.0,
+      "smoothing_signal_to_noise": 20.0,
+      "geometric_constraint": true,
+      "geometric_constraint_factor": 1.5,
+      "minimum_net_counts_per_region": 1300.0,
+      "minimum_source_fraction": 0.8,
+      "minimum_valid_regions_per_cluster": 12,
+      "mask": "the common valid-pixel mask inside 1200 kpc",
+      "failure_rule": "do not change S/N, smoothing, aperture, exposure cut, count cut, source-fraction cut, or geometric constraint for either cluster"
+    },
+    "galactic_absorption": {
+      "source": "NASA HEASARC nH v3 HI4PI interface",
+      "cone_radius_deg": 0.1,
+      "selection": "inverse-distance weighted HI4PI average at the frozen converged X-ray centroid",
+      "must_be_downloaded_and_hashed_before_spectral_extraction": true
+    },
+    "spectral_extraction": {
+      "tool": "CIAO specextract 4.18.2",
+      "unit": "every observation, CCD, and frozen accepted region having at least one source-band event",
+      "weight_arf": true,
+      "weight_rmf": true,
+      "correctpsf": false,
+      "response_energy_keV": [
+        0.3,
+        11.0,
+        0.01
+      ],
+      "group_after_combination_minimum_counts": 25,
+      "blank_sky_effective_scale_tolerance": 1e-06,
+      "empty_coverage_rule": "skip only a cell with zero source-band events after frozen FOV, CCD, point-source, and region filters; record every skip before fitting"
+    },
+    "spectral_model": {
+      "engine": "Sherpa 4.18.0 with XSPEC 12.14.0k",
+      "expression": "xstbabs * xsapec",
+      "abundance_table": "aspl",
+      "fit_energy_keV": [
+        0.5,
+        7.0
+      ],
+      "statistic": "chi2xspecvar",
+      "temperature_keV": {
+        "initial": 8.0,
+        "minimum": 1.0,
+        "maximum": 30.0
+      },
+      "abundance_solar": {
+        "integrated_initial": 0.3,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "regional_rule": "fixed to the same cluster integrated best-fit abundance"
+      },
+      "normalization": {
+        "initial_rule": "max(1e-8, 0.01 times the background-unsubtracted 0.5-7.0 count rate in counts per second)",
+        "minimum": 1e-10,
+        "maximum": 1.0
+      },
+      "fixed": [
+        "cluster redshift",
+        "weighted HI4PI hydrogen column",
+        "integrated abundance during regional and shock-side fits"
+      ],
+      "optimization": "levmar, then neldermead plus one levmar polish only if the first result fails or is nonfinite",
+      "uncertainty": "Sherpa conf 68-percent profile likelihood with every other free parameter profiled",
+      "no_outcome_selection": "retain every fitted region and never change model, band, background, or abundance because a temperature is surprising"
+    },
+    "shock_side_spectra": {
+      "geometry": "automatic strips parallel to the primary front on its brighter and fainter sides, excluding the bootstrap 95-percent front-position band",
+      "target_net_counts_per_side": 2500.0,
+      "maximum_width_each_side_kpc": 150.0,
+      "minimum_source_fraction": 0.8,
+      "failure_rule": "fail shock-speed identifiability if either side cannot reach the count target without exceeding the frozen width"
+    },
+    "fit_gates": {
+      "maximum_reduced_statistic": 1.5,
+      "maximum_regional_fractional_68_percent_temperature_half_width": 0.5,
+      "minimum_passing_regions_per_cluster": 12,
+      "finite_integrated_and_shock_side_temperature_intervals": true,
+      "failure_rule": "report failures without merging, splitting, smoothing, or selectively refitting regions"
+    }
+  },
+  "resolved_gas_uncertainty": {
+    "emission_measure": "derive each accepted bin emission measure and covariance from its apec normalization, response, redshift, and Planck18 angular-diameter distance",
+    "electron_to_hydrogen_ratio": 1.2,
+    "mean_mass_per_electron_proton_masses": 1.17,
+    "surface_density_relation": "for sampled line-of-sight depth L, Sigma_gas = mu_e m_p sqrt(EM_area * L / (n_e/n_H))",
+    "uncertainties": [
+      "source and blank-sky Poisson counts",
+      "temperature and apec-normalization profile likelihood",
+      "front position and local normal",
+      "line-of-sight depth and inclination",
+      "map exposure and particle-background normalization"
+    ],
+    "no_hydrostatic_equilibrium_assumption": true,
+    "no_lensing_calibration": true
+  },
+  "member_phase_structure": {
+    "inputs": "all 141 published member rows with their quoted cz uncertainties; published subcluster labels and BCG flags are retained only for post-fit validation",
+    "primary_fit": "heteroscedastic Gaussian mixture in tangent-plane x, y, and rest-frame line-of-sight velocity",
+    "standardization": "median and robust interquartile scale of each measured coordinate within each catalog; this is a measurement normalization, not a gravity parameter",
+    "component_counts_tested": [
+      1,
+      2,
+      3
+    ],
+    "selection": "lowest BIC; require Delta-BIC at least 10 relative to the next simpler model before adding a component",
+    "velocity_error_model": "convolve each component likelihood with the row's quoted cz uncertainty",
+    "uncertainty": {
+      "catalog_bootstraps": 2000,
+      "bootstrap_seed": 19008002,
+      "perturb_each_cz_by_quoted_error": true
+    },
+    "minimum_identifiable_merger_components": 2,
+    "failure_rule": "fail the phase-identifiability gate; do not force two components, use published labels to rescue the fit, or tune a spatial bandwidth by lensing performance"
+  },
+  "projection_clock_ensemble": {
+    "sampler": "scrambled Sobol",
+    "draws": 4096,
+    "seed": 19008003,
+    "same_construction_for_both_clusters": true,
+    "cluster_source_constraints": {
+      "BULLET": {
+        "angle_from_sky_plane_deg": [
+          5.0,
+          15.0
+        ],
+        "published_time_since_passage_gyr": [
+          0.1,
+          0.2
+        ],
+        "published_clock_assumption": "subcluster motion is related to X-ray shock speed in a two-body interpretation"
+      },
+      "ABELL2146": {
+        "angle_from_sky_plane_deg": [
+          13.0,
+          19.0
+        ],
+        "published_time_since_passage_gyr": [
+          0.24,
+          0.28
+        ],
+        "published_clock_assumption": "two-body dynamical model and first-core-passage interpretation"
+      }
+    },
+    "draw_rules": {
+      "inclination": "uniform in sin(angle) within the published source-side bounds",
+      "front_state": "draw jointly from the bootstrap position, normal, compression, upstream temperature, and temperature-jump covariance",
+      "member_state": "draw from the catalog-bootstrap mixture posterior including row velocity errors",
+      "line_of_sight_depth_factor": "universal log-uniform factor from 0.5 to 2.0 relative to the local sky-plane geometric-mean extent; report this prior sensitivity separately",
+      "kinematic_clock": "t_front = projected distance from the downstream member-component centroid to the front divided by shock speed times cos(inclination)",
+      "published_clock": "draw uniformly across the declared published interval but keep it as a separate assumption-dependent branch",
+      "primary_clock": "kinematic_clock",
+      "clock_robustness": "all later source observables must be reported under the primary kinematic clock and the published-clock branch; neither branch may be selected by lensing performance"
+    },
+    "output": "joint draws and covariance for gas surface density, front position and normal, Mach number, shock speed, member-component phase coordinates, inclination, line-of-sight depth, and both clock branches",
+    "gates": {
+      "exact_draw_count": 4096,
+      "all_draws_finite": true,
+      "maximum_failed_draw_fraction": 0.01,
+      "primary_and_published_clock_overlap_fraction_must_be_reported": true,
+      "failure_rule": "fail causal-source readiness rather than narrow a prior or select a clock branch using a halo or lensing target"
+    }
+  },
+  "visual_audit_after_machine_execution": {
+    "allowed_only_after_all_map_and_edge_outputs_are_hashed": true,
+    "purpose": "detect software or coordinate failures, chip-edge artifacts, unmasked compact sources, and nonsensical region topology",
+    "may_change_scientific_thresholds_or_choose_fronts": false,
+    "failure_action": "record the artifact and issue a new pre-analysis implementation protocol; do not edit the scientific result in place"
+  },
+  "advance_gate": {
+    "required": [
+      "both map coverage gates pass",
+      "both clusters have at least one automatically confirmed shock",
+      "both regional thermodynamic gates pass",
+      "both member catalogs identify at least two components",
+      "both 4096-draw projection and clock ensembles pass",
+      "every source product and covariance is content-addressed",
+      "replacement lensing targets remain sealed"
+    ],
+    "next_authorized_action": "freeze one label-free causal source functional and its universal transfer rule before opening any replacement-cluster lensing target",
+    "not_authorized": [
+      "choosing a gravity formula from these source measurements",
+      "fitting a halo size or amplitude",
+      "opening a replacement-cluster lensing coordinate or inferred halo map",
+      "claiming that causal assembly explains dark matter"
+    ]
+  },
+  "integrity": {
+    "registered_science_image_inspected_at_freeze": false,
+    "merged_image_constructed_at_freeze": false,
+    "edge_candidate_known_at_freeze": false,
+    "spectrum_or_response_constructed_at_freeze": false,
+    "temperature_density_mach_or_speed_fitted_at_freeze": false,
+    "member_mixture_fitted_at_freeze": false,
+    "projection_or_clock_drawn_at_freeze": false,
+    "causal_source_constructed_at_freeze": false,
+    "replacement_lensing_target_opened": false,
+    "gravity_parameter_changed": false
+  }
+}
