@@ -1,5 +1,23 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma v19X2 unified-response adapter preflight
+
+The future spectral combination step no longer assumes that all 5,082 response
+cells occupy the original V19W archive. A target-blind adapter now consumes the
+explicit `cell_directory` in the V19W4 unified index and accepts both
+`base_v19w` and `v19w4_recovery` rows. It independently rechecks the terminal
+authority, index hash and size, allowed archive roots, task identity, event
+counts, cell-report hash, all four product names/sizes/hashes, and the source
+PHA channel-count audit.
+
+Synthetic tests prove that mixed base/recovery cells are usable and that an
+out-of-root path, changed report, or mutated product fails closed. This is only
+an implementation preflight: V19X2 is not frozen until V19W terminates and
+V19W4 produces its terminal report and unified index. No response was combined,
+no spectrum or temperature was fit, and no lensing or gravity payload was
+opened. See
+[`SIGMA_V19X2_UNIFIED_RESPONSE_ADAPTER_PREFLIGHT.md`](SIGMA_V19X2_UNIFIED_RESPONSE_ADAPTER_PREFLIGHT.md).
+
 ## 2026-08-05 Sigma v19BG broad-phenomenology contract
 
 The long-wave source-state lane is now explicitly prevented from optimizing
