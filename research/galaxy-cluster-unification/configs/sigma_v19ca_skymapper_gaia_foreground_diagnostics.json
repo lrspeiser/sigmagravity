@@ -1,0 +1,123 @@
+{
+  "protocol_version": "SIGMA-V19CA-SKYMAPPER-GAIA-FOREGROUND-DIAGNOSTICS-1.0.0",
+  "status": "frozen after schema inspection and a three-object source-only pilot, before querying the complete 17034-object candidate population",
+  "purpose": "Acquire exact SkyMapper DR4 to Gaia DR3 links and conservative foreground-astrometry diagnostics for every unique V19BX optical candidate without removing or weighting a candidate and without opening any galaxy kinematic or gravity target.",
+  "honesty_boundary": {
+    "tap_schema_inspected_before_freeze": true,
+    "three_candidate_rows_piloted_before_freeze": true,
+    "complete_candidate_population_queried_before_freeze": false,
+    "gravity_kinematic_or_lensing_target_inspected": false,
+    "pilot_used_to_fit_thresholds": false,
+    "threshold_basis": "fixed five-sigma astrometric evidence and one-arcsecond exact-source association, with RUWE<=1.4 and a five- or six-parameter Gaia solution reported as a stricter quality-controlled flag"
+  },
+  "parent": {
+    "path": "results/sigma_v19bz_hi_optical_spatial_information_audit/report.json",
+    "sha256": "8ed7f7a6cd7f588ce757cc8dbfe69cc72cfa4ca7337b5a40f9ddcf6b1138c759"
+  },
+  "input": {
+    "path": "data/raw/sigma_v19bx_skymapper_source_only_candidates/skymapper_dr4_candidates.csv",
+    "sha256": "522dcc2fe2dc9615de0780c2d3c9786e02426cccff4d6fcc750be80fd7b5630a",
+    "rows": 17094,
+    "unique_object_ids": 17034
+  },
+  "primary_source": {
+    "service": "SkyMapper Southern Survey DR4 TAP",
+    "tap_endpoint": "https://api.skymapper.nci.org.au/public/tap/sync",
+    "master_table": "dr4.master",
+    "gaia_table": "ext.gaia_dr3",
+    "documentation": "https://skymapper.anu.edu.au/how-to-access/",
+    "table_browser": "https://skymapper.anu.edu.au/table-browser-standalone/"
+  },
+  "query_policy": {
+    "request_method": "POST",
+    "batch_size": 400,
+    "workers": 4,
+    "retries": 3,
+    "ordering": "numeric object_id ascending in each query and final output",
+    "join": "LEFT OUTER JOIN ext.gaia_dr3 AS g ON m.gaia_dr3_id1=g.source_id",
+    "projection": [
+      "m.object_id",
+      "m.raj2000",
+      "m.dej2000",
+      "m.cnt_gaia_dr3_15",
+      "m.gaia_dr3_id1",
+      "m.gaia_dr3_dist1",
+      "m.gaia_dr3_id2",
+      "m.gaia_dr3_dist2",
+      "g.source_id AS matched_gaia_source_id",
+      "g.ra AS gaia_ra_deg",
+      "g.dec AS gaia_dec_deg",
+      "g.parallax",
+      "g.parallax_error",
+      "g.pmra",
+      "g.pmra_error",
+      "g.pmdec",
+      "g.pmdec_error",
+      "g.ruwe",
+      "g.astrometric_params_solved",
+      "g.phot_g_mean_mag",
+      "g.phot_bp_mean_mag",
+      "g.phot_rp_mean_mag"
+    ],
+    "forbidden_projection_tokens": [
+      "radial_velocity",
+      "rv_",
+      "grvs_mag",
+      "rotation",
+      "vrot",
+      "velocity_field",
+      "halo",
+      "lensing",
+      "sigma_score",
+      "mond_score"
+    ]
+  },
+  "diagnostic_policy": {
+    "maximum_exact_match_distance_arcsec": 1.0,
+    "minimum_positive_parallax_significance": 5.0,
+    "minimum_absolute_component_proper_motion_significance": 5.0,
+    "maximum_quality_controlled_ruwe": 1.4,
+    "quality_controlled_astrometric_solutions": [31, 95],
+    "interpretation": "Astrometric evidence flags foreground contamination associated with a SkyMapper detection. It does not prove that no galaxy lies underneath or nearby, and it cannot remove or downweight the candidate in V19CA."
+  },
+  "access_boundary": {
+    "skymapper_gaia_crossmatch_read": true,
+    "gaia_astrometry_read": true,
+    "gaia_radial_velocity_read": false,
+    "hard_star_mask_applied": false,
+    "candidate_removed_or_weighted": false,
+    "optical_counterpart_selected": false,
+    "wallaby_kinematic_table_row_read": false,
+    "rotation_speed_or_velocity_field_read": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "development_validation_holdout_split_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "lensing_payload_opened": false,
+    "solar_system_optimization_performed": false
+  },
+  "required_gates": {
+    "parent_and_input_hashes_exact": true,
+    "exact_source_only_projection_used": true,
+    "all_17034_unique_objects_returned_once": true,
+    "all_17094_candidate_occurrences_represented": true,
+    "no_query_failure_or_duplicate_object": true,
+    "raw_and_derived_outputs_reproduce": true,
+    "no_radial_velocity_candidate_removal_or_counterpart_assignment": true,
+    "kinematic_gravity_lensing_and_solar_targets_remain_sealed": true,
+    "pilot_and_freeze_state_reported_honestly": true
+  },
+  "outputs": {
+    "raw_crossmatch": "data/raw/sigma_v19ca_skymapper_gaia_foreground_diagnostics/skymapper_gaia_dr3_nearest.csv",
+    "derived_diagnostics": "data/derived/sigma_v19ca_skymapper_gaia_foreground_diagnostics/candidate_foreground_diagnostics.csv",
+    "report": "results/sigma_v19ca_skymapper_gaia_foreground_diagnostics/report.json"
+  },
+  "claim_boundary": [
+    "V19CA reports foreground-astrometry evidence; it does not declare that a candidate is or is not the H I galaxy.",
+    "A moving Gaia source can overlap a background galaxy, so even quality-controlled flags remain uncertainty inputs rather than hard masks.",
+    "Every unique SkyMapper object and all 17094 candidate occurrences remain represented.",
+    "No Gaia radial velocity, WALLABY velocity, rotation curve, lensing result, halo map, gravity residual, action, constant, holdout label or Solar-System result enters V19CA."
+  ],
+  "implementation": {
+    "runner": "scripts/acquire_sigma_v19ca_skymapper_gaia_foreground_diagnostics.py"
+  }
+}

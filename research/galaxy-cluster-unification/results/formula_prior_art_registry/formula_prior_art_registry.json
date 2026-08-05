@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 196,
+    "sigma_protocols": 197,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7418,6 +7418,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "c5cc72beb328e8a2d8ea17308b92010c081aeff1bff03d8ffffaf9820980271f"
+    },
+    {
+      "config": "configs/sigma_v19ca_skymapper_gaia_foreground_diagnostics.json",
+      "protocol_version": "SIGMA-V19CA-SKYMAPPER-GAIA-FOREGROUND-DIAGNOSTICS-1.0.0",
+      "status": "frozen after schema inspection and a three-object source-only pilot, before querying the complete 17034-object candidate population",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "fcc66b61bf5d105cf5f731b00502b7571e7e1720cb1f5957b2da9cd5d8224a2d"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

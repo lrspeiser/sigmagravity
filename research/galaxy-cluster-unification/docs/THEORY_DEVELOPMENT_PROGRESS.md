@@ -2577,3 +2577,19 @@ convenient nearest or maximum-overlap assignment and requires uniform optical
 images, foreground-star masks, deblending uncertainty and probabilistic
 mixture propagation before this blind galaxy lane can support morphology
 holdouts. No target or force result was opened.
+
+## 2026-08-05 V19CA SkyMapper/Gaia foreground contract
+
+The blind galaxy lane now has a frozen path to foreground-star evidence that
+does not require mass retrieval from the SkyMapper image-cutout service. The
+DR4 TAP database publishes exact Gaia DR3 identifiers for SkyMapper objects,
+so V19CA will query all 17,034 unique candidates by object ID and retain all
+17,094 candidate occurrences.
+
+A one-arcsecond match plus five-sigma positive parallax or component proper
+motion defines astrometric foreground evidence. A stricter diagnostic also
+requires `RUWE <= 1.4` and a five- or six-parameter solution. Neither flag can
+remove or weight a candidate. The schema and three source-only pilot rows were
+inspected before freezing and are disclosed; the full population and all
+kinematic/gravity targets remain unopened. See
+[`SIGMA_V19CA_SKYMAPPER_GAIA_FOREGROUND_DIAGNOSTICS.md`](SIGMA_V19CA_SKYMAPPER_GAIA_FOREGROUND_DIAGNOSTICS.md).
