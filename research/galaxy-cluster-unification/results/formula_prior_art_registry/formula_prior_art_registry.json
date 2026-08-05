@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 162,
+    "sigma_protocols": 163,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 145,
     "eligibility": {
@@ -7046,7 +7046,7 @@
     },
     {
       "config": "configs/sigma_v19bb_abell2146_luminosity_current_ensemble.json",
-      "protocol_version": "SIGMA-V19BB-ABELL2146-LUMINOSITY-CURRENT-ENSEMBLE-1.0.0",
+      "protocol_version": "SIGMA-V19BB-ABELL2146-LUMINOSITY-CURRENT-ENSEMBLE-1.0.1",
       "status": "frozen_before_fitting_the_catalog_level_astrometric_scale_or_generating_any_abell2146_luminosity_current_draw",
       "role": "formula_or_action_protocol",
       "formula_fragments": [
@@ -7090,7 +7090,19 @@
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "83636ce8b5232635c1152df493356c5121331ea0352f7a05cecb733379569848"
+      "sha256": "c22b5ca8cd9f35adec28165bf112f4de56c943c389fe2a7fd0bff6d917e83bf4"
+    },
+    {
+      "config": "configs/sigma_v19bc_abell2146_collisionless_current_moments.json",
+      "protocol_version": "SIGMA-V19BC-ABELL2146-COLLISIONLESS-CURRENT-MOMENTS-1.0.1",
+      "status": "frozen_before_rasterizing_any_abell2146_member_ensemble_draw_or_computing_any_current_moment",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "dd14ef970780cdc7160217acd45686961331a1103fdfb5a791e4230d4bf061ce"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

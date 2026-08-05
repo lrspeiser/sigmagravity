@@ -1,0 +1,23 @@
+{
+  "protocol_version": "SIGMA-V19BC-ABELL2146-COLLISIONLESS-CURRENT-MOMENTS-1.0.1",
+  "runs_compared": 2,
+  "all_scientific_outputs_byte_identical": true,
+  "report_excluded_reason": "report.json contains an intentional generated_utc timestamp",
+  "outputs": {
+    "moment_maps": {
+      "path": "data/derived/sigma_v19bc_abell2146_collisionless_current_moments/collisionless_current_moments.fits",
+      "sha256_run_1": "78b91004592bdd555fb5b06bb76865276b7ebe457d33434ca2bbc29da368dee0",
+      "sha256_run_2": "78b91004592bdd555fb5b06bb76865276b7ebe457d33434ca2bbc29da368dee0"
+    },
+    "sample_global_moments": {
+      "path": "data/derived/sigma_v19bc_abell2146_collisionless_current_moments/sample_global_moments.csv",
+      "sha256_run_1": "0d3c5dbe5156e40d8d41fb9b0a2c091d10311cffe6cbe6eb4f8a5d2e054f8ed0",
+      "sha256_run_2": "0d3c5dbe5156e40d8d41fb9b0a2c091d10311cffe6cbe6eb4f8a5d2e054f8ed0"
+    },
+    "figure": {
+      "path": "results/sigma_v19bc_abell2146_collisionless_current_moments/collisionless_current_moments.png",
+      "sha256_run_1": "d3055aa64d77fcea1c377936e02e053ad7e8c7c94f2f0872112ee48c22dfbfcf",
+      "sha256_run_2": "d3055aa64d77fcea1c377936e02e053ad7e8c7c94f2f0872112ee48c22dfbfcf"
+    }
+  }
+}
