@@ -1,0 +1,243 @@
+{
+  "acquisition_report": "results/sigma_v19z_nsc_member_photometry/provenance.json",
+  "acquisition_report_sha256": "7ce94eba8fdbbcf6d9f2c816de353aa283d8169f66840690a858fd21982bd477",
+  "analysis_runner": "scripts/analyze_sigma_v19z_nsc_member_photometry.py",
+  "analysis_runner_sha256": "fae13349420488b327a8e244a8df54907a2f6e81218e278d4baf9fbe660dca8b",
+  "candidate_rows": 244,
+  "clusters": {
+    "ABELL2146": {
+      "all_candidate_separation_arcsec": {
+        "count": 59,
+        "maximum": 0.9912306106872852,
+        "mean": 0.636095976248174,
+        "median": 0.7251326894300335,
+        "minimum": 0.09231488357775078,
+        "p25": 0.45648895345356366,
+        "p75": 0.828229694872443
+      },
+      "candidate_band_combinations": {
+        "g+r+z": 34,
+        "r+z": 10,
+        "z": 15
+      },
+      "candidate_band_coverage": {
+        "g": {
+          "candidate_rows": 34,
+          "fraction_of_all_members": 0.5396825396825397,
+          "fraction_of_candidates": 0.576271186440678,
+          "member_cones_with_at_least_one": 34
+        },
+        "i": {
+          "candidate_rows": 0,
+          "fraction_of_all_members": 0.0,
+          "fraction_of_candidates": 0.0,
+          "member_cones_with_at_least_one": 0
+        },
+        "r": {
+          "candidate_rows": 44,
+          "fraction_of_all_members": 0.6984126984126984,
+          "fraction_of_candidates": 0.7457627118644068,
+          "member_cones_with_at_least_one": 44
+        },
+        "u": {
+          "candidate_rows": 0,
+          "fraction_of_all_members": 0.0,
+          "fraction_of_candidates": 0.0,
+          "member_cones_with_at_least_one": 0
+        },
+        "vr": {
+          "candidate_rows": 0,
+          "fraction_of_all_members": 0.0,
+          "fraction_of_candidates": 0.0,
+          "member_cones_with_at_least_one": 0
+        },
+        "y": {
+          "candidate_rows": 0,
+          "fraction_of_all_members": 0.0,
+          "fraction_of_candidates": 0.0,
+          "member_cones_with_at_least_one": 0
+        },
+        "z": {
+          "candidate_rows": 59,
+          "fraction_of_all_members": 0.9365079365079365,
+          "fraction_of_candidates": 1.0,
+          "member_cones_with_at_least_one": 59
+        }
+      },
+      "candidate_count_per_member": {
+        "count": 63,
+        "maximum": 1.0,
+        "mean": 0.9365079365079365,
+        "median": 1.0,
+        "minimum": 0.0,
+        "p25": 1.0,
+        "p75": 1.0
+      },
+      "candidate_rows": 59,
+      "candidates_with_all_griz": 0,
+      "candidates_with_finite_proper_motion_tuple": 44,
+      "candidates_with_nphot_gt_one": 44,
+      "class_star_distribution": {
+        "count": 59,
+        "maximum": 0.959961,
+        "mean": 0.16325449152542373,
+        "median": 0.049225,
+        "minimum": 0.000498,
+        "p25": 0.0301755,
+        "p75": 0.2432675
+      },
+      "counterpart_selected": false,
+      "fraction_of_candidates_with_all_griz": 0.0,
+      "member_cones": 63,
+      "members_with_candidates": 59,
+      "members_with_exactly_one_candidate": 59,
+      "members_with_exactly_one_candidate_and_all_griz": 0,
+      "members_with_multiple_candidates": 0,
+      "members_with_published_bri_and_candidate": 0,
+      "members_with_published_bri_and_exactly_one_candidate": 0,
+      "members_with_published_bri_exactly_one_candidate_and_all_griz": 0,
+      "members_without_candidates": 4,
+      "nearest_candidate_separation_per_nonempty_cone_arcsec": {
+        "count": 59,
+        "maximum": 0.9912306106872852,
+        "mean": 0.636095976248174,
+        "median": 0.7251326894300335,
+        "minimum": 0.09231488357775078,
+        "p25": 0.45648895345356366,
+        "p75": 0.828229694872443
+      }
+    },
+    "BULLET": {
+      "all_candidate_separation_arcsec": {
+        "count": 185,
+        "maximum": 5.9845182676536135,
+        "mean": 3.3990501052315407,
+        "median": 3.4629872285399887,
+        "minimum": 0.24638967246660293,
+        "p25": 2.004495123840458,
+        "p75": 4.8340494686195425
+      },
+      "candidate_band_combinations": {
+        "g": 5,
+        "g+r": 4,
+        "g+r+i": 3,
+        "g+r+i+z": 18,
+        "g+r+i+z+y": 118,
+        "i": 7,
+        "i+z": 2,
+        "i+z+y": 1,
+        "r": 12,
+        "r+i": 3,
+        "r+i+z": 6,
+        "r+i+z+y": 4,
+        "z": 2
+      },
+      "candidate_band_coverage": {
+        "g": {
+          "candidate_rows": 148,
+          "fraction_of_all_members": 0.9743589743589743,
+          "fraction_of_candidates": 0.8,
+          "member_cones_with_at_least_one": 76
+        },
+        "i": {
+          "candidate_rows": 162,
+          "fraction_of_all_members": 0.9871794871794872,
+          "fraction_of_candidates": 0.8756756756756757,
+          "member_cones_with_at_least_one": 77
+        },
+        "r": {
+          "candidate_rows": 168,
+          "fraction_of_all_members": 0.9871794871794872,
+          "fraction_of_candidates": 0.9081081081081082,
+          "member_cones_with_at_least_one": 77
+        },
+        "u": {
+          "candidate_rows": 0,
+          "fraction_of_all_members": 0.0,
+          "fraction_of_candidates": 0.0,
+          "member_cones_with_at_least_one": 0
+        },
+        "vr": {
+          "candidate_rows": 0,
+          "fraction_of_all_members": 0.0,
+          "fraction_of_candidates": 0.0,
+          "member_cones_with_at_least_one": 0
+        },
+        "y": {
+          "candidate_rows": 123,
+          "fraction_of_all_members": 0.9743589743589743,
+          "fraction_of_candidates": 0.6648648648648648,
+          "member_cones_with_at_least_one": 76
+        },
+        "z": {
+          "candidate_rows": 151,
+          "fraction_of_all_members": 0.9743589743589743,
+          "fraction_of_candidates": 0.8162162162162162,
+          "member_cones_with_at_least_one": 76
+        }
+      },
+      "candidate_count_per_member": {
+        "count": 78,
+        "maximum": 6.0,
+        "mean": 2.371794871794872,
+        "median": 2.0,
+        "minimum": 0.0,
+        "p25": 2.0,
+        "p75": 3.0
+      },
+      "candidate_rows": 185,
+      "candidates_with_all_griz": 136,
+      "candidates_with_finite_proper_motion_tuple": 164,
+      "candidates_with_nphot_gt_one": 164,
+      "class_star_distribution": {
+        "count": 185,
+        "maximum": 0.998047,
+        "mean": 0.42131642162162164,
+        "median": 0.401909,
+        "minimum": 0.000425,
+        "p25": 0.229805,
+        "p75": 0.554932
+      },
+      "counterpart_selected": false,
+      "fraction_of_candidates_with_all_griz": 0.7351351351351352,
+      "member_cones": 78,
+      "members_with_candidates": 77,
+      "members_with_exactly_one_candidate": 18,
+      "members_with_exactly_one_candidate_and_all_griz": 18,
+      "members_with_multiple_candidates": 59,
+      "members_with_published_bri_and_candidate": 72,
+      "members_with_published_bri_and_exactly_one_candidate": 15,
+      "members_with_published_bri_exactly_one_candidate_and_all_griz": 15,
+      "members_without_candidates": 1,
+      "nearest_candidate_separation_per_nonempty_cone_arcsec": {
+        "count": 77,
+        "maximum": 4.937296625147737,
+        "mean": 2.1788332104993473,
+        "median": 1.9130839334308778,
+        "minimum": 0.24638967246660293,
+        "p25": 1.0516308839113346,
+        "p75": 2.960975981304271
+      }
+    }
+  },
+  "counterpart_selection_performed": false,
+  "filter_transformation_performed": false,
+  "generated_utc": "2026-08-05T07:37:53.618735+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "hsc_acquisition_report": "results/sigma_v19y_hsc_member_photometry/provenance.json",
+  "hsc_acquisition_report_sha256": "a03ef4bb091a9df269b396b0410d2c4fccb7cc2e6bab445de067cc1c68908222",
+  "hsc_nsc_presence_comparison": {
+    "ABELL2146:both": 58,
+    "ABELL2146:neither": 4,
+    "ABELL2146:nsc_only": 1,
+    "BULLET:both": 58,
+    "BULLET:neither": 1,
+    "BULLET:nsc_only": 19
+  },
+  "lensing_or_halo_payload_opened": false,
+  "mass_current_constructed": false,
+  "photometric_quality_cut_performed": false,
+  "published_bullet_complete_bri_rows": 72,
+  "status": "v19z_nsc_candidate_coverage_described_without_matching",
+  "stellar_mass_inference_performed": false
+}
