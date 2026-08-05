@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 197,
+    "sigma_protocols": 198,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7430,6 +7430,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "fcc66b61bf5d105cf5f731b00502b7571e7e1720cb1f5957b2da9cd5d8224a2d"
+    },
+    {
+      "config": "configs/sigma_v19cb_foreground_treatment_information_audit.json",
+      "protocol_version": "SIGMA-V19CB-FOREGROUND-TREATMENT-INFORMATION-AUDIT-1.0.0",
+      "status": "exploratory source-only sensitivity audit designed after the complete V19CA foreground result was inspected",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "09d60e264cb9cd5a516c64b6937abd0109dd4d2f3abaf8aa2fe5ea313d27274d"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

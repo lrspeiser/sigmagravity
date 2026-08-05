@@ -1,0 +1,61 @@
+{
+  "protocol_version": "SIGMA-V19CB-FOREGROUND-TREATMENT-INFORMATION-AUDIT-1.0.0",
+  "status": "exploratory source-only sensitivity audit designed after the complete V19CA foreground result was inspected",
+  "purpose": "Measure whether plausible foreground treatments materially resolve the V19BZ H I/optical association ambiguity without selecting a treatment, counterpart, galaxy sample or gravity law.",
+  "honesty_boundary": {
+    "complete_v19ca_source_result_inspected_before_freeze": true,
+    "gravity_kinematic_or_lensing_target_inspected": false,
+    "this_is_a_preregistered_theory_or_holdout_gate": false
+  },
+  "parents": {
+    "v19ca_report": {"path": "results/sigma_v19ca_skymapper_gaia_foreground_diagnostics/report.json", "sha256": "b8738560fcfc4d7b52f4c7a3171bd559a1816f4efac4eb664dbe727395e7fa82"},
+    "v19bz_candidate_scores": {"path": "data/derived/sigma_v19bz_hi_optical_spatial_information_audit/candidate_spatial_scores.csv", "sha256": "bc6dfb4cd0a30d72269a44aae20c356c982bf8bd14f0c5e1b6f686fd61adfe20"},
+    "v19bz_release_information": {"path": "data/derived/sigma_v19bz_hi_optical_spatial_information_audit/release_information.csv", "sha256": "deb0185973d8d99948062bc8f4efecc5e0b2c5f33289c824a5bb70a4ce000cad"},
+    "v19ca_diagnostics": {"path": "data/derived/sigma_v19ca_skymapper_gaia_foreground_diagnostics/candidate_foreground_diagnostics.csv", "sha256": "a7b5b38bd7e1bf5fac88dda097be3fd8757d8428774d59682096595886f43d15"}
+  },
+  "kernel_labels": ["k0", "k0p5", "k1", "k2"],
+  "primary_kernel_label": "k1",
+  "treatment_branches": [
+    {"id": "retain_all", "quality_controlled_weight": 1.0, "other_foreground_evidence_weight": 1.0},
+    {"id": "soft_quality_0p1", "quality_controlled_weight": 0.1, "other_foreground_evidence_weight": 1.0},
+    {"id": "mask_quality_diagnostic", "quality_controlled_weight": 0.0, "other_foreground_evidence_weight": 1.0},
+    {"id": "mask_any_astrometry_diagnostic", "quality_controlled_weight": 0.0, "other_foreground_evidence_weight": 0.0}
+  ],
+  "descriptive_robust_margin": 3.0,
+  "exploratory_resolution_threshold": 0.9,
+  "interpretation": "Zero-weight branches are counterfactual diagnostics, not authorized masks. A foreground star may overlap a background galaxy.",
+  "access_boundary": {
+    "source_side_spatial_scores_read": true,
+    "source_side_gaia_diagnostics_read": true,
+    "hard_star_mask_authorized": false,
+    "treatment_branch_selected": false,
+    "candidate_or_galaxy_removed": false,
+    "optical_counterpart_selected": false,
+    "wallaby_kinematic_table_row_read": false,
+    "rotation_speed_or_velocity_field_read": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "development_validation_holdout_split_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "lensing_payload_opened": false,
+    "solar_system_optimization_performed": false
+  },
+  "required_gates": {
+    "parent_hashes_exact": true,
+    "all_711_release_rows_and_four_branches_reported": true,
+    "all_four_spatial_kernel_branches_used": true,
+    "no_mask_treatment_counterpart_or_sample_selected": true,
+    "kinematic_gravity_lensing_and_solar_targets_remain_sealed": true,
+    "post_source_exploratory_status_reported_honestly": true
+  },
+  "outputs": {
+    "release_branch_information": "data/derived/sigma_v19cb_foreground_treatment_information_audit/release_branch_information.csv",
+    "report": "results/sigma_v19cb_foreground_treatment_information_audit/report.json"
+  },
+  "claim_boundary": [
+    "V19CB quantifies sensitivity to foreground treatment but authorizes no treatment or hard star mask.",
+    "All candidates remain in the parent tables and every release row appears in every branch.",
+    "A branch that improves a margin does not validate its top object as the galaxy.",
+    "No velocity, rotation curve, lensing result, halo map, gravity residual, action, constant, holdout label or Solar-System result enters V19CB."
+  ],
+  "implementation": {"runner": "scripts/run_sigma_v19cb_foreground_treatment_information_audit.py"}
+}

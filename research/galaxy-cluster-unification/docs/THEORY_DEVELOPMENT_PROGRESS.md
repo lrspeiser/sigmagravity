@@ -2606,3 +2606,16 @@ resolve it. All candidates remain represented because a moving foreground star
 can overlap a background galaxy. Any future mask must be supported by optical
 image and deblending evidence, and foreground-treatment uncertainty must be
 propagated. No kinematic or force target was opened.
+
+## 2026-08-05 V19CB foreground-treatment information audit
+
+The complete Gaia source result has now been inspected, so V19CB is explicitly
+post-source exploration. It measures whether retaining, softly suppressing or
+counterfactually masking astrometric foreground objects makes the H I/optical
+ranking robust across all four beam kernels. Zero-weight branches are not
+authorized masks, and no treatment or counterpart is selected.
+
+All 711 release rows appear in all four branches. The audit remains independent
+of WALLABY velocities, lensing, halo maps, gravity residuals, evidence splits,
+actions, constants and Solar-System results. See
+[`SIGMA_V19CB_FOREGROUND_TREATMENT_INFORMATION_AUDIT.md`](SIGMA_V19CB_FOREGROUND_TREATMENT_INFORMATION_AUDIT.md).
