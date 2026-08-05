@@ -1,0 +1,76 @@
+{
+  "protocol_version": "SIGMA-V19CU-ASTROPY-BASE-ENVIRONMENT-REMEDIATION-1.0.0",
+  "status": "frozen after V19CT proved Astropy is a real V19X2 FITS-count dependency and conda dry-run showed astropy-base is the minimal package rather than the full Astropy metapackage",
+  "purpose": "Install the pinned minimal astropy-base package into the existing CIAO environment, record the package inventory delta, re-run the full V19CS live probe, and execute the unchanged V19X2 and conditional V19BR source chain.",
+  "parents": {
+    "v19ct_failure_report": {
+      "path": "results/sigma_v19ct_v19x2_required_ciao_probe/report.json",
+      "sha256": "e744e5141fa90be744991306538ea84a8e337db896bd0cec804d597d2186494a",
+      "required_status": "v19x2_required_ciao_probe_failed_closed",
+      "required_exception_fragment": "import_closure_exact_and_astropy_absent': False"
+    },
+    "v19cs_config": {
+      "path": "configs/sigma_v19cs_v19x2_independent_ciao_probe.json",
+      "sha256": "ee08b4235f92da8225f7354a305b64c3fe6c5f9a124b2de9fd41b46905a06ce7"
+    },
+    "v19cs_runner": {
+      "path": "scripts/run_sigma_v19cs_v19x2_independent_ciao_probe.py",
+      "sha256": "998ec344746dcd6ec1bf901d4278507591d3d7b91c4291a9adc3431bd0b7160c"
+    },
+    "astropy_import_source": {
+      "path": "scripts/run_sigma_v19x_spectral_combination_commissioning.py",
+      "sha256": "2370ac2790162c8b9120c5f475905c4be44a98e8201b84f7ee105244db5a979a",
+      "required_import": "from astropy.io import fits"
+    }
+  },
+  "environment_remediation": {
+    "conda_executable": "/home/henry/miniforge3/bin/conda",
+    "environment_name": "sigma-ciao-4.18",
+    "environment_prefix": "/home/henry/miniforge3/envs/sigma-ciao-4.18",
+    "install_spec": "astropy-base=8.0.1",
+    "command": [
+      "/home/henry/miniforge3/bin/conda",
+      "install",
+      "-n",
+      "sigma-ciao-4.18",
+      "astropy-base=8.0.1",
+      "-y"
+    ],
+    "required_absent_before": [
+      "astropy-base"
+    ],
+    "required_present_after": {
+      "astropy-base": "8.0.1"
+    },
+    "dry_run_download_megabytes": 13.9,
+    "full_astropy_metapackage_rejected": true,
+    "reason": "V19X2 uses only astropy.io.fits for PHA count verification; the full astropy metapackage proposed dozens of unrelated packages"
+  },
+  "effective_outputs": {
+    "report": "results/sigma_v19cu_astropy_base_environment_remediation/report.json",
+    "environment_before_log": "results/sigma_v19cu_astropy_base_environment_remediation/environment_before.json",
+    "install_log": "results/sigma_v19cu_astropy_base_environment_remediation/install.log",
+    "environment_after_log": "results/sigma_v19cu_astropy_base_environment_remediation/environment_after.json",
+    "environment_probe_log": "results/sigma_v19cu_astropy_base_environment_remediation/environment_probe.log",
+    "v19x2_log": "results/sigma_v19cu_astropy_base_environment_remediation/v19x2_commissioning.log",
+    "v19br_log": "results/sigma_v19cu_astropy_base_environment_remediation/v19br_continuation.log"
+  },
+  "authorization": {
+    "install_pinned_minimal_runtime_dependency": true,
+    "install_full_astropy_metapackage": false,
+    "change_x2_config_runner_scientific_rules_or_data": false,
+    "retry_or_tune_valid_scientific_fit_failure": false,
+    "run_v19bs_or_derive_action": false,
+    "open_lensing_halo_gravity_holdout_or_solar_optimization": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19cu_astropy_base_environment_remediation.py",
+    "tests": "tests/test_sigma_v19cu_astropy_base_environment_remediation.py"
+  },
+  "claim_boundary": [
+    "V19CU changes only the local CIAO runtime dependency set and records the exact before/after inventory.",
+    "The FITS reader is required by the frozen V19X2 count-audit code and is not a scientific model or fitting dependency choice.",
+    "V19X2 code, config, cells, responses, grouping, model, fit sequence and gates remain unchanged.",
+    "No gravity theory, lensing target, action, holdout or Solar-System optimization is opened."
+  ]
+}

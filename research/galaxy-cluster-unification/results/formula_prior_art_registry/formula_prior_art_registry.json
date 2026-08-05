@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 217,
+    "sigma_protocols": 218,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7658,6 +7658,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "462e7a5661c115e97a3b6c0cdd7157ba1775dee88f74b53b6f698352724a6f2c"
+    },
+    {
+      "config": "configs/sigma_v19cu_astropy_base_environment_remediation.json",
+      "protocol_version": "SIGMA-V19CU-ASTROPY-BASE-ENVIRONMENT-REMEDIATION-1.0.0",
+      "status": "frozen after V19CT proved Astropy is a real V19X2 FITS-count dependency and conda dry-run showed astropy-base is the minimal package rather than the full Astropy metapackage",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "9aad133daa3438807565bfd201b8a9d3b9123d022f23e71e0482ab9ccb17a0ae"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",
