@@ -17,7 +17,10 @@ velocity information or another independent merger is required.  Three
 action-placement classes are registered for later mathematical derivation,
 but none is selected.  This advances the physical-postulate/source-definition
 work while preserving V19W/V19W4, V19X2 and the 494-region gas map as mandatory
-prerequisites.  See
+prerequisites.  A reusable projected-map library now passes six manufactured
+tests covering component limits, common-boost invariance, rotation covariance,
+trace removal, known-axis recovery, baroclinic limiting cases and invalid-input
+failure.  This commissions the math but is not an astronomical result.  See
 [`SIGMA_V19BJ_SOURCE_INVARIANT_ACTION_PRESELECTION.md`](SIGMA_V19BJ_SOURCE_INVARIANT_ACTION_PRESELECTION.md).
 
 ## 2026-08-05 Sigma V19BI blind-galaxy admission protocol

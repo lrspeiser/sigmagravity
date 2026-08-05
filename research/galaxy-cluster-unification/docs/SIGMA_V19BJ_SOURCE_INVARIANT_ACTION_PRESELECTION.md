@@ -72,6 +72,27 @@ measurement is a direct gas-velocity constraint or an independent merger
 sample.  Thresholds cannot be relaxed, failed features cannot be combined
 after inspection, and lensing cannot rescue an unidentifiable source.
 
+## Manufactured-map algebra
+
+The reusable projected-map implementation is in
+`src/voidscreen/sigma_source_invariants.py`.  Six target-free tests establish
+the algebra before any gas result is read:
+
+- component overlap reaches zero for a pure component, one for equal
+  components and is unchanged when gas and stars are exchanged;
+- relative current is unchanged by a common velocity boost and rotates as a
+  vector while its norm is rotation invariant;
+- anisotropic stress is symmetrized, trace-free and rotation covariant;
+- a manufactured density/entropy gradient recovers its known axial direction;
+- normalized baroclinicity is zero for parallel gradients and unity for
+  orthogonal gradients; and
+- negative densities, zero normalization speeds and isotropic tensors without
+  an axis fail closed.
+
+These checks validate coordinate behavior and limiting cases only.  They do
+not establish that an invariant is measurable in the clusters or that it
+sources gravity.
+
 ## What the result can choose
 
 V19BJ registers three action-placement classes, not three formulas:
