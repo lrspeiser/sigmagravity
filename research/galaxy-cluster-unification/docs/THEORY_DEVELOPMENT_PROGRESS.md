@@ -2548,3 +2548,18 @@ ambiguous or failed. The immutable manifest has SHA-256
 `871df6aa9db724ad648a08762d619884f326d643c86ecd97414b79d4a2ae7aa7`.
 All release alternatives remain available for later uncertainty propagation;
 no counterpart, kinematic target, evidence split or force result was opened.
+
+## 2026-08-05 V19BZ H I/optical spatial-information audit
+
+The next blind-galaxy step is explicitly exploratory rather than retrospectively
+called preregistered. A source-only inspection showed that moment-zero overlap
+may not distinguish the dense SkyMapper candidate fields. V19BZ therefore
+freezes a reproducible information audit across four beam-kernel widths while
+retaining every candidate and every release alternative.
+
+The audit uses no optical weight, counterpart prior, null posterior, hard
+assignment or sample removal. It keeps every velocity, rotation, lensing,
+halo, gravity, holdout and Solar-System payload sealed. A failure can authorize
+better optical source information and uncertainty propagation, but cannot
+reject or modify a gravity theory. See
+[`SIGMA_V19BZ_HI_OPTICAL_SPATIAL_INFORMATION_AUDIT.md`](SIGMA_V19BZ_HI_OPTICAL_SPATIAL_INFORMATION_AUDIT.md).

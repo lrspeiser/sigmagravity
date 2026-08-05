@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 195,
+    "sigma_protocols": 196,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7394,6 +7394,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "ad70c63de24537b4fd76d53410ee879e88b0ee7d3b201722f85362660393ea47"
+    },
+    {
+      "config": "configs/sigma_v19bz_hi_optical_spatial_information_audit.json",
+      "protocol_version": "SIGMA-V19BZ-HI-OPTICAL-SPATIAL-INFORMATION-AUDIT-1.0.0",
+      "status": "exploratory source-only information audit designed after non-target source inspection; not preregistered before the V19BZ source outcome",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "eff5b5e64c3b3a4bb7818d73be43a3454e0a993cddeb7dbdc6a98c6b4c088cca"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",
