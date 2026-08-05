@@ -398,3 +398,23 @@ def test_v19_observability_gate_does_not_pretend_to_be_a_formula() -> None:
     v19a = protocols["sigma_v19a_assembly_history_readiness.json"]
     assert v19a["role"] == "gate_or_data_protocol_no_new_formula_fragment"
     assert v19a["formula_fragment_count"] == 0
+
+    v19b = protocols["sigma_v19b_replacement_cluster_screen.json"]
+    assert v19b["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19b["formula_fragment_count"] == 0
+
+    v19c = protocols["sigma_v19c_source_archive_acquisition.json"]
+    assert v19c["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19c["formula_fragment_count"] == 0
+
+    v19d = protocols["sigma_v19d_member_catalog_extraction.json"]
+    assert v19d["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19d["formula_fragment_count"] == 0
+
+    v19e = protocols["sigma_v19e_chandra_acquisition.json"]
+    assert v19e["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19e["formula_fragment_count"] == 0
+
+    v19f = protocols["sigma_v19f_chandra_source_reduction.json"]
+    assert v19f["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19f["formula_fragment_count"] == 0

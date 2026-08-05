@@ -1,0 +1,81 @@
+{
+  "protocol_version": "SIGMA-V19C-SOURCE-ARCHIVE-ACQUISITION-1.0.0",
+  "status": "frozen before downloading any Bullet Cluster or Abell 2146 source archive and while all replacement-cluster lensing target payloads remain sealed",
+  "purpose": "Acquire only the primary-paper source archives needed to recover member measurements, shock measurements, and uncertainty provenance for the v19B development pair.",
+  "parents": {
+    "replacement_screen_config": "configs/sigma_v19b_replacement_cluster_screen.json",
+    "replacement_screen_config_sha256": "bb0e6fdb1d5fc60947575964a741c9b08918635005abaeb51b418f2bfa5066b4",
+    "replacement_screen_report": "results/sigma_v19b_replacement_cluster_screen/report.json",
+    "replacement_screen_report_sha256": "55c93bcd63153aec0a0eaaf59983b7ac4319592c19cb5e2cd36b30ff90e4a8b7"
+  },
+  "selected_clusters": [
+    "ABELL2146",
+    "BULLET"
+  ],
+  "output_root": "data/raw/sigma_v19c_assembly_sources",
+  "minimum_archive_bytes": 500,
+  "assets": [
+    {
+      "cluster": "BULLET",
+      "arxiv_id": "astro-ph/0202323",
+      "url": "https://export.arxiv.org/e-print/astro-ph/0202323",
+      "filename": "bullet/arxiv_astro-ph_0202323_source.tar",
+      "role": "member positions, heliocentric velocities, velocity uncertainties, and two-body dynamics",
+      "contains_lensing_target_payload": false
+    },
+    {
+      "cluster": "BULLET",
+      "arxiv_id": "astro-ph/0511345",
+      "url": "https://export.arxiv.org/e-print/astro-ph/0511345",
+      "filename": "bullet/arxiv_astro-ph_0511345_source.tar",
+      "role": "deep-Chandra shock measurement provenance",
+      "contains_lensing_target_payload": false
+    },
+    {
+      "cluster": "BULLET",
+      "arxiv_id": "1907.07680",
+      "url": "https://export.arxiv.org/e-print/1907.07680",
+      "filename": "bullet/arxiv_1907.07680_source.tar",
+      "role": "ALMA plus Chandra shock uncertainty and geometry-systematics provenance",
+      "contains_lensing_target_payload": false
+    },
+    {
+      "cluster": "ABELL2146",
+      "arxiv_id": "1508.01505",
+      "url": "https://export.arxiv.org/e-print/1508.01505",
+      "filename": "abell2146/arxiv_1508.01505_source.tar",
+      "role": "member positions, redshifts, uncertainties, and merger geometry",
+      "contains_lensing_target_payload": false
+    },
+    {
+      "cluster": "ABELL2146",
+      "arxiv_id": "1202.5320",
+      "url": "https://export.arxiv.org/e-print/1202.5320",
+      "filename": "abell2146/arxiv_1202.5320_source.tar",
+      "role": "400 ks Chandra shock and thermodynamic uncertainty provenance",
+      "contains_lensing_target_payload": false
+    },
+    {
+      "cluster": "ABELL2146",
+      "arxiv_id": "2204.05785",
+      "url": "https://export.arxiv.org/e-print/2204.05785",
+      "filename": "abell2146/arxiv_2204.05785_source.tar",
+      "role": "2 Ms Chandra shock-width, gas-motion, and temperature-profile uncertainty provenance",
+      "contains_lensing_target_payload": false
+    }
+  ],
+  "explicitly_forbidden_arxiv_ids": [
+    "1209.0384",
+    "1609.06765"
+  ],
+  "authorization": {
+    "download_exact_source_assets": true,
+    "extract_or_parse_member_and_shock_source_material": true,
+    "download_lensing_paper_source_archives": false,
+    "download_multiple_image_coordinates": false,
+    "read_lens_models_or_inferred_halo_products": false,
+    "construct_causal_source": false,
+    "fit_gravity_parameters": false,
+    "open_holdout": false
+  }
+}

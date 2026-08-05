@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 109,
+    "sigma_protocols": 114,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6682,6 +6682,66 @@
         "NEWTON-POISSON"
       ],
       "sha256": "d92f47d357ffa6d2fe73d5f8f10b372541052a616693407c36a4f50aa8c68b9e"
+    },
+    {
+      "config": "configs/sigma_v19b_replacement_cluster_screen.json",
+      "protocol_version": "SIGMA-V19B-REPLACEMENT-CLUSTER-SCREEN-1.0.0",
+      "status": "frozen after a source-only primary-literature screen and before downloading any replacement-cluster lensing coordinates, lens model, or inferred halo product",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "bb0e6fdb1d5fc60947575964a741c9b08918635005abaeb51b418f2bfa5066b4"
+    },
+    {
+      "config": "configs/sigma_v19c_source_archive_acquisition.json",
+      "protocol_version": "SIGMA-V19C-SOURCE-ARCHIVE-ACQUISITION-1.0.0",
+      "status": "frozen before downloading any Bullet Cluster or Abell 2146 source archive and while all replacement-cluster lensing target payloads remain sealed",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "c5cc72beb328e8a2d8ea17308b92010c081aeff1bff03d8ffffaf9820980271f"
+    },
+    {
+      "config": "configs/sigma_v19d_member_catalog_extraction.json",
+      "protocol_version": "SIGMA-V19D-MEMBER-CATALOG-EXTRACTION-1.0.0",
+      "status": "frozen before parsing the acquired TeX member tables and while all replacement-cluster lensing target payloads remain sealed",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "b288c98cf4c46dcc4be5282e7e19decaf7bbe850f8a6c4f1e07015fe85682a7b"
+    },
+    {
+      "config": "configs/sigma_v19e_chandra_acquisition.json",
+      "protocol_version": "SIGMA-V19E-CHANDRA-ACQUISITION-1.0.0",
+      "status": "frozen before downloading any analysis-grade event or calibration product",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "8d96e4eb1886c2591fc581d4d7342285ffefb8d881b3d6c84e61b9bd847d3481"
+    },
+    {
+      "config": "configs/sigma_v19f_chandra_source_reduction.json",
+      "protocol_version": "SIGMA-V19F-CHANDRA-SOURCE-REDUCTION-1.0.1",
+      "status": "frozen before reprocessing, flare cleaning, source-image inspection, shock-front fitting, source construction, or opening any replacement-cluster lensing target",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "ef10d042d5a1a34b90044dcc93ec2820ae6808610df489f6972a7a06a7396c06"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

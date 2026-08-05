@@ -1,0 +1,358 @@
+{
+  "protocol_version": "SIGMA-V19B-REPLACEMENT-CLUSTER-SCREEN-1.0.0",
+  "status": "frozen after a source-only primary-literature screen and before downloading any replacement-cluster lensing coordinates, lens model, or inferred halo product",
+  "purpose": "Select a development pair whose measured merger fronts can test whether baryonic assembly history predicts the scale, phase, and orientation of the apparent gravitational halo without using the lensing answer to choose the pair.",
+  "parents": {
+    "assembly_readiness_config": "configs/sigma_v19a_assembly_history_readiness.json",
+    "assembly_readiness_config_sha256": "d92f47d357ffa6d2fe73d5f8f10b372541052a616693407c36a4f50aa8c68b9e",
+    "assembly_readiness_report": "results/sigma_v19a_assembly_history_readiness/report.json",
+    "assembly_readiness_report_sha256": "b681c9de73591d9de3ba277a18a552e1dad86309d62eb93a7c4a9a33b4c64179"
+  },
+  "blindness": {
+    "permitted_before_selection": [
+      "source-side shock and gas measurements",
+      "source-side member positions, redshifts, and uncertainties",
+      "published merger-axis and time-since-passage constraints",
+      "bibliographic lensing suitability metadata limited to counts of families, images, and spectroscopic families"
+    ],
+    "prohibited_before_source_freeze": [
+      "replacement-cluster multiple-image coordinates",
+      "replacement-cluster source positions",
+      "replacement-cluster lensing potential or deflection maps",
+      "replacement-cluster dark-matter halo centroids, scales, orientations, or amplitudes",
+      "any score derived from replacement-cluster lensing targets"
+    ],
+    "all_replacement_lensing_targets_remain_sealed": true
+  },
+  "gates": {
+    "minimum_selected_clusters": 2,
+    "minimum_secure_spectroscopic_members": 50,
+    "minimum_history_statistic_significance_sigma": 5.0,
+    "direct_primary_merger_front_required": true,
+    "unique_merger_attribution_required": true,
+    "mach_or_speed_uncertainty_required": true,
+    "published_projection_constraint_required": true,
+    "time_since_passage_constraint_required": true,
+    "public_source_archives_required": true,
+    "final_sample_minimum_image_families": 3,
+    "final_sample_minimum_spectroscopic_families": 1,
+    "final_sample_minimum_images": 8,
+    "local_member_table_with_uncertainties_required_for_source_construction": true,
+    "local_resolved_gas_uncertainty_product_required_for_source_construction": true,
+    "local_projection_ensemble_required_for_source_construction": true,
+    "front_position_uncertainty_required_for_source_construction": true
+  },
+  "preferred_development_pair": [
+    "BULLET",
+    "ABELL2146"
+  ],
+  "candidates": {
+    "BULLET": {
+      "name": "1E 0657-56 (Bullet Cluster)",
+      "redshift": 0.296,
+      "direct_primary_merger_front": true,
+      "unique_merger_attribution": true,
+      "mach_or_speed_uncertainty_available": true,
+      "history_statistic": {
+        "basis": "mach_excess_above_unity",
+        "measured_value": 2.57,
+        "uncertainty_toward_no_shock": 0.23,
+        "source_note": "Chandra estimate under the adiabatic-electron-heating comparison in Di Mascolo et al. 2019; the shock is independently detected in X-ray and SZ data, while geometry remains a systematic."
+      },
+      "member_sample": {
+        "secure_spectroscopic_members": 78,
+        "reported_redshift_sample": 120,
+        "published_table_has_position_velocity_and_error_columns": true
+      },
+      "assembly_geometry": {
+        "published_projection_constraint_available": true,
+        "angle_from_sky_plane_deg": [
+          5.0,
+          15.0
+        ],
+        "time_since_core_passage_gyr": [
+          0.10,
+          0.20
+        ],
+        "time_since_passage_constraint_available": true,
+        "time_constraint_is_assumption_independent": false,
+        "declared_clock_assumption": "the subcluster motion is related to the X-ray shock speed in the two-body interpretation"
+      },
+      "source_archives": {
+        "public_source_archives_identified": true,
+        "member_table_source_archive_identified": true,
+        "xray_archive_identified": true,
+        "resolved_thermodynamic_uncertainty_product_published": false
+      },
+      "front_geometry": {
+        "front_position_measurable_from_public_data": true,
+        "published_front_position_uncertainty_available": false
+      },
+      "later_lensing_suitability_metadata": {
+        "reported_image_families": 14,
+        "reported_spectroscopic_families": 3,
+        "minimum_reported_image_instances": 14,
+        "coordinates_or_model_read_during_screen": false
+      },
+      "local_source_products": {
+        "member_table_with_uncertainties": false,
+        "resolved_gas_uncertainty_product": false,
+        "projection_uncertainty_ensemble": false,
+        "front_position_with_uncertainty": false
+      },
+      "primary_sources": [
+        {
+          "title": "The Dynamical Status of the Cluster of Galaxies 1E0657-56",
+          "url": "https://arxiv.org/abs/astro-ph/0202323",
+          "arxiv_id": "astro-ph/0202323"
+        },
+        {
+          "title": "Chandra observation of the most interesting cluster in the Universe",
+          "url": "https://arxiv.org/abs/astro-ph/0511345",
+          "arxiv_id": "astro-ph/0511345"
+        },
+        {
+          "title": "An ALMA+ACA measurement of the shock in the Bullet Cluster",
+          "url": "https://arxiv.org/abs/1907.07680",
+          "arxiv_id": "1907.07680"
+        },
+        {
+          "title": "The Bullet cluster at its best: weighing stars, gas and dark matter",
+          "url": "https://arxiv.org/abs/1209.0384",
+          "arxiv_id": "1209.0384",
+          "use_in_this_screen": "bibliographic suitability counts only; no target coordinates, model, or halo quantities"
+        }
+      ]
+    },
+    "ABELL2146": {
+      "name": "Abell 2146",
+      "redshift": 0.2323,
+      "direct_primary_merger_front": true,
+      "unique_merger_attribution": true,
+      "mach_or_speed_uncertainty_available": true,
+      "history_statistic": {
+        "basis": "mach_excess_above_unity",
+        "measured_value": 2.3,
+        "uncertainty_toward_no_shock": 0.2,
+        "source_note": "The 400 ks Chandra bow-shock estimate in Russell et al. 2012; the later 2 Ms observation resolves both shock widths and independently confirms the two-front merger geometry."
+      },
+      "member_sample": {
+        "secure_spectroscopic_members": 63,
+        "reported_redshift_sample": 63,
+        "published_table_has_position_velocity_and_error_columns": true
+      },
+      "assembly_geometry": {
+        "published_projection_constraint_available": true,
+        "angle_from_sky_plane_deg": [
+          13.0,
+          19.0
+        ],
+        "time_since_core_passage_gyr": [
+          0.24,
+          0.28
+        ],
+        "time_since_passage_constraint_available": true,
+        "time_constraint_is_assumption_independent": false,
+        "declared_clock_assumption": "the two-body dynamical model and first-core-passage interpretation are used"
+      },
+      "source_archives": {
+        "public_source_archives_identified": true,
+        "member_table_source_archive_identified": true,
+        "xray_archive_identified": true,
+        "resolved_thermodynamic_uncertainty_product_published": false
+      },
+      "front_geometry": {
+        "front_position_measurable_from_public_data": true,
+        "published_front_position_uncertainty_available": false
+      },
+      "later_lensing_suitability_metadata": {
+        "reported_image_families": 4,
+        "reported_spectroscopic_families": 0,
+        "minimum_reported_image_instances": 8,
+        "coordinates_or_model_read_during_screen": false
+      },
+      "local_source_products": {
+        "member_table_with_uncertainties": false,
+        "resolved_gas_uncertainty_product": false,
+        "projection_uncertainty_ensemble": false,
+        "front_position_with_uncertainty": false
+      },
+      "primary_sources": [
+        {
+          "title": "Chandra observation of two shock fronts in the merging galaxy cluster Abell 2146",
+          "url": "https://arxiv.org/abs/1004.1559",
+          "arxiv_id": "1004.1559"
+        },
+        {
+          "title": "Shock fronts, electron-ion equilibration and ICM transport processes in the merging cluster Abell 2146",
+          "url": "https://arxiv.org/abs/1202.5320",
+          "arxiv_id": "1202.5320"
+        },
+        {
+          "title": "The structure of cluster merger shocks: turbulent width and the electron heating timescale",
+          "url": "https://arxiv.org/abs/2204.05785",
+          "arxiv_id": "2204.05785"
+        },
+        {
+          "title": "Dynamical analysis of galaxy cluster merger Abell 2146",
+          "url": "https://arxiv.org/abs/1508.01505",
+          "arxiv_id": "1508.01505"
+        },
+        {
+          "title": "The Mass Distribution of the Unusual Merging Cluster Abell 2146 from Strong Lensing",
+          "url": "https://arxiv.org/abs/1609.06765",
+          "arxiv_id": "1609.06765",
+          "use_in_this_screen": "bibliographic suitability counts only; no target coordinates, model, or halo quantities"
+        }
+      ]
+    },
+    "ELGORDO": {
+      "name": "ACT-CL J0102-4915 (El Gordo)",
+      "redshift": 0.87,
+      "direct_primary_merger_front": true,
+      "unique_merger_attribution": true,
+      "mach_or_speed_uncertainty_available": true,
+      "history_statistic": {
+        "basis": "published_detection_confidence",
+        "measured_value": 0.98,
+        "uncertainty_toward_no_shock": null,
+        "source_note": "The source-side ALMA shock detection is reported above 98 percent confidence; the joint SZ/X-ray Mach estimate is 2.4 +1.3/-0.6."
+      },
+      "member_sample": {
+        "secure_spectroscopic_members": 89,
+        "reported_redshift_sample": 89,
+        "published_table_has_position_velocity_and_error_columns": true
+      },
+      "assembly_geometry": {
+        "published_projection_constraint_available": true,
+        "angle_from_sky_plane_deg": [
+          10.0,
+          30.0
+        ],
+        "time_since_core_passage_gyr": [
+          0.30,
+          1.13
+        ],
+        "time_since_passage_constraint_available": false,
+        "time_constraint_is_assumption_independent": false,
+        "declared_clock_assumption": "outgoing and returning solutions remain distinct, at approximately 0.46 and 0.91 Gyr"
+      },
+      "source_archives": {
+        "public_source_archives_identified": true,
+        "member_table_source_archive_identified": true,
+        "xray_archive_identified": true,
+        "resolved_thermodynamic_uncertainty_product_published": false
+      },
+      "front_geometry": {
+        "front_position_measurable_from_public_data": true,
+        "published_front_position_uncertainty_available": true
+      },
+      "later_lensing_suitability_metadata": {
+        "reported_image_families": 23,
+        "reported_spectroscopic_families": 23,
+        "minimum_reported_image_instances": 46,
+        "coordinates_or_model_read_during_screen": false
+      },
+      "local_source_products": {
+        "member_table_with_uncertainties": false,
+        "resolved_gas_uncertainty_product": false,
+        "projection_uncertainty_ensemble": false,
+        "front_position_with_uncertainty": false
+      },
+      "primary_sources": [
+        {
+          "title": "The Atacama Cosmology Telescope: ACT-CL J0102-4915 El Gordo, a Massive Merging Cluster at Redshift 0.87",
+          "url": "https://arxiv.org/abs/1109.0953",
+          "arxiv_id": "1109.0953"
+        },
+        {
+          "title": "ALMA-SZ Detection of a Galaxy Cluster Merger Shock at Half the Age of the Universe",
+          "url": "https://arxiv.org/abs/1608.05413",
+          "arxiv_id": "1608.05413"
+        },
+        {
+          "title": "The return of the merging galaxy subclusters of El Gordo?",
+          "url": "https://arxiv.org/abs/1412.1826",
+          "arxiv_id": "1412.1826"
+        },
+        {
+          "title": "JWST's PEARLS: a new lens model for ACT-CL J0102-4915, El Gordo",
+          "url": "https://arxiv.org/abs/2210.06514",
+          "arxiv_id": "2210.06514",
+          "use_in_this_screen": "bibliographic suitability counts only; no target coordinates, model, or halo quantities"
+        }
+      ]
+    },
+    "MACS0025": {
+      "name": "MACS J0025.4-1222",
+      "redshift": 0.586,
+      "direct_primary_merger_front": false,
+      "unique_merger_attribution": false,
+      "mach_or_speed_uncertainty_available": false,
+      "history_statistic": {
+        "basis": "none",
+        "measured_value": null,
+        "uncertainty_toward_no_shock": null,
+        "source_note": "The system has a clear gas-galaxy separation but no directly measured primary-merger propagation front usable as the common clock."
+      },
+      "member_sample": {
+        "secure_spectroscopic_members": null,
+        "reported_redshift_sample": null,
+        "published_table_has_position_velocity_and_error_columns": false
+      },
+      "assembly_geometry": {
+        "published_projection_constraint_available": false,
+        "angle_from_sky_plane_deg": null,
+        "time_since_core_passage_gyr": null,
+        "time_since_passage_constraint_available": false,
+        "time_constraint_is_assumption_independent": false,
+        "declared_clock_assumption": "a head-on collision in the sky plane is assumed rather than measured as an uncertainty ensemble"
+      },
+      "source_archives": {
+        "public_source_archives_identified": true,
+        "member_table_source_archive_identified": false,
+        "xray_archive_identified": true,
+        "resolved_thermodynamic_uncertainty_product_published": false
+      },
+      "front_geometry": {
+        "front_position_measurable_from_public_data": false,
+        "published_front_position_uncertainty_available": false
+      },
+      "later_lensing_suitability_metadata": {
+        "reported_image_families": null,
+        "reported_spectroscopic_families": null,
+        "minimum_reported_image_instances": null,
+        "coordinates_or_model_read_during_screen": false
+      },
+      "local_source_products": {
+        "member_table_with_uncertainties": false,
+        "resolved_gas_uncertainty_product": false,
+        "projection_uncertainty_ensemble": false,
+        "front_position_with_uncertainty": false
+      },
+      "primary_sources": [
+        {
+          "title": "Revealing the properties of dark matter in the merging cluster MACSJ0025.4-1222",
+          "url": "https://arxiv.org/abs/0806.2320",
+          "arxiv_id": "0806.2320",
+          "use_in_this_screen": "source morphology and bibliographic availability only; no target coordinates, model, or halo quantities"
+        }
+      ]
+    }
+  },
+  "authorization": {
+    "candidate_selection_only": true,
+    "source_archive_acquisition_authorized_for_selected_pair": true,
+    "source_construction_authorized": false,
+    "formula_selection_authorized": false,
+    "lensing_or_halo_payload_access_authorized": false,
+    "holdout_access_authorized": false
+  },
+  "decision_rules": [
+    "Select every candidate that passes the source-side acquisition gates; the declared preferred pair must equal that set and may not be changed using lensing performance.",
+    "A five-sigma shock-front statistic establishes that a propagation front exists; it does not by itself make the inferred time since passage assumption independent.",
+    "A selected development object need not yet satisfy the final strong-lensing sample gate, but any missing spectroscopic family or target metadata must remain explicit.",
+    "Do not construct a causal source until all selected objects have local hashed member-error tables, front-position uncertainties, resolved gas uncertainty products, and a reproducible projection ensemble.",
+    "Failure of a candidate screen is data insufficiency, not falsification of the causal-history hypothesis."
+  ]
+}

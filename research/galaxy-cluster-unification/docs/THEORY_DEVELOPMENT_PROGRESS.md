@@ -1,5 +1,28 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v19B-v19F causal-source readiness checkpoint
+
+The causal-assembly branch has a new target-blind mechanism-development pair:
+the Bullet Cluster and Abell 2146. Both have greater-than-six-sigma primary
+merger shocks, published projection/clock intervals, and local member tables
+that retain individual velocity uncertainties. The parsed catalogs contain 78
+and 63 members, respectively.
+
+Twenty matched-depth Chandra observations have now been downloaded, hash
+verified, and processed with the previously audited CIAO 4.18.0/CALDB 4.12.4
+environment. All 20 pass reprocessing, flare, compact-source, and blank-sky
+gates. The cleaned exposures are 561.128 ks for Bullet and 418.013 ks for
+Abell 2146; the minimum retained fraction is 0.855990 against a frozen 0.50
+gate. No event image was visually inspected and no replacement-cluster lensing
+target was opened.
+
+This advances data readiness, not the theory. Registration, automated shock
+geometry, resolved thermodynamic uncertainties, and the projection/clock
+ensemble must be frozen before source construction. Only a source that then
+transfers without cluster-specific amplitude, scale, clock, or orientation may
+be compared with the sealed lensing fields. See
+[`SIGMA_V19B_V19F_CAUSAL_SOURCE_READINESS.md`](SIGMA_V19B_V19F_CAUSAL_SOURCE_READINESS.md).
+
 ## 2026-08-04 Sigma v19A assembly-history readiness result
 
 The first causal-history audit did not authorize a source. Deterministic

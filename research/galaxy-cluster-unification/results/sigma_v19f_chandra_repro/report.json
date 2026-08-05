@@ -1,0 +1,2523 @@
+{
+  "acquisition_provenance_sha256": "fd62fff3371c2391495164bc49bcae3359a6ec4b7e75fd0a1db5da077f094460",
+  "ciaover": "The current environment is configured for:\n  CIAO        : CIAO 4.18.0 Monday, December 08, 2025\n  Contrib     : Package release 2  Thursday, July 9, 2026\n  bindir      : /home/henry/miniforge3/envs/sigma-ciao-4.18/bin\n  Python path : /home/henry/miniforge3/envs/sigma-ciao-4.18/bin\n  CALDB       : 4.12.4\n\nSystem information:\nLinux GipsyDanger 6.6.114.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Mon Dec  1 20:46:23 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux",
+  "config_sha256": "ef10d042d5a1a34b90044dcc93ec2820ae6808610df489f6972a7a06a7396c06",
+  "event_images_inspected": false,
+  "generated_utc": "2026-08-05T03:53:17.032411+00:00",
+  "jobs": 2,
+  "lensing_target_opened": false,
+  "observation_count": 20,
+  "observations": [
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/10464",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/10464",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 388433,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2009-05-01T02:38:44",
+          "DATE-OBS": "2009-04-30T16:10:10",
+          "EXPOSURE": "35677.586289346",
+          "LIVETIME": "35677.586289346",
+          "OBS_ID": "10464",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/10464/acisf10464_repro_evt2.fits",
+        "repro_history_sha256": "e2f7efcce2998da3f7ca5ef916c25de5911bcf2d755b427c6bf357f3628386aa"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/10464",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/10464_chandra_repro.log",
+      "log_sha256": "1979415fb75db6ee83d32e1551562bcc51d23323d68bd9d28965c036a216203e",
+      "obsid": 10464,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/10464",
+      "product_bytes": 73831771,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 213120,
+          "relative_path": "acisf10464_000N003_bpix1.fits",
+          "sha256": "586fb5b700c37e8209bae6c8ab10c067bcb7e704aa692a1358bded0b2ff4094c"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf10464_000N003_fov1.fits",
+          "sha256": "40d9052ea7d2e37e4ab08f66c0d5ae7b8a50494fc1a624b19a96a46e51acbaaa"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf10464_000N003_msk1.fits",
+          "sha256": "55285a48a687296d74d7046c394128225a2a810c90f96384ba11fcad41c88e4d"
+        },
+        {
+          "bytes": 8303040,
+          "relative_path": "acisf10464_000N003_mtl1.fits",
+          "sha256": "82576100288bcd319bb3270fce91dec65f86ff21599438880b5ffeebf04aaef0"
+        },
+        {
+          "bytes": 2966400,
+          "relative_path": "acisf10464_000N003_stat1.fits",
+          "sha256": "fad238522c713916160f7c4d6d113391f0cc4ba90b6a58cf038da153d80399d3"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf10464_asol1.lis",
+          "sha256": "8225f0b7458edac7a4b561dbccdcba43974483c6a9b116a2ebd57cf625cafb6e"
+        },
+        {
+          "bytes": 195840,
+          "relative_path": "acisf10464_repro_bpix1.fits",
+          "sha256": "b516d7d35f7a6ec84cad9e69ffc31115166de2f250401f8b841d61c6ca5060d5"
+        },
+        {
+          "bytes": 44400960,
+          "relative_path": "acisf10464_repro_evt2.fits",
+          "sha256": "bd48cfb86877c862c135e2af83b053ba9ff9521fe17758e15b82e5632b6d0c7e"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf10464_repro_flt2.fits",
+          "sha256": "2fea3d1303d45c1a586df965207cce9a2174da792429ebe0780fd24521688266"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf10464_repro_fov1.fits",
+          "sha256": "ca58180dd611c849ca587f302c88ba96bc6c10e0ddd026cb15832415044ea9d3"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf357495740N003_pbk0.fits",
+          "sha256": "78b2ed63514257bb9152e7ff895f882c1246beaca7c2fee9b8e69acc59260b93"
+        },
+        {
+          "bytes": 17542080,
+          "relative_path": "pcadf10464_000N001_asol1.fits",
+          "sha256": "0bf0c45b626533451c1b31723038a178f5e4e45b69514c9149d9f374ed2463de"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 158189682,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 29,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/10464",
+        "obsid": 10464,
+        "reused": 15,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/10464"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/10888",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/10888",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 70367,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2009-04-29T07:24:16",
+          "DATE-OBS": "2009-04-29T04:56:24",
+          "EXPOSURE": "6447.9508614685",
+          "LIVETIME": "6447.9508614685",
+          "OBS_ID": "10888",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/10888/acisf10888_repro_evt2.fits",
+        "repro_history_sha256": "991d5dcefbcb56deeeccc36ff93f6acb9e806d44b6cbcaa663d07b4d2624bc08"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/10888",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/10888_chandra_repro.log",
+      "log_sha256": "353bc44f4f188232ccec334dcc9591f1d319e19fa033073a2773174fb98a2e26",
+      "obsid": 10888,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/10888",
+      "product_bytes": 14474971,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 152640,
+          "relative_path": "acisf10888_000N003_bpix1.fits",
+          "sha256": "bb3a9fa71f17d22c35f7b5032640e5f96ede5b318f46b35d9621775ab7de3569"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf10888_000N003_fov1.fits",
+          "sha256": "a229e86c5303e538255de60c7c3fd0d803cdd99c1d20af4baa2a444b967f9373"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf10888_000N003_msk1.fits",
+          "sha256": "ac9c1e3877992eedd94ae4b74e98bc92faaf8737adc9b188067a1b7b5719dafa"
+        },
+        {
+          "bytes": 1566720,
+          "relative_path": "acisf10888_000N003_mtl1.fits",
+          "sha256": "468bbd094b6064d690041acd1e83ef52d7e3d22969133f7394e714ba0823ff92"
+        },
+        {
+          "bytes": 593280,
+          "relative_path": "acisf10888_000N003_stat1.fits",
+          "sha256": "a2a31cfa1bf9be3e80749baa5148d4f89454e47ce4bbe32a68fc3d06de6f4e5d"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf10888_asol1.lis",
+          "sha256": "3bc5840ec0402ae3e5b107052996164376f6b9b366941c2798808953e1789d89"
+        },
+        {
+          "bytes": 135360,
+          "relative_path": "acisf10888_repro_bpix1.fits",
+          "sha256": "77065a5e7cce8a19e53611e8e6bc4b09021295f280534dc9f210e5b0d3470ecc"
+        },
+        {
+          "bytes": 8141760,
+          "relative_path": "acisf10888_repro_evt2.fits",
+          "sha256": "844c62ee71fe482a2725a6dc338387809cb313520f3834823ee3426f304d35cc"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf10888_repro_flt2.fits",
+          "sha256": "932a7d88247eef288d7cdbb6a7ca182188a00a9415278f0576981f2d0191b29f"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf10888_repro_fov1.fits",
+          "sha256": "413eadf6d920a4c69d471554dee28cc407611895e8e99c70d49799753de9dfe0"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf357369965N003_pbk0.fits",
+          "sha256": "758e45ad0a2e03a645d454ec6ed39a5d70a29b463edead1bdae879f56d7d2f9b"
+        },
+        {
+          "bytes": 3674880,
+          "relative_path": "pcadf10888_000N001_asol1.fits",
+          "sha256": "c2642b79532d3143eac73a2594657cad6854f6136a61a5cc4c268a9a5232dcd6"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 32088837,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 24,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/10888",
+        "obsid": 10888,
+        "reused": 10,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/10888"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/12245",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/12245",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 140095,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2010-09-09T03:00:57",
+          "DATE-OBS": "2010-09-08T12:51:15",
+          "EXPOSURE": "48343.97180545",
+          "LIVETIME": "48343.97180545",
+          "OBS_ID": "12245",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/12245/acisf12245_repro_evt2.fits",
+        "repro_history_sha256": "e11657f81eadd933d2a1dc009b8bd5ca2f96032691aa89676c3f1fbd25d08ade"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/12245",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/12245_chandra_repro.log",
+      "log_sha256": "d811579d904e937f3a12029efed35600078754994e665e2ae4cdee0f25fd0d56",
+      "obsid": 12245,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/12245",
+      "product_bytes": 56102491,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 351360,
+          "relative_path": "acisf12245_000N003_bpix1.fits",
+          "sha256": "b49000fc70c6d7144460d8624f74636298700b36d4cc4b9457f98b0a7ab78e6e"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf12245_000N003_fov1.fits",
+          "sha256": "612ad49a72db2b986ff0e59c5b66f1a9d2aeddad9b994d28631bd9d5ce784ea6"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf12245_000N003_msk1.fits",
+          "sha256": "e766d0a37aa8859e8dc3dc4a51deb7eebdf90c67c9d5c5513ce2690418d8daaf"
+        },
+        {
+          "bytes": 11220480,
+          "relative_path": "acisf12245_000N003_mtl1.fits",
+          "sha256": "db9b83e08f107dd412388ce70e4b5c11d49c50989c1daf0d24f859a3d60fabe4"
+        },
+        {
+          "bytes": 3971520,
+          "relative_path": "acisf12245_000N003_stat1.fits",
+          "sha256": "047dc8fa2aea16621ee1b54316dde6ffbb787e2b7b757bb7f3568e7cdbfb7f8f"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf12245_asol1.lis",
+          "sha256": "b97cc7ae70b4b5b62b4f822be807593cc7296be49552635ad92cdcae05a4f9d4"
+        },
+        {
+          "bytes": 334080,
+          "relative_path": "acisf12245_repro_bpix1.fits",
+          "sha256": "0825b9b9d299b0a9ea83a6b16f2f57fef5ecf9f115f96ec5be561c968e42f26d"
+        },
+        {
+          "bytes": 16090560,
+          "relative_path": "acisf12245_repro_evt2.fits",
+          "sha256": "3a7538b88275c969b8dbb98169935dee6ac324f11035436bc11e4df1953b566f"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf12245_repro_flt2.fits",
+          "sha256": "d0505686dbb99af9d815c5a1e4d207a784c8c01e0af4cf897ae63f1a24ffe057"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf12245_repro_fov1.fits",
+          "sha256": "cef2711daf268ffb985642a075fc66910b0534d5526dd21ee68efdb0f0a6293f"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf400338882N003_pbk0.fits",
+          "sha256": "c57b356e592dd7cf0d5aabf540c568ee9abfc936305b75d649ef9915eecd0a11"
+        },
+        {
+          "bytes": 23924160,
+          "relative_path": "pcadf12245_000N001_asol1.fits",
+          "sha256": "9e9a5654f3e8bc52e1bc963878a1bd160bb298ac1425e468fdcb569f3401ea9d"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 145259490,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 32,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/12245",
+        "obsid": 12245,
+        "reused": 18,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/12245"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/12246",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/12246",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 138940,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2010-10-05T06:26:22",
+          "DATE-OBS": "2010-10-04T16:28:37",
+          "EXPOSURE": "47438.784667139",
+          "LIVETIME": "47438.784667139",
+          "OBS_ID": "12246",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/12246/acisf12246_repro_evt2.fits",
+        "repro_history_sha256": "f0f133fcb7534c6267f011bc3645e69055aecbc23ac4aec229b9a6883c613b4f"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/12246",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/12246_chandra_repro.log",
+      "log_sha256": "c182c0cfce24d287d64d32816a8ca7744d359f1ffd7e27edfbdb7abb35741da5",
+      "obsid": 12246,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/12246",
+      "product_bytes": 55405531,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 334080,
+          "relative_path": "acisf12246_000N004_bpix1.fits",
+          "sha256": "99641f3a2fdd932ae43a9d244504390734e0b0d00530d21e8db18eda6bda29b8"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf12246_000N004_fov1.fits",
+          "sha256": "ae5c70738396a6d6b840986d7b6ab1769e0e7284d9f2f8b051baffcf0f618622"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf12246_000N004_msk1.fits",
+          "sha256": "ad5abd7c89ad0e6ff385f908200e81afe641f77548d81cb8b4e13632c214bbb1"
+        },
+        {
+          "bytes": 11016000,
+          "relative_path": "acisf12246_000N004_mtl1.fits",
+          "sha256": "2ca1b94eb19d17395db30fcb6932cb6d0c65dde64b569a231a65fe20bb851f60"
+        },
+        {
+          "bytes": 3899520,
+          "relative_path": "acisf12246_000N004_stat1.fits",
+          "sha256": "88251ab54ed1285c9e09147c809c66aee0b48772f0a5f47adbda6557438e9201"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf12246_asol1.lis",
+          "sha256": "320a787996112bce7313b6583f24ce5387b28b2a22f87c2e386950e1912664bf"
+        },
+        {
+          "bytes": 316800,
+          "relative_path": "acisf12246_repro_bpix1.fits",
+          "sha256": "2ce5366fdc65854e5712b28bc66a1263fbf9a4838e526b352e6a219a3ab55952"
+        },
+        {
+          "bytes": 15958080,
+          "relative_path": "acisf12246_repro_evt2.fits",
+          "sha256": "8c4dbb61eb0ce166d25f9b04424dfe9692932ceb506a99830e243bd530aa4472"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf12246_repro_flt2.fits",
+          "sha256": "ead40a7da68f50c28ea1dd882b7a4ee032b8b420c3dcc9c43b7700c570629dd8"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf12246_repro_fov1.fits",
+          "sha256": "8dafe03591f6ffc6b141a66f87e49c7a106daa7f17dada8035771e7ac4dd7bc3"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf402598596N003_pbk0.fits",
+          "sha256": "704c1bb96ba5b9e7cbab3cc097e94631041a9ebd2b1d072788ed74eb62186c68"
+        },
+        {
+          "bytes": 23670720,
+          "relative_path": "pcadf12246_000N001_asol1.fits",
+          "sha256": "c766c82287b4a31272124bac4ea35bdc07570f6fc20b05e792294e6e363f3fea"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 143312655,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 32,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/12246",
+        "obsid": 12246,
+        "reused": 18,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/12246"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/12247",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/12247",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 189130,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2010-08-21T13:40:00",
+          "DATE-OBS": "2010-08-20T18:42:06",
+          "EXPOSURE": "65189.155249343",
+          "LIVETIME": "65189.155249343",
+          "OBS_ID": "12247",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/12247/acisf12247_repro_evt2.fits",
+        "repro_history_sha256": "354fa08f50622c30b72a4019a278ccbd18d0a81ba6b1378a10b7b9cb8c56aeb8"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/12247",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/12247_chandra_repro.log",
+      "log_sha256": "eaad965f938103d3c1f9d319510e50c0be23725601b4c06cf275eb1efab97e0d",
+      "obsid": 12247,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/12247",
+      "product_bytes": 75513691,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 414720,
+          "relative_path": "acisf12247_000N003_bpix1.fits",
+          "sha256": "4939aec3769455b7171b709ead58b260f4bbc67440001f3a3b8f53fdae85cfa3"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf12247_000N003_fov1.fits",
+          "sha256": "80e07a5db7a5d9b07591015cb231380b0df0a8743830e92b46dd6b668d47f23c"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf12247_000N003_msk1.fits",
+          "sha256": "f56d4db07302f07e3c87d91f57655734a3ddc308bc561766d09238e046347743"
+        },
+        {
+          "bytes": 15099840,
+          "relative_path": "acisf12247_000N003_mtl1.fits",
+          "sha256": "6d75f4417eac150fb1060c84f90707ac78705073e1604bb432ea42d806e5eb6a"
+        },
+        {
+          "bytes": 5330880,
+          "relative_path": "acisf12247_000N003_stat1.fits",
+          "sha256": "4db26bae9db6253c09832faf9cebd2ef2070832b14cbd8b5d3243f7a43c8f2ff"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf12247_asol1.lis",
+          "sha256": "409f7d603be6242c95662c6729880880d3834305b705edac854b694696ce386d"
+        },
+        {
+          "bytes": 397440,
+          "relative_path": "acisf12247_repro_bpix1.fits",
+          "sha256": "cb00cf7ee90cb58e33947047c069a53f34980dc10ce89b307beedf4ca33f456a"
+        },
+        {
+          "bytes": 21680640,
+          "relative_path": "acisf12247_repro_evt2.fits",
+          "sha256": "1b4d11e242fb315a007a9e7bf562cdbf800fe37519f70494981c42aef38c90a3"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf12247_repro_flt2.fits",
+          "sha256": "accb16b8d8eb7dd7712e3765de82e3c3c0bfd20ef7841eba44bc0c029fb7a203"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf12247_repro_fov1.fits",
+          "sha256": "ae7119bbd6380906c3c7b247e7f085d52d81eb73bad289e2a39d2dccdb5cdb59"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf398718583N003_pbk0.fits",
+          "sha256": "5b76c0971aa72e94ec36e8baa19fa22df4f73344d0c10ff9bbeebbe4da2d6124"
+        },
+        {
+          "bytes": 32379840,
+          "relative_path": "pcadf12247_000N001_asol1.fits",
+          "sha256": "311b964e603d9004e39388f44d45b5c2e84c678dd887c4148708668f022e0c7c"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 198124823,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 35,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/12247",
+        "obsid": 12247,
+        "reused": 21,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/12247"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/13020",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13020",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 120212,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2010-08-10T17:26:08",
+          "DATE-OBS": "2010-08-10T04:52:42",
+          "EXPOSURE": "41499.234282671",
+          "LIVETIME": "41499.234282671",
+          "OBS_ID": "13020",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13020/acisf13020_repro_evt2.fits",
+        "repro_history_sha256": "057f10bc0e2a170859766147197e646e35d12567e95f6abe2cc3e9edd9f96dfd"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13020",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/13020_chandra_repro.log",
+      "log_sha256": "650aefe233d923440df87082ae0e5779303c53441f651fb67cd96e942f970fde",
+      "obsid": 13020,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13020",
+      "product_bytes": 48473371,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 316800,
+          "relative_path": "acisf13020_001N003_bpix1.fits",
+          "sha256": "119adff077f13349aacf2486006b35c13a25b5ca55514a46369c484d29e79641"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf13020_001N003_fov1.fits",
+          "sha256": "cec49819505f5f169b6896c299224cac94e62efd93a7f5d53b907801ba415387"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf13020_001N003_msk1.fits",
+          "sha256": "469287f41b6494fc7be417241b8e9e65bf3ad381ed08aeb1f854365b193129a7"
+        },
+        {
+          "bytes": 9645120,
+          "relative_path": "acisf13020_001N003_mtl1.fits",
+          "sha256": "f0a123f0840addec4b6dcd55f323d1343546b55a3af8fd84b32c99c0708a93b9"
+        },
+        {
+          "bytes": 3421440,
+          "relative_path": "acisf13020_001N003_stat1.fits",
+          "sha256": "92ac026ad38a087420347d8de5d12ea1f06a3c971916d6a60293a5c18da9c1cc"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf13020_asol1.lis",
+          "sha256": "cc2fc002cf41e5c6b6f6b7cfa3bda4d6558f1a96570ad3a74b3afe5b62df59ab"
+        },
+        {
+          "bytes": 299520,
+          "relative_path": "acisf13020_repro_bpix1.fits",
+          "sha256": "d2aacbbc85c23618eda04e7dc22294e20ac735e0c60ad37c6980d20f1b67a617"
+        },
+        {
+          "bytes": 13824000,
+          "relative_path": "acisf13020_repro_evt2.fits",
+          "sha256": "df4fc43c6f497aba7b0802447c59ff76ac37bc15ded88aced6ae040db4064b5a"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf13020_repro_flt2.fits",
+          "sha256": "5e7530abbf009e06a630ebe6c0d47387afa0f45f2e2bd23b612c05d51d231e9b"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf13020_repro_fov1.fits",
+          "sha256": "85e1f79ab1454c5f2c6012689639971f250e1f7acb48f01d611976354c8189b1"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf397804831N003_pbk0.fits",
+          "sha256": "f19a0181647590c4a93bdecd3e5307108f7e2ca42daec659ecc3ffd4e2556be7"
+        },
+        {
+          "bytes": 20756160,
+          "relative_path": "pcadf13020_001N001_asol1.fits",
+          "sha256": "6c3ade66ad8aea14f86a3b52c15eee9f63cc1cb26c2f2c6e986b5b8a26240df0"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 125309074,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 30,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13020",
+        "obsid": 13020,
+        "reused": 16,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/13020"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/13021",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13021",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 139445,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2010-08-13T10:30:26",
+          "DATE-OBS": "2010-08-12T20:10:46",
+          "EXPOSURE": "48405.929394654",
+          "LIVETIME": "48405.929394654",
+          "OBS_ID": "13021",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13021/acisf13021_repro_evt2.fits",
+        "repro_history_sha256": "0224c500e58096cae3a8f27ccd04a8fcf84bfa4871eb80e9f646b014211f0415"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13021",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/13021_chandra_repro.log",
+      "log_sha256": "13efec4516d1752c130234ceed501edf52325e56fc5151b2c0c43a1f48842396",
+      "obsid": 13021,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13021",
+      "product_bytes": 56275291,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 348480,
+          "relative_path": "acisf13021_001N003_bpix1.fits",
+          "sha256": "9dd1e88d5373d00c3eb0ade7fc5dc604e67e380cd2419fde45d6eba662114ce3"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf13021_001N003_fov1.fits",
+          "sha256": "b0ad4d89ea493184100581c282e5965d8ad66dfb90c13e33097c89d9c1817328"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf13021_001N003_msk1.fits",
+          "sha256": "8f179fe2f6600e59620ba05050e810e079e2e4021b687cd83687ced29f943a70"
+        },
+        {
+          "bytes": 11237760,
+          "relative_path": "acisf13021_001N003_mtl1.fits",
+          "sha256": "c10e04a5acc7413304b69b1bf80a95f7eb262c4b596669fd02bce55a38a50875"
+        },
+        {
+          "bytes": 3977280,
+          "relative_path": "acisf13021_001N003_stat1.fits",
+          "sha256": "8109cd689ca500efd2ead5f903065b8677a4dcdcbdeadf970ac27e07743b76cf"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf13021_asol1.lis",
+          "sha256": "131044264a6cb3af1c1243fb7e8e1e9c2ac26883b0c0ef836d11b428b160a060"
+        },
+        {
+          "bytes": 331200,
+          "relative_path": "acisf13021_repro_bpix1.fits",
+          "sha256": "56747f8d8628a5b129bf086ba5836e00f16fac7e90e8aaf013d29b604cc35497"
+        },
+        {
+          "bytes": 16015680,
+          "relative_path": "acisf13021_repro_evt2.fits",
+          "sha256": "8d9d7a440161ba72b08e2140d64a3e78eab7cd835ced1ef907c8e59363137919"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf13021_repro_flt2.fits",
+          "sha256": "3114955e66d363b5ec5417112175b20032d1af07ae6ef75e2acbe7cdb8386fb7"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf13021_repro_fov1.fits",
+          "sha256": "4de3d5c285117ec1f244c69ee4c962b3fabc11a165e654c8fe0b15705698e51f"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf398032722N003_pbk0.fits",
+          "sha256": "4c634609cf66cebf572499bb3e2e4505701c3bdf2708753d0c2d0b6a34430dfb"
+        },
+        {
+          "bytes": 24154560,
+          "relative_path": "pcadf13021_001N001_asol1.fits",
+          "sha256": "eae015ffab48fbcfe665c5045af7c5b611d727136b74b1970304326c96f65678"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 144578806,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 31,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13021",
+        "obsid": 13021,
+        "reused": 17,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/13021"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/13023",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13023",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 81193,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2010-08-19T20:40:37",
+          "DATE-OBS": "2010-08-19T12:27:07",
+          "EXPOSURE": "27682.673830123",
+          "LIVETIME": "27682.673830123",
+          "OBS_ID": "13023",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13023/acisf13023_repro_evt2.fits",
+        "repro_history_sha256": "002fb500c7db7191966ef8328f7eebad6f4bb46f375b3af256dd3b07af00c2a4"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13023",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/13023_chandra_repro.log",
+      "log_sha256": "c57063da07558ba5b7390c6addba0905e80e8c1a6dcf48ea3049e68e4bd5b5dc",
+      "obsid": 13023,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13023",
+      "product_bytes": 32642011,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 253440,
+          "relative_path": "acisf13023_000N003_bpix1.fits",
+          "sha256": "f5f1b8d9deaa81374ad1dfcb44e964f37656f389a46cabbbc2fd6f8fd2f15494"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf13023_000N003_fov1.fits",
+          "sha256": "658839d15a6d3fcb9f0d3f9981af93ba75df3656e74d8ccd2d07b25ec17045e7"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf13023_000N003_msk1.fits",
+          "sha256": "830db5d53a2f740157dc0000964c91c6c6a012dd30401a92aab2cdb7707196a2"
+        },
+        {
+          "bytes": 6459840,
+          "relative_path": "acisf13023_000N003_mtl1.fits",
+          "sha256": "d1917bc0755a6380f75f1b9e67fd14ef38af8523754c4ea60d29291072f4a23e"
+        },
+        {
+          "bytes": 2306880,
+          "relative_path": "acisf13023_000N003_stat1.fits",
+          "sha256": "3ccb9fa1d21dbab6f8a1f29399a68869b7ee1a4b13f985d9f6940228bba83c21"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf13023_asol1.lis",
+          "sha256": "d870f3d577179d3b41a4990a645e08d737fb4cd4450b225509f82c213c25ef5d"
+        },
+        {
+          "bytes": 233280,
+          "relative_path": "acisf13023_repro_bpix1.fits",
+          "sha256": "b5dcbd27f21c1e405dc44d6b9c642be0f0164374fdcbde133f4ba4211ec3cd77"
+        },
+        {
+          "bytes": 9374400,
+          "relative_path": "acisf13023_repro_evt2.fits",
+          "sha256": "04e0725136892c0ec34ab431d922f3ce63b45c2883b8f607998a5693270c2b0b"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf13023_repro_flt2.fits",
+          "sha256": "e5a06e1d157d146a7eddb0910bbf626a67c599c934d2986b6c41c4e5f44b6c17"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf13023_repro_fov1.fits",
+          "sha256": "5fecdd9cf4592c5313a4a15c2d5bbecc13b6e1bbaf7cf042759259c85ca89a71"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf398609025N003_pbk0.fits",
+          "sha256": "3b50ce8f5f2329fc809b2b7ff3c5b31d3c2bf8bdd471085f2d99acc2dca4e243"
+        },
+        {
+          "bytes": 13803840,
+          "relative_path": "pcadf13023_000N001_asol1.fits",
+          "sha256": "fd3a4258852715b57bf631bb73fbe77663f63bbcb0bb0fb3fc028d9336158899"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 86214532,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 28,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13023",
+        "obsid": 13023,
+        "reused": 14,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/13023"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/13120",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13120",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 143573,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2010-09-11T12:47:08",
+          "DATE-OBS": "2010-09-10T22:11:02",
+          "EXPOSURE": "49385.533342981",
+          "LIVETIME": "49385.533342981",
+          "OBS_ID": "13120",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13120/acisf13120_repro_evt2.fits",
+        "repro_history_sha256": "8b357b25414e5011ad14d38566a553781932ac0ef9802c768736bb9a47efa379"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13120",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/13120_chandra_repro.log",
+      "log_sha256": "0d26efdb2e530ea47b10c2f460810711c7788ab8af71ea502e96d517a8f90da8",
+      "obsid": 13120,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13120",
+      "product_bytes": 57554011,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 360000,
+          "relative_path": "acisf13120_000N003_bpix1.fits",
+          "sha256": "a384522cfd026386f30eebc7e041079bd2a392fe30aa0b1ae4351550b759557e"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf13120_000N003_fov1.fits",
+          "sha256": "3f484bc9617e7b55e401f45e3a8c360fa87dc3bcd3db7a3324fc53800133b383"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf13120_000N003_msk1.fits",
+          "sha256": "3c526fb4d89845132d4981046c4f7b4fb36a310ce00e6e6709299e61a2c60f4b"
+        },
+        {
+          "bytes": 11462400,
+          "relative_path": "acisf13120_000N003_mtl1.fits",
+          "sha256": "fcf5b4dfd0727e93eec851eca89dde1e13b1802ec65d6eb15cf4078e4bc112b3"
+        },
+        {
+          "bytes": 4057920,
+          "relative_path": "acisf13120_000N003_stat1.fits",
+          "sha256": "956a1a2e4ef070f203f5f6facf9e43d7742c946d2d583634fbccc5034b56bbb8"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf13120_asol1.lis",
+          "sha256": "1b51949ee4b4eae49320f5d5f5c0354df0995009891dd3b0c662e0bd11eec596"
+        },
+        {
+          "bytes": 342720,
+          "relative_path": "acisf13120_repro_bpix1.fits",
+          "sha256": "7d23216d1ad9a7cf5dfd40ce3167c23b245349806e5cb69b7eca2dd0ee6e074d"
+        },
+        {
+          "bytes": 16488000,
+          "relative_path": "acisf13120_repro_evt2.fits",
+          "sha256": "4c06a1a6f965c020c505cfc7dea5e7cb489751c04c64c456d14b81744cb2492b"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf13120_repro_flt2.fits",
+          "sha256": "58821e3d49b51822a2172d2be87643fa48c92680dac4600fe63bd62c42fb7864"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf13120_repro_fov1.fits",
+          "sha256": "172794ae54035f6fe2a2c2528af1bb29c2b6e90056101d98458749fb4f3011f5"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf400545547N003_pbk0.fits",
+          "sha256": "8a43695e2ccbc081011cf9766efb1ea71d3598d0fd4b7157a59c09b7c3abdcf8"
+        },
+        {
+          "bytes": 24632640,
+          "relative_path": "pcadf13120_000N001_asol1.fits",
+          "sha256": "3c9ed2a1c98d9f8afe5942121f93ed4c5007b759a0e533546dbcd8023060a70c"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 149864363,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 32,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13120",
+        "obsid": 13120,
+        "reused": 18,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/13120"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "ABELL2146",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/ABELL2146/13138",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13138",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 145097,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2010-10-11T03:15:09",
+          "DATE-OBS": "2010-10-10T12:41:54",
+          "EXPOSURE": "49391.758767632",
+          "LIVETIME": "49391.758767632",
+          "OBS_ID": "13138",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13138/acisf13138_repro_evt2.fits",
+        "repro_history_sha256": "68f0d9f6a1918f317c24a16675ceaf9278673cb886178bba50607adf3a7f35d0"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13138",
+      "log": "/home/henry/sigma-v19f-chandra/logs/ABELL2146/13138_chandra_repro.log",
+      "log_sha256": "63a7c006a4d61e5c707f1ab6af01e5ed785feeafd10652cb47c523431bef9763",
+      "obsid": 13138,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/ABELL2146/13138",
+      "product_bytes": 57358171,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 334080,
+          "relative_path": "acisf13138_000N004_bpix1.fits",
+          "sha256": "b6d6989e49e98ba52c4570e51a3bf20e076a9eadad8e7eac1d675349e2dfaccf"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf13138_000N004_fov1.fits",
+          "sha256": "5bf38a74f8153ba6dad33352e4c384b55c079f4daf95778da50ddcad5e89f9af"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf13138_000N004_msk1.fits",
+          "sha256": "993241d846fa867564c702c478d1103dd4f57a1e7836105cf50d3ac8f83da1be"
+        },
+        {
+          "bytes": 11462400,
+          "relative_path": "acisf13138_000N004_mtl1.fits",
+          "sha256": "1d7629c97cbc5873c194ed65b12e9a59c8690992fc46fa12f79a48232d51cc4c"
+        },
+        {
+          "bytes": 4057920,
+          "relative_path": "acisf13138_000N004_stat1.fits",
+          "sha256": "6fe3d98be83485e4610547965ddc5ea76449ae9ef307489e17a85f18f0126742"
+        },
+        {
+          "bytes": 91,
+          "relative_path": "acisf13138_asol1.lis",
+          "sha256": "5a07c29a9147c66a3e64a548508bda68ef4cdedfbe7e5071a1b3e45d980c0537"
+        },
+        {
+          "bytes": 316800,
+          "relative_path": "acisf13138_repro_bpix1.fits",
+          "sha256": "5d7cf06d3f2773bd9d91bcd85b5b57dafe33937fb200db9434f6c03d3e6fb61b"
+        },
+        {
+          "bytes": 16660800,
+          "relative_path": "acisf13138_repro_evt2.fits",
+          "sha256": "2c8fb4b043b1e34f2dada815d89f630f5dadcdd03856a290624785acac941e96"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf13138_repro_flt2.fits",
+          "sha256": "f990f3eef09d2c23bacc9b4f76334b7f292c99c2e67a22aaff41deebc7fb5474"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf13138_repro_fov1.fits",
+          "sha256": "0d73d8ff8db60f3b01f049a88e9f4eb2dbd703266605783c6d823ec783b54165"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf403102815N004_pbk0.fits",
+          "sha256": "11679cd967668916eaf155ee86b380f76474768566bd8f48873a0a32a16f0d67"
+        },
+        {
+          "bytes": 24315840,
+          "relative_path": "pcadf13138_000N001_asol1.fits",
+          "sha256": "0fa367254c037739fa56cd1d66aa00c6862b636307f083eb1ae33690048e41dc"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 148068127,
+        "cluster": "ABELL2146",
+        "copied": 14,
+        "files": 32,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/ABELL2146/13138",
+        "obsid": 13138,
+        "reused": 18,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/ABELL2146/13138"
+      }
+    },
+    {
+      "archive_datamode": "FAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "no",
+      "check_vf_pha_requested": false,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/554",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/554",
+        "check_vf_pha=no",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 252101,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "FAINT",
+          "DATE-END": "2000-10-16T18:20:59",
+          "DATE-OBS": "2000-10-16T10:34:32",
+          "EXPOSURE": "25791.659824477",
+          "LIVETIME": "25791.659824477",
+          "OBS_ID": "554",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.24104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/554/acisf00554_repro_evt2.fits",
+        "repro_history_sha256": "907117f786e18a7d22e9847c2314d5a808be5394cb5914ff061657a5d06d99c7"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/554",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/554_chandra_repro.log",
+      "log_sha256": "a007a7ed9f252f3d112fa41091cca6094f8276bd5df080a7b4c98b9f9e9fdae6",
+      "obsid": 554,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/554",
+      "product_bytes": 42531926,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 204480,
+          "relative_path": "acisf00554_000N004_bpix1.fits",
+          "sha256": "5de98a1948786c0f7d79abdd71b286f3b77f1de74c841cce8f9ee8d98435c72e"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf00554_000N004_fov1.fits",
+          "sha256": "8ca73eb268d649236f4f750483b9362d003b3dd0856502fa949ace48ead27ce4"
+        },
+        {
+          "bytes": 109440,
+          "relative_path": "acisf00554_000N004_msk1.fits",
+          "sha256": "f47a55f67bf58ddba8fe416028e31e676ff492b16d91f73a40169c0beb3a13b4"
+        },
+        {
+          "bytes": 5837760,
+          "relative_path": "acisf00554_000N004_mtl1.fits",
+          "sha256": "606ce2cc738f9242ebc932839307b17af6cd014aae912fda4c36e3017cb62829"
+        },
+        {
+          "bytes": 2566080,
+          "relative_path": "acisf00554_000N004_stat1.fits",
+          "sha256": "d8dd2d12d958a793ca3429f944f4859ae8a2fe1409fc4879eaeacfaa45a402ea"
+        },
+        {
+          "bytes": 86,
+          "relative_path": "acisf00554_asol1.lis",
+          "sha256": "5ba0f7a9f88a1d977e642c6a93ee3f16dc86d9a2f475aa6af1dd88a559592b91"
+        },
+        {
+          "bytes": 201600,
+          "relative_path": "acisf00554_repro_bpix1.fits",
+          "sha256": "fa4ac73df46e3a06ac1f459f4cb19e9d1684608e64080c96055446f647066c4a"
+        },
+        {
+          "bytes": 20796480,
+          "relative_path": "acisf00554_repro_evt2.fits",
+          "sha256": "b017079400ea2b1124cfb1a9fa268a0446a8455f693d2647fd3cc29a1975155f"
+        },
+        {
+          "bytes": 43200,
+          "relative_path": "acisf00554_repro_flt2.fits",
+          "sha256": "118ecfd9fad894c314f0ff873a928a8258ea2e015296aab691a1029565e5231e"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf00554_repro_fov1.fits",
+          "sha256": "d3a6e4d9be7c011d09cd9650bc69ad09036169d9fa38cca28ac39b2be5e61331"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf088080224N005_pbk0.fits",
+          "sha256": "755ca207603aa5c757e64850d922eef4cfcc9e0906af3d4a437cc8b5f801814f"
+        },
+        {
+          "bytes": 12692160,
+          "relative_path": "pcadf00554_000N001_asol1.fits",
+          "sha256": "78766065d78b2992b9c30456d521288d98dc6d0ecf68c88a6d6b23563dafcec3"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 83294971,
+        "cluster": "BULLET",
+        "copied": 15,
+        "files": 29,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/554",
+        "obsid": 554,
+        "reused": 14,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/554"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/3184",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/3184",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 276478,
+        "header": {
+          "CALDBVER": "4.9.4",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2002-07-13T06:27:34",
+          "DATE-OBS": "2002-07-12T05:06:40",
+          "EXPOSURE": "87474.712377757",
+          "LIVETIME": "87474.712377757",
+          "OBS_ID": "3184",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/3184/acisf03184_repro_evt2.fits",
+        "repro_history_sha256": "1cdf2e4079570ff6de84aa4195b6f7e7ad9103fb157e5ccc417386b8710f2e9f"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/3184",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/3184_chandra_repro.log",
+      "log_sha256": "b43602ec1acd4721de5e19dc4512b399360cbab10cecc9f052ab6ef1fde367ee",
+      "obsid": 3184,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/3184",
+      "product_bytes": 102873687,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 348480,
+          "relative_path": "acisf03184_000N004_bpix1.fits",
+          "sha256": "0adbd101bfc32716a38bd4e14237cdb9c55df4c11892c959968893ee7acbcb8d"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf03184_000N004_fov1.fits",
+          "sha256": "6d21a95df1c0d9678868de43ac17bf809c66009a8b6b8ae8126bc272c596a94f"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf03184_000N004_msk1.fits",
+          "sha256": "347734e0f3ba3228e8f0e6fe1047a4169eaa506f370b659cbb8a3d5e6232af32"
+        },
+        {
+          "bytes": 20243520,
+          "relative_path": "acisf03184_000N004_mtl1.fits",
+          "sha256": "a2e6bbd8d8df6c85a8819f69efc284614dd22a9161aefd2fcb080ba16df5867c"
+        },
+        {
+          "bytes": 7128000,
+          "relative_path": "acisf03184_000N004_stat1.fits",
+          "sha256": "daba00bc5633d4e3495ab418d32a20a54e8d70d93c1355a3b3ad0b10fb4e58af"
+        },
+        {
+          "bytes": 87,
+          "relative_path": "acisf03184_asol1.lis",
+          "sha256": "0bd70760da58fb7f8b22b0fceee5ccd6ec450cfd3bb9d8138ebc715643d8788a"
+        },
+        {
+          "bytes": 331200,
+          "relative_path": "acisf03184_repro_bpix1.fits",
+          "sha256": "570ab1d93648236ee5252a09a7a2d5b98fbc0e5a5e45ee01fa5f02d535d9c59e"
+        },
+        {
+          "bytes": 31636800,
+          "relative_path": "acisf03184_repro_evt2.fits",
+          "sha256": "79c34fbee37d70bfe5be1e35637d5984653f59f39d948229d6f8a3805527eee2"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf03184_repro_flt2.fits",
+          "sha256": "c7785a086823964a7c3b67fd28cf0aefa35c247cd890636beef0badea02070a3"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf03184_repro_fov1.fits",
+          "sha256": "f4e74b4fd38fb39a5114fc3798c1f7b37932afc203695c0ee94662ab7533cae8"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf142838537N004_pbk0.fits",
+          "sha256": "4d8fde7ffe41234db12afe8a4fb9b787fb3ff8b4d54bc471fad6993141836268"
+        },
+        {
+          "bytes": 42975360,
+          "relative_path": "pcadf03184_000N001_asol1.fits",
+          "sha256": "f2b168a3467a162a747307756d42f7bdd8bd6e38656321d0e082524b40c28929"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 211882060,
+        "cluster": "BULLET",
+        "copied": 14,
+        "files": 39,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/3184",
+        "obsid": 3184,
+        "reused": 25,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/3184"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/4984",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/4984",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 248908,
+        "header": {
+          "CALDBVER": "4.9.2",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2004-08-20T15:22:34",
+          "DATE-OBS": "2004-08-19T17:27:25",
+          "EXPOSURE": "76119.595640067",
+          "LIVETIME": "76119.595640067",
+          "OBS_ID": "4984",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/4984/acisf04984_repro_evt2.fits",
+        "repro_history_sha256": "b5a80ae0827ee07d963a01031ca96524a509b0edea27cbd834deb19c85671790"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/4984",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/4984_chandra_repro.log",
+      "log_sha256": "abde8cae557cac0aee1a73992099bdab62e429f31a09075e888899702fc210d0",
+      "obsid": 4984,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/4984",
+      "product_bytes": 90674007,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 365760,
+          "relative_path": "acisf04984_001N004_bpix1.fits",
+          "sha256": "3b3eebd5bf18ec1b79129295bc63e0483e3f563b6cc141797fd7ccdef1250a77"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf04984_001N004_fov1.fits",
+          "sha256": "8a832995691bce20790370b9e4bd2c86747f3a082e5766cffcb5201b9fc621c7"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf04984_001N004_msk1.fits",
+          "sha256": "3bfcaab099128c7591c65a1947facb336ad979b045c339bc4d4c1dc1bd9b640a"
+        },
+        {
+          "bytes": 17622720,
+          "relative_path": "acisf04984_001N004_mtl1.fits",
+          "sha256": "a1edfe13e430d8ce6a5cbd02c1964cff4a2127054f2f393f7a48e09307687aca"
+        },
+        {
+          "bytes": 6252480,
+          "relative_path": "acisf04984_001N004_stat1.fits",
+          "sha256": "bdd39138d02c8cbd92f4733ba46eb1915a1fc26fcfd4e4485356ee5551c3c792"
+        },
+        {
+          "bytes": 87,
+          "relative_path": "acisf04984_asol1.lis",
+          "sha256": "9b2216c4efb23eed7c698bd4544f0c63fec52a2b75985d546214ad3809933e64"
+        },
+        {
+          "bytes": 348480,
+          "relative_path": "acisf04984_repro_bpix1.fits",
+          "sha256": "0385728a3fdfe53a9d276db6c1554ca8437fbf8ba9f5f2ec276a01bf1e5f5e2d"
+        },
+        {
+          "bytes": 28494720,
+          "relative_path": "acisf04984_repro_evt2.fits",
+          "sha256": "373203288551eb9c0b405a00f1ec8d08a8ba6983413a524e20d1d797300058ec"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf04984_repro_flt2.fits",
+          "sha256": "214ee5664d11857762c405f9cbbdef2e58955b74b56d287a4781f0a7d3e7e442"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf04984_repro_fov1.fits",
+          "sha256": "af906dd37513672a503f317f42cf4d517572ab34ae1ffd8da74fbc79ea0372fe"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf209324217N004_pbk0.fits",
+          "sha256": "aded0c1d329ff49a475d00c37d55f4ca5625b85a0df0f20f5482595019c2066b"
+        },
+        {
+          "bytes": 37379520,
+          "relative_path": "pcadf04984_001N001_asol1.fits",
+          "sha256": "f11abd2a99f57435b45e6475ec1584c8d168052c51099d8ed72c92d6284dfde7"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 205671844,
+        "cluster": "BULLET",
+        "copied": 14,
+        "files": 37,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/4984",
+        "obsid": 4984,
+        "reused": 23,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/4984"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/4985",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/4985",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 95930,
+        "header": {
+          "CALDBVER": "4.9.2",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2004-08-24T08:02:46",
+          "DATE-OBS": "2004-08-23T23:51:21",
+          "EXPOSURE": "27490.470280469",
+          "LIVETIME": "27490.470280469",
+          "OBS_ID": "4985",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/4985/acisf04985_repro_evt2.fits",
+        "repro_history_sha256": "3c570fd51396b0a5f0269e03c6662b2fba73be1cc38719641d9862c8a0bca719"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/4985",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/4985_chandra_repro.log",
+      "log_sha256": "c297a1151313cf1394cbcc817790ed1349927526f811619c555be68d67213688",
+      "obsid": 4985,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/4985",
+      "product_bytes": 33984087,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 207360,
+          "relative_path": "acisf04985_000N004_bpix1.fits",
+          "sha256": "908551660d6168ef9cf2c7c3e5804de0e9e8b4d7e2630b8cd4873d74d18f6fab"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf04985_000N004_fov1.fits",
+          "sha256": "b3841e7735c348dedd15f2a9dd2eb831918717c040d4a49b53305cda780f2889"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf04985_000N004_msk1.fits",
+          "sha256": "cc4530c4d71d060fa548e9490652383ccb61445af942350faf92926e439f84b4"
+        },
+        {
+          "bytes": 6416640,
+          "relative_path": "acisf04985_000N004_mtl1.fits",
+          "sha256": "732b9683e577f7655bd70b4513fdf4d94f63f730e3d2e5f627a9f0b068cb09d6"
+        },
+        {
+          "bytes": 2378880,
+          "relative_path": "acisf04985_000N004_stat1.fits",
+          "sha256": "df41ffb02fe8420362b9b9561cfea0e39d7b8480e9331d285b7135faa0910548"
+        },
+        {
+          "bytes": 87,
+          "relative_path": "acisf04985_asol1.lis",
+          "sha256": "7c6d9ee8f4ef9e4649363d71109a6d8120553daf72885cc33e2f5383284cdb9f"
+        },
+        {
+          "bytes": 190080,
+          "relative_path": "acisf04985_repro_bpix1.fits",
+          "sha256": "9e2ee6eb4dc52fb0b7e34c05f68669f9d082d406ef0427348a0f82f631359196"
+        },
+        {
+          "bytes": 11056320,
+          "relative_path": "acisf04985_repro_evt2.fits",
+          "sha256": "340c0377181852aee67c97e11af6b9766d86515dad7437aa5d17943f4822de8f"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf04985_repro_flt2.fits",
+          "sha256": "db51a241a24f7f386073474d6060835cf763d0a55677cd5841dee2ca4ed70f00"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf04985_repro_fov1.fits",
+          "sha256": "73dbb5bfe8cabb51d309c363c6e4a5658ee540134aef86417ec4085479fa5d9b"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf209692564N004_pbk0.fits",
+          "sha256": "3458d5d182912b52363e3f7a8b8a6c6044b2b5fa80491a25924aa960a43b95b9"
+        },
+        {
+          "bytes": 13524480,
+          "relative_path": "pcadf04985_000N001_asol1.fits",
+          "sha256": "02cff7dd178251ab92fb3283dbca1d6458cb8bf267dbd28ee7f0031742c35a9c"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 77747420,
+        "cluster": "BULLET",
+        "copied": 14,
+        "files": 28,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/4985",
+        "obsid": 4985,
+        "reused": 14,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/4985"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/4986",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/4986",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 129775,
+        "header": {
+          "CALDBVER": "4.9.2",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2004-08-25T13:03:30",
+          "DATE-OBS": "2004-08-25T00:53:27",
+          "EXPOSURE": "41493.017258853",
+          "LIVETIME": "41493.017258853",
+          "OBS_ID": "4986",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/4986/acisf04986_repro_evt2.fits",
+        "repro_history_sha256": "0b601ca54077e15feaff327d8d0270b919bdea69a97a25219e81dd553637aa49"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/4986",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/4986_chandra_repro.log",
+      "log_sha256": "edc758bbbe1e57b06a5e054a76b141ce2e7fe8761792ebc75b39235581d4f9a5",
+      "obsid": 4986,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/4986",
+      "product_bytes": 49317207,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 267840,
+          "relative_path": "acisf04986_000N004_bpix1.fits",
+          "sha256": "560a504be3b4a63719b798bc430fe5f22568e2749c78abf625c2b684f6a1a2d5"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf04986_000N004_fov1.fits",
+          "sha256": "f201f0c7475d09791dd1ebe6b3815d4d926c72ecfcaada489601acc39a19018f"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf04986_000N004_msk1.fits",
+          "sha256": "5b46aea6df643eff643a8a3023eaac7e038c0dcefd217e28f6115ad1189f1609"
+        },
+        {
+          "bytes": 9645120,
+          "relative_path": "acisf04986_000N004_mtl1.fits",
+          "sha256": "efc8075940565d25ccda3b88f42b8cf5f9646e15b6df205f51b9535df1cf2c67"
+        },
+        {
+          "bytes": 3421440,
+          "relative_path": "acisf04986_000N004_stat1.fits",
+          "sha256": "b982503d782e5261002276a589156815b70d3aaa1b3606d895e8868cf3e4ef88"
+        },
+        {
+          "bytes": 87,
+          "relative_path": "acisf04986_asol1.lis",
+          "sha256": "34a711d5e47a1a1267cc72b7fd470149c5804db6e1ef5a4c2e99daf2db097ad7"
+        },
+        {
+          "bytes": 250560,
+          "relative_path": "acisf04986_repro_bpix1.fits",
+          "sha256": "1dd1466c246c2cf04a5403cb7470dd094a14111834eb68b9b522f98f028cc24f"
+        },
+        {
+          "bytes": 14912640,
+          "relative_path": "acisf04986_repro_evt2.fits",
+          "sha256": "b36bcecba88e6f9af0b9bf20864c608687054b7a92e912bdc5d7d28e1218f2fc"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf04986_repro_flt2.fits",
+          "sha256": "f018359cf4705b37bbae599309f65f158db9b8dd8748767a159c79c645cd3cab"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf04986_repro_fov1.fits",
+          "sha256": "7dbd19e4867b2001421ccd1ff3492aac11b7bde34318ebdb63eb4e6dcdf2959d"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf209783427N004_pbk0.fits",
+          "sha256": "bfd28da8cd1f26a057079820577d3e7c7679c9e754fe9e1adbb3d09ac3745ff4"
+        },
+        {
+          "bytes": 20609280,
+          "relative_path": "pcadf04986_000N001_asol1.fits",
+          "sha256": "58ed77609b4cae21d41083520a3a368e6392aa9794e8f94948e75ce3f3254b5e"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 114395047,
+        "cluster": "BULLET",
+        "copied": 14,
+        "files": 30,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/4986",
+        "obsid": 4986,
+        "reused": 16,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/4986"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/5355",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/5355",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 93108,
+        "header": {
+          "CALDBVER": "4.9.2",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2004-08-11T00:32:54",
+          "DATE-OBS": "2004-08-10T16:16:40",
+          "EXPOSURE": "27412.971420462",
+          "LIVETIME": "27412.971420462",
+          "OBS_ID": "5355",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/5355/acisf05355_repro_evt2.fits",
+        "repro_history_sha256": "7ca8b954dab0781ab28803e859c652fdb1f7cf7dff14565ff2360d868acec5d6"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5355",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/5355_chandra_repro.log",
+      "log_sha256": "676e956b16fa0915f476ca5490a32dd7443ae87dbc50fc98fd9042823ad339ef",
+      "obsid": 5355,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/5355",
+      "product_bytes": 33664407,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 216000,
+          "relative_path": "acisf05355_000N004_bpix1.fits",
+          "sha256": "7a7e4806425bb159232308dbd55007ce28b601cdd3512048078e8877cbd2a526"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf05355_000N004_fov1.fits",
+          "sha256": "d82dd69ddd069f8ed37ccecf3498d61ff70174ff34881d19334bc1feecabd1cb"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf05355_000N004_msk1.fits",
+          "sha256": "bad06b10df0974405dd951afecd6f3ee3beae44be32b08413b8ec92ad194b83e"
+        },
+        {
+          "bytes": 6396480,
+          "relative_path": "acisf05355_000N004_mtl1.fits",
+          "sha256": "a19b44a9b90abcd8712563287ead20981bc9066db06b327bd78cc8b5e70a66f5"
+        },
+        {
+          "bytes": 2422080,
+          "relative_path": "acisf05355_000N004_stat1.fits",
+          "sha256": "196527c417575e20a324d1ae2f0deabd7a008eb38865f147d35894b3b933ef31"
+        },
+        {
+          "bytes": 87,
+          "relative_path": "acisf05355_asol1.lis",
+          "sha256": "bfc3a73d1e7ec4f8736da4fbfe58083d19a40a113d3acfbae602a64618e4568c"
+        },
+        {
+          "bytes": 198720,
+          "relative_path": "acisf05355_repro_bpix1.fits",
+          "sha256": "ab6de6ab4a11742ad39cea1bc4f3094a22c81663bb2bba835a961bf6a02235bf"
+        },
+        {
+          "bytes": 10733760,
+          "relative_path": "acisf05355_repro_evt2.fits",
+          "sha256": "6f74b6016b1a771ee735bcc84b3bec8fdb3ba2bbe41c199d65d68bb130e95a3b"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf05355_repro_flt2.fits",
+          "sha256": "66d3a5b6eb80d6741d890b43660ae5ca962fb6f199cd44e8361ba594ab967a28"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf05355_repro_fov1.fits",
+          "sha256": "8f4d073f19c6011a05ba675b4e8ee3c08438a92620e9f9fe281bcd786877357e"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf208541681N005_pbk0.fits",
+          "sha256": "6585ee84ff6901653c8e874f5bce56bb58c06a296187d302f398f37c1fcf2df5"
+        },
+        {
+          "bytes": 13487040,
+          "relative_path": "pcadf05355_000N001_asol1.fits",
+          "sha256": "6790fa41f8343fbcaaf0eb82666bf79b7062590f20181973a6ea9a500125fbaf"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 77846478,
+        "cluster": "BULLET",
+        "copied": 14,
+        "files": 29,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5355",
+        "obsid": 5355,
+        "reused": 15,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/5355"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/5356",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/5356",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 305490,
+        "header": {
+          "CALDBVER": "4.9.2",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2004-08-12T23:13:45",
+          "DATE-OBS": "2004-08-11T19:17:29",
+          "EXPOSURE": "97199.345281354",
+          "LIVETIME": "97199.345281354",
+          "OBS_ID": "5356",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/5356/acisf05356_repro_evt2.fits",
+        "repro_history_sha256": "f4aaa976a472136f646c404b99de4a5478d6413ec55de4cd2b45c59dcd5b431f"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5356",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/5356_chandra_repro.log",
+      "log_sha256": "7aae44b0fafdba3bfd03a5d11a6613c2e9e4f999cb6cdc8f430830bec2d4df56",
+      "obsid": 5356,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/5356",
+      "product_bytes": 114148887,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 423360,
+          "relative_path": "acisf05356_000N004_bpix1.fits",
+          "sha256": "8b3ca5ca9552628b7455b02d888afaa01a3f359233b9ae79ebc5cbb6c5a3f31e"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf05356_000N004_fov1.fits",
+          "sha256": "57c799f97ede4e945400d59c491c59510f957067a8a2a33e7f786e529ffb3b63"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf05356_000N004_msk1.fits",
+          "sha256": "7aa1884e4e8682ec8eb931529e390c73b4985d5dcc69b4da9723d40ca40dd167"
+        },
+        {
+          "bytes": 22481280,
+          "relative_path": "acisf05356_000N004_mtl1.fits",
+          "sha256": "7e9809fbb1cc110104f6ed82c72cc6245960dc9342f1d9aae6858d08d9e089b7"
+        },
+        {
+          "bytes": 7948800,
+          "relative_path": "acisf05356_000N004_stat1.fits",
+          "sha256": "13531556ba3e776406cac9bb5ea26294f238546b568865762124a3fe4e4a6388"
+        },
+        {
+          "bytes": 87,
+          "relative_path": "acisf05356_asol1.lis",
+          "sha256": "b6857b48dcddb4ea817dd20db67c21694f02469a6784f667700752d30cf6f848"
+        },
+        {
+          "bytes": 406080,
+          "relative_path": "acisf05356_repro_bpix1.fits",
+          "sha256": "b5f8ec30bf4c0f4ae1eac4838cdb4e9e68ef0123b02789b7bb888a650f2f35f7"
+        },
+        {
+          "bytes": 34945920,
+          "relative_path": "acisf05356_repro_evt2.fits",
+          "sha256": "8bb836915428eca7199fb284fbf78dfbc96392e689e2a61117ffc7b0be773789"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf05356_repro_flt2.fits",
+          "sha256": "2d0dcc8f6c220f09598dc9869e2ebafd507f7244cc4e0a7be626efc0810a7abf"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf05356_repro_fov1.fits",
+          "sha256": "4efafcdb08db7f99859494c31355f14988b1a1eed46fe2968ee862c1d2c1dc0c"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf208639652N004_pbk0.fits",
+          "sha256": "a9068efcfe83d07c5d2517a9064c42ead4582e2ee9edb24cc17dca5a601f2fd3"
+        },
+        {
+          "bytes": 47733120,
+          "relative_path": "pcadf05356_000N001_asol1.fits",
+          "sha256": "51a251defee44fcdead738b5904e5b0f3cc1daca83a973594684cdde5321aa44"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 257443160,
+        "cluster": "BULLET",
+        "copied": 14,
+        "files": 41,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5356",
+        "obsid": 5356,
+        "reused": 27,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/5356"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/5357",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/5357",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 247208,
+        "header": {
+          "CALDBVER": "4.9.2",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2004-08-15T10:18:32",
+          "DATE-OBS": "2004-08-14T11:29:06",
+          "EXPOSURE": "79058.364749498",
+          "LIVETIME": "79058.364749498",
+          "OBS_ID": "5357",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/5357/acisf05357_repro_evt2.fits",
+        "repro_history_sha256": "f47bb1bb1129fba04400bd527bfa1afdba6005b83bd1544df5472d9d795c7256"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5357",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/5357_chandra_repro.log",
+      "log_sha256": "28b150ea002979b510b5603ddfc1296197d60d23e8dc8731324870b923553146",
+      "obsid": 5357,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/5357",
+      "product_bytes": 92854167,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 371520,
+          "relative_path": "acisf05357_000N004_bpix1.fits",
+          "sha256": "16d15f7065591461277f7e65ade03aad9b8a4acb231c5dcbaa117f1065f62047"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf05357_000N004_fov1.fits",
+          "sha256": "4e36e79a6454a90b9ecb6e9d7c3f4be42ad463b79a900a2ecbe140c3a78c31a0"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf05357_000N004_msk1.fits",
+          "sha256": "9d80672e3112a878981e276d8d3391138629dd97d6ce669efb17d8c37b6f9b21"
+        },
+        {
+          "bytes": 18299520,
+          "relative_path": "acisf05357_000N004_mtl1.fits",
+          "sha256": "3fe23726822900b84e8e6cf0dcc2347c6731c530d97230619fd40bb34cb25eb7"
+        },
+        {
+          "bytes": 6494400,
+          "relative_path": "acisf05357_000N004_stat1.fits",
+          "sha256": "d7e59feff2d38189394669c52d41ff8b91dd79249d5bf5fed9ba1cc47d822e3a"
+        },
+        {
+          "bytes": 87,
+          "relative_path": "acisf05357_asol1.lis",
+          "sha256": "9a201e111da69f7652f7a2ea538915c1b1b5f7c49a180a7f0c6fdf4a42f3f9bc"
+        },
+        {
+          "bytes": 354240,
+          "relative_path": "acisf05357_repro_bpix1.fits",
+          "sha256": "405e1b5ab906cb67e20bbc4afa0c036a7b9ba7d7e9d0aa5328ab1a96e209af05"
+        },
+        {
+          "bytes": 28301760,
+          "relative_path": "acisf05357_repro_evt2.fits",
+          "sha256": "e41d9ebe37ece0462ef300c7304574fedb20f638e269caaadf45c861a23f3d5e"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf05357_repro_flt2.fits",
+          "sha256": "507dec636c06e9eec5902f3407c9098cafd32e93c34fe4fb3cd8d371914a5dcd"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf05357_repro_fov1.fits",
+          "sha256": "1d4adae06f3728d90669f2ed6800f3518192665e57e392c63c617697050bb3ab"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf208870695N004_pbk0.fits",
+          "sha256": "f259ff40b35d2b157cedc562e51160834da270dcec010066469c03f2d1ae7a31"
+        },
+        {
+          "bytes": 38822400,
+          "relative_path": "pcadf05357_000N001_asol1.fits",
+          "sha256": "6de8650793a8ddcab3a43bd9029e4e1c10cbbe2e4db3f847980149d27ded1ab9"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 214676559,
+        "cluster": "BULLET",
+        "copied": 14,
+        "files": 36,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5357",
+        "obsid": 5357,
+        "reused": 22,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/5357"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/5358",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/5358",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 99617,
+        "header": {
+          "CALDBVER": "4.9.2",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2004-08-16T07:28:03",
+          "DATE-OBS": "2004-08-15T22:07:30",
+          "EXPOSURE": "31957.532836021",
+          "LIVETIME": "31957.532836021",
+          "OBS_ID": "5358",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/5358/acisf05358_repro_evt2.fits",
+        "repro_history_sha256": "465f236d1bce1992ba61d0a1420418b58ce04a4b03ad251627d9748615d41a51"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5358",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/5358_chandra_repro.log",
+      "log_sha256": "da83ae30ffbab70bb8bedefe216b0068da58ef4b17b6e979a84208a949acb237",
+      "obsid": 5358,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/5358",
+      "product_bytes": 37970007,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 230400,
+          "relative_path": "acisf05358_000N004_bpix1.fits",
+          "sha256": "e136030946be3a29fdd84e83bc2f6f72d59e634f2ab38ee59fd9cbcc6760c436"
+        },
+        {
+          "bytes": 28800,
+          "relative_path": "acisf05358_000N004_fov1.fits",
+          "sha256": "26895408274b9420ac4b5ed3fcc0087d05dcf767127bcb9741c23e59981ea5e3"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf05358_000N004_msk1.fits",
+          "sha256": "b614dd548342378556b1404639f0a0a32bcd0798875911c7a9f5452721f0e0af"
+        },
+        {
+          "bytes": 7447680,
+          "relative_path": "acisf05358_000N004_mtl1.fits",
+          "sha256": "21862e20d1faea213fbc685372b21f3f57c29bd866d435dc43fce4b5d038b4b2"
+        },
+        {
+          "bytes": 2681280,
+          "relative_path": "acisf05358_000N004_stat1.fits",
+          "sha256": "b296691732e66d6c899e5fafba489a62926d90823721e4eb68d9dea2fd6d41a8"
+        },
+        {
+          "bytes": 87,
+          "relative_path": "acisf05358_asol1.lis",
+          "sha256": "9973c036c5aa75e108e45dba242dd16872a40e9db1fd79c68715803ac7012b06"
+        },
+        {
+          "bytes": 213120,
+          "relative_path": "acisf05358_repro_bpix1.fits",
+          "sha256": "bcf1398643224cdad61c9df2f6a8a5d2ddf4cee75080cdefa982257a69d95744"
+        },
+        {
+          "bytes": 11476800,
+          "relative_path": "acisf05358_repro_evt2.fits",
+          "sha256": "e25b9deed853922c883dcb3ce656d182da7411ba60523425dc9fb6e0e5e6fc31"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf05358_repro_flt2.fits",
+          "sha256": "b1536ba8848a983a3c6c7d5c71a53d8a4847927869a31567d39ba26b37e154bb"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf05358_repro_fov1.fits",
+          "sha256": "0079dc4428d17213a1aa6c305b02f9a2884f75e342634740ef80fa706c38d200"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf208995477N004_pbk0.fits",
+          "sha256": "775599afa3463aa42c0a862f58627f8ad0145bfba867bc8e6b5e73e27fac293e"
+        },
+        {
+          "bytes": 15716160,
+          "relative_path": "pcadf05358_000N001_asol1.fits",
+          "sha256": "52d91484d28ef0b65c898c9a3a6087bda0bbd53725d7f4d84541163352b778d4"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 88145410,
+        "cluster": "BULLET",
+        "copied": 14,
+        "files": 29,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5358",
+        "obsid": 5358,
+        "reused": 15,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/5358"
+      }
+    },
+    {
+      "archive_datamode": "VFAINT",
+      "check_vf_pha_history_present": true,
+      "check_vf_pha_history_value": "yes",
+      "check_vf_pha_requested": true,
+      "cluster": "BULLET",
+      "command": [
+        "chandra_repro",
+        "indir=/home/henry/sigma-v19f-chandra/input/BULLET/5361",
+        "outdir=/home/henry/sigma-v19f-chandra/repro/BULLET/5361",
+        "check_vf_pha=yes",
+        "pix_adj=edser",
+        "set_ardlib=no",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "event": {
+        "caldbver_header_note": "CALDBVER is inherited from the archive event; the chandra_repro HISTORY/COMMENT records the current reduction CALDB.",
+        "current_caldb_comment_present": true,
+        "event_rows": 266703,
+        "header": {
+          "CALDBVER": "4.9.2",
+          "CHECK_VF_PHA": null,
+          "DATAMODE": "VFAINT",
+          "DATE-END": "2004-08-18T10:17:32",
+          "DATE-OBS": "2004-08-17T10:30:31",
+          "EXPOSURE": "82620.198181689",
+          "LIVETIME": "82620.198181689",
+          "OBS_ID": "5361",
+          "PIX_ADJ": "EDSER",
+          "RAND_PI": "1.0",
+          "RAND_SKY": "0.0",
+          "READMODE": "TIMED",
+          "TIMEDEL": "3.14104"
+        },
+        "path": "/home/henry/sigma-v19f-chandra/repro/BULLET/5361/acisf05361_repro_evt2.fits",
+        "repro_history_sha256": "9bb06e3ee44219c4b6817b972cabbb95e921025760aacee1fd0947c40722426f"
+      },
+      "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5361",
+      "log": "/home/henry/sigma-v19f-chandra/logs/BULLET/5361_chandra_repro.log",
+      "log_sha256": "41e7c21c7d40ae143a79238e86a2b174fb8e115537e43ad96e9ca898a89ebb5b",
+      "obsid": 5361,
+      "output_directory": "/home/henry/sigma-v19f-chandra/repro/BULLET/5361",
+      "product_bytes": 97917207,
+      "product_files": 12,
+      "products": [
+        {
+          "bytes": 380160,
+          "relative_path": "acisf05361_001N004_bpix1.fits",
+          "sha256": "92d0eb7289655fe8e19cef8174d8642f5feac18e08a8639fd50866fa4078ce12"
+        },
+        {
+          "bytes": 31680,
+          "relative_path": "acisf05361_001N004_fov1.fits",
+          "sha256": "13829eabb2aac5f9d2584cf21ef2a3e0aacddffa49d759d6ba7d5bd040f45776"
+        },
+        {
+          "bytes": 92160,
+          "relative_path": "acisf05361_001N004_msk1.fits",
+          "sha256": "1c1691efaa418d725220d8f8fce90606842a0fa12add60d4cf770a124569bc09"
+        },
+        {
+          "bytes": 19120320,
+          "relative_path": "acisf05361_001N004_mtl1.fits",
+          "sha256": "f0030a358f2be9a892085b7379341957e9660dbc051a32cc7a219522c1bd6079"
+        },
+        {
+          "bytes": 6750720,
+          "relative_path": "acisf05361_001N004_stat1.fits",
+          "sha256": "71c4c28474c49749a38988b5843ded4db28dc7fb380426605a2bad13d28df18c"
+        },
+        {
+          "bytes": 87,
+          "relative_path": "acisf05361_asol1.lis",
+          "sha256": "183a517edaf8b2e76ab0e9bd6e5dfa92f5451f2ca346535f022725090f443908"
+        },
+        {
+          "bytes": 362880,
+          "relative_path": "acisf05361_repro_bpix1.fits",
+          "sha256": "6d15e26d7adb79642000b52c79be1d127af01affdec90b14f0b76ecb76530293"
+        },
+        {
+          "bytes": 30522240,
+          "relative_path": "acisf05361_repro_evt2.fits",
+          "sha256": "665a898e6a7a20b21bbba84ef2233eddb6891d46e9317e5d31cd5aeaed24de45"
+        },
+        {
+          "bytes": 37440,
+          "relative_path": "acisf05361_repro_flt2.fits",
+          "sha256": "6d694f8dd071fa906f2a640eedc79c1fae4444b6dccf1301363459dd70ea8550"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "acisf05361_repro_fov1.fits",
+          "sha256": "7dee7cc0e1e85ecc38af71212199a39f0db1aae01162a389ce0ead14b193358c"
+        },
+        {
+          "bytes": 23040,
+          "relative_path": "acisf209126540N004_pbk0.fits",
+          "sha256": "3bea46cb61e58231c5ed8d82f4aea5200a0cd7753413e84310c73f589f8680e2"
+        },
+        {
+          "bytes": 40570560,
+          "relative_path": "pcadf05361_001N001_asol1.fits",
+          "sha256": "5cc51d904dbd90fed345b2639b3ce47869a8a20992e6c833d02168d70d088d95"
+        }
+      ],
+      "reused": true,
+      "staging": {
+        "bytes": 217104481,
+        "cluster": "BULLET",
+        "copied": 14,
+        "files": 38,
+        "input_directory": "/home/henry/sigma-v19f-chandra/input/BULLET/5361",
+        "obsid": 5361,
+        "reused": 24,
+        "root_products_promoted_to_standard_obsid_layout": true,
+        "source_directory": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19e_chandra_archive/BULLET/5361"
+      }
+    }
+  ],
+  "product_bytes": 1223566899,
+  "product_files": 240,
+  "protocol_version": "SIGMA-V19F-CHANDRA-SOURCE-REDUCTION-1.0.1",
+  "requested_observations": [
+    {
+      "cluster": "BULLET",
+      "obsid": 554
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 3184
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 4984
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 4985
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 4986
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5355
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5356
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5357
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5358
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5361
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 10888
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 10464
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13020
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13021
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13023
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 12247
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 12245
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13120
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 12246
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13138
+    }
+  ],
+  "runtime_audit_sha256": "8d01b674a321e369d86cb695a9e1e2cf30cf2f0093d2d37781af9bc1d0717067",
+  "runtime_gate_passed": true,
+  "scratch": "/home/henry/sigma-v19f-chandra",
+  "shock_front_fitted": false,
+  "source_constructed": false,
+  "status": "all_frozen_v19f_chandra_observations_reprocessed"
+}

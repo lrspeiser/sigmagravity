@@ -1,0 +1,47 @@
+{
+  "all_rows_retain_quoted_cz_uncertainty": true,
+  "catalogs": {
+    "ABELL2146": {
+      "bcg_rows": 2,
+      "maximum_cz_uncertainty_km_s": 130.0,
+      "mean_heliocentric_cz_km_s": 69725.28571428571,
+      "minimum_cz_uncertainty_km_s": 10.0,
+      "output": "data/derived/sigma_v19d_assembly_members/abell2146_members.csv",
+      "output_sha256": "cf7c61854f4aa0317a9dd3ea8e91618e90fa7823a6cb30634147f8af39243360",
+      "rows": 63,
+      "subcluster_counts": {
+        "A": 35,
+        "B": 28
+      }
+    },
+    "BULLET": {
+      "bcg_rows": 0,
+      "maximum_cz_uncertainty_km_s": 276.0,
+      "mean_heliocentric_cz_km_s": 88765.98717948717,
+      "minimum_cz_uncertainty_km_s": 10.0,
+      "output": "data/derived/sigma_v19d_assembly_members/bullet_members.csv",
+      "output_sha256": "36a87b48f77e4998fc8b4136ab1b1c559b90d1b18d7d65633e8dacf167dea64b",
+      "rows": 78,
+      "subcluster_counts": {
+        "unassigned": 78
+      }
+    }
+  },
+  "generated_utc": "2026-08-05T03:19:30.181957+00:00",
+  "gravity_parameters_fit": 0,
+  "holdout_opened": false,
+  "input_hashes": {
+    "ABELL2146_archive": "addaa48007d92cfc2b0e06b36cb7d26cffcd66b10c10d918dd8d14b4c6f5db78",
+    "BULLET_archive": "3d54a4d1c9423c448baf09f8cdbfde4c8df8aa00b4d57336b91f6a5eaa405b76",
+    "config": "b288c98cf4c46dcc4be5282e7e19decaf7bbe850f8a6c4f1e07015fe85682a7b",
+    "source_acquisition_config": "c5cc72beb328e8a2d8ea17308b92010c081aeff1bff03d8ffffaf9820980271f",
+    "source_acquisition_manifest": "398ec0167777e0050616909f6c4f9fd1cf7256a7577984156b617bf6ddd4c73b"
+  },
+  "lensing_or_halo_payload_used": false,
+  "missing_uncertainties_inferred": false,
+  "next_gate": "construct registered shock-front measurements and an assumption-aware projection ensemble before defining any causal Sigma source",
+  "protocol_version": "SIGMA-V19D-MEMBER-CATALOG-EXTRACTION-1.0.0",
+  "source_construction_performed": false,
+  "status": "completed Sigma v19D lossless member-table extraction",
+  "total_rows": 141
+}

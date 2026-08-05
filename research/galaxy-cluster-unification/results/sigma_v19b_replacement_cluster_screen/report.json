@@ -1,0 +1,170 @@
+{
+  "candidate_results": {
+    "ABELL2146": {
+      "declared_clock_assumption": "the two-body dynamical model and first-core-passage interpretation are used",
+      "final_sample_lensing_metadata_gates": {
+        "minimum_image_families": true,
+        "minimum_images": true,
+        "minimum_spectroscopic_families": false,
+        "target_payload_remained_sealed": true
+      },
+      "final_sample_lensing_metadata_ready": false,
+      "history_statistic_basis": "mach_excess_above_unity",
+      "history_statistic_sigma": 6.499999999999999,
+      "name": "Abell 2146",
+      "secure_spectroscopic_members": 63,
+      "source_acquisition_eligible": true,
+      "source_acquisition_gates": {
+        "direct_primary_merger_front": true,
+        "five_sigma_history_statistic": true,
+        "mach_or_speed_uncertainty": true,
+        "minimum_secure_members": true,
+        "public_source_archives": true,
+        "published_projection_constraint": true,
+        "time_since_passage_constraint": true,
+        "unique_merger_attribution": true
+      },
+      "source_construction_gates": {
+        "acquisition_eligible": true,
+        "local_front_position_with_uncertainty": false,
+        "local_member_table_with_uncertainties": false,
+        "local_projection_uncertainty_ensemble": false,
+        "local_resolved_gas_uncertainty_product": false
+      },
+      "source_construction_ready": false,
+      "time_constraint_is_assumption_independent": false
+    },
+    "BULLET": {
+      "declared_clock_assumption": "the subcluster motion is related to the X-ray shock speed in the two-body interpretation",
+      "final_sample_lensing_metadata_gates": {
+        "minimum_image_families": true,
+        "minimum_images": true,
+        "minimum_spectroscopic_families": true,
+        "target_payload_remained_sealed": true
+      },
+      "final_sample_lensing_metadata_ready": true,
+      "history_statistic_basis": "mach_excess_above_unity",
+      "history_statistic_sigma": 6.826086956521738,
+      "name": "1E 0657-56 (Bullet Cluster)",
+      "secure_spectroscopic_members": 78,
+      "source_acquisition_eligible": true,
+      "source_acquisition_gates": {
+        "direct_primary_merger_front": true,
+        "five_sigma_history_statistic": true,
+        "mach_or_speed_uncertainty": true,
+        "minimum_secure_members": true,
+        "public_source_archives": true,
+        "published_projection_constraint": true,
+        "time_since_passage_constraint": true,
+        "unique_merger_attribution": true
+      },
+      "source_construction_gates": {
+        "acquisition_eligible": true,
+        "local_front_position_with_uncertainty": false,
+        "local_member_table_with_uncertainties": false,
+        "local_projection_uncertainty_ensemble": false,
+        "local_resolved_gas_uncertainty_product": false
+      },
+      "source_construction_ready": false,
+      "time_constraint_is_assumption_independent": false
+    },
+    "ELGORDO": {
+      "declared_clock_assumption": "outgoing and returning solutions remain distinct, at approximately 0.46 and 0.91 Gyr",
+      "final_sample_lensing_metadata_gates": {
+        "minimum_image_families": true,
+        "minimum_images": true,
+        "minimum_spectroscopic_families": true,
+        "target_payload_remained_sealed": true
+      },
+      "final_sample_lensing_metadata_ready": true,
+      "history_statistic_basis": "published_detection_confidence",
+      "history_statistic_sigma": 2.053748910631822,
+      "name": "ACT-CL J0102-4915 (El Gordo)",
+      "secure_spectroscopic_members": 89,
+      "source_acquisition_eligible": false,
+      "source_acquisition_gates": {
+        "direct_primary_merger_front": true,
+        "five_sigma_history_statistic": false,
+        "mach_or_speed_uncertainty": true,
+        "minimum_secure_members": true,
+        "public_source_archives": true,
+        "published_projection_constraint": true,
+        "time_since_passage_constraint": false,
+        "unique_merger_attribution": true
+      },
+      "source_construction_gates": {
+        "acquisition_eligible": false,
+        "local_front_position_with_uncertainty": false,
+        "local_member_table_with_uncertainties": false,
+        "local_projection_uncertainty_ensemble": false,
+        "local_resolved_gas_uncertainty_product": false
+      },
+      "source_construction_ready": false,
+      "time_constraint_is_assumption_independent": false
+    },
+    "MACS0025": {
+      "declared_clock_assumption": "a head-on collision in the sky plane is assumed rather than measured as an uncertainty ensemble",
+      "final_sample_lensing_metadata_gates": {
+        "minimum_image_families": false,
+        "minimum_images": false,
+        "minimum_spectroscopic_families": false,
+        "target_payload_remained_sealed": true
+      },
+      "final_sample_lensing_metadata_ready": false,
+      "history_statistic_basis": "none",
+      "history_statistic_sigma": null,
+      "name": "MACS J0025.4-1222",
+      "secure_spectroscopic_members": null,
+      "source_acquisition_eligible": false,
+      "source_acquisition_gates": {
+        "direct_primary_merger_front": false,
+        "five_sigma_history_statistic": false,
+        "mach_or_speed_uncertainty": false,
+        "minimum_secure_members": false,
+        "public_source_archives": false,
+        "published_projection_constraint": false,
+        "time_since_passage_constraint": false,
+        "unique_merger_attribution": false
+      },
+      "source_construction_gates": {
+        "acquisition_eligible": false,
+        "local_front_position_with_uncertainty": false,
+        "local_member_table_with_uncertainties": false,
+        "local_projection_uncertainty_ensemble": false,
+        "local_resolved_gas_uncertainty_product": false
+      },
+      "source_construction_ready": false,
+      "time_constraint_is_assumption_independent": false
+    }
+  },
+  "decision": "acquire and audit source-only Bullet Cluster and Abell 2146 products; do not construct a causal source or open their lensing targets yet",
+  "failure_classification": "data acquisition and uncertainty-identification work remains; no causal-history physics test has yet occurred",
+  "formula_selected": false,
+  "gate_results": {
+    "all_replacement_lensing_targets_remained_sealed": true,
+    "replacement_development_pair_identified": true,
+    "selected_pair_final_lensing_sample_metadata_ready": false,
+    "selected_pair_has_assumption_independent_clocks": false,
+    "selected_pair_local_source_products_ready": false,
+    "source_archive_acquisition_authorized": true,
+    "source_construction_authorized": false,
+    "source_gate_survivors_equal_preregistered_pair": true
+  },
+  "generated_utc": "2026-08-05T03:15:08.676209+00:00",
+  "gravity_parameters_fit": 0,
+  "holdout_opened": false,
+  "input_hashes": {
+    "assembly_readiness_config": "d92f47d357ffa6d2fe73d5f8f10b372541052a616693407c36a4f50aa8c68b9e",
+    "assembly_readiness_report": "b681c9de73591d9de3ba277a18a552e1dad86309d62eb93a7c4a9a33b4c64179",
+    "config": "bb0e6fdb1d5fc60947575964a741c9b08918635005abaeb51b418f2bfa5066b4"
+  },
+  "lensing_or_halo_payload_used": false,
+  "new_lensing_target_opened": false,
+  "protocol_version": "SIGMA-V19B-REPLACEMENT-CLUSTER-SCREEN-1.0.0",
+  "scientific_interpretation": "Two clusters pass the source-side acquisition screen, but their local uncertainty products and assumption-aware projection ensembles are not yet assembled. Abell 2146 also lacks a reported spectroscopic lensed family, so this pair is for mechanism development rather than the final four-cluster validation sample.",
+  "selected_development_pair": [
+    "ABELL2146",
+    "BULLET"
+  ],
+  "status": "completed Sigma v19B target-blind replacement-cluster screen"
+}

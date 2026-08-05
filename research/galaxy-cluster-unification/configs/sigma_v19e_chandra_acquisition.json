@@ -1,0 +1,108 @@
+{
+  "protocol_version": "SIGMA-V19E-CHANDRA-ACQUISITION-1.0.0",
+  "status": "frozen before downloading any analysis-grade event or calibration product",
+  "purpose": "Acquire matched, source-only Chandra event and calibration products for Bullet Cluster and Abell 2146 shock-front geometry and thermodynamic uncertainty reconstruction without opening lensing targets.",
+  "parents": {
+    "member_extraction_config": "configs/sigma_v19d_member_catalog_extraction.json",
+    "member_extraction_config_sha256": "b288c98cf4c46dcc4be5282e7e19decaf7bbe850f8a6c4f1e07015fe85682a7b",
+    "member_extraction_report": "results/sigma_v19d_member_catalog_extraction/report.json",
+    "member_extraction_report_sha256": "f13992494779593794cb3cd7b42e4dada54ff3356198e2a02c3dacd633366dd1"
+  },
+  "archive_base_url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid",
+  "raw_directory": "data/raw/sigma_v19e_chandra_archive",
+  "maximum_workers": 4,
+  "analysis_tier": "matched published shock-depth tier: the ten-observation Bullet data and the ten-observation 418 ks Abell 2146 data used in the published shock analyses",
+  "clusters": {
+    "BULLET": {
+      "redshift": 0.296,
+      "obsids": [
+        554,
+        3184,
+        4984,
+        4985,
+        4986,
+        5355,
+        5356,
+        5357,
+        5358,
+        5361
+      ],
+      "archive_exposure_ks": 576.6
+    },
+    "ABELL2146": {
+      "redshift": 0.2323,
+      "obsids": [
+        10888,
+        10464,
+        13020,
+        13021,
+        13023,
+        12247,
+        12245,
+        13120,
+        12246,
+        13138
+      ],
+      "archive_exposure_ks": 419.4
+    }
+  },
+  "included_products": {
+    "root": [
+      "00README",
+      "oif.fits"
+    ],
+    "primary_suffixes": [
+      "_evt2.fits.gz",
+      "_bpix1.fits.gz",
+      "_fov1.fits.gz",
+      "_eph1.fits.gz",
+      "_asol1.fits.gz"
+    ],
+    "secondary_suffixes": [
+      "_evt1.fits.gz",
+      "_flt1.fits.gz",
+      "_msk1.fits.gz",
+      "_mtl1.fits.gz",
+      "_stat1.fits.gz",
+      "_bias0.fits.gz",
+      "_pbk0.fits.gz"
+    ],
+    "secondary_aspect_suffixes": [
+      "_osol1.fits.gz",
+      "_aqual1.fits.gz"
+    ],
+    "secondary_ephem_suffixes": [
+      "_eph1.fits.gz"
+    ]
+  },
+  "required_roles_per_obsid": {
+    "evt1": 1,
+    "evt2": 1,
+    "bpix1": 1,
+    "fov1": 1,
+    "asol1": 1,
+    "msk1": 1,
+    "pbk0": 1,
+    "bias0": 1
+  },
+  "deferred_robustness_upgrade": {
+    "cluster": "ABELL2146",
+    "additional_observations": 65,
+    "additional_exposure_ks": 1890.0,
+    "reason": "The 2.31 Ms data will be added only after the matched-depth pipeline is verified, so one cluster does not receive a hidden data-quality advantage during source definition."
+  },
+  "exclusions": [
+    "V&V and V&V-reference PDF files",
+    "JPEG previews",
+    "source catalogs and source images",
+    "lensing coordinates, lens models, and inferred halo products",
+    "the additional Abell 2146 2018-2019 observations at this matched-depth stage"
+  ],
+  "claim_boundary": [
+    "All downloaded products are detector events or calibration and observation metadata; no lensing target is opened.",
+    "Level-1 events and calibration ancillaries are retained for reprocessing with a declared current CALDB.",
+    "The archived Level-2 event is retained only as a reproducibility control.",
+    "Successful acquisition does not imply that a valid shock front, temperature map, assembly clock, or causal Sigma source has been constructed.",
+    "The missing local CIAO/CALDB runtime must be installed and frozen before reduction."
+  ]
+}

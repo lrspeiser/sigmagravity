@@ -1,0 +1,54 @@
+{
+  "protocol_version": "SIGMA-V19D-MEMBER-CATALOG-EXTRACTION-1.0.0",
+  "status": "frozen before parsing the acquired TeX member tables and while all replacement-cluster lensing target payloads remain sealed",
+  "purpose": "Convert the published Bullet Cluster and Abell 2146 member tables into lossless machine-readable catalogs with measured sky positions, heliocentric cz values, and quoted cz uncertainties.",
+  "parents": {
+    "source_acquisition_config": "configs/sigma_v19c_source_archive_acquisition.json",
+    "source_acquisition_config_sha256": "c5cc72beb328e8a2d8ea17308b92010c081aeff1bff03d8ffffaf9820980271f",
+    "source_acquisition_manifest": "data/raw/sigma_v19c_assembly_sources/provenance.json",
+    "source_acquisition_manifest_sha256": "398ec0167777e0050616909f6c4f9fd1cf7256a7577984156b617bf6ddd4c73b"
+  },
+  "catalogs": {
+    "BULLET": {
+      "archive": "data/raw/sigma_v19c_assembly_sources/bullet/arxiv_astro-ph_0202323_source.tar",
+      "archive_sha256": "3d54a4d1c9423c448baf09f8cdbfde4c8df8aa00b4d57336b91f6a5eaa405b76",
+      "member_name": "h3368.tex",
+      "source_arxiv_id": "astro-ph/0202323",
+      "expected_rows": 78,
+      "output": "data/derived/sigma_v19d_assembly_members/bullet_members.csv",
+      "coordinate_encoding": "right ascension hh:mm:ss and signed declination dd:mm:ss",
+      "velocity_encoding": "heliocentric cz and quoted delta-cz, both in km/s"
+    },
+    "ABELL2146": {
+      "archive": "data/raw/sigma_v19c_assembly_sources/abell2146/arxiv_1508.01505_source.tar",
+      "archive_sha256": "addaa48007d92cfc2b0e06b36cb7d26cffcd66b10c10d918dd8d14b4c6f5db78",
+      "member_name": "A2146_Dynamics_update.tex",
+      "source_arxiv_id": "1508.01505",
+      "expected_rows": 63,
+      "output": "data/derived/sigma_v19d_assembly_members/abell2146_members.csv",
+      "coordinate_encoding": "right ascension and declination in decimal degrees",
+      "velocity_encoding": "heliocentric cz and quoted delta-cz, both in km/s"
+    }
+  },
+  "output_report": "results/sigma_v19d_member_catalog_extraction/report.json",
+  "required_output_columns": [
+    "cluster",
+    "object_id",
+    "ra_deg",
+    "dec_deg",
+    "heliocentric_cz_km_s",
+    "cz_uncertainty_km_s",
+    "subcluster_label",
+    "is_bcg",
+    "spectral_type",
+    "source_arxiv_id"
+  ],
+  "authorization": {
+    "parse_only_named_source_members": true,
+    "infer_missing_measurement_uncertainties": false,
+    "use_lensing_or_halo_payload": false,
+    "construct_causal_source": false,
+    "fit_gravity_parameters": false,
+    "open_holdout": false
+  }
+}

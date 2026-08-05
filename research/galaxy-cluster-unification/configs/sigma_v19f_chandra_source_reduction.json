@@ -1,0 +1,112 @@
+{
+  "protocol_version": "SIGMA-V19F-CHANDRA-SOURCE-REDUCTION-1.0.1",
+  "status": "frozen before reprocessing, flare cleaning, source-image inspection, shock-front fitting, source construction, or opening any replacement-cluster lensing target",
+  "pre_image_execution_correction": "The first provenance assertion looked for CHECK_VF_PHA as an output FITS keyword. CIAO records this chandra_repro parameter in tool history rather than as that header keyword. Version 1.0.1 verifies the exact check_vf_pha history value. All 20 calibrated products may be reused because the original commands were correct; no event image, shock fit, source construction, lensing target, or gravity score was opened.",
+  "runtime_discovery_note": "After v19E acquisition completed, the already-audited isolated Sigma v17A CIAO environment was found intact in WSL. V19F reuses that exact environment and its passed 37-test audit instead of installing or selecting a new calibration stack.",
+  "purpose": "Produce current-calibration, source-only Chandra event and blank-sky products for the preregistered Bullet Cluster and Abell 2146 mechanism-development pair using one inherited reduction protocol.",
+  "parents": {
+    "acquisition_config": "configs/sigma_v19e_chandra_acquisition.json",
+    "acquisition_config_sha256": "8d96e4eb1886c2591fc581d4d7342285ffefb8d881b3d6c84e61b9bd847d3481",
+    "acquisition_report": "results/sigma_v19e_chandra_acquisition/provenance.json",
+    "acquisition_report_sha256": "fd62fff3371c2391495164bc49bcae3359a6ec4b7e75fd0a1db5da077f094460",
+    "member_config": "configs/sigma_v19d_member_catalog_extraction.json",
+    "member_config_sha256": "b288c98cf4c46dcc4be5282e7e19decaf7bbe850f8a6c4f1e07015fe85682a7b",
+    "member_report": "results/sigma_v19d_member_catalog_extraction/report.json",
+    "member_report_sha256": "f13992494779593794cb3cd7b42e4dada54ff3356198e2a02c3dacd633366dd1",
+    "shared_reduction_config": "configs/sigma_v17a_chandra_reduction.json",
+    "shared_reduction_config_sha256": "db6c8e671f4057e778800fde4aa048b93ac633a3fa38c675960a36736b699f70",
+    "shared_repro_script": "scripts/run_sigma_v17a_chandra_repro.py",
+    "shared_repro_script_sha256": "e8474d15a610b5fb12019a4e18f78a37a7366aa13803476c50651fcabf6fbc01",
+    "shared_cleaning_script": "scripts/run_sigma_v17a_chandra_cleaning.py",
+    "shared_cleaning_script_sha256": "2cd86569f5ce40ec1b27f7ae0d24ac065b1e5a1b4f7b12f982b4e89db2ea4bca",
+    "runtime_audit": "results/sigma_v17a_ciao_environment/report.json",
+    "runtime_audit_sha256": "8d01b674a321e369d86cb695a9e1e2cf30cf2f0093d2d37781af9bc1d0717067",
+    "runtime_smoke_log": "results/sigma_v17a_ciao_environment/ciao_smoke.log",
+    "runtime_smoke_log_sha256": "b9224e6a1132ff52c4ea2279c647a9ac210f19b4f79706edb47d2e08c17b678b"
+  },
+  "runtime": {
+    "host": "WSL2 Ubuntu 24.04 on Windows",
+    "support_caveat": "The Chandra X-ray Center documents a WSL installation route but does not formally support WSL as a CIAO platform.",
+    "conda_environment": "sigma-ciao-4.18",
+    "ciao": "4.18.0",
+    "ciao_contrib": "4.18.2",
+    "caldb_main": "4.12.4",
+    "acis_bkg_evt": "4.9.7",
+    "sherpa": "4.18.0",
+    "xspec_modelsonly": "12.14.0k",
+    "required_smoke_tests": 37,
+    "maximum_failed_smoke_tests": 0
+  },
+  "clusters": {
+    "BULLET": {
+      "redshift": 0.296,
+      "obsids": [554, 3184, 4984, 4985, 4986, 5355, 5356, 5357, 5358, 5361],
+      "expected_archive_datamode": {
+        "554": "FAINT",
+        "3184": "VFAINT",
+        "4984": "VFAINT",
+        "4985": "VFAINT",
+        "4986": "VFAINT",
+        "5355": "VFAINT",
+        "5356": "VFAINT",
+        "5357": "VFAINT",
+        "5358": "VFAINT",
+        "5361": "VFAINT"
+      }
+    },
+    "ABELL2146": {
+      "redshift": 0.2323,
+      "obsids": [10888, 10464, 13020, 13021, 13023, 12247, 12245, 13120, 12246, 13138],
+      "expected_archive_datamode": {
+        "10888": "VFAINT",
+        "10464": "VFAINT",
+        "13020": "VFAINT",
+        "13021": "VFAINT",
+        "13023": "VFAINT",
+        "12247": "VFAINT",
+        "12245": "VFAINT",
+        "13120": "VFAINT",
+        "12246": "VFAINT",
+        "13138": "VFAINT"
+      }
+    }
+  },
+  "event_reprocessing": {
+    "shared_settings": "inherit event_reprocessing from the hashed Sigma v17A reduction config",
+    "parallel_observations": 2,
+    "check_vf_pha_rule": "yes only when the archived DATAMODE is VFAINT; no for the single declared FAINT observation",
+    "pix_adj": "edser",
+    "output_scratch": "/home/henry/sigma-v19f-chandra"
+  },
+  "cleaning": {
+    "shared_settings": "inherit flare_filtering, point_sources, and background verbatim from the hashed Sigma v17A reduction config",
+    "lightcurve_energy_keV": [0.5, 12.0],
+    "time_bin_seconds": 250,
+    "flare_algorithm": "iterative symmetric 3-sigma clipping about the quiescent mean until membership is unchanged",
+    "minimum_retained_fraction": 0.5,
+    "source_detection_energy_keV": [0.5, 7.0],
+    "source_detection_sigthresh": 1e-6,
+    "source_mask_expansion": 1.5,
+    "background": "per-observation CALDB ACIS blank sky, particle weighted and normalized in 9-12 keV",
+    "blanksky_random_seed": "integer ObsID"
+  },
+  "gates": {
+    "required_observations": 20,
+    "required_clusters": 2,
+    "maximum_parallel_observations": 2,
+    "all_raw_hashes_must_match_v19e": true,
+    "all_reprocessed_events_must_record_caldb_4_12_4": true,
+    "all_datamodes_must_match_the_declared_per_obsid_map": true,
+    "minimum_retained_exposure_fraction": 0.5,
+    "every_observation_requires_blanksky_scaling_keywords": true,
+    "failure_rule": "Fail the observation or pair; do not change calibration, flare threshold, source threshold, energy band, or background rule for one cluster."
+  },
+  "next_protocol_boundary": "Freeze the absolute/relative registration, common source-map grid, surface-brightness edge detector, resolved spectral bins, shock-front uncertainty fit, and projection ensemble before visually inspecting any v19F image.",
+  "claim_boundary": [
+    "V19F is detector reduction only and contains no new gravity formula or fitted gravity parameter.",
+    "No event image may be visually inspected during v19F; only machine-readable headers, counts, exposure, warnings, and gate statistics may be read.",
+    "No lensing coordinate, inferred halo map, strong-lensing model, or holdout target is opened.",
+    "Passing v19F does not construct a shock front, assembly clock, causal source, or root equation.",
+    "The older Bullet ObsID 554 is processed in its archived FAINT mode without VFAINT background cleaning; this is a declared detector fact, not an object-specific physics parameter."
+  ]
+}
