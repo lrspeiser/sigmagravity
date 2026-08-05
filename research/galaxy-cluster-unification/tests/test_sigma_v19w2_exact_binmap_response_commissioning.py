@@ -27,6 +27,14 @@ def test_exact_bin_mask_values_are_binary_and_disjoint():
     assert not np.any(MODULE.exact_mask_values(values, 0) & mask)
 
 
+def test_detector_medoid_is_an_actual_selected_event_and_deterministic():
+    detx = np.asarray([4069.3391113281, 4069.8034667969])
+    dety = np.asarray([3739.2976074219, 3770.2145996094])
+    index = MODULE.detector_medoid_index(detx, dety)
+    assert index == 0
+    assert (detx[index], dety[index]) in set(zip(detx, dety, strict=True))
+
+
 def test_frozen_selection_covers_all_observed_implementation_classes():
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     classes = " ".join(item["failure_class"] for item in config["commissioning_cells"])
@@ -44,7 +52,7 @@ def test_frozen_selection_covers_all_observed_implementation_classes():
     assert off_ccd["expected_source_band_events"] == 2
     assert off_ccd["expected_background_band_events"] == 14
     assert config["execution"]["attempts_per_commissioning_cell"] == 1
-    assert config["execution"]["scratch_root"] == "/home/henry/sv19w2_v110"
+    assert config["execution"]["scratch_root"] == "/home/henry/sv19w2_v120"
     assert config["execution"]["base_v19w_archive_is_read_only"]
     assert not config["advance"]["v19x_authorized_here"]
 
@@ -54,7 +62,8 @@ def test_implementation_change_preserves_scientific_settings():
     correction = config["implementation_correction"]
     assert "binmap equals bin_id" in correction["source_selection"]
     assert "same exact bin mask" in correction["background_selection"]
-    assert "refcoord unset" in correction["response_position"]
+    assert "DETX/DETY centroid" in correction["response_position"]
+    assert "declared CCD_ID" in correction["response_position"]
     assert "weight=yes" in correction["response_weighting"]
     assert "CIAO dmimgcalc" in correction["mask_writer"]
     assert "dmimgthresh" in correction["mask_writer"]
@@ -62,6 +71,9 @@ def test_implementation_change_preserves_scientific_settings():
     materialized = config["ciao_response_materialization_correction"]
     assert "Materialize" in materialized["change"]
     assert materialized["exact_event_membership_changed"] is False
+    medoid = config["detector_medoid_response_reference_correction"]
+    assert "DETX/DETY" in medoid["change"]
+    assert medoid["free_or_fitted_coordinate_added"] is False
     assert correction["scientific_values_changed"] is False
 
 

@@ -7,10 +7,11 @@ failure classes exposed by the live V19W audit while preserving the frozen
 event partition and every scientific setting.
 
 The correction replaces polygon event filtering with an exact binary mask
-defined by the already-frozen V19M binmap. It leaves `refcoord` unset and uses
-CIAO's supported `resp_pos=CENTROID` pixel-mask mode. Runtime-only directories
-use the short production-index token so CIAO's internal Unix socket remains
-below the operating-system path limit.
+defined by the already-frozen V19M binmap. The final response reference is the
+actual selected event nearest the DETX/DETY centroid, mapped through the
+observation's unreprojected detector frame and required to remain on the
+declared CCD. Runtime-only directories use the short production-index token so
+CIAO's internal Unix socket remains below the operating-system path limit.
 
 The first invocation stopped during Python import because Astropy is absent
 from the CIAO environment. It created no scratch directory or scientific
@@ -50,6 +51,18 @@ creates a valid zero-count background PHA, and `dmhedit` adds the ordinary
 is retained. Protocol 1.1.0 uses a new scratch root so no failed response is
 reused.
 
+Protocol 1.1.0 passed the three boundary cells and the zero-background/path
+cell. The remaining two-event case demonstrated that a reprojected SKY
+centroid is not a valid detector calibration reference: its midpoint mapped
+through the observation aspect to CCD 2 even though both measured events have
+`CCD_ID=3`. Protocol 1.2.0 therefore uses detector coordinates, which
+`reproject_events` does not alter. It selects the actual 0.5--7 keV event
+nearest the exact subset's DETX/DETY centroid, converts that detector medoid
+through the observation's unreprojected V19H source-excluded frame, and
+requires the result to map back to the declared CCD. The coordinate is derived
+calibration metadata, never a fitted position. The spent off-CCD diagnostic
+completed the full weighted response at that derived reference.
+
 ## Why the binmap remains authoritative
 
 The V19P/V19Q manifest assigns every event to exactly one integer binmap pixel.
@@ -68,7 +81,7 @@ the executable filter, not the science partition.
 | `BULLET_bin154_obs4985_ccd3` | two-event centroid maps to adjacent CCD |
 | `BULLET_bin36_obs4984_ccd3` | AF_UNIX path too long in both base attempts |
 
-The products remain under `/home/henry/sv19w2_v110` and are not promoted into the
+The products remain under `/home/henry/sv19w2_v120` and are not promoted into the
 live V19W archive.
 
 ## Advancement rule

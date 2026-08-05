@@ -28,7 +28,7 @@ import run_sigma_v19w_full_response_production as v19w
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / "configs" / "sigma_v19w2_exact_binmap_response_commissioning.json"
 DEFAULT_OUTPUT = ROOT / "results" / "sigma_v19w2_exact_binmap_response_commissioning"
-DEFAULT_SCRATCH = Path("/home/henry/sv19w2_v110")
+DEFAULT_SCRATCH = Path("/home/henry/sv19w2_v120")
 
 
 def sha256(path: Path) -> str:
@@ -163,6 +163,11 @@ def prepare_mask_cell(
         scratch / "mask_logs" / token / "dmimgcalc.log",
     )
     exact_mask = Path(mask_record["path"])
+    detector_science = Path(
+        str(context["science"]).replace("_reproj_evt.fits", "_evt.fits")
+    )
+    if detector_science == context["science"] or not detector_science.is_file():
+        raise RuntimeError(f"V19W2 detector-frame source is absent: {detector_science}")
     source_filter = (
         f"{context['science']}[ccd_id={ccd_id}]"
         f"[sky=region({context['fov']})][sky=mask({exact_mask})]"
@@ -197,6 +202,7 @@ def prepare_mask_cell(
         "mask": context["mask"],
         "badpix": context["badpix"],
         "fov": context["fov"],
+        "detector_science": detector_science,
         "blanksky_scale": float(row["blanksky_scale"]),
         "preflight": {
             "source_band_events": source_events,
@@ -251,6 +257,97 @@ def run_in_place(command: list[str], log: Path, env: dict[str, str]) -> dict[str
     if completed.returncode != 0:
         raise RuntimeError(f"{command[0]} failed; inspect {log}")
     return {"command": command, "log": str(log), "returncode": completed.returncode}
+
+
+def detector_medoid_index(detx: np.ndarray, dety: np.ndarray) -> int:
+    mean_detx = float(detx.mean())
+    mean_dety = float(dety.mean())
+    return int(np.argmin((detx - mean_detx) ** 2 + (dety - mean_dety) ** 2))
+
+
+def detector_medoid_reference(
+    materialized_source: Path,
+    detector_science: Path,
+    aspect: Path,
+    ccd_id: int,
+    env: dict[str, str],
+) -> dict[str, Any]:
+    import pycrates
+
+    selection = str(materialized_source) + "[energy=500:7000][cols detx,dety,ccd_id]"
+    crate = pycrates.read_file(selection)
+    detx = np.asarray(crate.get_column("detx").values, dtype=float)
+    dety = np.asarray(crate.get_column("dety").values, dtype=float)
+    ccd = np.asarray(crate.get_column("ccd_id").values, dtype=int)
+    if (
+        detx.size == 0
+        or dety.size != detx.size
+        or ccd.size != detx.size
+        or not np.isfinite(detx).all()
+        or not np.isfinite(dety).all()
+        or np.any(ccd != int(ccd_id))
+    ):
+        raise RuntimeError(f"V19W2 invalid detector reference events: {selection}")
+    mean_detx = float(detx.mean())
+    mean_dety = float(dety.mean())
+    medoid_index = detector_medoid_index(detx, dety)
+    reference_detx = float(detx[medoid_index])
+    reference_dety = float(dety[medoid_index])
+    subprocess.run(
+        ["punlearn", "dmcoords"],
+        check=True,
+        capture_output=True,
+        text=True,
+        env=env,
+    )
+    command = [
+        "dmcoords",
+        f"infile={detector_science}",
+        f"asolfile=@{aspect}",
+        "option=det",
+        f"detx={reference_detx:.14f}",
+        f"dety={reference_dety:.14f}",
+        "celfmt=deg",
+        "verbose=0",
+        "mode=h",
+    ]
+    completed = subprocess.run(
+        command,
+        check=False,
+        capture_output=True,
+        text=True,
+        env=env,
+    )
+    if completed.returncode != 0:
+        raise RuntimeError(
+            f"V19W2 detector-coordinate conversion failed: "
+            f"{completed.stdout}{completed.stderr}"
+        )
+    ra = float(v19w.inherited.command_text(["pget", "dmcoords", "ra"], env))
+    dec = float(v19w.inherited.command_text(["pget", "dmcoords", "dec"], env))
+    mapped_ccd = int(
+        float(v19w.inherited.command_text(["pget", "dmcoords", "chip_id"], env))
+    )
+    if not np.isfinite([ra, dec]).all() or mapped_ccd != int(ccd_id):
+        raise RuntimeError(
+            f"V19W2 detector medoid maps to CCD {mapped_ccd}, expected {ccd_id}"
+        )
+    return {
+        "rule": "0.5-7 keV selected event nearest the detector-coordinate centroid",
+        "selection": selection,
+        "events": int(detx.size),
+        "mean_detx": mean_detx,
+        "mean_dety": mean_dety,
+        "medoid_index": medoid_index,
+        "reference_detx": reference_detx,
+        "reference_dety": reference_dety,
+        "ra_deg": ra,
+        "dec_deg": dec,
+        "mapped_ccd_id": mapped_ccd,
+        "detector_science": str(detector_science),
+        "detector_science_sha256": sha256(detector_science),
+        "command": command,
+    }
 
 
 def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
@@ -308,6 +405,13 @@ def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
         f"{materialized_background}[sky=region({cell['fov']})]"
     )
     has_background_rows = background_subset["all_energy_rows"] > 0
+    response_reference = detector_medoid_reference(
+        materialized_source,
+        Path(cell["detector_science"]),
+        Path(cell["aspect"]),
+        int(cell["ccd_id"]),
+        env,
+    )
     command = [
         "specextract",
         f"infile={response_source_filter}",
@@ -321,7 +425,7 @@ def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
         "weight=yes",
         "weight_rmf=yes",
         "resp_pos=CENTROID",
-        "refcoord=",
+        f"refcoord={response_reference['ra_deg']:.14f},{response_reference['dec_deg']:.14f}",
         "correctpsf=no",
         "combine=no",
         "grouptype=NONE",
@@ -432,8 +536,10 @@ def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
             "effective_scale_relative_error_from_BKGSCALn"
         ]
         <= 1e-6,
-        "manual_refcoord_absent_and_materialized_centroid_used": (
-            "refcoord=" in command and "resp_pos=CENTROID" in command
+        "detector_medoid_reference_maps_to_declared_ccd": (
+            response_reference["mapped_ccd_id"] == int(cell["ccd_id"])
+            and response_reference["events"]
+            == cell["preflight"]["source_band_events"]
         ),
     }
     if not all(gates.values()):
@@ -455,9 +561,13 @@ def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
             "background": background_subset,
         },
         "response_position": {
-            "refcoord": None,
+            "refcoord": [
+                response_reference["ra_deg"],
+                response_reference["dec_deg"],
+            ],
             "resp_pos": "CENTROID",
-            "reason": "centroid of the exact materialized event subset; no manual cross-CCD coordinate",
+            "reason": "outcome-blind detector medoid from an exact selected event; no fitted sky coordinate",
+            "detector_medoid": response_reference,
         },
         "short_path_token": token,
         "step": step,
@@ -552,8 +662,9 @@ def run(config_path: Path, output: Path, scratch: Path) -> dict[str, Any]:
         "every_arf_rmf_link_and_blanksky_gate_passes": all(
             all(row["gates"].values()) for row in ordered
         ),
-        "every_response_uses_materialized_centroid_without_manual_refcoord": all(
-            row["response_position"]["refcoord"] is None
+        "every_response_uses_detector_medoid_on_declared_ccd": all(
+            row["response_position"]["detector_medoid"]["mapped_ccd_id"]
+            == row["ccd_id"]
             and row["response_position"]["resp_pos"] == "CENTROID"
             for row in ordered
         ),

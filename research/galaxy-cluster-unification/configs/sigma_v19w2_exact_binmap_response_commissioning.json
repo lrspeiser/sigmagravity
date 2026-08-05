@@ -1,5 +1,5 @@
 {
-  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.1.0",
+  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.2.0",
   "status": "frozen after the read-only V19W live archive audit identified three implementation failure classes and before constructing any exact-bin mask, running a corrected response, reading a spectral fit, changing a scientific region or event assignment, opening lensing data, or changing gravity physics",
   "purpose": "Commission one implementation correction that restores the frozen disjoint V19P/V19Q binmap event partition, removes the invalid manually transformed low-count response coordinate, and shortens CIAO runtime paths without changing any admitted region, event, energy band, response weighting, background scaling or scientific threshold.",
   "parents": {
@@ -60,7 +60,7 @@
   "implementation_correction": {
     "source_selection": "science event file filtered by frozen observation FOV, declared CCD_ID and sky=mask(binary image where frozen V19M binmap equals bin_id)",
     "background_selection": "WCS-corrected blank-sky event file filtered by declared CCD_ID and the same exact bin mask",
-    "response_position": "leave refcoord unset and use resp_pos=CENTROID, the CIAO-supported mode for a pixel-mask filter",
+    "response_position": "derive refcoord from the actual selected 0.5-7 keV event nearest the DETX/DETY centroid, convert it through the observation's unreprojected detector frame, and require it to map to the declared CCD_ID",
     "response_weighting": "unchanged weight=yes, weight_rmf=yes, energy_wmap=500:7000 eV, binwmap=det=8, binarfwmap=1",
     "runtime_path": "use a short scratch root and production-index cell token for PFILES, TMPDIR and partial directories; retain canonical cell and product names",
     "mask_writer": "CIAO dmimgcalc constructs a constant-one image with the frozen binmap WCS; CIAO dmimgthresh retains one only where the binmap lies in the exact closed interval bin_id:bin_id and writes zero elsewhere; NumPy independently checks every output pixel against binmap equals bin_id",
@@ -91,8 +91,15 @@
     "exact_event_membership_changed": false,
     "response_weighting_or_energy_grid_changed": false
   },
+  "detector_medoid_response_reference_correction": {
+    "reason": "Protocol 1.1.0 passed four cells but the two-event off-CCD case remained invalid because the centroid of reprojected SKY coordinates mapped through the observation aspect to CCD 2 although both selected events are measured on CCD 3.",
+    "change": "For every cell, select the actual 0.5-7 keV event nearest the exact subset's DETX/DETY centroid, convert that measured detector coordinate to ICRS with the observation's unreprojected V19H source-excluded event frame, require dmcoords to return the declared CCD_ID, and pass that derived coordinate as refcoord. This coordinate is calibration metadata, not a fitted scientific parameter.",
+    "diagnostic_evidence": "For BULLET_bin154_obs4985_ccd3 the two selected detector positions are on CCD 3; the deterministic medoid maps to RA 104.7061564151 deg, Dec -55.9385605219 deg and CCD 3, and the full weighted source/background response command completed.",
+    "free_or_fitted_coordinate_added": false,
+    "event_membership_or_response_weighting_changed": false
+  },
   "execution": {
-    "scratch_root": "/home/henry/sv19w2_v110",
+    "scratch_root": "/home/henry/sv19w2_v120",
     "maximum_concurrent_cells": 2,
     "attempts_per_commissioning_cell": 1,
     "base_v19w_archive_is_read_only": true
@@ -101,7 +108,7 @@
     "all_five_cells_use_the_exact_frozen_manifest_counts": true,
     "all_materialized_event_subsets_and_source_background_pha_histograms_match_their_exact_mask_event_lists": true,
     "all_arf_rmf_link_and_blanksky_audits_pass": true,
-    "all_responses_use_the_exact_materialized_event_centroid_with_no_manual_refcoord": true,
+    "all_responses_use_the_exact_detector_medoid_and_map_to_the_declared_ccd": true,
     "the_path_length_cell_completes_under_the_short_runtime_root": true,
     "failure_rule": "Fail closed without changing the binmap, event membership, CCD_ID, FOV, energy band, background scaling, response weighting, response binning, concurrency, attempt count or selected commissioning cells. Do not modify or promote into the live base V19W archive."
   },
@@ -126,6 +133,6 @@
   },
   "implementation": {
     "runner": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
-    "runner_sha256": "fea403d005e655a7079ca31e9fa9444fac52a0caa1e213d6125afce9c4ee6eed"
+    "runner_sha256": "7bfa95bacc2d6904fb67262b1523cb58fab9cb492a0ccfcec15ae1ea41185810"
   }
 }
