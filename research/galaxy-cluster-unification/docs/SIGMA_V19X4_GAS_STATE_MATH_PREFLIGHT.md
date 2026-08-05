@@ -2,11 +2,12 @@
 
 ## Outcome
 
-The cluster source pipeline now has a target-blind, executable conversion from
-future regional X-ray fits to gas density, surface density, pressure, entropy,
-sound speed and shock state. It admits all 494 already-frozen adaptive regions
-without opening a regional spectrum, lensing target, inferred halo map or
-gravity parameter.
+The cluster source pipeline now has a target-blind, hash-frozen executable
+conversion from future regional X-ray fits to gas density, surface density,
+pressure, entropy, sound speed and the thermodynamic inputs needed by a later
+shock-state reconstruction. It admits all 494
+already-frozen adaptive regions without opening a regional spectrum, lensing
+target, inferred halo map or gravity parameter.
 
 The audit also found and corrected a material algebra error in the historical
 V19H prose. That parent is hash-bound and remains untouched. The correction is
@@ -58,9 +59,34 @@ complete frozen fit-bound log-uniform prior is used and the region is flagged.
 Dependence between temperature and normalization is tested at rank
 correlations -0.9, 0 and +0.9 when a joint likelihood surface is unavailable.
 
+The scrambled-Sobol construction has $2N+1$ dimensions for a cluster with $N$
+regions. Each region receives distinct temperature and normalization draws;
+one shared depth-factor draw represents the cluster-wide deprojection scale.
+The same underlying Sobol points are reused across all three dependence
+branches, so differences between them are caused by the declared dependence
+rather than Monte Carlo noise.
+
 No hydrostatic-equilibrium assumption is used. Shock Mach number and shock
 speed follow from the measured density/temperature jumps and ordinary
 Rankine-Hugoniot relations.
+
+## Common physical grid
+
+Both clusters are placed on the same east-positive, north-positive physical
+grid spanning $-1200$ to $+1200$ kpc at 10-kpc spacing: 241 cells on each axis.
+Adaptive-region identities are transferred by nearest-neighbor sampling before
+any field value is assigned. Invalid V19M bins are masked rather than filled.
+
+Posterior summaries are stored at the 5th, 16th, 50th, 84th and 95th
+percentiles. Every summary is exposed at predeclared 50-kpc and 100-kpc FWHM
+resolutions. Mask-normalized smoothing prevents missing pixels from acting as
+zero density, and surface-density maps are rescaled within the admitted mask
+to conserve their discrete gas mass to a required relative error of $10^{-6}$.
+
+The real frozen geometry passes the manufactured admission test: all 366
+Bullet and all 128 Abell 2146 region IDs occur on the 241-by-241 grids. The
+measured regional fit values remain unavailable, so this proves geometry and
+algorithm coverage only.
 
 ## What this enables
 
@@ -81,7 +107,9 @@ derived from one covariant action.
 
 ## Claim boundary
 
-This preflight verifies algebra, provenance and region admission. It is not
-evidence for Sigma Gravity. The synthetic representative normalizations used
-by the checker are unit tests only. Observed gas maps, source-invariant scores,
-lensing predictions and gravity claims all remain unopened.
+This preflight verifies algebra, provenance, posterior execution and region
+admission. It is not evidence for Sigma Gravity. The synthetic representative
+normalizations used by the checker are unit tests only. The executable refuses
+to run until the hash-bound V19X3 configuration and terminal passing report
+exist. Observed gas maps, source-invariant scores, lensing predictions and
+gravity claims all remain unopened.

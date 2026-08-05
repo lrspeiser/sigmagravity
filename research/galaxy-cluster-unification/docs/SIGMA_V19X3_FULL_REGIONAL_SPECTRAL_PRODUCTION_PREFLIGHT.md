@@ -75,10 +75,11 @@ source protocol.
 ## What V19X3 still will not provide
 
 Regional APEC temperature and normalization are inputs to, not substitutes
-for, a gas-state posterior.  After V19X3 passes, a separate frozen stage must
-derive emission measure, gas surface density, pressure, entropy, shock state,
-line-of-sight depth/projection uncertainty and their covariance.  Only then
-can V19BJ score source invariants.  Lensing remains sealed throughout.
+for, a gas-state posterior. V19X4 now supplies the separately frozen executor
+that derives emission measure, gas surface density, pressure, entropy, sound
+speed, line-of-sight depth uncertainty and common physical grids. It remains
+runtime-closed until V19X3 passes. Only a passing V19X4 report can authorize
+V19BJ source-invariant scoring. Lensing remains sealed throughout.
 
 ## Verification
 

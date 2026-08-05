@@ -1,13 +1,15 @@
 {
-  "protocol_version": "SIGMA-V19X4-GAS-STATE-MATH-PREFLIGHT-1.0.0",
+  "protocol_version": "SIGMA-V19X4-GAS-STATE-POSTERIOR-1.1.0",
   "freeze_state": "preregistered_before_v19x3_regional_results",
-  "status": "gas-state algebra corrected and frozen before any regional spectral result, source-invariant score, lensing target, halo target or gravity parameter is opened",
+  "status": "gas-state algebra, regional posterior sampler and common-grid reconstruction frozen before any regional spectral result, source-invariant score, lensing target, halo target or gravity parameter is opened",
   "purpose": "Convert future V19X3 temperature and APEC-normalization measurements into a common-grid gas-state posterior for the Bullet Cluster and Abell 2146 without hydrostatic equilibrium or lensing calibration.",
   "parents": {
     "v19h_source_protocol": "configs/sigma_v19h_causal_observable_protocol.json",
     "v19h_source_protocol_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
     "v19m_region_report": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
     "v19m_region_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
     "v19x3_runner": "scripts/run_sigma_v19x3_full_regional_spectral_production.py",
     "v19x3_runner_sha256": "3d321a5f658d1e40ce84bf9ad2c51c9627cfd7d6838d552bb2a1a078ba232017",
     "v19x3_freezer": "scripts/freeze_sigma_v19x3_full_regional_spectral_production.py",
@@ -48,12 +50,14 @@
       "BULLET": {
         "redshift": 0.296,
         "kpc_per_arcsec": 4.554708213666332,
+        "seed_offset": 0,
         "expected_valid_regions": 366,
         "region_statistics": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/region_statistics.csv"
       },
       "ABELL2146": {
         "redshift": 0.2323,
         "kpc_per_arcsec": 3.822721649528813,
+        "seed_offset": 2146,
         "expected_valid_regions": 128,
         "region_statistics": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/region_statistics.csv"
       }
@@ -63,6 +67,11 @@
     "sampler": "scrambled Sobol",
     "draws": 4096,
     "seed": 19008003,
+    "rank_correlations": [
+      -0.9,
+      0.0,
+      0.9
+    ],
     "line_of_sight_depth_factor": {
       "distribution": "log-uniform",
       "minimum": 0.5,
@@ -90,6 +99,31 @@
     ],
     "dependence_sensitivity": "repeat with rank correlations -0.9, 0 and +0.9 between temperature and normalization when a joint likelihood surface is unavailable"
   },
+  "common_grid": {
+    "frame": "cluster-centered east-positive and north-positive physical coordinates",
+    "half_width_kpc": 1200.0,
+    "spacing_kpc": 10.0,
+    "cells_per_axis": 241,
+    "bin_label_resampling": "nearest neighbor from the frozen V19M bin map so adaptive-region identity is not blended",
+    "summary_quantiles": [
+      0.05,
+      0.16,
+      0.5,
+      0.84,
+      0.95
+    ],
+    "smoothing_fwhm_kpc": [
+      50.0,
+      100.0
+    ],
+    "smoothing_rule": "mask-normalized Gaussian smoothing; gas surface density is rescaled within the admitted mask to conserve its discrete integral exactly",
+    "primary_source_invariant_radius_kpc": 350.0,
+    "source_only_radius_robustness_kpc": [
+      250.0,
+      500.0
+    ],
+    "reason": "common physical sampling and two predeclared derivative resolutions prevent native-pixel scale and adaptive-bin edges from selecting a source feature"
+  },
   "front_state": {
     "density_jump": "Rankine-Hugoniot compression inversion",
     "temperature_jump": "independent Rankine-Hugoniot temperature inversion",
@@ -104,6 +138,9 @@
     "exact_draws_per_region": 4096,
     "all_common_grid_posterior_summaries_finite": true,
     "depth_and_temperature_normalization_dependence_sensitivities_reported": true,
+    "all_three_rank_correlation_branches_completed": true,
+    "both_50_and_100_kpc_resolution_branches_completed": true,
+    "surface_density_smoothing_mass_relative_error_maximum": 1e-6,
     "same_rules_both_clusters": true
   },
   "authorization": {
@@ -117,6 +154,18 @@
     "This preflight validates conversion algebra and frozen region geometry only; it is not a Sigma Gravity result.",
     "Line-of-sight depth and profile dependence remain measurement nuisances and must not count as gravity constants.",
     "The historical V19H formula error is corrected prospectively and is not hidden by rewriting a hashed parent.",
-    "A future gas map is a baryonic source reconstruction, not a dark-matter map and not a lensing-derived target."
-  ]
+    "A future gas map is a baryonic source reconstruction, not a dark-matter map and not a lensing-derived target.",
+    "Common-grid smoothing exposes 50 and 100 kpc source-resolution branches; neither may be chosen after viewing a lensing or halo target."
+  ],
+  "outputs": {
+    "result_root": "results/sigma_v19x4_gas_state_posterior",
+    "regional_products": "one hash-bound NPZ per cluster and temperature-normalization dependence branch",
+    "common_grid_products": "one hash-bound 241 by 241 summary-map NPZ per cluster and dependence branch"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19x4_gas_state_posterior.py",
+    "runner_sha256": "934a241a1611bdc6eb34569c67efa76641195a39ec33ae600ea41960171042e3",
+    "posterior_module": "src/voidscreen/sigma_gas_posterior.py",
+    "posterior_module_sha256": "095581c97d6c4ff294f76aeaaf52ae68fdb38f1ac04bba8e3b791a1a97e6571c"
+  }
 }

@@ -2158,3 +2158,24 @@ Solar-System optimization. Solar and PPN consistency remain mandatory later
 vetoes. Cosmological dark-matter observables require perturbing a final
 covariant action and cannot be predicted uniquely from the current empirical
 bridge.
+
+## 2026-08-05 V19X4 executable posterior and common-grid admission
+
+The corrected gas algebra is now implemented as a hash-frozen future executor,
+not only a prose protocol. For each cluster it will generate 4,096
+scrambled-Sobol draws for every accepted region under three predeclared
+temperature-normalization dependence branches ($\rho=-0.9,0,+0.9$). Failed
+ordered intervals use the complete pre-fit log bounds and remain flagged;
+regions are never outcome-selected.
+
+All source summaries are placed on identical 241-by-241, 10-kpc physical grids
+and exposed at 50-kpc and 100-kpc FWHM. Surface-density smoothing is explicitly
+mass conserving. A manufactured run against the real bin maps proves that all
+366 Bullet and 128 Abell 2146 admitted region IDs survive resampling. The
+executor verifies the future V19X3 config/report hashes and refuses to run
+before all 494 finite fits and both cluster-level quality gates pass.
+
+This closes a major pre-lensing implementation gap: the density, overlap,
+thermodynamic-gradient and baroclinicity candidates can later be compared on
+the same axes and physical resolutions. No regional spectral value, invariant
+score, lensing/halo target, action or gravity constant was opened or selected.
