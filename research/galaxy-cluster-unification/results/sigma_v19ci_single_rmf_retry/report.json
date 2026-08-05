@@ -1,0 +1,18 @@
+{
+  "claim_boundary": [
+    "V19CI repairs one response-generation execution failure; it does not relax a scientific gate or change a measured value.",
+    "The failed partial directory is moved into a preserved failed-attempt directory and is not deleted.",
+    "The byte-identical V19W5 runner reuses 383 completed checkpoints, regenerates only the absent completed checkpoint, then independently validates all 5,082 checkpoints and 20,328 products.",
+    "The protected 4,698-cell base archive must remain byte-identical.",
+    "No target lensing, halo, action, gravity parameter or holdout payload is opened, and a second retry is not authorized automatically.",
+    "Only a complete V19W5 pass may resume the unchanged source-only V19BR chain; V19BS remains a separate frozen scientific disposition."
+  ],
+  "config_sha256": "a1d0d8ad341b09b59c73acda351e1894316243c44a09f47a91ce571d75e538ba",
+  "exception": "RuntimeError: V19CI single-cell V19W5 retry exited 1",
+  "generated_utc": "2026-08-05T19:56:43.538609+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "protocol_version": "SIGMA-V19CI-SINGLE-RMF-RETRY-1.0.0",
+  "runner_sha256": "67e3e69966a5f7351b7c7660726055822cef3999d75336f604f79f9907f386b4",
+  "status": "single_rmf_retry_failed_closed"
+}

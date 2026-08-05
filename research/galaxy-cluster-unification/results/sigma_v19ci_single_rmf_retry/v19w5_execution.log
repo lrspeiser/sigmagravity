@@ -1,0 +1,36 @@
+2026-08-05T19:54:34.745183+00:00 command=['/home/henry/miniforge3/bin/conda', 'run', '--no-capture-output', '-n', 'sigma-ciao-4.18', 'python', '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py', '--config', '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/configs/sigma_v19w5_ccd7_hardened_response_recovery.json', '--output', '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19w5_ccd7_hardened_response_recovery', '--scratch', '/home/henry/sigma-v19cd-v19w5-response-recovery/v100', '--base-scratch', '/home/henry/sigma-v19w-response-production/v100']
+recovery 16/384; failed=0
+recovery 32/384; failed=0
+recovery 48/384; failed=0
+recovery 64/384; failed=0
+recovery 80/384; failed=0
+recovery 96/384; failed=0
+recovery 112/384; failed=0
+recovery 128/384; failed=0
+recovery 144/384; failed=0
+recovery 160/384; failed=0
+recovery 176/384; failed=0
+recovery 192/384; failed=0
+recovery 208/384; failed=0
+recovery 224/384; failed=0
+recovery 240/384; failed=0
+recovery 256/384; failed=0
+recovery 272/384; failed=0
+recovery 288/384; failed=0
+recovery 304/384; failed=0
+recovery 320/384; failed=0
+recovery 336/384; failed=0
+recovery 352/384; failed=0
+recovery 368/384; failed=0
+recovery 384/384; failed=1
+Traceback (most recent call last):
+  File "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py", line 277, in <module>
+    main()
+  File "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py", line 260, in main
+    report = run(args.config, args.output, args.scratch, args.base_scratch)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py", line 137, in run
+    raise RuntimeError(f"V19W5 recovery failed closed: {failures}")
+RuntimeError: V19W5 recovery failed closed: {'BULLET_bin384_obs5358_ccd0': 'RuntimeError: specextract failed; inspect /home/henry/sigma-v19cd-v19w5-response-recovery/v100/partial/c3432/logs/specextract.log'}
+ERROR conda.cli.main_run:execute(148): `conda run python /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py --config /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/configs/sigma_v19w5_ccd7_hardened_response_recovery.json --output /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19w5_ccd7_hardened_response_recovery --scratch /home/henry/sigma-v19cd-v19w5-response-recovery/v100 --base-scratch /home/henry/sigma-v19w-response-production/v100` failed. (See above for error)
+2026-08-05T19:56:43.537509+00:00 returncode=1

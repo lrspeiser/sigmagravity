@@ -33,3 +33,19 @@ python scripts/run_sigma_v19ci_single_rmf_retry.py --preflight-only
 
 Execution uses `--execute` only after the config, runner hash, and tests are
 committed.
+
+## Outcome
+
+The authorized retry reproduced the same failure for the same cell with no
+other response cell executing concurrently.  Both preserved attempts have the
+same `specextract.log` SHA-256,
+`ee083a7ff3e68d11498a68ede5a111c92b518907c3e10dd1fcbd84989a72933c`,
+and both stop at `Failed to create RMF`.  The scratch still contains 383 valid
+completed checkpoints; the first partial is preserved under
+`failed_attempts/c3432_rmf_attempt1`, and the second partial remains available
+for diagnosis.
+
+V19CI therefore failed closed.  V19BR was not started.  Another blind retry is
+not authorized; the next step must diagnose the RMF boundary with higher CIAO
+verbosity in a non-admitted copy before any response-placement remedy is
+defined.
