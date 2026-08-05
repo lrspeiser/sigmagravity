@@ -2227,3 +2227,20 @@ remain within 10%, I4 direction within 10 degrees, its 95% axial interval
 within 30 degrees, and at least 90% of region omissions and projection draws
 must remain stable. These are source-identifiability tests only; observed V19X4
 gas maps, lensing, action selection and gravity parameters remain unopened.
+
+## 2026-08-05 V19BM stellar-control executor
+
+The filter-safe stellar morphology nuisance is now implemented as a future
+hash-frozen executor. It consumes exactly member-ensemble sample IDs 0--4095,
+normalizes the finite member light within each cluster and draw, inverts the
+exact V19X4 native-pixel convention, deposits light on the 241-by-241 physical
+grid with cloud-in-cell weights, and smooths independently at 50 and 100 kpc.
+Every draw is rescaled after convolution to conserve unit light.
+
+The resulting adaptive-region means are converted to within-draw percentile
+ranks. Those ranks, not the relative luminosity amplitudes, enter the V19BL
+density null. This prevents Bullet Bessel-I and Abell 2146 F814W photometry
+from being treated as a common stellar-mass scale. The preflight passes, but
+terminal execution correctly remains closed until the observed V19X4 report
+provides three identical, hash-bound label grids per cluster. No gas posterior,
+lensing, halo, action or gravity target was opened.

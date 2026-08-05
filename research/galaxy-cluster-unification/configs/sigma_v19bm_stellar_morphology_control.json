@@ -1,0 +1,109 @@
+{
+  "protocol_version": "SIGMA-V19BM-STELLAR-MORPHOLOGY-CONTROL-1.0.0",
+  "status": "frozen before terminal V19X4 observed gas products or any invariant, lensing, halo, action, or gravity score",
+  "purpose": "Construct the within-cluster, filter-invariant stellar-light percentile nuisance control required by V19BK/V19BL on the exact future V19X4 common grid.",
+  "parents": {
+    "v19bl_config": {
+      "path": "configs/sigma_v19bl_source_invariant_scoring_protocol.json",
+      "sha256": "91914a009129cc8155b2601a4396cb7bebdfd8abef298511b1e748de6dc3f515"
+    },
+    "v19bl_report": {
+      "path": "results/sigma_v19bl_source_invariant_scoring_protocol/report.json",
+      "sha256": "570f36a2c0772d6da48a77fb07ed50b014b191ae7d53194726b05e3e79238156"
+    },
+    "v19x4_config": {
+      "path": "configs/sigma_v19x4_gas_state_math_preflight.json",
+      "sha256": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f"
+    },
+    "source_map_report": {
+      "path": "results/sigma_v19h_source_maps/report.json",
+      "sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af"
+    }
+  },
+  "future_v19x4_report": "results/sigma_v19x4_gas_state_posterior/report.json",
+  "clusters": {
+    "BULLET": {
+      "ensemble": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/position_current_ensemble.csv.gz",
+      "ensemble_sha256": "28f292af9afc4e8161bc5f0fce48d30dcf5c9c27c4412f6cba02c6fbb19bdc47",
+      "analysis_grid": "results/sigma_v19h_source_maps/frozen_map_products/BULLET/analysis_mask.img",
+      "analysis_grid_sha256": "874ffe6c028ab9340ff467811da79073ee6af2d00fc829fd6b89b65ba28717c4",
+      "luminosity_field": "relative_i_luminosity",
+      "photometric_role": "relative Bessel-I luminosity",
+      "expected_members_per_draw": 72,
+      "expected_regions": 366,
+      "kpc_per_arcsec": 4.554708213666332
+    },
+    "ABELL2146": {
+      "ensemble": "data/derived/sigma_v19bb_abell2146_luminosity_current_ensemble/position_current_ensemble.csv.gz",
+      "ensemble_sha256": "234937ccef9b6ce5fa1540b7e698a3c8b2440baf875822d7b91df6768aab124d",
+      "analysis_grid": "results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/analysis_mask.img",
+      "analysis_grid_sha256": "c4177a5d8bffc28f47dd8607f82ce95c3b44a7f910890365f79d7faac35074f4",
+      "luminosity_field": "relative_f814w_luminosity",
+      "photometric_role": "relative HST F814W luminosity",
+      "expected_members_per_draw": 63,
+      "expected_regions": 128,
+      "kpc_per_arcsec": 3.822721649528813
+    }
+  },
+  "construction": {
+    "draws": 4096,
+    "sample_ids": "exactly 0 through 4095",
+    "batch_size": 32,
+    "output_pixel_arcsec": 0.984,
+    "common_axis_kpc": {
+      "minimum": -1200.0,
+      "maximum": 1200.0,
+      "spacing": 10.0,
+      "cells": 241
+    },
+    "smoothing_fwhm_kpc": [
+      50.0,
+      100.0
+    ],
+    "deposition": "cloud in cell on the common physical grid after exact inversion of the V19X4 native-pixel convention",
+    "normalization": "divide finite nonnegative member luminosities by their within-cluster, within-draw total before deposition",
+    "smoothing": "Gaussian point-light convolution with zero exterior; rescale each draw after convolution to conserve its unit total",
+    "region_control": "mean smoothed light per adaptive region followed by within-draw average-tie percentile rank (rank-0.5)/N",
+    "pairing": "equal sample_id pairs the independent member posterior with the V19X4 gas Sobol draw; no physical gas-star covariance is asserted"
+  },
+  "future_runtime_gates": {
+    "terminal_v19x4_status": "gas_state_posterior_and_common_grids_passed_source_invariant_scoring_authorized",
+    "all_v19x4_product_hashes_exact": true,
+    "all_three_v19x4_branch_label_grids_identical_per_cluster": true,
+    "exact_draw_member_and_region_counts": true,
+    "every_finite_luminosity_nonnegative_and_positive_total": true,
+    "every_member_has_four_common_grid_CIC_neighbors": true,
+    "unit_light_conserved_to_absolute_1e-12": true,
+    "all_region_ranks_finite_strictly_between_zero_and_one": true,
+    "mean_region_rank_each_draw_equals_one_half_to_1e-12": true,
+    "no_cross_filter_amplitude_comparison": true,
+    "no_lensing_halo_action_or_gravity_payload": true
+  },
+  "outputs": {
+    "root": "results/sigma_v19bm_stellar_morphology_control",
+    "preflight_report": "results/sigma_v19bm_stellar_morphology_control/preflight_report.json",
+    "terminal_report": "results/sigma_v19bm_stellar_morphology_control/report.json"
+  },
+  "authorization": {
+    "run_preflight_now": true,
+    "run_terminal_after_v19x4": true,
+    "run_terminal_before_v19x4": false,
+    "compare_cross_filter_amplitudes": false,
+    "infer_stellar_mass": false,
+    "read_lensing_or_halo_payload": false,
+    "select_action_or_gravity_parameter": false,
+    "open_holdout": false
+  },
+  "claim_boundary": [
+    "V19BM produces a morphology nuisance control, not a stellar-mass map or a gravitational source detection.",
+    "Equal sample IDs are a deterministic pairing of independent posterior draws, not measured gas-star covariance.",
+    "Bullet Bessel-I and Abell 2146 F814W amplitudes are never compared.",
+    "No observed V19X4 gas value, invariant score, lensing target, halo map, action, formula, coupling, or gravity constant is used by the present preflight."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19bm_stellar_morphology_control.py",
+    "runner_sha256": "f69d17403299935b0bb539f881eb2610bcc84044d80b53ec0f5584f2c3d11875",
+    "module": "src/voidscreen/sigma_stellar_control.py",
+    "module_sha256": "6f45a3f485cb5e18d1b45a16e2600c75ff4ca0ae1b8f718919b5de1321c54ae9"
+  }
+}

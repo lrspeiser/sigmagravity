@@ -1,0 +1,37 @@
+{
+  "protocol_version": "SIGMA-V19BM-STELLAR-MORPHOLOGY-CONTROL-1.0.0",
+  "decision": "passed_stellar_control_preflight_awaiting_terminal_v19x4",
+  "config_sha256": "d2db22b08684aa42aba85659da8367a1633ea039a7e5200a96297b087bafce31",
+  "runner_sha256": "f69d17403299935b0bb539f881eb2610bcc84044d80b53ec0f5584f2c3d11875",
+  "module_sha256": "6f45a3f485cb5e18d1b45a16e2600c75ff4ca0ae1b8f718919b5de1321c54ae9",
+  "input_hashes": {
+    "v19bl_config": "91914a009129cc8155b2601a4396cb7bebdfd8abef298511b1e748de6dc3f515",
+    "v19bl_report": "570f36a2c0772d6da48a77fb07ed50b014b191ae7d53194726b05e3e79238156",
+    "v19x4_config": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f",
+    "source_map_report": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "BULLET_ensemble": "28f292af9afc4e8161bc5f0fce48d30dcf5c9c27c4412f6cba02c6fbb19bdc47",
+    "BULLET_analysis_grid": "874ffe6c028ab9340ff467811da79073ee6af2d00fc829fd6b89b65ba28717c4",
+    "ABELL2146_ensemble": "234937ccef9b6ce5fa1540b7e698a3c8b2440baf875822d7b91df6768aab124d",
+    "ABELL2146_analysis_grid": "c4177a5d8bffc28f47dd8607f82ce95c3b44a7f910890365f79d7faac35074f4"
+  },
+  "gates": {
+    "all_static_parent_input_and_implementation_hashes_exact": true,
+    "exact_4096_draw_pairing": true,
+    "common_grid_matches_v19x4": true,
+    "rank_control_matches_v19bl": true,
+    "filter_amplitudes_and_stellar_mass_forbidden": true,
+    "terminal_run_waits_for_v19x4": true,
+    "lensing_halo_action_and_holdout_sealed": true
+  },
+  "observed_v19x4_gas_posterior_opened": false,
+  "stellar_control_computed": false,
+  "cross_filter_luminosity_amplitudes_compared": false,
+  "stellar_mass_inferred": false,
+  "lensing_halo_action_or_gravity_payload_opened": false,
+  "claim_boundary": [
+    "V19BM produces a morphology nuisance control, not a stellar-mass map or a gravitational source detection.",
+    "Equal sample IDs are a deterministic pairing of independent posterior draws, not measured gas-star covariance.",
+    "Bullet Bessel-I and Abell 2146 F814W amplitudes are never compared.",
+    "No observed V19X4 gas value, invariant score, lensing target, halo map, action, formula, coupling, or gravity constant is used by the present preflight."
+  ]
+}

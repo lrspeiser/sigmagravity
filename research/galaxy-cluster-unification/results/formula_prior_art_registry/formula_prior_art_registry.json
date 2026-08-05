@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 177,
+    "sigma_protocols": 178,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7226,6 +7226,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "91914a009129cc8155b2601a4396cb7bebdfd8abef298511b1e748de6dc3f515"
+    },
+    {
+      "config": "configs/sigma_v19bm_stellar_morphology_control.json",
+      "protocol_version": "SIGMA-V19BM-STELLAR-MORPHOLOGY-CONTROL-1.0.0",
+      "status": "frozen before terminal V19X4 observed gas products or any invariant, lensing, halo, action, or gravity score",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "d2db22b08684aa42aba85659da8367a1633ea039a7e5200a96297b087bafce31"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",
