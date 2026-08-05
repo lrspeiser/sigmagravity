@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 165,
+    "sigma_protocols": 166,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 145,
     "eligibility": {
@@ -7368,6 +7368,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "2085286a9f208c2cb2e5d7d38b7154cbf44c110493b712f603c6eca8c2272152"
+    },
+    {
+      "config": "configs/sigma_v19w2_exact_binmap_response_commissioning.json",
+      "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.2.0",
+      "status": "frozen after the read-only V19W live archive audit identified three implementation failure classes and before constructing any exact-bin mask, running a corrected response, reading a spectral fit, changing a scientific region or event assignment, opening lensing data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "df3041c54bf14fc8c7071229ef5facc4011be1e94645027ff5f37903e9d516d7"
     },
     {
       "config": "configs/sigma_v19w_full_response_production.json",
