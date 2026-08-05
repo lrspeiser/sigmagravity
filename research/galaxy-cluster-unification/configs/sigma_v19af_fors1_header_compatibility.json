@@ -1,0 +1,111 @@
+{
+  "protocol_version": "SIGMA-V19AF-FORS1-HEADER-COMPATIBILITY-1.0.0",
+  "status": "frozen_before_decompression_or_any_fits_header_or_pixel_access",
+  "purpose": "Losslessly decompress the 46 frozen V19AE files in a temporary directory, audit only their primary FITS headers and detector compatibility, and delete the temporary decompressed payloads without interpreting a single pixel value.",
+  "parent_artifacts": [
+    {
+      "path": "configs/sigma_v19ae_fors1_commissioning_frames.json",
+      "sha256": "c2a67f7cfafb6aab07647bc7a0ec754e66face7d907590b9e57dee14472b33eb"
+    },
+    {
+      "path": "results/sigma_v19ae_fors1_commissioning_frames/provenance.json",
+      "sha256": "79eb03dbc91783b9c2000c62db79ac9d72e97d5be10ea99b8ad1292f5c178e7c"
+    }
+  ],
+  "inputs": {
+    "acquisition_report": "results/sigma_v19ae_fors1_commissioning_frames/provenance.json",
+    "file_source": "Use every file record and exact compressed SHA-256 from the passed acquisition report; no new archive query or file selection."
+  },
+  "decompression": {
+    "format": "historic UNIX compress .Z",
+    "wsl_distribution": "Ubuntu-24.04",
+    "executable": "gzip",
+    "arguments": [
+      "-dc",
+      "--"
+    ],
+    "persistence": "Each decompressed FITS file exists only inside one Python TemporaryDirectory and is removed when the header audit exits.",
+    "full_stream_hashing_boundary": "The decompressed byte stream is SHA-256 hashed for integrity, but no data byte is converted into or interpreted as a pixel value."
+  },
+  "header": {
+    "block_bytes": 2880,
+    "card_bytes": 80,
+    "termination": "Read whole 2880-byte blocks until the first exact END card; never request the primary data array.",
+    "required_primary_keywords": [
+      "SIMPLE",
+      "BITPIX",
+      "NAXIS",
+      "NAXIS1",
+      "NAXIS2"
+    ],
+    "candidate_detector_signature_keywords": [
+      "ESO DET CHIP1 ID",
+      "ESO DET CHIP1 NAME",
+      "ESO DET WIN1 BINX",
+      "ESO DET WIN1 BINY",
+      "ESO DET WIN1 NX",
+      "ESO DET WIN1 NY",
+      "ESO DET OUTPUTS",
+      "ESO DET READ CLOCK",
+      "ESO DET READ SPEED",
+      "ESO DET READ CURNAME",
+      "ESO DET OUT1 GAIN",
+      "ESO DET OUT1 RON",
+      "ESO DET OUT1 CONAD"
+    ],
+    "signature_rule": "Ignore a candidate keyword only if it is absent from all 46 headers. Fail if it is present in only some files. For every keyword present in all files, require one exact value across science, bias and flat roles together with exact BITPIX/NAXIS1/NAXIS2.",
+    "complete_primary_hdu_rule": "Compute the minimum padded primary-HDU byte length from BITPIX and NAXIS dimensions and fail if the decompressed file is shorter. Trailing bytes are recorded but not opened."
+  },
+  "outputs": {
+    "headers": "results/sigma_v19af_fors1_header_compatibility/primary_headers.json",
+    "report": "results/sigma_v19af_fors1_header_compatibility/report.json"
+  },
+  "gates": {
+    "exact_input_files": 46,
+    "exact_role_counts": {
+      "science": 7,
+      "bias": 14,
+      "flat": 25
+    },
+    "all_compressed_hashes_match_v19ae": true,
+    "every_primary_hdu_simple_2d_and_complete": true,
+    "no_partially_present_signature_keyword": true,
+    "one_exact_detector_signature_across_all_roles": true,
+    "no_decompressed_payload_persisted": true,
+    "no_pixel_value_interpreted": true
+  },
+  "claim_boundary": [
+    "V19AF can establish that the frozen science, bias and flat files share one header-level detector/readout configuration; it cannot establish that their pixel calibrations are good.",
+    "Reading and hashing the decompressed byte stream is not pixel interpretation. The runner never requests a FITS data array, statistic, cutout or image visualization.",
+    "A pass authorizes only a separately frozen global-pixel calibration audit. It does not authorize source detection, member cutouts, astrometric matching, photometry, deblending or counterpart selection.",
+    "No mass, current, lensing, halo or gravity result is read or changed."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19af_fors1_header_compatibility.py",
+    "runner_sha256": "7130a266099cd6fabed3d8bd412bdf0bd73defed7b73c9b09536511f82b9256d"
+  },
+  "authorization": {
+    "verify_every_v19ae_compressed_hash": true,
+    "decompress_every_file_temporarily": true,
+    "hash_decompressed_byte_stream": true,
+    "read_only_primary_header_blocks_through_end": true,
+    "persist_exact_primary_header_cards": true,
+    "persist_decompressed_pixel_payload": false,
+    "interpret_or_measure_pixel_values": false,
+    "inspect_member_or_candidate_cutouts": false,
+    "fit_photometry_or_counterparts": false,
+    "infer_stellar_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "any_fits_payload_decompressed_at_freeze": false,
+    "any_fits_header_opened_at_freeze": false,
+    "any_pixel_value_interpreted_at_freeze": false,
+    "member_or_candidate_cutout_inspected_at_freeze": false,
+    "photometry_or_counterpart_model_chosen_at_freeze": false,
+    "lensing_or_halo_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  }
+}
