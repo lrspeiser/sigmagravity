@@ -1,0 +1,96 @@
+{
+  "calibration_boundary": [
+    "Community Pipeline MAGZERO supplies internally repeatable instrumental-characterization magnitudes but is not treated as final native-band AB calibration.",
+    "At this declination the documented Community Pipeline reference is Gaia G regardless of DECam filter, producing stable band-dependent offsets.",
+    "The validation score therefore uses the complete three-color mapping frozen from development objects. No validation-dependent zeropoint or color term is allowed.",
+    "Passing validates color consistency for these provisional singleton pairs only; it does not establish scientific total fluxes or stellar masses."
+  ],
+  "claim_boundary": [
+    "V19AT is a once-only internal validation of one frozen image measurement and color-transfer rule on five provisional singleton pairs.",
+    "A pass authorizes only a separately frozen ambiguous-candidate image likelihood. It does not authorize an association, stellar mass, mass current, lensing or gravity claim.",
+    "A failure closes this exact four-arcsecond area-scaled route; it cannot be rescued by inspecting another aperture or deblending variant on validation.",
+    "No absolute AB-photometry claim is made because a separate field-star/color calibration remains required."
+  ],
+  "counts": {
+    "complete_griz_validation_objects": 5,
+    "validation_anchors": 5,
+    "validation_image_groups": 110,
+    "validation_measurements": 362
+  },
+  "decision": "passed",
+  "development_color_model": {
+    "parameters": {
+      "g_minus_r": [
+        0.34593288439644193,
+        0.5752504046451792,
+        0.11177893577811406
+      ],
+      "i_minus_z": [
+        0.07822067645351928,
+        0.11012706246182163,
+        0.010180542877180473
+      ],
+      "r_minus_i": [
+        -0.0006303215769398983,
+        0.21507361997917673,
+        0.035914702252943416
+      ]
+    },
+    "predictive_scales": {
+      "g_minus_r": 0.06802898655911226,
+      "i_minus_z": 0.05,
+      "r_minus_i": 0.05
+    }
+  },
+  "frozen_measurement": {
+    "aperture_diameter_arcsec": 4.0,
+    "background_annulus_arcsec": [
+      8.0,
+      13.0
+    ],
+    "cutout_size_arcsec": 28.0,
+    "detection_threshold_sigma": 2.5,
+    "exposure_selection": "none; retain every validation measurement membership",
+    "implementation": "Reuse the hash-bound V19AS background, watershed, aperture and area-scaling functions without modification.",
+    "variant": "area_scaled"
+  },
+  "gate_results": {
+    "all_validation_measurements_retained": true,
+    "all_validation_objects_complete_griz": true,
+    "color_error": true,
+    "mean_reciprocal_rank": true,
+    "member57_complete_griz": true,
+    "top1_retrieval": true
+  },
+  "outputs": {
+    "aggregates": "data/derived/sigma_v19at_decam_forced_photometry_validation/aggregates.csv",
+    "aggregates_sha256": "2ca2a94fee0d8c78651db07b050dda730ad379e7045bc4718c9d1d2c76244649",
+    "development_color_fit": "data/derived/sigma_v19at_decam_forced_photometry_validation/development_color_fit.csv",
+    "development_color_fit_sha256": "7a90f8988b2921dfeeaa1c61c734847be1b7acf9a53453e7b031e0eebdce14b2",
+    "group_audit": "data/derived/sigma_v19at_decam_forced_photometry_validation/group_audit.csv",
+    "group_audit_sha256": "74a623fe252f350aee6ee820380d1b1650bebec88b0937df4626b51b0b4520c3",
+    "measurements": "data/derived/sigma_v19at_decam_forced_photometry_validation/measurements.csv",
+    "measurements_sha256": "225b6f6b4cae1f2e1cbcc41faa64ae9dfe1c76498c677b1fd69a004493c76479",
+    "validation_predictions": "data/derived/sigma_v19at_decam_forced_photometry_validation/validation_predictions.csv",
+    "validation_predictions_sha256": "80a75a98956efc8fbaccf338b1e1ad66e61355784f22a6c4c6c413c3caaf9f1c",
+    "validation_retrieval": "data/derived/sigma_v19at_decam_forced_photometry_validation/validation_retrieval.csv",
+    "validation_retrieval_sha256": "dc7385b30095aa160792043aabd7b5b1b3a44cf9e714187bd75741f5d2be5aab"
+  },
+  "protocol_version": "SIGMA-V19AT-DECAM-FORCED-PHOTOMETRY-VALIDATION-1.0.0",
+  "validation_metrics": {
+    "mean_reciprocal_rank": 0.7333333333333334,
+    "median_absolute_error_mag": {
+      "g_minus_r": 0.09790026832258747,
+      "i_minus_z": 0.04912202279756599,
+      "r_minus_i": 0.045982974396996834
+    },
+    "top1_retrievals": 3,
+    "true_pair_ranks": {
+      "21": 3,
+      "26": 1,
+      "57": 1,
+      "66": 3,
+      "71": 1
+    }
+  }
+}
