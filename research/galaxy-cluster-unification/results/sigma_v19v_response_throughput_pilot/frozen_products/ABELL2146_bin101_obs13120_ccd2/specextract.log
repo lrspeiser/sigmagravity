@@ -1,0 +1,18 @@
+Running specextract
+Version: 8 June 2026
+
+WARNING: Extracting background spectra from blanksky background files.
+
+Extracting src spectra 
+
+Extracting bkg spectra 
+
+/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin101_obs13120_ccd2_attempt1/products/ABELL2146_bin101_obs13120_ccd2_bkg.pi AREASCAL keyword set to the inverse of the 'blanksky' BKGSCAL2 value for automated background spectrum scaling while spectral modeling or for background subtraction.
+Using mkacisrmf...
+
+Using mkacisrmf...
+
+Creating src ARF 
+
+Creating src RMF 
+

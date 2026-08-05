@@ -48,3 +48,17 @@ def test_v19v_pilot_passes_before_full_production_is_authorized() -> None:
     assert report["full_response_production_authorized"] is True
     assert report["additional_temperature_density_mach_or_speed_fitted"] is False
     assert report["gravity_formula_or_parameter_changed"] is False
+    assert len(report["frozen_snapshots"]) == 4
+    for cell in report["frozen_snapshots"]:
+        assert set(cell["products"]) == {
+            "source_pha",
+            "background_pha",
+            "arf",
+            "rmf",
+            "specextract_log",
+            "cell_report",
+        }
+        for product in cell["products"].values():
+            path = ROOT / product["relative_path"]
+            assert path.stat().st_size == product["bytes"]
+            assert sha256(path) == product["sha256"]

@@ -1,0 +1,163 @@
+{
+  "cell_name": "ABELL2146_bin75_obs13020_ccd0",
+  "cluster": "ABELL2146",
+  "bin_id": 75,
+  "obsid": 13020,
+  "ccd_id": 0,
+  "quantile": 0.25,
+  "attempt": 1,
+  "start_utc": "2026-08-05T06:41:35.263439+00:00",
+  "start_monotonic_seconds": 944989.620646528,
+  "end_monotonic_seconds": 945017.546552922,
+  "elapsed_seconds": 27.925906394026242,
+  "preflight": {
+    "positive_exposure_events": 153,
+    "source_band_events": 153,
+    "background_band_events": 57
+  },
+  "response_reference": {
+    "selection": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13020_science_nosrc_reproj_evt.fits[ccd_id=0][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/13020.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_75.reg)][energy=500:7000][cols x,y]",
+    "events": 153,
+    "mean_sky_x": 4028.0644515293097,
+    "mean_sky_y": 4245.120953329249,
+    "ra_deg": 239.0431852311958,
+    "dec_deg": 66.34502724229739,
+    "dmcoords_chip_id": 0,
+    "command": [
+      "dmcoords",
+      "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13020_science_nosrc_reproj_evt.fits",
+      "option=sky",
+      "x=4028.06445152930974",
+      "y=4245.12095332924855",
+      "celfmt=deg",
+      "verbose=0",
+      "mode=h"
+    ],
+    "science_aspect_chip_id": 0,
+    "background_aspect_chip_id": 0
+  },
+  "step": {
+    "command": [
+      "specextract",
+      "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13020_science_nosrc_reproj_evt.fits[ccd_id=0][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/13020.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_75.reg)]",
+      "outroot=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin75_obs13020_ccd0_attempt1/products/ABELL2146_bin75_obs13020_ccd0",
+      "bkgfile=/home/henry/sigma-v19v-response-throughput-pilot/v100/background_geometry/ABELL2146/13020/acisf13020_blanksky_geometry.fits[ccd_id=0][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_75.reg)]",
+      "asp=@/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/13020/corrected_asol1.lis",
+      "mskfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13020/acisf13020_001N003_msk1.fits",
+      "badpixfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13020/acisf13020_repro_bpix1.fits",
+      "dafile=CALDB",
+      "bkgresp=no",
+      "weight=yes",
+      "weight_rmf=yes",
+      "resp_pos=CENTROID",
+      "refcoord=239.04318523119579,66.34502724229739",
+      "correctpsf=no",
+      "combine=no",
+      "grouptype=NONE",
+      "binspec=NONE",
+      "bkg_grouptype=NONE",
+      "bkg_binspec=NONE",
+      "energy=0.3:11.0:0.01",
+      "energy_wmap=500:7000",
+      "binwmap=det=8",
+      "binarfwmap=1",
+      "parallel=no",
+      "nproc=1",
+      "clobber=no",
+      "verbose=1",
+      "mode=h"
+    ],
+    "reused": false,
+    "log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin75_obs13020_ccd0_attempt1/logs/specextract.log"
+  },
+  "blanksky_scaling": {
+    "BKGSCALn": 0.096840702,
+    "source_exposure": 41252.500716718,
+    "background_exposure": 430000.0,
+    "source_BACKSCAL": 1.096073538065e-05,
+    "background_BACKSCAL": 1.096073538065e-05,
+    "source_AREASCAL": 1.0,
+    "initial_background_AREASCAL": 10.326236585935,
+    "background_AREASCAL": 0.99065833060993,
+    "expected_background_AREASCAL": 0.9906583306099325,
+    "areascal_relative_error": 2.4424906541753444e-15,
+    "effective_background_scale": 0.09684070200000024,
+    "effective_scale_relative_error_from_BKGSCALn": 2.4424906541753444e-15,
+    "correction_command": [
+      "dmhedit",
+      "infile=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin75_obs13020_ccd0_attempt1/products/ABELL2146_bin75_obs13020_ccd0_bkg.pi",
+      "filelist=",
+      "operation=add",
+      "key=AREASCAL",
+      "value=0.9906583306099325",
+      "comment=Sigma v17C: enforce effective scale equal to BKGSCALn",
+      "verbose=0",
+      "mode=h"
+    ],
+    "correction_log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin75_obs13020_ccd0_attempt1/products/ABELL2146_bin75_obs13020_ccd0_bkg.areascal.log",
+    "correction_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "source_pha_channel_audit": {
+    "event_rows": 161,
+    "pha_total_counts": 161,
+    "nonzero_event_channels": 116,
+    "nonzero_pha_channels": 116,
+    "mismatched_channel_count": 0,
+    "maximum_absolute_channel_delta": 0,
+    "exact": true
+  },
+  "background_pha_channel_audit": {
+    "event_rows": 129,
+    "pha_total_counts": 129,
+    "nonzero_event_channels": 120,
+    "nonzero_pha_channels": 120,
+    "mismatched_channel_count": 0,
+    "maximum_absolute_channel_delta": 0,
+    "exact": true
+  },
+  "response_audit": {
+    "arf_rows": 1070,
+    "arf_finite": true,
+    "arf_positive_bins": 1070,
+    "arf_maximum_cm2": 512.0369873046875,
+    "rmf_matrix_elements": 524534,
+    "rmf_finite": true,
+    "rmf_nonzero_elements": 524534,
+    "rmf_maximum": 0.20170432329177856
+  },
+  "source_pha_links": {
+    "BACKFILE": "ABELL2146_bin75_obs13020_ccd0_bkg.pi",
+    "ANCRFILE": "ABELL2146_bin75_obs13020_ccd0.arf",
+    "RESPFILE": "ABELL2146_bin75_obs13020_ccd0.rmf"
+  },
+  "four_product_bytes": 6566400,
+  "products": {
+    "source_pha": {
+      "name": "ABELL2146_bin75_obs13020_ccd0.pi",
+      "bytes": 2183040,
+      "sha256": "fbc02be37a532d6b092e57a52e1afac898cefd08d5943445af33cac884083e44"
+    },
+    "background_pha": {
+      "name": "ABELL2146_bin75_obs13020_ccd0_bkg.pi",
+      "bytes": 2160000,
+      "sha256": "91f339de7539b4177ccefea14fbd31a399a067404c143c43ca4d0acfb3606f5d"
+    },
+    "arf": {
+      "name": "ABELL2146_bin75_obs13020_ccd0.arf",
+      "bytes": 40320,
+      "sha256": "93bd630c303362f478e2ea19b60b9b4c06dde40a13efaba0590c04f37bf1d7f1"
+    },
+    "rmf": {
+      "name": "ABELL2146_bin75_obs13020_ccd0.rmf",
+      "bytes": 2183040,
+      "sha256": "95d84ce870b9fc45f7ca3ec2a14e994622385f85f6f849f83cb400c0a790dccc"
+    }
+  },
+  "gates": {
+    "source_and_background_pha_channel_histograms_match_events": true,
+    "arf_is_finite_positive": true,
+    "rmf_is_finite_nonzero": true,
+    "pha_links_present": true,
+    "blanksky_scale_exact": true
+  }
+}

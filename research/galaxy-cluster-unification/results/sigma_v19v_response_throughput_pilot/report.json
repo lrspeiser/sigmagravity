@@ -1,0 +1,861 @@
+{
+  "status": "throughput_pilot_passed_and_full_response_production_authorized",
+  "protocol_version": "SIGMA-V19V-RESPONSE-THROUGHPUT-PILOT-1.0.0",
+  "generated_utc": "2026-08-05T06:42:24.014172+00:00",
+  "config_sha256": "2085286a9f208c2cb2e5d7d38b7154cbf44c110493b712f603c6eca8c2272152",
+  "runner_sha256": "3123f21fae56f468c8c7ac42050a79cae9019c799a9d3f726112c6e34740d9bd",
+  "pilot_wall_seconds": 48.14378038793802,
+  "observed_maximum_concurrency": 4,
+  "successful_cells_per_second": 0.08308446008536054,
+  "projected_full_response_hours_at_pilot_throughput": 16.990742495243126,
+  "median_four_product_bytes": 6596640.0,
+  "projected_full_response_bytes_at_pilot_median": 33524124480.0,
+  "cells": [
+    {
+      "cell_name": "ABELL2146_bin101_obs13120_ccd2",
+      "cluster": "ABELL2146",
+      "bin_id": 101,
+      "obsid": 13120,
+      "ccd_id": 2,
+      "quantile": 0.75,
+      "attempt": 1,
+      "start_utc": "2026-08-05T06:41:35.263551+00:00",
+      "start_monotonic_seconds": 944989.620759095,
+      "end_monotonic_seconds": 945037.758728,
+      "elapsed_seconds": 48.13796890503727,
+      "preflight": {
+        "positive_exposure_events": 217,
+        "source_band_events": 217,
+        "background_band_events": 146
+      },
+      "response_reference": {
+        "selection": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13120_science_nosrc_reproj_evt.fits[ccd_id=2][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/13120.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_101.reg)][energy=500:7000][cols x,y]",
+        "events": 217,
+        "mean_sky_x": 3957.183849141345,
+        "mean_sky_y": 4427.463570168491,
+        "ra_deg": 239.067375795509,
+        "dec_deg": 66.36994190336823,
+        "dmcoords_chip_id": 2,
+        "command": [
+          "dmcoords",
+          "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13120_science_nosrc_reproj_evt.fits",
+          "option=sky",
+          "x=3957.18384914134504",
+          "y=4427.46357016849106",
+          "celfmt=deg",
+          "verbose=0",
+          "mode=h"
+        ],
+        "science_aspect_chip_id": 2,
+        "background_aspect_chip_id": 2
+      },
+      "step": {
+        "command": [
+          "specextract",
+          "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13120_science_nosrc_reproj_evt.fits[ccd_id=2][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/13120.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_101.reg)]",
+          "outroot=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin101_obs13120_ccd2_attempt1/products/ABELL2146_bin101_obs13120_ccd2",
+          "bkgfile=/home/henry/sigma-v19v-response-throughput-pilot/v100/background_geometry/ABELL2146/13120/acisf13120_blanksky_geometry.fits[ccd_id=2][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_101.reg)]",
+          "asp=@/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/13120/corrected_asol1.lis",
+          "mskfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13120/acisf13120_000N003_msk1.fits",
+          "badpixfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13120/acisf13120_repro_bpix1.fits",
+          "dafile=CALDB",
+          "bkgresp=no",
+          "weight=yes",
+          "weight_rmf=yes",
+          "resp_pos=CENTROID",
+          "refcoord=239.06737579550901,66.36994190336823",
+          "correctpsf=no",
+          "combine=no",
+          "grouptype=NONE",
+          "binspec=NONE",
+          "bkg_grouptype=NONE",
+          "bkg_binspec=NONE",
+          "energy=0.3:11.0:0.01",
+          "energy_wmap=500:7000",
+          "binwmap=det=8",
+          "binarfwmap=1",
+          "parallel=no",
+          "nproc=1",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "reused": false,
+        "log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin101_obs13120_ccd2_attempt1/logs/specextract.log"
+      },
+      "blanksky_scaling": {
+        "BKGSCALn": 0.11622176,
+        "source_exposure": 49084.828265945,
+        "background_exposure": 430000.0,
+        "source_BACKSCAL": 2.6115216314793e-05,
+        "background_BACKSCAL": 2.6115216314793e-05,
+        "source_AREASCAL": 1.0,
+        "initial_background_AREASCAL": 8.6042407204985,
+        "background_AREASCAL": 0.98218064680121,
+        "expected_background_AREASCAL": 0.9821806468012051,
+        "areascal_relative_error": 4.884981308350689e-15,
+        "effective_background_scale": 0.11622175999999941,
+        "effective_scale_relative_error_from_BKGSCALn": 4.9960036108132044e-15,
+        "correction_command": [
+          "dmhedit",
+          "infile=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin101_obs13120_ccd2_attempt1/products/ABELL2146_bin101_obs13120_ccd2_bkg.pi",
+          "filelist=",
+          "operation=add",
+          "key=AREASCAL",
+          "value=0.9821806468012051",
+          "comment=Sigma v17C: enforce effective scale equal to BKGSCALn",
+          "verbose=0",
+          "mode=h"
+        ],
+        "correction_log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin101_obs13120_ccd2_attempt1/products/ABELL2146_bin101_obs13120_ccd2_bkg.areascal.log",
+        "correction_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source_pha_channel_audit": {
+        "event_rows": 239,
+        "pha_total_counts": 239,
+        "nonzero_event_channels": 166,
+        "nonzero_pha_channels": 166,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "background_pha_channel_audit": {
+        "event_rows": 314,
+        "pha_total_counts": 314,
+        "nonzero_event_channels": 258,
+        "nonzero_pha_channels": 258,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "response_audit": {
+        "arf_rows": 1070,
+        "arf_finite": true,
+        "arf_positive_bins": 1070,
+        "arf_maximum_cm2": 508.6826171875,
+        "rmf_matrix_elements": 532414,
+        "rmf_finite": true,
+        "rmf_nonzero_elements": 532414,
+        "rmf_maximum": 0.16130539774894714
+      },
+      "source_pha_links": {
+        "BACKFILE": "ABELL2146_bin101_obs13120_ccd2_bkg.pi",
+        "ANCRFILE": "ABELL2146_bin101_obs13120_ccd2.arf",
+        "RESPFILE": "ABELL2146_bin101_obs13120_ccd2.rmf"
+      },
+      "four_product_bytes": 6615360,
+      "products": {
+        "source_pha": {
+          "name": "ABELL2146_bin101_obs13120_ccd2.pi",
+          "bytes": 2203200,
+          "sha256": "5c2e334cabcbf13a16bda4aae4c9e917dc6af9c19c468a07801951e80b76bb1d"
+        },
+        "background_pha": {
+          "name": "ABELL2146_bin101_obs13120_ccd2_bkg.pi",
+          "bytes": 2160000,
+          "sha256": "cdf08bb6a395858de9f0b7ba9abbeedda0a2e54e1f72ac823deb9ef89697b64c"
+        },
+        "arf": {
+          "name": "ABELL2146_bin101_obs13120_ccd2.arf",
+          "bytes": 40320,
+          "sha256": "ada7203b18bb2e011b3071d2d7d221cae5e25514008389759de630f1c0b4aeea"
+        },
+        "rmf": {
+          "name": "ABELL2146_bin101_obs13120_ccd2.rmf",
+          "bytes": 2211840,
+          "sha256": "f5e3ffa64bb00a05f608682a7f04810c504d79ccad1454fa084f85ebab84aa79"
+        }
+      },
+      "gates": {
+        "source_and_background_pha_channel_histograms_match_events": true,
+        "arf_is_finite_positive": true,
+        "rmf_is_finite_nonzero": true,
+        "pha_links_present": true,
+        "blanksky_scale_exact": true
+      },
+      "completed_directory": "/home/henry/sigma-v19v-response-throughput-pilot/v100/completed/ABELL2146_bin101_obs13120_ccd2",
+      "failures_before_success": []
+    },
+    {
+      "cell_name": "ABELL2146_bin75_obs13020_ccd0",
+      "cluster": "ABELL2146",
+      "bin_id": 75,
+      "obsid": 13020,
+      "ccd_id": 0,
+      "quantile": 0.25,
+      "attempt": 1,
+      "start_utc": "2026-08-05T06:41:35.263439+00:00",
+      "start_monotonic_seconds": 944989.620646528,
+      "end_monotonic_seconds": 945017.546552922,
+      "elapsed_seconds": 27.925906394026242,
+      "preflight": {
+        "positive_exposure_events": 153,
+        "source_band_events": 153,
+        "background_band_events": 57
+      },
+      "response_reference": {
+        "selection": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13020_science_nosrc_reproj_evt.fits[ccd_id=0][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/13020.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_75.reg)][energy=500:7000][cols x,y]",
+        "events": 153,
+        "mean_sky_x": 4028.0644515293097,
+        "mean_sky_y": 4245.120953329249,
+        "ra_deg": 239.0431852311958,
+        "dec_deg": 66.34502724229739,
+        "dmcoords_chip_id": 0,
+        "command": [
+          "dmcoords",
+          "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13020_science_nosrc_reproj_evt.fits",
+          "option=sky",
+          "x=4028.06445152930974",
+          "y=4245.12095332924855",
+          "celfmt=deg",
+          "verbose=0",
+          "mode=h"
+        ],
+        "science_aspect_chip_id": 0,
+        "background_aspect_chip_id": 0
+      },
+      "step": {
+        "command": [
+          "specextract",
+          "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf13020_science_nosrc_reproj_evt.fits[ccd_id=0][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/13020.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_75.reg)]",
+          "outroot=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin75_obs13020_ccd0_attempt1/products/ABELL2146_bin75_obs13020_ccd0",
+          "bkgfile=/home/henry/sigma-v19v-response-throughput-pilot/v100/background_geometry/ABELL2146/13020/acisf13020_blanksky_geometry.fits[ccd_id=0][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_75.reg)]",
+          "asp=@/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/13020/corrected_asol1.lis",
+          "mskfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13020/acisf13020_001N003_msk1.fits",
+          "badpixfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/13020/acisf13020_repro_bpix1.fits",
+          "dafile=CALDB",
+          "bkgresp=no",
+          "weight=yes",
+          "weight_rmf=yes",
+          "resp_pos=CENTROID",
+          "refcoord=239.04318523119579,66.34502724229739",
+          "correctpsf=no",
+          "combine=no",
+          "grouptype=NONE",
+          "binspec=NONE",
+          "bkg_grouptype=NONE",
+          "bkg_binspec=NONE",
+          "energy=0.3:11.0:0.01",
+          "energy_wmap=500:7000",
+          "binwmap=det=8",
+          "binarfwmap=1",
+          "parallel=no",
+          "nproc=1",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "reused": false,
+        "log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin75_obs13020_ccd0_attempt1/logs/specextract.log"
+      },
+      "blanksky_scaling": {
+        "BKGSCALn": 0.096840702,
+        "source_exposure": 41252.500716718,
+        "background_exposure": 430000.0,
+        "source_BACKSCAL": 1.096073538065e-05,
+        "background_BACKSCAL": 1.096073538065e-05,
+        "source_AREASCAL": 1.0,
+        "initial_background_AREASCAL": 10.326236585935,
+        "background_AREASCAL": 0.99065833060993,
+        "expected_background_AREASCAL": 0.9906583306099325,
+        "areascal_relative_error": 2.4424906541753444e-15,
+        "effective_background_scale": 0.09684070200000024,
+        "effective_scale_relative_error_from_BKGSCALn": 2.4424906541753444e-15,
+        "correction_command": [
+          "dmhedit",
+          "infile=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin75_obs13020_ccd0_attempt1/products/ABELL2146_bin75_obs13020_ccd0_bkg.pi",
+          "filelist=",
+          "operation=add",
+          "key=AREASCAL",
+          "value=0.9906583306099325",
+          "comment=Sigma v17C: enforce effective scale equal to BKGSCALn",
+          "verbose=0",
+          "mode=h"
+        ],
+        "correction_log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/ABELL2146_bin75_obs13020_ccd0_attempt1/products/ABELL2146_bin75_obs13020_ccd0_bkg.areascal.log",
+        "correction_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source_pha_channel_audit": {
+        "event_rows": 161,
+        "pha_total_counts": 161,
+        "nonzero_event_channels": 116,
+        "nonzero_pha_channels": 116,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "background_pha_channel_audit": {
+        "event_rows": 129,
+        "pha_total_counts": 129,
+        "nonzero_event_channels": 120,
+        "nonzero_pha_channels": 120,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "response_audit": {
+        "arf_rows": 1070,
+        "arf_finite": true,
+        "arf_positive_bins": 1070,
+        "arf_maximum_cm2": 512.0369873046875,
+        "rmf_matrix_elements": 524534,
+        "rmf_finite": true,
+        "rmf_nonzero_elements": 524534,
+        "rmf_maximum": 0.20170432329177856
+      },
+      "source_pha_links": {
+        "BACKFILE": "ABELL2146_bin75_obs13020_ccd0_bkg.pi",
+        "ANCRFILE": "ABELL2146_bin75_obs13020_ccd0.arf",
+        "RESPFILE": "ABELL2146_bin75_obs13020_ccd0.rmf"
+      },
+      "four_product_bytes": 6566400,
+      "products": {
+        "source_pha": {
+          "name": "ABELL2146_bin75_obs13020_ccd0.pi",
+          "bytes": 2183040,
+          "sha256": "fbc02be37a532d6b092e57a52e1afac898cefd08d5943445af33cac884083e44"
+        },
+        "background_pha": {
+          "name": "ABELL2146_bin75_obs13020_ccd0_bkg.pi",
+          "bytes": 2160000,
+          "sha256": "91f339de7539b4177ccefea14fbd31a399a067404c143c43ca4d0acfb3606f5d"
+        },
+        "arf": {
+          "name": "ABELL2146_bin75_obs13020_ccd0.arf",
+          "bytes": 40320,
+          "sha256": "93bd630c303362f478e2ea19b60b9b4c06dde40a13efaba0590c04f37bf1d7f1"
+        },
+        "rmf": {
+          "name": "ABELL2146_bin75_obs13020_ccd0.rmf",
+          "bytes": 2183040,
+          "sha256": "95d84ce870b9fc45f7ca3ec2a14e994622385f85f6f849f83cb400c0a790dccc"
+        }
+      },
+      "gates": {
+        "source_and_background_pha_channel_histograms_match_events": true,
+        "arf_is_finite_positive": true,
+        "rmf_is_finite_nonzero": true,
+        "pha_links_present": true,
+        "blanksky_scale_exact": true
+      },
+      "completed_directory": "/home/henry/sigma-v19v-response-throughput-pilot/v100/completed/ABELL2146_bin75_obs13020_ccd0",
+      "failures_before_success": []
+    },
+    {
+      "cell_name": "BULLET_bin23_obs5356_ccd2",
+      "cluster": "BULLET",
+      "bin_id": 23,
+      "obsid": 5356,
+      "ccd_id": 2,
+      "quantile": 0.75,
+      "attempt": 1,
+      "start_utc": "2026-08-05T06:41:35.263471+00:00",
+      "start_monotonic_seconds": 944989.620678055,
+      "end_monotonic_seconds": 945013.003540877,
+      "elapsed_seconds": 23.38286282203626,
+      "preflight": {
+        "positive_exposure_events": 266,
+        "source_band_events": 266,
+        "background_band_events": 38
+      },
+      "response_reference": {
+        "selection": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits[ccd_id=2][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5356.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_23.reg)][energy=500:7000][cols x,y]",
+        "events": 266,
+        "mean_sky_x": 4248.553264876057,
+        "mean_sky_y": 4245.49916845336,
+        "ra_deg": 104.6183251330701,
+        "dec_deg": -55.94574401586752,
+        "dmcoords_chip_id": 2,
+        "command": [
+          "dmcoords",
+          "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits",
+          "option=sky",
+          "x=4248.55326487605726",
+          "y=4245.49916845335974",
+          "celfmt=deg",
+          "verbose=0",
+          "mode=h"
+        ],
+        "science_aspect_chip_id": 2,
+        "background_aspect_chip_id": 2
+      },
+      "step": {
+        "command": [
+          "specextract",
+          "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_reproj_evt.fits[ccd_id=2][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5356.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_23.reg)]",
+          "outroot=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/BULLET_bin23_obs5356_ccd2_attempt1/products/BULLET_bin23_obs5356_ccd2",
+          "bkgfile=/home/henry/sigma-v19v-response-throughput-pilot/v100/background_geometry/BULLET/5356/acisf5356_blanksky_geometry.fits[ccd_id=2][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_23.reg)]",
+          "asp=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5356/corrected_asol1.lis",
+          "mskfile=/home/henry/sigma-v19f-chandra/repro/BULLET/5356/acisf05356_000N004_msk1.fits",
+          "badpixfile=/home/henry/sigma-v19f-chandra/repro/BULLET/5356/acisf05356_repro_bpix1.fits",
+          "dafile=CALDB",
+          "bkgresp=no",
+          "weight=yes",
+          "weight_rmf=yes",
+          "resp_pos=CENTROID",
+          "refcoord=104.61832513307010,-55.94574401586752",
+          "correctpsf=no",
+          "combine=no",
+          "grouptype=NONE",
+          "binspec=NONE",
+          "bkg_grouptype=NONE",
+          "bkg_binspec=NONE",
+          "energy=0.3:11.0:0.01",
+          "energy_wmap=500:7000",
+          "binwmap=det=8",
+          "binarfwmap=1",
+          "parallel=no",
+          "nproc=1",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "reused": false,
+        "log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/BULLET_bin23_obs5356_ccd2_attempt1/logs/specextract.log"
+      },
+      "blanksky_scaling": {
+        "BKGSCALn": 0.065704048,
+        "source_exposure": 96212.411017543,
+        "background_exposure": 1500000.0,
+        "source_BACKSCAL": 2.9141083359718e-06,
+        "background_BACKSCAL": 2.9141083359718e-06,
+        "source_AREASCAL": 1.0,
+        "initial_background_AREASCAL": 15.219762410986,
+        "background_AREASCAL": 0.97622002445007,
+        "expected_background_AREASCAL": 0.9762200244500714,
+        "areascal_relative_error": 1.4432899320127035e-15,
+        "effective_background_scale": 0.0657040480000001,
+        "effective_scale_relative_error_from_BKGSCALn": 1.5543122344752192e-15,
+        "correction_command": [
+          "dmhedit",
+          "infile=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/BULLET_bin23_obs5356_ccd2_attempt1/products/BULLET_bin23_obs5356_ccd2_bkg.pi",
+          "filelist=",
+          "operation=add",
+          "key=AREASCAL",
+          "value=0.9762200244500714",
+          "comment=Sigma v17C: enforce effective scale equal to BKGSCALn",
+          "verbose=0",
+          "mode=h"
+        ],
+        "correction_log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/BULLET_bin23_obs5356_ccd2_attempt1/products/BULLET_bin23_obs5356_ccd2_bkg.areascal.log",
+        "correction_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source_pha_channel_audit": {
+        "event_rows": 273,
+        "pha_total_counts": 273,
+        "nonzero_event_channels": 170,
+        "nonzero_pha_channels": 170,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "background_pha_channel_audit": {
+        "event_rows": 80,
+        "pha_total_counts": 80,
+        "nonzero_event_channels": 74,
+        "nonzero_pha_channels": 74,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "response_audit": {
+        "arf_rows": 1070,
+        "arf_finite": true,
+        "arf_positive_bins": 1070,
+        "arf_maximum_cm2": 571.1139526367188,
+        "rmf_matrix_elements": 533158,
+        "rmf_finite": true,
+        "rmf_nonzero_elements": 533158,
+        "rmf_maximum": 0.15846364200115204
+      },
+      "source_pha_links": {
+        "BACKFILE": "BULLET_bin23_obs5356_ccd2_bkg.pi",
+        "ANCRFILE": "BULLET_bin23_obs5356_ccd2.arf",
+        "RESPFILE": "BULLET_bin23_obs5356_ccd2.rmf"
+      },
+      "four_product_bytes": 6595200,
+      "products": {
+        "source_pha": {
+          "name": "BULLET_bin23_obs5356_ccd2.pi",
+          "bytes": 2177280,
+          "sha256": "841488892d11e7c27a2688f40423ab07f8dfcc5b8b8c6dad88e0c877b3e703c6"
+        },
+        "background_pha": {
+          "name": "BULLET_bin23_obs5356_ccd2_bkg.pi",
+          "bytes": 2160000,
+          "sha256": "b9da3a3224362af08806d369338fb175ae2358334231fff2106624fd6c6176e8"
+        },
+        "arf": {
+          "name": "BULLET_bin23_obs5356_ccd2.arf",
+          "bytes": 40320,
+          "sha256": "5b4ff171e88138d0de7737270e67a07d32d81bb4eaae33e2e2c2ec102305429d"
+        },
+        "rmf": {
+          "name": "BULLET_bin23_obs5356_ccd2.rmf",
+          "bytes": 2217600,
+          "sha256": "2d4317faddd0a108fd9132bac2b1fc73cc8f4fcb4feaf9b182542f399740250b"
+        }
+      },
+      "gates": {
+        "source_and_background_pha_channel_histograms_match_events": true,
+        "arf_is_finite_positive": true,
+        "rmf_is_finite_nonzero": true,
+        "pha_links_present": true,
+        "blanksky_scale_exact": true
+      },
+      "completed_directory": "/home/henry/sigma-v19v-response-throughput-pilot/v100/completed/BULLET_bin23_obs5356_ccd2",
+      "failures_before_success": []
+    },
+    {
+      "cell_name": "BULLET_bin257_obs5355_ccd2",
+      "cluster": "BULLET",
+      "bin_id": 257,
+      "obsid": 5355,
+      "ccd_id": 2,
+      "quantile": 0.25,
+      "attempt": 1,
+      "start_utc": "2026-08-05T06:41:35.263128+00:00",
+      "start_monotonic_seconds": 944989.620333128,
+      "end_monotonic_seconds": 945018.387105155,
+      "elapsed_seconds": 28.76677202701103,
+      "preflight": {
+        "positive_exposure_events": 82,
+        "source_band_events": 82,
+        "background_band_events": 98
+      },
+      "response_reference": {
+        "selection": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5355_science_nosrc_reproj_evt.fits[ccd_id=2][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5355.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_257.reg)][energy=500:7000][cols x,y]",
+        "events": 82,
+        "mean_sky_x": 4250.144304973323,
+        "mean_sky_y": 4358.928889576981,
+        "ra_deg": 104.6179518364902,
+        "dec_deg": -55.93024184383498,
+        "dmcoords_chip_id": 2,
+        "command": [
+          "dmcoords",
+          "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5355_science_nosrc_reproj_evt.fits",
+          "option=sky",
+          "x=4250.14430497332341",
+          "y=4358.92888957698142",
+          "celfmt=deg",
+          "verbose=0",
+          "mode=h"
+        ],
+        "science_aspect_chip_id": 2,
+        "background_aspect_chip_id": 2
+      },
+      "step": {
+        "command": [
+          "specextract",
+          "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5355_science_nosrc_reproj_evt.fits[ccd_id=2][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/images/broad_flux/5355.fov)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_257.reg)]",
+          "outroot=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/BULLET_bin257_obs5355_ccd2_attempt1/products/BULLET_bin257_obs5355_ccd2",
+          "bkgfile=/home/henry/sigma-v19v-response-throughput-pilot/v100/background_geometry/BULLET/5355/acisf5355_blanksky_geometry.fits[ccd_id=2][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_257.reg)]",
+          "asp=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5355/corrected_asol1.lis",
+          "mskfile=/home/henry/sigma-v19f-chandra/repro/BULLET/5355/acisf05355_000N004_msk1.fits",
+          "badpixfile=/home/henry/sigma-v19f-chandra/repro/BULLET/5355/acisf05355_repro_bpix1.fits",
+          "dafile=CALDB",
+          "bkgresp=no",
+          "weight=yes",
+          "weight_rmf=yes",
+          "resp_pos=CENTROID",
+          "refcoord=104.61795183649021,-55.93024184383498",
+          "correctpsf=no",
+          "combine=no",
+          "grouptype=NONE",
+          "binspec=NONE",
+          "bkg_grouptype=NONE",
+          "bkg_binspec=NONE",
+          "energy=0.3:11.0:0.01",
+          "energy_wmap=500:7000",
+          "binwmap=det=8",
+          "binarfwmap=1",
+          "parallel=no",
+          "nproc=1",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "reused": false,
+        "log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/BULLET_bin257_obs5355_ccd2_attempt1/logs/specextract.log"
+      },
+      "blanksky_scaling": {
+        "BKGSCALn": 0.016302906,
+        "source_exposure": 23465.234365219,
+        "background_exposure": 1500000.0,
+        "source_BACKSCAL": 6.3935294747353e-06,
+        "background_BACKSCAL": 6.3935294747353e-06,
+        "source_AREASCAL": 1.0,
+        "initial_background_AREASCAL": 61.338757642349,
+        "background_AREASCAL": 0.95955221583273,
+        "expected_background_AREASCAL": 0.9595522158327275,
+        "areascal_relative_error": 2.4424906541753444e-15,
+        "effective_background_scale": 0.016302905999999957,
+        "effective_scale_relative_error_from_BKGSCALn": 2.55351295663786e-15,
+        "correction_command": [
+          "dmhedit",
+          "infile=/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/BULLET_bin257_obs5355_ccd2_attempt1/products/BULLET_bin257_obs5355_ccd2_bkg.pi",
+          "filelist=",
+          "operation=add",
+          "key=AREASCAL",
+          "value=0.9595522158327275",
+          "comment=Sigma v17C: enforce effective scale equal to BKGSCALn",
+          "verbose=0",
+          "mode=h"
+        ],
+        "correction_log": "/home/henry/sigma-v19v-response-throughput-pilot/v100/partial/BULLET_bin257_obs5355_ccd2_attempt1/products/BULLET_bin257_obs5355_ccd2_bkg.areascal.log",
+        "correction_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source_pha_channel_audit": {
+        "event_rows": 83,
+        "pha_total_counts": 83,
+        "nonzero_event_channels": 69,
+        "nonzero_pha_channels": 69,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "background_pha_channel_audit": {
+        "event_rows": 195,
+        "pha_total_counts": 195,
+        "nonzero_event_channels": 174,
+        "nonzero_pha_channels": 174,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "response_audit": {
+        "arf_rows": 1070,
+        "arf_finite": true,
+        "arf_positive_bins": 1070,
+        "arf_maximum_cm2": 570.9636840820312,
+        "rmf_matrix_elements": 531523,
+        "rmf_finite": true,
+        "rmf_nonzero_elements": 531523,
+        "rmf_maximum": 0.16632342338562012
+      },
+      "source_pha_links": {
+        "BACKFILE": "BULLET_bin257_obs5355_ccd2_bkg.pi",
+        "ANCRFILE": "BULLET_bin257_obs5355_ccd2.arf",
+        "RESPFILE": "BULLET_bin257_obs5355_ccd2.rmf"
+      },
+      "four_product_bytes": 6598080,
+      "products": {
+        "source_pha": {
+          "name": "BULLET_bin257_obs5355_ccd2.pi",
+          "bytes": 2188800,
+          "sha256": "a554fb41a2d6504da5944ed108aa87a0b420ce7c77d65cc40547b98fae8422d8"
+        },
+        "background_pha": {
+          "name": "BULLET_bin257_obs5355_ccd2_bkg.pi",
+          "bytes": 2160000,
+          "sha256": "45ae17d406df1a83a533a92062436f4c438710f1e8bdaac620d428b842e07dff"
+        },
+        "arf": {
+          "name": "BULLET_bin257_obs5355_ccd2.arf",
+          "bytes": 40320,
+          "sha256": "4e6b3910db0b4f87ed7adb8cf0e3d3275efa0b2d615df360e29e440c63d02ec7"
+        },
+        "rmf": {
+          "name": "BULLET_bin257_obs5355_ccd2.rmf",
+          "bytes": 2208960,
+          "sha256": "04f16f081dbdf6947cdfb6ec2c723eaba05dae9aba72609f01f84fa8050511f6"
+        }
+      },
+      "gates": {
+        "source_and_background_pha_channel_histograms_match_events": true,
+        "arf_is_finite_positive": true,
+        "rmf_is_finite_nonzero": true,
+        "pha_links_present": true,
+        "blanksky_scale_exact": true
+      },
+      "completed_directory": "/home/henry/sigma-v19v-response-throughput-pilot/v100/completed/BULLET_bin257_obs5355_ccd2",
+      "failures_before_success": []
+    }
+  ],
+  "frozen_snapshots": [
+    {
+      "cell_name": "ABELL2146_bin101_obs13120_ccd2",
+      "products": {
+        "source_pha": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin101_obs13120_ccd2/ABELL2146_bin101_obs13120_ccd2.pi",
+          "bytes": 2203200,
+          "sha256": "5c2e334cabcbf13a16bda4aae4c9e917dc6af9c19c468a07801951e80b76bb1d",
+          "reused": false
+        },
+        "background_pha": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin101_obs13120_ccd2/ABELL2146_bin101_obs13120_ccd2_bkg.pi",
+          "bytes": 2160000,
+          "sha256": "cdf08bb6a395858de9f0b7ba9abbeedda0a2e54e1f72ac823deb9ef89697b64c",
+          "reused": false
+        },
+        "arf": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin101_obs13120_ccd2/ABELL2146_bin101_obs13120_ccd2.arf",
+          "bytes": 40320,
+          "sha256": "ada7203b18bb2e011b3071d2d7d221cae5e25514008389759de630f1c0b4aeea",
+          "reused": false
+        },
+        "rmf": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin101_obs13120_ccd2/ABELL2146_bin101_obs13120_ccd2.rmf",
+          "bytes": 2211840,
+          "sha256": "f5e3ffa64bb00a05f608682a7f04810c504d79ccad1454fa084f85ebab84aa79",
+          "reused": false
+        },
+        "specextract_log": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin101_obs13120_ccd2/specextract.log",
+          "bytes": 557,
+          "sha256": "44d425d7f5f9a406a961cfa1d6f63d1dac6314f04607777a58223955cd6561a7",
+          "reused": false
+        },
+        "cell_report": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin101_obs13120_ccd2/cell_report.json",
+          "bytes": 6897,
+          "sha256": "ac46e10906b70be3dc4699129c3de17e2a70eb1b3b6e069349883437e5068df4",
+          "reused": false
+        }
+      }
+    },
+    {
+      "cell_name": "ABELL2146_bin75_obs13020_ccd0",
+      "products": {
+        "source_pha": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin75_obs13020_ccd0/ABELL2146_bin75_obs13020_ccd0.pi",
+          "bytes": 2183040,
+          "sha256": "fbc02be37a532d6b092e57a52e1afac898cefd08d5943445af33cac884083e44",
+          "reused": false
+        },
+        "background_pha": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin75_obs13020_ccd0/ABELL2146_bin75_obs13020_ccd0_bkg.pi",
+          "bytes": 2160000,
+          "sha256": "91f339de7539b4177ccefea14fbd31a399a067404c143c43ca4d0acfb3606f5d",
+          "reused": false
+        },
+        "arf": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin75_obs13020_ccd0/ABELL2146_bin75_obs13020_ccd0.arf",
+          "bytes": 40320,
+          "sha256": "93bd630c303362f478e2ea19b60b9b4c06dde40a13efaba0590c04f37bf1d7f1",
+          "reused": false
+        },
+        "rmf": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin75_obs13020_ccd0/ABELL2146_bin75_obs13020_ccd0.rmf",
+          "bytes": 2183040,
+          "sha256": "95d84ce870b9fc45f7ca3ec2a14e994622385f85f6f849f83cb400c0a790dccc",
+          "reused": false
+        },
+        "specextract_log": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin75_obs13020_ccd0/specextract.log",
+          "bytes": 555,
+          "sha256": "0acbce8863a4020c918c1c4d8d375e71779a6d1c6a5e5373c52826e06cd69cce",
+          "reused": false
+        },
+        "cell_report": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/ABELL2146_bin75_obs13020_ccd0/cell_report.json",
+          "bytes": 6886,
+          "sha256": "547116dbf0c8a763d173fea03ab07a9f840854caf35bc02ed26145ceacfbc123",
+          "reused": false
+        }
+      }
+    },
+    {
+      "cell_name": "BULLET_bin23_obs5356_ccd2",
+      "products": {
+        "source_pha": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin23_obs5356_ccd2/BULLET_bin23_obs5356_ccd2.pi",
+          "bytes": 2177280,
+          "sha256": "841488892d11e7c27a2688f40423ab07f8dfcc5b8b8c6dad88e0c877b3e703c6",
+          "reused": false
+        },
+        "background_pha": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin23_obs5356_ccd2/BULLET_bin23_obs5356_ccd2_bkg.pi",
+          "bytes": 2160000,
+          "sha256": "b9da3a3224362af08806d369338fb175ae2358334231fff2106624fd6c6176e8",
+          "reused": false
+        },
+        "arf": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin23_obs5356_ccd2/BULLET_bin23_obs5356_ccd2.arf",
+          "bytes": 40320,
+          "sha256": "5b4ff171e88138d0de7737270e67a07d32d81bb4eaae33e2e2c2ec102305429d",
+          "reused": false
+        },
+        "rmf": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin23_obs5356_ccd2/BULLET_bin23_obs5356_ccd2.rmf",
+          "bytes": 2217600,
+          "sha256": "2d4317faddd0a108fd9132bac2b1fc73cc8f4fcb4feaf9b182542f399740250b",
+          "reused": false
+        },
+        "specextract_log": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin23_obs5356_ccd2/specextract.log",
+          "bytes": 923,
+          "sha256": "195325e6c85c3922ad2c49b996ee9747abf5c631e0f1d9e09e235a7208e0c04c",
+          "reused": false
+        },
+        "cell_report": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin23_obs5356_ccd2/cell_report.json",
+          "bytes": 6773,
+          "sha256": "8684ff8f7c80632721b4ca7437e0e266bd44495fd64a6dbbde3a562c61afbad7",
+          "reused": false
+        }
+      }
+    },
+    {
+      "cell_name": "BULLET_bin257_obs5355_ccd2",
+      "products": {
+        "source_pha": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin257_obs5355_ccd2/BULLET_bin257_obs5355_ccd2.pi",
+          "bytes": 2188800,
+          "sha256": "a554fb41a2d6504da5944ed108aa87a0b420ce7c77d65cc40547b98fae8422d8",
+          "reused": false
+        },
+        "background_pha": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin257_obs5355_ccd2/BULLET_bin257_obs5355_ccd2_bkg.pi",
+          "bytes": 2160000,
+          "sha256": "45ae17d406df1a83a533a92062436f4c438710f1e8bdaac620d428b842e07dff",
+          "reused": false
+        },
+        "arf": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin257_obs5355_ccd2/BULLET_bin257_obs5355_ccd2.arf",
+          "bytes": 40320,
+          "sha256": "4e6b3910db0b4f87ed7adb8cf0e3d3275efa0b2d615df360e29e440c63d02ec7",
+          "reused": false
+        },
+        "rmf": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin257_obs5355_ccd2/BULLET_bin257_obs5355_ccd2.rmf",
+          "bytes": 2208960,
+          "sha256": "04f16f081dbdf6947cdfb6ec2c723eaba05dae9aba72609f01f84fa8050511f6",
+          "reused": false
+        },
+        "specextract_log": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin257_obs5355_ccd2/specextract.log",
+          "bytes": 925,
+          "sha256": "529850e8b5b2d0724ee622b7b131a0c3a87ed3bf74f3bc4c50394f3a4a8cccdd",
+          "reused": false
+        },
+        "cell_report": {
+          "relative_path": "results/sigma_v19v_response_throughput_pilot/frozen_products/BULLET_bin257_obs5355_ccd2/cell_report.json",
+          "bytes": 6790,
+          "sha256": "df2a045713cac65333b96765f13d51a773dad58ac8fd8df03ef65c1b83aa0e77",
+          "reused": false
+        }
+      }
+    }
+  ],
+  "gates": {
+    "all_parent_and_external_input_hashes_exact": true,
+    "pilot_cells_exactly_equal_v19u_selection": true,
+    "pilot_cells_have_unique_observation_ccd_pairs": true,
+    "positive_exposure_source_and_background_preflight_counts_exact": true,
+    "response_reference_maps_to_the_frozen_ccd_for_science_and_background": true,
+    "all_four_cells_pass_on_at_most_two_unchanged_attempts": true,
+    "source_and_background_pha_channel_histograms_match_events": true,
+    "arf_is_finite_positive_and_rmf_is_finite_nonzero": true,
+    "pha_background_arf_and_rmf_links_are_present": true,
+    "effective_blanksky_scale_matches_manifest_within_1e_6_relative": true,
+    "at_least_two_cells_overlap_in_execution": true,
+    "pilot_wall_time_at_most_600_seconds": true,
+    "each_cell_four_product_bytes_at_most_twice_v19r": true,
+    "all_passing_products_are_hashed_and_snapshotted": true
+  },
+  "full_response_production_authorized": true,
+  "additional_temperature_density_mach_or_speed_fitted": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

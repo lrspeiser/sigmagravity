@@ -78,3 +78,4 @@ research/galaxy-cluster-unification/configs/sigma_v19v_response_throughput_pilot
 research/galaxy-cluster-unification/scripts/run_sigma_v19v_response_throughput_pilot.py -text
 research/galaxy-cluster-unification/results/sigma_v19v_response_throughput_pilot/report.json -text -diff
 research/galaxy-cluster-unification/results/sigma_v19v_response_throughput_pilot/**/specextract.log -text -diff
+research/galaxy-cluster-unification/results/sigma_v19v_response_throughput_pilot/**/cell_report.json -text -diff
