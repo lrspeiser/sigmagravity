@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 187,
+    "sigma_protocols": 188,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7298,6 +7298,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "d443b2bb5c9664c60ef08fa7d798e7abf0f6dff7bbedcc172f96955e1574f2d5"
+    },
+    {
+      "config": "configs/sigma_v19br_target_sealed_terminal_chain.json",
+      "protocol_version": "SIGMA-V19BR-TARGET-SEALED-TERMINAL-CHAIN-1.0.0",
+      "status": "frozen while base V19W production remains active, before terminal V19W5, spectral combination, regional gas reconstruction, stellar control, observed source scoring, lensing, halo, action, gravity parameter or holdout access",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "8a5205d978ab25d53b8befb11472ff420e2e8116ad06cd9c43e4d158a9d580ed"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

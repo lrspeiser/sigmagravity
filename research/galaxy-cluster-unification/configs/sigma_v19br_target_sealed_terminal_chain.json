@@ -1,0 +1,326 @@
+{
+  "protocol_version": "SIGMA-V19BR-TARGET-SEALED-TERMINAL-CHAIN-1.0.0",
+  "freeze_state": "frozen_before_terminal_v19w5_or_source_results",
+  "status": "frozen while base V19W production remains active, before terminal V19W5, spectral combination, regional gas reconstruction, stellar control, observed source scoring, lensing, halo, action, gravity parameter or holdout access",
+  "purpose": "Execute the already frozen V19W5-to-V19BQ evidence chain in one fail-closed order after the protected base process exits, with no manual substitution of predecessor files or scientific settings.",
+  "parents": {
+    "v19x3b_preflight_report": {
+      "path": "results/sigma_v19x3b_v19w5_regional_successor_preflight/report.json",
+      "sha256": "acfd91058a73396e01796e250e8af480b3d88e81ba856c77b3bc24c21ed73ea6"
+    },
+    "v19x4b_preflight_report": {
+      "path": "results/sigma_v19x4b_v19x3b_gas_successor_preflight/report.json",
+      "sha256": "e52ac6afd7795cc02e74fb0a34c8b477a967de45aacfd9ea318e6d386eed76a3"
+    },
+    "v19bmb_preflight_report": {
+      "path": "results/sigma_v19bmb_v19x4b_stellar_successor_preflight/report.json",
+      "sha256": "b17246186c53105790b3bbe335304bbb06d3e5217035388b5dfdfdd07e08034a"
+    },
+    "v19bq_preflight_report": {
+      "path": "results/sigma_v19bq_v19x4b_observed_source_successor_preflight/report.json",
+      "sha256": "1336fe9d9693433f69d25d4661a71e382f8c21cd8521f33eeb967e91ca8c2c62"
+    }
+  },
+  "stages": [
+    {
+      "id": "V19W5_RESPONSE_RECOVERY",
+      "artifact_kind": "report",
+      "artifact": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+      "failure_artifacts": [
+        "results/sigma_v19w5_ccd7_hardened_response_recovery/failure_report.json"
+      ],
+      "state_key": "status",
+      "expected_value": "ccd7_hardened_unified_5082_response_archive_passed",
+      "require_all_gates": true,
+      "required_true_flags": [
+        "v19x_successor_configuration_may_be_frozen"
+      ],
+      "required_false_flags": [
+        "base_v19w_archive_modified",
+        "lensing_halo_or_gravity_payload_opened",
+        "gravity_formula_or_parameter_changed"
+      ],
+      "command": {
+        "script": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+        "args": []
+      }
+    },
+    {
+      "id": "FREEZE_V19X2",
+      "artifact_kind": "config",
+      "artifact": "configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+      "state_key": "freeze_state",
+      "expected_value": "frozen_after_terminal_v19w5_pass",
+      "command": {
+        "script": "scripts/freeze_sigma_v19x2_unified_spectral_combination.py",
+        "args": []
+      }
+    },
+    {
+      "id": "RUN_V19X2",
+      "artifact_kind": "report",
+      "artifact": "results/sigma_v19x2_unified_spectral_combination_commissioning/report.json",
+      "failure_artifacts": [
+        "results/sigma_v19x2_unified_spectral_combination_commissioning/report.json"
+      ],
+      "state_key": "status",
+      "expected_value": "unified_spectral_combination_commissioning_passed_and_full_regional_fits_authorized",
+      "require_all_gates": true,
+      "required_true_flags": [
+        "full_494_region_combination_and_fit_authorized"
+      ],
+      "required_false_flags": [
+        "replacement_cluster_lensing_target_opened",
+        "gravity_formula_or_parameter_changed"
+      ],
+      "command": {
+        "script": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+        "args": [
+          "--config",
+          "configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+          "--output",
+          "results/sigma_v19x2_unified_spectral_combination_commissioning",
+          "--scratch",
+          "/home/henry/sigma-v19x2-spectral-combination/v100",
+          "--response-report",
+          "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json"
+        ]
+      }
+    },
+    {
+      "id": "FREEZE_V19X3B",
+      "artifact_kind": "config",
+      "artifact": "configs/sigma_v19x3b_v19w5_full_regional_spectral_production.json",
+      "state_key": "freeze_state",
+      "expected_value": "frozen_after_terminal_v19w5_authorized_v19x2_pass",
+      "command": {
+        "script": "scripts/freeze_sigma_v19x3b_v19w5_full_regional_spectral_production.py",
+        "args": []
+      }
+    },
+    {
+      "id": "RUN_V19X3B",
+      "artifact_kind": "report",
+      "artifact": "results/sigma_v19x3b_v19w5_full_regional_spectral_production/report.json",
+      "failure_artifacts": [
+        "results/sigma_v19x3b_v19w5_full_regional_spectral_production/report.json"
+      ],
+      "state_key": "status",
+      "expected_value": "all_494_regional_spectra_and_finite_temperature_fits_passed_source_map_authorized",
+      "require_all_gates": true,
+      "required_true_flags": [
+        "source_map_construction_authorized"
+      ],
+      "required_false_flags": [
+        "lensing_or_halo_payload_opened",
+        "gravity_formula_or_parameter_changed"
+      ],
+      "command": {
+        "script": "scripts/run_sigma_v19x3b_v19w5_full_regional_spectral_production.py",
+        "args": [
+          "--config",
+          "configs/sigma_v19x3b_v19w5_full_regional_spectral_production.json",
+          "--output",
+          "results/sigma_v19x3b_v19w5_full_regional_spectral_production",
+          "--scratch",
+          "/home/henry/sigma-v19x3b-full-regional-spectra/v100"
+        ]
+      }
+    },
+    {
+      "id": "FREEZE_V19X4B",
+      "artifact_kind": "config",
+      "artifact": "configs/sigma_v19x4b_v19x3b_gas_state_posterior.json",
+      "state_key": "freeze_state",
+      "expected_value": "frozen_after_terminal_v19x3b_pass",
+      "command": {
+        "script": "scripts/freeze_sigma_v19x4b_v19x3b_gas_state_posterior.py",
+        "args": []
+      }
+    },
+    {
+      "id": "RUN_V19X4B",
+      "artifact_kind": "report",
+      "artifact": "results/sigma_v19x4b_v19x3b_gas_state_posterior/report.json",
+      "failure_artifacts": [
+        "results/sigma_v19x4b_v19x3b_gas_state_posterior/report.json"
+      ],
+      "state_key": "status",
+      "expected_value": "gas_state_posterior_and_common_grids_passed_source_invariant_scoring_authorized",
+      "require_all_gates": true,
+      "required_true_flags": [
+        "source_invariant_scoring_authorized"
+      ],
+      "required_false_flags": [
+        "lensing_or_halo_payload_opened",
+        "gravity_formula_or_parameter_changed"
+      ],
+      "command": {
+        "script": "scripts/run_sigma_v19x4b_v19x3b_gas_state_posterior.py",
+        "args": [
+          "--config",
+          "configs/sigma_v19x4b_v19x3b_gas_state_posterior.json",
+          "--x3b-config",
+          "configs/sigma_v19x3b_v19w5_full_regional_spectral_production.json",
+          "--x3b-report",
+          "results/sigma_v19x3b_v19w5_full_regional_spectral_production/report.json",
+          "--output",
+          "results/sigma_v19x4b_v19x3b_gas_state_posterior"
+        ]
+      }
+    },
+    {
+      "id": "FREEZE_V19BMB",
+      "artifact_kind": "config",
+      "artifact": "configs/sigma_v19bmb_v19x4b_stellar_morphology_control.json",
+      "state_key": "freeze_state",
+      "expected_value": "frozen_after_terminal_v19x4b_pass",
+      "command": {
+        "script": "scripts/freeze_sigma_v19bmb_v19x4b_stellar_morphology_control.py",
+        "args": []
+      }
+    },
+    {
+      "id": "RUN_V19BMB",
+      "artifact_kind": "report",
+      "artifact": "results/sigma_v19bmb_v19x4b_stellar_morphology_control/report.json",
+      "failure_artifacts": [
+        "results/sigma_v19bmb_v19x4b_stellar_morphology_control/report.json"
+      ],
+      "state_key": "status",
+      "expected_value": "stellar_morphology_control_passed_invariant_scoring_ready",
+      "require_all_gates": true,
+      "required_true_flags": [
+        "invariant_scoring_ready"
+      ],
+      "required_false_flags": [
+        "lensing_halo_action_or_gravity_payload_opened"
+      ],
+      "command": {
+        "script": "scripts/run_sigma_v19bmb_v19x4b_stellar_morphology_control.py",
+        "args": [
+          "--config",
+          "configs/sigma_v19bmb_v19x4b_stellar_morphology_control.json",
+          "--x4b-report",
+          "results/sigma_v19x4b_v19x3b_gas_state_posterior/report.json"
+        ]
+      }
+    },
+    {
+      "id": "FREEZE_V19BQ",
+      "artifact_kind": "config",
+      "artifact": "configs/sigma_v19bq_v19x4b_observed_source_invariant_scoring.json",
+      "state_key": "freeze_state",
+      "expected_value": "frozen_after_terminal_v19x4b_and_v19bmb_pass",
+      "command": {
+        "script": "scripts/freeze_sigma_v19bq_v19x4b_observed_source_invariant_scoring.py",
+        "args": []
+      }
+    },
+    {
+      "id": "RUN_V19BQ_SOURCE_DECISION",
+      "artifact_kind": "report",
+      "artifact": "results/sigma_v19bq_v19x4b_observed_source_invariant_scoring/report.json",
+      "failure_artifacts": [
+        "results/sigma_v19bq_v19x4b_observed_source_invariant_scoring/report.json"
+      ],
+      "state_key": "status",
+      "expected_values": [
+        "observed_source_invariant_gates_passed_action_derivation_authorized",
+        "observed_source_invariant_gates_failed_no_action_authorized"
+      ],
+      "require_all_gates": false,
+      "required_keys": [
+        "aggregate_decision"
+      ],
+      "required_false_flags": [
+        "lensing_halo_action_or_gravity_payload_opened",
+        "gravity_formula_or_parameter_changed"
+      ],
+      "command": {
+        "script": "scripts/run_sigma_v19bq_v19x4b_observed_source_invariant_scoring.py",
+        "args": [
+          "--config",
+          "configs/sigma_v19bq_v19x4b_observed_source_invariant_scoring.json",
+          "--x4b-report",
+          "results/sigma_v19x4b_v19x3b_gas_state_posterior/report.json",
+          "--stellar-report",
+          "results/sigma_v19bmb_v19x4b_stellar_morphology_control/report.json"
+        ]
+      }
+    }
+  ],
+  "authorization": {
+    "status_only_while_base_runs": true,
+    "execute_only_after_base_process_exits": true,
+    "run_only_frozen_stage_commands": true,
+    "retry_terminal_failure_automatically": false,
+    "open_lensing_or_halo_payload": false,
+    "derive_action": false,
+    "change_gravity_formula_or_parameter": false,
+    "open_holdout": false
+  },
+  "outputs": {
+    "terminal_report": "results/sigma_v19br_target_sealed_terminal_chain/report.json"
+  },
+  "claim_boundary": [
+    "V19BR changes orchestration only; every scientific definition and threshold remains in its separately frozen parent.",
+    "A valid I4/I5 scientific failure is a completed source decision and must not be retried or tuned; only an execution failure stops the chain as corrupt or incomplete.",
+    "V19BR never opens lensing, halo, galaxy rotation, action, gravity-parameter or holdout payloads.",
+    "A source pass authorizes later action derivation under V19BJ; it is not evidence that a gravity theory fits galaxies or clusters."
+  ],
+  "implementation": {
+    "runner": {
+      "path": "scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+      "sha256": "d0f4c2f48a0a22e898fadaf3f637785df5d8cbfeb50f81164aec5e39c2c30bcc"
+    },
+    "checker": {
+      "path": "scripts/check_sigma_v19br_target_sealed_terminal_chain.py",
+      "sha256": "c1fdeaf05222494c26762119b4435995fa220b0c6ce3ae6f332ed2702558731f"
+    },
+    "v19w5_runner": {
+      "path": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+      "sha256": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72"
+    },
+    "v19x2_freezer": {
+      "path": "scripts/freeze_sigma_v19x2_unified_spectral_combination.py",
+      "sha256": "6a939dc7af9c82bae8f3216c53b633dd3df4800e57271c7d9d957c4fb9d89147"
+    },
+    "v19x2_runner": {
+      "path": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+      "sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea"
+    },
+    "v19x3b_freezer": {
+      "path": "scripts/freeze_sigma_v19x3b_v19w5_full_regional_spectral_production.py",
+      "sha256": "1547acb7e5dfd33042dfa1b1daaed73ddf71038d81d0177e292c03518f6c1e9b"
+    },
+    "v19x3b_runner": {
+      "path": "scripts/run_sigma_v19x3b_v19w5_full_regional_spectral_production.py",
+      "sha256": "5d270c641abc04365fc5df7fadebe7bfdc19dd5783b905be92a28f5e2330127a"
+    },
+    "v19x4b_freezer": {
+      "path": "scripts/freeze_sigma_v19x4b_v19x3b_gas_state_posterior.py",
+      "sha256": "497fe2c51e800c89c3fbecdb5e555c7556b7968dd9f16826b6796627f2ddd28d"
+    },
+    "v19x4b_runner": {
+      "path": "scripts/run_sigma_v19x4b_v19x3b_gas_state_posterior.py",
+      "sha256": "50b26761105f51e2403cb8fdad997a98b533d3360a005d667b033a398b182941"
+    },
+    "v19bmb_freezer": {
+      "path": "scripts/freeze_sigma_v19bmb_v19x4b_stellar_morphology_control.py",
+      "sha256": "ba8d30b416a310cdb773c530a0d3f609493e82c1fe87186f449d3d305236a5ab"
+    },
+    "v19bmb_runner": {
+      "path": "scripts/run_sigma_v19bmb_v19x4b_stellar_morphology_control.py",
+      "sha256": "9a1ff827b7f4df39e3ea1cdcf495e8d0363000414ebf701992db273d9983b30e"
+    },
+    "v19bq_freezer": {
+      "path": "scripts/freeze_sigma_v19bq_v19x4b_observed_source_invariant_scoring.py",
+      "sha256": "0058cebec8d862622218439d34dcdbf5e5b927aa355fcb5d17b092a4f4a48e69"
+    },
+    "v19bq_runner": {
+      "path": "scripts/run_sigma_v19bq_v19x4b_observed_source_invariant_scoring.py",
+      "sha256": "98b8008e3b5071e32b122be23bb6f934affa7c49cd72a4d4331ad5852fd616f9"
+    }
+  }
+}

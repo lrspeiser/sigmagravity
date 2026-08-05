@@ -1,5 +1,22 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19BR target-sealed terminal chain
+
+The final execution sequence from the live response archive to the I4/I5 source
+decision is now frozen as one fail-closed eleven-stage driver. It requires the
+protected V19W process to exit before V19W5 can start, hashes every stage
+executable, accepts only the separately frozen successor configurations and
+stops on any failed or corrupt terminal artifact. This removes the risk of
+manually invoking a historical V19W4/V19X3/V19X4/V19BP path.
+
+A valid negative V19BQ scientific result is terminal evidence, not an execution
+error: it records source-mechanism falsification and forbids action derivation.
+Only a passing source result can authorize the later V19BJ action route. The
+driver contains no lensing, halo, galaxy-rotation, action, gravity-fit or
+holdout stage. Its preflight and fail-closed tests pass while all terminal
+stages remain pending behind the active base process. See
+[`SIGMA_V19BR_TARGET_SEALED_TERMINAL_CHAIN.md`](SIGMA_V19BR_TARGET_SEALED_TERMINAL_CHAIN.md).
+
 ## 2026-08-05 Sigma V19BQ observed-source successor preflight
 
 The final target-sealed handoff from the V19W5-authorized gas chain to the
