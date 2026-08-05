@@ -1,0 +1,87 @@
+{
+  "broader_prediction_states": {
+    "B1_DWARF_SATELLITES": "not_earned",
+    "B2_STREAMS_AND_COMPACT_SUBSTRUCTURE": "not_earned",
+    "B3_DYNAMICAL_FRICTION": "not_earned",
+    "B4_GROWTH_COSMIC_SHEAR_AND_CLUSTER_ABUNDANCE": "not_earned",
+    "B5_PRIMARY_CMB_AND_CMB_LENSING": "not_earned"
+  },
+  "claim_boundary": [
+    "Passing V19CC means the cross-scale prediction gates were frozen before the theory was selected; it is not evidence that Sigma Gravity passes them.",
+    "I4 and I5 remain registered source candidates until the frozen V19BQ/V19BS chain decides whether either is observable and transferable; this protocol does not admit them.",
+    "Raw shape and image catalogs are the validation targets. Halo or convergence maps inferred under a conventional model remain comparators or secondary diagnostics, not truth.",
+    "Solar-System work is delayed to avoid tuning the mechanism locally, but no final theory can pass without the local and mathematical vetoes."
+  ],
+  "config": "configs/sigma_v19cc_cross_scale_prediction_gates.json",
+  "config_sha256": "7ff89be2f7aa710dcb8fb5ecab568719fbc324f1dc23c33c8920ee99fa6daec4",
+  "core_breadth": {
+    "cluster_disturbed_minimum": 2,
+    "cluster_holdout_minimum": 6,
+    "cluster_relaxed_minimum": 2,
+    "galaxy_holdout_minimum": 48,
+    "galaxy_morphology_strata": 8
+  },
+  "decision": "passed_cross_scale_prediction_gate_freeze",
+  "gate_results": {
+    "all_parent_hashes_exact": true,
+    "broad_core_gates_preserved": true,
+    "broader_claims_are_explicitly_unearned": true,
+    "near_term_tests_are_quantitative_and_no_retuning": true,
+    "no_action_constant_formula_or_target_selected": true,
+    "priority_keeps_solar_as_later_hard_veto": true,
+    "raw_observation_roles_are_preserved": true
+  },
+  "implementation": {
+    "checker": "scripts/check_sigma_v19cc_cross_scale_prediction_gates.py",
+    "tests": "tests/test_sigma_v19cc_cross_scale_prediction_gates.py"
+  },
+  "near_term_gate_ids": [
+    "N1_RESOLVED_CLUSTER_WEAK_LENSING",
+    "N2_GALAXY_GALAXY_WEAK_LENSING",
+    "N3_JOINT_DYNAMICS_AND_LENSING",
+    "N4_COLLIDING_CLUSTER_DIRECTION_AND_OFFSETS"
+  ],
+  "parent_audit": {
+    "blind_cluster_admission": {
+      "actual_sha256": "3aba06b1360e976794b6dd2ded4bd65e2e472e184e84abb46b187baea2bf07d8",
+      "exact": true,
+      "expected_sha256": "3aba06b1360e976794b6dd2ded4bd65e2e472e184e84abb46b187baea2bf07d8",
+      "path": "results/sigma_v19bh_blind_cluster_admission/report.json"
+    },
+    "blind_galaxy_admission": {
+      "actual_sha256": "c5cabc48d224d4a1021e8f3d65f8ec8236b3fecd8ac13c33734c82b3d1644b55",
+      "exact": true,
+      "expected_sha256": "c5cabc48d224d4a1021e8f3d65f8ec8236b3fecd8ac13c33734c82b3d1644b55",
+      "path": "results/sigma_v19bi_blind_galaxy_admission/report.json"
+    },
+    "broad_phenomenology_contract": {
+      "actual_sha256": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd",
+      "exact": true,
+      "expected_sha256": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd",
+      "path": "results/sigma_v19bg_broad_phenomenology_contract/report.json"
+    },
+    "source_invariant_action_preselection": {
+      "actual_sha256": "98e3d9a7f7d1c867b9fb40b089b9d2d8557178e9213e2f9e48e5be2492890a46",
+      "exact": true,
+      "expected_sha256": "98e3d9a7f7d1c867b9fb40b089b9d2d8557178e9213e2f9e48e5be2492890a46",
+      "path": "results/sigma_v19bj_source_invariant_action_preselection/report.json"
+    }
+  },
+  "priority_order": [
+    "broad_galaxy_and_raw_cluster_core",
+    "same_metric_weak_lensing_and_merger_geometry",
+    "satellites_streams_and_energy_transfer",
+    "cosmological_background_and_perturbations",
+    "local_relativistic_and_mathematical_veto"
+  ],
+  "protocol_version": "SIGMA-V19CC-CROSS-SCALE-PREDICTION-GATES-1.0.0",
+  "status": "completed_cross_scale_prediction_gate_freeze",
+  "theory_state": {
+    "action_selected": false,
+    "detailed_solar_optimization_performed": false,
+    "gravity_formula_changed": false,
+    "new_holdout_opened": false,
+    "source_invariant_selected": false,
+    "universal_constants_selected": false
+  }
+}

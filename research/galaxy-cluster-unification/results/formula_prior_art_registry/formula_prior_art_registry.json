@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 198,
+    "sigma_protocols": 199,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7442,6 +7442,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "09d60e264cb9cd5a516c64b6937abd0109dd4d2f3abaf8aa2fe5ea313d27274d"
+    },
+    {
+      "config": "configs/sigma_v19cc_cross_scale_prediction_gates.json",
+      "protocol_version": "SIGMA-V19CC-CROSS-SCALE-PREDICTION-GATES-1.0.0",
+      "status": "frozen after V19CB and while V19W response production remained active, before V19BQ/V19BS source disposition, before selecting or deriving an action, before fixing universal constants, before opening any new galaxy or cluster target, and before detailed Solar-System optimization",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "7ff89be2f7aa710dcb8fb5ecab568719fbc324f1dc23c33c8920ee99fa6daec4"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

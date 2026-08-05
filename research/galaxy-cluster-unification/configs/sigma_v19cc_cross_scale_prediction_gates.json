@@ -1,0 +1,258 @@
+{
+  "protocol_version": "SIGMA-V19CC-CROSS-SCALE-PREDICTION-GATES-1.0.0",
+  "status": "frozen after V19CB and while V19W response production remained active, before V19BQ/V19BS source disposition, before selecting or deriving an action, before fixing universal constants, before opening any new galaxy or cluster target, and before detailed Solar-System optimization",
+  "purpose": "Turn the broad dark-matter phenomenology roadmap into quantitative no-retuning tests, with diverse galaxies and clusters first, weak lensing and merger geometry next, and Solar-System work retained as a later hard veto.",
+  "parents": {
+    "broad_phenomenology_contract": {
+      "path": "results/sigma_v19bg_broad_phenomenology_contract/report.json",
+      "sha256": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd"
+    },
+    "source_invariant_action_preselection": {
+      "path": "results/sigma_v19bj_source_invariant_action_preselection/report.json",
+      "sha256": "98e3d9a7f7d1c867b9fb40b089b9d2d8557178e9213e2f9e48e5be2492890a46"
+    },
+    "blind_cluster_admission": {
+      "path": "results/sigma_v19bh_blind_cluster_admission/report.json",
+      "sha256": "3aba06b1360e976794b6dd2ded4bd65e2e472e184e84abb46b187baea2bf07d8"
+    },
+    "blind_galaxy_admission": {
+      "path": "results/sigma_v19bi_blind_galaxy_admission/report.json",
+      "sha256": "c5cabc48d224d4a1021e8f3d65f8ec8236b3fecd8ac13c33734c82b3d1644b55"
+    }
+  },
+  "theory_lock": {
+    "one_physical_metric_for_matter_and_light": true,
+    "maximum_universal_physical_constants": 5,
+    "per_object_gravity_parameters": 0,
+    "object_type_switches": 0,
+    "lensing_only_multipliers": 0,
+    "equation_and_constants_frozen_before_targets": true,
+    "same_constants_across_all_registered_tests": true,
+    "action_selected_here": false,
+    "constant_selected_here": false,
+    "gravity_formula_changed_here": false
+  },
+  "priority_order": [
+    {
+      "rank": 1,
+      "stage": "broad_galaxy_and_raw_cluster_core",
+      "advance_when": "The frozen action passes the registered galaxy morphology gate and raw strong-lensing gate across relaxed and disturbed clusters."
+    },
+    {
+      "rank": 2,
+      "stage": "same_metric_weak_lensing_and_merger_geometry",
+      "advance_when": "The same constants pass resolved weak-lensing, magnification, joint dynamics/lensing, and merger-direction gates without a new amplitude, orientation, scale, or source law."
+    },
+    {
+      "rank": 3,
+      "stage": "satellites_streams_and_energy_transfer",
+      "advance_when": "A three-dimensional time-dependent solution predicts environmental satellite dynamics, stream observables, and the destination of orbital energy."
+    },
+    {
+      "rank": 4,
+      "stage": "cosmological_background_and_perturbations",
+      "advance_when": "The covariant action supplies a background solution and perturbation equations for growth, cosmic shear, cluster abundance, and the CMB."
+    },
+    {
+      "rank": 5,
+      "stage": "local_relativistic_and_mathematical_veto",
+      "advance_when": "The already successful broad candidate passes Solar-System, binary, wave-speed, conservation, stability, causality, and well-posedness gates."
+    }
+  ],
+  "core_breadth_gates": {
+    "galaxy": {
+      "minimum_unique_holdout_galaxies": 48,
+      "minimum_wallaby_galaxies": 32,
+      "minimum_members_per_morphology_stratum": 6,
+      "required_morphology_strata": [
+        "low_baryonic_mass_dwarf",
+        "high_baryonic_mass_giant",
+        "gas_rich",
+        "gas_poor",
+        "low_surface_brightness",
+        "high_surface_brightness",
+        "bulgeless_disk",
+        "bulge_dominated_or_pressure_supported"
+      ],
+      "minimum_raw_cube_or_velocity_field_systems": 12,
+      "minimum_high_resolution_inner_curve_systems": 8,
+      "minimum_joint_radial_vertical_systems": 8,
+      "overall_RMSE_maximum_relative_to_fixed_MOND_RAR": 1.05,
+      "each_stratum_RMSE_maximum_relative_to_fixed_MOND_RAR": 1.25
+    },
+    "cluster": {
+      "minimum_new_clusters": 6,
+      "minimum_relaxed_clusters": 2,
+      "minimum_disturbed_or_merging_clusters": 2,
+      "minimum_secure_families_per_cluster": 3,
+      "minimum_spectroscopic_families_per_cluster": 1,
+      "minimum_images_per_cluster": 8,
+      "complete_baryon_model_required": true,
+      "raw_target_likelihood_required": true,
+      "inferred_halo_map_as_validation_truth_forbidden": true,
+      "image_root_recovery_fraction_minimum": 1.0,
+      "image_RMS_maximum_relative_to_same_catalog_halo_comparator": 1.25,
+      "baryon_to_halo_gap_closure_fraction_minimum": 0.75
+    }
+  },
+  "score_definitions": {
+    "covariance_deviance": "D_model = (y - y_model)^T C^{-1} (y - y_model), evaluated in the raw observable space with the same masks, nuisance priors, and covariance for Sigma, baryons-only, MOND/RAR where defined, and the conventional halo comparator.",
+    "baryon_to_halo_gap_closure": "F_close = 1 - (D_Sigma - D_halo)/(D_baryon - D_halo), reported only when D_baryon > D_halo; values below zero and above one are retained rather than clipped.",
+    "axial_angle_error": "Delta_theta_ax = min(|Delta_theta|, 180 degrees - |Delta_theta|), with the source-predicted axis frozen before lensing is opened.",
+    "parameter_counting": "Count universal physical constants, globally fitted nuisance hyperparameters, and per-system nuisance parameters separately; any per-system gravity amplitude, range, exponent, shear, orientation, or object label is a hard failure."
+  },
+  "near_term_quantitative_gates": [
+    {
+      "id": "N1_RESOLVED_CLUSTER_WEAK_LENSING",
+      "minimum_systems": 6,
+      "required_strata": [
+        "relaxed",
+        "disturbed_or_merging",
+        "lower_mass",
+        "higher_mass"
+      ],
+      "raw_observables": [
+        "per_source_g1_g2_or_ellipticity",
+        "source_redshift_posterior",
+        "selection_and_shape_calibration",
+        "mask_and_PSF_model",
+        "number_count_magnification_where_available",
+        "random_point_and_B_mode_nulls",
+        "full_covariance"
+      ],
+      "finite_prediction_fraction_minimum": 1.0,
+      "aggregate_deviance_maximum_relative_to_halo": 1.25,
+      "each_registered_stratum_deviance_maximum_relative_to_halo": 1.50,
+      "baryon_to_halo_gap_closure_fraction_minimum": 0.75,
+      "random_point_and_B_mode_null_p_value_minimum": 0.01,
+      "new_gravity_parameters_allowed": 0,
+      "failure_meaning": "The frozen metric has the wrong amplitude or two-dimensional curvature outside strong-lens cores; a weak-lensing-only multiplier is forbidden."
+    },
+    {
+      "id": "N2_GALAXY_GALAXY_WEAK_LENSING",
+      "minimum_baryonic_mass_bins": 3,
+      "minimum_surface_density_or_morphology_bins": 2,
+      "raw_observables": [
+        "stacked_tangential_shear",
+        "stacked_cross_shear",
+        "lens_and_source_redshift_posteriors",
+        "boost_and_selection_corrections",
+        "random_lens_null",
+        "full_covariance"
+      ],
+      "aggregate_deviance_maximum_relative_to_halo": 1.25,
+      "each_registered_bin_deviance_maximum_relative_to_halo": 1.50,
+      "baryon_to_halo_gap_closure_fraction_minimum": 0.75,
+      "random_lens_and_cross_shear_null_p_value_minimum": 0.01,
+      "new_gravity_parameters_allowed": 0,
+      "failure_meaning": "A galaxy rotation success does not transfer to the same metric potential on larger projected radii."
+    },
+    {
+      "id": "N3_JOINT_DYNAMICS_AND_LENSING",
+      "minimum_systems": 8,
+      "required_system_classes": [
+        "rotation_supported",
+        "pressure_supported"
+      ],
+      "matter_and_light_use_identical_metric_and_constants": true,
+      "combined_deviance_maximum_relative_to_halo": 1.25,
+      "no_domain_worse_than_baryons_only": true,
+      "new_gravity_parameters_allowed": 0,
+      "failure_meaning": "The candidate is solving motion and light with effectively different laws even if separate aggregate fits look acceptable."
+    },
+    {
+      "id": "N4_COLLIDING_CLUSTER_DIRECTION_AND_OFFSETS",
+      "minimum_spent_development_mergers": 2,
+      "minimum_untouched_mergers": 2,
+      "source_axis_frozen_before_lensing": true,
+      "primary_truth": "raw strong_and_weak_lensing_catalog_likelihood",
+      "inferred_halo_peak_secondary_diagnostic_only": true,
+      "median_axial_angle_error_deg_maximum": 30.0,
+      "aggregate_deviance_maximum_relative_to_halo": 1.25,
+      "baryon_to_halo_gap_closure_fraction_minimum": 0.75,
+      "strong_lensing_root_and_topology_gates_also_required": true,
+      "new_amplitude_orientation_scale_or_lag_parameters_allowed": 0,
+      "failure_meaning": "The baryonic state may be measurable but it points the metric curvature in the wrong place or direction."
+    }
+  ],
+  "broader_prediction_dispositions": [
+    {
+      "id": "B1_DWARF_SATELLITES",
+      "present_claim": "not_earned",
+      "required_theory": "three-dimensional nonlinear field plus massive-particle geodesics",
+      "must_predict": "dispersion profiles, escape speeds, tidal radii, and host-distance dependence with no halo or force parameter per satellite",
+      "decisive_risk": "A purely instantaneous gas thermodynamic source cannot explain gas-poor satellites unless the same action derives a persistent or environmental response."
+    },
+    {
+      "id": "B2_STREAMS_AND_COMPACT_SUBSTRUCTURE",
+      "present_claim": "not_earned",
+      "required_theory": "time-dependent nonlinear field and compact-solution stability analysis",
+      "must_predict": "stream track, precession, width, density perturbations, and lensing flux or astrometric anomalies",
+      "decisive_risk": "A smooth long mode can alter global precession but does not imitate localized dark subhalos unless compact response structures arise from the equations."
+    },
+    {
+      "id": "B3_DYNAMICAL_FRICTION",
+      "present_claim": "not_earned",
+      "required_theory": "action-derived field stress-energy, radiation, retarded response, and backreaction",
+      "must_predict": "the sign and rate of orbital energy and angular-momentum loss",
+      "decisive_risk": "A static constitutive law has no physical destination for the missing orbital energy and cannot claim to replace a dark-matter wake."
+    },
+    {
+      "id": "B4_GROWTH_COSMIC_SHEAR_AND_CLUSTER_ABUNDANCE",
+      "present_claim": "not_earned",
+      "required_theory": "covariant background and scalar-vector-tensor perturbation equations",
+      "must_predict": "growth rate, slip, redshift-space distortions, cosmic shear, collapse, and abundance with one fixed physical or comoving scale interpretation",
+      "decisive_risk": "Constants that work only at redshift zero cannot be retuned at each epoch."
+    },
+    {
+      "id": "B5_PRIMARY_CMB_AND_CMB_LENSING",
+      "present_claim": "not_earned",
+      "required_theory": "Boltzmann implementation of the same covariant action",
+      "must_predict": "acoustic peak positions and heights, early and late ISW effects, damping, and lensing power without cold dark matter",
+      "decisive_risk": "This is likely the strongest eventual test because early gravitational potentials must exist before late galaxy structure forms."
+    }
+  ],
+  "stop_and_promotion_rules": {
+    "core_before_broader_claims": true,
+    "weak_lensing_and_merger_geometry_use_same_frozen_action": true,
+    "no_broader_result_may_repair_failed_core_gate": true,
+    "failed_orientation_is_not_repaired_by_amplitude": true,
+    "three_materially_distinct_action_failures_trigger_mechanism_reconsideration": true,
+    "solar_work_is_later_but_remains_mandatory": true,
+    "detailed_solar_optimization_authorized_now": false
+  },
+  "authorization": {
+    "read_existing_reports": true,
+    "freeze_future_tests": true,
+    "open_new_holdout": false,
+    "inspect_sealed_target_values": false,
+    "select_source_invariant": false,
+    "derive_or_select_action": false,
+    "fit_universal_constants": false,
+    "change_gravity_formula": false,
+    "perform_detailed_solar_optimization": false,
+    "use_inferred_halo_map_as_validation_truth": false
+  },
+  "required_gates": {
+    "all_parent_hashes_exact": true,
+    "broad_core_gates_preserved": true,
+    "near_term_tests_are_quantitative_and_no_retuning": true,
+    "raw_observation_roles_are_preserved": true,
+    "broader_claims_are_explicitly_unearned": true,
+    "priority_keeps_solar_as_later_hard_veto": true,
+    "no_action_constant_formula_or_target_selected": true
+  },
+  "claim_boundary": [
+    "Passing V19CC means the cross-scale prediction gates were frozen before the theory was selected; it is not evidence that Sigma Gravity passes them.",
+    "I4 and I5 remain registered source candidates until the frozen V19BQ/V19BS chain decides whether either is observable and transferable; this protocol does not admit them.",
+    "Raw shape and image catalogs are the validation targets. Halo or convergence maps inferred under a conventional model remain comparators or secondary diagnostics, not truth.",
+    "Solar-System work is delayed to avoid tuning the mechanism locally, but no final theory can pass without the local and mathematical vetoes."
+  ],
+  "implementation": {
+    "checker": "scripts/check_sigma_v19cc_cross_scale_prediction_gates.py",
+    "tests": "tests/test_sigma_v19cc_cross_scale_prediction_gates.py"
+  },
+  "outputs": {
+    "report": "results/sigma_v19cc_cross_scale_prediction_gates/report.json"
+  }
+}
