@@ -1,0 +1,169 @@
+{
+  "ambiguous_candidate_photometry_scored": false,
+  "claim_boundary": [
+    "V19AB commissions a measurement transformation; it does not select any ambiguous counterpart.",
+    "The five validation singleton candidates are provisional internal checks, not external identity ground truth.",
+    "Passing authorizes a separately frozen ambiguous-candidate likelihood; it does not authorize stellar mass, mass current, lensing, halo, or gravity inference.",
+    "Failing leaves all V19AA ambiguous states unchanged and requires a synthetic-SED/filter-curve model or new source imaging."
+  ],
+  "config": "configs/sigma_v19ab_bessel_nsc_transform_commissioning.json",
+  "config_sha256": "1e346fb1b0097cd6b16058b125cf51ab94bc2a845b1cd0419c350a9476c78263",
+  "counterpart_selected": false,
+  "fit": {
+    "coefficients": [
+      {
+        "B_minus_R_standardized_slope": -0.39091698254783563,
+        "R_minus_I_standardized_slope": 0.06273320370262325,
+        "intercept": -0.5604454720505194,
+        "output": "g_minus_B",
+        "predictive_scale_mag": 0.15
+      },
+      {
+        "B_minus_R_standardized_slope": 0.1232763920771587,
+        "R_minus_I_standardized_slope": 0.001839156385478979,
+        "intercept": 0.4820186591469977,
+        "output": "r_minus_R",
+        "predictive_scale_mag": 0.15
+      },
+      {
+        "B_minus_R_standardized_slope": -0.0921245356988687,
+        "R_minus_I_standardized_slope": 0.4773634897183846,
+        "intercept": 1.0834134600053662,
+        "output": "i_minus_I",
+        "predictive_scale_mag": 0.15
+      },
+      {
+        "B_minus_R_standardized_slope": -0.2510027209171144,
+        "R_minus_I_standardized_slope": 0.44105933750575455,
+        "intercept": 0.8183837682258326,
+        "output": "z_minus_I",
+        "predictive_scale_mag": 0.15
+      }
+    ],
+    "optimizers": [
+      {
+        "cost": 0.41790806742763276,
+        "nfev": 4,
+        "optimality": 2.267347609663517e-08,
+        "output": "g_minus_B",
+        "status": 2,
+        "success": true
+      },
+      {
+        "cost": 0.06372879063771797,
+        "nfev": 3,
+        "optimality": 7.543893482120367e-09,
+        "output": "r_minus_R",
+        "status": 1,
+        "success": true
+      },
+      {
+        "cost": 0.15511559789386142,
+        "nfev": 4,
+        "optimality": 7.263175366700736e-09,
+        "output": "i_minus_I",
+        "status": 1,
+        "success": true
+      },
+      {
+        "cost": 0.3019372721879925,
+        "nfev": 4,
+        "optimality": 5.297597471809468e-09,
+        "output": "z_minus_I",
+        "status": 1,
+        "success": true
+      }
+    ]
+  },
+  "gates": {
+    "all_commissioning_gates_pass": false,
+    "all_optimizers_succeeded": true,
+    "color_only_mean_reciprocal_rank": false,
+    "color_only_top1_retrieval": false,
+    "exact_eligible_and_split_counts": true,
+    "full_offset_mean_reciprocal_rank": true,
+    "full_offset_top1_retrieval": true,
+    "no_ambiguous_association_mass_lensing_or_gravity": true,
+    "validation_median_absolute_error_each_offset": true
+  },
+  "generated_utc": "2026-08-05T08:05:47.776697+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ab_bessel_nsc_transform_commissioning.py",
+    "runner_sha256": "426e9b67acd94d7870c5a8d895d0995015838bad99996845a266bf9d51c1972b"
+  },
+  "lensing_or_halo_payload_opened": false,
+  "likelihood_application_authorized": false,
+  "mass_current_constructed": false,
+  "outputs": {
+    "commissioning_sample": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+    "commissioning_sample_sha256": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7",
+    "validation_predictions": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/validation_predictions.csv",
+    "validation_predictions_sha256": "01f3ae1b7879afe172de223586da695088baab3f0efb5f145eb0e8ae7e7cd7b5",
+    "validation_retrieval": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/validation_retrieval.csv",
+    "validation_retrieval_sha256": "fe9f150af68bc592ef910f6d78559ec6c6534cf47799f31bdbf85068b1e0528c"
+  },
+  "parent_hashes": {
+    "configs/sigma_v19aa_member_counterpart_association.json": "bc07209be5ba4d5e66fbf1db9d113dbec4e53371607d829092da74e994ec9cf8",
+    "configs/sigma_v19z_nsc_member_photometry.json": "bcb3a5d2fad63081aa9854f2ff539a5f100dffa23d42d315d17ebd4e14c93aeb",
+    "data/derived/sigma_v19aa_member_counterpart_association/member_associations.csv": "107e4d82ee35774ee47b81e8e3452ada33577cfac050cce0f80c4ab35b8a6840",
+    "data/derived/sigma_v19z_member_photometry/bullet_published_bri.csv": "396af209b9ba466f9396f7f0fcf4af1ced3d0725fffc143b07e0e0218d3c63a7",
+    "results/sigma_v19aa_member_counterpart_association/report.json": "2b751c1e455171b6b37b844ea22b820a3faab65ddd898672b8802b8ca94cd860",
+    "results/sigma_v19z_nsc_member_photometry/provenance.json": "7ce94eba8fdbbcf6d9f2c816de353aa283d8169f66840690a858fd21982bd477",
+    "scripts/run_sigma_v19aa_member_counterpart_association.py": "3fabf505018b2737c06402e9e50ffd4b2ab8b57363ac9a202fb2883304148b8b"
+  },
+  "report_version": "SIGMA-V19AB-BESSEL-NSC-TRANSFORM-COMMISSIONING-1.0.0",
+  "sample": {
+    "development_ids": [
+      "29",
+      "78",
+      "14",
+      "07",
+      "06",
+      "37",
+      "22",
+      "16",
+      "23",
+      "24"
+    ],
+    "eligible_rows": 15,
+    "singleton_rows_are_provisional_anchors_not_ground_truth": true,
+    "validation_ids": [
+      "26",
+      "57",
+      "66",
+      "71",
+      "21"
+    ]
+  },
+  "status": "completed_internal_transform_commissioning",
+  "stellar_mass_inferred": false,
+  "validation": {
+    "median_absolute_error_mag": {
+      "g_minus_B": 0.12500248760620536,
+      "i_minus_I": 0.08212201214371939,
+      "r_minus_R": 0.05379194133588727,
+      "z_minus_I": 0.08851888872652292
+    },
+    "retrieval": {
+      "color_only_mean_reciprocal_rank": 0.6000000000000001,
+      "color_only_top1": 2,
+      "color_only_true_ranks": [
+        1,
+        1,
+        3,
+        3,
+        3
+      ],
+      "full_offset_mean_reciprocal_rank": 1.0,
+      "full_offset_top1": 5,
+      "full_offset_true_ranks": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}
