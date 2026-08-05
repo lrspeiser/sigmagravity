@@ -1,7 +1,11 @@
 {
-  "protocol_version": "SIGMA-V19BC-ABELL2146-COLLISIONLESS-CURRENT-MOMENTS-1.0.0",
+  "protocol_version": "SIGMA-V19BC-ABELL2146-COLLISIONLESS-CURRENT-MOMENTS-1.0.1",
   "status": "frozen_before_rasterizing_any_abell2146_member_ensemble_draw_or_computing_any_current_moment",
   "purpose": "Project the target-blind V19BB Abell 2146 member ensemble onto the frozen V19H Chandra tangent grid using the unchanged V19BA unsmoothed luminosity, signed line-of-sight current, and positive second-moment definitions, while retaining every missing-photometry row in completeness accounting and without fitting a propagation length, opening lensing data, or changing gravity physics.",
+  "implementation": {
+    "runner": "scripts/run_sigma_v19bc_abell2146_collisionless_current_moments.py",
+    "runner_sha256": "e209eac7c3b1abe8a17479bc6e62d86d63494fa899e30359db61f417bdd577bf"
+  },
   "parents": {
     "v19bb_config": {
       "path": "configs/sigma_v19bb_abell2146_luminosity_current_ensemble.json",
