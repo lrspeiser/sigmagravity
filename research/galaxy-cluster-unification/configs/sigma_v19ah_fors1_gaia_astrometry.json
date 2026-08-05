@@ -1,0 +1,145 @@
+{
+  "protocol_version": "SIGMA-V19AH-FORS1-GAIA-ASTROMETRY-1.0.0",
+  "status": "frozen_after_equivalent_icrs_frame_metadata_correction_before_any_gaia_match_or_wcs_outcome",
+  "implementation_correction": {
+    "first_attempt_report": "results/sigma_v19ah_fors1_gaia_astrometry/engineering_failure_frame_metadata.json",
+    "first_attempt_report_sha256": "71d676e8130801e46537e8e3f8987bf71cda8f312eaedd2d35afff9aab755369",
+    "observed_error": "Astropy spherical_offsets_to rejected the ICRS Gaia SkyCoord because it carried an obstime attribute while the ICRS center did not.",
+    "change": "Remove the obstime frame attribute from the already numerically epoch-propagated Gaia ICRS coordinates. The ra_epoch and dec_epoch numbers, catalog selection, image preparation, source detector, matcher, RANSAC, WCS fitter, thresholds and gates are unchanged.",
+    "source_detection_outcome_visible_before_correction": false,
+    "gaia_match_or_wcs_outcome_visible_before_correction": false
+  },
+  "purpose": "Fit an independent full-field Gaia DR3 WCS for each passed V19AG B/R/I active mosaic before any cluster-member coordinate, member cutout, deblending, photometry, mass, current, lensing, halo or gravity input is opened.",
+  "parent_artifacts": [
+    {
+      "path": "results/sigma_v19ag_fors1_role_calibration/report.json",
+      "sha256": "bb7966d7ef219f1da514b4eb4523a4b0215555782d5854ed58e4953bde0da57d"
+    },
+    {
+      "path": "data/raw/sigma_v19g_gaia_dr3/BULLET_gaia_dr3.csv",
+      "sha256": "cd55229dcd4cf14f0d703cee8e3488b16e984a933472075ea9a27c22ca871b8c"
+    },
+    {
+      "path": "src/voidscreen/astrometric_registration.py",
+      "sha256": "b6da54712dd390970f5b701769ef38b2e311dea3da955d4feff4cf9317384c3c"
+    }
+  ],
+  "science_products": [
+    {
+      "filter": "B_BESS",
+      "path": "results/sigma_v19ag_fors1_role_calibration/calibrated_B_BESS_OFORS.1998-12-14T06_05_25.298.fits.gz",
+      "sha256": "5b8bb3863b0386a0de3b63617e3fabfb39d60136f44517b34501b9e7331e2343"
+    },
+    {
+      "filter": "I_BESS",
+      "path": "results/sigma_v19ag_fors1_role_calibration/calibrated_I_BESS_OFORS.1998-12-14T05_54_16.814.fits.gz",
+      "sha256": "4d26f11531d7eb112d0229dcb735e72e3c7d1ebbc305f2d67814a8a7e92df677"
+    },
+    {
+      "filter": "R_BESS",
+      "path": "results/sigma_v19ag_fors1_role_calibration/calibrated_R_BESS_OFORS.1998-12-14T05_44_56.445.fits.gz",
+      "sha256": "fa0ec4c8ae32030a2b66071df9dd328f373b51e8832cb05edec0cfa9e378e764"
+    }
+  ],
+  "gaia_selection": {
+    "required_astrometric_params_solved": [
+      31,
+      95
+    ],
+    "maximum_g_magnitude": 19.0,
+    "maximum_ruwe": 1.4,
+    "minimum_visibility_periods_used": 8,
+    "duplicated_source_must_be_false": true,
+    "proper_motion_must_be_finite": true,
+    "epoch_rule": "Linearly propagate every retained Gaia source from its DR3 ref_epoch to the FITS DATE-OBS Julian year. Gaia pmra is mu_alpha*cos(dec), so the RA angle change is pmra/cos(dec). Parallax and perspective acceleration are not applied.",
+    "selection_boundary": "Gaia selection uses only foreground-star astrometric quality and brightness; it has no cluster-member, image-residual or physics-dependent term."
+  },
+  "image_preparation": {
+    "required_shape_yx": [
+      2048,
+      2016
+    ],
+    "replace_nonfinite_with_global_finite_median_for_detection_only": true,
+    "science_pixels_are_not_modified_on_disk": true,
+    "member_or_candidate_mask": "none; the central 90 arcsec is excluded geometrically for all filters before matching, independent of any member catalog"
+  },
+  "algorithm": {
+    "initial_center": "Use CRVAL1/CRVAL2 from each source FITS header at the geometric active-mosaic center; do not recenter on the cluster light.",
+    "initial_scale": "Use the absolute mean of CDELT1/CDELT2 in each source FITS header.",
+    "orientation_candidates": [
+      "identity",
+      "rotate_90",
+      "rotate_180",
+      "rotate_270",
+      "flip_x",
+      "flip_y",
+      "swap",
+      "negative_swap"
+    ],
+    "sigma_clip": 3.0,
+    "detection_threshold_sigma": 8.0,
+    "minimum_detection_separation_arcsec": 2.0,
+    "galaxy_exclusion_radius_arcsec": 90.0,
+    "maximum_detected_sources": 3000,
+    "maximum_translation_pixel": 250.0,
+    "translation_histogram_bin_pixel": 5.0,
+    "initial_match_radius_pixel": 15.0,
+    "ransac_residual_pixel": 3.0,
+    "ransac_max_trials": 5000,
+    "random_seed": 1908,
+    "final_projection": "TAN"
+  },
+  "gates": {
+    "exact_filter_count": 3,
+    "minimum_selected_gaia_sources": 50,
+    "minimum_gaia_inliers_per_filter": 30,
+    "minimum_shared_gaia_inliers_all_filters": 20,
+    "maximum_median_residual_pixel": 1.0,
+    "maximum_p95_residual_pixel": 3.0,
+    "maximum_p95_residual_arcsec": 0.75,
+    "maximum_fractional_similarity_scale_error": 0.02,
+    "required_orientation": "identity",
+    "maximum_absolute_similarity_rotation_deg": 2.0,
+    "maximum_geometric_center_disagreement_arcsec": 1.0,
+    "all_filters_must_pass": true,
+    "no_member_candidate_deblend_photometry_mass_current_lensing_halo_or_gravity_access": true
+  },
+  "outputs": {
+    "directory": "results/sigma_v19ah_fors1_gaia_astrometry",
+    "report": "results/sigma_v19ah_fors1_gaia_astrometry/report.json",
+    "wcs": "one JSON WCS header per filter",
+    "matched_stars": "one CSV of Gaia source IDs, propagated coordinates, image coordinates and residuals per filter",
+    "diagnostic": "one residual-distribution PNG; no science-image or member cutout is emitted"
+  },
+  "claim_boundary": [
+    "V19AH can establish a foreground-star WCS and cross-filter registration for the V19AG full frames.",
+    "It cannot establish a PSF, saturated/vignetted science mask, photometric zeropoint, deblending rule, member flux, member color, stellar mass, baryonic current, lensing prediction or gravity prediction.",
+    "The earlier Chandra Gaia cone is reused only as an independently frozen foreground-star catalog; no X-ray coordinate, source match or shock result is opened.",
+    "Failure is an astrometric data-preparation failure, not a failure of Sigma Gravity. A pass authorizes a separately frozen full-field mask and Gaia-star PSF audit."
+  ],
+  "authorization": {
+    "read_passed_v19ag_full_frames": true,
+    "detect_full_field_sources": true,
+    "read_and_propagate_gaia_foreground_stars": true,
+    "fit_wcs_from_foreground_stars": true,
+    "persist_wcs_match_catalogs_and_residual_plot": true,
+    "inspect_member_or_candidate_coordinates_or_cutouts": false,
+    "fit_source_photometry_or_deblending": false,
+    "infer_stellar_mass_or_current": false,
+    "read_chandra_source_match_shock_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "v19ah_source_detection_may_have_run_inside_failed_call_before_freeze": true,
+    "v19ah_source_detection_count_or_location_visible_at_correction_freeze": false,
+    "v19ah_astrometric_fit_run_at_freeze": false,
+    "member_or_candidate_coordinate_or_cutout_opened_at_freeze": false,
+    "photometry_or_deblending_model_chosen_at_freeze": false,
+    "mass_current_lensing_halo_or_gravity_payload_opened_at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ah_fors1_gaia_astrometry.py",
+    "runner_sha256": "f2f44107cd8c86f4cd0ccfafec931ec39562ff024d7c7e630af0c3e1eed40f0d"
+  }
+}

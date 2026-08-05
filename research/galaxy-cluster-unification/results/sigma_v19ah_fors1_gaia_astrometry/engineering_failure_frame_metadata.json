@@ -1,0 +1,53 @@
+{
+  "all_astrometry_gates_pass": false,
+  "chandra_source_match_shock_lensing_or_halo_payload_opened": false,
+  "claim_boundary": [
+    "V19AH can establish a foreground-star WCS and cross-filter registration for the V19AG full frames.",
+    "It cannot establish a PSF, saturated/vignetted science mask, photometric zeropoint, deblending rule, member flux, member color, stellar mass, baryonic current, lensing prediction or gravity prediction.",
+    "The earlier Chandra Gaia cone is reused only as an independently frozen foreground-star catalog; no X-ray coordinate, source match or shock result is opened.",
+    "Failure is an astrometric data-preparation failure, not a failure of Sigma Gravity. A pass authorizes a separately frozen full-field mask and Gaia-star PSF audit."
+  ],
+  "diagnostic_path": null,
+  "diagnostic_sha256": null,
+  "failures": [
+    {
+      "error": "ValueError: Tried to use spherical_offsets_to with two non-matching frames!",
+      "filter": "B_BESS"
+    },
+    {
+      "error": "ValueError: Tried to use spherical_offsets_to with two non-matching frames!",
+      "filter": "I_BESS"
+    },
+    {
+      "error": "ValueError: Tried to use spherical_offsets_to with two non-matching frames!",
+      "filter": "R_BESS"
+    }
+  ],
+  "filters": {},
+  "generated_utc": "2026-08-05T09:05:22.732368+00:00",
+  "geometric_center_separation_arcsec": {},
+  "global_gates": {
+    "all_filter_gates": false,
+    "exact_filter_solutions": false,
+    "geometric_center_consistency": false,
+    "minimum_shared_gaia_inliers": false,
+    "no_prohibited_access": true
+  },
+  "gravity_formula_or_parameter_changed": false,
+  "input_hashes": {
+    "config": "170deae96cb24908760bb411af05ab83563290bc46a91f1838ae974f60e38dcf",
+    "data/raw/sigma_v19g_gaia_dr3/BULLET_gaia_dr3.csv": "cd55229dcd4cf14f0d703cee8e3488b16e984a933472075ea9a27c22ca871b8c",
+    "results/sigma_v19ag_fors1_role_calibration/calibrated_B_BESS_OFORS.1998-12-14T06_05_25.298.fits.gz": "5b8bb3863b0386a0de3b63617e3fabfb39d60136f44517b34501b9e7331e2343",
+    "results/sigma_v19ag_fors1_role_calibration/calibrated_I_BESS_OFORS.1998-12-14T05_54_16.814.fits.gz": "4d26f11531d7eb112d0229dcb735e72e3c7d1ebbc305f2d67814a8a7e92df677",
+    "results/sigma_v19ag_fors1_role_calibration/calibrated_R_BESS_OFORS.1998-12-14T05_44_56.445.fits.gz": "fa0ec4c8ae32030a2b66071df9dd328f373b51e8832cb05edec0cfa9e378e764",
+    "results/sigma_v19ag_fors1_role_calibration/report.json": "bb7966d7ef219f1da514b4eb4523a4b0215555782d5854ed58e4953bde0da57d",
+    "runner": "34eb355b0e5396c2f248d1f2a765a537e9c6d29219037fd66433a84971ef9c20",
+    "src/voidscreen/astrometric_registration.py": "b6da54712dd390970f5b701769ef38b2e311dea3da955d4feff4cf9317384c3c"
+  },
+  "member_or_candidate_coordinate_or_cutout_opened": false,
+  "photometry_or_deblending_fitted": false,
+  "report_version": "SIGMA-V19AH-FORS1-GAIA-ASTROMETRY-1.0.0",
+  "shared_gaia_inliers_all_filters": 0,
+  "status": "failed_gaia_astrometry",
+  "stellar_mass_or_current_inferred": false
+}
