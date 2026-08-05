@@ -51,6 +51,28 @@ The clean next routes are:
 A synthetic SED alone cannot replace the missing observed `r/i` colors; it can
 only forward-model colors once usable measurements exist.
 
+## Subsequent independent-catalog preflight
+
+A read-only NOIRLab Data Lab crossmatch was run only for the same 15
+already-opened V19AB singleton anchors.  No V19AA ambiguous-candidate cone was
+queried, and no association, mass, lensing, halo, or gravity result was read.
+
+- `nsc_dr2.x1p5__object__delve_dr2__objects` returned one DELVE DR2 match for
+  every anchor, with separations from 0.0021 to 0.0618 arcsec.
+- `nsc_dr2.x1p5__object__decaps_dr2__object` returned no match for any anchor.
+- All 15 DELVE matches have catalog `MAG_AUTO` values in `g/r/i/z`.
+- Thirteen anchors have DELVE SExtractor flag zero in every band.  Member 71
+  has flag 3 in `i`.  Problem member 57 has flag 3 in **all four bands**, with
+  3, 5, 2 and 2 catalog epochs in `g/r/i/z`, respectively.
+
+Thus DELVE confirms the object and supplies multiband values, but it does not
+supply the clean independent deblending required to rescue the frozen V19AD
+gate.  Accepting member 57 after observing the flag pattern would be a
+retrospective quality-rule change.  DECaPS cannot help because it has no
+coverage.  The remaining defensible routes are image-level forced/profile
+photometry under a preregistered model or recovery of the original FORS1
+identifiers/segmentation.
+
 ## Reproducibility
 
 - Frozen/corrected protocol: `configs/sigma_v19ad_fixed_aperture_color_commissioning.json`
