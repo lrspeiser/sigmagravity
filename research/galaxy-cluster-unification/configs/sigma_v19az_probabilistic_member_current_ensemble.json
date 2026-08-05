@@ -1,0 +1,132 @@
+{
+  "protocol_version": "SIGMA-V19AZ-PROBABILISTIC-MEMBER-CURRENT-ENSEMBLE-1.0.0",
+  "status": "frozen_before_joint_assignment_or_ensemble_generation",
+  "purpose": "Construct an exact one-to-one positional posterior and a deterministic Monte Carlo ensemble of the Bullet Cluster spectroscopic members that have published Bessel BRI photometry, preserving candidate ambiguity, private null states, coordinate quantization, redshift uncertainty, and missing transverse velocities without reading lensing, halo, or gravity residuals.",
+  "parents": {
+    "candidate_hypotheses": {
+      "path": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_hypotheses.csv",
+      "sha256": "ea7628d0daab8774bbe346ca721304e0ec8712025a89ac9f9508451317c3be9e"
+    },
+    "published_bri": {
+      "path": "data/derived/sigma_v19z_member_photometry/bullet_published_bri.csv",
+      "sha256": "396af209b9ba466f9396f7f0fcf4af1ced3d0725fffc143b07e0e0218d3c63a7"
+    },
+    "spectroscopic_members": {
+      "path": "data/derived/sigma_v19d_assembly_members/bullet_members.csv",
+      "sha256": "36a87b48f77e4998fc8b4136ab1b1c559b90d1b18d7d65633e8dacf167dea64b"
+    },
+    "anchor_manifest": {
+      "path": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+      "sha256": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f"
+    },
+    "association_report": {
+      "path": "results/sigma_v19aa_member_counterpart_association/report.json",
+      "sha256": "2b751c1e455171b6b37b844ea22b820a3faab65ddd898672b8802b8ca94cd860"
+    },
+    "failed_signed_flux_likelihood_report": {
+      "path": "results/sigma_v19ay_signed_flux_likelihood_validation/report.json",
+      "sha256": "8365d87e842cf3a5381fbdbc81d22a254953424ec25c2e3fa930fd8a09e28cd0"
+    }
+  },
+  "population": {
+    "cluster": "BULLET",
+    "expected_spectroscopic_members": 78,
+    "expected_members_with_finite_published_bri": 72,
+    "expected_fixed_anchor_members": 15,
+    "expected_probabilistic_members": 57,
+    "expected_missing_bri_members": 6,
+    "missing_bri_rule": "Retain all six members in the inventory with an explicit missing_photometry state; do not invent a luminosity or silently omit them from completeness accounting.",
+    "anchor_rule": "Use the unique V19AM NSC catalog coordinate for each of the 15 previously validated anchors as a fixed positional state.",
+    "probabilistic_member_rule": "Use every V19AU candidate plus one private null state for each of the 57 non-anchor members with BRI."
+  },
+  "joint_assignment_posterior": {
+    "primary_counterpart_prior": 0.9,
+    "candidate_local_weight": "positional_posterior_q_0_90 from the frozen V19AU candidate-hypothesis table",
+    "null_local_weight": "one minus the sum of positional_posterior_q_0_90 over that member, cross-checked against the V19AA q=0.90 null posterior",
+    "joint_density": "Product of member-local candidate/null weights, conditioned on each real candidate_id being assigned to at most one member; private null states never conflict.",
+    "solver": "Enumerate every valid joint state independently within each connected component of the member-candidate conflict graph, using log-sum-exp normalization. Singleton members are exact one-member components.",
+    "approximation": "none",
+    "hard_counterpart_selection": false,
+    "photometric_or_flux_likelihood": "forbidden because V19AY failed its once-frozen validation gate"
+  },
+  "null_position_model": {
+    "coordinate_source": "published Bullet member coordinate",
+    "east_half_width_arcsec": "7.5*cos(dec_deg), from half of one whole RA time-second",
+    "north_half_width_arcsec": 0.5,
+    "conditional_distribution": "uniform in east and north over the original coordinate-rounding rectangle",
+    "interpretation": "The null state means no catalog candidate is identified; it does not mean the spectroscopic member is absent."
+  },
+  "luminosity_and_current_proxies": {
+    "relative_i_luminosity": "10^[-0.4*(I_Bessel-20.0)]",
+    "reference_i_magnitude": 20.0,
+    "reference_role": "arbitrary fixed normalization only; no absolute luminosity, stellar mass, K correction, extinction correction, or mass-to-light ratio is inferred",
+    "cluster_systemic_cz": "median heliocentric cz over all 78 spectroscopic Bullet members, recomputed in every ensemble draw after drawing the stated cz measurement errors",
+    "rest_frame_los_velocity": "(cz_i-cz_median)/(1+cz_median/c)",
+    "los_current_proxy": "relative_i_luminosity times rest_frame_los_velocity",
+    "cz_error_model": "independent Gaussian with each catalogued cz uncertainty",
+    "transverse_velocities": "unmeasured_not_imputed",
+    "claim": "luminosity-weighted line-of-sight current proxy, not a three-dimensional mass current"
+  },
+  "ensemble": {
+    "draws": 8192,
+    "random_generator": "numpy.random.Generator(PCG64)",
+    "seed": 190126,
+    "component_sampling": "Draw one exact enumerated joint state per conflict component and ensemble draw.",
+    "anchor_sampling": "Anchor coordinates remain fixed; catalogued cz errors are still propagated.",
+    "null_sampling": "For each selected null state and draw, sample a fresh coordinate from the frozen rounding rectangle."
+  },
+  "gates": {
+    "input_hashes_must_match": true,
+    "exact_candidate_hypothesis_rows": 640,
+    "exact_unique_probabilistic_candidates": 568,
+    "exact_shared_candidate_count": 60,
+    "maximum_conflict_component_members": 4,
+    "local_probability_normalization_tolerance": 1e-12,
+    "component_probability_normalization_tolerance": 1e-12,
+    "member_marginal_normalization_tolerance": 1e-12,
+    "candidate_occupancy_ceiling_tolerance": 1e-12,
+    "sampled_vs_exact_state_marginal_max_absolute_difference": 0.03,
+    "every_sample_must_be_one_to_one": true,
+    "all_72_bri_members_must_appear_in_every_draw": true,
+    "all_6_missing_bri_members_must_remain_explicit": true,
+    "lensing_halo_and_gravity_payload_forbidden": true,
+    "failure_rule": "Fail closed without changing the prior, conflict rule, null kernel, sample count, seed, luminosity proxy, velocity definition, or gates after seeing the result."
+  },
+  "outputs": {
+    "membership_inventory": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/membership_inventory.csv",
+    "state_marginals": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/state_marginals.csv",
+    "candidate_occupancy": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/candidate_occupancy.csv",
+    "component_partitions": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/component_partitions.csv",
+    "member_summary": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/member_summary.csv",
+    "ensemble": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/position_current_ensemble.csv.gz",
+    "figure": "results/sigma_v19az_probabilistic_member_current_ensemble/position_current_ensemble.png",
+    "report": "results/sigma_v19az_probabilistic_member_current_ensemble/report.json"
+  },
+  "claim_boundary": [
+    "V19AZ propagates positional identity and spectroscopic measurement uncertainty; it does not identify a hard counterpart for an ambiguous member.",
+    "Bessel I flux is a relative luminosity proxy, not stellar mass, total baryonic mass, or a fitted mass-to-light ratio.",
+    "Only the line-of-sight velocity is observed. Transverse currents remain missing and must be marginalized in a later physics protocol.",
+    "The 78-member spectroscopic catalog is not asserted to be a complete cluster-galaxy census.",
+    "No lensing, dark-matter map, halo fit, gravity residual, or Sigma parameter enters this ensemble."
+  ],
+  "authorization": {
+    "read_frozen_member_association_photometry_and_spectroscopy": true,
+    "condition_on_one_to_one_candidate_usage": true,
+    "construct_relative_luminosity_and_los_current_proxies": true,
+    "write_exact_marginals_and_ensemble": true,
+    "select_hard_ambiguous_counterparts": false,
+    "infer_stellar_mass": false,
+    "impute_transverse_velocity": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "joint_assignment_computed_at_freeze": false,
+    "component_partition_functions_computed_at_freeze": false,
+    "ensemble_drawn_at_freeze": false,
+    "sample_fidelity_computed_at_freeze": false,
+    "lensing_or_halo_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  }
+}
