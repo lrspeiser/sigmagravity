@@ -1,0 +1,138 @@
+{
+  "protocol_version": "SIGMA-V19BE-LONG-WAVE-ACTION-ADMISSION-1.0.0",
+  "status": "frozen after V19BD passed and while V19W was still running, before reading a V19X gas-state result, selecting a covariant action, operator, source activation, wavelength, coupling, phase or polarization, opening a lensing or halo payload, or changing gravity physics",
+  "purpose": "Turn the hypothesis that an additional gravitational metric mode has a wavelength longer than a star system into an action-level admission gate. Preserve the useful Solar-to-galaxy scale separation while prohibiting an unconserved filtered source, a free halo-equivalent wave, a per-object wavelength, or a replay of the failed linear isotropic operator.",
+  "parents": {
+    "v19bd_config": {
+      "path": "configs/sigma_v19bd_two_cluster_directional_source_uncertainty.json",
+      "sha256": "7e7c1f46e29c54679443817fb01149b79cd115887e3600209b074fb17309ed52"
+    },
+    "v19bd_report": {
+      "path": "results/sigma_v19bd_two_cluster_directional_source_uncertainty/report.json",
+      "sha256": "7de820f46b284c78a86aec616bca5d4309b4aec2b1f4daa25e00e4ada59edef8"
+    },
+    "long_wave_audit": {
+      "path": "docs/FORMULA_MODIFICATION_PHOTON_AND_FRAME_DRAGGING_AUDIT.md",
+      "sha256": "29380e731179950fdaeefb090499179d3afe4211e24dbc23f96261b6ddec9734"
+    },
+    "linear_spectral_audit": {
+      "path": "docs/SIGMA_V3B_LINEAR_NONLOCAL_SPECTRAL_AUDIT.md",
+      "sha256": "32ce2fe1cebe95cce1c21681a1236c1f6b339887f7f59d866f0527d65b229f6b"
+    },
+    "mechanism_exhaustion_audit": {
+      "path": "docs/SIGMA_V18_MECHANISM_EXHAUSTION_AND_V19_GATE.md",
+      "sha256": "8a2b48d93849cb5f8c18e2c82621fdd114367f450f04f2ffeec5ccd1c1fff367"
+    },
+    "v19x_frozen_protocol": {
+      "path": "configs/sigma_v19x_spectral_combination_commissioning.json",
+      "sha256": "e915f5d5be9d8dea5a2ecb1b8e00aeffd9fb10ed5b9aafccc258b040e8ad9afb"
+    }
+  },
+  "physical_postulate": {
+    "statement": "The physical metric may contain an additional baryon-forced mode whose universal correlation length or wavelength exceeds a planetary system, so its constant and uniform-gradient pieces are locally unobservable while its tidal curvature can change over galactic and cluster baselines.",
+    "not_assumed": [
+      "that ordinary Newtonian or GR near-field gravity is itself one monochromatic traveling wave",
+      "that wavelength determines amplitude, sign, phase, polarization, source or attraction",
+      "that a free cosmological wave may be adjusted to imitate an object halo",
+      "that a wavelength may be inferred separately from each galaxy or cluster"
+    ],
+    "registered_equation_ids": [
+      "SIGMA-LONG-WAVE-METRIC-MODE",
+      "SIGMA-LONG-WAVE-SOURCED-RESPONSE"
+    ]
+  },
+  "action_admission_requirements": {
+    "one_physical_metric": true,
+    "diffeomorphism_invariant_action": true,
+    "total_metric_source_conservation": true,
+    "universal_wavelength_no_object_fit": true,
+    "no_free_halo_equivalent_homogeneous_mode": true,
+    "quadratic_gr_limit": true,
+    "matter_and_light_unified": true,
+    "source_direction_from_covariant_baryonic_state": true,
+    "field_energy_and_exchange_derived_by_metric_variation": true,
+    "causal_no_incoming_or_cosmological_initial_state_fixed_universally": true,
+    "at_most_five_total_universal_physical_constants": true,
+    "zero_galaxy_cluster_labels": true,
+    "zero_per_object_gravity_parameters": true,
+    "zero_lensing_only_multipliers": true
+  },
+  "source_state_requirements": {
+    "covariant_inputs": [
+      "baryonic stress-energy tensor",
+      "baryon or species currents",
+      "isotropic pressure and trace-free stress in a declared covariant matter frame",
+      "causal assembly or propagation state if V19X makes it identifiable"
+    ],
+    "projection_warning": "The V19BA-V19BD line-of-sight luminosity-current moments are measurement proxies, not yet a complete local four-dimensional tensor or an action source.",
+    "filter_warning": "A curved-spacetime coarse-grained or retarded tensor is not assumed to be covariantly conserved merely because the microscopic baryonic stress-energy is conserved.",
+    "pending_input": "V19W must complete and V19X must supply target-blind gas thermodynamic and uncertainty maps before one combined source state can be admitted."
+  },
+  "mechanism_boundary": {
+    "closed_controls": [
+      "linear isotropic wavelength-only transfer from Sigma V3C",
+      "positive-spectrum linear infrared enhancement from Sigma V3B",
+      "rational infrared enhancement with a negative-residue massive pole",
+      "identity-projector point-source Yukawa or STVG-MOG realization",
+      "aether, Proca, massive-spin-two, material-memory or gauge-tidal carrier replay"
+    ],
+    "only_admissible_next_class": "A nonlinear, baryon-forced, source-state-sensitive interaction derived from one diffeomorphism-invariant action, with the GR quadratic propagator retained and no freely adjustable homogeneous halo state.",
+    "does_not_select_a_member_of_that_class": true
+  },
+  "illustrative_scale_check": {
+    "illustrative_correlation_length_kpc": 6.0,
+    "literal_wavelength_relation": "lambda is 2 pi times the correlation length",
+    "solar_baseline_au": 100.0,
+    "galaxy_radius_kpc": 10.0,
+    "parameter_status": "illustrative dimensional check only; neither 6 kpc nor its associated wavelength is selected as a Sigma constant"
+  },
+  "gates": {
+    "numeric_scale_separation": {
+      "maximum_literal_wave_tidal_scale": 1e-12,
+      "maximum_sourced_low_pass_small_baseline_scale": 1e-12,
+      "minimum_galaxy_scale_activation": 0.45,
+      "maximum_galaxy_scale_activation": 0.55,
+      "minimum_light_crossing_time_years": 10000.0
+    },
+    "must_fail_if": [
+      "the proposed added metric source is written on the Einstein-equation right-hand side without a conservation proof or a complete action variation",
+      "the source phase, direction, polarization, wavelength or amplitude is fitted to an individual object",
+      "the homogeneous solution can carry an arbitrary halo-shaped state unrelated to baryonic initial data",
+      "the same physical metric does not determine both massive trajectories and photon null geodesics",
+      "the proposal changes only the name, strength, length or exponent of a closed linear isotropic, Yukawa, Proca, aether or spin-two mechanism"
+    ]
+  },
+  "outputs": {
+    "report": "results/sigma_v19be_long_wave_action_admission/report.json"
+  },
+  "claim_boundary": [
+    "Passing V19BE shows only that the long-wave premise has been stated consistently enough to constrain the next derivation; it is not evidence that the extra mode exists.",
+    "The numerical calculation demonstrates scale separation, not compliance with Cassini, Mercury, pulsar timing, gravitational-wave speed, radiative-loss or PPN constraints.",
+    "No action, field content, source activation, coupling, wavelength, phase, polarization or universal Sigma constant is selected.",
+    "The collisionless source evidence comes from two spent merging clusters and has not been compared with a lensing residual.",
+    "No gas, lensing, halo or holdout payload is read by this protocol."
+  ],
+  "authorization": {
+    "read_frozen_v19bd_source_only_report": true,
+    "compute_illustrative_scale_separation": true,
+    "record_action_admission_requirements": true,
+    "read_v19w_or_v19x_gas_result": false,
+    "select_candidate_action": false,
+    "select_long_wave_operator_or_constant": false,
+    "read_lensing_or_halo_payload": false,
+    "open_holdout": false,
+    "change_gravity_physics": false
+  },
+  "integrity": {
+    "v19w_complete_at_freeze": false,
+    "v19x_gas_state_known_at_freeze": false,
+    "candidate_action_or_operator_selected_at_freeze": false,
+    "universal_constant_selected_at_freeze": false,
+    "lensing_halo_or_holdout_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/check_sigma_v19be_long_wave_action_admission.py",
+    "runner_sha256": "78d445575ebfd1757cf3f30313fc2d2b59a08f11144cc2b0fca27bd0ad92d4bb"
+  }
+}

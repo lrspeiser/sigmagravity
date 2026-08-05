@@ -468,3 +468,7 @@ disproving every possible long-wavelength gravitational mode.
    dependent form.  The linear isotropic wavelength-only realization has
    already failed its cross-cluster map gate and must not be recreated by
    renaming `A`, `L_Sigma`, or the Fourier exponent.
+
+The action-level conservation, homogeneous-state, parameter-budget, and
+post-V19X admission rules for this surviving interpretation are frozen in
+`docs/SIGMA_V19BE_LONG_WAVE_ACTION_ADMISSION.md`.
