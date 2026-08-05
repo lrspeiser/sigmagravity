@@ -1,0 +1,95 @@
+{
+  "protocol_version": "SIGMA-V19AY-SIGNED-FLUX-LIKELIHOOD-VALIDATION-1.0.0",
+  "status": "frozen_before_flux_space_validation_scoring",
+  "purpose": "Test whether the already-frozen BRI-to-griz color model can identify the five validation anchors directly in signed griz flux space while profiling out brightness, so low-SNR and negative measurements can remain probabilistic evidence rather than being discarded.",
+  "parent_artifacts": [
+    {
+      "path": "configs/sigma_v19av_signed_flux_stack.json",
+      "sha256": "3006568a5e558a490abec991bad513b60eca3683e2e487ec79ccd0ef26ca0ec2"
+    },
+    {
+      "path": "results/sigma_v19av_signed_flux_stack/report.json",
+      "sha256": "55b5a04db937a541a97efec8e08003857ed16d897ff5e2747a721801fccdd5bb"
+    },
+    {
+      "path": "data/derived/sigma_v19av_signed_flux_stack/anchor_stacks.csv",
+      "sha256": "102340cfe9f61ae6e36344768f98781c832255e50715882cb7731fe270ac26cd"
+    },
+    {
+      "path": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+      "sha256": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7"
+    },
+    {
+      "path": "configs/sigma_v19ax_delve_dr3_coadd_acquisition.json",
+      "sha256": "9b5bd56ec67f61ab99c50862fb26b777d6e4d399b87b75e87859d0929b93fc6b"
+    },
+    {
+      "path": "results/sigma_v19ax_delve_dr3_coadd_acquisition/report.json",
+      "sha256": "3d9524fffe4084a42af002cf84eee03500759b19d6b7e5f2fdfbf6c7c31d59da"
+    }
+  ],
+  "inputs": {
+    "v19av_report": "results/sigma_v19av_signed_flux_stack/report.json",
+    "anchor_stacks": "data/derived/sigma_v19av_signed_flux_stack/anchor_stacks.csv",
+    "commissioning_sample": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv"
+  },
+  "split": {
+    "development_ids_used_only_in_the_parent_color_fit": ["29", "78", "14", "07", "06", "37", "22", "16", "23", "24"],
+    "validation_ids": ["26", "57", "66", "71", "21"],
+    "validation_values_used_to_fit_color_model": false,
+    "validation_is_an_internal_once_frozen_check_not_a_new_untouched_holdout": true
+  },
+  "likelihood": {
+    "bands": ["g", "r", "i", "z"],
+    "predicted_colors": ["g-r", "r-i", "i-z"],
+    "color_model": "Use the unchanged V19AV development coefficients and predictive scales.",
+    "template": "Set relative r-band flux to one; convert predicted colors into positive griz flux ratios on the common AB scale.",
+    "color_uncertainty_integration": "Independent Gaussian predictive colors integrated with tensor-product Gauss-Hermite quadrature.",
+    "gauss_hermite_order_per_color": 5,
+    "templates_per_score": 125,
+    "brightness_nuisance": "For every color template, profile one nonnegative flux amplitude by weighted least squares.",
+    "score": "log of the Gaussian-color average of exp(-chi2_profile/2); Gaussian flux normalization is omitted so low-information flux cannot become positive identity evidence solely because its uncertainty is large.",
+    "signed_flux_rule": "Every finite positive, zero, or negative griz stack enters with its frozen uncertainty. No SNR or magnitude cut is applied.",
+    "candidate_application_if_validated": "Use only as a relative conditional-candidate likelihood and preserve the pre-existing positional null probability exactly."
+  },
+  "validation_gates": {
+    "exact_score_rows": 25,
+    "minimum_top1_retrievals": 3,
+    "minimum_mean_reciprocal_rank": 0.65,
+    "all_scores_must_be_finite": true,
+    "failure_rule": "Fail closed without changing quadrature order, profiling rule, predictive scales, validation members, top-one gate or reciprocal-rank gate."
+  },
+  "outputs": {
+    "validation_scores": "data/derived/sigma_v19ay_signed_flux_likelihood_validation/validation_scores.csv",
+    "report": "results/sigma_v19ay_signed_flux_likelihood_validation/report.json"
+  },
+  "claim_boundary": [
+    "V19AY validates a measurement likelihood; it does not score an ambiguous candidate or change a positional association.",
+    "The five anchors are the unchanged internal validation set and are not a newly untouched holdout.",
+    "Profiling brightness deliberately removes aperture normalization, so this test can validate color-shape discrimination but cannot estimate stellar luminosity or mass.",
+    "A pass authorizes a separately frozen full-posterior application that preserves null and ambiguous states; it does not authorize a hard counterpart, mass, current, lensing, halo or gravity claim."
+  ],
+  "authorization": {
+    "read_frozen_color_model_and_anchor_stacks": true,
+    "score_five_validation_by_five_validation_flux_pairs": true,
+    "profile_nonnegative_brightness": true,
+    "integrate_color_predictive_uncertainty": true,
+    "score_ambiguous_candidates": false,
+    "select_or_rank_counterparts": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "formula_and_gates_frozen_before_v19ay_validation_scores": true,
+    "v19ay_validation_scores_computed_before_freeze": false,
+    "ambiguous_candidate_flux_scored_before_freeze": false,
+    "candidate_identity_or_mass_selected_before_freeze": false,
+    "mass_lensing_halo_or_gravity_payload_opened_before_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ay_signed_flux_likelihood_validation.py",
+    "runner_sha256": "09bd3d32eaa889d52d4fefd02cb339f1287b4c5cb229cd4334de582697802b16"
+  }
+}
