@@ -1,0 +1,147 @@
+{
+  "protocol_version": "SIGMA-V19W2B-CROSS-DETECTOR-RESPONSE-COMMISSIONING-1.0.3",
+  "status": "frozen from the 2880-cell read-only V19W snapshot while the unchanged base process was still running, after all six cross-detector checkpoints completed and independently validated but before a successful commissioning report, reading the terminal missing workload, combining a spectrum, fitting a temperature, opening a lensing payload, or changing gravity physics",
+  "implementation_corrections": "Version 1.0.0 attempted to obtain the protected base scratch path from a nonexistent resources.scratch_root field and stopped with KeyError. Version 1.0.1 declared that already-known protected path explicitly but its disk-space probe then targeted the not-yet-created scratch parent and stopped with FileNotFoundError. Both attempts ended before creating the commissioning scratch, preparing an observation context, or writing a response product. Version 1.0.2 probed the existing /home/henry filesystem and all six checkpoints completed with every cell gate and independent audit passing, but the wrapper requested a nonexistent detector_reference report key after each audit and falsely recorded six KeyErrors; the actual nested field is response_position.detector_medoid. Version 1.0.3 corrects only that report-field path and reuses the immutable completed checkpoints. No selected cell, response rule, count, gate, scientific input or output changed.",
+  "purpose": "Close the uncovered implementation axis in V19W2. Its five exact-binmap cases all used CCD 3, while the live independently audited omission set spans CCD 0, 1, 2 and 3, four count regimes, zero and positive backgrounds, and eight observations. Commission the unchanged V19W2 exact-mask and detector-medoid implementation on six additional cells spanning every previously uncommissioned CCD and every newly represented observation context.",
+  "parents": {
+    "v19w_config": {
+      "path": "configs/sigma_v19w_full_response_production.json",
+      "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
+    },
+    "v19w_runner": {
+      "path": "scripts/run_sigma_v19w_full_response_production.py",
+      "sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
+    },
+    "v19u_manifest": {
+      "path": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+      "sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd"
+    },
+    "v19w2_config": {
+      "path": "configs/sigma_v19w2_exact_binmap_response_commissioning.json",
+      "sha256": "df3041c54bf14fc8c7071229ef5facc4011be1e94645027ff5f37903e9d516d7"
+    },
+    "v19w2_runner": {
+      "path": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
+      "sha256": "7bfa95bacc2d6904fb67262b1523cb58fab9cb492a0ccfcec15ae1ea41185810"
+    },
+    "v19w2_report": {
+      "path": "results/sigma_v19w2_exact_binmap_response_commissioning/report.json",
+      "sha256": "830f7d2cca5f84b2970a013c5cd89be9652d7628c107dbf5bbd5dfb966751efc"
+    },
+    "independent_auditor": {
+      "path": "scripts/audit_sigma_v19w_live_archive.py",
+      "sha256": "29a3fe09b2df37f5d55ab5d7587ac6f28ce530ad1ba29d564f6aa97d31218670"
+    },
+    "live_snapshot_report": {
+      "path": "results/sigma_v19w_live_archive_audit/report.json",
+      "sha256": "cab3a8cb93c93d537ab6eb4cc4a0dab610aca6b83dae31f831b25b19b24fde9d"
+    }
+  },
+  "snapshot_basis": {
+    "completed_cells": 2880,
+    "audited_product_files": 11520,
+    "maximum_completed_production_index": 2966,
+    "missing_at_or_before_frontier": 86,
+    "missing_source_count_range": [
+      1,
+      346
+    ],
+    "missing_background_zero_cells": 14,
+    "missing_background_positive_cells": 72,
+    "missing_obsids": [
+      554,
+      3184,
+      4984,
+      4985,
+      4986,
+      5355,
+      5356,
+      5357
+    ],
+    "missing_ccd_ids": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "interpretation": "This is a point-in-time implementation-coverage sample, not the terminal recovery workload."
+  },
+  "commissioning_cells": [
+    {
+      "cell_name": "BULLET_bin190_obs4986_ccd0",
+      "expected_production_index": 1636,
+      "expected_source_band_events": 177,
+      "expected_background_band_events": 601,
+      "coverage": "CCD 0, observation 4986, high positive background"
+    },
+    {
+      "cell_name": "BULLET_bin102_obs4986_ccd1",
+      "expected_production_index": 1545,
+      "expected_source_band_events": 1,
+      "expected_background_band_events": 0,
+      "coverage": "CCD 1, observation 4986, minimum source and zero background"
+    },
+    {
+      "cell_name": "BULLET_bin25_obs5355_ccd2",
+      "expected_production_index": 1878,
+      "expected_source_band_events": 56,
+      "expected_background_band_events": 35,
+      "coverage": "CCD 2, newly represented observation 5355, moderate counts"
+    },
+    {
+      "cell_name": "BULLET_bin76_obs5356_ccd2",
+      "expected_production_index": 2305,
+      "expected_source_band_events": 340,
+      "expected_background_band_events": 63,
+      "coverage": "CCD 2, newly represented observation 5356, near-maximum source count"
+    },
+    {
+      "cell_name": "BULLET_bin253_obs5357_ccd0",
+      "expected_production_index": 2888,
+      "expected_source_band_events": 1,
+      "expected_background_band_events": 0,
+      "coverage": "CCD 0, newly represented observation 5357, minimum source and zero background"
+    },
+    {
+      "cell_name": "BULLET_bin127_obs5357_ccd1",
+      "expected_production_index": 2753,
+      "expected_source_band_events": 281,
+      "expected_background_band_events": 55,
+      "coverage": "CCD 1, newly represented observation 5357, high source count"
+    }
+  ],
+  "selection_rule": "Use only tasks absent at or before the frozen live production frontier. Add the smallest declared set that covers every CCD not present in V19W2, all four observation contexts not present in V19W2, source counts at one and above 250, and both zero and positive background. No response shape, spectrum, temperature, gas state, lensing coordinate, halo target or gravity result enters selection.",
+  "execution": {
+    "runner": "scripts/run_sigma_v19w2b_cross_detector_response_commissioning.py",
+    "runner_sha256": "e32ed9c1184607674bad56162ced1f7b2fe083ca898c10250de01e2fa5107b7e",
+    "scratch_root": "/home/henry/sigma-v19w2b-cross-detector/v100",
+    "protected_base_scratch": "/home/henry/sigma-v19w-response-production/v100",
+    "free_space_probe": "/home/henry",
+    "output": "results/sigma_v19w2b_cross_detector_response_commissioning",
+    "maximum_concurrent_cells": 1,
+    "minimum_free_bytes_at_launch": 5000000000,
+    "may_run_while_base_process_is_active": true,
+    "base_archive_mutation": false
+  },
+  "gates": {
+    "all_parent_hashes_exact": true,
+    "v19w2_parent_passed": true,
+    "snapshot_integrity_and_coverage_counts_exact": true,
+    "all_six_cells_are_snapshot_omissions_with_exact_manifest_counts": true,
+    "all_previously_uncommissioned_ccds_covered": true,
+    "all_four_new_observation_contexts_covered": true,
+    "minimum_high_zero_and_positive_count_regimes_covered": true,
+    "all_six_exact_masks_equal_frozen_integer_binmap_labels": true,
+    "all_six_materialized_event_histograms_are_exact": true,
+    "all_six_detector_medoids_map_to_declared_ccd": true,
+    "all_six_arf_rmf_pha_link_scaling_size_and_hash_audits_pass": true,
+    "base_archive_remains_unmodified": true
+  },
+  "failure_rule": "Retain the failed scratch cell and report. Do not retry under this protocol, alter a bin label, response setting, detector reference, background rule, selected case or base archive. Do not launch V19W3; freeze a successor recovery only after this commissioning passes.",
+  "claim_boundary": [
+    "This commissions implementation coverage only; it does not enumerate the final recovery workload.",
+    "A pass does not prove every terminal omission will succeed, but it removes the untested-CCD and observation-context gap in V19W2.",
+    "No spectrum is combined or interpreted and no temperature, density, Mach state or shock speed is fitted.",
+    "No lensing, halo, galaxy rotation or gravity payload is opened and no gravity formula or parameter is changed."
+  ]
+}

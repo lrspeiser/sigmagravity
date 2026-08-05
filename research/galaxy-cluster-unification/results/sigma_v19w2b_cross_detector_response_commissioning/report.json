@@ -1,0 +1,362 @@
+{
+  "base_archive_modified": false,
+  "claim_boundary": [
+    "This commissions implementation coverage only; it does not enumerate the final recovery workload.",
+    "A pass does not prove every terminal omission will succeed, but it removes the untested-CCD and observation-context gap in V19W2.",
+    "No spectrum is combined or interpreted and no temperature, density, Mach state or shock speed is fitted.",
+    "No lensing, halo, galaxy rotation or gravity payload is opened and no gravity formula or parameter is changed."
+  ],
+  "completed_cells": [
+    {
+      "all_cell_gates_passed": true,
+      "background_band_events": 601,
+      "ccd_id": 0,
+      "cell_name": "BULLET_bin190_obs4986_ccd0",
+      "cell_report_sha256": "0a540c50d2aeabe56eba347690e515fdc134deeb41429c75cc7dff6b976271b6",
+      "cluster": "BULLET",
+      "four_product_bytes": 7416000,
+      "obsid": 4986,
+      "product_hashes": {
+        "arf": "383755ef5e2c3f281de4a4753415ffb5a222b61f44025ec5d01f695b0c0f29db",
+        "background_pha": "c92ea8b839911f93c5ec625e8423b8804661bf8029c727200649e19e3e69e399",
+        "rmf": "bc1d8a0a4f63f445891f669f21d65de420b3ffe4a12d2fd285b7148a5c1178f1",
+        "source_pha": "98efc8db3156c433d3c1b10c1a480ffaddbb15895e67ba7c324fe0e3ef50ac35"
+      },
+      "response_position": {
+        "detector_medoid": {
+          "command": [
+            "dmcoords",
+            "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4986_science_nosrc_evt.fits",
+            "asolfile=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/4986/corrected_asol1.lis",
+            "option=det",
+            "detx=3812.44189453125000",
+            "dety=3838.82543945312500",
+            "celfmt=deg",
+            "verbose=0",
+            "mode=h"
+          ],
+          "dec_deg": -55.9071393836731,
+          "detector_science": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4986_science_nosrc_evt.fits",
+          "detector_science_sha256": "280e4b459a000caea92e796dff83e449914c394a71605bd4f77649ea05b4c29b",
+          "events": 177,
+          "mapped_ccd_id": 0,
+          "mean_detx": 3811.733517059499,
+          "mean_dety": 3839.1478085275426,
+          "medoid_index": 101,
+          "ra_deg": 104.621664892582,
+          "reference_detx": 3812.44189453125,
+          "reference_dety": 3838.825439453125,
+          "rule": "0.5-7 keV selected event nearest the detector-coordinate centroid",
+          "selection": "/home/henry/sigma-v19w2b-cross-detector/v100/partial/c1636/e/s.fits[energy=500:7000][cols detx,dety,ccd_id]"
+        },
+        "reason": "outcome-blind detector medoid from an exact selected event; no fitted sky coordinate",
+        "refcoord": [
+          104.621664892582,
+          -55.9071393836731
+        ],
+        "resp_pos": "CENTROID"
+      },
+      "source_band_events": 177
+    },
+    {
+      "all_cell_gates_passed": true,
+      "background_band_events": 0,
+      "ccd_id": 1,
+      "cell_name": "BULLET_bin102_obs4986_ccd1",
+      "cell_report_sha256": "fad3394b51255e716f47982a51d37d42cdab0c42500c5fe14c919665585473c6",
+      "cluster": "BULLET",
+      "four_product_bytes": 7459200,
+      "obsid": 4986,
+      "product_hashes": {
+        "arf": "42f9566c7ed8c268d17ebda2ef9b75126718be4e4368e677b5e7d2ee4c4226be",
+        "background_pha": "21251638517377c92fd49506086182ccf66302c7a326de6ecac05dca947e58b8",
+        "rmf": "10cac7279a60d20d0c98218254a2b8af8beacf1f6483c855d8e789e0ca4ed5e1",
+        "source_pha": "adfdb11fcffdc15f9e84a4097ac64e39d9bf86fa8297f4a3164a3b6a3e98ff58"
+      },
+      "response_position": {
+        "detector_medoid": {
+          "command": [
+            "dmcoords",
+            "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4986_science_nosrc_evt.fits",
+            "asolfile=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/4986/corrected_asol1.lis",
+            "option=det",
+            "detx=4072.57592773437500",
+            "dety=3972.08276367187500",
+            "celfmt=deg",
+            "verbose=0",
+            "mode=h"
+          ],
+          "dec_deg": -55.94488097940702,
+          "detector_science": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf4986_science_nosrc_evt.fits",
+          "detector_science_sha256": "280e4b459a000caea92e796dff83e449914c394a71605bd4f77649ea05b4c29b",
+          "events": 1,
+          "mapped_ccd_id": 1,
+          "mean_detx": 4072.575927734375,
+          "mean_dety": 3972.082763671875,
+          "medoid_index": 0,
+          "ra_deg": 104.6450162056529,
+          "reference_detx": 4072.575927734375,
+          "reference_dety": 3972.082763671875,
+          "rule": "0.5-7 keV selected event nearest the detector-coordinate centroid",
+          "selection": "/home/henry/sigma-v19w2b-cross-detector/v100/partial/c1545/e/s.fits[energy=500:7000][cols detx,dety,ccd_id]"
+        },
+        "reason": "outcome-blind detector medoid from an exact selected event; no fitted sky coordinate",
+        "refcoord": [
+          104.6450162056529,
+          -55.94488097940702
+        ],
+        "resp_pos": "CENTROID"
+      },
+      "source_band_events": 1
+    },
+    {
+      "all_cell_gates_passed": true,
+      "background_band_events": 35,
+      "ccd_id": 2,
+      "cell_name": "BULLET_bin25_obs5355_ccd2",
+      "cell_report_sha256": "c7790910f19ec09c80ffb86bc8f60d1ecfb651a21f6ec9bc9b1ad28b3de4183d",
+      "cluster": "BULLET",
+      "four_product_bytes": 7401600,
+      "obsid": 5355,
+      "product_hashes": {
+        "arf": "b50444690788fa78588a9b8f432df9f0b868f955d87853400e522b2feab275db",
+        "background_pha": "957be7e1c956179c264a7fa2dd43eda5cf4cc9b8c20ff0c56cc09b3a4a224711",
+        "rmf": "bef2b561408715078e8dc08fd3075899a00960014ae8fa19a5df16e36dcec78a",
+        "source_pha": "c843f88e95cfb76508e4e50db63f87c05e87508b70914fd2e7df909f4be784e9"
+      },
+      "response_position": {
+        "detector_medoid": {
+          "command": [
+            "dmcoords",
+            "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5355_science_nosrc_evt.fits",
+            "asolfile=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5355/corrected_asol1.lis",
+            "option=det",
+            "detx=3774.00512695312500",
+            "dety=4121.03125000000000",
+            "celfmt=deg",
+            "verbose=0",
+            "mode=h"
+          ],
+          "dec_deg": -55.94239629403926,
+          "detector_science": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5355_science_nosrc_evt.fits",
+          "detector_science_sha256": "7f1b429eea90eba988506d1a33d2baff08ba3428b7b25ad8851ad2dda6621e62",
+          "events": 56,
+          "mapped_ccd_id": 2,
+          "mean_detx": 3776.7598310198105,
+          "mean_dety": 4116.037501743862,
+          "medoid_index": 21,
+          "ra_deg": 104.5889539386692,
+          "reference_detx": 3774.005126953125,
+          "reference_dety": 4121.03125,
+          "rule": "0.5-7 keV selected event nearest the detector-coordinate centroid",
+          "selection": "/home/henry/sigma-v19w2b-cross-detector/v100/partial/c1878/e/s.fits[energy=500:7000][cols detx,dety,ccd_id]"
+        },
+        "reason": "outcome-blind detector medoid from an exact selected event; no fitted sky coordinate",
+        "refcoord": [
+          104.5889539386692,
+          -55.94239629403926
+        ],
+        "resp_pos": "CENTROID"
+      },
+      "source_band_events": 56
+    },
+    {
+      "all_cell_gates_passed": true,
+      "background_band_events": 63,
+      "ccd_id": 2,
+      "cell_name": "BULLET_bin76_obs5356_ccd2",
+      "cell_report_sha256": "d04b28fb210c59663bbc37842448d2c519f1eedf7fc94641456b766581499b0b",
+      "cluster": "BULLET",
+      "four_product_bytes": 7418880,
+      "obsid": 5356,
+      "product_hashes": {
+        "arf": "f4a435f466f9338042ea8a522394408481a740dc76749e8794a6b104011c6653",
+        "background_pha": "6691b0aa87c726260ccd1b9a8d78f247fe1e2680c975f7a89f1428f36514ae7e",
+        "rmf": "0e80d74de7ba70f2c9e70114827cb4a7af483388fb84f7f497e0059672243c4e",
+        "source_pha": "169f38b21e82648ffcc4d8b97ee20e528311cc3d1be972e7bf688e09c0f161eb"
+      },
+      "response_position": {
+        "detector_medoid": {
+          "command": [
+            "dmcoords",
+            "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_evt.fits",
+            "asolfile=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5356/corrected_asol1.lis",
+            "option=det",
+            "detx=3870.38354492187500",
+            "dety=3970.42138671875000",
+            "celfmt=deg",
+            "verbose=0",
+            "mode=h"
+          ],
+          "dec_deg": -55.9338169092744,
+          "detector_science": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5356_science_nosrc_evt.fits",
+          "detector_science_sha256": "d710204058c6e1ce3ed7d8aa6306071d8a23736d7f35773075f99deaf18c3f1e",
+          "events": 340,
+          "mapped_ccd_id": 2,
+          "mean_detx": 3868.104574764476,
+          "mean_dety": 3970.8622443704044,
+          "medoid_index": 220,
+          "ra_deg": 104.629624954415,
+          "reference_detx": 3870.383544921875,
+          "reference_dety": 3970.42138671875,
+          "rule": "0.5-7 keV selected event nearest the detector-coordinate centroid",
+          "selection": "/home/henry/sigma-v19w2b-cross-detector/v100/partial/c2305/e/s.fits[energy=500:7000][cols detx,dety,ccd_id]"
+        },
+        "reason": "outcome-blind detector medoid from an exact selected event; no fitted sky coordinate",
+        "refcoord": [
+          104.629624954415,
+          -55.9338169092744
+        ],
+        "resp_pos": "CENTROID"
+      },
+      "source_band_events": 340
+    },
+    {
+      "all_cell_gates_passed": true,
+      "background_band_events": 0,
+      "ccd_id": 0,
+      "cell_name": "BULLET_bin253_obs5357_ccd0",
+      "cell_report_sha256": "8f7b6749dc3f6bb63e6db14a0f788c91314969d76e6b06f643d7357e3fa07d3a",
+      "cluster": "BULLET",
+      "four_product_bytes": 7459200,
+      "obsid": 5357,
+      "product_hashes": {
+        "arf": "28a679bfbd903eb8e7edb83edb63def919a1bfc31dc3459f13be9ec7efe472b7",
+        "background_pha": "1cdcca3714230590182c40bec383b255da83b612c527a636bba7b1209a770186",
+        "rmf": "0defae3a0372d25b46650dab2725aceac84669f2113187531112c87c41f1301a",
+        "source_pha": "904dd169a223bbfcfde920d3bdc28604a4f201c4ee0efbd6b175154afbe89e6a"
+      },
+      "response_position": {
+        "detector_medoid": {
+          "command": [
+            "dmcoords",
+            "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5357_science_nosrc_evt.fits",
+            "asolfile=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5357/corrected_asol1.lis",
+            "option=det",
+            "detx=4042.05371093750000",
+            "dety=4157.00878906250000",
+            "celfmt=deg",
+            "verbose=0",
+            "mode=h"
+          ],
+          "dec_deg": -55.95809276876589,
+          "detector_science": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5357_science_nosrc_evt.fits",
+          "detector_science_sha256": "dd97f7e89b571bc857a8a6ebd365ea817adc58f0b58adcf981c132ba9cc3d371",
+          "events": 1,
+          "mapped_ccd_id": 0,
+          "mean_detx": 4042.0537109375,
+          "mean_dety": 4157.0087890625,
+          "medoid_index": 0,
+          "ra_deg": 104.6116358635657,
+          "reference_detx": 4042.0537109375,
+          "reference_dety": 4157.0087890625,
+          "rule": "0.5-7 keV selected event nearest the detector-coordinate centroid",
+          "selection": "/home/henry/sigma-v19w2b-cross-detector/v100/partial/c2888/e/s.fits[energy=500:7000][cols detx,dety,ccd_id]"
+        },
+        "reason": "outcome-blind detector medoid from an exact selected event; no fitted sky coordinate",
+        "refcoord": [
+          104.6116358635657,
+          -55.95809276876589
+        ],
+        "resp_pos": "CENTROID"
+      },
+      "source_band_events": 1
+    },
+    {
+      "all_cell_gates_passed": true,
+      "background_band_events": 55,
+      "ccd_id": 1,
+      "cell_name": "BULLET_bin127_obs5357_ccd1",
+      "cell_report_sha256": "196b74acaff94be9a7ea692d694e59a87e7c3aeb2779e938bdbec159969dc7c1",
+      "cluster": "BULLET",
+      "four_product_bytes": 7467840,
+      "obsid": 5357,
+      "product_hashes": {
+        "arf": "d08e48cd59f396aad6bde2c18b6cc3a308a6ce7b0cf9b653fce2d807dc74d356",
+        "background_pha": "92e5673f0f583e7ad2476ea7bc49e848e73ccede462c3def33bb70964204ae2f",
+        "rmf": "332323819acb27b0ac904836f66beee4de2057c9d1355a19d09a1988a29f23ee",
+        "source_pha": "3148a75545e91cd673bc582e7b2ae99ffa4ea206ebcc59e213b722d83155f9c0"
+      },
+      "response_position": {
+        "detector_medoid": {
+          "command": [
+            "dmcoords",
+            "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5357_science_nosrc_evt.fits",
+            "asolfile=@/home/henry/sigma-v19f-chandra/astrometry_v102/BULLET/5357/corrected_asol1.lis",
+            "option=det",
+            "detx=4085.67846679687500",
+            "dety=4025.94335937500000",
+            "celfmt=deg",
+            "verbose=0",
+            "mode=h"
+          ],
+          "dec_deg": -55.94731123103488,
+          "detector_science": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/BULLET/events/acisf5357_science_nosrc_evt.fits",
+          "detector_science_sha256": "dd97f7e89b571bc857a8a6ebd365ea817adc58f0b58adcf981c132ba9cc3d371",
+          "events": 281,
+          "mapped_ccd_id": 1,
+          "mean_detx": 4085.326267446063,
+          "mean_dety": 4025.652688674655,
+          "medoid_index": 253,
+          "ra_deg": 104.6393149850355,
+          "reference_detx": 4085.678466796875,
+          "reference_dety": 4025.943359375,
+          "rule": "0.5-7 keV selected event nearest the detector-coordinate centroid",
+          "selection": "/home/henry/sigma-v19w2b-cross-detector/v100/partial/c2753/e/s.fits[energy=500:7000][cols detx,dety,ccd_id]"
+        },
+        "reason": "outcome-blind detector medoid from an exact selected event; no fitted sky coordinate",
+        "refcoord": [
+          104.6393149850355,
+          -55.94731123103488
+        ],
+        "resp_pos": "CENTROID"
+      },
+      "source_band_events": 281
+    }
+  ],
+  "config_sha256": "2ea37d6cf7969ca0b80133e35f6d55fe44f263880e636e50e5c490c213137a52",
+  "failures": {},
+  "gates": {
+    "all_four_new_observation_contexts_covered": true,
+    "all_parent_hashes_exact": true,
+    "all_previously_uncommissioned_ccds_covered": true,
+    "all_six_arf_rmf_pha_link_scaling_size_and_hash_audits_pass": true,
+    "all_six_cells_are_snapshot_omissions_with_exact_manifest_counts": true,
+    "all_six_detector_medoids_map_to_declared_ccd": true,
+    "all_six_exact_masks_equal_frozen_integer_binmap_labels": true,
+    "all_six_materialized_event_histograms_are_exact": true,
+    "base_archive_remains_unmodified": true,
+    "minimum_high_zero_and_positive_count_regimes_covered": true,
+    "snapshot_integrity_and_coverage_counts_exact": true,
+    "v19w2_parent_passed": true
+  },
+  "generated_utc": "2026-08-05T13:51:55.878703+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "input_hashes": {
+    "independent_auditor": "29a3fe09b2df37f5d55ab5d7587ac6f28ce530ad1ba29d564f6aa97d31218670",
+    "live_snapshot_report": "cab3a8cb93c93d537ab6eb4cc4a0dab610aca6b83dae31f831b25b19b24fde9d",
+    "v19u_manifest": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd",
+    "v19w2_config": "df3041c54bf14fc8c7071229ef5facc4011be1e94645027ff5f37903e9d516d7",
+    "v19w2_report": "830f7d2cca5f84b2970a013c5cd89be9652d7628c107dbf5bbd5dfb966751efc",
+    "v19w2_runner": "7bfa95bacc2d6904fb67262b1523cb58fab9cb492a0ccfcec15ae1ea41185810",
+    "v19w_config": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197",
+    "v19w_runner": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
+  },
+  "launch_free_bytes": 755221991424,
+  "lensing_halo_or_gravity_payload_opened": false,
+  "protocol_version": "SIGMA-V19W2B-CROSS-DETECTOR-RESPONSE-COMMISSIONING-1.0.3",
+  "runner_sha256": "e32ed9c1184607674bad56162ced1f7b2fe083ca898c10250de01e2fa5107b7e",
+  "scratch_root": "/home/henry/sigma-v19w2b-cross-detector/v100",
+  "selected_cells": [
+    "BULLET_bin190_obs4986_ccd0",
+    "BULLET_bin102_obs4986_ccd1",
+    "BULLET_bin25_obs5355_ccd2",
+    "BULLET_bin76_obs5356_ccd2",
+    "BULLET_bin253_obs5357_ccd0",
+    "BULLET_bin127_obs5357_ccd1"
+  ],
+  "spectrum_combined_or_fitted": false,
+  "status": "cross_detector_exact_binmap_commissioning_passed",
+  "temperature_density_mach_or_speed_fitted": false,
+  "v19w4_hardened_recovery_may_be_frozen": true
+}

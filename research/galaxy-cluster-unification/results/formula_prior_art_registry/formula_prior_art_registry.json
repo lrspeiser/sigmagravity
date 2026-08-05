@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 168,
+    "sigma_protocols": 169,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 145,
     "eligibility": {
@@ -7392,6 +7392,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "df3041c54bf14fc8c7071229ef5facc4011be1e94645027ff5f37903e9d516d7"
+    },
+    {
+      "config": "configs/sigma_v19w2b_cross_detector_response_commissioning.json",
+      "protocol_version": "SIGMA-V19W2B-CROSS-DETECTOR-RESPONSE-COMMISSIONING-1.0.3",
+      "status": "frozen from the 2880-cell read-only V19W snapshot while the unchanged base process was still running, after all six cross-detector checkpoints completed and independently validated but before a successful commissioning report, reading the terminal missing workload, combining a spectrum, fitting a temperature, opening a lensing payload, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "2ea37d6cf7969ca0b80133e35f6d55fe44f263880e636e50e5c490c213137a52"
     },
     {
       "config": "configs/sigma_v19w3_full_response_recovery.json",

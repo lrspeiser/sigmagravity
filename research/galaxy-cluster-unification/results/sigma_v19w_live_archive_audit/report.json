@@ -1,13 +1,13 @@
 {
   "active_partial_directories_observed_after_snapshot": 4,
   "attempt_counts": {
-    "1": 2569
+    "1": 2880
   },
-  "audited_product_bytes": 16991812800,
-  "audited_product_files": 10276,
+  "audited_product_bytes": 19057351680,
+  "audited_product_files": 11520,
   "claim_boundary": "This is a point-in-time integrity audit of the completed checkpoints present when the snapshot began. It does not authorize V19X or claim that V19W has completed.",
   "cluster_counts": {
-    "BULLET": 2569
+    "BULLET": 2880
   },
   "config_sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197",
   "exhausted_failed_cells_observed_after_snapshot": [
@@ -31,7 +31,7 @@
   },
   "gravity_formula_or_parameter_changed": false,
   "lensing_halo_or_gravity_payload_opened": false,
-  "maximum_completed_production_index": 2632,
+  "maximum_completed_production_index": 2966,
   "missing_manifest_tasks_at_or_before_maximum_completed_index": [
     {
       "batch_id": 1,
@@ -347,6 +347,121 @@
       "batch_id": 41,
       "cell_name": "BULLET_bin384_obs5356_ccd2",
       "production_index": 2624
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin22_obs5357_ccd0",
+      "production_index": 2653
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin49_obs5357_ccd0",
+      "production_index": 2674
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin49_obs5357_ccd1",
+      "production_index": 2675
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin51_obs5357_ccd1",
+      "production_index": 2678
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin52_obs5357_ccd0",
+      "production_index": 2679
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin59_obs5357_ccd1",
+      "production_index": 2685
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin65_obs5357_ccd1",
+      "production_index": 2692
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin69_obs5357_ccd0",
+      "production_index": 2695
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin72_obs5357_ccd1",
+      "production_index": 2699
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin102_obs5357_ccd0",
+      "production_index": 2727
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin121_obs5357_ccd0",
+      "production_index": 2746
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin127_obs5357_ccd1",
+      "production_index": 2753
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin161_obs5357_ccd0",
+      "production_index": 2783
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin172_obs5357_ccd0",
+      "production_index": 2796
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin176_obs5357_ccd1",
+      "production_index": 2802
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin188_obs5357_ccd1",
+      "production_index": 2816
+    },
+    {
+      "batch_id": 45,
+      "cell_name": "BULLET_bin221_obs5357_ccd1",
+      "production_index": 2852
+    },
+    {
+      "batch_id": 45,
+      "cell_name": "BULLET_bin228_obs5357_ccd1",
+      "production_index": 2859
+    },
+    {
+      "batch_id": 45,
+      "cell_name": "BULLET_bin238_obs5357_ccd1",
+      "production_index": 2871
+    },
+    {
+      "batch_id": 45,
+      "cell_name": "BULLET_bin245_obs5357_ccd0",
+      "production_index": 2878
+    },
+    {
+      "batch_id": 46,
+      "cell_name": "BULLET_bin253_obs5357_ccd0",
+      "production_index": 2888
+    },
+    {
+      "batch_id": 46,
+      "cell_name": "BULLET_bin277_obs5357_ccd0",
+      "production_index": 2914
+    },
+    {
+      "batch_id": 47,
+      "cell_name": "BULLET_bin309_obs5357_ccd1",
+      "production_index": 2949
     }
   ],
   "protocol_version": "SIGMA-V19W-FULL-RESPONSE-PRODUCTION-1.0.0",
@@ -354,10 +469,10 @@
   "read_only": true,
   "scientific_spectrum_combined_or_fitted": false,
   "scratch_root": "/home/henry/sigma-v19w-response-production/v100",
-  "snapshot_cell_names_sha256": "f777f583f719329d6381a1961e785f827413a4079342712d9d839ff330df6bf3",
-  "snapshot_completed_cells": 2569,
-  "snapshot_completed_utc": "2026-08-05T12:57:13.153952+00:00",
-  "snapshot_started_utc": "2026-08-05T12:57:09.812187+00:00",
+  "snapshot_cell_names_sha256": "1294dbd74991f72d3baab405fa2c685971300aeee6ee13752c1a0d8a804cfe2b",
+  "snapshot_completed_cells": 2880,
+  "snapshot_completed_utc": "2026-08-05T13:43:12.295443+00:00",
+  "snapshot_started_utc": "2026-08-05T13:43:09.067389+00:00",
   "status": "completed_checkpoint_snapshot_passed_with_exhausted_base_production_cell",
   "temperature_density_mach_or_speed_fitted": false,
   "v19w_runner_sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
