@@ -1,0 +1,50 @@
+{
+  "ambiguous_candidate_scoring_performed": false,
+  "claim_boundary": [
+    "V19AY validates a measurement likelihood; it does not score an ambiguous candidate or change a positional association.",
+    "The five anchors are the unchanged internal validation set and are not a newly untouched holdout.",
+    "Profiling brightness deliberately removes aperture normalization, so this test can validate color-shape discrimination but cannot estimate stellar luminosity or mass.",
+    "A pass authorizes a separately frozen full-posterior application that preserves null and ambiguous states; it does not authorize a hard counterpart, mass, current, lensing, halo or gravity claim."
+  ],
+  "decision": "failed_closed",
+  "gate_results": {
+    "all_scores_finite": true,
+    "exact_score_rows": true,
+    "minimum_mrr": false,
+    "minimum_top1": false,
+    "no_ambiguous_candidate_scoring": true
+  },
+  "likelihood": {
+    "bands": [
+      "g",
+      "r",
+      "i",
+      "z"
+    ],
+    "brightness_amplitude_profiled_nonnegative": true,
+    "color_predictive_scales_mag": [
+      0.05327303467365886,
+      0.05,
+      0.05
+    ],
+    "gauss_hermite_order_per_color": 5,
+    "quadrature_templates_per_score": 125,
+    "signed_flux_retained": true
+  },
+  "outputs": {
+    "validation_scores": "data/derived/sigma_v19ay_signed_flux_likelihood_validation/validation_scores.csv",
+    "validation_scores_sha256": "fa600b1e94c6d9beb5b9ca740faaa0bc01ba2703e1ac3b6b26b18e071a49b7ab"
+  },
+  "protocol_version": "SIGMA-V19AY-SIGNED-FLUX-LIKELIHOOD-VALIDATION-1.0.0",
+  "validation": {
+    "mean_reciprocal_rank": 0.5,
+    "top1_retrievals": 1,
+    "true_pair_ranks": {
+      "21": 2,
+      "26": 2,
+      "57": 1,
+      "66": 4,
+      "71": 4
+    }
+  }
+}
