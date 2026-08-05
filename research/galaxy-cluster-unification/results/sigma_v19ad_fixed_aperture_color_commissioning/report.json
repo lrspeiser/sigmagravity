@@ -1,0 +1,79 @@
+{
+  "ambiguous_candidate_photometry_scored": false,
+  "ambiguous_likelihood_application_authorized": false,
+  "claim_boundary": [
+    "V19AD is an internal measurement commissioning test on the unchanged provisional singleton split.",
+    "Only the 4-arcsec primary aperture can authorize the next stage; 2- and 8-arcsec results are sensitivity diagnostics.",
+    "A pass authorizes a separately frozen ambiguous-candidate color likelihood, not a counterpart, mass, current, lensing, halo, or gravity result.",
+    "A failure preserves every V19AA ambiguous state and requires synthetic SEDs, forced photometry on original images, or better coordinates."
+  ],
+  "config": "configs/sigma_v19ad_fixed_aperture_color_commissioning.json",
+  "config_sha256": "3a164e650c71c8e93b6d13febcc251084b4ddb0d71a785585ac9fb6b3469e860",
+  "counterpart_selected": false,
+  "gates": {
+    "all_commissioning_gates_pass": false,
+    "all_optimizers_succeeded": false,
+    "all_primary_rows_have_griz": false,
+    "color_only_mean_reciprocal_rank": false,
+    "color_only_top1_retrieval": false,
+    "exact_sample_and_split": true,
+    "no_ambiguous_association_mass_lensing_or_gravity": true,
+    "validation_median_absolute_error_each_color": false
+  },
+  "generated_utc": "2026-08-05T08:17:21.580153+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "implementation": {
+    "post_freeze_correction": "The first execution stopped before fitting when the primary sample lacked complete accepted griz. The runner was changed only to serialize that preregistered failure and missing-band evidence; no aperture, flag, error, split, model, threshold, or authorization changed.",
+    "runner": "scripts/run_sigma_v19ad_fixed_aperture_color_commissioning.py",
+    "runner_sha256": "5dd00bdd114c97d28df5dd6e9e3fc6cde56740ef815b92f7b4a47ead075aa552"
+  },
+  "lensing_or_halo_payload_opened": false,
+  "mass_current_constructed": false,
+  "outputs": {
+    "aggregated_sample": "data/derived/sigma_v19ad_fixed_aperture_color_commissioning/aggregated_sample.csv",
+    "aggregated_sample_sha256": "14d4e8306d7f38f0942bcf334d4acaadc4d4225fc6266d28d67ab340f1220cd4"
+  },
+  "parent_hashes": {
+    "configs/sigma_v19ab_bessel_nsc_transform_commissioning.json": "1e346fb1b0097cd6b16058b125cf51ab94bc2a845b1cd0419c350a9476c78263",
+    "configs/sigma_v19ac_nsc_measurement_photometry.json": "6b56b4a72c1ccfd6d839ae98234aa43a576694707cd231b70d751be01d723d6c",
+    "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7",
+    "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv": "05ca7f66bc62184a84f6f980986eb303b9aaf5b3ae24f27d7183c70b8c7e27dd",
+    "results/sigma_v19ab_bessel_nsc_transform_commissioning/report.json": "f6364489e16dee9b44928dcaea70d69d11c7770df761470a7fa0cfa41e1f3176",
+    "results/sigma_v19ac_nsc_measurement_photometry/provenance.json": "9ec0342233d4b2781fb2acb0efb689ce5c15ae4a0379b78881cce51aaece32ee"
+  },
+  "primary": {
+    "aperture_diameter_arcsec": 4,
+    "complete_griz": false,
+    "fit_or_validation_scoring_performed": false,
+    "missing_rows": [
+      {
+        "accepted_measurements": {
+          "g": 1,
+          "i": 0,
+          "r": 0,
+          "z": 4
+        },
+        "missing_filters": [
+          "r",
+          "i"
+        ],
+        "nsc_id": "179969_8549",
+        "object_id": "57",
+        "split": "validation"
+      }
+    ]
+  },
+  "report_version": "SIGMA-V19AD-FIXED-APERTURE-COLOR-COMMISSIONING-1.0.0",
+  "sensitivity": [
+    {
+      "aperture_diameter_arcsec": 2,
+      "complete_griz": false
+    },
+    {
+      "aperture_diameter_arcsec": 8,
+      "complete_griz": false
+    }
+  ],
+  "status": "failed_before_fit_incomplete_primary_photometry",
+  "stellar_mass_inferred": false
+}
