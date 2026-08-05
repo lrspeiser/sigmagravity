@@ -57,7 +57,8 @@ def test_execution_waits_for_complete_gas_chain() -> None:
     prerequisites = MODULE.build_report()["execution_prerequisites"]
     assert prerequisites["terminal_v19w4_unified_response_pass"]
     assert prerequisites["terminal_v19x2_commissioning_pass"]
-    assert prerequisites["all_494_frozen_regional_temperature_fits_pass"]
+    assert prerequisites["all_494_frozen_regional_temperature_fits_attempted_and_finite"]
+    assert prerequisites["minimum_quality_passing_regions_per_cluster"] == 12
     assert prerequisites["common_grid_gas_density_temperature_pressure_entropy_posterior_exists"]
     assert prerequisites["current_state"].startswith("pending")
 

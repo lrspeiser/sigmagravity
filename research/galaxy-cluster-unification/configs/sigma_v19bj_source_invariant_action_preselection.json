@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19BJ-SOURCE-INVARIANT-ACTION-PRESELECTION-1.0.0",
-  "status": "frozen before terminal V19W/V19W4 evidence, before V19X2 commissioning or the 494-region thermodynamic map, before opening any lensing or halo target, and before selecting an action, operator, field content, wavelength, coupling, or universal constant",
+  "protocol_version": "SIGMA-V19BJ-SOURCE-INVARIANT-ACTION-PRESELECTION-1.0.1",
+  "status": "frozen before terminal V19W/V19W4 evidence, before V19X2 commissioning or the 494-region thermodynamic map, before opening any lensing or halo target, and before selecting an action, operator, field content, wavelength, coupling, or universal constant; version 1.0.1 corrects the prerequisite wording before any regional fit existed so it matches frozen V19H: all 494 regions are attempted and require finite best fits, while at least 12 regions per cluster—not all 494—must pass the individual quality gate",
   "purpose": "Pre-register which covariant baryonic source-state features may be tested after the gas maps exist, the target-blind identifiability gates they must pass, and how those results may constrain an eventual action placement without fitting gravity to Bullet or Abell 2146 lensing.",
   "parents": {
     "long_wave_action_admission_config": {
@@ -27,7 +27,9 @@
   "execution_prerequisites": {
     "terminal_v19w4_unified_response_pass": true,
     "terminal_v19x2_commissioning_pass": true,
-    "all_494_frozen_regional_temperature_fits_pass": true,
+    "all_494_frozen_regional_temperature_fits_attempted_and_finite": true,
+    "minimum_quality_passing_regions_per_cluster": 12,
+    "regional_quality_rule": "Retain every finite best fit regardless of its individual uncertainty/statistic subgate; fail if a region has no finite best fit, and require at least 12 individual quality passes in each cluster exactly as frozen in V19H.",
     "common_grid_gas_density_temperature_pressure_entropy_posterior_exists": true,
     "collisionless_and_gas_maps_share_verified_astrometry": true,
     "joint_projection_resolution_and_measurement_posterior_exists": true,
@@ -223,6 +225,6 @@
   ],
   "implementation": {
     "runner": "scripts/check_sigma_v19bj_source_invariant_action_preselection.py",
-    "runner_sha256": "2670b2e19d2f9082060bd3c51c235f9f512b46df21da3b84bd0bea4e0c3a710f"
+    "runner_sha256": "6c28c48baa2b37fbe642b423293f51c448b783621df1486ccee83bacbac80193"
   }
 }

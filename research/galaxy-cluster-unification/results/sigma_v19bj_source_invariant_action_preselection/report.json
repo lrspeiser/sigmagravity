@@ -42,7 +42,7 @@
     "Solar and PPN work remains a later hard veto; it is not used to tune this galaxy/cluster source preselection."
   ],
   "config": "configs/sigma_v19bj_source_invariant_action_preselection.json",
-  "config_sha256": "34386255a39b73ce19a692aa9833dc6b6b59f394e379bfd307410cb9639ba93f",
+  "config_sha256": "3a66d06c49d2a8d9481453d8ce23582468a0a81d0a796c5f7e918d04f7229bf4",
   "dark_matter_phenomenology_implications": [
     {
       "near_term_prediction": "The selected source tensor must predict convergence and shear orientation from the same quasistatic Weyl potential used for strong-lensing image roots; a wrong orientation is a source-geometry failure, not an amplitude problem.",
@@ -67,11 +67,13 @@
   ],
   "decision": "passed_target_blind_source_preselection_freeze",
   "execution_prerequisites": {
-    "all_494_frozen_regional_temperature_fits_pass": true,
+    "all_494_frozen_regional_temperature_fits_attempted_and_finite": true,
     "collisionless_and_gas_maps_share_verified_astrometry": true,
     "common_grid_gas_density_temperature_pressure_entropy_posterior_exists": true,
     "current_state": "pending; this protocol freezes the later calculation but does not execute it",
     "joint_projection_resolution_and_measurement_posterior_exists": true,
+    "minimum_quality_passing_regions_per_cluster": 12,
+    "regional_quality_rule": "Retain every finite best fit regardless of its individual uncertainty/statistic subgate; fail if a region has no finite best fit, and require at least 12 individual quality passes in each cluster exactly as frozen in V19H.",
     "terminal_v19w4_unified_response_pass": true,
     "terminal_v19x2_commissioning_pass": true
   },
@@ -110,7 +112,7 @@
   },
   "implementation": {
     "runner": "scripts/check_sigma_v19bj_source_invariant_action_preselection.py",
-    "runner_sha256": "2670b2e19d2f9082060bd3c51c235f9f512b46df21da3b84bd0bea4e0c3a710f"
+    "runner_sha256": "6c28c48baa2b37fbe642b423293f51c448b783621df1486ccee83bacbac80193"
   },
   "input_hashes": {
     "broad_phenomenology_contract": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd",
@@ -122,9 +124,9 @@
   "next_decision": {
     "advance": "Require at least one scalar activation and one direction to pass every frozen gate in both clusters, then derive the least-field-content healthy compatible action placement.",
     "stop": "If no registered feature passes, obtain direct gas velocity or another independent merger sample; do not tune an action. If three materially different action derivations fail the same gate, reconsider the mechanism.",
-    "when_authorized": "After V19W4, V19X2, all 494 regional fits, and the common-grid gas posterior pass, score only the registered source features on Bullet and Abell 2146 without opening lensing."
+    "when_authorized": "After V19W4, V19X2, all 494 regional fit attempts have finite best fits, each cluster has at least 12 individual quality passes, and the common-grid gas posterior passes, score only the registered source features on Bullet and Abell 2146 without opening lensing."
   },
-  "protocol_version": "SIGMA-V19BJ-SOURCE-INVARIANT-ACTION-PRESELECTION-1.0.0",
+  "protocol_version": "SIGMA-V19BJ-SOURCE-INVARIANT-ACTION-PRESELECTION-1.0.1",
   "source_library_summary": {
     "directional_after_gas": [
       "I2_RELATIVE_CURRENT",

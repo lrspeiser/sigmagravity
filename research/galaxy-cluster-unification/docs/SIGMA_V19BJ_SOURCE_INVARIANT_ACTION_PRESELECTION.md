@@ -4,10 +4,13 @@
 
 V19BJ freezes the question that the completed cluster thermodynamic maps are
 allowed to answer.  It does **not** choose a new gravity equation.  After the
-V19W4 unified response archive, V19X2 commissioning, all 494 regional fits and
-the common-grid gas posterior pass, the source-only Bullet and Abell 2146 data
-may test a small registered library of baryonic state variables.  Lensing,
-halo maps and gravity residuals remain sealed during that selection.
+V19W4 unified response archive, V19X2 commissioning, all 494 regional fit
+attempts and the common-grid gas posterior pass, the source-only Bullet and
+Abell 2146 data may test a small registered library of baryonic state
+variables.  Every region must have a finite best fit, while at least 12 regions
+per cluster must pass the individual uncertainty/statistic gate, exactly as
+frozen in V19H.  Lensing, halo maps and gravity residuals remain sealed during
+that selection.
 
 The reason is simple.  Total baryonic density tells us where ordinary matter
 is, but the same density can occur in a settled disk, a relaxed cluster or two

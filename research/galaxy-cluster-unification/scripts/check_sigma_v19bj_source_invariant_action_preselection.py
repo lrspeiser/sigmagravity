@@ -196,9 +196,10 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
         },
         "next_decision": {
             "when_authorized": (
-                "After V19W4, V19X2, all 494 regional fits, and the common-grid gas "
-                "posterior pass, score only the registered source features on Bullet and "
-                "Abell 2146 without opening lensing."
+                "After V19W4, V19X2, all 494 regional fit attempts have finite best "
+                "fits, each cluster has at least 12 individual quality passes, and the "
+                "common-grid gas posterior passes, score only the registered source "
+                "features on Bullet and Abell 2146 without opening lensing."
             ),
             "advance": (
                 "Require at least one scalar activation and one direction to pass every "

@@ -1,5 +1,21 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19X3 full regional spectral preflight
+
+The executable gap after V19X2 commissioning is now closed in advance.  A
+checkpointed successor groups all 5,082 unified response cells into the 366
+Bullet and 128 Abell 2146 regions, combines each region once, fixes abundance
+to the passing cluster-integrated V19X2 value and applies the identical plasma
+fit and uncertainty rules.  Separate combination and fit checkpoints are
+content-bound to cell identities, PHA hashes, count totals and abundance, so a
+long run can resume without outcome-selective recombination or refitting.
+
+The mechanical freezer still refuses to emit a V19X3 configuration until
+V19X2 has passed.  Seven synthetic tests pass.  No production region was
+combined, no temperature or gas state was learned and no lensing or gravity
+payload was opened.  See
+[`SIGMA_V19X3_FULL_REGIONAL_SPECTRAL_PRODUCTION_PREFLIGHT.md`](SIGMA_V19X3_FULL_REGIONAL_SPECTRAL_PRODUCTION_PREFLIGHT.md).
+
 ## 2026-08-05 Sigma V19BJ source-invariant/action preselection
 
 The post-gas decision is now frozen before any V19X temperature, lensing or
@@ -16,8 +32,10 @@ the response is not rescued with lensing or a tuned combination; direct gas
 velocity information or another independent merger is required.  Three
 action-placement classes are registered for later mathematical derivation,
 but none is selected.  This advances the physical-postulate/source-definition
-work while preserving V19W/V19W4, V19X2 and the 494-region gas map as mandatory
-prerequisites.  A reusable projected-map library now passes six manufactured
+work while preserving V19W/V19W4, V19X2 and all 494 regional fit attempts as
+mandatory prerequisites.  Every region needs a finite best fit and at least
+12 regions per cluster must pass the individual quality gate; 494/494 quality
+passes are not required.  A reusable projected-map library now passes six manufactured
 tests covering component limits, common-boost invariance, rotation covariance,
 trace removal, known-axis recovery, baroclinic limiting cases and invalid-input
 failure.  This commissions the math but is not an astronomical result.  See
