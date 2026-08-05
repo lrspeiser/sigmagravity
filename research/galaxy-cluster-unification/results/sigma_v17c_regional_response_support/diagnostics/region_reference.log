@@ -1,0 +1,16 @@
+Running specextract
+Version: 8 June 2026
+
+WARNING: Extracting background spectra from blanksky background files.
+
+Warning: more than 1 shape found, using the coordinates of the first defined shape
+Warning: Skip adding 'bell_nh' header keyword.  No valid data at the source location in the Bell Labs HI Survey (the survey covers RA > -40 deg).
+
+/home/henry/sigma-v17a-chandra/spectral_v17c_v107/regional/AS295/background_geometry/acisf16524_blanksky_geometry.fits[ccd_id=2][sky=region(/home/henry/sigma-v17a-chandra/spectral_v17c_v107/regional/AS295/fov/acisf16524_gaia_fov1.fits)][sky=region(/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v17b_temperature_regions/frozen_region_products/AS295/regions/xaf_2.reg)] has zero counts. Using the region defined position for reference.
+Warning: Skip adding 'bell_nh' header keyword.  No valid data at the source location in the Bell Labs HI Survey (the survey covers RA > -40 deg).
+
+Extracting src spectra
+
+Extracting bkg spectra
+
+# specextract (8 June 2026): ERROR max() iterable argument is empty

@@ -4,7 +4,7 @@ Registry version: `FORMULA-PRIOR-ART-REGISTRY-1.0.0`. Published-literature cutof
 
 ## What this file guarantees
 
-This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **102 Sigma v1-v17 protocol files** and their **121 explicit formula/action fragments** (including **14** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
+This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **103 Sigma v1-v17 protocol files** and their **122 explicit formula/action fragments** (including **14** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
 
 It does **not** claim to contain every equation ever published in gravitation. It is a reproducible scientific prior-art screen of the families that overlap mechanisms we have actually explored. It is not a legal novelty or patent opinion.
 
@@ -276,6 +276,7 @@ This appendix closes a gap in the older scorecard: later action-health and sourc
 | `configs/sigma_v17a_chandra_reduction.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v17a_gaia_astrometry.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v17b_temperature_regions.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v17c_regional_response_support.json` | formula_or_action_protocol | `admission_rule.action`: `Record the cell, its source/background event counts, response reference, and mapped CCDs; do not extract or fit that cell. Preserve every other cell and every frozen region unchanged.` | NEWTON-POISSON |
 | `configs/sigma_v17c_spectral_temperature.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v17d_thermal_stress_map.json` | formula_or_action_protocol | `physical_proxy.dimensionless_equation`: `q_total(x)=kappa_gas(x) [k_B T_X(x)/(mu m_p c^2)]`<br>`physical_proxy.response_equation`: `q_contrast(x)=kappa_gas(x) [k_B (T_X(x)-T_global)/(mu m_p c^2)] inside resolved bins and zero outside` | GR-EINSTEIN, FRT-GRAVITY, EMSG |
 | `configs/sigma_v17e_thermal_stress_transfer.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |

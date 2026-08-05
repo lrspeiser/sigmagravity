@@ -53,7 +53,15 @@ DEFAULT_INTEGRATED_SPECTRA = (
 DEFAULT_INTEGRATED_TEMPERATURES = (
     ROOT / "results" / "sigma_v17c_integrated_temperatures" / "report.json"
 )
+DEFAULT_RESPONSE_SUPPORT = (
+    ROOT / "configs" / "sigma_v17c_regional_response_support.json"
+)
 DEFAULT_OUTPUT = ROOT / "results" / "sigma_v17c_regional_spectra"
+
+OFF_CCD_RESPONSE_REASON = "event_mean_response_reference_maps_off_selected_ccd"
+MISSING_CCD_SUPPORT_REASON = (
+    "event_mean_response_reference_lacks_source_background_ccd_support"
+)
 
 
 def region_id(path: Path) -> int:
@@ -202,6 +210,7 @@ def plan_region(
     cluster_name: str,
     path: Path,
     contexts: list[dict[str, Any]],
+    response_support: dict[str, Any],
     work: Path,
     env: dict[str, str],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -213,6 +222,9 @@ def plan_region(
     logs.mkdir(parents=True, exist_ok=True)
     tasks = []
     skipped = []
+    allowed_response_skips = set(
+        response_support["admission_rule"]["allowed_calibrated_response_skip_reasons"]
+    )
     for context in contexts:
         obsid = int(context["obsid"])
         science = context["science"]
@@ -248,11 +260,20 @@ def plan_region(
                     f"region {rid} ObsID {obsid} CCD {chip}"
                 )
             if response_reference["dmcoords_chip_id"] != chip:
-                raise RuntimeError(
-                    f"response reference for {cluster_name} region {rid} ObsID "
-                    f"{obsid} CCD {chip} maps to CCD "
-                    f"{response_reference['dmcoords_chip_id']}"
+                if OFF_CCD_RESPONSE_REASON not in allowed_response_skips:
+                    raise RuntimeError("off-CCD response skip is not frozen")
+                skipped.append(
+                    {
+                        "region_id": rid,
+                        "obsid": obsid,
+                        "ccd_id": chip,
+                        "reason": OFF_CCD_RESPONSE_REASON,
+                        "source_band_events": source_events,
+                        "background_band_events": background_events,
+                        "response_reference": response_reference,
+                    }
                 )
+                continue
             source_chip = celestial_coordinate_chip(
                 science,
                 context["aspect"],
@@ -268,11 +289,22 @@ def plan_region(
                 env,
             )
             if source_chip != chip or background_chip != chip:
-                raise RuntimeError(
-                    f"response reference for {cluster_name} region {rid} ObsID "
-                    f"{obsid} CCD {chip} maps to science/background CCD "
-                    f"{source_chip}/{background_chip}"
+                if MISSING_CCD_SUPPORT_REASON not in allowed_response_skips:
+                    raise RuntimeError("source/background CCD support skip is not frozen")
+                skipped.append(
+                    {
+                        "region_id": rid,
+                        "obsid": obsid,
+                        "ccd_id": chip,
+                        "reason": MISSING_CCD_SUPPORT_REASON,
+                        "source_band_events": source_events,
+                        "background_band_events": background_events,
+                        "response_reference": response_reference,
+                        "science_aspect_chip_id": source_chip,
+                        "background_aspect_chip_id": background_chip,
+                    }
                 )
+                continue
             response_reference["science_aspect_chip_id"] = source_chip
             response_reference["background_aspect_chip_id"] = background_chip
             outroot = individual / f"acisf{obsid}_ccd{chip}_region{rid:03d}"
@@ -436,6 +468,7 @@ def combine_region(
 def build_cluster(
     cluster_name: str,
     config: dict,
+    response_support: dict[str, Any],
     region_row: dict,
     astrometry_rows: dict[int, dict],
     repro_rows: dict[int, dict],
@@ -467,7 +500,14 @@ def build_cluster(
     all_tasks = []
     skipped_by_region: dict[int, list[dict[str, Any]]] = {}
     for index, path in enumerate(paths, start=1):
-        tasks, skipped = plan_region(cluster_name, path, contexts, work, planning_env)
+        tasks, skipped = plan_region(
+            cluster_name,
+            path,
+            contexts,
+            response_support,
+            work,
+            planning_env,
+        )
         all_tasks.extend(tasks)
         skipped_by_region[region_id(path)] = skipped
         print(
@@ -555,6 +595,66 @@ def validate_authorization(
         raise RuntimeError("authorization reports unexpectedly share a path")
 
 
+def validate_response_support(
+    support_path: Path,
+    support: dict[str, Any],
+    config_path: Path,
+    integrated_spectra_path: Path,
+    integrated_spectra: dict[str, Any],
+    integrated_temperatures_path: Path,
+    integrated_temperatures: dict[str, Any],
+) -> None:
+    expected_status = (
+        "frozen after both integrated-temperature gates passed and before any "
+        "regional spectrum, regional temperature, thermal-stress map, v17 inverse "
+        "coefficient, or v17 lensing score existed"
+    )
+    if support.get("status") != expected_status or not support_path.is_file():
+        raise RuntimeError("regional response-support protocol is not frozen")
+    parents = support["parents"]
+    checks = (
+        ("spectral_protocol_sha256", config_path),
+        ("integrated_spectra_report_sha256", integrated_spectra_path),
+        ("integrated_temperatures_report_sha256", integrated_temperatures_path),
+    )
+    for key, path in checks:
+        if parents.get(key) != sha256(path):
+            raise RuntimeError(f"regional response-support parent changed: {key}")
+    required = support["required_upstream_state"]
+    if integrated_spectra.get("status") != required["integrated_spectra_status"]:
+        raise RuntimeError("response-support protocol lacks integrated spectra")
+    if integrated_temperatures.get("status") != required[
+        "integrated_temperatures_status"
+    ]:
+        raise RuntimeError("response-support protocol lacks integrated temperatures")
+    if integrated_temperatures.get("regional_fit_authorized") is not required[
+        "regional_fit_authorized"
+    ]:
+        raise RuntimeError("response-support protocol is not authorized")
+    if integrated_temperatures.get("lensing_target_opened") is not False:
+        raise RuntimeError("response-support protocol was frozen after target access")
+    expected_reasons = {OFF_CCD_RESPONSE_REASON, MISSING_CCD_SUPPORT_REASON}
+    reasons = set(
+        support["admission_rule"]["allowed_calibrated_response_skip_reasons"]
+    )
+    if reasons != expected_reasons:
+        raise RuntimeError("regional response-support reasons changed")
+    integrity = support["integrity"]
+    if any(
+        integrity[key]
+        for key in (
+            "regional_spectrum_existed_at_freeze",
+            "regional_temperature_existed_at_freeze",
+            "thermal_stress_constructed_at_freeze",
+            "lensing_target_opened",
+            "scientific_threshold_changed",
+            "gravity_parameter_changed",
+            "core_v17c_protocol_changed",
+        )
+    ):
+        raise RuntimeError("regional response-support integrity boundary changed")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
@@ -569,6 +669,9 @@ def main() -> None:
     parser.add_argument("--integrated-spectra", type=Path, default=DEFAULT_INTEGRATED_SPECTRA)
     parser.add_argument(
         "--integrated-temperatures", type=Path, default=DEFAULT_INTEGRATED_TEMPERATURES
+    )
+    parser.add_argument(
+        "--response-support", type=Path, default=DEFAULT_RESPONSE_SUPPORT
     )
     parser.add_argument("--scratch", type=Path, default=DEFAULT_SCRATCH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
@@ -585,6 +688,7 @@ def main() -> None:
         "restoration": args.restoration.resolve(),
         "integrated_spectra": args.integrated_spectra.resolve(),
         "integrated_temperatures": args.integrated_temperatures.resolve(),
+        "response_support": args.response_support.resolve(),
     }
     loaded = {
         name: json.loads(path.read_text(encoding="utf-8")) for name, path in paths.items()
@@ -594,6 +698,15 @@ def main() -> None:
     validate_authorization(
         paths["config"],
         config,
+        paths["integrated_spectra"],
+        loaded["integrated_spectra"],
+        paths["integrated_temperatures"],
+        loaded["integrated_temperatures"],
+    )
+    validate_response_support(
+        paths["response_support"],
+        loaded["response_support"],
+        paths["config"],
         paths["integrated_spectra"],
         loaded["integrated_spectra"],
         paths["integrated_temperatures"],
@@ -629,6 +742,7 @@ def main() -> None:
             build_cluster(
                 cluster_name,
                 config,
+                loaded["response_support"],
                 region_rows[cluster_name],
                 astrometry_rows,
                 repro_rows,
@@ -647,6 +761,7 @@ def main() -> None:
         "integrated_temperatures_report_sha256": sha256(
             paths["integrated_temperatures"]
         ),
+        "response_support_config_sha256": sha256(paths["response_support"]),
         "clusters": clusters,
         "regional_temperature_fit_authorized": True,
         "thermal_stress_constructed": False,

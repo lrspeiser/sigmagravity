@@ -18,8 +18,11 @@ if str(SCRIPT_DIR) not in sys.path:
 from fit_sigma_v17c_integrated_temperatures import (
     DEFAULT_CONFIG,
     ROOT,
+    configure_apec_data,
+    evaluate_apec_probe,
     finite_number,
     json_value,
+    primary_optimization_method,
     result_attributes,
     run_fit,
     sha256,
@@ -72,6 +75,7 @@ def fit_region(
     rmf = product_path(region, "source_rmf")
 
     ui.clean()
+    apec_data = configure_apec_data(ui)
     abundance_table_token = model_config["abundance_table"].split(maxsplit=1)[0]
     ui.set_xsabund(abundance_table_token)
     ui.load_pha(1, str(source_pha))
@@ -109,12 +113,13 @@ def fit_region(
     thermal.norm.min = float(model_config["normalization"]["minimum"])
     thermal.norm.max = float(model_config["normalization"]["maximum"])
     ui.thaw(thermal.norm)
+    apec_probe = evaluate_apec_probe(thermal, fit_lo, fit_hi)
 
     ui.set_stat(model_config["statistic"])
     fit_result, attempts = run_fit(
         ui,
         thermal,
-        model_config["optimization"],
+        primary_optimization_method(model_config["optimization"]),
         SherpaErr,
     )
     temperature = float(thermal.kT.val)
@@ -180,6 +185,8 @@ def fit_region(
         "background_unsubtracted_count_rate_s": count_rate,
         "normalization_initial": norm_initial,
         "model": model_config["expression"],
+        "xspec_atomic_data": apec_data,
+        "apec_model_probe": apec_probe,
         "abundance_table": model_config["abundance_table"],
         "xspec_abundance_table_token": abundance_table_token,
         "statistic": model_config["statistic"],

@@ -10,6 +10,14 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "run_sigma_v17c_regional_spectra.py"
 CONFIG = ROOT / "configs" / "sigma_v17c_spectral_temperature.json"
+SUPPORT = ROOT / "configs" / "sigma_v17c_regional_response_support.json"
+SUPPORT_REPORT = (
+    ROOT / "results" / "sigma_v17c_regional_response_support" / "report.json"
+)
+INTEGRATED_SPECTRA = ROOT / "results" / "sigma_v17c_integrated_spectra" / "report.json"
+INTEGRATED_TEMPERATURES = (
+    ROOT / "results" / "sigma_v17c_integrated_temperatures" / "report.json"
+)
 
 
 def _load_module():
@@ -22,6 +30,17 @@ def _load_module():
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _response_support(module) -> dict:
+    return {
+        "admission_rule": {
+            "allowed_calibrated_response_skip_reasons": [
+                module.OFF_CCD_RESPONSE_REASON,
+                module.MISSING_CCD_SUPPORT_REASON,
+            ]
+        }
+    }
 
 
 def test_regional_runner_is_hard_gated_by_both_integrated_results(tmp_path: Path) -> None:
@@ -132,7 +151,12 @@ def test_region_planning_preserves_frozen_extraction_conventions(
         "blanksky_scaling": {"BKGSCAL3": "0.04"},
     }
     tasks, skipped = module.plan_region(
-        "AS295", region, [context], tmp_path / "work", {}
+        "AS295",
+        region,
+        [context],
+        _response_support(module),
+        tmp_path / "work",
+        {},
     )
     assert skipped == []
     assert len(tasks) == 1
@@ -156,6 +180,106 @@ def test_region_planning_preserves_frozen_extraction_conventions(
     assert tasks[0]["region_id"] == 4
 
 
+def test_region_planning_records_an_off_ccd_response_without_fitting(
+    monkeypatch, tmp_path: Path
+) -> None:
+    module = _load_module()
+    monkeypatch.setattr(module, "event_count", lambda *_args: 1)
+    monkeypatch.setattr(
+        module,
+        "event_reference_coordinate",
+        lambda *_args: {
+            "events": 1,
+            "dmcoords_chip_id": 3,
+            "ra_deg": 10.0,
+            "dec_deg": -20.0,
+        },
+    )
+    region = tmp_path / "xaf_2.reg"
+    region.write_text("circle(1,1,1)\n", encoding="utf-8")
+    context = {
+        "obsid": 16524,
+        "science": tmp_path / "science.fits",
+        "background": tmp_path / "background.fits",
+        "aspect": tmp_path / "aspect.lis",
+        "mask": tmp_path / "mask.fits",
+        "badpix": tmp_path / "badpix.fits",
+        "translated_fov": tmp_path / "fov.fits",
+        "translated_fov_record": {},
+        "blanksky_scaling": {"BKGSCAL2": "0.07"},
+    }
+
+    tasks, skipped = module.plan_region(
+        "AS295",
+        region,
+        [context],
+        _response_support(module),
+        tmp_path / "work",
+        {},
+    )
+
+    assert tasks == []
+    assert skipped == [
+        {
+            "region_id": 2,
+            "obsid": 16524,
+            "ccd_id": 2,
+            "reason": "event_mean_response_reference_maps_off_selected_ccd",
+            "source_band_events": 1,
+            "background_band_events": 1,
+            "response_reference": {
+                "events": 1,
+                "dmcoords_chip_id": 3,
+                "ra_deg": 10.0,
+                "dec_deg": -20.0,
+            },
+        }
+    ]
+
+
+def test_response_support_freeze_is_hashed_and_target_blind() -> None:
+    module = _load_module()
+    config = json.loads(CONFIG.read_text(encoding="utf-8"))
+    support = json.loads(SUPPORT.read_text(encoding="utf-8"))
+    spectra = json.loads(INTEGRATED_SPECTRA.read_text(encoding="utf-8"))
+    temperatures = json.loads(INTEGRATED_TEMPERATURES.read_text(encoding="utf-8"))
+
+    module.validate_response_support(
+        SUPPORT,
+        support,
+        CONFIG,
+        INTEGRATED_SPECTRA,
+        spectra,
+        INTEGRATED_TEMPERATURES,
+        temperatures,
+    )
+    assert support["parents"]["spectral_protocol_sha256"] == _sha256(CONFIG)
+    assert support["parents"]["integrated_spectra_report_sha256"] == _sha256(
+        INTEGRATED_SPECTRA
+    )
+    assert support["parents"]["integrated_temperatures_report_sha256"] == _sha256(
+        INTEGRATED_TEMPERATURES
+    )
+    assert "no fitted count rate" in support["admission_rule"]["no_outcome_selection"]
+    assert support["integrity"]["lensing_target_opened"] is False
+
+
+def test_response_support_diagnostic_logs_are_immutable() -> None:
+    report = json.loads(SUPPORT_REPORT.read_text(encoding="utf-8"))
+
+    assert report["config_sha256"] == _sha256(SUPPORT)
+    assert report["regional_extraction_authorized"] is True
+    for trial in report["isolated_trials"]:
+        log = ROOT / trial["log"]
+        assert log.is_file()
+        assert trial["log_sha256"] == _sha256(log)
+        assert trial["arf_created"] is False
+        assert trial["rmf_created"] is False
+        assert trial["return_code"] != 0
+    assert report["decision"]["temperature_or_fit_outcome_used"] is False
+    assert report["decision"]["lensing_target_opened"] is False
+
+
 def test_regional_runner_matches_frozen_region_gates_and_claim_boundary() -> None:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     source = SCRIPT.read_text(encoding="utf-8")
@@ -165,3 +289,5 @@ def test_regional_runner_matches_frozen_region_gates_and_claim_boundary() -> Non
     assert '"thermal_stress_constructed": False' in source
     assert '"lensing_target_opened": False' in source
     assert '"regional_temperature_fit_authorized": True' in source
+    assert "event_mean_response_reference_maps_off_selected_ccd" in source
+    assert "response_support_config_sha256" in source

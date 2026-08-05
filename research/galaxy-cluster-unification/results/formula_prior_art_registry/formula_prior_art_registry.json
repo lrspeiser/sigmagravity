@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 102,
+    "sigma_protocols": 103,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 121,
+    "sigma_formula_fragments": 122,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -5643,6 +5643,26 @@
         "NEWTON-POISSON"
       ],
       "sha256": "93f51ca712db10dd91b615d2c54c6f986b976fbcb0bbd1fb0c07ee2f5fbba507"
+    },
+    {
+      "config": "configs/sigma_v17c_regional_response_support.json",
+      "protocol_version": "SIGMA-V17C-REGIONAL-RESPONSE-SUPPORT-1.0.0",
+      "status": "frozen after both integrated-temperature gates passed and before any regional spectrum, regional temperature, thermal-stress map, v17 inverse coefficient, or v17 lensing score existed",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "admission_rule.action",
+          "formula": "Record the cell, its source/background event counts, response reference, and mapped CCDs; do not extract or fit that cell. Preserve every other cell and every frozen region unchanged.",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 1,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "0b82ada1c7e3c53a28d7023693e64a9479d69ffb01a6c00d0ed39d4d156ac15d"
     },
     {
       "config": "configs/sigma_v17c_spectral_temperature.json",

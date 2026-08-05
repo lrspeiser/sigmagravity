@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v17c_spectral_temperature.json"
 RUNNER = ROOT / "scripts" / "run_sigma_v17c_integrated_spectra.py"
 FITTER = ROOT / "scripts" / "fit_sigma_v17c_integrated_temperatures.py"
+REGIONAL_FITTER = ROOT / "scripts" / "fit_sigma_v17c_regional_temperatures.py"
 AUDITOR = ROOT / "scripts" / "audit_sigma_v17c_spectrum_scaling.py"
 
 
@@ -315,6 +316,70 @@ def test_integrated_fitter_implements_the_frozen_model_and_failure_gate() -> Non
     assert "raise SystemExit(2)" in source
     assert fitter.finite_number(1.0) is True
     assert fitter.finite_number(float("nan")) is False
+    assert (
+        fitter.primary_optimization_method(config["model"]["optimization"])
+        == "levmar"
+    )
+
+
+def test_integrated_fitter_rejects_a_changed_primary_optimizer() -> None:
+    fitter = _load_fitter()
+
+    try:
+        fitter.primary_optimization_method("neldermead; then levmar")
+    except ValueError as exc:
+        assert "must start with levmar" in str(exc)
+    else:
+        raise AssertionError("a changed primary optimizer must fail closed")
+
+
+def test_apec_data_are_bound_to_the_installed_atomdb_version(tmp_path: Path) -> None:
+    fitter = _load_fitter()
+    headas = tmp_path / "spectral"
+    manager = headas / "manager"
+    data = headas / "modelData"
+    manager.mkdir(parents=True)
+    data.mkdir()
+    (manager / "Xspec.init").write_text(
+        "ATOMDB_VERSION:  3.0.9\n", encoding="utf-8"
+    )
+    (data / "apec_v3.0.9_coco.fits").write_bytes(b"continuum")
+    (data / "apec_v3.0.9_line.fits").write_bytes(b"lines")
+
+    class FakeUi:
+        value = None
+
+        @classmethod
+        def set_xsxset(cls, name, value):
+            cls.value = (name, value)
+
+    metadata = fitter.configure_apec_data(FakeUi, headas)
+
+    assert metadata["atomdb_version"] == "3.0.9"
+    assert metadata["continuum_sha256"] == _sha256(
+        data / "apec_v3.0.9_coco.fits"
+    )
+    assert FakeUi.value == ("APECROOT", str(data / "apec_v3.0.9"))
+
+
+def test_apec_probe_fails_closed_on_zero_flux() -> None:
+    fitter = _load_fitter()
+
+    try:
+        fitter.evaluate_apec_probe(lambda lo, hi: [0.0], 0.5, 7.0)
+    except RuntimeError as exc:
+        assert "no finite positive flux" in str(exc)
+    else:
+        raise AssertionError("an unevaluable APEC model must fail closed")
+
+
+def test_regional_fitter_parses_the_same_frozen_optimizer_protocol() -> None:
+    source = REGIONAL_FITTER.read_text(encoding="utf-8")
+
+    assert "primary_optimization_method" in source
+    assert 'primary_optimization_method(model_config["optimization"])' in source
+    assert "configure_apec_data" in source
+    assert "evaluate_apec_probe" in source
 
 
 def test_integrated_fit_exception_is_retained_as_a_failed_cluster() -> None:

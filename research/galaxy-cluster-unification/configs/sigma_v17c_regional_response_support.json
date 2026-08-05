@@ -1,0 +1,58 @@
+{
+  "protocol_version": "SIGMA-V17C-REGIONAL-RESPONSE-SUPPORT-1.0.0",
+  "status": "frozen after both integrated-temperature gates passed and before any regional spectrum, regional temperature, thermal-stress map, v17 inverse coefficient, or v17 lensing score existed",
+  "purpose": "Define the target-blind instrumental admission rule for an ObsID/CCD/region cell whose frozen sky selection contains events but for which CIAO cannot construct a calibrated response on that CCD.",
+  "parents": {
+    "spectral_protocol": "configs/sigma_v17c_spectral_temperature.json",
+    "spectral_protocol_sha256": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86",
+    "integrated_spectra_report": "results/sigma_v17c_integrated_spectra/report.json",
+    "integrated_spectra_report_sha256": "c2f5708baaed07d477b42679e476b13637e1295ba8abd3de94c22c313e2819bb",
+    "integrated_temperatures_report": "results/sigma_v17c_integrated_temperatures/report.json",
+    "integrated_temperatures_report_sha256": "9ce3b05dc64e0ee547693921f62b1f38ad0b9974f5c71e44f07a6338381a22e0"
+  },
+  "discovery": {
+    "cluster": "AS295",
+    "region_id": 2,
+    "obsid": 16524,
+    "selected_ccd_id": 2,
+    "source_band_events": 1,
+    "event_chipx_chipy": [39, 1021],
+    "event_mean_sky_xy": [4121.9638671875, 4127.86083984375],
+    "event_mean_icrs_deg": [41.35824251854478, -53.02777512328883],
+    "mean_reference_dmcoords_ccd_id": 3,
+    "detector_projected_ccd2_icrs_deg": [41.35294623745819, -53.02823784577512],
+    "isolated_reproductions": [
+      "the frozen event-mean refcoord produced source and background PHA files but no ARF or RMF and CIAO terminated with an empty response-support domain",
+      "a detector-projected CCD-2 refcoord produced the same missing ARF/RMF failure",
+      "removing refcoord and using resp_pos=REGION produced the same missing ARF/RMF failure"
+    ],
+    "interpretation": "The cell contains a dithered detector-edge event but no calibrated response support under the frozen extraction geometry. This was discovered during planning, before any regional fit existed."
+  },
+  "admission_rule": {
+    "zero_event_reason": "zero_source_band_events_after_frozen_filters",
+    "allowed_calibrated_response_skip_reasons": [
+      "event_mean_response_reference_maps_off_selected_ccd",
+      "event_mean_response_reference_lacks_source_background_ccd_support"
+    ],
+    "maps_off_selected_ccd": "After the unchanged frozen event-mean sky reference is converted through the registered science-event WCS, dmcoords reports a CCD other than the cell's selected CCD.",
+    "lacks_source_background_ccd_support": "The same ICRS reference does not map to the selected CCD under both the science and matched blank-sky aspect/geometry checks.",
+    "action": "Record the cell, its source/background event counts, response reference, and mapped CCDs; do not extract or fit that cell. Preserve every other cell and every frozen region unchanged.",
+    "no_outcome_selection": "The rule uses no fitted count rate, temperature, uncertainty, morphology, lensing observable, gravity residual, cluster label, or tunable threshold.",
+    "failure_mode": "Any other response-construction failure aborts the run; it is not silently converted into a skip."
+  },
+  "required_upstream_state": {
+    "integrated_spectra_status": "both_frozen_integrated_spectra_extracted_combined_and_grouped",
+    "integrated_temperatures_status": "both_integrated_temperature_gates_passed",
+    "regional_fit_authorized": true,
+    "lensing_target_opened": false
+  },
+  "integrity": {
+    "regional_spectrum_existed_at_freeze": false,
+    "regional_temperature_existed_at_freeze": false,
+    "thermal_stress_constructed_at_freeze": false,
+    "lensing_target_opened": false,
+    "scientific_threshold_changed": false,
+    "gravity_parameter_changed": false,
+    "core_v17c_protocol_changed": false
+  }
+}

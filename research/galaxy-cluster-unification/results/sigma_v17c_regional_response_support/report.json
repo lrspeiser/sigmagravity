@@ -1,0 +1,76 @@
+{
+  "status": "calibrated_response_support_failure_reproduced_and_exclusion_frozen",
+  "protocol_version": "SIGMA-V17C-REGIONAL-RESPONSE-SUPPORT-1.0.0",
+  "generated_utc": "2026-08-05T00:45:32.8130921Z",
+  "config": "configs/sigma_v17c_regional_response_support.json",
+  "config_sha256": "0b82ada1c7e3c53a28d7023693e64a9479d69ffb01a6c00d0ed39d4d156ac15d",
+  "parent_hashes": {
+    "spectral_protocol": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86",
+    "integrated_spectra_report": "c2f5708baaed07d477b42679e476b13637e1295ba8abd3de94c22c313e2819bb",
+    "integrated_temperatures_report": "9ce3b05dc64e0ee547693921f62b1f38ad0b9974f5c71e44f07a6338381a22e0"
+  },
+  "cell": {
+    "cluster": "AS295",
+    "region_id": 2,
+    "obsid": 16524,
+    "selected_ccd_id": 2,
+    "source_band_events": 1,
+    "background_band_events": 0,
+    "event_chipx_chipy": [39, 1021],
+    "event_mean_sky_xy": [4121.9638671875, 4127.86083984375],
+    "event_mean_icrs_deg": [41.35824251854478, -53.02777512328883],
+    "event_mean_dmcoords_ccd_id": 3,
+    "detector_projected_ccd2_icrs_deg": [41.35294623745819, -53.02823784577512]
+  },
+  "isolated_trials": [
+    {
+      "name": "frozen_event_mean_refcoord",
+      "refcoord_icrs_deg": [41.35824251854478, -53.02777512328883],
+      "resp_pos": "CENTROID (ignored because refcoord is supplied)",
+      "source_pha_created": true,
+      "background_pha_created": true,
+      "arf_created": false,
+      "rmf_created": false,
+      "return_code": 1,
+      "terminal_error": "max() iterable argument is empty",
+      "log": "results/sigma_v17c_regional_response_support/diagnostics/event_mean_refcoord.log",
+      "log_sha256": "45b41a6d113293ce63dd926bb3500f744c964ee083ef561a6937ca778eb1beff"
+    },
+    {
+      "name": "detector_projected_ccd2_refcoord",
+      "refcoord_icrs_deg": [41.35294623745819, -53.02823784577512],
+      "resp_pos": "CENTROID (ignored because refcoord is supplied)",
+      "source_pha_created": true,
+      "background_pha_created": true,
+      "arf_created": false,
+      "rmf_created": false,
+      "return_code": 1,
+      "terminal_error": "max() iterable argument is empty",
+      "log": "results/sigma_v17c_regional_response_support/diagnostics/detector_projected_refcoord.log",
+      "log_sha256": "43c707108cee0d95eb30bbcafb551b956d65164dc2ba6d8337555a75b3acf2a3"
+    },
+    {
+      "name": "region_reference_without_refcoord",
+      "refcoord": "unset",
+      "resp_pos": "REGION",
+      "source_pha_created": true,
+      "background_pha_created": true,
+      "arf_created": false,
+      "rmf_created": false,
+      "return_code": 1,
+      "terminal_error": "max() iterable argument is empty",
+      "log": "results/sigma_v17c_regional_response_support/diagnostics/region_reference.log",
+      "log_sha256": "759bb1b91c9c0118cb78f93e7326caa3880204778d2d955e6be463ebf1c48f84"
+    }
+  ],
+  "decision": {
+    "exclude_this_cell_before_fitting": true,
+    "reason": "event_mean_response_reference_maps_off_selected_ccd",
+    "rule_is_instrumental_not_scientific": true,
+    "temperature_or_fit_outcome_used": false,
+    "lensing_target_opened": false,
+    "gravity_parameter_changed": false,
+    "core_v17c_protocol_changed": false
+  },
+  "regional_extraction_authorized": true
+}

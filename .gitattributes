@@ -32,6 +32,13 @@ data/** filter=lfs diff=lfs merge=lfs -text
 *.gif filter=lfs diff=lfs merge=lfs -text
 *.gz filter=lfs diff=lfs merge=lfs -text
 *.fits filter=lfs diff=lfs merge=lfs -text
+*.arf filter=lfs diff=lfs merge=lfs -text
+*.pi filter=lfs diff=lfs merge=lfs -text
+*.rmf filter=lfs diff=lfs merge=lfs -text
 *.avi filter=lfs diff=lfs merge=lfs -text
 *.xlsx filter=lfs diff=lfs merge=lfs -text
 research/galaxy-cluster-unification/data/** filter=lfs diff=lfs merge=lfs -text
+research/galaxy-cluster-unification/configs/sigma_v17c_regional_response_support.json -text
+research/galaxy-cluster-unification/results/sigma_v17c_integrated_spectra/** -text
+research/galaxy-cluster-unification/results/sigma_v17c_integrated_temperatures/report.json -text
+research/galaxy-cluster-unification/results/sigma_v17c_regional_response_support/** -text

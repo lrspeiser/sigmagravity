@@ -7,6 +7,8 @@ import argparse
 import hashlib
 import json
 import math
+import os
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -57,6 +59,89 @@ def result_attributes(result: object, names: tuple[str, ...]) -> dict[str, Any]:
         name: json_value(getattr(result, name))
         for name in names
         if hasattr(result, name)
+    }
+
+
+def primary_optimization_method(protocol: object) -> str:
+    """Return the Sherpa method token from the frozen prose protocol."""
+
+    if not isinstance(protocol, str):
+        raise TypeError("optimization protocol must be a string")
+    method = protocol.partition(";")[0].strip().lower()
+    if method != "levmar":
+        raise ValueError(
+            "the frozen v17C optimization protocol must start with levmar"
+        )
+    return method
+
+
+def configure_apec_data(ui, headas: Path | None = None) -> dict[str, Any]:
+    """Bind XSPEC APEC to the AtomDB version declared by this installation."""
+
+    if headas is None:
+        raw_headas = os.environ.get("HEADAS")
+        if not raw_headas:
+            raise RuntimeError("HEADAS is not set; XSPEC model data are unavailable")
+        headas = Path(raw_headas)
+    headas = headas.resolve()
+    init_candidates = (
+        headas / "manager" / "Xspec.init",
+        headas.parent / "spectral" / "manager" / "Xspec.init",
+    )
+    init_path = next((path for path in init_candidates if path.is_file()), None)
+    if init_path is None:
+        raise RuntimeError("the active XSPEC installation has no Xspec.init")
+    match = re.search(
+        r"^\s*ATOMDB_VERSION\s*:\s*([^\s#]+)",
+        init_path.read_text(encoding="utf-8", errors="replace"),
+        flags=re.MULTILINE,
+    )
+    if match is None:
+        raise RuntimeError("Xspec.init does not declare ATOMDB_VERSION")
+    version = match.group(1)
+    data_candidates = (
+        headas / "modelData",
+        headas.parent / "spectral" / "modelData",
+    )
+    data_dir = next((path for path in data_candidates if path.is_dir()), None)
+    if data_dir is None:
+        raise RuntimeError("the active XSPEC installation has no modelData directory")
+    root = data_dir / f"apec_v{version}"
+    continuum = Path(f"{root}_coco.fits")
+    lines = Path(f"{root}_line.fits")
+    if not continuum.is_file() or not lines.is_file():
+        raise RuntimeError(
+            f"AtomDB {version} is declared but its APEC continuum/line files are absent"
+        )
+    ui.set_xsxset("APECROOT", str(root))
+    return {
+        "atomdb_version": version,
+        "xspec_init": str(init_path),
+        "xspec_init_sha256": sha256(init_path),
+        "apec_root": str(root),
+        "continuum_sha256": sha256(continuum),
+        "line_sha256": sha256(lines),
+    }
+
+
+def evaluate_apec_probe(thermal, fit_lo: float, fit_hi: float) -> dict[str, Any]:
+    """Fail closed if XSPEC cannot evaluate the configured plasma tables."""
+
+    probe_hi = min(fit_hi, fit_lo + 0.5)
+    probe_mid = 0.5 * (fit_lo + probe_hi)
+    values = [
+        float(value)
+        for value in thermal(
+            [fit_lo, probe_mid],
+            [probe_mid, probe_hi],
+        )
+    ]
+    total = sum(values)
+    if not values or not all(finite_number(value) for value in values) or total <= 0:
+        raise RuntimeError("APEC model-data probe returned no finite positive flux")
+    return {
+        "energy_bins_keV": [[fit_lo, probe_mid], [probe_mid, probe_hi]],
+        "integrated_flux": total,
     }
 
 
@@ -129,6 +214,7 @@ def fit_cluster(cluster: dict, config: dict) -> dict[str, Any]:
     rmf = product_path(cluster, "source_rmf")
 
     ui.clean()
+    apec_data = configure_apec_data(ui)
     abundance_table_token = model_config["abundance_table"].split(maxsplit=1)[0]
     ui.set_xsabund(abundance_table_token)
     ui.load_pha(1, str(source_pha))
@@ -169,12 +255,13 @@ def fit_cluster(cluster: dict, config: dict) -> dict[str, Any]:
     thermal.norm.min = float(model_config["normalization"]["minimum"])
     thermal.norm.max = float(model_config["normalization"]["maximum"])
     ui.thaw(thermal.norm)
+    apec_probe = evaluate_apec_probe(thermal, fit_lo, fit_hi)
 
     ui.set_stat(model_config["statistic"])
     fit_result, attempts = run_fit(
         ui,
         thermal,
-        model_config["optimization"],
+        primary_optimization_method(model_config["optimization"]),
         SherpaErr,
     )
     temperature = float(thermal.kT.val)
@@ -239,6 +326,8 @@ def fit_cluster(cluster: dict, config: dict) -> dict[str, Any]:
         "background_unsubtracted_count_rate_s": count_rate,
         "normalization_initial": norm_initial,
         "model": model_config["expression"],
+        "xspec_atomic_data": apec_data,
+        "apec_model_probe": apec_probe,
         "abundance_table": model_config["abundance_table"],
         "xspec_abundance_table_token": abundance_table_token,
         "statistic": model_config["statistic"],
