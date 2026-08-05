@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 164,
+    "sigma_protocols": 165,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 145,
     "eligibility": {
@@ -7115,6 +7115,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "7e7c1f46e29c54679443817fb01149b79cd115887e3600209b074fb17309ed52"
+    },
+    {
+      "config": "configs/sigma_v19be_long_wave_action_admission.json",
+      "protocol_version": "SIGMA-V19BE-LONG-WAVE-ACTION-ADMISSION-1.0.0",
+      "status": "frozen after V19BD passed and while V19W was still running, before reading a V19X gas-state result, selecting a covariant action, operator, source activation, wavelength, coupling, phase or polarization, opening a lensing or halo payload, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "9d0ab3e6d0d52a4e55871385607b2b006e78a4c99b4f64e8e772a0e88ad12c63"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",
