@@ -1,0 +1,213 @@
+{
+  "admission_state": {
+    "admitted_holdouts": 0,
+    "disturbed_side_count": 4,
+    "final_six_selected": false,
+    "metadata_shortlist_count": 8,
+    "raw_target_payload_opened": false,
+    "relaxed_side_count": 4
+  },
+  "alias_audit": {
+    "cutoff_commit_expected": "b05f5ebc8ab6bd6b318eabedbac11fec6f462023",
+    "cutoff_commit_resolved": "b05f5ebc8ab6bd6b318eabedbac11fec6f462023",
+    "systems": {
+      "SDSS_J0851+3331": {
+        "alias": "J0851+3331",
+        "hits": []
+      },
+      "SDSS_J0952+3434": {
+        "alias": "J0952+3434",
+        "hits": []
+      },
+      "SDSS_J1002+2031": {
+        "alias": "J1002+2031",
+        "hits": []
+      },
+      "SDSS_J1038+4849": {
+        "alias": "J1038+4849",
+        "hits": []
+      },
+      "SDSS_J1050+0017": {
+        "alias": "J1050+0017",
+        "hits": []
+      },
+      "SDSS_J1207+5254": {
+        "alias": "J1207+5254",
+        "hits": []
+      },
+      "SDSS_J1209+2640": {
+        "alias": "J1209+2640",
+        "hits": []
+      },
+      "SDSS_J1226+2149": {
+        "alias": "J1226+2149",
+        "hits": []
+      }
+    }
+  },
+  "authorization_audit": {
+    "change_or_select_gravity_formula": false,
+    "fit_universal_constants": false,
+    "perform_detailed_solar_optimization": false,
+    "read_lens_maps_for_candidate_selection": false,
+    "read_public_metadata": true,
+    "read_raw_target_coordinates": false,
+    "select_final_six": false
+  },
+  "claim_boundary": [
+    "The eight named systems are a metadata-only shortlist, not admitted holdouts and not evidence for Sigma Gravity.",
+    "Published dynamical-state labels are source-side stratification variables; they do not supply the gravity target.",
+    "No shortlist member advances until its raw-family counts, positional covariance, complete baryons and comparator can all be verified without opening image coordinates.",
+    "The final six remain unselected, and their raw target payload remains sealed until one action and at most five universal constants are frozen.",
+    "The other-phenomena ladder states predictions the theory owes; it does not count them as passed tests."
+  ],
+  "config": "configs/sigma_v19bh_blind_cluster_admission.json",
+  "config_sha256": "96bcb2ae2038fcc234e73722fb8cbb390aeb48a1be9b1cbe9c631b8013340ef1",
+  "cross_domain_prediction_ladder": [
+    {
+      "distinctive_failure": "A formula that fits rotation speeds and radial deflection but misses cross shear, critical-curve orientation or merger offsets has the wrong spatial response, not merely the wrong amplitude.",
+      "phenomena": [
+        "P1_GALAXY_GALAXY_AND_CLUSTER_WEAK_LENSING",
+        "P2_COLLIDING_CLUSTER_OFFSETS"
+      ],
+      "tier": 1,
+      "why_now": "They use the same quasistatic Weyl potential, resolved baryons and merger source state needed for the strong-lensing test."
+    },
+    {
+      "distinctive_failure": "A smooth long-wave field may change environmental forces and global precession, but it cannot claim compact subhalo gaps or dynamical drag unless the action actually generates compact structure or carries away energy.",
+      "phenomena": [
+        "P3_DWARF_SPHEROIDAL_AND_SATELLITE_DYNAMICS",
+        "P4_STELLAR_STREAMS_AND_SUBSTRUCTURE_LENSING",
+        "P5_DYNAMICAL_FRICTION_AND_MERGER_TIMES"
+      ],
+      "tier": 2,
+      "why_now": "These become meaningful after the three-dimensional time-dependent field and its energy flow exist."
+    },
+    {
+      "distinctive_failure": "If the field cannot preserve early gravitational potentials and seed the observed growth history without cold dark matter, a late-time galaxy success is not a dark-matter replacement.",
+      "phenomena": [
+        "P6_COSMIC_STRUCTURE_GROWTH",
+        "P7_CMB_PRIMARY_AND_LENSING"
+      ],
+      "tier": 3,
+      "why_now": "These require the covariant background and perturbation equations and cannot be inferred from a static galaxy fit."
+    }
+  ],
+  "decision": "passed_metadata_only_holdout_admission_protocol",
+  "final_sample_requirements": {
+    "clusters": 6,
+    "cool_core_relaxed_minimum": 1,
+    "disturbed_side_minimum": 2,
+    "final_six_selected_here": false,
+    "higher_mass_half_minimum": 2,
+    "lower_mass_half_minimum": 2,
+    "non_cool_core_relaxed_minimum": 1,
+    "plane_of_sky_merger_minimum": 1,
+    "projection_challenging_or_line_of_sight_merger_minimum": 1,
+    "relaxed_side_minimum": 2
+  },
+  "gate_results": {
+    "all_other_dark_matter_phenomena_are_ordered": true,
+    "availability_is_not_admission": true,
+    "final_sample_not_selected": true,
+    "metadata_shortlist_is_state_balanced": true,
+    "no_theory_or_constant_selected": true,
+    "outcome_payload_remains_sealed": true,
+    "parent_hash_exact": true,
+    "public_candidate_universes_are_broad": true,
+    "shortlist_aliases_were_absent_at_cutoff": true,
+    "solar_is_retained_as_later_veto": true
+  },
+  "implementation": {
+    "runner": "scripts/check_sigma_v19bh_blind_cluster_admission.py"
+  },
+  "metadata_shortlist": [
+    {
+      "alias": "J0851+3331",
+      "id": "SDSS_J0851+3331",
+      "published_state": "disturbed",
+      "state_side": "disturbed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "alias": "J0952+3434",
+      "id": "SDSS_J0952+3434",
+      "published_state": "disturbed",
+      "state_side": "disturbed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "alias": "J1002+2031",
+      "id": "SDSS_J1002+2031",
+      "published_state": "disturbed",
+      "state_side": "disturbed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "alias": "J1207+5254",
+      "id": "SDSS_J1207+5254",
+      "published_state": "disturbed",
+      "state_side": "disturbed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "alias": "J1050+0017",
+      "id": "SDSS_J1050+0017",
+      "published_state": "relaxed",
+      "state_side": "relaxed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "alias": "J1038+4849",
+      "id": "SDSS_J1038+4849",
+      "published_state": "moderately relaxed",
+      "state_side": "relaxed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "alias": "J1209+2640",
+      "id": "SDSS_J1209+2640",
+      "published_state": "moderately relaxed",
+      "state_side": "relaxed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "alias": "J1226+2149",
+      "id": "SDSS_J1226+2149",
+      "published_state": "moderately relaxed",
+      "state_side": "relaxed",
+      "status": "metadata_only_not_admitted"
+    }
+  ],
+  "parent_audit": {
+    "actual_sha256": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd",
+    "exact": true,
+    "expected_sha256": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd",
+    "path": "results/sigma_v19bg_broad_phenomenology_contract/report.json"
+  },
+  "priority": {
+    "detailed_solar_optimization_now": false,
+    "evaluate_next": "weak lensing and merger offsets from the same frozen metric, followed by satellite, stream and friction predictions",
+    "optimize_first": "diverse galaxy morphologies plus relaxed and disturbed raw-lensing clusters",
+    "retain_as_later_hard_veto": "Solar-System, PPN, propagation speed, stability and causal initial-value constraints"
+  },
+  "protocol_version": "SIGMA-V19BH-BLIND-CLUSTER-ADMISSION-1.0.0",
+  "source_universes": [
+    {
+      "id": "SGAS_HLSP",
+      "scientific_role": "candidate universe and later same-catalog comparator source; inferred kappa and gamma maps are never validation truth",
+      "systems": 37
+    },
+    {
+      "id": "CHANDRA_STRONG_LENS_SAMPLE",
+      "scientific_role": "source-side gas readiness and state stratification before any raw lensing coordinate is opened",
+      "systems": 28
+    },
+    {
+      "id": "RELICS_HLSP_RESERVE",
+      "scientific_role": "reserve candidate universe only; model availability is not evidence that the raw-image or baryon-completeness gates pass",
+      "systems": 41
+    }
+  ],
+  "status": "completed_metadata_only_holdout_admission_protocol"
+}

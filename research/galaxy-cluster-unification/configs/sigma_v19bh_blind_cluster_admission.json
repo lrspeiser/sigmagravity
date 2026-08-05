@@ -1,0 +1,258 @@
+{
+  "protocol_version": "SIGMA-V19BH-BLIND-CLUSTER-ADMISSION-1.0.0",
+  "status": "frozen metadata-only admission protocol; no new lensing coordinates, lens maps, residuals, Sigma action, or universal constants opened or selected",
+  "purpose": "Build a genuinely diverse future raw-lensing holdout without confusing public availability with scientific eligibility and without spending the holdout before the Sigma equation is frozen.",
+  "parent": {
+    "path": "results/sigma_v19bg_broad_phenomenology_contract/report.json",
+    "sha256": "6266767748441d7d3b59232c7d316e23036d222412161c007fd9625a8df2a1bd"
+  },
+  "alias_audit": {
+    "repository_commit_before_this_protocol": "b05f5ebc8ab6bd6b318eabedbac11fec6f462023",
+    "scope": "tracked project files excluding data/raw and the large environment lock",
+    "meaning": "A zero result shows that the exact alias was absent from tracked analysis-bearing files at the audit cutoff. It does not by itself make the system an eligible holdout."
+  },
+  "public_source_universes": [
+    {
+      "id": "SGAS_HLSP",
+      "systems": 37,
+      "url": "https://archive.stsci.edu/hlsp/sgas",
+      "available_metadata": [
+        "multi-band HST WFC3 imaging",
+        "published lensing-constraint and source-redshift inventory",
+        "public conventional lens-model products"
+      ],
+      "scientific_role": "candidate universe and later same-catalog comparator source; inferred kappa and gamma maps are never validation truth"
+    },
+    {
+      "id": "CHANDRA_STRONG_LENS_SAMPLE",
+      "systems": 28,
+      "url": "https://arxiv.org/abs/2511.12707",
+      "available_metadata": [
+        "Chandra ACIS imaging with more than 1000 counts inside R500 for every system",
+        "HST WFC3 imaging",
+        "X-ray concentration, asymmetry, centroid shift, and X-ray-to-BCG separation",
+        "four-level dynamical-state classification"
+      ],
+      "scientific_role": "source-side gas readiness and state stratification before any raw lensing coordinate is opened"
+    },
+    {
+      "id": "RELICS_HLSP_RESERVE",
+      "systems": 41,
+      "url": "https://archive.stsci.edu/hlsp/relics",
+      "available_metadata": [
+        "HST imaging",
+        "photometric catalogs",
+        "public lens-model products for a subset"
+      ],
+      "scientific_role": "reserve candidate universe only; model availability is not evidence that the raw-image or baryon-completeness gates pass"
+    }
+  ],
+  "known_non_holdout_examples": [
+    {
+      "systems": [
+        "Abell 2744",
+        "MACS J0416.1-2403",
+        "MACS J0717.5+3745",
+        "MACS J1149.5+2223",
+        "Abell S1063",
+        "Abell 370"
+      ],
+      "reason": "The Frontier Fields are already present in tracked project analyses or inputs and therefore cannot be represented as untouched future holdouts."
+    },
+    {
+      "systems": [
+        "PLCK G004.5-19.5"
+      ],
+      "reason": "Public availability is insufficient: the published analysis uses one secure three-image source family, below the frozen minimum of three families and eight images."
+    }
+  ],
+  "metadata_only_shortlist": [
+    {
+      "id": "SDSS_J0851+3331",
+      "alias": "J0851+3331",
+      "published_state": "disturbed",
+      "state_side": "disturbed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "id": "SDSS_J0952+3434",
+      "alias": "J0952+3434",
+      "published_state": "disturbed",
+      "state_side": "disturbed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "id": "SDSS_J1002+2031",
+      "alias": "J1002+2031",
+      "published_state": "disturbed",
+      "state_side": "disturbed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "id": "SDSS_J1207+5254",
+      "alias": "J1207+5254",
+      "published_state": "disturbed",
+      "state_side": "disturbed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "id": "SDSS_J1050+0017",
+      "alias": "J1050+0017",
+      "published_state": "relaxed",
+      "state_side": "relaxed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "id": "SDSS_J1038+4849",
+      "alias": "J1038+4849",
+      "published_state": "moderately relaxed",
+      "state_side": "relaxed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "id": "SDSS_J1209+2640",
+      "alias": "J1209+2640",
+      "published_state": "moderately relaxed",
+      "state_side": "relaxed",
+      "status": "metadata_only_not_admitted"
+    },
+    {
+      "id": "SDSS_J1226+2149",
+      "alias": "J1226+2149",
+      "published_state": "moderately relaxed",
+      "state_side": "relaxed",
+      "status": "metadata_only_not_admitted"
+    }
+  ],
+  "admission_sequence": [
+    {
+      "stage": 1,
+      "name": "identity_and_spend_audit",
+      "allowed": "canonical names, aliases, archive identifiers, redshift, sky coverage and prior project use",
+      "forbidden": "raw multiple-image coordinates, lensing residuals, convergence maps and shear maps"
+    },
+    {
+      "stage": 2,
+      "name": "source_side_readiness",
+      "allowed": "stars, gas, BCG, intracluster light, member catalog, exposure, PSF, masks, source-state morphology and uncertainties",
+      "forbidden": "using any lens-derived mass map to repair the baryonic source model"
+    },
+    {
+      "stage": 3,
+      "name": "constraint_count_and_covariance_metadata",
+      "allowed": "family count, spectroscopic-family count, image count, stated positional-error rule and comparator identity",
+      "forbidden": "image coordinates, parity, topology, critical curves, model maps and target residuals"
+    },
+    {
+      "stage": 4,
+      "name": "freeze_final_six_and_payload_hashes",
+      "allowed": "cluster IDs, strata, source-input manifests and sealed target-file hashes",
+      "forbidden": "opening target-file contents before the action and universal constants are frozen"
+    },
+    {
+      "stage": 5,
+      "name": "open_once_and_score",
+      "allowed": "open raw target coordinates exactly once after theory freeze and score the preregistered metrics",
+      "forbidden": "changing the action, constants, cluster selection or scoring rule after any target is opened"
+    }
+  ],
+  "per_cluster_admission_requirements": {
+    "secure_families_minimum": 3,
+    "spectroscopic_families_minimum": 1,
+    "images_minimum": 8,
+    "per_image_position_uncertainties_required": true,
+    "complete_baryons_required": [
+      "hot_gas",
+      "BCG_stars",
+      "intracluster_light",
+      "member_galaxies",
+      "other_detected_gas"
+    ],
+    "source_and_target_coordinate_frames_registered": true,
+    "same_catalog_halo_comparator_required": true,
+    "independent_baryon_uncertainty_ensemble_required": true,
+    "no_prior_project_formula_exposure": true
+  },
+  "final_sample_requirements": {
+    "clusters": 6,
+    "relaxed_side_minimum": 2,
+    "disturbed_side_minimum": 2,
+    "cool_core_relaxed_minimum": 1,
+    "non_cool_core_relaxed_minimum": 1,
+    "plane_of_sky_merger_minimum": 1,
+    "projection_challenging_or_line_of_sight_merger_minimum": 1,
+    "lower_mass_half_minimum": 2,
+    "higher_mass_half_minimum": 2,
+    "final_six_selected_here": false
+  },
+  "cross_domain_prediction_ladder": [
+    {
+      "tier": 1,
+      "phenomena": [
+        "P1_GALAXY_GALAXY_AND_CLUSTER_WEAK_LENSING",
+        "P2_COLLIDING_CLUSTER_OFFSETS"
+      ],
+      "why_now": "They use the same quasistatic Weyl potential, resolved baryons and merger source state needed for the strong-lensing test.",
+      "distinctive_failure": "A formula that fits rotation speeds and radial deflection but misses cross shear, critical-curve orientation or merger offsets has the wrong spatial response, not merely the wrong amplitude."
+    },
+    {
+      "tier": 2,
+      "phenomena": [
+        "P3_DWARF_SPHEROIDAL_AND_SATELLITE_DYNAMICS",
+        "P4_STELLAR_STREAMS_AND_SUBSTRUCTURE_LENSING",
+        "P5_DYNAMICAL_FRICTION_AND_MERGER_TIMES"
+      ],
+      "why_now": "These become meaningful after the three-dimensional time-dependent field and its energy flow exist.",
+      "distinctive_failure": "A smooth long-wave field may change environmental forces and global precession, but it cannot claim compact subhalo gaps or dynamical drag unless the action actually generates compact structure or carries away energy."
+    },
+    {
+      "tier": 3,
+      "phenomena": [
+        "P6_COSMIC_STRUCTURE_GROWTH",
+        "P7_CMB_PRIMARY_AND_LENSING"
+      ],
+      "why_now": "These require the covariant background and perturbation equations and cannot be inferred from a static galaxy fit.",
+      "distinctive_failure": "If the field cannot preserve early gravitational potentials and seed the observed growth history without cold dark matter, a late-time galaxy success is not a dark-matter replacement."
+    }
+  ],
+  "priority": {
+    "optimize_first": "diverse galaxy morphologies plus relaxed and disturbed raw-lensing clusters",
+    "evaluate_next": "weak lensing and merger offsets from the same frozen metric, followed by satellite, stream and friction predictions",
+    "retain_as_later_hard_veto": "Solar-System, PPN, propagation speed, stability and causal initial-value constraints",
+    "detailed_solar_optimization_now": false
+  },
+  "authorization": {
+    "read_public_metadata": true,
+    "read_raw_target_coordinates": false,
+    "read_lens_maps_for_candidate_selection": false,
+    "select_final_six": false,
+    "change_or_select_gravity_formula": false,
+    "fit_universal_constants": false,
+    "perform_detailed_solar_optimization": false
+  },
+  "required_gates": {
+    "parent_hash_exact": true,
+    "public_candidate_universes_are_broad": true,
+    "shortlist_aliases_were_absent_at_cutoff": true,
+    "metadata_shortlist_is_state_balanced": true,
+    "availability_is_not_admission": true,
+    "outcome_payload_remains_sealed": true,
+    "final_sample_not_selected": true,
+    "all_other_dark_matter_phenomena_are_ordered": true,
+    "solar_is_retained_as_later_veto": true,
+    "no_theory_or_constant_selected": true
+  },
+  "outputs": {
+    "report": "results/sigma_v19bh_blind_cluster_admission/report.json"
+  },
+  "claim_boundary": [
+    "The eight named systems are a metadata-only shortlist, not admitted holdouts and not evidence for Sigma Gravity.",
+    "Published dynamical-state labels are source-side stratification variables; they do not supply the gravity target.",
+    "No shortlist member advances until its raw-family counts, positional covariance, complete baryons and comparator can all be verified without opening image coordinates.",
+    "The final six remain unselected, and their raw target payload remains sealed until one action and at most five universal constants are frozen.",
+    "The other-phenomena ladder states predictions the theory owes; it does not count them as passed tests."
+  ],
+  "implementation": {
+    "runner": "scripts/check_sigma_v19bh_blind_cluster_admission.py"
+  }
+}

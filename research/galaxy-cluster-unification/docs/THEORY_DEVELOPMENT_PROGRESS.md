@@ -1,5 +1,31 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19BH blind-cluster admission protocol
+
+The future cluster holdout is now protected by an outcome-blind, state-
+stratified admission protocol.  The public starting universe combines 37 SGAS
+lenses, the 28-system Chandra Strong Lens Sample, and 41 RELICS systems as a
+reserve.  Eight SGAS systems absent from tracked analysis-bearing files at the
+pre-protocol commit form a metadata-only shortlist: four relaxed-side and four
+disturbed systems.  None is admitted and no raw image coordinate, lens map,
+topology or Sigma residual was opened.
+
+The final six must include cool-core and non-cool-core relaxed lenses,
+plane-of-sky and projection-challenging mergers, and both mass halves.  Every
+system still needs three secure families, one spectroscopic family, eight
+images, per-image uncertainties, complete stars/gas/BCG/ICL/member baryons and
+a same-catalog halo comparator.  PLCK G004.5-19.5 is recorded as a concrete
+availability-without-eligibility example because its published one-family,
+three-image constraint fails the frozen raw-lensing minimum.
+
+The same checkpoint orders the non-Solar predictions.  Weak lensing and
+merger offsets come first because they use the quasistatic metric already
+needed for strong lensing; satellite, stream and friction tests follow a
+three-dimensional time-dependent action; growth and the CMB follow the
+covariant background and perturbation equations.  Solar/PPN remains a later
+hard veto rather than the present optimization target.  See
+[`SIGMA_V19BH_BLIND_CLUSTER_ADMISSION.md`](SIGMA_V19BH_BLIND_CLUSTER_ADMISSION.md).
+
 ## 2026-08-05 Sigma v19X2 unified-response adapter preflight
 
 The future spectral combination step no longer assumes that all 5,082 response
