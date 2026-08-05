@@ -56,6 +56,7 @@ def test_implementation_change_preserves_scientific_settings():
     assert "refcoord unset" in correction["response_position"]
     assert "weight=yes" in correction["response_weighting"]
     assert "CIAO dmimgcalc" in correction["mask_writer"]
+    assert "dmimgthresh" in correction["mask_writer"]
     assert config["implementation_dependency_correction"]["scientific_output_existed"] is False
     assert correction["scientific_values_changed"] is False
 

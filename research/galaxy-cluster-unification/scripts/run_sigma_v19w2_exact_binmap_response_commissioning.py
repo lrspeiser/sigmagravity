@@ -89,19 +89,36 @@ def write_exact_bin_mask(
         step = None
     else:
         destination.parent.mkdir(parents=True, exist_ok=True)
+        ones = destination.with_suffix(".ones.fits")
         temporary = destination.with_suffix(".tmp.fits")
-        step = v19w.inherited.run_step(
+        ones_step = v19w.inherited.run_step(
             [
                 "dmimgcalc",
                 f"infile={binmap_path}",
                 "infile2=none",
-                f"outfile={temporary}",
-                f"operation=imgout=(img1=={int(bin_id)})",
+                f"outfile={ones}",
+                "operation=imgout=(img1*0)+1",
                 "clobber=no",
                 "verbose=1",
                 "mode=h",
             ],
-            log,
+            log.with_name("dmimgcalc_ones.log"),
+            [ones],
+            env,
+        )
+        threshold_step = v19w.inherited.run_step(
+            [
+                "dmimgthresh",
+                f"infile={ones}",
+                f"outfile={temporary}",
+                f"expfile={binmap_path}",
+                f"cut={int(bin_id)}:{int(bin_id)}",
+                "value=0",
+                "clobber=no",
+                "verbose=1",
+                "mode=h",
+            ],
+            log.with_name("dmimgthresh_exact_bin.log"),
             [temporary],
             env,
         )
@@ -110,13 +127,14 @@ def write_exact_bin_mask(
             raise RuntimeError(f"V19W2 CIAO mask differs from binmap: {temporary}")
         temporary.replace(destination)
         reused = False
+        step = {"constant_one_image": ones_step, "exact_threshold": threshold_step}
     return {
         "path": str(destination),
         "sha256": sha256(destination),
         "bytes": destination.stat().st_size,
         "selected_pixels": int(mask.sum()),
         "definition": f"frozen V19M binmap == {int(bin_id)}",
-        "writer": "CIAO dmimgcalc with input WCS propagated to output",
+        "writer": "CIAO dmimgcalc constant-one image plus dmimgthresh exact-bin threshold",
         "step": step,
         "reused": reused,
     }

@@ -25,6 +25,15 @@ scratch directory or product existed: the background count for
 V19U manifest value 14. Protocol 1.0.2 corrects only that metadata transcription;
 the executable mask and event-count gates remain unchanged.
 
+Protocol 1.0.2 then reached the CIAO mask writer after creating only the four
+deterministic background-geometry prerequisites. CIAO rejected a direct
+comparison because Boolean images are not a supported `dmimgcalc` output type;
+no exact mask, selected spectrum, response or report existed. Protocol 1.0.3
+uses the documented two-step form: `dmimgcalc` makes a WCS-preserving image of
+ones, and `dmimgthresh` retains one only for the closed integer interval
+`bin_id:bin_id`, writing zero elsewhere. The independent pixel equality check
+remains unchanged.
+
 ## Why the binmap remains authoritative
 
 The V19P/V19Q manifest assigns every event to exactly one integer binmap pixel.

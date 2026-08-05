@@ -1,5 +1,5 @@
 {
-  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.0.2",
+  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.0.3",
   "status": "frozen after the read-only V19W live archive audit identified three implementation failure classes and before constructing any exact-bin mask, running a corrected response, reading a spectral fit, changing a scientific region or event assignment, opening lensing data, or changing gravity physics",
   "purpose": "Commission one implementation correction that restores the frozen disjoint V19P/V19Q binmap event partition, removes the invalid manually transformed low-count response coordinate, and shortens CIAO runtime paths without changing any admitted region, event, energy band, response weighting, background scaling or scientific threshold.",
   "parents": {
@@ -63,7 +63,7 @@
     "response_position": "leave refcoord unset and use resp_pos=CENTROID, the CIAO-supported mode for a pixel-mask filter",
     "response_weighting": "unchanged weight=yes, weight_rmf=yes, energy_wmap=500:7000 eV, binwmap=det=8, binarfwmap=1",
     "runtime_path": "use a short scratch root and production-index cell token for PFILES, TMPDIR and partial directories; retain canonical cell and product names",
-    "mask_writer": "CIAO dmimgcalc constructs the exact binary image and propagates the frozen binmap WCS; NumPy independently checks every written pixel against binmap equals bin_id",
+    "mask_writer": "CIAO dmimgcalc constructs a constant-one image with the frozen binmap WCS; CIAO dmimgthresh retains one only where the binmap lies in the exact closed interval bin_id:bin_id and writes zero elsewhere; NumPy independently checks every output pixel against binmap equals bin_id",
     "scientific_values_changed": false
   },
   "implementation_dependency_correction": {
@@ -76,6 +76,12 @@
     "reason": "Protocol 1.0.1 stopped in manifest validation because the background count for BULLET_bin154_obs4985_ccd3 was transcribed as 7 rather than the authoritative frozen V19U manifest value 14. No scratch directory, mask, response, spectrum or report was created.",
     "change": "Replace the transcription with the frozen manifest value; the runner continues to verify it before any CIAO mask or response command.",
     "scientific_output_existed": false,
+    "scientific_selection_or_setting_changed": false
+  },
+  "ciao_mask_expression_correction": {
+    "reason": "Protocol 1.0.2 reached mask construction after creating only deterministic observation-geometry prerequisites, but CIAO dmimgcalc rejected the direct comparison because a Boolean image is an unsupported output type. No exact-bin mask, selected spectrum, response or report existed.",
+    "change": "Use documented CIAO arithmetic to make a WCS-preserving constant-one image and documented dmimgthresh with cut=bin_id:bin_id to retain one at exactly the selected integer bin and set every other pixel to zero. The independent NumPy equality audit is unchanged.",
+    "exact_bin_definition_changed": false,
     "scientific_selection_or_setting_changed": false
   },
   "execution": {
@@ -113,6 +119,6 @@
   },
   "implementation": {
     "runner": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
-    "runner_sha256": "dc80881093461d7ae7aa2548afa9313fb9790edf4d1dd05848d327255b35afe4"
+    "runner_sha256": "4c09ce825216c6688c90a61656486fe15cbca624f4b7d1d82501a3a6ee079ba6"
   }
 }
