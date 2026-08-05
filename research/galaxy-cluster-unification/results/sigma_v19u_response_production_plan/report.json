@@ -1,0 +1,123 @@
+{
+  "status": "production_plan_passed_and_throughput_pilot_authorized",
+  "protocol_version": "SIGMA-V19U-RESPONSE-PRODUCTION-PLAN-1.0.0",
+  "generated_utc": "2026-08-05T06:35:24.993461+00:00",
+  "config_sha256": "38c7358b06ec5b6e84763d49e1eca75c3a447d08c27968a8b55e7efaddf1ae28",
+  "runner_sha256": "337dcb2c5d35e9ee3797ee2ed9bf41aaaeb65dd910cc326d54d46f4606e1d694",
+  "parent_manifest": {
+    "path": "results/sigma_v19q_positive_exposure_response_workload/response_task_manifest.csv",
+    "sha256": "ee2403f10540fb90a9915eadcf0704dfcbff848e6bfc74e73938dda260a380c6",
+    "task_count": 5082
+  },
+  "production_manifest": {
+    "path": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+    "sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd",
+    "bytes": 1019411,
+    "task_count": 5082,
+    "batch_count": 80,
+    "batch_size": 64,
+    "final_batch_size": 26
+  },
+  "task_count_by_cluster": {
+    "BULLET": 3812,
+    "ABELL2146": 1270
+  },
+  "pilot_cells": [
+    {
+      "cluster": "BULLET",
+      "bin_id": "257",
+      "obsid": "5355",
+      "ccd_id": "2",
+      "source_band_events": "82",
+      "background_band_events": "98",
+      "blanksky_scale": "0.016302906",
+      "scaled_background_events": "1.5976847879999998",
+      "expected_output_files": "4",
+      "flux_obs_support_fov_sha256": "a103ecb2eb9987f653b0fd1e1fcf655f11f1693ff3320ac57d18713524bf723e",
+      "flux_obs_exposure_sha256": "116112bdf418a6244e8171dd46b9fff4563b2a2457de642fe8ba99f29c040f62",
+      "pilot_quantile": 0.25,
+      "pilot_rank_zero_based": 953,
+      "pilot_population": 3812
+    },
+    {
+      "cluster": "BULLET",
+      "bin_id": "23",
+      "obsid": "5356",
+      "ccd_id": "2",
+      "source_band_events": "266",
+      "background_band_events": "38",
+      "blanksky_scale": "0.065704048",
+      "scaled_background_events": "2.4967538240000002",
+      "expected_output_files": "4",
+      "flux_obs_support_fov_sha256": "06e94049e7264f65b3781dc4fc3be13a5e1c627207f9668814ac89233f582830",
+      "flux_obs_exposure_sha256": "c0e71b8c3b417eb613dc28d6de7a61692c11f0ccd65b80842b27c366778eb168",
+      "pilot_quantile": 0.75,
+      "pilot_rank_zero_based": 2858,
+      "pilot_population": 3812
+    },
+    {
+      "cluster": "ABELL2146",
+      "bin_id": "75",
+      "obsid": "13020",
+      "ccd_id": "0",
+      "source_band_events": "153",
+      "background_band_events": "57",
+      "blanksky_scale": "0.096840702",
+      "scaled_background_events": "5.519920014",
+      "expected_output_files": "4",
+      "flux_obs_support_fov_sha256": "5bcf4fd7a7e49d52c81ae86bcdbaeb326911e7244fe04015139ff4b7b1c537d5",
+      "flux_obs_exposure_sha256": "efa724bc99f83b34cebd775b4b51b57cd34ec944289b718eb60e02397e4dd06e",
+      "pilot_quantile": 0.25,
+      "pilot_rank_zero_based": 317,
+      "pilot_population": 1270
+    },
+    {
+      "cluster": "ABELL2146",
+      "bin_id": "101",
+      "obsid": "13120",
+      "ccd_id": "2",
+      "source_band_events": "217",
+      "background_band_events": "146",
+      "blanksky_scale": "0.11622176",
+      "scaled_background_events": "16.96837696",
+      "expected_output_files": "4",
+      "flux_obs_support_fov_sha256": "c42a87db6648cd1c0b1f59f2b507b807c544feb88bc5be2c9dc2af00f81f47e0",
+      "flux_obs_exposure_sha256": "dad66bc3993f940aa7ff133de061b94305479d04e252eb2630e52f15d52753c6",
+      "pilot_quantile": 0.75,
+      "pilot_rank_zero_based": 952,
+      "pilot_population": 1270
+    }
+  ],
+  "resource_projection": {
+    "response_bytes_per_cell_from_v19r": 6641280,
+    "response_bytes_all_cells": 33750984960,
+    "response_decimal_gb_all_cells": 33.75098496,
+    "response_gib_all_cells": 31.433054208755493,
+    "minimum_free_space_bytes": 84377462400,
+    "wsl_free_bytes_at_freeze_snapshot": 777892818944,
+    "approximate_serial_hours": 59.29,
+    "approximate_four_worker_ideal_hours": 14.8225,
+    "timing_is_planning_only_until_pilot": true
+  },
+  "gates": {
+    "all_parent_hashes_exact": true,
+    "v19q_authorizes_exactly_5082_tasks": true,
+    "v19r_authorizes_response_production": true,
+    "v19t_authorizes_response_and_fit_production": true,
+    "production_task_key_set_equals_v19q": true,
+    "batch_count_equals_80_and_no_batch_exceeds_64": true,
+    "each_task_occurs_exactly_once": true,
+    "pilot_has_two_outcome_blind_source_count_strata_per_cluster": true,
+    "capacity_snapshot_exceeds_2p5_times_projected_response_storage": true,
+    "failure_or_retry_cannot_change_scientific_inputs": true,
+    "pilot_pass_required_before_full_execution": true,
+    "cluster_task_counts_match_frozen_expectations": true,
+    "projected_storage_matches_frozen_arithmetic": true
+  },
+  "throughput_pilot_authorized": true,
+  "full_production_authorized": false,
+  "response_or_spectrum_constructed": false,
+  "temperature_density_mach_or_speed_fitted": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}
