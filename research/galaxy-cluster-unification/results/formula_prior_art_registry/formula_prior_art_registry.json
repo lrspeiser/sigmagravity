@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 218,
+    "sigma_protocols": 219,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7670,6 +7670,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "9aad133daa3438807565bfd201b8a9d3b9123d022f23e71e0482ab9ccb17a0ae"
+    },
+    {
+      "config": "configs/sigma_v19cv_bullet_nofile_runtime_remediation.json",
+      "protocol_version": "SIGMA-V19CV-BULLET-NOFILE-RUNTIME-REMEDIATION-1.0.0",
+      "status": "frozen during the active Abell 2146 integrated response combination and before the Bullet integrated response combination",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "dcd46faa988bdf4624ed1e86d7ad03ad9c01bd62a0e3c284f36835b4317e401f"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

@@ -1,0 +1,52 @@
+{
+  "protocol_version": "SIGMA-V19CV-BULLET-NOFILE-RUNTIME-REMEDIATION-1.0.0",
+  "status": "bullet_nofile_runtime_remediation_applied",
+  "generated_utc": "2026-08-05T21:48:31.233210+00:00",
+  "config_sha256": "dcd46faa988bdf4624ed1e86d7ad03ad9c01bd62a0e3c284f36835b4317e401f",
+  "parent_checks": {
+    "v19x2_config": true,
+    "v19cu_config": true,
+    "v19cu_runner": true
+  },
+  "authorization_exact": true,
+  "live_evidence": {
+    "v19x2_pid": 3829372,
+    "combine_spectra_pid": 3829373,
+    "addresp_pid": 3829509,
+    "active_addresp_open_descriptors": 3814,
+    "projected_bullet_open_descriptors": 11440,
+    "combine_command": [
+      "python",
+      "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/combine_spectra",
+      "src_spectra=@/home/henry/sigma-v19x2-spectral-combination/v100/ABELL2146_integrated/source_spectra.lis",
+      "outroot=/home/henry/sigma-v19x2-spectral-combination/v100/ABELL2146_integrated/ABELL2146_integrated",
+      "method=sum",
+      "bscale_method=asca",
+      "exp_origin=pha",
+      "clobber=no",
+      "verbose=1",
+      "mode=h"
+    ],
+    "addresp_command": [
+      "addresp",
+      "@@/home/henry/sigma-v19x2-spectral-combination/v100/ABELL2146_integrated/tmp/tmphgyoysl6.addresp.par",
+      "mode=hl"
+    ]
+  },
+  "rlimit_nofile_before": [
+    10240,
+    1048576
+  ],
+  "rlimit_nofile_after": [
+    65536,
+    1048576
+  ],
+  "hard_limit_changed": false,
+  "scientific_payload_changed": false,
+  "claim_boundary": [
+    "V19CV changes one process resource ceiling only; every scientific input, command argument, weighting rule, product audit, fit rule and gate remains unchanged.",
+    "The need is established before the Bullet combination from live Abell descriptor scaling and the frozen Bullet cell count.",
+    "A later spectral or source failure remains terminal scientific evidence and is not repaired here.",
+    "No lensing, halo, action, gravity, galaxy, holdout or Solar-System payload is opened."
+  ]
+}

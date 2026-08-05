@@ -1,0 +1,59 @@
+{
+  "protocol_version": "SIGMA-V19CV-BULLET-NOFILE-RUNTIME-REMEDIATION-1.0.0",
+  "status": "frozen during the active Abell 2146 integrated response combination and before the Bullet integrated response combination",
+  "purpose": "Raise only the active V19X2 process soft open-file limit so the preregistered 3812-spectrum Bullet combination can open the same three files per spectrum already observed for Abell 2146.",
+  "parents": {
+    "v19x2_config": {
+      "path": "configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+      "sha256": "60543254acdfa979b2e0ab86e346ea291e1a8b1346a13f48669a44974a42c559"
+    },
+    "v19cu_config": {
+      "path": "configs/sigma_v19cu_astropy_base_environment_remediation.json",
+      "sha256": "9aad133daa3438807565bfd201b8a9d3b9123d022f23e71e0482ab9ccb17a0ae"
+    },
+    "v19cu_runner": {
+      "path": "scripts/run_sigma_v19cu_astropy_base_environment_remediation.py",
+      "sha256": "86bfbdbdea220dbe355f00421d49db02b981ee3e8d4569035c45ff50b2f1de44"
+    }
+  },
+  "live_precondition": {
+    "v19x2_runner": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+    "scratch_root": "/home/henry/sigma-v19x2-spectral-combination/v100",
+    "active_cluster": "ABELL2146",
+    "active_integrated_cells": 1270,
+    "active_addresp_open_descriptors": 3814,
+    "descriptors_per_spectrum": 3,
+    "fixed_process_descriptors": 4,
+    "bullet_integrated_cells": 3812,
+    "projected_bullet_open_descriptors": 11440,
+    "bullet_directory_must_be_absent": "/home/henry/sigma-v19x2-spectral-combination/v100/BULLET_integrated"
+  },
+  "runtime_change": {
+    "resource": "RLIMIT_NOFILE",
+    "required_soft_before": 10240,
+    "required_hard_before": 1048576,
+    "soft_after": 65536,
+    "hard_after": 1048576,
+    "reason": "The frozen direct CIAO addresp implementation holds three input descriptors per spectrum. The projected Bullet requirement exceeds 10240 but is safely below 65536."
+  },
+  "authorization": {
+    "change_only_live_v19x2_parent_nofile_soft_limit": true,
+    "change_hard_limit": false,
+    "change_spectrum_response_weight_grouping_fit_or_gate": false,
+    "change_gravity_formula_or_parameter": false,
+    "open_lensing_halo_action_holdout_or_solar_payload": false
+  },
+  "outputs": {
+    "report": "results/sigma_v19cv_bullet_nofile_runtime_remediation/report.json"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19cv_bullet_nofile_runtime_remediation.py",
+    "tests": "tests/test_sigma_v19cv_bullet_nofile_runtime_remediation.py"
+  },
+  "claim_boundary": [
+    "V19CV changes one process resource ceiling only; every scientific input, command argument, weighting rule, product audit, fit rule and gate remains unchanged.",
+    "The need is established before the Bullet combination from live Abell descriptor scaling and the frozen Bullet cell count.",
+    "A later spectral or source failure remains terminal scientific evidence and is not repaired here.",
+    "No lensing, halo, action, gravity, galaxy, holdout or Solar-System payload is opened."
+  ]
+}
