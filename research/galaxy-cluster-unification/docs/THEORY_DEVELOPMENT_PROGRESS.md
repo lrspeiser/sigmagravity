@@ -2497,3 +2497,21 @@ under only some, and 78 names change at least one source-metric quartile.
 No target value, formula score, action, constant, holdout label or Solar
 optimization was opened. See
 [`SIGMA_V19BW_WALLABY_SOURCE_ONLY_VARIETY_FRAME.md`](SIGMA_V19BW_WALLABY_SOURCE_ONLY_VARIETY_FRAME.md).
+
+## 2026-08-05 V19BX SkyMapper optical-candidate contract
+
+The next blind galaxy-source acquisition is frozen before retrieving any
+SkyMapper row. Every one of the 592 V19BW H I centroids will receive the same
+60-arcsecond DR4 cone query and exact 50-column source-only projection. All
+returned objects are retained; nearest-neighbor or galaxy-like appearance is
+not allowed to select an optical counterpart.
+
+The uniform SkyMapper footprint covers Hydra, Norma and NGC 4636 and supplies
+photometry, Petrosian radius, catalog quality and stellarity diagnostics. Its
+published extended-source limitation is explicit, so these rows can measure
+coverage and crowding but cannot yet define bulge fractions or stellar masses.
+The query projection was checked against all 121 live `dr4.master` fields, and
+all 50 declared columns exist. Five manufactured contract tests pass. No
+WALLABY kinematic row, evidence split, force result, action, constant or Solar
+calculation was opened. See
+[`SIGMA_V19BX_SKYMAPPER_SOURCE_ONLY_CANDIDATES.md`](SIGMA_V19BX_SKYMAPPER_SOURCE_ONLY_CANDIDATES.md).

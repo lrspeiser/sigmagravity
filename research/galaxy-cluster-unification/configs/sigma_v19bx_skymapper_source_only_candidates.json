@@ -1,0 +1,142 @@
+{
+  "protocol_version": "SIGMA-V19BX-SKYMAPPER-SOURCE-ONLY-CANDIDATES-1.0.0",
+  "status": "frozen before retrieving any SkyMapper row or opening any WALLABY kinematic target",
+  "purpose": "Retrieve a uniform, source-only optical candidate universe around every V19BW WALLABY H I centroid without selecting an optical counterpart, evidence split, galaxy, formula, or gravity constant.",
+  "parent": {
+    "path": "results/sigma_v19bw_wallaby_source_only_variety_frame/report.json",
+    "sha256": "3b7887b4514e5fd52fd75b65b04fe3da8f8e14de1b7f75ce76351dd06a205e67"
+  },
+  "input": {
+    "path": "data/derived/sigma_v19bw_wallaby_source_only_variety_frame/wallaby_source_only_variety_frame.csv",
+    "sha256": "a21d0c9f0452e9c77e39bf6065ad60d0f00280dbdce9432df9a45ede01190f3f",
+    "rows": 592,
+    "unique_names": 592
+  },
+  "primary_source": {
+    "survey_release": "SkyMapper Southern Survey DR4",
+    "release_page": "https://skymapper.anu.edu.au/data-release/dr4/",
+    "doi": "10.25914/5M47-S621",
+    "tap_endpoint": "https://api.skymapper.nci.org.au/public/tap/sync",
+    "table": "dr4.master",
+    "coverage_reason": "DR4 six-band coverage reaches from the South Celestial Pole to declination +16 degrees and therefore contains all three WALLABY PDR1 fields.",
+    "known_limitation": "SkyMapper states that extended-source photometry is not optimized in DR4; the rows are candidates and coverage diagnostics, not definitive galaxy decompositions or stellar masses."
+  },
+  "query_policy": {
+    "search_radius_arcsec": 60.0,
+    "maximum_rows_per_source": 2000,
+    "workers": 8,
+    "retries": 3,
+    "ordering": "object_id ascending at the service; source name, angular separation and object_id in the combined output",
+    "counterpart_selection": "forbidden; retain every returned object",
+    "projection": [
+      "object_id",
+      "raj2000",
+      "dej2000",
+      "flags",
+      "nimaflags",
+      "ngood",
+      "class_star",
+      "mean_fwhm",
+      "radius_petro",
+      "g_ngood",
+      "g_flags",
+      "g_nimaflags",
+      "r_ngood",
+      "r_flags",
+      "r_nimaflags",
+      "i_ngood",
+      "i_flags",
+      "i_nimaflags",
+      "z_ngood",
+      "z_flags",
+      "z_nimaflags",
+      "g_petro",
+      "e_g_petro",
+      "r_petro",
+      "e_r_petro",
+      "i_petro",
+      "e_i_petro",
+      "z_petro",
+      "e_z_petro",
+      "g_apc05",
+      "e_g_apc05",
+      "r_apc05",
+      "e_r_apc05",
+      "i_apc05",
+      "e_i_apc05",
+      "z_apc05",
+      "e_z_apc05",
+      "ebmv_sfd",
+      "ebmv_gnilc",
+      "flags_psf",
+      "self_id1",
+      "self_dist1",
+      "self_id2",
+      "self_dist2",
+      "allwise_cntr",
+      "allwise_dist",
+      "catwise_id",
+      "catwise_dist",
+      "galex_guv_id",
+      "galex_guv_dist"
+    ]
+  },
+  "diagnostic_only_flags": {
+    "usable_r_photometry": "r_ngood > 0, r_flags < 4, r_nimaflags < 5, and finite r_petro/e_r_petro",
+    "extended_candidate": "usable r photometry, finite radius_petro, and class_star <= 0.5",
+    "boundary": "These flags summarize candidate density and catalog quality. They do not identify the H I counterpart."
+  },
+  "forbidden_target_tokens": [
+    "freq",
+    "kin_pa",
+    "vsys",
+    "inc_model",
+    "pa_model",
+    "vrot",
+    "rad_sd",
+    "sd_model",
+    "velocity",
+    "rotation",
+    "residual",
+    "halo",
+    "sigma_score",
+    "mond_score"
+  ],
+  "access_boundary": {
+    "skymapper_table_metadata_read": true,
+    "skymapper_source_only_rows_authorized": true,
+    "wallaby_kinematic_table_rows_read": false,
+    "rotation_speed_or_velocity_field_read": false,
+    "inclination_or_kinematic_angle_read": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "optical_counterpart_selected": false,
+    "development_validation_holdout_split_selected": false,
+    "final_galaxy_sample_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "solar_system_optimization_performed": false
+  },
+  "required_gates": {
+    "parent_and_input_hashes_exact": true,
+    "all_592_source_positions_queried_once": true,
+    "exact_source_only_projection_used": true,
+    "no_service_failure_or_row_cap_hit": true,
+    "all_candidates_inside_frozen_radius": true,
+    "candidate_and_coverage_outputs_reproduce": true,
+    "kinematic_gravity_and_solar_targets_remain_sealed": true,
+    "no_counterpart_sample_or_evidence_split_claimed": true
+  },
+  "outputs": {
+    "candidate_csv": "data/raw/sigma_v19bx_skymapper_source_only_candidates/skymapper_dr4_candidates.csv",
+    "coverage_csv": "data/derived/sigma_v19bx_skymapper_source_only_candidates/wallaby_skymapper_candidate_coverage.csv",
+    "report": "results/sigma_v19bx_skymapper_source_only_candidates/report.json"
+  },
+  "claim_boundary": [
+    "A SkyMapper object inside 60 arcsec is an optical candidate, not a claimed H I counterpart.",
+    "Catalog stellarity, Petrosian radius and quality flags diagnose available source information but do not constitute a bulge fraction, stellar mass or morphology truth label.",
+    "No nearest-neighbor choice is used to select a galaxy or tune a force law.",
+    "No WALLABY velocity, fitted inclination, kinematic angle, gravity residual, halo result, action, constant, evidence split or Solar-System result enters V19BX."
+  ],
+  "implementation": {
+    "runner": "scripts/acquire_sigma_v19bx_skymapper_source_only_candidates.py"
+  }
+}
