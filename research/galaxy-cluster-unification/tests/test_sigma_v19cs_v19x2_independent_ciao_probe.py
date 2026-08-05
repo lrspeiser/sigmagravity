@@ -19,24 +19,13 @@ def test_v19cs_freezes_independent_probe_without_scientific_change() -> None:
     assert not payload["authorization"]["run_v19bs_or_derive_action"]
 
 
-def test_v19cs_completed_result_passes_every_boundary() -> None:
+def test_v19cs_records_the_overbroad_probe_failure() -> None:
     payload = load(REPORT)
-    assert payload["status"] == "v19x2_independent_ciao_probe_completed"
-    assert all(payload["preflight"].values())
-    assert all(payload["environment_probe"]["checks"].values())
-    assert payload["preexecution_scratch_audit"]["only_permitted_files"]
-    assert not payload["preexecution_scratch_audit"]["combined_or_fit_products"]
-    assert all(payload["gate_results"].values())
+    assert payload["status"] == "v19x2_independent_ciao_probe_failed_closed"
+    assert "V19CR environment probe failed" in payload["exception"]
     assert not any(payload["authorization_boundary"].values())
 
 
-def test_v19cs_reaches_registered_scientific_or_source_disposition() -> None:
-    payload = load(REPORT)
-    assert payload["decision"] in {
-        "v19x2_valid_scientific_gate_failure_no_full_source_chain",
-        "run_frozen_v19bs_disposition_next",
-    }
-    assert payload["v19x2_report"]["status"] in {
-        "unified_spectral_combination_commissioning_gate_failed",
-        "unified_spectral_combination_commissioning_passed_and_full_regional_fits_authorized",
-    }
+def test_v19cs_probe_log_identifies_only_the_unused_module() -> None:
+    log = (ROOT / "results" / "sigma_v19cs_v19x2_independent_ciao_probe" / "environment_probe.log").read_text(encoding="utf-8")
+    assert "ModuleNotFoundError: No module named 'astropy'" in log

@@ -1,0 +1,18 @@
+{
+  "authorization_boundary": {
+    "action_derived": false,
+    "solar_optimized": false,
+    "target_or_gravity_opened": false,
+    "v19bs_run": false
+  },
+  "claim_boundary": [
+    "V19CS removes one false historical-success premise from the wrapper preflight and replaces it with a stricter current executable/module probe.",
+    "The V19X2 config, runner, response archive, spectra, grouping, model, fit sequence and scientific gates remain byte-identical.",
+    "The source list is the only preexisting scratch file and no combined spectrum or fit exists before this run.",
+    "No gravity theory, lensing target, action, holdout or Solar-System optimization is opened."
+  ],
+  "exception": "RuntimeError: V19CR environment probe failed: {'command': ['/home/henry/miniforge3/bin/conda', 'run', '--no-capture-output', '-n', 'sigma-ciao-4.18', 'python', '-c', \"import importlib,json,shutil,sys;commands=['combine_spectra', 'dmgroup'];modules=['sherpa', 'astropy', 'numpy'];print(json.dumps({'python':sys.executable,'commands':{x:shutil.which(x) for x in commands},'modules':{x:bool(importlib.import_module(x)) for x in modules}},sort_keys=True))\"], 'returncode': 1, 'log': 'results/sigma_v19cs_v19x2_independent_ciao_probe/environment_probe.log', 'log_sha256': '4b886694c082da54c813af712bff9957ffc757b8f28d2479d4e4bd5838942e8a', 'log_bytes': 955}",
+  "generated_utc": "2026-08-05T20:42:16.084984+00:00",
+  "protocol_version": "SIGMA-V19CS-V19X2-INDEPENDENT-CIAO-PROBE-1.0.0",
+  "status": "v19x2_independent_ciao_probe_failed_closed"
+}
