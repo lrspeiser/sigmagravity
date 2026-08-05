@@ -38,9 +38,11 @@ the source response, create and link a zero-count background PHA, and pass every
 mask, histogram, detector-medoid, ARF/RMF, link, scaling, size and hash gate.
 V19W5 now supersedes the unexecuted V19W4 terminal launcher and makes this CCD7
 pass mandatory. It remains blocked until the unchanged base process exits and
-its full-interval report passes. The response adapter now has an explicit,
-fail-closed V19W5 status and archive-label mode while retaining V19W4 as its
-default; the terminal freezer still must be superseded after V19W5 passes. No
+its full-interval report passes. The response adapter has an explicit,
+fail-closed V19W5 status and archive-label mode while retaining V19W4 only as
+its low-level historical default. The V19X2 production freezer/runner now
+requires V19W5 and cannot silently fall back to V19W4. The hash-bound V19X3/X4
+preflight chain is preserved pending a separately named successor. No
 spectrum was combined, no gas state was fit and no lensing or gravity result
 was opened. See
 [`SIGMA_V19W2C_CCD7_RESPONSE_COMMISSIONING_RESULTS.md`](SIGMA_V19W2C_CCD7_RESPONSE_COMMISSIONING_RESULTS.md)
@@ -137,8 +139,8 @@ hard veto rather than the present optimization target.  See
 
 The future spectral combination step no longer assumes that all 5,082 response
 cells occupy the original V19W archive. A target-blind adapter preflight consumes
-an explicit `cell_directory` in a unified index and currently accepts the older
-`base_v19w` and `v19w4_recovery` schema. It independently rechecks the terminal
+an explicit `cell_directory` in a unified index and accepts the explicit
+`base_v19w` and `v19w5_recovery` production schema. It independently rechecks the terminal
 authority, index hash and size, allowed archive roots, task identity, event
 counts, cell-report hash, all four product names/sizes/hashes, and the source
 PHA channel-count audit.
@@ -154,8 +156,10 @@ registered workload, combination, fit sequence, and gates exactly from V19X
 while hashing every parent. Its config hash is recorded in the execution report
 rather than circularly embedded in the config itself. V19X2 is not frozen until
 V19W terminates and V19W5 produces its terminal report and unified index. The
-adapter/freezer must then be superseded to accept the `v19w5_recovery` label and
-hash the V19W5 authority before any combination is allowed. No
+freezer and commissioning runner now propagate that exact V19W5 authority,
+status, archive label and hashes before any combination is allowed. V19X3 must
+be superseded under a new name after V19X2 passes because V19X4 hashes the
+current preregistered V19X3 files. No
 response was combined, no spectrum or temperature was fit, and no lensing or
 gravity payload was opened. See
 [`SIGMA_V19X2_UNIFIED_RESPONSE_ADAPTER_PREFLIGHT.md`](SIGMA_V19X2_UNIFIED_RESPONSE_ADAPTER_PREFLIGHT.md).

@@ -16,18 +16,21 @@ import run_sigma_v19x2_unified_spectral_combination_commissioning as runner
 def fixture_config(tmp_path: Path) -> dict:
     return {
         "runtime_authorization": {
-            "required_v19w4_report": "unused.json",
+            "response_authority": "V19W5",
+            "required_response_report": "unused.json",
+            "required_status": runner.adapter.V19W5_AUTHORIZED_STATUS,
+            "recovery_archive": "v19w5_recovery",
             "required_unified_cells": 2,
             "required_unified_products": 8,
         },
         "parents": {
-            "v19w4_config_sha256": "a" * 64,
-            "v19w4_runner_sha256": "b" * 64,
+            "v19w5_config_sha256": "a" * 64,
+            "v19w5_runner_sha256": "b" * 64,
         },
         "execution": {
             "response_archives": {
                 "base_v19w": str(tmp_path / "base"),
-                "v19w4_recovery": str(tmp_path / "recovery"),
+                "v19w5_recovery": str(tmp_path / "recovery"),
             }
         },
         "registered_workload": {
@@ -70,7 +73,7 @@ def fixture_validated(tmp_path: Path) -> dict:
     records = {}
     for index, manifest in enumerate(fixture_manifest()):
         key = runner.adapter.task_key(manifest)
-        archive = "base_v19w" if index == 0 else "v19w4_recovery"
+        archive = "base_v19w" if index == 0 else "v19w5_recovery"
         records[key] = {
             "cluster": key[0],
             "bin_id": key[1],
@@ -125,22 +128,27 @@ def test_scaffold_orchestrates_mixed_archive_with_unchanged_fit_order(
     validated = fixture_validated(tmp_path)
     index = tmp_path / "unified.csv"
     index.write_text("fixture\n", encoding="utf-8")
-    report_path = tmp_path / "v19w4.json"
+    report_path = tmp_path / "v19w5.json"
     report_path.write_text("{}", encoding="utf-8")
+    authorization: dict = {}
+
+    def authorize(*_args, **kwargs):
+        authorization.update(kwargs)
+        return {"unified_product_index": {"sha256": "c" * 64}}, index
+
     monkeypatch.setattr(
         runner.adapter,
         "authorize_unified_index",
-        lambda *_args, **_kwargs: (
-            {"unified_product_index": {"sha256": "c" * 64}},
-            index,
-        ),
+        authorize,
     )
     monkeypatch.setattr(runner.inherited_v19x, "load_manifest", lambda _config: manifest)
     monkeypatch.setattr(
         runner.inherited_v19x, "build_aperture_plan", lambda *_args: plan
     )
     monkeypatch.setattr(
-        runner.adapter, "validate_unified_archive", lambda *_args: validated
+        runner.adapter,
+        "validate_unified_archive",
+        lambda *_args, **_kwargs: validated,
     )
     monkeypatch.setattr(runner.inherited_v19x, "combine_aperture", passing_combination)
     calls = []
@@ -155,8 +163,10 @@ def test_scaffold_orchestrates_mixed_archive_with_unchanged_fit_order(
     assert result["full_494_region_combination_and_fit_authorized"]
     assert result["validated_response_archive_counts"] == {
         "base_v19w": 1,
-        "v19w4_recovery": 1,
+        "v19w5_recovery": 1,
     }
+    assert authorization["expected_status"] == runner.adapter.V19W5_AUTHORIZED_STATUS
+    assert authorization["authority_label"] == "V19W5"
     assert calls == [
         ("BULLET", "BULLET_integrated", None),
         ("ABELL2146", "ABELL2146_integrated", None),
@@ -200,7 +210,7 @@ def test_validated_index_preserves_archive_and_cell_directory(tmp_path: Path) ->
     with (tmp_path / "validated.csv").open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
     assert result["rows"] == 2
-    assert [row["archive"] for row in rows] == ["base_v19w", "v19w4_recovery"]
+    assert [row["archive"] for row in rows] == ["base_v19w", "v19w5_recovery"]
     assert all(Path(row["cell_directory"]).is_absolute() for row in rows)
 
 
@@ -214,6 +224,6 @@ def test_runner_refuses_an_unfrozen_configuration(tmp_path: Path) -> None:
     try:
         runner.validate_frozen_runner(config)
     except RuntimeError as exc:
-        assert "not frozen after a terminal V19W4 pass" in str(exc)
+        assert "not frozen after a terminal V19W5 pass" in str(exc)
     else:
         raise AssertionError("unfrozen V19X2 configuration was accepted")

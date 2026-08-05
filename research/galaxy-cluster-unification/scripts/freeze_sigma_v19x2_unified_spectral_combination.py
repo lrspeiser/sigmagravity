@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Freeze V19X2 only after a terminal, passing V19W4 unified archive exists."""
+"""Freeze V19X2 only after a terminal, passing V19W5 unified archive exists."""
 
 from __future__ import annotations
 
@@ -22,10 +22,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_LEGACY_CONFIG = (
     ROOT / "configs" / "sigma_v19x_spectral_combination_commissioning.json"
 )
-DEFAULT_V19W4_CONFIG = ROOT / "configs" / "sigma_v19w4_hardened_response_recovery.json"
-DEFAULT_V19W4_RUNNER = ROOT / "scripts" / "run_sigma_v19w4_hardened_response_recovery.py"
-DEFAULT_V19W4_REPORT = (
-    ROOT / "results" / "sigma_v19w4_hardened_response_recovery" / "report.json"
+DEFAULT_V19W5_CONFIG = ROOT / "configs" / "sigma_v19w5_ccd7_hardened_response_recovery.json"
+DEFAULT_V19W5_RUNNER = ROOT / "scripts" / "run_sigma_v19w5_ccd7_hardened_response_recovery.py"
+DEFAULT_V19W5_REPORT = (
+    ROOT / "results" / "sigma_v19w5_ccd7_hardened_response_recovery" / "report.json"
 )
 DEFAULT_SUCCESSOR_RUNNER = (
     ROOT / "scripts" / "run_sigma_v19x2_unified_spectral_combination_commissioning.py"
@@ -57,32 +57,34 @@ def canonical_sha256(value: Any) -> str:
 
 def freeze_config(
     legacy_config_path: Path,
-    v19w4_config_path: Path,
-    v19w4_runner_path: Path,
-    v19w4_report_path: Path,
+    v19w5_config_path: Path,
+    v19w5_runner_path: Path,
+    v19w5_report_path: Path,
     successor_runner_path: Path,
     adapter_path: Path,
     output_path: Path,
 ) -> dict[str, Any]:
     paths = (
         legacy_config_path,
-        v19w4_config_path,
-        v19w4_runner_path,
+        v19w5_config_path,
+        v19w5_runner_path,
         successor_runner_path,
         adapter_path,
     )
     if not all(path.is_file() for path in paths):
         missing = [str(path) for path in paths if not path.is_file()]
         raise RuntimeError(f"V19X2 freeze parent is absent: {missing}")
-    v19w4_config_sha = adapter.sha256(v19w4_config_path)
-    v19w4_runner_sha = adapter.sha256(v19w4_runner_path)
+    v19w5_config_sha = adapter.sha256(v19w5_config_path)
+    v19w5_runner_sha = adapter.sha256(v19w5_runner_path)
     terminal, index_path = adapter.authorize_unified_index(
-        v19w4_report_path,
-        expected_config_sha256=v19w4_config_sha,
-        expected_runner_sha256=v19w4_runner_sha,
+        v19w5_report_path,
+        expected_config_sha256=v19w5_config_sha,
+        expected_runner_sha256=v19w5_runner_sha,
         expected_cells=5082,
         expected_products=20328,
         root=ROOT,
+        expected_status=adapter.V19W5_AUTHORIZED_STATUS,
+        authority_label="V19W5",
     )
     legacy = load_json(legacy_config_path)
     parents = copy.deepcopy(legacy["parents"])
@@ -90,21 +92,21 @@ def freeze_config(
         {
             "legacy_v19x_config": relative(legacy_config_path),
             "legacy_v19x_config_sha256": adapter.sha256(legacy_config_path),
-            "v19w4_config": relative(v19w4_config_path),
-            "v19w4_config_sha256": v19w4_config_sha,
-            "v19w4_runner": relative(v19w4_runner_path),
-            "v19w4_runner_sha256": v19w4_runner_sha,
-            "v19w4_report": relative(v19w4_report_path),
-            "v19w4_report_sha256": adapter.sha256(v19w4_report_path),
-            "v19w4_unified_index": relative(index_path),
-            "v19w4_unified_index_sha256": adapter.sha256(index_path),
+            "v19w5_config": relative(v19w5_config_path),
+            "v19w5_config_sha256": v19w5_config_sha,
+            "v19w5_runner": relative(v19w5_runner_path),
+            "v19w5_runner_sha256": v19w5_runner_sha,
+            "v19w5_report": relative(v19w5_report_path),
+            "v19w5_report_sha256": adapter.sha256(v19w5_report_path),
+            "v19w5_unified_index": relative(index_path),
+            "v19w5_unified_index_sha256": adapter.sha256(index_path),
         }
     )
     config: dict[str, Any] = {
-        "protocol_version": "SIGMA-V19X2-UNIFIED-SPECTRAL-COMBINATION-COMMISSIONING-1.0.0",
-        "freeze_state": "frozen_after_terminal_v19w4_pass",
-        "status": "frozen mechanically after V19W4 passed every recovery, immutability, unified-index and second full-audit gate; before combining a response, fitting a spectrum or temperature, constructing gas source state, opening lensing or halo data, or changing gravity physics",
-        "purpose": "Commission the unchanged V19X integrated and selected-region spectral pipeline against the terminal mixed base/recovery V19W4 archive.",
+        "protocol_version": "SIGMA-V19X2-UNIFIED-SPECTRAL-COMBINATION-COMMISSIONING-1.1.0",
+        "freeze_state": "frozen_after_terminal_v19w5_pass",
+        "status": "frozen mechanically after V19W5 passed every CCD7-hardened recovery, immutability, unified-index and second full-audit gate; before combining a response, fitting a spectrum or temperature, constructing gas source state, opening lensing or halo data, or changing gravity physics",
+        "purpose": "Commission the unchanged V19X integrated and selected-region spectral pipeline against the terminal mixed base/recovery V19W5 archive.",
         "parents": parents,
         "exact_legacy_sections": list(EXACT_LEGACY_SECTIONS),
         "inherited_section_sha256": {
@@ -112,8 +114,10 @@ def freeze_config(
             for section in EXACT_LEGACY_SECTIONS
         },
         "runtime_authorization": {
-            "required_v19w4_report": relative(v19w4_report_path),
-            "required_status": adapter.AUTHORIZED_STATUS,
+            "response_authority": "V19W5",
+            "required_response_report": relative(v19w5_report_path),
+            "required_status": adapter.V19W5_AUTHORIZED_STATUS,
+            "recovery_archive": "v19w5_recovery",
             "required_unified_cells": 5082,
             "required_unified_products": 20328,
             "required_unified_index": relative(index_path),
@@ -127,7 +131,7 @@ def freeze_config(
             "adapter": relative(adapter_path),
             "response_archives": {
                 "base_v19w": "/home/henry/sigma-v19w-response-production/v100",
-                "v19w4_recovery": "/home/henry/sigma-v19w4-response-recovery/v100",
+                "v19w5_recovery": "/home/henry/sigma-v19w5-response-recovery/v100",
             },
             "scratch_root": "/home/henry/sigma-v19x2-spectral-combination/v100",
             "result_root": "results/sigma_v19x2_unified_spectral_combination_commissioning",
@@ -154,13 +158,13 @@ def freeze_config(
             "change_gravity_formula_or_parameter": False,
         },
         "integrity": {
-            "v19w4_terminal_report_existed_at_freeze": True,
-            "v19w4_terminal_report_passed_at_freeze": True,
+            "v19w5_terminal_report_existed_at_freeze": True,
+            "v19w5_terminal_report_passed_at_freeze": True,
             "unified_index_rows_at_freeze": int(
                 terminal["unified_product_index"]["rows"]
             ),
             "unified_product_files_at_freeze": int(terminal["unified_product_files"]),
-            "base_archive_modified_by_v19w4": terminal["base_v19w_archive_modified"],
+            "base_archive_modified_by_v19w5": terminal["base_v19w_archive_modified"],
             "obsolete_v19x_authorized": terminal["original_v19x_authorized"],
             "spectrum_or_temperature_known_at_freeze": False,
             "lensing_halo_or_gravity_payload_opened_at_freeze": False,
@@ -193,18 +197,18 @@ def freeze_config(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--legacy-config", type=Path, default=DEFAULT_LEGACY_CONFIG)
-    parser.add_argument("--v19w4-config", type=Path, default=DEFAULT_V19W4_CONFIG)
-    parser.add_argument("--v19w4-runner", type=Path, default=DEFAULT_V19W4_RUNNER)
-    parser.add_argument("--v19w4-report", type=Path, default=DEFAULT_V19W4_REPORT)
+    parser.add_argument("--v19w5-config", type=Path, default=DEFAULT_V19W5_CONFIG)
+    parser.add_argument("--v19w5-runner", type=Path, default=DEFAULT_V19W5_RUNNER)
+    parser.add_argument("--v19w5-report", type=Path, default=DEFAULT_V19W5_REPORT)
     parser.add_argument("--successor-runner", type=Path, default=DEFAULT_SUCCESSOR_RUNNER)
     parser.add_argument("--adapter", type=Path, default=DEFAULT_ADAPTER)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
     config = freeze_config(
         args.legacy_config.resolve(),
-        args.v19w4_config.resolve(),
-        args.v19w4_runner.resolve(),
-        args.v19w4_report.resolve(),
+        args.v19w5_config.resolve(),
+        args.v19w5_runner.resolve(),
+        args.v19w5_report.resolve(),
         args.successor_runner.resolve(),
         args.adapter.resolve(),
         args.output.resolve(),

@@ -74,11 +74,12 @@ validated a second time.
 The shared V19X2 adapter now accepts `v19w5_recovery` only when a caller
 explicitly declares that archive label and the V19W5 terminal status; its
 default remains the historical V19W4 contract, so the two authorities cannot be
-silently interchanged. The current mechanical freezer and orchestration
-scaffold still name V19W4. After V19W5 passes, they must be superseded with
-hashes for the V19W5 report and index and the explicit V19W5 adapter options.
-This is a schema update, not permission to alter any spectrum, region or fit
-setting.
+silently interchanged. The V19X2 mechanical freezer and orchestration scaffold
+now explicitly require the V19W5 status, report, index and adapter mode. The
+already hash-bound V19X3/V19X4 preflight chain is preserved; after V19X2 passes,
+a separately named V19X3 successor must propagate the new authority rather than
+mutating that preregistered evidence. This is a schema update, not permission to
+alter any spectrum, region or fit setting.
 
 V19W5 itself does not combine or fit a spectrum, infer a gas state, open a
 lensing target or change a gravity formula.

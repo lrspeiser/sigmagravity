@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unfrozen V19X2 orchestration scaffold for a V19W4 unified archive."""
+"""Unfrozen V19X2 orchestration scaffold for a V19W5 unified archive."""
 
 from __future__ import annotations
 
@@ -137,13 +137,15 @@ def combine_and_fit(
     ]
     expected_cells = int(config["runtime_authorization"]["required_unified_cells"])
     gates = {
-        "v19w4_unified_archive_and_every_product_hash_exact": len(validated)
+        "v19w5_unified_archive_and_every_product_hash_exact": len(validated)
         == expected_cells,
         "base_and_recovery_archive_labels_are_preserved": sum(
             archive_counts.values()
         )
         == expected_cells
-        and set(archive_counts).issubset({"base_v19w", "v19w4_recovery"}),
+        and set(archive_counts).issubset(
+            set(config["execution"]["response_archives"])
+        ),
         "combination_uses_every_registered_cell_exactly_once": all(
             combinations[cluster]["integrated"]["cells"]
             == int(config["registered_workload"]["clusters"][cluster]["total_cells"])
@@ -195,20 +197,22 @@ def execute(
     config: dict[str, Any],
     output: Path,
     scratch: Path,
-    v19w4_report_path: Path | None = None,
+    response_report_path: Path | None = None,
 ) -> dict[str, Any]:
     runtime = config["runtime_authorization"]
     report_path = (
-        ROOT / runtime["required_v19w4_report"]
-        if v19w4_report_path is None
-        else v19w4_report_path
+        ROOT / runtime["required_response_report"]
+        if response_report_path is None
+        else response_report_path
     )
-    v19w4_report, unified_index = adapter.authorize_unified_index(
+    response_report, unified_index = adapter.authorize_unified_index(
         report_path,
-        expected_config_sha256=config["parents"]["v19w4_config_sha256"],
-        expected_runner_sha256=config["parents"]["v19w4_runner_sha256"],
+        expected_config_sha256=config["parents"]["v19w5_config_sha256"],
+        expected_runner_sha256=config["parents"]["v19w5_runner_sha256"],
         expected_cells=int(runtime["required_unified_cells"]),
         expected_products=int(runtime["required_unified_products"]),
+        expected_status=runtime["required_status"],
+        authority_label=runtime["response_authority"],
     )
     manifest = inherited_v19x.load_manifest(config)
     plan = inherited_v19x.build_aperture_plan(config, manifest)
@@ -217,15 +221,18 @@ def execute(
         for name, path in config["execution"]["response_archives"].items()
     }
     validated = adapter.validate_unified_archive(
-        manifest, unified_index, archive_roots
+        manifest,
+        unified_index,
+        archive_roots,
+        recovery_archive=runtime["recovery_archive"],
     )
     result = combine_and_fit(
         config, output, scratch, manifest, plan, validated
     )
     result.update(
         {
-            "v19w4_report_sha256": adapter.sha256(report_path),
-            "v19w4_unified_index_sha256": v19w4_report[
+            "response_report_sha256": adapter.sha256(report_path),
+            "response_unified_index_sha256": response_report[
                 "unified_product_index"
             ]["sha256"],
             "obsolete_v19x_executed": False,
@@ -235,8 +242,8 @@ def execute(
 
 
 def validate_frozen_runner(config: dict[str, Any]) -> None:
-    if config.get("freeze_state") != "frozen_after_terminal_v19w4_pass":
-        raise RuntimeError("V19X2 configuration is not frozen after a terminal V19W4 pass")
+    if config.get("freeze_state") != "frozen_after_terminal_v19w5_pass":
+        raise RuntimeError("V19X2 configuration is not frozen after a terminal V19W5 pass")
     runner = ROOT / config["implementation"]["runner"]
     if runner.resolve() != Path(__file__).resolve():
         raise RuntimeError("V19X2 configuration names another runner")
@@ -266,7 +273,7 @@ def main() -> None:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--scratch", type=Path, required=True)
-    parser.add_argument("--v19w4-report", type=Path)
+    parser.add_argument("--response-report", type=Path)
     args = parser.parse_args()
     config_path = args.config.resolve()
     output = args.output.resolve()
@@ -279,7 +286,7 @@ def main() -> None:
             config,
             output,
             args.scratch.resolve(),
-            args.v19w4_report.resolve() if args.v19w4_report else None,
+            args.response_report.resolve() if args.response_report else None,
         )
     except Exception as exc:  # noqa: BLE001 - preserve failure report
         result = {
