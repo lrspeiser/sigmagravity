@@ -1,0 +1,15 @@
+{
+  "protocol_version": "SIGMA-V19BR-TARGET-SEALED-TERMINAL-CHAIN-1.0.0",
+  "generated_utc": "2026-08-05T20:24:42.690375+00:00",
+  "config_sha256": "8a5205d978ab25d53b8befb11472ff420e2e8116ad06cd9c43e4d158a9d580ed",
+  "runner_sha256": "d0f4c2f48a0a22e898fadaf3f637785df5d8cbfeb50f81164aec5e39c2c30bcc",
+  "status": "terminal_chain_failed_closed",
+  "exception": "RuntimeError: V19BR stage RUN_V19X2 exited 2; chain stopped",
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "claim_boundary": [
+    "V19BR changes orchestration only; every scientific definition and threshold remains in its separately frozen parent.",
+    "A valid I4/I5 scientific failure is a completed source decision and must not be retried or tuned; only an execution failure stops the chain as corrupt or incomplete.",
+    "V19BR never opens lensing, halo, galaxy rotation, action, gravity-parameter or holdout payloads.",
+    "A source pass authorizes later action derivation under V19BJ; it is not evidence that a gravity theory fits galaxies or clusters."
+  ]
+}

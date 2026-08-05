@@ -1,0 +1,78 @@
+{
+  "protocol_version": "SIGMA-V19CP-V19X2-RUNTIME-ALIAS-REMEDIATION-1.0.0",
+  "status": "frozen after V19W5 passed all 5,082 cells and V19X2 failed before archive validation with KeyError required_completed_cells, and before adding the compatibility alias, validating a response cell, combining a spectrum, fitting a temperature, or resuming V19BR",
+  "purpose": "Add the missing legacy runtime count alias with the same frozen value as required_unified_cells, rerun the byte-identical V19X2 commissioning stage, and resume the unchanged source-only terminal chain only if commissioning passes.",
+  "failure_parents": {
+    "v19co_report": {
+      "path": "results/sigma_v19co_checkpoint_attempt_metadata_correction/report.json",
+      "sha256": "4ddaac8c80ab1963c8edde8a8678e59237a07f3182112c6467e9a5d0cc2c984a",
+      "required_exception": "RuntimeError: V19CO V19BR exited 2"
+    },
+    "v19x2_failure_report": {
+      "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/report.json",
+      "sha256": "0cb55e3e7cf6f54ae4e95ee5e8f3dcbaf2bba037e4bb5011f13f013686f15edc",
+      "required_status": "unified_spectral_combination_commissioning_execution_failed",
+      "required_exception": "KeyError: 'required_completed_cells'"
+    },
+    "v19w5_report": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+      "sha256": "9e90fcb397c80010562b8fbd441fff91a716ced4bb0ef895704ca449dca7c85f",
+      "required_status": "ccd7_hardened_unified_5082_response_archive_passed"
+    }
+  },
+  "config_correction": {
+    "path": "configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+    "sha256_before": "6f31d3a06e2d93583d0b4524e4c8ec6df43ff75fe0fbcd5ab52fc900d2ee681e",
+    "json_path_added": "runtime_authorization.required_completed_cells",
+    "value": 5082,
+    "must_equal_existing_json_path": "runtime_authorization.required_unified_cells",
+    "all_other_values_byte_for_canonical_json_unchanged": true,
+    "scientific_sections_unchanged": [
+      "registered_workload",
+      "combination",
+      "fit_sequence",
+      "gates"
+    ]
+  },
+  "unchanged_execution": {
+    "v19x2_runner": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+    "v19x2_runner_sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea",
+    "v19x2_output": "results/sigma_v19x2_unified_spectral_combination_commissioning",
+    "v19x2_scratch": "/home/henry/sigma-v19x2-spectral-combination/v100",
+    "v19br_config": "configs/sigma_v19br_target_sealed_terminal_chain.json",
+    "v19br_config_sha256": "8a5205d978ab25d53b8befb11472ff420e2e8116ad06cd9c43e4d158a9d580ed",
+    "v19br_runner": "scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+    "v19br_runner_sha256": "d0f4c2f48a0a22e898fadaf3f637785df5d8cbfeb50f81164aec5e39c2c30bcc"
+  },
+  "required_gates": {
+    "failure_reports_v19w5_pass_and_config_boundary_exact": true,
+    "only_required_completed_cells_alias_added_and_equals_5082": true,
+    "v19x2_byte_identical_runner_reaches_registered_scientific_disposition": true,
+    "if_v19x2_passes_unchanged_v19br_reaches_source_decision": true,
+    "no_lensing_halo_action_gravity_holdout_or_solar_access": true
+  },
+  "authorization": {
+    "add_one_runtime_count_alias": true,
+    "change_scientific_section_or_value": false,
+    "rerun_v19x2_after_precombination_execution_failure": true,
+    "resume_v19br_only_after_v19x2_pass": true,
+    "retry_or_tune_valid_scientific_fit_failure": false,
+    "run_v19bs_or_derive_action": false,
+    "open_lensing_halo_gravity_holdout_or_solar_optimization": false
+  },
+  "outputs": {
+    "report": "results/sigma_v19cp_v19x2_runtime_alias_remediation/report.json",
+    "v19x2_log": "results/sigma_v19cp_v19x2_runtime_alias_remediation/v19x2_commissioning.log",
+    "v19br_log": "results/sigma_v19cp_v19x2_runtime_alias_remediation/v19br_continuation.log"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19cp_v19x2_runtime_alias_remediation.py",
+    "tests": "tests/test_sigma_v19cp_v19x2_runtime_alias_remediation.py"
+  },
+  "claim_boundary": [
+    "V19CP repairs a count-key compatibility mismatch before any spectrum was combined.",
+    "The alias has the same 5,082 value already frozen and independently verified by V19W5.",
+    "A V19X2 scientific quality-gate failure after this repair is final for these frozen spectral rules and is not an execution failure.",
+    "No gravity theory is tested and V19BS remains separate."
+  ]
+}

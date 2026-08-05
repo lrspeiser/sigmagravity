@@ -1,0 +1,117 @@
+{
+  "base_invalid_checkpoint_errors": {},
+  "base_inventory_after": {
+    "invalid_cells": 0,
+    "inventory_sha256": "83f7a07d3b8f5952e3e7ca4876a96bf9f064be1d677c4e1dcc4a89466aa15d3a",
+    "valid_cells": 4698
+  },
+  "base_inventory_before": {
+    "invalid_cells": 0,
+    "inventory_sha256": "83f7a07d3b8f5952e3e7ca4876a96bf9f064be1d677c4e1dcc4a89466aa15d3a",
+    "valid_cells": 4698
+  },
+  "base_terminal_report": {
+    "path": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19w_full_response_production/report.json",
+    "reported_completed_cells": 4698,
+    "reported_status": "response_production_incomplete",
+    "sha256": "df6ccdfe2ae7766a698039f1e666aa2309cbc3730f32cfbc1f2cc1828bdcc6e3"
+  },
+  "base_tree_after": {
+    "bytes": 31105756264,
+    "files": 33396,
+    "path_size_content_sha256": "814abb1fad0188f822aae1a785b783c7e7319154b8fdccf9ab2870192146e9c8",
+    "root_file_counts": {
+      "completed": 32886,
+      "failed_attempts": 510,
+      "partial": 0,
+      "quarantine": 0
+    },
+    "roots": [
+      "completed",
+      "failed_attempts",
+      "quarantine",
+      "partial"
+    ]
+  },
+  "base_tree_before": {
+    "bytes": 31105756264,
+    "files": 33396,
+    "path_size_content_sha256": "814abb1fad0188f822aae1a785b783c7e7319154b8fdccf9ab2870192146e9c8",
+    "root_file_counts": {
+      "completed": 32886,
+      "failed_attempts": 510,
+      "partial": 0,
+      "quarantine": 0
+    },
+    "roots": [
+      "completed",
+      "failed_attempts",
+      "quarantine",
+      "partial"
+    ]
+  },
+  "base_v19w_archive_modified": false,
+  "base_valid_cells": 4698,
+  "ccd7_commissioning_parent": {
+    "completed_cells": 6,
+    "report_sha256": "2bd039a45c934639b2bb0855b7db668ba4326369c42a9c97c47a355776301d82",
+    "status": "ccd7_exact_binmap_commissioning_passed"
+  },
+  "claim_boundary": [
+    "V19W5 is an implementation recovery and integrity audit; it does not combine or interpret a spectrum.",
+    "The terminal recovery count is unknown at freeze and is computed only after the unchanged base process exits.",
+    "A pass authorizes freezing a two-archive V19X successor, not running the original V19X configuration.",
+    "No gas temperature, density, Mach state, shock speed, long-wave parameter, lensing target, halo map or gravity formula enters recovery selection."
+  ],
+  "config_sha256": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a",
+  "gates": {
+    "all_frozen_parent_hashes_and_parent_gates_pass": true,
+    "base_process_exited_and_terminal_report_passes": true,
+    "ccd7_absent_background_commissioning_passes": true,
+    "cross_detector_commissioning_passes": true,
+    "every_missing_or_invalid_cell_has_one_recovery_checkpoint": true,
+    "every_terminal_base_checkpoint_independently_audited": true,
+    "manifest_has_5082_unique_tasks": true,
+    "no_recovery_failure_remains": true,
+    "protected_base_checkpoint_inventory_is_identical_before_and_after": true,
+    "protected_base_tree_is_byte_identical_before_and_after": true,
+    "second_full_unified_index_checkpoint_and_product_audit_passes": true,
+    "unified_index_has_5082_unique_cells_and_20328_products": true
+  },
+  "generated_utc": "2026-08-05T20:24:41.636311+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "input_hashes": {
+    "v19w2c_config": "826b9eb265dbd98a9a25ce652529a9bfc0bb2570531e0c552727b16ac2ca98db",
+    "v19w2c_report": "2bd039a45c934639b2bb0855b7db668ba4326369c42a9c97c47a355776301d82",
+    "v19w2c_runner": "0755744a7651749eb8bde21a4bd6bfa501eb82e47da595e1fd63436314f6047e",
+    "v19w4_config": "9b6f21033cd995acedfa4618e7445468c6f0b63ee2011891f45eee01b1353ed8",
+    "v19w4_runner": "9b8f7295183a7038de6d91d080aee5dee4226004b57cc56709aa6d8c38d90cf3"
+  },
+  "lensing_halo_or_gravity_payload_opened": false,
+  "missing_cells_at_launch": 384,
+  "original_v19x_authorized": false,
+  "protocol_version": "SIGMA-V19W5-CCD7-HARDENED-RESPONSE-RECOVERY-1.0.0",
+  "recovered_cells": 384,
+  "runner_sha256": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72",
+  "second_full_unified_audit": {
+    "cells": 5082,
+    "index_sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4",
+    "product_bytes": 34111742400,
+    "product_files": 20328,
+    "unique_task_keys": 5082
+  },
+  "spectrum_combined_or_fitted": false,
+  "status": "ccd7_hardened_unified_5082_response_archive_passed",
+  "superseded_v19w4_executed": false,
+  "temperature_density_mach_or_speed_fitted": false,
+  "unified_cells": 5082,
+  "unified_product_bytes": 34111742400,
+  "unified_product_files": 20328,
+  "unified_product_index": {
+    "bytes": 3264883,
+    "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+    "rows": 5082,
+    "sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4"
+  },
+  "v19x_successor_configuration_may_be_frozen": true
+}

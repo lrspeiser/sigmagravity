@@ -1,0 +1,16 @@
+{
+  "protocol_version": "SIGMA-V19X2-UNIFIED-SPECTRAL-COMBINATION-COMMISSIONING-1.1.0",
+  "generated_utc": "2026-08-05T20:24:42.675228+00:00",
+  "config_sha256": "6f31d3a06e2d93583d0b4524e4c8ec6df43ff75fe0fbcd5ab52fc900d2ee681e",
+  "runner_sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea",
+  "status": "unified_spectral_combination_commissioning_execution_failed",
+  "execution_exception": "KeyError: 'required_completed_cells'",
+  "gates": {
+    "execution_completed": false
+  },
+  "full_494_region_combination_and_fit_authorized": false,
+  "scientific_temperature_map_claimed": false,
+  "thermal_stress_constructed": false,
+  "replacement_cluster_lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

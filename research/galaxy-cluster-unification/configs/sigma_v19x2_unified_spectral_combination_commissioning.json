@@ -1,0 +1,221 @@
+{
+  "protocol_version": "SIGMA-V19X2-UNIFIED-SPECTRAL-COMBINATION-COMMISSIONING-1.1.0",
+  "freeze_state": "frozen_after_terminal_v19w5_pass",
+  "status": "frozen mechanically after V19W5 passed every CCD7-hardened recovery, immutability, unified-index and second full-audit gate; before combining a response, fitting a spectrum or temperature, constructing gas source state, opening lensing or halo data, or changing gravity physics",
+  "purpose": "Commission the unchanged V19X integrated and selected-region spectral pipeline against the terminal mixed base/recovery V19W5 archive.",
+  "parents": {
+    "v19h_config": "configs/sigma_v19h_causal_observable_protocol.json",
+    "v19h_config_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+    "v19s_config": "configs/sigma_v19s_hi4pi_acquisition.json",
+    "v19s_config_sha256": "93dcd0a9690dbff7e23fa946c894ac6816f38c13396d77e4dfe1917c81a5eadf",
+    "v19s_provenance": "results/sigma_v19s_hi4pi_acquisition/provenance.json",
+    "v19s_provenance_sha256": "ff37ee2ed99aa3df88815b7564cb72b6881f232175f22d5abbfe045d8919db4e",
+    "v19t_config": "configs/sigma_v19t_temperature_fit_commissioning.json",
+    "v19t_config_sha256": "844d8bd8f3bdbbb9292ffd0e1df44c55fec5868310b0b552083e711fc1fd6f26",
+    "v19t_report": "results/sigma_v19t_temperature_fit_commissioning/report.json",
+    "v19t_report_sha256": "9073cc96bbfa87fd4264ea6c2ddf893c3f8f6fa34257381fcf757757cf6ad363",
+    "v19u_manifest": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+    "v19u_manifest_sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd",
+    "v19w_config": "configs/sigma_v19w_full_response_production.json",
+    "v19w_config_sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197",
+    "v19w_runner": "scripts/run_sigma_v19w_full_response_production.py",
+    "v19w_runner_sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1",
+    "inherited_spectral_config": "configs/sigma_v17c_spectral_temperature.json",
+    "inherited_spectral_config_sha256": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86",
+    "inherited_integrated_combiner": "scripts/run_sigma_v17c_integrated_spectra.py",
+    "inherited_integrated_combiner_sha256": "1116dff3c8da44c54a0402d20dbcf7094945579abdbcf89e9278a3017685dd21",
+    "inherited_regional_combiner": "scripts/run_sigma_v17c_regional_spectra.py",
+    "inherited_regional_combiner_sha256": "505c17797b28ced3f5202e908b3407ecfc8e82ea2d1157016cc38f18f511c19a",
+    "inherited_integrated_fitter": "scripts/fit_sigma_v17c_integrated_temperatures.py",
+    "inherited_integrated_fitter_sha256": "aff18b05f20eaa41db1a7be5535a7be96380c938af0f036392b3d6a4d56a390f",
+    "inherited_regional_fitter": "scripts/fit_sigma_v17c_regional_temperatures.py",
+    "inherited_regional_fitter_sha256": "2cfdb2248f2cebcda75206ac3bb50d8ad040deb5c4fe3505b97b1f4505a6d78b",
+    "legacy_v19x_config": "configs/sigma_v19x_spectral_combination_commissioning.json",
+    "legacy_v19x_config_sha256": "e915f5d5be9d8dea5a2ecb1b8e00aeffd9fb10ed5b9aafccc258b040e8ad9afb",
+    "v19w5_config": "configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+    "v19w5_config_sha256": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a",
+    "v19w5_runner": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+    "v19w5_runner_sha256": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72",
+    "v19w5_report": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+    "v19w5_report_sha256": "9e90fcb397c80010562b8fbd441fff91a716ced4bb0ef895704ca449dca7c85f",
+    "v19w5_unified_index": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+    "v19w5_unified_index_sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4"
+  },
+  "exact_legacy_sections": [
+    "registered_workload",
+    "combination",
+    "fit_sequence",
+    "gates"
+  ],
+  "inherited_section_sha256": {
+    "registered_workload": "ab0e5a9b99875cac1c739bb181b04d32d46e0ce262342142acbf236be16c09da",
+    "combination": "a556ed47c000d5529e26be9ca5200aa2405238091ddf5286df72383c0601500c",
+    "fit_sequence": "6e0ab25cbf18e87dce3c1e07e6dd708c1bcdf82cbde82682773dbecd77cad8f5",
+    "gates": "b8c7ca2f8d8f168fab3e95db4b638ad2d4b6c66bc8e83460980a4ff893c60b95"
+  },
+  "runtime_authorization": {
+    "response_authority": "V19W5",
+    "required_response_report": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+    "required_status": "ccd7_hardened_unified_5082_response_archive_passed",
+    "recovery_archive": "v19w5_recovery",
+    "required_unified_cells": 5082,
+    "required_unified_products": 20328,
+    "required_unified_index": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+    "required_unified_index_sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4",
+    "may_start_before_authorization": false
+  },
+  "execution": {
+    "runner": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+    "adapter": "scripts/sigma_v19x2_unified_response_adapter.py",
+    "response_archives": {
+      "base_v19w": "/home/henry/sigma-v19w-response-production/v100",
+      "v19w5_recovery": "/home/henry/sigma-v19w5-response-recovery/v100"
+    },
+    "scratch_root": "/home/henry/sigma-v19x2-spectral-combination/v100",
+    "result_root": "results/sigma_v19x2_unified_spectral_combination_commissioning",
+    "validated_cell_index": "results/sigma_v19x2_unified_spectral_combination_commissioning/validated_cell_index.csv",
+    "combination_concurrency": 1,
+    "reason_for_serial_combination": "each direct integrated combine reads thousands of response-linked spectra and must remain isolated from the still-running V19W production workload"
+  },
+  "registered_workload": {
+    "clusters": {
+      "BULLET": {
+        "redshift": 0.296,
+        "galactic_nh_cm2": 4.38e+20,
+        "total_cells": 3812,
+        "total_regions": 366,
+        "total_source_events_0p5_7_keV": 660535,
+        "total_background_events_0p5_7_keV": 634253,
+        "total_scaled_background_events_0p5_7_keV": 26452.357326816054,
+        "commissioning_region": {
+          "bin_id": 169,
+          "cells": 9,
+          "source_events_0p5_7_keV": 2675,
+          "background_events_0p5_7_keV": 1123,
+          "scaled_background_events_0p5_7_keV": 46.40029947
+        }
+      },
+      "ABELL2146": {
+        "redshift": 0.2323,
+        "galactic_nh_cm2": 2.62e+20,
+        "total_cells": 1270,
+        "total_regions": 128,
+        "total_source_events_0p5_7_keV": 227561,
+        "total_background_events_0p5_7_keV": 81581,
+        "total_scaled_background_events_0p5_7_keV": 9188.855528998003,
+        "commissioning_region": {
+          "bin_id": 62,
+          "cells": 10,
+          "source_events_0p5_7_keV": 2503,
+          "background_events_0p5_7_keV": 4204,
+          "scaled_background_events_0p5_7_keV": 472.81041972599996
+        }
+      }
+    },
+    "commissioning_region_selection_rule": "within each cluster, the unique accepted region with the greatest sum of frozen V19U source_band_events; no spectrum, response shape, temperature, fit statistic, front, lensing coordinate or published temperature enters selection",
+    "same_rules_for_both_clusters": true
+  },
+  "combination": {
+    "integrated_aperture": "the union of every accepted V19M region, represented by all V19W cells for that cluster without overlap or exclusion",
+    "regional_aperture": "the exact selected V19M region represented by every V19W cell for that cluster and bin_id",
+    "tool": "CIAO combine_spectra 4.18.2",
+    "method": "sum",
+    "bscale_method": "asca",
+    "exp_origin": "pha",
+    "primary_combination": "directly combine the complete deterministic source-PHA list for the aperture; do not use fitted temperature or response shape to select or weight cells",
+    "group_after_combination": {
+      "tool": "CIAO dmgroup 4.18",
+      "grouptype": "NUM_CTS",
+      "minimum_counts": 25,
+      "xcolumn": "CHANNEL",
+      "ycolumn": "COUNTS"
+    },
+    "failure_rule": "retain the failed command and products; do not drop cells, change grouping, alter background scaling, or introduce an observation hierarchy after seeing a spectral or fit outcome"
+  },
+  "fit_sequence": {
+    "order": [
+      "combine and group the full integrated spectrum for both clusters",
+      "fit each integrated spectrum with abundance free",
+      "freeze each cluster's integrated best-fit abundance",
+      "combine and group the preregistered commissioning region for both clusters",
+      "fit each commissioning region with its own cluster's integrated abundance fixed"
+    ],
+    "model": "xstbabs * xsapec",
+    "abundance_table": "aspl (Asplund et al. 2009)",
+    "fit_energy_keV": [
+      0.5,
+      7.0
+    ],
+    "statistic": "chi2xspecvar",
+    "temperature_keV": {
+      "initial": 8.0,
+      "minimum": 1.0,
+      "maximum": 30.0
+    },
+    "integrated_abundance_solar": {
+      "initial": 0.3,
+      "minimum": 0.0,
+      "maximum": 2.0
+    },
+    "regional_abundance_rule": "fixed to the same cluster's integrated best-fit value",
+    "normalization": {
+      "initial_rule": "max(1e-8, 0.01 times the background-unsubtracted 0.5-7.0 count rate in counts per second)",
+      "minimum": 1e-10,
+      "maximum": 1.0
+    },
+    "optimization": "levmar; if it fails or returns a non-finite statistic, run neldermead and then one levmar polish",
+    "uncertainty": "Sherpa conf 68-percent profile-likelihood interval for temperature with every other free parameter profiled",
+    "published_temperature_used_as_gate": false
+  },
+  "gates": {
+    "v19w_complete_and_every_product_hash_exact": true,
+    "combination_uses_every_registered_cell_exactly_once": true,
+    "combined_source_background_arf_and_rmf_exist_and_links_are_exact": true,
+    "every_cell_event_energy_source_and_background_count_equals_the_frozen_manifest": true,
+    "combined_full_pha_source_counts_equal_the_sum_of_contributing_cell_pha_counts": true,
+    "sherpa_response_energy_fit_band_counts_reported_but_not_equated_to_event_energy_rows": true,
+    "both_integrated_fits_have_finite_temperature_abundance_normalization_and_ordered_interval": true,
+    "both_integrated_reduced_statistics_at_most": 1.5,
+    "both_regional_fits_have_finite_temperature_normalization_and_ordered_interval": true,
+    "both_regional_fractional_68_percent_temperature_half_widths_at_most": 0.5,
+    "both_regional_reduced_statistics_at_most": 1.5,
+    "all_free_parameters_strictly_inside_bounds": true,
+    "failure_rule": "do not start the 494-region production fit; report the failed cluster and stage without changing grouping, energy band, nH, redshift, abundance rule, statistic, optimizer sequence, parameter bounds or cell membership"
+  },
+  "advance": {
+    "if_all_gates_pass": "freeze and run all 494 regional combinations and fits with the identical inherited rules",
+    "if_any_gate_fails": "report the failed cluster and stage; do not change cell membership, grouping, fit rules, source state, lensing target or gravity physics",
+    "gravity_theory_tested_here": false
+  },
+  "authorization": {
+    "combine_integrated_and_two_selected_regions": true,
+    "fit_integrated_abundances_and_two_selected_region_temperatures": true,
+    "run_all_494_regional_fits_before_commissioning_passes": false,
+    "open_lensing_or_halo_payload": false,
+    "change_gravity_formula_or_parameter": false
+  },
+  "integrity": {
+    "v19w5_terminal_report_existed_at_freeze": true,
+    "v19w5_terminal_report_passed_at_freeze": true,
+    "unified_index_rows_at_freeze": 5082,
+    "unified_product_files_at_freeze": 20328,
+    "base_archive_modified_by_v19w5": false,
+    "obsolete_v19x_authorized": false,
+    "spectrum_or_temperature_known_at_freeze": false,
+    "lensing_halo_or_gravity_payload_opened_at_freeze": false
+  },
+  "claim_boundary": [
+    "A pass commissions spectral combination and fitting; it does not validate Sigma Gravity.",
+    "Recovered response cells are engineering replacements selected solely by manifest completeness and independent checkpoint validity.",
+    "The exact V19X aperture, grouping, spectral-model, fitting and quality-gate sections are inherited byte-for-structure from the frozen predecessor.",
+    "No replacement-cluster lensing, halo target or gravity outcome is read by the freeze step."
+  ],
+  "implementation": {
+    "freezer": "scripts/freeze_sigma_v19x2_unified_spectral_combination.py",
+    "freezer_sha256": "6a939dc7af9c82bae8f3216c53b633dd3df4800e57271c7d9d957c4fb9d89147",
+    "runner": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+    "runner_sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea",
+    "adapter": "scripts/sigma_v19x2_unified_response_adapter.py",
+    "adapter_sha256": "10c4cc60a9e17ad0569f421ccc5c530403647d763fda7de7c2eaca6f5d4dcdf1"
+  }
+}

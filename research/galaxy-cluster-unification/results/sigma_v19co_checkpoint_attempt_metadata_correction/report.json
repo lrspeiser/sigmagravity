@@ -1,0 +1,17 @@
+{
+  "authorization_boundary": {
+    "action_derived": false,
+    "solar_optimized": false,
+    "target_or_gravity_opened": false
+  },
+  "claim_boundary": [
+    "V19CO corrects one invalid bookkeeping value; the response products and science selections are immutable.",
+    "The two failed launches remain represented by their preserved directories and the V19CK/V19CI evidence.",
+    "The corrected attempt=1 means the successful checkpoint producer's attempt under the frozen archive schema, not that earlier failures did not occur.",
+    "V19BS remains separate and no action is derived here."
+  ],
+  "exception": "RuntimeError: V19CO V19BR exited 2",
+  "generated_utc": "2026-08-05T20:24:42.728318+00:00",
+  "protocol_version": "SIGMA-V19CO-CHECKPOINT-ATTEMPT-METADATA-CORRECTION-1.0.0",
+  "status": "checkpoint_metadata_correction_failed_closed"
+}

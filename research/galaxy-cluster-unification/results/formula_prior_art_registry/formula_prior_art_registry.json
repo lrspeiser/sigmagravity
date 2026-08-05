@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 211,
+    "sigma_protocols": 213,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7600,6 +7600,18 @@
       "sha256": "ce9016c87e00d25964f7c5dc4f1fa9055de5e2580406f1a2ece9224e031d5fd0"
     },
     {
+      "config": "configs/sigma_v19cp_v19x2_runtime_alias_remediation.json",
+      "protocol_version": "SIGMA-V19CP-V19X2-RUNTIME-ALIAS-REMEDIATION-1.0.0",
+      "status": "frozen after V19W5 passed all 5,082 cells and V19X2 failed before archive validation with KeyError required_completed_cells, and before adding the compatibility alias, validating a response cell, combining a spectrum, fitting a temperature, or resuming V19BR",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "61ab4384d5590338a5f5adf89ce27327c473dc0d81300620816693a026f9cd1b"
+    },
+    {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",
       "protocol_version": "SIGMA-V19D-MEMBER-CATALOG-EXTRACTION-1.0.0",
       "status": "frozen before parsing the acquired TeX member tables and while all replacement-cluster lensing target payloads remain sealed",
@@ -7911,6 +7923,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
+    },
+    {
+      "config": "configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+      "protocol_version": "SIGMA-V19X2-UNIFIED-SPECTRAL-COMBINATION-COMMISSIONING-1.1.0",
+      "status": "frozen mechanically after V19W5 passed every CCD7-hardened recovery, immutability, unified-index and second full-audit gate; before combining a response, fitting a spectrum or temperature, constructing gas source state, opening lensing or halo data, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "6f31d3a06e2d93583d0b4524e4c8ec6df43ff75fe0fbcd5ab52fc900d2ee681e"
     },
     {
       "config": "configs/sigma_v19x3b_v19w5_regional_successor_preflight.json",
