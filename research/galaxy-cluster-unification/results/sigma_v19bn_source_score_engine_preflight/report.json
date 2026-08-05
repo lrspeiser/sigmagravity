@@ -1,0 +1,36 @@
+{
+  "protocol_version": "SIGMA-V19BN-SOURCE-SCORE-ENGINE-PREFLIGHT-1.0.0",
+  "decision": "passed_source_score_engine_preflight",
+  "config_sha256": "cc8920db3752d22ef337d3f5f84210a1e49679a615a22a385a5fbb87703f091b",
+  "checker_sha256": "906c82d7177fd1f68111a978a6bb295a5632ef2878953be78947d23dddf01246",
+  "engine_module_sha256": "106ac730467cd7590a358e2f1999c8e8c2fce9d3fb9ce8a4b79f829f4fa9f0b1",
+  "input_hashes": {
+    "v19bl_config": "91914a009129cc8155b2601a4396cb7bebdfd8abef298511b1e748de6dc3f515",
+    "v19bl_report": "570f36a2c0772d6da48a77fb07ed50b014b191ae7d53194726b05e3e79238156",
+    "v19bm_config": "d2db22b08684aa42aba85659da8367a1633ea039a7e5200a96297b087bafce31",
+    "v19bm_preflight_report": "1ff44f795d3f74af930cb932fda001815c4da247cc9b03e9ddf07c8137dbfdfa"
+  },
+  "manufactured_evidence": {
+    "controlled_novelty_pass_fraction": 0.0,
+    "independent_novelty_pass_fraction": 1.0,
+    "close_variant_pass_fraction": 1.0,
+    "rotated_variant_pass_fraction": 0.0,
+    "uniform_tensor_leave_one_out_pass_fraction": 1.0
+  },
+  "gates": {
+    "all_parent_and_implementation_hashes_exact": true,
+    "thresholds_match_v19bl": true,
+    "controlled_response_rejected": true,
+    "independent_response_admitted": true,
+    "small_variant_admitted_large_rotation_rejected": true,
+    "uniform_tensor_leave_one_out_stable": true,
+    "observed_scores_and_targets_sealed": true
+  },
+  "observed_source_score_computed": false,
+  "lensing_halo_action_or_gravity_payload_opened": false,
+  "claim_boundary": [
+    "V19BN validates decision algebra on manufactured data; it is not an observed source result.",
+    "The engine cannot authorize an action until terminal V19X4 and V19BM inputs exist and every V19BL transfer gate passes.",
+    "No lensing, halo, action, formula, coupling, or gravity constant is selected."
+  ]
+}

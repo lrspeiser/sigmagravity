@@ -2244,3 +2244,18 @@ from being treated as a common stellar-mass scale. The preflight passes, but
 terminal execution correctly remains closed until the observed V19X4 report
 provides three identical, hash-bound label grids per cluster. No gas posterior,
 lensing, halo, action or gravity target was opened.
+
+## 2026-08-05 V19BN source-score decision engine
+
+The posterior decision engine is now commissioned independently of the still-
+running response production. It enforces multi-gradient support, calculates
+I4 amplitude/axis and I5 activation per draw, runs the fixed quadratic PRESS
+novelty control, combines all resolution/aperture variants at draw level, and
+tests each posterior-median region omission.
+
+Manufactured data verify both sides of the decision: a response algebraically
+constructed from density controls is rejected in every draw, independent
+structure passes, a 2% transfer perturbation is admitted, a 45-degree I4-axis
+rotation is rejected, and a uniform tensor survives every region omission.
+This is still a preflight; the gas-map-to-region executor and observed score
+remain gated on terminal V19X4/V19BM products, with lensing sealed.

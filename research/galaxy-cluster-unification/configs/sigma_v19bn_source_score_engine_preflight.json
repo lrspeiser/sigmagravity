@@ -1,0 +1,74 @@
+{
+  "protocol_version": "SIGMA-V19BN-SOURCE-SCORE-ENGINE-PREFLIGHT-1.0.0",
+  "status": "frozen before terminal V19X4, V19BM products, observed invariant scores, lensing, halos, action selection, or gravity fitting",
+  "purpose": "Commission the posterior decision engine that applies the already-frozen V19BL gates to future region-level I4/I5 features and V19BM controls.",
+  "parents": {
+    "v19bl_config": {
+      "path": "configs/sigma_v19bl_source_invariant_scoring_protocol.json",
+      "sha256": "91914a009129cc8155b2601a4396cb7bebdfd8abef298511b1e748de6dc3f515"
+    },
+    "v19bl_report": {
+      "path": "results/sigma_v19bl_source_invariant_scoring_protocol/report.json",
+      "sha256": "570f36a2c0772d6da48a77fb07ed50b014b191ae7d53194726b05e3e79238156"
+    },
+    "v19bm_config": {
+      "path": "configs/sigma_v19bm_stellar_morphology_control.json",
+      "sha256": "d2db22b08684aa42aba85659da8367a1633ea039a7e5200a96297b087bafce31"
+    },
+    "v19bm_preflight_report": {
+      "path": "results/sigma_v19bm_stellar_morphology_control/preflight_report.json",
+      "sha256": "1ff44f795d3f74af930cb932fda001815c4da247cc9b03e9ddf07c8137dbfdfa"
+    }
+  },
+  "engine_contract": {
+    "gradient_support": "A region passes only when every candidate-required two-component gradient has posterior Mahalanobis significance at least 3.",
+    "I4_activation": "sqrt(mean_regions(2(q_plus^2+q_cross^2))) per draw",
+    "I4_direction": "half-angle of the supported-region mean q_plus/q_cross tensor per draw",
+    "I5_activation": "mean supported-region bounded baroclinicity per draw",
+    "novelty": "Apply the frozen 21-coefficient quadratic density control and analytic PRESS independently to every draw; I4 is scored jointly over both tensor components.",
+    "leave_one_region_out": "Omit each supported region from posterior-median regional features and require the frozen activation/direction stability.",
+    "variant_stability": "A draw passes only when every registered resolution/aperture variant stays inside the frozen activation and I4 direction tolerances.",
+    "posterior_summary": "Report activation q05/q16/median/q84/q95, robust detection sigma, and for I4 the wrapped 95-percent axial width."
+  },
+  "inherited_thresholds": {
+    "minimum_gradient_detection_sigma": 3.0,
+    "minimum_supported_regions": 32,
+    "minimum_unexplained_variance_fraction": 0.2,
+    "minimum_novelty_draw_pass_fraction": 0.9,
+    "minimum_detection_sigma": 3.0,
+    "maximum_I4_axial_width_deg": 30.0,
+    "maximum_activation_change_fraction": 0.1,
+    "maximum_axis_change_deg": 10.0,
+    "minimum_variant_draw_pass_fraction": 0.9,
+    "minimum_leave_one_region_out_pass_fraction": 0.9
+  },
+  "future_execution_boundary": {
+    "all_three_correlation_branches": true,
+    "both_smoothing_scales": true,
+    "all_three_apertures": true,
+    "both_clusters": true,
+    "terminal_v19x4_and_v19bm_required": true,
+    "lensing_or_halo_used_for_source_selection": false
+  },
+  "authorization": {
+    "run_manufactured_preflight": true,
+    "compute_observed_score_now": false,
+    "read_lensing_or_halo_payload": false,
+    "select_action_or_gravity_parameter": false,
+    "open_holdout": false
+  },
+  "claim_boundary": [
+    "V19BN validates decision algebra on manufactured data; it is not an observed source result.",
+    "The engine cannot authorize an action until terminal V19X4 and V19BM inputs exist and every V19BL transfer gate passes.",
+    "No lensing, halo, action, formula, coupling, or gravity constant is selected."
+  ],
+  "implementation": {
+    "checker": "scripts/check_sigma_v19bn_source_score_engine_preflight.py",
+    "checker_sha256": "906c82d7177fd1f68111a978a6bb295a5632ef2878953be78947d23dddf01246",
+    "engine_module": "src/voidscreen/sigma_source_score_engine.py",
+    "engine_module_sha256": "106ac730467cd7590a358e2f1999c8e8c2fce9d3fb9ce8a4b79f829f4fa9f0b1"
+  },
+  "outputs": {
+    "report": "results/sigma_v19bn_source_score_engine_preflight/report.json"
+  }
+}
