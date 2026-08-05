@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 180,
+    "sigma_protocols": 182,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7529,6 +7529,18 @@
       "sha256": "2ea37d6cf7969ca0b80133e35f6d55fe44f263880e636e50e5c490c213137a52"
     },
     {
+      "config": "configs/sigma_v19w2c_ccd7_response_commissioning.json",
+      "protocol_version": "SIGMA-V19W2C-CCD7-RESPONSE-COMMISSIONING-1.0.0",
+      "status": "frozen from the independently audited 3706-cell live V19W snapshot after CCD7 failed twice in each of two observation contexts and before running any corrected CCD7 response, reading any recovered spectrum, fitting a temperature, opening a lensing payload, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "826b9eb265dbd98a9a25ce652529a9bfc0bb2570531e0c552727b16ac2ca98db"
+    },
+    {
       "config": "configs/sigma_v19w3_full_response_recovery.json",
       "protocol_version": "SIGMA-V19W3-FULL-RESPONSE-RECOVERY-1.0.0",
       "status": "frozen after V19W2 passed all five implementation failure classes, while the unchanged base V19W process was still running, before reading a base final report, enumerating its final missing cells, creating a recovery product, combining a spectrum, opening a lensing payload, or changing gravity physics",
@@ -7551,6 +7563,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "9b6f21033cd995acedfa4618e7445468c6f0b63ee2011891f45eee01b1353ed8"
+    },
+    {
+      "config": "configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+      "protocol_version": "SIGMA-V19W5-CCD7-HARDENED-RESPONSE-RECOVERY-1.0.0",
+      "status": "frozen after all six V19W2C CCD7 commissioning cells passed and while the unchanged base V19W process was still running, before reading the base terminal report, enumerating the terminal missing workload, creating a V19W5 product, combining a spectrum, fitting a temperature, opening a lensing payload, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a"
     },
     {
       "config": "configs/sigma_v19w_full_response_production.json",

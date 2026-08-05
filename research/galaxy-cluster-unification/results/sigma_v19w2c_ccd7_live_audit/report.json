@@ -1,0 +1,2413 @@
+{
+  "active_partial_directories_observed_after_snapshot": 4,
+  "attempt_counts": {
+    "1": 3706
+  },
+  "audited_product_bytes": 24523954560,
+  "audited_product_files": 14824,
+  "claim_boundary": "This is a point-in-time integrity audit of the completed checkpoints present when the snapshot began. It does not authorize V19X or claim that V19W has completed.",
+  "cluster_counts": {
+    "ABELL2146": 9,
+    "BULLET": 3697
+  },
+  "config_sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197",
+  "exhausted_failed_cells_observed_after_snapshot": [
+    "ABELL2146_bin0_obs10464_ccd7",
+    "ABELL2146_bin0_obs10888_ccd7",
+    "ABELL2146_bin100_obs10464_ccd7",
+    "ABELL2146_bin100_obs10888_ccd7",
+    "ABELL2146_bin101_obs10464_ccd7",
+    "ABELL2146_bin101_obs10888_ccd7",
+    "ABELL2146_bin102_obs10464_ccd7",
+    "ABELL2146_bin102_obs10888_ccd7",
+    "ABELL2146_bin103_obs10464_ccd7",
+    "ABELL2146_bin103_obs10888_ccd7",
+    "ABELL2146_bin104_obs10464_ccd7",
+    "ABELL2146_bin104_obs10888_ccd7",
+    "ABELL2146_bin105_obs10464_ccd7",
+    "ABELL2146_bin105_obs10888_ccd7",
+    "ABELL2146_bin106_obs10464_ccd7",
+    "ABELL2146_bin106_obs10888_ccd7",
+    "ABELL2146_bin107_obs10464_ccd7",
+    "ABELL2146_bin107_obs10888_ccd7",
+    "ABELL2146_bin108_obs10464_ccd7",
+    "ABELL2146_bin108_obs10888_ccd7",
+    "ABELL2146_bin109_obs10464_ccd7",
+    "ABELL2146_bin109_obs10888_ccd7",
+    "ABELL2146_bin10_obs10464_ccd7",
+    "ABELL2146_bin10_obs10888_ccd7",
+    "ABELL2146_bin110_obs10464_ccd7",
+    "ABELL2146_bin110_obs10888_ccd7",
+    "ABELL2146_bin111_obs10464_ccd7",
+    "ABELL2146_bin111_obs10888_ccd7",
+    "ABELL2146_bin112_obs10464_ccd7",
+    "ABELL2146_bin112_obs10888_ccd7",
+    "ABELL2146_bin113_obs10464_ccd7",
+    "ABELL2146_bin113_obs10888_ccd7",
+    "ABELL2146_bin114_obs10464_ccd7",
+    "ABELL2146_bin114_obs10888_ccd7",
+    "ABELL2146_bin115_obs10464_ccd7",
+    "ABELL2146_bin115_obs10888_ccd7",
+    "ABELL2146_bin116_obs10464_ccd7",
+    "ABELL2146_bin116_obs10888_ccd7",
+    "ABELL2146_bin117_obs10464_ccd7",
+    "ABELL2146_bin117_obs10888_ccd7",
+    "ABELL2146_bin118_obs10464_ccd7",
+    "ABELL2146_bin118_obs10888_ccd7",
+    "ABELL2146_bin119_obs10464_ccd7",
+    "ABELL2146_bin119_obs10888_ccd7",
+    "ABELL2146_bin11_obs10464_ccd7",
+    "ABELL2146_bin11_obs10888_ccd7",
+    "ABELL2146_bin120_obs10464_ccd7",
+    "ABELL2146_bin120_obs10888_ccd7",
+    "ABELL2146_bin121_obs10464_ccd7",
+    "ABELL2146_bin121_obs10888_ccd7",
+    "ABELL2146_bin122_obs10464_ccd7",
+    "ABELL2146_bin122_obs10888_ccd7",
+    "ABELL2146_bin123_obs10464_ccd7",
+    "ABELL2146_bin123_obs10888_ccd7",
+    "ABELL2146_bin124_obs10464_ccd7",
+    "ABELL2146_bin124_obs10888_ccd7",
+    "ABELL2146_bin125_obs10464_ccd7",
+    "ABELL2146_bin125_obs10888_ccd7",
+    "ABELL2146_bin126_obs10464_ccd7",
+    "ABELL2146_bin126_obs10888_ccd7",
+    "ABELL2146_bin127_obs10464_ccd7",
+    "ABELL2146_bin127_obs10888_ccd7",
+    "ABELL2146_bin128_obs10464_ccd7",
+    "ABELL2146_bin128_obs10888_ccd7",
+    "ABELL2146_bin129_obs10464_ccd7",
+    "ABELL2146_bin129_obs10888_ccd7",
+    "ABELL2146_bin12_obs10464_ccd7",
+    "ABELL2146_bin12_obs10888_ccd7",
+    "ABELL2146_bin130_obs10464_ccd7",
+    "ABELL2146_bin130_obs10888_ccd7",
+    "ABELL2146_bin131_obs10464_ccd7",
+    "ABELL2146_bin131_obs10888_ccd7",
+    "ABELL2146_bin132_obs10464_ccd7",
+    "ABELL2146_bin132_obs10888_ccd7",
+    "ABELL2146_bin133_obs10464_ccd7",
+    "ABELL2146_bin133_obs10888_ccd7",
+    "ABELL2146_bin134_obs10464_ccd7",
+    "ABELL2146_bin134_obs10888_ccd7",
+    "ABELL2146_bin135_obs10464_ccd7",
+    "ABELL2146_bin135_obs10888_ccd7",
+    "ABELL2146_bin136_obs10464_ccd7",
+    "ABELL2146_bin136_obs10888_ccd7",
+    "ABELL2146_bin137_obs10464_ccd7",
+    "ABELL2146_bin137_obs10888_ccd7",
+    "ABELL2146_bin16_obs10464_ccd7",
+    "ABELL2146_bin16_obs10888_ccd7",
+    "ABELL2146_bin17_obs10464_ccd7",
+    "ABELL2146_bin17_obs10888_ccd7",
+    "ABELL2146_bin18_obs10464_ccd7",
+    "ABELL2146_bin18_obs10888_ccd7",
+    "ABELL2146_bin19_obs10464_ccd7",
+    "ABELL2146_bin19_obs10888_ccd7",
+    "ABELL2146_bin1_obs10464_ccd7",
+    "ABELL2146_bin1_obs10888_ccd7",
+    "ABELL2146_bin20_obs10464_ccd7",
+    "ABELL2146_bin20_obs10888_ccd7",
+    "ABELL2146_bin21_obs10464_ccd7",
+    "ABELL2146_bin21_obs10888_ccd7",
+    "ABELL2146_bin22_obs10464_ccd7",
+    "ABELL2146_bin22_obs10888_ccd7",
+    "ABELL2146_bin23_obs10464_ccd7",
+    "ABELL2146_bin23_obs10888_ccd7",
+    "ABELL2146_bin24_obs10464_ccd7",
+    "ABELL2146_bin24_obs10888_ccd7",
+    "ABELL2146_bin25_obs10464_ccd7",
+    "ABELL2146_bin25_obs10888_ccd7",
+    "ABELL2146_bin26_obs10464_ccd7",
+    "ABELL2146_bin26_obs10888_ccd7",
+    "ABELL2146_bin27_obs10464_ccd7",
+    "ABELL2146_bin27_obs10888_ccd7",
+    "ABELL2146_bin28_obs10464_ccd7",
+    "ABELL2146_bin28_obs10888_ccd7",
+    "ABELL2146_bin29_obs10888_ccd7",
+    "ABELL2146_bin2_obs10464_ccd7",
+    "ABELL2146_bin2_obs10888_ccd7",
+    "ABELL2146_bin30_obs10464_ccd7",
+    "ABELL2146_bin30_obs10888_ccd7",
+    "ABELL2146_bin31_obs10464_ccd7",
+    "ABELL2146_bin31_obs10888_ccd7",
+    "ABELL2146_bin32_obs10464_ccd7",
+    "ABELL2146_bin32_obs10888_ccd7",
+    "ABELL2146_bin33_obs10464_ccd7",
+    "ABELL2146_bin33_obs10888_ccd7",
+    "ABELL2146_bin34_obs10464_ccd7",
+    "ABELL2146_bin34_obs10888_ccd7",
+    "ABELL2146_bin35_obs10464_ccd7",
+    "ABELL2146_bin35_obs10888_ccd7",
+    "ABELL2146_bin36_obs10464_ccd7",
+    "ABELL2146_bin36_obs10888_ccd7",
+    "ABELL2146_bin37_obs10464_ccd7",
+    "ABELL2146_bin37_obs10888_ccd7",
+    "ABELL2146_bin39_obs10464_ccd7",
+    "ABELL2146_bin39_obs10888_ccd7",
+    "ABELL2146_bin3_obs10464_ccd7",
+    "ABELL2146_bin3_obs10888_ccd7",
+    "ABELL2146_bin40_obs10464_ccd7",
+    "ABELL2146_bin40_obs10888_ccd7",
+    "ABELL2146_bin42_obs10464_ccd7",
+    "ABELL2146_bin42_obs10888_ccd7",
+    "ABELL2146_bin43_obs10464_ccd7",
+    "ABELL2146_bin43_obs10888_ccd7",
+    "ABELL2146_bin44_obs10464_ccd7",
+    "ABELL2146_bin44_obs10888_ccd7",
+    "ABELL2146_bin45_obs10464_ccd7",
+    "ABELL2146_bin45_obs10888_ccd7",
+    "ABELL2146_bin47_obs10464_ccd7",
+    "ABELL2146_bin47_obs10888_ccd7",
+    "ABELL2146_bin49_obs10464_ccd7",
+    "ABELL2146_bin49_obs10888_ccd7",
+    "ABELL2146_bin4_obs10464_ccd7",
+    "ABELL2146_bin4_obs10888_ccd7",
+    "ABELL2146_bin50_obs10464_ccd7",
+    "ABELL2146_bin50_obs10888_ccd7",
+    "ABELL2146_bin51_obs10464_ccd7",
+    "ABELL2146_bin51_obs10888_ccd7",
+    "ABELL2146_bin52_obs10464_ccd7",
+    "ABELL2146_bin52_obs10888_ccd7",
+    "ABELL2146_bin53_obs10464_ccd7",
+    "ABELL2146_bin53_obs10888_ccd7",
+    "ABELL2146_bin54_obs10464_ccd7",
+    "ABELL2146_bin54_obs10888_ccd7",
+    "ABELL2146_bin55_obs10464_ccd7",
+    "ABELL2146_bin55_obs10888_ccd7",
+    "ABELL2146_bin56_obs10464_ccd7",
+    "ABELL2146_bin56_obs10888_ccd7",
+    "ABELL2146_bin57_obs10464_ccd7",
+    "ABELL2146_bin57_obs10888_ccd7",
+    "ABELL2146_bin59_obs10464_ccd7",
+    "ABELL2146_bin59_obs10888_ccd7",
+    "ABELL2146_bin60_obs10464_ccd7",
+    "ABELL2146_bin60_obs10888_ccd7",
+    "ABELL2146_bin61_obs10464_ccd7",
+    "ABELL2146_bin61_obs10888_ccd7",
+    "ABELL2146_bin62_obs10464_ccd7",
+    "ABELL2146_bin62_obs10888_ccd7",
+    "ABELL2146_bin63_obs10464_ccd7",
+    "ABELL2146_bin63_obs10888_ccd7",
+    "ABELL2146_bin64_obs10464_ccd7",
+    "ABELL2146_bin64_obs10888_ccd7",
+    "ABELL2146_bin65_obs10464_ccd7",
+    "ABELL2146_bin65_obs10888_ccd7",
+    "ABELL2146_bin66_obs10464_ccd7",
+    "ABELL2146_bin66_obs10888_ccd7",
+    "ABELL2146_bin67_obs10464_ccd7",
+    "ABELL2146_bin67_obs10888_ccd7",
+    "ABELL2146_bin68_obs10464_ccd7",
+    "ABELL2146_bin68_obs10888_ccd7",
+    "ABELL2146_bin69_obs10464_ccd7",
+    "ABELL2146_bin69_obs10888_ccd7",
+    "ABELL2146_bin6_obs10464_ccd7",
+    "ABELL2146_bin6_obs10888_ccd7",
+    "ABELL2146_bin70_obs10464_ccd7",
+    "ABELL2146_bin70_obs10888_ccd7",
+    "ABELL2146_bin71_obs10464_ccd7",
+    "ABELL2146_bin71_obs10888_ccd7",
+    "ABELL2146_bin72_obs10464_ccd7",
+    "ABELL2146_bin72_obs10888_ccd7",
+    "ABELL2146_bin73_obs10464_ccd7",
+    "ABELL2146_bin73_obs10888_ccd7",
+    "ABELL2146_bin74_obs10464_ccd7",
+    "ABELL2146_bin74_obs10888_ccd7",
+    "ABELL2146_bin75_obs10464_ccd7",
+    "ABELL2146_bin75_obs10888_ccd7",
+    "ABELL2146_bin76_obs10464_ccd7",
+    "ABELL2146_bin76_obs10888_ccd7",
+    "ABELL2146_bin77_obs10464_ccd7",
+    "ABELL2146_bin77_obs10888_ccd7",
+    "ABELL2146_bin78_obs10464_ccd7",
+    "ABELL2146_bin78_obs10888_ccd7",
+    "ABELL2146_bin79_obs10464_ccd7",
+    "ABELL2146_bin79_obs10888_ccd7",
+    "ABELL2146_bin7_obs10464_ccd7",
+    "ABELL2146_bin7_obs10888_ccd7",
+    "ABELL2146_bin80_obs10464_ccd7",
+    "ABELL2146_bin80_obs10888_ccd7",
+    "ABELL2146_bin81_obs10464_ccd7",
+    "ABELL2146_bin81_obs10888_ccd7",
+    "ABELL2146_bin82_obs10464_ccd7",
+    "ABELL2146_bin82_obs10888_ccd7",
+    "ABELL2146_bin83_obs10464_ccd7",
+    "ABELL2146_bin83_obs10888_ccd7",
+    "ABELL2146_bin84_obs10464_ccd7",
+    "ABELL2146_bin84_obs10888_ccd7",
+    "ABELL2146_bin85_obs10464_ccd7",
+    "ABELL2146_bin85_obs10888_ccd7",
+    "ABELL2146_bin86_obs10464_ccd7",
+    "ABELL2146_bin86_obs10888_ccd7",
+    "ABELL2146_bin87_obs10464_ccd7",
+    "ABELL2146_bin87_obs10888_ccd7",
+    "ABELL2146_bin88_obs10464_ccd7",
+    "ABELL2146_bin88_obs10888_ccd7",
+    "ABELL2146_bin89_obs10464_ccd7",
+    "ABELL2146_bin89_obs10888_ccd7",
+    "ABELL2146_bin90_obs10888_ccd7",
+    "ABELL2146_bin91_obs10464_ccd7",
+    "ABELL2146_bin91_obs10888_ccd7",
+    "ABELL2146_bin92_obs10464_ccd7",
+    "ABELL2146_bin92_obs10888_ccd7",
+    "ABELL2146_bin93_obs10464_ccd7",
+    "ABELL2146_bin93_obs10888_ccd7",
+    "ABELL2146_bin94_obs10464_ccd7",
+    "ABELL2146_bin94_obs10888_ccd7",
+    "ABELL2146_bin95_obs10464_ccd7",
+    "ABELL2146_bin95_obs10888_ccd7",
+    "ABELL2146_bin96_obs10464_ccd7",
+    "ABELL2146_bin96_obs10888_ccd7",
+    "ABELL2146_bin97_obs10464_ccd7",
+    "ABELL2146_bin97_obs10888_ccd7",
+    "ABELL2146_bin98_obs10464_ccd7",
+    "ABELL2146_bin98_obs10888_ccd7",
+    "ABELL2146_bin99_obs10464_ccd7",
+    "ABELL2146_bin99_obs10888_ccd7",
+    "ABELL2146_bin9_obs10464_ccd7",
+    "ABELL2146_bin9_obs10888_ccd7",
+    "BULLET_bin36_obs4984_ccd3"
+  ],
+  "expected_final_cells": 5082,
+  "failed_attempt_directories_observed_after_snapshot": 510,
+  "failed_attempts_by_cell_observed_after_snapshot": {
+    "ABELL2146_bin0_obs10464_ccd7": 2,
+    "ABELL2146_bin0_obs10888_ccd7": 2,
+    "ABELL2146_bin100_obs10464_ccd7": 2,
+    "ABELL2146_bin100_obs10888_ccd7": 2,
+    "ABELL2146_bin101_obs10464_ccd7": 2,
+    "ABELL2146_bin101_obs10888_ccd7": 2,
+    "ABELL2146_bin102_obs10464_ccd7": 2,
+    "ABELL2146_bin102_obs10888_ccd7": 2,
+    "ABELL2146_bin103_obs10464_ccd7": 2,
+    "ABELL2146_bin103_obs10888_ccd7": 2,
+    "ABELL2146_bin104_obs10464_ccd7": 2,
+    "ABELL2146_bin104_obs10888_ccd7": 2,
+    "ABELL2146_bin105_obs10464_ccd7": 2,
+    "ABELL2146_bin105_obs10888_ccd7": 2,
+    "ABELL2146_bin106_obs10464_ccd7": 2,
+    "ABELL2146_bin106_obs10888_ccd7": 2,
+    "ABELL2146_bin107_obs10464_ccd7": 2,
+    "ABELL2146_bin107_obs10888_ccd7": 2,
+    "ABELL2146_bin108_obs10464_ccd7": 2,
+    "ABELL2146_bin108_obs10888_ccd7": 2,
+    "ABELL2146_bin109_obs10464_ccd7": 2,
+    "ABELL2146_bin109_obs10888_ccd7": 2,
+    "ABELL2146_bin10_obs10464_ccd7": 2,
+    "ABELL2146_bin10_obs10888_ccd7": 2,
+    "ABELL2146_bin110_obs10464_ccd7": 2,
+    "ABELL2146_bin110_obs10888_ccd7": 2,
+    "ABELL2146_bin111_obs10464_ccd7": 2,
+    "ABELL2146_bin111_obs10888_ccd7": 2,
+    "ABELL2146_bin112_obs10464_ccd7": 2,
+    "ABELL2146_bin112_obs10888_ccd7": 2,
+    "ABELL2146_bin113_obs10464_ccd7": 2,
+    "ABELL2146_bin113_obs10888_ccd7": 2,
+    "ABELL2146_bin114_obs10464_ccd7": 2,
+    "ABELL2146_bin114_obs10888_ccd7": 2,
+    "ABELL2146_bin115_obs10464_ccd7": 2,
+    "ABELL2146_bin115_obs10888_ccd7": 2,
+    "ABELL2146_bin116_obs10464_ccd7": 2,
+    "ABELL2146_bin116_obs10888_ccd7": 2,
+    "ABELL2146_bin117_obs10464_ccd7": 2,
+    "ABELL2146_bin117_obs10888_ccd7": 2,
+    "ABELL2146_bin118_obs10464_ccd7": 2,
+    "ABELL2146_bin118_obs10888_ccd7": 2,
+    "ABELL2146_bin119_obs10464_ccd7": 2,
+    "ABELL2146_bin119_obs10888_ccd7": 2,
+    "ABELL2146_bin11_obs10464_ccd7": 2,
+    "ABELL2146_bin11_obs10888_ccd7": 2,
+    "ABELL2146_bin120_obs10464_ccd7": 2,
+    "ABELL2146_bin120_obs10888_ccd7": 2,
+    "ABELL2146_bin121_obs10464_ccd7": 2,
+    "ABELL2146_bin121_obs10888_ccd7": 2,
+    "ABELL2146_bin122_obs10464_ccd7": 2,
+    "ABELL2146_bin122_obs10888_ccd7": 2,
+    "ABELL2146_bin123_obs10464_ccd7": 2,
+    "ABELL2146_bin123_obs10888_ccd7": 2,
+    "ABELL2146_bin124_obs10464_ccd7": 2,
+    "ABELL2146_bin124_obs10888_ccd7": 2,
+    "ABELL2146_bin125_obs10464_ccd7": 2,
+    "ABELL2146_bin125_obs10888_ccd7": 2,
+    "ABELL2146_bin126_obs10464_ccd7": 2,
+    "ABELL2146_bin126_obs10888_ccd7": 2,
+    "ABELL2146_bin127_obs10464_ccd7": 2,
+    "ABELL2146_bin127_obs10888_ccd7": 2,
+    "ABELL2146_bin128_obs10464_ccd7": 2,
+    "ABELL2146_bin128_obs10888_ccd7": 2,
+    "ABELL2146_bin129_obs10464_ccd7": 2,
+    "ABELL2146_bin129_obs10888_ccd7": 2,
+    "ABELL2146_bin12_obs10464_ccd7": 2,
+    "ABELL2146_bin12_obs10888_ccd7": 2,
+    "ABELL2146_bin130_obs10464_ccd7": 2,
+    "ABELL2146_bin130_obs10888_ccd7": 2,
+    "ABELL2146_bin131_obs10464_ccd7": 2,
+    "ABELL2146_bin131_obs10888_ccd7": 2,
+    "ABELL2146_bin132_obs10464_ccd7": 2,
+    "ABELL2146_bin132_obs10888_ccd7": 2,
+    "ABELL2146_bin133_obs10464_ccd7": 2,
+    "ABELL2146_bin133_obs10888_ccd7": 2,
+    "ABELL2146_bin134_obs10464_ccd7": 2,
+    "ABELL2146_bin134_obs10888_ccd7": 2,
+    "ABELL2146_bin135_obs10464_ccd7": 2,
+    "ABELL2146_bin135_obs10888_ccd7": 2,
+    "ABELL2146_bin136_obs10464_ccd7": 2,
+    "ABELL2146_bin136_obs10888_ccd7": 2,
+    "ABELL2146_bin137_obs10464_ccd7": 2,
+    "ABELL2146_bin137_obs10888_ccd7": 2,
+    "ABELL2146_bin16_obs10464_ccd7": 2,
+    "ABELL2146_bin16_obs10888_ccd7": 2,
+    "ABELL2146_bin17_obs10464_ccd7": 2,
+    "ABELL2146_bin17_obs10888_ccd7": 2,
+    "ABELL2146_bin18_obs10464_ccd7": 2,
+    "ABELL2146_bin18_obs10888_ccd7": 2,
+    "ABELL2146_bin19_obs10464_ccd7": 2,
+    "ABELL2146_bin19_obs10888_ccd7": 2,
+    "ABELL2146_bin1_obs10464_ccd7": 2,
+    "ABELL2146_bin1_obs10888_ccd7": 2,
+    "ABELL2146_bin20_obs10464_ccd7": 2,
+    "ABELL2146_bin20_obs10888_ccd7": 2,
+    "ABELL2146_bin21_obs10464_ccd7": 2,
+    "ABELL2146_bin21_obs10888_ccd7": 2,
+    "ABELL2146_bin22_obs10464_ccd7": 2,
+    "ABELL2146_bin22_obs10888_ccd7": 2,
+    "ABELL2146_bin23_obs10464_ccd7": 2,
+    "ABELL2146_bin23_obs10888_ccd7": 2,
+    "ABELL2146_bin24_obs10464_ccd7": 2,
+    "ABELL2146_bin24_obs10888_ccd7": 2,
+    "ABELL2146_bin25_obs10464_ccd7": 2,
+    "ABELL2146_bin25_obs10888_ccd7": 2,
+    "ABELL2146_bin26_obs10464_ccd7": 2,
+    "ABELL2146_bin26_obs10888_ccd7": 2,
+    "ABELL2146_bin27_obs10464_ccd7": 2,
+    "ABELL2146_bin27_obs10888_ccd7": 2,
+    "ABELL2146_bin28_obs10464_ccd7": 2,
+    "ABELL2146_bin28_obs10888_ccd7": 2,
+    "ABELL2146_bin29_obs10888_ccd7": 2,
+    "ABELL2146_bin2_obs10464_ccd7": 2,
+    "ABELL2146_bin2_obs10888_ccd7": 2,
+    "ABELL2146_bin30_obs10464_ccd7": 2,
+    "ABELL2146_bin30_obs10888_ccd7": 2,
+    "ABELL2146_bin31_obs10464_ccd7": 2,
+    "ABELL2146_bin31_obs10888_ccd7": 2,
+    "ABELL2146_bin32_obs10464_ccd7": 2,
+    "ABELL2146_bin32_obs10888_ccd7": 2,
+    "ABELL2146_bin33_obs10464_ccd7": 2,
+    "ABELL2146_bin33_obs10888_ccd7": 2,
+    "ABELL2146_bin34_obs10464_ccd7": 2,
+    "ABELL2146_bin34_obs10888_ccd7": 2,
+    "ABELL2146_bin35_obs10464_ccd7": 2,
+    "ABELL2146_bin35_obs10888_ccd7": 2,
+    "ABELL2146_bin36_obs10464_ccd7": 2,
+    "ABELL2146_bin36_obs10888_ccd7": 2,
+    "ABELL2146_bin37_obs10464_ccd7": 2,
+    "ABELL2146_bin37_obs10888_ccd7": 2,
+    "ABELL2146_bin39_obs10464_ccd7": 2,
+    "ABELL2146_bin39_obs10888_ccd7": 2,
+    "ABELL2146_bin3_obs10464_ccd7": 2,
+    "ABELL2146_bin3_obs10888_ccd7": 2,
+    "ABELL2146_bin40_obs10464_ccd7": 2,
+    "ABELL2146_bin40_obs10888_ccd7": 2,
+    "ABELL2146_bin42_obs10464_ccd7": 2,
+    "ABELL2146_bin42_obs10888_ccd7": 2,
+    "ABELL2146_bin43_obs10464_ccd7": 2,
+    "ABELL2146_bin43_obs10888_ccd7": 2,
+    "ABELL2146_bin44_obs10464_ccd7": 2,
+    "ABELL2146_bin44_obs10888_ccd7": 2,
+    "ABELL2146_bin45_obs10464_ccd7": 2,
+    "ABELL2146_bin45_obs10888_ccd7": 2,
+    "ABELL2146_bin47_obs10464_ccd7": 2,
+    "ABELL2146_bin47_obs10888_ccd7": 2,
+    "ABELL2146_bin49_obs10464_ccd7": 2,
+    "ABELL2146_bin49_obs10888_ccd7": 2,
+    "ABELL2146_bin4_obs10464_ccd7": 2,
+    "ABELL2146_bin4_obs10888_ccd7": 2,
+    "ABELL2146_bin50_obs10464_ccd7": 2,
+    "ABELL2146_bin50_obs10888_ccd7": 2,
+    "ABELL2146_bin51_obs10464_ccd7": 2,
+    "ABELL2146_bin51_obs10888_ccd7": 2,
+    "ABELL2146_bin52_obs10464_ccd7": 2,
+    "ABELL2146_bin52_obs10888_ccd7": 2,
+    "ABELL2146_bin53_obs10464_ccd7": 2,
+    "ABELL2146_bin53_obs10888_ccd7": 2,
+    "ABELL2146_bin54_obs10464_ccd7": 2,
+    "ABELL2146_bin54_obs10888_ccd7": 2,
+    "ABELL2146_bin55_obs10464_ccd7": 2,
+    "ABELL2146_bin55_obs10888_ccd7": 2,
+    "ABELL2146_bin56_obs10464_ccd7": 2,
+    "ABELL2146_bin56_obs10888_ccd7": 2,
+    "ABELL2146_bin57_obs10464_ccd7": 2,
+    "ABELL2146_bin57_obs10888_ccd7": 2,
+    "ABELL2146_bin59_obs10464_ccd7": 2,
+    "ABELL2146_bin59_obs10888_ccd7": 2,
+    "ABELL2146_bin60_obs10464_ccd7": 2,
+    "ABELL2146_bin60_obs10888_ccd7": 2,
+    "ABELL2146_bin61_obs10464_ccd7": 2,
+    "ABELL2146_bin61_obs10888_ccd7": 2,
+    "ABELL2146_bin62_obs10464_ccd7": 2,
+    "ABELL2146_bin62_obs10888_ccd7": 2,
+    "ABELL2146_bin63_obs10464_ccd7": 2,
+    "ABELL2146_bin63_obs10888_ccd7": 2,
+    "ABELL2146_bin64_obs10464_ccd7": 2,
+    "ABELL2146_bin64_obs10888_ccd7": 2,
+    "ABELL2146_bin65_obs10464_ccd7": 2,
+    "ABELL2146_bin65_obs10888_ccd7": 2,
+    "ABELL2146_bin66_obs10464_ccd7": 2,
+    "ABELL2146_bin66_obs10888_ccd7": 2,
+    "ABELL2146_bin67_obs10464_ccd7": 2,
+    "ABELL2146_bin67_obs10888_ccd7": 2,
+    "ABELL2146_bin68_obs10464_ccd7": 2,
+    "ABELL2146_bin68_obs10888_ccd7": 2,
+    "ABELL2146_bin69_obs10464_ccd7": 2,
+    "ABELL2146_bin69_obs10888_ccd7": 2,
+    "ABELL2146_bin6_obs10464_ccd7": 2,
+    "ABELL2146_bin6_obs10888_ccd7": 2,
+    "ABELL2146_bin70_obs10464_ccd7": 2,
+    "ABELL2146_bin70_obs10888_ccd7": 2,
+    "ABELL2146_bin71_obs10464_ccd7": 2,
+    "ABELL2146_bin71_obs10888_ccd7": 2,
+    "ABELL2146_bin72_obs10464_ccd7": 2,
+    "ABELL2146_bin72_obs10888_ccd7": 2,
+    "ABELL2146_bin73_obs10464_ccd7": 2,
+    "ABELL2146_bin73_obs10888_ccd7": 2,
+    "ABELL2146_bin74_obs10464_ccd7": 2,
+    "ABELL2146_bin74_obs10888_ccd7": 2,
+    "ABELL2146_bin75_obs10464_ccd7": 2,
+    "ABELL2146_bin75_obs10888_ccd7": 2,
+    "ABELL2146_bin76_obs10464_ccd7": 2,
+    "ABELL2146_bin76_obs10888_ccd7": 2,
+    "ABELL2146_bin77_obs10464_ccd7": 2,
+    "ABELL2146_bin77_obs10888_ccd7": 2,
+    "ABELL2146_bin78_obs10464_ccd7": 2,
+    "ABELL2146_bin78_obs10888_ccd7": 2,
+    "ABELL2146_bin79_obs10464_ccd7": 2,
+    "ABELL2146_bin79_obs10888_ccd7": 2,
+    "ABELL2146_bin7_obs10464_ccd7": 2,
+    "ABELL2146_bin7_obs10888_ccd7": 2,
+    "ABELL2146_bin80_obs10464_ccd7": 2,
+    "ABELL2146_bin80_obs10888_ccd7": 2,
+    "ABELL2146_bin81_obs10464_ccd7": 2,
+    "ABELL2146_bin81_obs10888_ccd7": 2,
+    "ABELL2146_bin82_obs10464_ccd7": 2,
+    "ABELL2146_bin82_obs10888_ccd7": 2,
+    "ABELL2146_bin83_obs10464_ccd7": 2,
+    "ABELL2146_bin83_obs10888_ccd7": 2,
+    "ABELL2146_bin84_obs10464_ccd7": 2,
+    "ABELL2146_bin84_obs10888_ccd7": 2,
+    "ABELL2146_bin85_obs10464_ccd7": 2,
+    "ABELL2146_bin85_obs10888_ccd7": 2,
+    "ABELL2146_bin86_obs10464_ccd7": 2,
+    "ABELL2146_bin86_obs10888_ccd7": 2,
+    "ABELL2146_bin87_obs10464_ccd7": 2,
+    "ABELL2146_bin87_obs10888_ccd7": 2,
+    "ABELL2146_bin88_obs10464_ccd7": 2,
+    "ABELL2146_bin88_obs10888_ccd7": 2,
+    "ABELL2146_bin89_obs10464_ccd7": 2,
+    "ABELL2146_bin89_obs10888_ccd7": 2,
+    "ABELL2146_bin90_obs10888_ccd7": 2,
+    "ABELL2146_bin91_obs10464_ccd7": 2,
+    "ABELL2146_bin91_obs10888_ccd7": 2,
+    "ABELL2146_bin92_obs10464_ccd7": 2,
+    "ABELL2146_bin92_obs10888_ccd7": 2,
+    "ABELL2146_bin93_obs10464_ccd7": 2,
+    "ABELL2146_bin93_obs10888_ccd7": 2,
+    "ABELL2146_bin94_obs10464_ccd7": 2,
+    "ABELL2146_bin94_obs10888_ccd7": 2,
+    "ABELL2146_bin95_obs10464_ccd7": 2,
+    "ABELL2146_bin95_obs10888_ccd7": 2,
+    "ABELL2146_bin96_obs10464_ccd7": 2,
+    "ABELL2146_bin96_obs10888_ccd7": 2,
+    "ABELL2146_bin97_obs10464_ccd7": 2,
+    "ABELL2146_bin97_obs10888_ccd7": 2,
+    "ABELL2146_bin98_obs10464_ccd7": 2,
+    "ABELL2146_bin98_obs10888_ccd7": 2,
+    "ABELL2146_bin99_obs10464_ccd7": 2,
+    "ABELL2146_bin99_obs10888_ccd7": 2,
+    "ABELL2146_bin9_obs10464_ccd7": 2,
+    "ABELL2146_bin9_obs10888_ccd7": 2,
+    "BULLET_bin36_obs4984_ccd3": 2
+  },
+  "gates": {
+    "every_snapshot_arf_and_rmf_audit_passes": true,
+    "every_snapshot_cell_gate_passes": true,
+    "every_snapshot_cell_is_a_unique_manifest_task": true,
+    "every_snapshot_pha_histogram_audit_is_exact": true,
+    "every_snapshot_pha_link_matches": true,
+    "every_snapshot_preflight_count_matches_manifest": true,
+    "every_snapshot_product_size_and_sha256_matches": true,
+    "no_quarantine_directory_observed": true,
+    "retained_failed_attempts_are_not_completed_products": true
+  },
+  "gravity_formula_or_parameter_changed": false,
+  "lensing_halo_or_gravity_payload_opened": false,
+  "maximum_completed_production_index": 4077,
+  "missing_manifest_tasks_at_or_before_maximum_completed_index": [
+    {
+      "batch_id": 1,
+      "cell_name": "BULLET_bin45_obs554_ccd3",
+      "production_index": 27
+    },
+    {
+      "batch_id": 3,
+      "cell_name": "BULLET_bin230_obs554_ccd3",
+      "production_index": 173
+    },
+    {
+      "batch_id": 6,
+      "cell_name": "BULLET_bin25_obs3184_ccd3",
+      "production_index": 353
+    },
+    {
+      "batch_id": 6,
+      "cell_name": "BULLET_bin52_obs3184_ccd3",
+      "production_index": 375
+    },
+    {
+      "batch_id": 7,
+      "cell_name": "BULLET_bin90_obs3184_ccd3",
+      "production_index": 404
+    },
+    {
+      "batch_id": 7,
+      "cell_name": "BULLET_bin130_obs3184_ccd3",
+      "production_index": 441
+    },
+    {
+      "batch_id": 7,
+      "cell_name": "BULLET_bin135_obs3184_ccd3",
+      "production_index": 445
+    },
+    {
+      "batch_id": 8,
+      "cell_name": "BULLET_bin177_obs3184_ccd3",
+      "production_index": 481
+    },
+    {
+      "batch_id": 8,
+      "cell_name": "BULLET_bin199_obs3184_ccd3",
+      "production_index": 503
+    },
+    {
+      "batch_id": 10,
+      "cell_name": "BULLET_bin318_obs3184_ccd3",
+      "production_index": 622
+    },
+    {
+      "batch_id": 11,
+      "cell_name": "BULLET_bin339_obs3184_ccd3",
+      "production_index": 643
+    },
+    {
+      "batch_id": 11,
+      "cell_name": "BULLET_bin365_obs3184_ccd3",
+      "production_index": 669
+    },
+    {
+      "batch_id": 12,
+      "cell_name": "BULLET_bin9_obs4984_ccd3",
+      "production_index": 705
+    },
+    {
+      "batch_id": 12,
+      "cell_name": "BULLET_bin36_obs4984_ccd3",
+      "production_index": 728
+    },
+    {
+      "batch_id": 12,
+      "cell_name": "BULLET_bin65_obs4984_ccd3",
+      "production_index": 752
+    },
+    {
+      "batch_id": 12,
+      "cell_name": "BULLET_bin66_obs4984_ccd3",
+      "production_index": 753
+    },
+    {
+      "batch_id": 14,
+      "cell_name": "BULLET_bin184_obs4984_ccd3",
+      "production_index": 858
+    },
+    {
+      "batch_id": 15,
+      "cell_name": "BULLET_bin232_obs4984_ccd3",
+      "production_index": 906
+    },
+    {
+      "batch_id": 16,
+      "cell_name": "BULLET_bin311_obs4984_ccd3",
+      "production_index": 985
+    },
+    {
+      "batch_id": 16,
+      "cell_name": "BULLET_bin347_obs4984_ccd3",
+      "production_index": 1021
+    },
+    {
+      "batch_id": 17,
+      "cell_name": "BULLET_bin370_obs4984_ccd3",
+      "production_index": 1044
+    },
+    {
+      "batch_id": 17,
+      "cell_name": "BULLET_bin6_obs4985_ccd2",
+      "production_index": 1072
+    },
+    {
+      "batch_id": 19,
+      "cell_name": "BULLET_bin144_obs4985_ccd3",
+      "production_index": 1188
+    },
+    {
+      "batch_id": 19,
+      "cell_name": "BULLET_bin154_obs4985_ccd3",
+      "production_index": 1198
+    },
+    {
+      "batch_id": 20,
+      "cell_name": "BULLET_bin212_obs4985_ccd2",
+      "production_index": 1257
+    },
+    {
+      "batch_id": 21,
+      "cell_name": "BULLET_bin244_obs4985_ccd3",
+      "production_index": 1291
+    },
+    {
+      "batch_id": 23,
+      "cell_name": "BULLET_bin354_obs4985_ccd2",
+      "production_index": 1412
+    },
+    {
+      "batch_id": 23,
+      "cell_name": "BULLET_bin380_obs4985_ccd3",
+      "production_index": 1442
+    },
+    {
+      "batch_id": 24,
+      "cell_name": "BULLET_bin25_obs4986_ccd0",
+      "production_index": 1477
+    },
+    {
+      "batch_id": 24,
+      "cell_name": "BULLET_bin69_obs4986_ccd1",
+      "production_index": 1514
+    },
+    {
+      "batch_id": 24,
+      "cell_name": "BULLET_bin79_obs4986_ccd1",
+      "production_index": 1523
+    },
+    {
+      "batch_id": 24,
+      "cell_name": "BULLET_bin82_obs4986_ccd1",
+      "production_index": 1528
+    },
+    {
+      "batch_id": 25,
+      "cell_name": "BULLET_bin102_obs4986_ccd1",
+      "production_index": 1545
+    },
+    {
+      "batch_id": 25,
+      "cell_name": "BULLET_bin147_obs4986_ccd1",
+      "production_index": 1591
+    },
+    {
+      "batch_id": 25,
+      "cell_name": "BULLET_bin155_obs4986_ccd1",
+      "production_index": 1598
+    },
+    {
+      "batch_id": 26,
+      "cell_name": "BULLET_bin161_obs4986_ccd1",
+      "production_index": 1604
+    },
+    {
+      "batch_id": 26,
+      "cell_name": "BULLET_bin190_obs4986_ccd0",
+      "production_index": 1636
+    },
+    {
+      "batch_id": 27,
+      "cell_name": "BULLET_bin229_obs4986_ccd1",
+      "production_index": 1678
+    },
+    {
+      "batch_id": 27,
+      "cell_name": "BULLET_bin256_obs4986_ccd0",
+      "production_index": 1708
+    },
+    {
+      "batch_id": 28,
+      "cell_name": "BULLET_bin294_obs4986_ccd0",
+      "production_index": 1748
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin336_obs4986_ccd0",
+      "production_index": 1795
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin339_obs4986_ccd0",
+      "production_index": 1799
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin339_obs4986_ccd1",
+      "production_index": 1800
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin341_obs4986_ccd1",
+      "production_index": 1803
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin366_obs4986_ccd0",
+      "production_index": 1829
+    },
+    {
+      "batch_id": 29,
+      "cell_name": "BULLET_bin384_obs4986_ccd0",
+      "production_index": 1848
+    },
+    {
+      "batch_id": 30,
+      "cell_name": "BULLET_bin25_obs5355_ccd2",
+      "production_index": 1878
+    },
+    {
+      "batch_id": 34,
+      "cell_name": "BULLET_bin310_obs5355_ccd3",
+      "production_index": 2152
+    },
+    {
+      "batch_id": 35,
+      "cell_name": "BULLET_bin334_obs5355_ccd2",
+      "production_index": 2178
+    },
+    {
+      "batch_id": 35,
+      "cell_name": "BULLET_bin335_obs5355_ccd3",
+      "production_index": 2181
+    },
+    {
+      "batch_id": 35,
+      "cell_name": "BULLET_bin353_obs5355_ccd2",
+      "production_index": 2199
+    },
+    {
+      "batch_id": 36,
+      "cell_name": "BULLET_bin60_obs5356_ccd2",
+      "production_index": 2292
+    },
+    {
+      "batch_id": 36,
+      "cell_name": "BULLET_bin61_obs5356_ccd2",
+      "production_index": 2293
+    },
+    {
+      "batch_id": 37,
+      "cell_name": "BULLET_bin76_obs5356_ccd2",
+      "production_index": 2305
+    },
+    {
+      "batch_id": 40,
+      "cell_name": "BULLET_bin310_obs5356_ccd3",
+      "production_index": 2539
+    },
+    {
+      "batch_id": 40,
+      "cell_name": "BULLET_bin321_obs5356_ccd2",
+      "production_index": 2551
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin335_obs5356_ccd3",
+      "production_index": 2567
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin353_obs5356_ccd2",
+      "production_index": 2585
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin357_obs5356_ccd2",
+      "production_index": 2590
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin367_obs5356_ccd2",
+      "production_index": 2603
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin368_obs5356_ccd3",
+      "production_index": 2605
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin375_obs5356_ccd2",
+      "production_index": 2612
+    },
+    {
+      "batch_id": 41,
+      "cell_name": "BULLET_bin384_obs5356_ccd2",
+      "production_index": 2624
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin22_obs5357_ccd0",
+      "production_index": 2653
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin49_obs5357_ccd0",
+      "production_index": 2674
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin49_obs5357_ccd1",
+      "production_index": 2675
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin51_obs5357_ccd1",
+      "production_index": 2678
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin52_obs5357_ccd0",
+      "production_index": 2679
+    },
+    {
+      "batch_id": 42,
+      "cell_name": "BULLET_bin59_obs5357_ccd1",
+      "production_index": 2685
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin65_obs5357_ccd1",
+      "production_index": 2692
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin69_obs5357_ccd0",
+      "production_index": 2695
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin72_obs5357_ccd1",
+      "production_index": 2699
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin102_obs5357_ccd0",
+      "production_index": 2727
+    },
+    {
+      "batch_id": 43,
+      "cell_name": "BULLET_bin121_obs5357_ccd0",
+      "production_index": 2746
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin127_obs5357_ccd1",
+      "production_index": 2753
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin161_obs5357_ccd0",
+      "production_index": 2783
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin172_obs5357_ccd0",
+      "production_index": 2796
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin176_obs5357_ccd1",
+      "production_index": 2802
+    },
+    {
+      "batch_id": 44,
+      "cell_name": "BULLET_bin188_obs5357_ccd1",
+      "production_index": 2816
+    },
+    {
+      "batch_id": 45,
+      "cell_name": "BULLET_bin221_obs5357_ccd1",
+      "production_index": 2852
+    },
+    {
+      "batch_id": 45,
+      "cell_name": "BULLET_bin228_obs5357_ccd1",
+      "production_index": 2859
+    },
+    {
+      "batch_id": 45,
+      "cell_name": "BULLET_bin238_obs5357_ccd1",
+      "production_index": 2871
+    },
+    {
+      "batch_id": 45,
+      "cell_name": "BULLET_bin245_obs5357_ccd0",
+      "production_index": 2878
+    },
+    {
+      "batch_id": 46,
+      "cell_name": "BULLET_bin253_obs5357_ccd0",
+      "production_index": 2888
+    },
+    {
+      "batch_id": 46,
+      "cell_name": "BULLET_bin277_obs5357_ccd0",
+      "production_index": 2914
+    },
+    {
+      "batch_id": 47,
+      "cell_name": "BULLET_bin309_obs5357_ccd1",
+      "production_index": 2949
+    },
+    {
+      "batch_id": 47,
+      "cell_name": "BULLET_bin336_obs5357_ccd0",
+      "production_index": 2980
+    },
+    {
+      "batch_id": 48,
+      "cell_name": "BULLET_bin383_obs5357_ccd0",
+      "production_index": 3030
+    },
+    {
+      "batch_id": 48,
+      "cell_name": "BULLET_bin384_obs5357_ccd0",
+      "production_index": 3031
+    },
+    {
+      "batch_id": 48,
+      "cell_name": "BULLET_bin388_obs5357_ccd0",
+      "production_index": 3037
+    },
+    {
+      "batch_id": 49,
+      "cell_name": "BULLET_bin51_obs5358_ccd1",
+      "production_index": 3086
+    },
+    {
+      "batch_id": 49,
+      "cell_name": "BULLET_bin59_obs5358_ccd1",
+      "production_index": 3093
+    },
+    {
+      "batch_id": 49,
+      "cell_name": "BULLET_bin79_obs5358_ccd0",
+      "production_index": 3113
+    },
+    {
+      "batch_id": 49,
+      "cell_name": "BULLET_bin102_obs5358_ccd0",
+      "production_index": 3135
+    },
+    {
+      "batch_id": 50,
+      "cell_name": "BULLET_bin148_obs5358_ccd0",
+      "production_index": 3181
+    },
+    {
+      "batch_id": 51,
+      "cell_name": "BULLET_bin172_obs5358_ccd0",
+      "production_index": 3203
+    },
+    {
+      "batch_id": 51,
+      "cell_name": "BULLET_bin180_obs5358_ccd0",
+      "production_index": 3212
+    },
+    {
+      "batch_id": 52,
+      "cell_name": "BULLET_bin236_obs5358_ccd0",
+      "production_index": 3272
+    },
+    {
+      "batch_id": 52,
+      "cell_name": "BULLET_bin243_obs5358_ccd1",
+      "production_index": 3280
+    },
+    {
+      "batch_id": 52,
+      "cell_name": "BULLET_bin266_obs5358_ccd1",
+      "production_index": 3305
+    },
+    {
+      "batch_id": 53,
+      "cell_name": "BULLET_bin290_obs5358_ccd1",
+      "production_index": 3331
+    },
+    {
+      "batch_id": 53,
+      "cell_name": "BULLET_bin295_obs5358_ccd1",
+      "production_index": 3337
+    },
+    {
+      "batch_id": 53,
+      "cell_name": "BULLET_bin299_obs5358_ccd1",
+      "production_index": 3342
+    },
+    {
+      "batch_id": 54,
+      "cell_name": "BULLET_bin366_obs5358_ccd0",
+      "production_index": 3413
+    },
+    {
+      "batch_id": 54,
+      "cell_name": "BULLET_bin384_obs5358_ccd0",
+      "production_index": 3432
+    },
+    {
+      "batch_id": 54,
+      "cell_name": "BULLET_bin1_obs5361_ccd3",
+      "production_index": 3443
+    },
+    {
+      "batch_id": 56,
+      "cell_name": "BULLET_bin145_obs5361_ccd3",
+      "production_index": 3567
+    },
+    {
+      "batch_id": 56,
+      "cell_name": "BULLET_bin150_obs5361_ccd3",
+      "production_index": 3570
+    },
+    {
+      "batch_id": 57,
+      "cell_name": "BULLET_bin178_obs5361_ccd1",
+      "production_index": 3598
+    },
+    {
+      "batch_id": 57,
+      "cell_name": "BULLET_bin188_obs5361_ccd3",
+      "production_index": 3609
+    },
+    {
+      "batch_id": 59,
+      "cell_name": "BULLET_bin295_obs5361_ccd3",
+      "production_index": 3716
+    },
+    {
+      "batch_id": 59,
+      "cell_name": "BULLET_bin311_obs5361_ccd3",
+      "production_index": 3732
+    },
+    {
+      "batch_id": 59,
+      "cell_name": "BULLET_bin326_obs5361_ccd3",
+      "production_index": 3747
+    },
+    {
+      "batch_id": 59,
+      "cell_name": "BULLET_bin354_obs5361_ccd3",
+      "production_index": 3775
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "BULLET_bin369_obs5361_ccd3",
+      "production_index": 3790
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin0_obs10464_ccd7",
+      "production_index": 3813
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin1_obs10464_ccd7",
+      "production_index": 3814
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin2_obs10464_ccd7",
+      "production_index": 3815
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin3_obs10464_ccd7",
+      "production_index": 3816
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin4_obs10464_ccd7",
+      "production_index": 3817
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin6_obs10464_ccd7",
+      "production_index": 3818
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin7_obs10464_ccd7",
+      "production_index": 3819
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin9_obs10464_ccd7",
+      "production_index": 3820
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin10_obs10464_ccd7",
+      "production_index": 3821
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin11_obs10464_ccd7",
+      "production_index": 3822
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin12_obs10464_ccd7",
+      "production_index": 3823
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin16_obs10464_ccd7",
+      "production_index": 3824
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin17_obs10464_ccd7",
+      "production_index": 3825
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin18_obs10464_ccd7",
+      "production_index": 3826
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin19_obs10464_ccd7",
+      "production_index": 3827
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin20_obs10464_ccd7",
+      "production_index": 3828
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin21_obs10464_ccd7",
+      "production_index": 3829
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin22_obs10464_ccd7",
+      "production_index": 3830
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin23_obs10464_ccd7",
+      "production_index": 3831
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin24_obs10464_ccd7",
+      "production_index": 3832
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin25_obs10464_ccd7",
+      "production_index": 3833
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin26_obs10464_ccd7",
+      "production_index": 3834
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin27_obs10464_ccd7",
+      "production_index": 3835
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin28_obs10464_ccd7",
+      "production_index": 3836
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin29_obs10464_ccd7",
+      "production_index": 3837
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin30_obs10464_ccd7",
+      "production_index": 3838
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin31_obs10464_ccd7",
+      "production_index": 3839
+    },
+    {
+      "batch_id": 60,
+      "cell_name": "ABELL2146_bin32_obs10464_ccd7",
+      "production_index": 3840
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin33_obs10464_ccd7",
+      "production_index": 3841
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin34_obs10464_ccd7",
+      "production_index": 3842
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin35_obs10464_ccd7",
+      "production_index": 3843
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin36_obs10464_ccd7",
+      "production_index": 3844
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin37_obs10464_ccd7",
+      "production_index": 3845
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin39_obs10464_ccd7",
+      "production_index": 3846
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin40_obs10464_ccd7",
+      "production_index": 3847
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin42_obs10464_ccd7",
+      "production_index": 3848
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin43_obs10464_ccd7",
+      "production_index": 3849
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin44_obs10464_ccd7",
+      "production_index": 3850
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin45_obs10464_ccd7",
+      "production_index": 3851
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin47_obs10464_ccd7",
+      "production_index": 3852
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin49_obs10464_ccd7",
+      "production_index": 3853
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin50_obs10464_ccd7",
+      "production_index": 3854
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin51_obs10464_ccd7",
+      "production_index": 3855
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin52_obs10464_ccd7",
+      "production_index": 3856
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin53_obs10464_ccd7",
+      "production_index": 3857
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin54_obs10464_ccd7",
+      "production_index": 3858
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin55_obs10464_ccd7",
+      "production_index": 3859
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin56_obs10464_ccd7",
+      "production_index": 3860
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin57_obs10464_ccd7",
+      "production_index": 3861
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin59_obs10464_ccd7",
+      "production_index": 3862
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin60_obs10464_ccd7",
+      "production_index": 3863
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin61_obs10464_ccd7",
+      "production_index": 3864
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin62_obs10464_ccd7",
+      "production_index": 3865
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin63_obs10464_ccd7",
+      "production_index": 3866
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin64_obs10464_ccd7",
+      "production_index": 3867
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin65_obs10464_ccd7",
+      "production_index": 3868
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin66_obs10464_ccd7",
+      "production_index": 3869
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin67_obs10464_ccd7",
+      "production_index": 3870
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin68_obs10464_ccd7",
+      "production_index": 3871
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin69_obs10464_ccd7",
+      "production_index": 3872
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin70_obs10464_ccd7",
+      "production_index": 3873
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin71_obs10464_ccd7",
+      "production_index": 3874
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin72_obs10464_ccd7",
+      "production_index": 3875
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin73_obs10464_ccd7",
+      "production_index": 3876
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin74_obs10464_ccd7",
+      "production_index": 3877
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin75_obs10464_ccd7",
+      "production_index": 3878
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin76_obs10464_ccd7",
+      "production_index": 3879
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin77_obs10464_ccd7",
+      "production_index": 3880
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin78_obs10464_ccd7",
+      "production_index": 3881
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin79_obs10464_ccd7",
+      "production_index": 3882
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin80_obs10464_ccd7",
+      "production_index": 3883
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin81_obs10464_ccd7",
+      "production_index": 3884
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin82_obs10464_ccd7",
+      "production_index": 3885
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin83_obs10464_ccd7",
+      "production_index": 3886
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin84_obs10464_ccd7",
+      "production_index": 3887
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin85_obs10464_ccd7",
+      "production_index": 3888
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin86_obs10464_ccd7",
+      "production_index": 3889
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin87_obs10464_ccd7",
+      "production_index": 3890
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin88_obs10464_ccd7",
+      "production_index": 3891
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin89_obs10464_ccd7",
+      "production_index": 3892
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin90_obs10464_ccd7",
+      "production_index": 3893
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin91_obs10464_ccd7",
+      "production_index": 3894
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin92_obs10464_ccd7",
+      "production_index": 3895
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin93_obs10464_ccd7",
+      "production_index": 3896
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin94_obs10464_ccd7",
+      "production_index": 3897
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin95_obs10464_ccd7",
+      "production_index": 3898
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin96_obs10464_ccd7",
+      "production_index": 3899
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin97_obs10464_ccd7",
+      "production_index": 3900
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin98_obs10464_ccd7",
+      "production_index": 3901
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin99_obs10464_ccd7",
+      "production_index": 3902
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin100_obs10464_ccd7",
+      "production_index": 3903
+    },
+    {
+      "batch_id": 61,
+      "cell_name": "ABELL2146_bin101_obs10464_ccd7",
+      "production_index": 3904
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin102_obs10464_ccd7",
+      "production_index": 3905
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin103_obs10464_ccd7",
+      "production_index": 3906
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin104_obs10464_ccd7",
+      "production_index": 3907
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin105_obs10464_ccd7",
+      "production_index": 3908
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin106_obs10464_ccd7",
+      "production_index": 3909
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin107_obs10464_ccd7",
+      "production_index": 3910
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin108_obs10464_ccd7",
+      "production_index": 3911
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin109_obs10464_ccd7",
+      "production_index": 3912
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin110_obs10464_ccd7",
+      "production_index": 3913
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin111_obs10464_ccd7",
+      "production_index": 3914
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin112_obs10464_ccd7",
+      "production_index": 3915
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin113_obs10464_ccd7",
+      "production_index": 3916
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin114_obs10464_ccd7",
+      "production_index": 3917
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin115_obs10464_ccd7",
+      "production_index": 3918
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin116_obs10464_ccd7",
+      "production_index": 3919
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin117_obs10464_ccd7",
+      "production_index": 3920
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin118_obs10464_ccd7",
+      "production_index": 3921
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin119_obs10464_ccd7",
+      "production_index": 3922
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin120_obs10464_ccd7",
+      "production_index": 3923
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin121_obs10464_ccd7",
+      "production_index": 3924
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin122_obs10464_ccd7",
+      "production_index": 3925
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin123_obs10464_ccd7",
+      "production_index": 3926
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin124_obs10464_ccd7",
+      "production_index": 3927
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin125_obs10464_ccd7",
+      "production_index": 3928
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin126_obs10464_ccd7",
+      "production_index": 3929
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin127_obs10464_ccd7",
+      "production_index": 3930
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin128_obs10464_ccd7",
+      "production_index": 3931
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin129_obs10464_ccd7",
+      "production_index": 3932
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin130_obs10464_ccd7",
+      "production_index": 3933
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin131_obs10464_ccd7",
+      "production_index": 3934
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin132_obs10464_ccd7",
+      "production_index": 3935
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin133_obs10464_ccd7",
+      "production_index": 3936
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin134_obs10464_ccd7",
+      "production_index": 3937
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin135_obs10464_ccd7",
+      "production_index": 3938
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin136_obs10464_ccd7",
+      "production_index": 3939
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin137_obs10464_ccd7",
+      "production_index": 3940
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin0_obs10888_ccd7",
+      "production_index": 3941
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin1_obs10888_ccd7",
+      "production_index": 3942
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin2_obs10888_ccd7",
+      "production_index": 3943
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin3_obs10888_ccd7",
+      "production_index": 3944
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin4_obs10888_ccd7",
+      "production_index": 3945
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin6_obs10888_ccd7",
+      "production_index": 3946
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin7_obs10888_ccd7",
+      "production_index": 3947
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin9_obs10888_ccd7",
+      "production_index": 3948
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin10_obs10888_ccd7",
+      "production_index": 3949
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin11_obs10888_ccd7",
+      "production_index": 3950
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin12_obs10888_ccd7",
+      "production_index": 3951
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin16_obs10888_ccd7",
+      "production_index": 3952
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin17_obs10888_ccd7",
+      "production_index": 3953
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin18_obs10888_ccd7",
+      "production_index": 3954
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin19_obs10888_ccd7",
+      "production_index": 3955
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin20_obs10888_ccd7",
+      "production_index": 3956
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin21_obs10888_ccd7",
+      "production_index": 3957
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin22_obs10888_ccd7",
+      "production_index": 3958
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin23_obs10888_ccd7",
+      "production_index": 3959
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin24_obs10888_ccd7",
+      "production_index": 3960
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin25_obs10888_ccd7",
+      "production_index": 3961
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin26_obs10888_ccd7",
+      "production_index": 3962
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin27_obs10888_ccd7",
+      "production_index": 3963
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin28_obs10888_ccd7",
+      "production_index": 3964
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin29_obs10888_ccd7",
+      "production_index": 3965
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin30_obs10888_ccd7",
+      "production_index": 3966
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin31_obs10888_ccd7",
+      "production_index": 3967
+    },
+    {
+      "batch_id": 62,
+      "cell_name": "ABELL2146_bin32_obs10888_ccd7",
+      "production_index": 3968
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin33_obs10888_ccd7",
+      "production_index": 3969
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin34_obs10888_ccd7",
+      "production_index": 3970
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin35_obs10888_ccd7",
+      "production_index": 3971
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin36_obs10888_ccd7",
+      "production_index": 3972
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin37_obs10888_ccd7",
+      "production_index": 3973
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin39_obs10888_ccd7",
+      "production_index": 3974
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin40_obs10888_ccd7",
+      "production_index": 3975
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin42_obs10888_ccd7",
+      "production_index": 3976
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin43_obs10888_ccd7",
+      "production_index": 3977
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin44_obs10888_ccd7",
+      "production_index": 3978
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin45_obs10888_ccd7",
+      "production_index": 3979
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin47_obs10888_ccd7",
+      "production_index": 3980
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin49_obs10888_ccd7",
+      "production_index": 3981
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin50_obs10888_ccd7",
+      "production_index": 3982
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin51_obs10888_ccd7",
+      "production_index": 3983
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin52_obs10888_ccd7",
+      "production_index": 3984
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin53_obs10888_ccd7",
+      "production_index": 3985
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin54_obs10888_ccd7",
+      "production_index": 3986
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin55_obs10888_ccd7",
+      "production_index": 3987
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin56_obs10888_ccd7",
+      "production_index": 3988
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin57_obs10888_ccd7",
+      "production_index": 3989
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin59_obs10888_ccd7",
+      "production_index": 3990
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin60_obs10888_ccd7",
+      "production_index": 3991
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin61_obs10888_ccd7",
+      "production_index": 3992
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin62_obs10888_ccd7",
+      "production_index": 3993
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin63_obs10888_ccd7",
+      "production_index": 3994
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin64_obs10888_ccd7",
+      "production_index": 3995
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin65_obs10888_ccd7",
+      "production_index": 3996
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin66_obs10888_ccd7",
+      "production_index": 3997
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin67_obs10888_ccd7",
+      "production_index": 3998
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin68_obs10888_ccd7",
+      "production_index": 3999
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin69_obs10888_ccd7",
+      "production_index": 4000
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin70_obs10888_ccd7",
+      "production_index": 4001
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin71_obs10888_ccd7",
+      "production_index": 4002
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin72_obs10888_ccd7",
+      "production_index": 4003
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin73_obs10888_ccd7",
+      "production_index": 4004
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin74_obs10888_ccd7",
+      "production_index": 4005
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin75_obs10888_ccd7",
+      "production_index": 4006
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin76_obs10888_ccd7",
+      "production_index": 4007
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin77_obs10888_ccd7",
+      "production_index": 4008
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin78_obs10888_ccd7",
+      "production_index": 4009
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin79_obs10888_ccd7",
+      "production_index": 4010
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin80_obs10888_ccd7",
+      "production_index": 4011
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin81_obs10888_ccd7",
+      "production_index": 4012
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin82_obs10888_ccd7",
+      "production_index": 4013
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin83_obs10888_ccd7",
+      "production_index": 4014
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin84_obs10888_ccd7",
+      "production_index": 4015
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin85_obs10888_ccd7",
+      "production_index": 4016
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin86_obs10888_ccd7",
+      "production_index": 4017
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin87_obs10888_ccd7",
+      "production_index": 4018
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin88_obs10888_ccd7",
+      "production_index": 4019
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin89_obs10888_ccd7",
+      "production_index": 4020
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin90_obs10888_ccd7",
+      "production_index": 4021
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin91_obs10888_ccd7",
+      "production_index": 4022
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin92_obs10888_ccd7",
+      "production_index": 4023
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin93_obs10888_ccd7",
+      "production_index": 4024
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin94_obs10888_ccd7",
+      "production_index": 4025
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin95_obs10888_ccd7",
+      "production_index": 4026
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin96_obs10888_ccd7",
+      "production_index": 4027
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin97_obs10888_ccd7",
+      "production_index": 4028
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin98_obs10888_ccd7",
+      "production_index": 4029
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin99_obs10888_ccd7",
+      "production_index": 4030
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin100_obs10888_ccd7",
+      "production_index": 4031
+    },
+    {
+      "batch_id": 63,
+      "cell_name": "ABELL2146_bin101_obs10888_ccd7",
+      "production_index": 4032
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin102_obs10888_ccd7",
+      "production_index": 4033
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin103_obs10888_ccd7",
+      "production_index": 4034
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin104_obs10888_ccd7",
+      "production_index": 4035
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin105_obs10888_ccd7",
+      "production_index": 4036
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin106_obs10888_ccd7",
+      "production_index": 4037
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin107_obs10888_ccd7",
+      "production_index": 4038
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin108_obs10888_ccd7",
+      "production_index": 4039
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin109_obs10888_ccd7",
+      "production_index": 4040
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin110_obs10888_ccd7",
+      "production_index": 4041
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin111_obs10888_ccd7",
+      "production_index": 4042
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin112_obs10888_ccd7",
+      "production_index": 4043
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin113_obs10888_ccd7",
+      "production_index": 4044
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin114_obs10888_ccd7",
+      "production_index": 4045
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin115_obs10888_ccd7",
+      "production_index": 4046
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin116_obs10888_ccd7",
+      "production_index": 4047
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin117_obs10888_ccd7",
+      "production_index": 4048
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin118_obs10888_ccd7",
+      "production_index": 4049
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin119_obs10888_ccd7",
+      "production_index": 4050
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin120_obs10888_ccd7",
+      "production_index": 4051
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin121_obs10888_ccd7",
+      "production_index": 4052
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin122_obs10888_ccd7",
+      "production_index": 4053
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin123_obs10888_ccd7",
+      "production_index": 4054
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin124_obs10888_ccd7",
+      "production_index": 4055
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin125_obs10888_ccd7",
+      "production_index": 4056
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin126_obs10888_ccd7",
+      "production_index": 4057
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin127_obs10888_ccd7",
+      "production_index": 4058
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin128_obs10888_ccd7",
+      "production_index": 4059
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin129_obs10888_ccd7",
+      "production_index": 4060
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin130_obs10888_ccd7",
+      "production_index": 4061
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin131_obs10888_ccd7",
+      "production_index": 4062
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin132_obs10888_ccd7",
+      "production_index": 4063
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin133_obs10888_ccd7",
+      "production_index": 4064
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin134_obs10888_ccd7",
+      "production_index": 4065
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin135_obs10888_ccd7",
+      "production_index": 4066
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin136_obs10888_ccd7",
+      "production_index": 4067
+    },
+    {
+      "batch_id": 64,
+      "cell_name": "ABELL2146_bin137_obs10888_ccd7",
+      "production_index": 4068
+    }
+  ],
+  "protocol_version": "SIGMA-V19W-FULL-RESPONSE-PRODUCTION-1.0.0",
+  "quarantine_directories_observed_after_snapshot": 0,
+  "read_only": true,
+  "scientific_spectrum_combined_or_fitted": false,
+  "scratch_root": "/home/henry/sigma-v19w-response-production/v100",
+  "snapshot_cell_names_sha256": "60165911fdc2b7c073db72c01c7864ef7b55d29f2688c7866790102e3070088e",
+  "snapshot_completed_cells": 3706,
+  "snapshot_completed_utc": "2026-08-05T15:41:29.599323+00:00",
+  "snapshot_started_utc": "2026-08-05T15:41:24.985155+00:00",
+  "status": "completed_checkpoint_snapshot_passed_with_exhausted_base_production_cell",
+  "temperature_density_mach_or_speed_fitted": false,
+  "v19w_runner_sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
+}

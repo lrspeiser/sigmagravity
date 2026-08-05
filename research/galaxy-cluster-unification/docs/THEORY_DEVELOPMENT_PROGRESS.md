@@ -1,5 +1,26 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19W2C/V19W5 CCD7 response boundary
+
+The live response build exposed a detector boundary not present in the earlier
+commissioning set: 254 Abell 2146 CCD7 cells exhausted both base attempts
+because CCD7 is absent from the matching blank-sky geometry. A new read-only
+snapshot independently validated 3,706 completed cells and 14,824 products
+before freezing six outcome-blind CCD7 cases: the minimum, lower-median and
+maximum source-count ranks in each of the two affected observations.
+
+All six cases passed. Their exact materialized background subsets contained
+zero events at all energies, allowing the already frozen V19W2 method to build
+the source response, create and link a zero-count background PHA, and pass every
+mask, histogram, detector-medoid, ARF/RMF, link, scaling, size and hash gate.
+V19W5 now supersedes the unexecuted V19W4 terminal launcher and makes this CCD7
+pass mandatory. It remains blocked until the unchanged base process exits and
+its full-interval report passes. No spectrum was combined, no gas state was fit
+and no lensing or gravity result was opened. See
+[`SIGMA_V19W2C_CCD7_RESPONSE_COMMISSIONING_RESULTS.md`](SIGMA_V19W2C_CCD7_RESPONSE_COMMISSIONING_RESULTS.md)
+and
+[`SIGMA_V19W5_CCD7_HARDENED_RESPONSE_RECOVERY_PLAN.md`](SIGMA_V19W5_CCD7_HARDENED_RESPONSE_RECOVERY_PLAN.md).
+
 ## 2026-08-05 Sigma V19X3 full regional spectral preflight
 
 The executable gap after V19X2 commissioning is now closed in advance.  A
@@ -32,8 +53,8 @@ the response is not rescued with lensing or a tuned combination; direct gas
 velocity information or another independent merger is required.  Three
 action-placement classes are registered for later mathematical derivation,
 but none is selected.  This advances the physical-postulate/source-definition
-work while preserving V19W/V19W4, V19X2 and all 494 regional fit attempts as
-mandatory prerequisites.  Every region needs a finite best fit and at least
+work while preserving V19W/V19W5, the V19X successor and all 494 regional fit
+attempts as mandatory prerequisites.  Every region needs a finite best fit and at least
 12 regions per cluster must pass the individual quality gate; 494/494 quality
 passes are not required.  A reusable projected-map library now passes six manufactured
 tests covering component limits, common-boost invariance, rotation covariance,
@@ -89,9 +110,9 @@ hard veto rather than the present optimization target.  See
 ## 2026-08-05 Sigma v19X2 unified-response adapter preflight
 
 The future spectral combination step no longer assumes that all 5,082 response
-cells occupy the original V19W archive. A target-blind adapter now consumes the
-explicit `cell_directory` in the V19W4 unified index and accepts both
-`base_v19w` and `v19w4_recovery` rows. It independently rechecks the terminal
+cells occupy the original V19W archive. A target-blind adapter preflight consumes
+an explicit `cell_directory` in a unified index and currently accepts the older
+`base_v19w` and `v19w4_recovery` schema. It independently rechecks the terminal
 authority, index hash and size, allowed archive roots, task identity, event
 counts, cell-report hash, all four product names/sizes/hashes, and the source
 PHA channel-count audit.
@@ -106,7 +127,9 @@ now refuses absent/failed terminal evidence and, after a pass, will copy the
 registered workload, combination, fit sequence, and gates exactly from V19X
 while hashing every parent. Its config hash is recorded in the execution report
 rather than circularly embedded in the config itself. V19X2 is not frozen until
-V19W terminates and V19W4 produces its terminal report and unified index. No
+V19W terminates and V19W5 produces its terminal report and unified index. The
+adapter/freezer must then be superseded to accept the `v19w5_recovery` label and
+hash the V19W5 authority before any combination is allowed. No
 response was combined, no spectrum or temperature was fit, and no lensing or
 gravity payload was opened. See
 [`SIGMA_V19X2_UNIFIED_RESPONSE_ADAPTER_PREFLIGHT.md`](SIGMA_V19X2_UNIFIED_RESPONSE_ADAPTER_PREFLIGHT.md).

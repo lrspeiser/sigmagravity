@@ -1,0 +1,164 @@
+{
+  "protocol_version": "SIGMA-V19W2C-CCD7-RESPONSE-COMMISSIONING-1.0.0",
+  "status": "frozen from the independently audited 3706-cell live V19W snapshot after CCD7 failed twice in each of two observation contexts and before running any corrected CCD7 response, reading any recovered spectrum, fitting a temperature, opening a lensing payload, or changing gravity physics",
+  "purpose": "Close the detector-coverage gap exposed after V19W2B. The base production blank-sky geometry has no CCD7 for ABELL2146 ObsIDs 10464 and 10888, causing 254 CCD7 cells to exhaust both base attempts. Commission the unchanged V19W2 exact integer-binmap, materialized-event, detector-medoid and zero-all-energy-background path on outcome-blind minimum, median and maximum source-count cells from both affected observations.",
+  "failure_diagnosis": {
+    "base_failure": "specextract rejects a response reference on CCD7 because CCD7 is absent from the observation's blank-sky geometry",
+    "affected_cluster": "ABELL2146",
+    "affected_obsids": [
+      10464,
+      10888
+    ],
+    "affected_ccd_id": 7,
+    "exhausted_ccd7_cells_in_snapshot": 254,
+    "other_exhausted_cells_in_snapshot": 1,
+    "implementation_hypothesis": "The V19W2 materialized exact subset contains zero blank-sky rows on the absent detector, so it can generate the source response without passing the incompatible blank-sky file to specextract, then construct and link an exact zero-count background PHA."
+  },
+  "parents": {
+    "v19w_config": {
+      "path": "configs/sigma_v19w_full_response_production.json",
+      "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
+    },
+    "v19w_runner": {
+      "path": "scripts/run_sigma_v19w_full_response_production.py",
+      "sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
+    },
+    "v19u_manifest": {
+      "path": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+      "sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd"
+    },
+    "v19w2_config": {
+      "path": "configs/sigma_v19w2_exact_binmap_response_commissioning.json",
+      "sha256": "df3041c54bf14fc8c7071229ef5facc4011be1e94645027ff5f37903e9d516d7"
+    },
+    "v19w2_runner": {
+      "path": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
+      "sha256": "7bfa95bacc2d6904fb67262b1523cb58fab9cb492a0ccfcec15ae1ea41185810"
+    },
+    "v19w2_report": {
+      "path": "results/sigma_v19w2_exact_binmap_response_commissioning/report.json",
+      "sha256": "830f7d2cca5f84b2970a013c5cd89be9652d7628c107dbf5bbd5dfb966751efc"
+    },
+    "independent_auditor": {
+      "path": "scripts/audit_sigma_v19w_live_archive.py",
+      "sha256": "29a3fe09b2df37f5d55ab5d7587ac6f28ce530ad1ba29d564f6aa97d31218670"
+    },
+    "live_snapshot_report": {
+      "path": "results/sigma_v19w2c_ccd7_live_audit/report.json",
+      "sha256": "e979ff8a3366af81140d577cc7d3aa39890d7db656b74f0afda3c5fbe2d19bdf"
+    }
+  },
+  "snapshot_basis": {
+    "completed_cells": 3706,
+    "audited_product_files": 14824,
+    "audited_product_bytes": 24523954560,
+    "maximum_completed_production_index": 4077,
+    "failed_attempt_directories": 510,
+    "exhausted_failed_cells": 255,
+    "snapshot_cell_names_sha256": "60165911fdc2b7c073db72c01c7864ef7b55d29f2688c7866790102e3070088e",
+    "interpretation": "This is a point-in-time implementation failure inventory while the protected base process continues; it is not the terminal recovery workload."
+  },
+  "selection_definition": {
+    "cluster": "ABELL2146",
+    "observation_contexts": [
+      10464,
+      10888
+    ],
+    "ccd_id": 7,
+    "rank_rule": "Within each observation's 128 frozen CCD7 manifest rows, sort by source-band event count and then production index; select ranks 0, floor((N-1)/2), and N-1.",
+    "outcome_blind_inputs": [
+      "manifest cluster",
+      "manifest observation ID",
+      "manifest CCD ID",
+      "manifest source-band event count",
+      "manifest production index",
+      "independently audited exhausted-failure membership"
+    ],
+    "forbidden_selection_inputs": [
+      "response shape",
+      "spectrum or fitted temperature",
+      "gas state",
+      "lensing coordinate or halo target",
+      "galaxy rotation result",
+      "gravity formula or parameter"
+    ]
+  },
+  "commissioning_cells": [
+    {
+      "cell_name": "ABELL2146_bin7_obs10464_ccd7",
+      "expected_production_index": 3819,
+      "expected_source_band_events": 137,
+      "expected_background_band_events": 0,
+      "coverage": "ObsID 10464 minimum source-count rank"
+    },
+    {
+      "cell_name": "ABELL2146_bin76_obs10464_ccd7",
+      "expected_production_index": 3879,
+      "expected_source_band_events": 226,
+      "expected_background_band_events": 0,
+      "coverage": "ObsID 10464 lower-median source-count rank"
+    },
+    {
+      "cell_name": "ABELL2146_bin32_obs10464_ccd7",
+      "expected_production_index": 3840,
+      "expected_source_band_events": 532,
+      "expected_background_band_events": 0,
+      "coverage": "ObsID 10464 maximum source-count rank"
+    },
+    {
+      "cell_name": "ABELL2146_bin44_obs10888_ccd7",
+      "expected_production_index": 3978,
+      "expected_source_band_events": 22,
+      "expected_background_band_events": 0,
+      "coverage": "ObsID 10888 minimum source-count rank"
+    },
+    {
+      "cell_name": "ABELL2146_bin103_obs10888_ccd7",
+      "expected_production_index": 4034,
+      "expected_source_band_events": 43,
+      "expected_background_band_events": 0,
+      "coverage": "ObsID 10888 lower-median source-count rank"
+    },
+    {
+      "cell_name": "ABELL2146_bin32_obs10888_ccd7",
+      "expected_production_index": 3968,
+      "expected_source_band_events": 152,
+      "expected_background_band_events": 0,
+      "coverage": "ObsID 10888 maximum source-count rank"
+    }
+  ],
+  "execution": {
+    "runner": "scripts/run_sigma_v19w2c_ccd7_response_commissioning.py",
+    "runner_sha256": "0755744a7651749eb8bde21a4bd6bfa501eb82e47da595e1fd63436314f6047e",
+    "scratch_root": "/home/henry/sigma-v19w2c-ccd7/v100",
+    "protected_base_scratch": "/home/henry/sigma-v19w-response-production/v100",
+    "free_space_probe": "/home/henry",
+    "output": "results/sigma_v19w2c_ccd7_response_commissioning",
+    "maximum_concurrent_cells": 1,
+    "attempts_per_commissioning_cell": 1,
+    "minimum_free_bytes_at_launch": 5000000000,
+    "may_run_while_base_process_is_active": true,
+    "base_archive_mutation": false
+  },
+  "gates": {
+    "all_parent_hashes_exact": true,
+    "v19w2_parent_passed": true,
+    "live_snapshot_and_exhausted_failure_inventory_exact": true,
+    "all_six_cells_are_outcome_blind_quantile_selections": true,
+    "both_affected_observation_contexts_covered": true,
+    "ccd7_and_source_count_range_covered": true,
+    "all_six_exact_masks_equal_frozen_integer_binmap_labels": true,
+    "all_six_materialized_event_histograms_are_exact": true,
+    "all_six_use_zero_all_energy_background_path": true,
+    "all_six_detector_medoids_map_to_ccd7": true,
+    "all_six_arf_rmf_pha_link_scaling_size_and_hash_audits_pass": true,
+    "base_archive_remains_unmodified_by_commissioning": true
+  },
+  "failure_rule": "Retain the failed scratch cell and report. Do not retry under this protocol, change a selected rank or cell, fabricate a CCD7 blank-sky event, alter an exact bin label, response reference, background rule, base archive or science parameter. Do not launch V19W4. Freeze a V19W5 successor only after every CCD7 commissioning gate passes.",
+  "claim_boundary": [
+    "This commissions one response implementation boundary; it does not enumerate or execute the terminal recovery workload.",
+    "A pass establishes that the exact source-only response and exact zero-count PHA construction works on six preregistered CCD7 cases; it does not prove every remaining cell will pass.",
+    "No spectrum is combined or interpreted and no temperature, density, Mach state or shock speed is fitted.",
+    "No lensing, halo, galaxy rotation or gravity payload is opened and no gravity formula or parameter is changed."
+  ]
+}
