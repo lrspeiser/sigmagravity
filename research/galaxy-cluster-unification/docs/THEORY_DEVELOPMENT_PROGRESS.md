@@ -1,5 +1,21 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19X4B V19X3B gas-successor preflight
+
+The full gas-posterior stage is now prepared behind V19X3B without rewriting
+the original V19X4/V19BP chain. A mechanical freezer copies and canonically
+hashes all eight V19X4 science sections: the corrected APEC algebra,
+composition, geometry, 4,096-draw uncertainty model, three dependence branches,
+depth/profile fallbacks, common-grid reconstruction, smoothing and runtime
+gates. Only the terminal regional-data authority changes from V19X3 to V19X3B.
+
+The preflight and manufactured tests pass. Terminal V19X3B must still contain
+all 494 regions with every production gate and the target seal intact before a
+V19X4B configuration can exist. No observed regional temperature, gas
+posterior, source score, lensing, halo, gravity or holdout result was opened.
+See
+[`SIGMA_V19X4B_V19X3B_GAS_SUCCESSOR_PREFLIGHT.md`](SIGMA_V19X4B_V19X3B_GAS_SUCCESSOR_PREFLIGHT.md).
+
 ## 2026-08-05 Sigma V19X3B V19W5 regional-successor preflight
 
 The 494-region production handoff is now prepared without mutating the

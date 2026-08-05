@@ -1,0 +1,84 @@
+{
+  "protocol_version": "SIGMA-V19X4B-V19X3B-GAS-SUCCESSOR-PREFLIGHT-1.0.0",
+  "status": "frozen before terminal V19X3B regional measurements, any observed gas posterior, source score, lensing or halo target, gravity parameter or holdout access",
+  "purpose": "Prepare a separately named gas-posterior successor that uses a terminal V19X3B report while copying every V19X4 thermodynamic, uncertainty and common-grid rule exactly.",
+  "parents": {
+    "original_v19x4_config": "configs/sigma_v19x4_gas_state_math_preflight.json",
+    "original_v19x4_config_sha256": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f",
+    "original_v19x4_preflight_report": "results/sigma_v19x4_gas_state_math_preflight/report.json",
+    "original_v19x4_preflight_report_sha256": "01c206e11e93411995d60537aae90c432b8980285bafeea0ddc51154cf749e1b",
+    "original_v19x4_runner": "scripts/run_sigma_v19x4_gas_state_posterior.py",
+    "original_v19x4_runner_sha256": "934a241a1611bdc6eb34569c67efa76641195a39ec33ae600ea41960171042e3",
+    "posterior_module": "src/voidscreen/sigma_gas_posterior.py",
+    "posterior_module_sha256": "095581c97d6c4ff294f76aeaaf52ae68fdb38f1ac04bba8e3b791a1a97e6571c",
+    "v19x3b_preflight_config": "configs/sigma_v19x3b_v19w5_regional_successor_preflight.json",
+    "v19x3b_preflight_config_sha256": "aba38ff5e7ece24f8aa1e51b0fa480f9f0a37c3c16f327907edb23903c704b99",
+    "v19x3b_preflight_report": "results/sigma_v19x3b_v19w5_regional_successor_preflight/report.json",
+    "v19x3b_preflight_report_sha256": "acfd91058a73396e01796e250e8af480b3d88e81ba856c77b3bc24c21ed73ea6",
+    "v19x3b_runner": "scripts/run_sigma_v19x3b_v19w5_full_regional_spectral_production.py",
+    "v19x3b_runner_sha256": "5d270c641abc04365fc5df7fadebe7bfdc19dd5783b905be92a28f5e2330127a",
+    "v19x3b_freezer": "scripts/freeze_sigma_v19x3b_v19w5_full_regional_spectral_production.py",
+    "v19x3b_freezer_sha256": "1547acb7e5dfd33042dfa1b1daaed73ddf71038d81d0177e292c03518f6c1e9b",
+    "v19bp_config": "configs/sigma_v19bp_observed_source_invariant_scoring.json",
+    "v19bp_config_sha256": "43a966ea04300222a018c9667f2feb50c600509a522bd05fc3dcf9a197075b6a"
+  },
+  "successor_contract": {
+    "science_sections": [
+      "official_definition",
+      "algebra_correction",
+      "physical_constants_and_composition",
+      "geometry",
+      "posterior",
+      "common_grid",
+      "front_state",
+      "future_runtime_gates"
+    ],
+    "science_section_sha256": {
+      "official_definition": "a6eeee0ef9fdf53d792a195aab8e8768ef52dfd0f714cf618bbd8d6539668b52",
+      "algebra_correction": "9bb25e710ab2f7e7fd3ef884976574be5a85664b2836ea0ca7592dd6b241a703",
+      "physical_constants_and_composition": "1b2adee1912ad057990dc5133e1c43b5dfae3220f4aeddd46d968ecfb5729f9b",
+      "geometry": "d081ad114398d11f3789a33f481f8ed19925239ca8f78a0e59314349cf9decd1",
+      "posterior": "988d2ac7ed5bc6fa0955a1a098512f8f7ca56d2a2935fae5b58e2bc8dee7cb3a",
+      "common_grid": "405a8a6e3361925ed02271bde02dbf92e57fe5e102aa0011e9eb9024413e55af",
+      "front_state": "418cbad26833c1f943ee5886c8474945ae32e87bbdbce49c7770af6d41c1600e",
+      "future_runtime_gates": "a0b6fb040cdcd53dbc536d0e71a3f499497e6a995c767ff87d34355ccd7bc382"
+    },
+    "terminal_parent": "V19X3B only after all 494 finite regional fits and cluster quality gates pass",
+    "posterior_draws_per_region": 4096,
+    "temperature_normalization_rank_correlations": [-0.9, 0.0, 0.9],
+    "common_grid_cells_per_axis": 241,
+    "smoothing_fwhm_kpc": [50.0, 100.0],
+    "future_downstream_rule": "Freeze a separately named observed-source executor from terminal V19X4B products; never redirect V19BP in place."
+  },
+  "authorization": {
+    "run_preflight_now": true,
+    "freeze_after_terminal_v19x3b_pass": true,
+    "freeze_before_terminal_v19x3b_pass": false,
+    "open_regional_temperature_result_now": false,
+    "construct_observed_gas_posterior_now": false,
+    "open_lensing_or_halo_payload": false,
+    "change_gravity_formula_or_parameter": false,
+    "open_holdout": false
+  },
+  "claim_boundary": [
+    "This is a target-blind implementation preflight, not an observed gas result or a Sigma Gravity test.",
+    "V19X4B changes only the terminal regional-data authority; all gas conversion, uncertainty, smoothing and grid rules remain identical to V19X4.",
+    "A future V19X4B pass would authorize source-only scoring, not a gravity action or lensing fit.",
+    "No lensing, halo, galaxy, gravity or holdout outcome enters this preflight."
+  ],
+  "outputs": {
+    "report": "results/sigma_v19x4b_v19x3b_gas_successor_preflight/report.json"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19x4b_v19x3b_gas_state_posterior.py",
+    "runner_sha256": "50b26761105f51e2403cb8fdad997a98b533d3360a005d667b033a398b182941",
+    "freezer": "scripts/freeze_sigma_v19x4b_v19x3b_gas_state_posterior.py",
+    "freezer_sha256": "497fe2c51e800c89c3fbecdb5e555c7556b7968dd9f16826b6796627f2ddd28d",
+    "checker": "scripts/check_sigma_v19x4b_v19x3b_gas_successor_preflight.py",
+    "checker_sha256": "7ca1a965eb700533fea1eb700ca5999d1b480cd599c317d789ac541dee0cdf99",
+    "inherited_v19x4_runner": "scripts/run_sigma_v19x4_gas_state_posterior.py",
+    "inherited_v19x4_runner_sha256": "934a241a1611bdc6eb34569c67efa76641195a39ec33ae600ea41960171042e3",
+    "posterior_module": "src/voidscreen/sigma_gas_posterior.py",
+    "posterior_module_sha256": "095581c97d6c4ff294f76aeaaf52ae68fdb38f1ac04bba8e3b791a1a97e6571c"
+  }
+}

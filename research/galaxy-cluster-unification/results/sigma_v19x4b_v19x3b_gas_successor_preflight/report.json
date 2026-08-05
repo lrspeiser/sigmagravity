@@ -1,0 +1,52 @@
+{
+  "protocol_version": "SIGMA-V19X4B-V19X3B-GAS-SUCCESSOR-PREFLIGHT-1.0.0",
+  "status": "v19x4b_v19x3b_gas_successor_preflight_passed",
+  "config_sha256": "a699d5af275e244ef0a027f12f512472373fb5c4022561448cb4415d090e6367",
+  "hashes": {
+    "original_v19x4_config": "376e727997ded1c0f0b7b37b046c1f4eb4f48fce416e52a06bce20e82b2a795f",
+    "original_v19x4_preflight_report": "01c206e11e93411995d60537aae90c432b8980285bafeea0ddc51154cf749e1b",
+    "original_v19x4_runner": "934a241a1611bdc6eb34569c67efa76641195a39ec33ae600ea41960171042e3",
+    "posterior_module": "095581c97d6c4ff294f76aeaaf52ae68fdb38f1ac04bba8e3b791a1a97e6571c",
+    "v19x3b_preflight_config": "aba38ff5e7ece24f8aa1e51b0fa480f9f0a37c3c16f327907edb23903c704b99",
+    "v19x3b_preflight_report": "acfd91058a73396e01796e250e8af480b3d88e81ba856c77b3bc24c21ed73ea6",
+    "v19x3b_runner": "5d270c641abc04365fc5df7fadebe7bfdc19dd5783b905be92a28f5e2330127a",
+    "v19x3b_freezer": "1547acb7e5dfd33042dfa1b1daaed73ddf71038d81d0177e292c03518f6c1e9b",
+    "v19bp_config": "43a966ea04300222a018c9667f2feb50c600509a522bd05fc3dcf9a197075b6a",
+    "runner": "50b26761105f51e2403cb8fdad997a98b533d3360a005d667b033a398b182941",
+    "freezer": "497fe2c51e800c89c3fbecdb5e555c7556b7968dd9f16826b6796627f2ddd28d",
+    "checker": "7ca1a965eb700533fea1eb700ca5999d1b480cd599c317d789ac541dee0cdf99",
+    "inherited_v19x4_runner": "934a241a1611bdc6eb34569c67efa76641195a39ec33ae600ea41960171042e3"
+  },
+  "hash_gates": {
+    "original_v19x4_config": true,
+    "original_v19x4_preflight_report": true,
+    "original_v19x4_runner": true,
+    "posterior_module": true,
+    "v19x3b_preflight_config": true,
+    "v19x3b_preflight_report": true,
+    "v19x3b_runner": true,
+    "v19x3b_freezer": true,
+    "v19bp_config": true,
+    "runner": true,
+    "freezer": true,
+    "checker": true,
+    "inherited_v19x4_runner": true
+  },
+  "gates": {
+    "all_parent_and_implementation_hashes_exact": true,
+    "original_v19x4_math_preflight_still_passes": true,
+    "v19x3b_successor_preflight_passes": true,
+    "gas_posterior_rules_are_identical": true,
+    "full_uncertainty_and_grid_contract_retained": true,
+    "terminal_measurements_and_targets_sealed": true,
+    "separately_named_successor_required": true
+  },
+  "terminal_regional_or_gas_measurement_opened": false,
+  "lensing_halo_gravity_or_holdout_payload_opened": false,
+  "claim_boundary": [
+    "This is a target-blind implementation preflight, not an observed gas result or a Sigma Gravity test.",
+    "V19X4B changes only the terminal regional-data authority; all gas conversion, uncertainty, smoothing and grid rules remain identical to V19X4.",
+    "A future V19X4B pass would authorize source-only scoring, not a gravity action or lensing fit.",
+    "No lensing, halo, galaxy, gravity or holdout outcome enters this preflight."
+  ]
+}
