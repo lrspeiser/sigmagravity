@@ -1,0 +1,41 @@
+{
+  "association_or_bri_likelihood_computed": false,
+  "claim_boundary": [
+    "V19AU is a theory-blind candidate image-measurement and source-sufficiency test, not a counterpart association.",
+    "It does not compare a candidate with Bessel colors or positional posteriors even though the frozen hypothesis table preserves those inputs for a later protocol.",
+    "A positive flux is not proof of membership, and a non-detection is retained rather than silently converted to a null association.",
+    "A pass authorizes a separately frozen joint positional/color likelihood with explicit null and ambiguous states; it does not authorize stellar mass, mass current, lensing or gravity inference."
+  ],
+  "counts": {
+    "complete_grizY_candidates": 454,
+    "complete_griz_candidates": 461,
+    "image_groups": 123,
+    "planned_and_retained_measurements": 40812,
+    "unique_candidates": 568,
+    "valid_measurements": 24382
+  },
+  "decision": "failed_closed",
+  "gate_results": {
+    "all_measurement_memberships_retained": true,
+    "complete_griz_candidate_fraction": true,
+    "no_candidate_association_scored": true,
+    "overall_valid_fraction": false
+  },
+  "outputs": {
+    "aggregates": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/aggregates.csv",
+    "aggregates_sha256": "4029dac98a10e901499c265f075f36e803b878cdea71127b34385612164ae3c9",
+    "group_audit": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/group_audit.csv",
+    "group_audit_sha256": "32b590ef789b1d98d0d8f27a126c031cde412a1a48b3757cdddc44cb23251b09",
+    "measurements": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/measurements.csv",
+    "measurements_sha256": "4f6c98b042361b261a50bb5bbc0ffdafb7b1bc8d77ef9c548290911ee7931e15"
+  },
+  "protocol_version": "SIGMA-V19AU-AMBIGUOUS-CANDIDATE-IMAGE-MEASUREMENT-1.0.0",
+  "quality": {
+    "measurement_status": {
+      "nonpositive_retained": 16430,
+      "valid": 24382
+    },
+    "minimum_candidate_band_valid_fraction": 0.0,
+    "overall_valid_fraction": 0.5974223267666373
+  }
+}
