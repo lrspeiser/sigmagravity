@@ -1,0 +1,51 @@
+{
+  "filter": "B_BESS",
+  "gates": {
+    "fitted_median_residual": true,
+    "fitted_p95_residual": true,
+    "loo_median_residual": true,
+    "loo_p95_residual": true,
+    "loo_p95_residual_arcsec": true,
+    "minimum_accepted_centroids": true,
+    "r_improves_v19ah": true
+  },
+  "metrics": {
+    "accepted_centroids": 37,
+    "fitted_median_residual_pixel": 0.4222603495542825,
+    "fitted_p95_residual_pixel": 2.0841960488918994,
+    "input_v19ah_matches": 37,
+    "loo_median_residual_pixel": 0.4392987055583715,
+    "loo_p95_residual_arcsec": 0.48036600128929235,
+    "loo_p95_residual_pixel": 2.406983840245195,
+    "median_centroid_shift_pixel": 0.4729159949836008,
+    "median_ellipticity": 0.05688594176405182,
+    "median_fwhm_pixel": 2.8628577568369917,
+    "p95_centroid_shift_pixel": 1.0515638349637455,
+    "pixel_scale_arcsec": 0.19957176,
+    "rejected_centroids": 0,
+    "rejection_reasons": {}
+  },
+  "refined_matches": "results/sigma_v19aj_fors1_core_astrometry/refined_matches_B_BESS.csv",
+  "refined_matches_sha256": "e76b5520fdaaa2e6e2e62e23daca25b522c9118d5954ffc4348fcd617caadd29",
+  "wcs_header": {
+    "CDELT1": 1.0,
+    "CDELT2": 1.0,
+    "CRPIX1": 1306.891078165,
+    "CRPIX2": 1010.243078285,
+    "CRVAL1": 104.59013538039,
+    "CRVAL2": -55.955550103661,
+    "CTYPE1": "RA---TAN",
+    "CTYPE2": "DEC--TAN",
+    "CUNIT1": "deg",
+    "CUNIT2": "deg",
+    "LATPOLE": -55.955550103661,
+    "LONPOLE": 180.0,
+    "MJDREF": 0.0,
+    "PC1_1": -5.5604029245839e-05,
+    "PC1_2": -1.8407036757091e-08,
+    "PC2_1": -3.1176592605944e-08,
+    "PC2_2": 5.5563015290707e-05,
+    "RADESYS": "ICRS",
+    "WCSAXES": 2
+  }
+}
