@@ -2462,3 +2462,19 @@ residual or halo result was read. The spectral cubes also remain sealed because
 they contain the target velocities. No final galaxy was selected, and no
 action, constant or Solar-System tuning changed. See
 [`SIGMA_V19BU_WALLABY_SOURCE_ONLY_METADATA.md`](SIGMA_V19BU_WALLABY_SOURCE_ONLY_METADATA.md).
+
+## 2026-08-05 V19BV WALLABY release-row robustness
+
+The 711-row WALLABY source catalog now has a deterministic 592-name canonical
+view, but the release choice is not treated as certain. All 119 repeated names
+are Hydra TR1/TR2 pairs. Five prespecified source-quality priority orders agree
+for only 27 pairs; 92 select different rows under at least one reasonable
+ordering. The first implementation's use of non-unique `catalogue_id` values
+would have hidden this ambiguity, so the final audit identifies rows by the
+archive primary `id`.
+
+Every alternative remains in the immutable V19BU input. The 92 sensitive
+pairs must propagate both source reconstructions or be removed by a target-
+blind gate when the galaxy sample is frozen. No kinematic value, target
+residual, gravity formula, constant or Solar result was opened. See
+[`SIGMA_V19BV_WALLABY_CANONICAL_SOURCE_ROWS.md`](SIGMA_V19BV_WALLABY_CANONICAL_SOURCE_ROWS.md).

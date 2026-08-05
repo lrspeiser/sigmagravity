@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 191,
+    "sigma_protocols": 192,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7346,6 +7346,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "da5ff0c63f7986f34b7f40aa6be8220d103fc13c57fd72f08194172fdd7e6839"
+    },
+    {
+      "config": "configs/sigma_v19bv_wallaby_canonical_source_rows.json",
+      "protocol_version": "SIGMA-V19BV-WALLABY-CANONICAL-SOURCE-ROWS-1.0.0",
+      "status": "source-only duplicate-resolution policy frozen before choosing a canonical row, opening any kinematic target, or selecting a final holdout galaxy",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "8abd59993e5f5e04d551615259dddb97119db9f207849ef46c49829056b55d67"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

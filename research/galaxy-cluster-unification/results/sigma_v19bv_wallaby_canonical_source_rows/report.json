@@ -1,0 +1,158 @@
+{
+  "access_boundary_audit": {
+    "final_holdout_sample_selected": false,
+    "gravity_formula_or_constant_changed": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "inclination_or_kinematic_angle_read": false,
+    "kinematic_table_rows_read": false,
+    "raw_alternative_rows_retained": true,
+    "rotation_speed_or_velocity_field_read": false,
+    "solar_system_optimization_performed": false,
+    "source_columns_only": true
+  },
+  "canonical_output": {
+    "all_name_distinct_choice_counts": {
+      "1": 500,
+      "2": 92
+    },
+    "bytes": 232584,
+    "canonical_choice_reason_counts": {
+      "higher_integrated_source_snr": 25,
+      "higher_kinematic_availability_flag": 12,
+      "higher_source_reliability": 81,
+      "lower_qflag": 1,
+      "unique_source_name": 473
+    },
+    "canonical_kflag_counts": {
+      "0": 380,
+      "1": 103,
+      "2": 109
+    },
+    "canonical_qflag_counts": {
+      "0.0": 512,
+      "4.0": 80
+    },
+    "canonical_rows": 592,
+    "canonical_team_release_counts": {
+      "Hydra TR1": 116,
+      "Hydra TR2": 185,
+      "NGC 4636 TR1": 147,
+      "Norma TR1": 144
+    },
+    "duplicate_names_policy_ambiguous": 92,
+    "duplicate_names_resolved": 119,
+    "duplicate_names_with_all_five_policies_agreeing": 27,
+    "input_rows": 711,
+    "maximum_input_rows_per_name": 2,
+    "output_columns": [
+      "id",
+      "catalogue_id",
+      "name",
+      "ra",
+      "dec",
+      "f_sum",
+      "err_f_sum",
+      "rms",
+      "rel",
+      "qflag",
+      "kflag",
+      "n_pix",
+      "ell_maj",
+      "ell_min",
+      "ell_pa",
+      "ell3s_maj",
+      "ell3s_min",
+      "ell3s_pa",
+      "team_release",
+      "dist_h",
+      "log_m_hi",
+      "source_snr",
+      "duplicate_group_size",
+      "canonical_choice_reason",
+      "all_prespecified_policies_agree",
+      "prespecified_distinct_choice_count",
+      "canonical_policy_id"
+    ],
+    "path": "data/derived/sigma_v19bv_wallaby_canonical_source_rows/wallaby_pilot_dr1_canonical_source_only.csv",
+    "policy_choice_sha256": {
+      "KFLAG_QFLAG_RELIABILITY_SNR_PIXELS_RELEASE": "9e1851803ecee01213e070bc8f4aa9795885da52d0794f5fbbaad9a1e0c9059d",
+      "QFLAG_KFLAG_RELIABILITY_SNR_PIXELS_RELEASE_CATALOGUE": "9e1851803ecee01213e070bc8f4aa9795885da52d0794f5fbbaad9a1e0c9059d",
+      "QFLAG_RELEASE_KFLAG_RELIABILITY_SNR_PIXELS": "f69ada5a2f52f75c18ad014b45077f6df8b7ee7106cac7d304aa90047ac4f757",
+      "RELIABILITY_QFLAG_KFLAG_SNR_PIXELS_RELEASE": "313e9628eb6b60e5b61096e783e456eb2d89739289243ed3c7a65fbc1ea1223b",
+      "SNR_QFLAG_KFLAG_RELIABILITY_PIXELS_RELEASE": "7a326cfd1d04e56f0709d7f2e68cab932b57947a2c9e3c8b0a62137bc0469bde"
+    },
+    "sha256": "2f7cd772db3efc55495483a43884b7ee5af12ab37a0d1ec5800405ddeb67d1f4",
+    "unique_source_names": 592
+  },
+  "claim_boundary": [
+    "V19BV chooses one source-catalog row per WALLABY name; it does not choose the final galaxy holdout.",
+    "A successful public kinematic-product flag establishes target availability only and does not reveal or score the target value.",
+    "The 119 discarded canonical alternatives remain intact in the hash-bound V19BU raw CSV and can be propagated as a source systematic.",
+    "Only 27 duplicate names are invariant across all five prespecified priority orders; the 92 policy-sensitive names must carry both release rows as a source-reconstruction systematic rather than being called uniquely resolved.",
+    "No rotation curve, velocity field, fitted inclination, kinematic angle, gravity residual, halo result, action, universal constant or Solar-System optimization enters this transformation."
+  ],
+  "config": "configs/sigma_v19bv_wallaby_canonical_source_rows.json",
+  "config_sha256": "8abd59993e5f5e04d551615259dddb97119db9f207849ef46c49829056b55d67",
+  "decision": "passed_canonical_source_rows_not_holdout_selection",
+  "gate_results": {
+    "all_raw_alternatives_remain_retained": true,
+    "canonical_policy_is_source_only_and_total": true,
+    "canonical_summary_reproduces_exactly": true,
+    "kinematic_gravity_and_solar_targets_remain_sealed": true,
+    "no_final_holdout_selection_claimed": true,
+    "one_canonical_row_per_unique_name": true,
+    "parent_and_input_hashes_exact": true,
+    "prespecified_policy_ambiguity_is_quantified_and_retained": true
+  },
+  "implementation": {
+    "runner": "scripts/build_sigma_v19bv_wallaby_canonical_source_rows.py"
+  },
+  "input_audit": {
+    "actual_sha256": "58e59cdfc48cf8192ff2038b949285adfa3ab0b1038603b31afcf81df8fbac4d",
+    "expected_sha256": "58e59cdfc48cf8192ff2038b949285adfa3ab0b1038603b31afcf81df8fbac4d",
+    "path": "data/raw/sigma_v19bu_wallaby_source_metadata/wallaby_pilot_dr1_source_only.csv",
+    "rows": 711,
+    "unique_names": 592
+  },
+  "parent_audit": {
+    "actual_sha256": "d9c1dbd0daf3f869ffbf3ba6f8b722b02081b9b8d6fe804c854ed83d058f9216",
+    "exact": true,
+    "expected_sha256": "d9c1dbd0daf3f869ffbf3ba6f8b722b02081b9b8d6fe804c854ed83d058f9216",
+    "path": "results/sigma_v19bu_wallaby_source_only_metadata/report.json"
+  },
+  "policy": {
+    "canonical": {
+      "id": "QFLAG_KFLAG_RELIABILITY_SNR_PIXELS_RELEASE_CATALOGUE",
+      "priority": [
+        "qflag ascending, so an unflagged source beats a partially flagged source",
+        "kflag success rank 2 then 1 then 0, so an available successful public kinematic product beats a failed or absent product without reading it",
+        "reliability descending",
+        "integrated source SNR f_sum/err_f_sum descending",
+        "source-mask pixel count descending",
+        "numeric team-release suffix descending",
+        "catalogue_id ascending followed by the archive primary id ascending as deterministic final tie-breaks"
+      ]
+    },
+    "published_flag_semantics": {
+      "boundary": "The flags describe archive source/target availability and quality. They do not contain a rotation speed or any Sigma, MOND or halo outcome.",
+      "kflag": {
+        "0": "kinematic modelling not attempted",
+        "1": "kinematic modelling attempted but unsuccessful",
+        "2": "kinematic modelling attempted and successful"
+      },
+      "qflag": {
+        "0": "no issue",
+        "4": "source may be partially flagged"
+      },
+      "source": "https://arxiv.org/abs/2211.07094"
+    },
+    "robustness_policies": [
+      "QFLAG_RELEASE_KFLAG_RELIABILITY_SNR_PIXELS",
+      "KFLAG_QFLAG_RELIABILITY_SNR_PIXELS_RELEASE",
+      "RELIABILITY_QFLAG_KFLAG_SNR_PIXELS_RELEASE",
+      "SNR_QFLAG_KFLAG_RELIABILITY_PIXELS_RELEASE"
+    ]
+  },
+  "protocol_version": "SIGMA-V19BV-WALLABY-CANONICAL-SOURCE-ROWS-1.0.0",
+  "status": "completed_wallaby_canonical_source_row_checkpoint"
+}

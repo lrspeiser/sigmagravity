@@ -1,0 +1,90 @@
+{
+  "protocol_version": "SIGMA-V19BV-WALLABY-CANONICAL-SOURCE-ROWS-1.0.0",
+  "status": "source-only duplicate-resolution policy frozen before choosing a canonical row, opening any kinematic target, or selecting a final holdout galaxy",
+  "purpose": "Resolve the 119 repeated Hydra team-release rows in the V19BU source-only candidate universe with an outcome-blind archive-quality rule, while retaining the raw alternatives and measuring sensitivity to four prespecified priority reorderings.",
+  "parent": {
+    "path": "results/sigma_v19bu_wallaby_source_only_metadata/report.json",
+    "sha256": "d9c1dbd0daf3f869ffbf3ba6f8b722b02081b9b8d6fe804c854ed83d058f9216"
+  },
+  "input": {
+    "path": "data/raw/sigma_v19bu_wallaby_source_metadata/wallaby_pilot_dr1_source_only.csv",
+    "sha256": "58e59cdfc48cf8192ff2038b949285adfa3ab0b1038603b31afcf81df8fbac4d",
+    "rows": 711,
+    "unique_names": 592,
+    "duplicate_names": 119
+  },
+  "published_flag_semantics": {
+    "source": "https://arxiv.org/abs/2211.07094",
+    "qflag": {
+      "0": "no issue",
+      "4": "source may be partially flagged"
+    },
+    "kflag": {
+      "0": "kinematic modelling not attempted",
+      "1": "kinematic modelling attempted but unsuccessful",
+      "2": "kinematic modelling attempted and successful"
+    },
+    "boundary": "The flags describe archive source/target availability and quality. They do not contain a rotation speed or any Sigma, MOND or halo outcome."
+  },
+  "canonical_policy": {
+    "id": "QFLAG_KFLAG_RELIABILITY_SNR_PIXELS_RELEASE_CATALOGUE",
+    "priority": [
+      "qflag ascending, so an unflagged source beats a partially flagged source",
+      "kflag success rank 2 then 1 then 0, so an available successful public kinematic product beats a failed or absent product without reading it",
+      "reliability descending",
+      "integrated source SNR f_sum/err_f_sum descending",
+      "source-mask pixel count descending",
+      "numeric team-release suffix descending",
+      "catalogue_id ascending followed by the archive primary id ascending as deterministic final tie-breaks"
+    ]
+  },
+  "robustness_policies": [
+    "QFLAG_RELEASE_KFLAG_RELIABILITY_SNR_PIXELS",
+    "KFLAG_QFLAG_RELIABILITY_SNR_PIXELS_RELEASE",
+    "RELIABILITY_QFLAG_KFLAG_SNR_PIXELS_RELEASE",
+    "SNR_QFLAG_KFLAG_RELIABILITY_PIXELS_RELEASE"
+  ],
+  "expected_source_only_result": {
+    "canonical_rows": 592,
+    "duplicate_names_resolved": 119,
+    "maximum_input_rows_per_name": 2,
+    "duplicate_names_with_all_five_policies_agreeing": 27,
+    "duplicate_names_policy_ambiguous": 92,
+    "final_holdout_galaxies_selected": 0
+  },
+  "access_boundary": {
+    "raw_alternative_rows_retained": true,
+    "source_columns_only": true,
+    "kinematic_table_rows_read": false,
+    "rotation_speed_or_velocity_field_read": false,
+    "inclination_or_kinematic_angle_read": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "final_holdout_sample_selected": false,
+    "gravity_formula_or_constant_changed": false,
+    "solar_system_optimization_performed": false
+  },
+  "required_gates": {
+    "parent_and_input_hashes_exact": true,
+    "canonical_policy_is_source_only_and_total": true,
+    "one_canonical_row_per_unique_name": true,
+    "all_raw_alternatives_remain_retained": true,
+    "prespecified_policy_ambiguity_is_quantified_and_retained": true,
+    "canonical_summary_reproduces_exactly": true,
+    "kinematic_gravity_and_solar_targets_remain_sealed": true,
+    "no_final_holdout_selection_claimed": true
+  },
+  "outputs": {
+    "canonical_csv": "data/derived/sigma_v19bv_wallaby_canonical_source_rows/wallaby_pilot_dr1_canonical_source_only.csv",
+    "report": "results/sigma_v19bv_wallaby_canonical_source_rows/report.json"
+  },
+  "claim_boundary": [
+    "V19BV chooses one source-catalog row per WALLABY name; it does not choose the final galaxy holdout.",
+    "A successful public kinematic-product flag establishes target availability only and does not reveal or score the target value.",
+    "The 119 discarded canonical alternatives remain intact in the hash-bound V19BU raw CSV and can be propagated as a source systematic.",
+    "Only 27 duplicate names are invariant across all five prespecified priority orders; the 92 policy-sensitive names must carry both release rows as a source-reconstruction systematic rather than being called uniquely resolved.",
+    "No rotation curve, velocity field, fitted inclination, kinematic angle, gravity residual, halo result, action, universal constant or Solar-System optimization enters this transformation."
+  ],
+  "implementation": {
+    "runner": "scripts/build_sigma_v19bv_wallaby_canonical_source_rows.py"
+  }
+}
