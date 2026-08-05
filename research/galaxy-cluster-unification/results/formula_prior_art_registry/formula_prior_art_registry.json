@@ -6950,7 +6950,7 @@
     },
     {
       "config": "configs/sigma_v19x_spectral_combination_commissioning.json",
-      "protocol_version": "SIGMA-V19X-SPECTRAL-COMBINATION-COMMISSIONING-1.0.0",
+      "protocol_version": "SIGMA-V19X-SPECTRAL-COMBINATION-COMMISSIONING-1.0.1",
       "status": "frozen while V19W response production was running, after 51 of 5082 checkpoints existed with zero failures, but before V19W completed, before combining any V19W spectrum, fitting either integrated abundance or a regional temperature, opening replacement-cluster lensing data, or changing gravity physics",
       "role": "gate_or_data_protocol_no_new_formula_fragment",
       "formula_fragments": [],
@@ -6958,7 +6958,7 @@
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "bb57d9f60934ee2e4ddcc8736df3718a039434f26d81c8193a86c148ece1618f"
+      "sha256": "e915f5d5be9d8dea5a2ecb1b8e00aeffd9fb10ed5b9aafccc258b040e8ad9afb"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

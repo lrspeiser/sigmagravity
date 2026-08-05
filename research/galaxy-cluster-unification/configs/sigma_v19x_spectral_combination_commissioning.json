@@ -1,6 +1,7 @@
 {
-  "protocol_version": "SIGMA-V19X-SPECTRAL-COMBINATION-COMMISSIONING-1.0.0",
+  "protocol_version": "SIGMA-V19X-SPECTRAL-COMBINATION-COMMISSIONING-1.0.1",
   "status": "frozen while V19W response production was running, after 51 of 5082 checkpoints existed with zero failures, but before V19W completed, before combining any V19W spectrum, fitting either integrated abundance or a regional temperature, opening replacement-cluster lensing data, or changing gravity physics",
+  "pre_execution_count_gate_correction": "Version 1.0.0 incorrectly required Sherpa's response-energy fit-band count from a combined PHA to equal the manifest event ENERGY=500:7000 count. The already-frozen V19T commissioning evidence existed before V19X and shows why that is not an identity: 625 exact event-energy rows correspond to 651 Sherpa-selected response-energy counts because PHA channels and RMF EBOUNDS straddle the requested boundaries. No V19X product had been combined or opened and no V19X fit had run. Version 1.0.1 instead requires every cell report's exact event-energy preflight count to match the manifest and requires combine_spectra to conserve the sum of all full PHA channel counts exactly. The Sherpa-selected 0.5-7.0 keV count remains reported but is not falsely equated to the event-row count. No scientific selection, spectrum membership, energy band, grouping, model, fit parameter or gate threshold changed.",
   "purpose": "Commission the exact V19H integrated and regional spectrum-combination and temperature-fit chain on both clusters before launching all 494 regional fits.",
   "parents": {
     "v19h_config": "configs/sigma_v19h_causal_observable_protocol.json",
@@ -38,6 +39,16 @@
     "required_product_index_hash_from_report": true,
     "required_cell_product_hash_validation": true,
     "may_start_before_authorization": false
+  },
+  "execution": {
+    "runner": "scripts/run_sigma_v19x_spectral_combination_commissioning.py",
+    "runner_sha256": "2370ac2790162c8b9120c5f475905c4be44a98e8201b84f7ee105244db5a979a",
+    "response_archive": "/home/henry/sigma-v19w-response-production/v100",
+    "scratch_root": "/home/henry/sigma-v19x-spectral-combination/v101",
+    "result_root": "results/sigma_v19x_spectral_combination_commissioning",
+    "validated_cell_index": "results/sigma_v19x_spectral_combination_commissioning/validated_cell_index.csv",
+    "combination_concurrency": 1,
+    "reason_for_serial_combination": "each direct integrated combine reads thousands of response-linked spectra and must remain isolated from the still-running V19W production workload"
   },
   "registered_workload": {
     "clusters": {
@@ -130,7 +141,9 @@
     "v19w_complete_and_every_product_hash_exact": true,
     "combination_uses_every_registered_cell_exactly_once": true,
     "combined_source_background_arf_and_rmf_exist_and_links_are_exact": true,
-    "fit_band_source_counts_equal_the_frozen_manifest_sums": true,
+    "every_cell_event_energy_source_and_background_count_equals_the_frozen_manifest": true,
+    "combined_full_pha_source_counts_equal_the_sum_of_contributing_cell_pha_counts": true,
+    "sherpa_response_energy_fit_band_counts_reported_but_not_equated_to_event_energy_rows": true,
     "both_integrated_fits_have_finite_temperature_abundance_normalization_and_ordered_interval": true,
     "both_integrated_reduced_statistics_at_most": 1.5,
     "both_regional_fits_have_finite_temperature_normalization_and_ordered_interval": true,
@@ -149,6 +162,7 @@
     "v19w_completed_cells_observed_at_freeze": 51,
     "v19w_failed_cells_observed_at_freeze": 0,
     "v19w_product_opened_for_combination_at_freeze": false,
+    "v19x_v100_combined_product_existed_before_count_gate_correction": false,
     "combined_spectrum_or_fit_statistic_known_at_freeze": false,
     "integrated_abundance_or_regional_temperature_known_at_freeze": false,
     "replacement_cluster_lensing_target_opened": false,
