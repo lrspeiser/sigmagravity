@@ -1,0 +1,88 @@
+{
+  "protocol_version": "SIGMA-V19W3-FULL-RESPONSE-RECOVERY-1.0.0",
+  "status": "frozen after V19W2 passed all five implementation failure classes, while the unchanged base V19W process was still running, before reading a base final report, enumerating its final missing cells, creating a recovery product, combining a spectrum, opening a lensing payload, or changing gravity physics",
+  "purpose": "After the frozen base process exits normally, derive the recovery workload as the frozen 5082-cell manifest minus every independently valid base checkpoint, apply the commissioned exact-binmap response path to every missing or invalid cell, and independently audit one unified 5082-cell index without modifying or copying over the base archive.",
+  "parents": {
+    "v19w_config": {
+      "path": "configs/sigma_v19w_full_response_production.json",
+      "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
+    },
+    "v19w_runner": {
+      "path": "scripts/run_sigma_v19w_full_response_production.py",
+      "sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
+    },
+    "v19u_manifest": {
+      "path": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+      "sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd"
+    },
+    "v19w2_config": {
+      "path": "configs/sigma_v19w2_exact_binmap_response_commissioning.json",
+      "sha256": "df3041c54bf14fc8c7071229ef5facc4011be1e94645027ff5f37903e9d516d7"
+    },
+    "v19w2_runner": {
+      "path": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
+      "sha256": "7bfa95bacc2d6904fb67262b1523cb58fab9cb492a0ccfcec15ae1ea41185810"
+    },
+    "v19w2_report": {
+      "path": "results/sigma_v19w2_exact_binmap_response_commissioning/report.json",
+      "sha256": "830f7d2cca5f84b2970a013c5cd89be9652d7628c107dbf5bbd5dfb966751efc"
+    },
+    "independent_auditor": {
+      "path": "scripts/audit_sigma_v19w_live_archive.py",
+      "sha256": "29a3fe09b2df37f5d55ab5d7587ac6f28ce530ad1ba29d564f6aa97d31218670"
+    }
+  },
+  "base_terminal_gate": {
+    "required_base_scratch": "/home/henry/sigma-v19w-response-production/v100",
+    "required_final_report": "results/sigma_v19w_full_response_production/report.json",
+    "require_no_process_command_containing": "run_sigma_v19w_full_response_production.py",
+    "require_full_interval_requested": true,
+    "require_expected_cells": 5082,
+    "derive_missing_from_final_valid_checkpoints_not_progress_snapshot": true,
+    "may_launch_while_base_process_runs": false
+  },
+  "recovery_definition": {
+    "workload": "every frozen V19U manifest task lacking a base completed checkpoint that passes task identity, preflight counts, all cell gates, PHA histograms and links, ARF/RMF audit, product sizes and SHA-256",
+    "source_and_background_membership": "exact frozen V19M integer binmap mask as commissioned by V19W2",
+    "response_reference": "actual selected 0.5-7 keV event nearest the DETX/DETY centroid, converted through the observation's unreprojected detector frame and required to map to the declared CCD_ID",
+    "zero_background_rule": "source-only weighted response plus an exact zero-count background PHA and ordinary BACKFILE/AREASCAL audits",
+    "base_precedence": "use a valid base checkpoint; use a recovery checkpoint only when the base checkpoint is absent or independently invalid",
+    "base_archive_mutation": false,
+    "attempts_per_recovery_cell": 1
+  },
+  "execution": {
+    "runner": "scripts/run_sigma_v19w3_full_response_recovery.py",
+    "runner_sha256": "7834b35463750600d3e373172be84f924f93eda955f509939e4f9d57644aafcd",
+    "base_scratch": "/home/henry/sigma-v19w-response-production/v100",
+    "recovery_scratch": "/home/henry/sigma-v19w3-response-recovery/v100",
+    "output": "results/sigma_v19w3_full_response_recovery",
+    "maximum_concurrent_cells": 2,
+    "minimum_free_bytes_at_launch": 10000000000
+  },
+  "final_audit": {
+    "required_unique_manifest_cells": 5082,
+    "required_products_per_cell": 4,
+    "required_product_files": 20328,
+    "repeat_full_checkpoint_and_product_hash_validation": true,
+    "unified_index": "results/sigma_v19w3_full_response_recovery/unified_product_index.csv",
+    "copy_or_promote_products_into_base_archive": false,
+    "original_v19x_authorized_here": false,
+    "successor_v19x_config_may_be_frozen_only_after_pass": true
+  },
+  "failure_rule": "Fail closed and retain recovery diagnostics. Never delete, quarantine, replace, relink or otherwise modify a base V19W checkpoint. Do not drop a manifest cell, alter its binmap label, change response settings, retry a failed recovery under the same protocol, combine spectra, or authorize V19X after an incomplete unified audit.",
+  "claim_boundary": [
+    "V19W3 repairs and audits response products; it does not combine or interpret a spectrum.",
+    "The final workload is unknown at freeze and is determined only from the terminal base report plus an independent checkpoint audit.",
+    "A pass authorizes freezing a successor V19X configuration that understands the two-archive unified index; it does not make the original single-archive V19X configuration valid.",
+    "No temperature, density, Mach state, long-wave parameter, lensing target, halo map or gravity formula enters recovery selection."
+  ],
+  "integrity": {
+    "base_final_report_existed_at_freeze": false,
+    "base_process_running_at_freeze": true,
+    "final_missing_cell_count_known_at_freeze": false,
+    "recovery_product_existed_at_freeze": false,
+    "spectrum_combined_or_fitted_at_freeze": false,
+    "lensing_halo_or_gravity_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  }
+}

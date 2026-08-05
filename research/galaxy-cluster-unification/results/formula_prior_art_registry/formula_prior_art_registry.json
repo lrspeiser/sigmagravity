@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 166,
+    "sigma_protocols": 167,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 145,
     "eligibility": {
@@ -7380,6 +7380,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "df3041c54bf14fc8c7071229ef5facc4011be1e94645027ff5f37903e9d516d7"
+    },
+    {
+      "config": "configs/sigma_v19w3_full_response_recovery.json",
+      "protocol_version": "SIGMA-V19W3-FULL-RESPONSE-RECOVERY-1.0.0",
+      "status": "frozen after V19W2 passed all five implementation failure classes, while the unchanged base V19W process was still running, before reading a base final report, enumerating its final missing cells, creating a recovery product, combining a spectrum, opening a lensing payload, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "0a29329b3f87f3c400582abb36dbc7782407ecf3490a7f0f3da5e6072f06f28e"
     },
     {
       "config": "configs/sigma_v19w_full_response_production.json",
