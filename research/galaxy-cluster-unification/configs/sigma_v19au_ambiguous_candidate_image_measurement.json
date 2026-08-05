@@ -1,0 +1,130 @@
+{
+  "protocol_version": "SIGMA-V19AU-AMBIGUOUS-CANDIDATE-IMAGE-MEASUREMENT-1.0.0",
+  "status": "frozen_after_metadata_plan_before_candidate_science_pixel_measurement",
+  "purpose": "Apply the validated V19AT image rule to every WCS-covered exposure of every unique candidate for the 57 non-anchor Bullet members with published Bessel BRI, retaining detections, non-detections and failures without computing an association likelihood.",
+  "parent_artifacts": [
+    {
+      "path": "configs/sigma_v19at_decam_forced_photometry_validation.json",
+      "sha256": "2b77a8aaee4631ee4543410016e8c7ddc93a1f9d2af14c3fb7fdbb3359cb612e"
+    },
+    {
+      "path": "results/sigma_v19at_decam_forced_photometry_validation/report.json",
+      "sha256": "309428bb96b1e17806902e5de45610b35a3ba7af762eff374f99c24a8f1167f3"
+    },
+    {
+      "path": "scripts/run_sigma_v19as_decam_forced_photometry_development.py",
+      "sha256": "2d547ceced44f6e44784602a5b7ec73ed3284aaf8a75c2dcb02a9c15dafb3c5d"
+    },
+    {
+      "path": "scripts/build_sigma_v19au_ambiguous_candidate_image_plan.py",
+      "sha256": "5981cdd7e4d43f0cd898791bf2efc4ef172b296e12a009248fa5404a4f5d1140"
+    },
+    {
+      "path": "results/sigma_v19au_ambiguous_candidate_image_measurement/metadata_plan.json",
+      "sha256": "53afc3c791fa5c18e2991d5fbcbd9ee3316aef70cbc0805cdbe78bd809c9feb3"
+    },
+    {
+      "path": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_measurement_plan.csv",
+      "sha256": "98f424c3b5668ddbba0f3397d0868627340ccedd9dcbee0768d6078840fa2d53"
+    },
+    {
+      "path": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_hypotheses.csv",
+      "sha256": "ea7628d0daab8774bbe346ca721304e0ec8712025a89ac9f9508451317c3be9e"
+    },
+    {
+      "path": "data/derived/sigma_v19ar_current_archive_decam_cutouts/download_manifest.csv",
+      "sha256": "fb57f563a2b868dbb1a122b55561ffa3360ae4d966ce671b5c7d07852c36cd2c"
+    },
+    {
+      "path": "data/derived/sigma_v19aa_member_counterpart_association/unified_candidates.csv",
+      "sha256": "2059209cc9699f23857579bbb772f9e6427d76cb82437b8ec7f0f3449b4dacec"
+    },
+    {
+      "path": "data/derived/sigma_v19aa_member_counterpart_association/candidate_posteriors.csv",
+      "sha256": "14a9fa01df2fef961caa22eaf38846ffb8c92a655bfd277935838f2d44c3b69b"
+    },
+    {
+      "path": "data/derived/sigma_v19z_member_photometry/bullet_published_bri.csv",
+      "sha256": "396af209b9ba466f9396f7f0fcf4af1ced3d0725fffc143b07e0e0218d3c63a7"
+    }
+  ],
+  "inputs": {
+    "candidate_measurement_plan": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_measurement_plan.csv",
+    "candidate_hypotheses": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_hypotheses.csv"
+  },
+  "candidate_scope": {
+    "cluster": "BULLET",
+    "member_rule": "Every non-anchor spectroscopic member with complete published Bessel BRI and at least one V19AA candidate.",
+    "candidate_rule": "Every V19AA candidate for every eligible member, deduplicated only for image measurement and never ranked or omitted by position, color, morphology, catalog flags or gravity relevance.",
+    "eligible_members": 57,
+    "member_candidate_hypotheses": 640,
+    "unique_candidates": 568
+  },
+  "frozen_measurement": {
+    "variant": "area_scaled",
+    "aperture_diameter_arcsec": 4.0,
+    "cutout_size_arcsec": 28.0,
+    "background_annulus_arcsec": [8.0, 13.0],
+    "detection_threshold_sigma": 2.5,
+    "filters": ["g", "r", "i", "z", "Y"],
+    "implementation": "Reuse the hash-bound V19AS background, watershed, aperture and area-scaling functions without modification.",
+    "calibration": "Retain Community Pipeline characterization flux/magnitude and repeated-exposure statistics; do not call it final native-band AB photometry.",
+    "uncertainty": "Propagate background RMS through the usable-pixel area correction and retain robust repeated-exposure flux and magnitude scatter.",
+    "retention": "Write one row for every plan membership. Non-positive flux and processing failure are retained explicitly and may not remove a candidate or exposure."
+  },
+  "quality_gates": {
+    "minimum_overall_valid_fraction": 0.80,
+    "minimum_complete_griz_candidate_fraction": 0.75,
+    "all_plan_memberships_must_be_retained": true,
+    "all_candidate_band_non_detections_remain_available_as_fluxes_or_explicit_failures": true,
+    "failure_rule": "Fail source sufficiency without changing aperture, segmentation, candidates or exposure membership."
+  },
+  "gates": {
+    "exact_members": 57,
+    "exact_member_candidate_hypotheses": 640,
+    "exact_unique_candidates": 568,
+    "exact_image_groups": 123,
+    "exact_candidate_exposure_measurements": 40812,
+    "measurements_by_filter": {"g": 7553, "r": 13757, "i": 8133, "z": 6175, "Y": 5194},
+    "all_candidates_have_geometric_grizY_coverage": true,
+    "no_bri_positional_association_mass_lensing_halo_or_gravity_likelihood_computed": true
+  },
+  "outputs": {
+    "candidate_measurement_plan": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_measurement_plan.csv",
+    "candidate_hypotheses": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_hypotheses.csv",
+    "measurements": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/measurements.csv",
+    "aggregates": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/aggregates.csv",
+    "group_audit": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/group_audit.csv",
+    "report": "results/sigma_v19au_ambiguous_candidate_image_measurement/report.json"
+  },
+  "claim_boundary": [
+    "V19AU is a theory-blind candidate image-measurement and source-sufficiency test, not a counterpart association.",
+    "It does not compare a candidate with Bessel colors or positional posteriors even though the frozen hypothesis table preserves those inputs for a later protocol.",
+    "A positive flux is not proof of membership, and a non-detection is retained rather than silently converted to a null association.",
+    "A pass authorizes a separately frozen joint positional/color likelihood with explicit null and ambiguous states; it does not authorize stellar mass, mass current, lensing or gravity inference."
+  ],
+  "authorization": {
+    "open_all_frozen_candidate_cutouts": true,
+    "measure_one_frozen_flux_rule": true,
+    "retain_non_detections_and_failures": true,
+    "fit_or_score_bri_color_likelihood": false,
+    "combine_with_positional_posterior": false,
+    "select_or_rank_counterparts": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "metadata_only_plan_frozen_and_hashed": true,
+    "science_pixel_values_measured_before_v19au_freeze": false,
+    "candidate_color_or_association_scores_computed_before_v19au_freeze": false,
+    "mass_lensing_halo_or_gravity_payload_opened_before_v19au_freeze": false
+  },
+  "implementation": {
+    "plan_builder": "scripts/build_sigma_v19au_ambiguous_candidate_image_plan.py",
+    "plan_builder_sha256": "5981cdd7e4d43f0cd898791bf2efc4ef172b296e12a009248fa5404a4f5d1140",
+    "runner": "scripts/run_sigma_v19au_ambiguous_candidate_image_measurement.py",
+    "runner_sha256": "dfa4ad199665661ec38ce270b9f155b527b5ded527128b628b023a07838fc4b7"
+  }
+}

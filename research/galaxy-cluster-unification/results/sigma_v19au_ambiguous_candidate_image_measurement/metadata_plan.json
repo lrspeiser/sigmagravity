@@ -1,0 +1,24 @@
+{
+  "all_candidates_complete_grizY": true,
+  "bri_or_positional_values_used_for_image_coverage_selection": false,
+  "candidate_exposure_measurements": 40812,
+  "image_groups_with_candidates": 123,
+  "measurements_by_filter": {
+    "Y": 5194,
+    "g": 7553,
+    "i": 8133,
+    "r": 13757,
+    "z": 6175
+  },
+  "member_candidate_hypotheses": 640,
+  "members": 57,
+  "outputs": {
+    "candidate_hypotheses": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_hypotheses.csv",
+    "candidate_hypotheses_sha256": "ea7628d0daab8774bbe346ca721304e0ec8712025a89ac9f9508451317c3be9e",
+    "candidate_measurement_plan": "data/derived/sigma_v19au_ambiguous_candidate_image_measurement/candidate_measurement_plan.csv",
+    "candidate_measurement_plan_sha256": "98f424c3b5668ddbba0f3397d0868627340ccedd9dcbee0768d6078840fa2d53"
+  },
+  "protocol_stage": "SIGMA-V19AU-metadata-only-plan",
+  "science_pixels_opened_or_interpreted": false,
+  "unique_candidates": 568
+}
