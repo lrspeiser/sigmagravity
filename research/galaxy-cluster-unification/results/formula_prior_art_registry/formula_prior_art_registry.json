@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 205,
+    "sigma_protocols": 206,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7526,6 +7526,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "a1d0d8ad341b09b59c73acda351e1894316243c44a09f47a91ce571d75e538ba"
+    },
+    {
+      "config": "configs/sigma_v19cj_cluster_morphology_preregistration.json",
+      "protocol_version": "SIGMA-V19CJ-CLUSTER-MORPHOLOGY-PREREGISTRATION-1.0.0",
+      "status": "frozen before downloading or reading either registered morphology table, before resolving a candidate to a morphology value, before selecting a replacement cluster, and before opening any lensing target, halo map, action, gravity parameter, or Solar-System optimization",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "d72b447c41b6bbf80f2ac267a7aff49778cd636e59220abbf789283734991db8"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

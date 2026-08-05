@@ -1,0 +1,143 @@
+{
+  "protocol_version": "SIGMA-V19CJ-CLUSTER-MORPHOLOGY-PREREGISTRATION-1.0.0",
+  "status": "frozen before downloading or reading either registered morphology table, before resolving a candidate to a morphology value, before selecting a replacement cluster, and before opening any lensing target, halo map, action, gravity parameter, or Solar-System optimization",
+  "purpose": "Define an outcome-independent X-ray morphology stratification for the clean V19CH cluster source frame so relaxed, intermediate, and disturbed systems are selected by baryonic source structure rather than by lensing or Sigma performance.",
+  "parent": {
+    "path": "results/sigma_v19ch_jwst_slice_clean_source_frame/report.json",
+    "sha256": "4a3e70f4bb91681a4ab2e9b1bd63faa62a7e9667b91db0d932a8e437921b7292",
+    "required_decision": "clean_cluster_source_frame_established_metadata_stratification_required",
+    "required_clean_candidates": 162
+  },
+  "registered_sources": {
+    "primary": {
+      "name": "Yuan and Han 2020 Chandra dynamical-state catalog",
+      "paper": "https://arxiv.org/abs/2008.01299",
+      "readme": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/497/5485/ReadMe",
+      "table": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/497/5485/table1.dat",
+      "catalog_rows": 964,
+      "registered_columns": [
+        "Name",
+        "z",
+        "logc",
+        "e_logc",
+        "logw",
+        "e_logw",
+        "logP3/P0",
+        "e_logP3/P0",
+        "logalpha",
+        "e_logalpha",
+        "kappa",
+        "delta",
+        "e_delta"
+      ],
+      "role": "primary continuous X-ray source-state classification"
+    },
+    "secondary": {
+      "name": "Zhang et al. 2023 Planck clusters in the LOFAR sky morphology catalog",
+      "readme": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/672/A42/ReadMe",
+      "table": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/672/A42/tablea1.dat",
+      "catalog_rows": 150,
+      "registered_columns": [
+        "Name",
+        "Subcluster",
+        "cC",
+        "e_cC",
+        "wC",
+        "e_wC",
+        "cX",
+        "e_cX",
+        "wX",
+        "e_wX"
+      ],
+      "role": "independent Planck-name concentration and centroid-shift cross-check where available"
+    }
+  },
+  "crossmatch_rule": {
+    "candidate_universe": "exact V19CH clean_source_frame_candidate_ids only",
+    "method": "case-insensitive catalog identifier and curated catalog-alias equality after punctuation normalization; no nearest-coordinate matching and no lensing-derived identity",
+    "one_to_one_required": true,
+    "ambiguous_matches": "exclude pending an independently sourced alias resolution",
+    "unmatched_candidates": "remain clean reserves but cannot enter the morphology-balanced shortlist",
+    "no_manual_match_using_lensing_information": true
+  },
+  "primary_state_rule": {
+    "published_boundary": "Yuan and Han define delta as signed distance from the kappa-log10(alpha) demarcation, with lower delta more relaxed and higher delta more disturbed",
+    "uncertainty_interval": "[delta-e_delta, delta+e_delta]",
+    "secure_relaxed": "delta+e_delta < 0",
+    "secure_disturbed": "delta-e_delta > 0",
+    "boundary_intermediate": "delta-e_delta <= 0 <= delta+e_delta",
+    "missing_or_nonfinite_delta_or_error": "exclude from hard morphology strata",
+    "no_threshold_may_be_moved_after_values_are_read": true
+  },
+  "multimetric_consistency_rule": {
+    "statistics_computed_only_within_clean_finite_primary_crossmatches": true,
+    "relaxed_direction": "higher logc, lower logw, lower logP3/P0",
+    "disturbed_direction": "lower logc, higher logw, higher logP3/P0",
+    "secure_relaxed_confirmation": "primary secure_relaxed and at least two of logc>=sample_median_logc, logw<=sample_median_logw, logP3/P0<=sample_median_logP3/P0",
+    "secure_disturbed_confirmation": "primary secure_disturbed and at least two of logc<=sample_median_logc, logw>=sample_median_logw, logP3/P0>=sample_median_logP3/P0",
+    "discordant_extreme": "retain as a dedicated source-complexity flag but do not use as a secure relaxed/disturbed anchor",
+    "secondary_catalog_role": "report agreement or disagreement without replacing the primary state or changing a threshold"
+  },
+  "diversity_and_admission_requirements": {
+    "minimum_metadata_shortlist": 8,
+    "minimum_secure_relaxed": 3,
+    "minimum_secure_disturbed": 3,
+    "minimum_boundary_or_discordant": 2,
+    "minimum_final_clusters": 6,
+    "minimum_final_secure_relaxed": 2,
+    "minimum_final_secure_disturbed": 2,
+    "minimum_final_intermediate_or_discordant": 1,
+    "additional_axes_frozen_before_final_selection": [
+      "redshift bins",
+      "SZ or source-side mass bins",
+      "gas and BCG concentration",
+      "single-core versus multipeak baryonic layout",
+      "source imaging and spectroscopy completeness"
+    ],
+    "forbidden_selection_axes": [
+      "reported image multiplicity",
+      "reported lensing RMS",
+      "inferred halo mass, concentration, centroid, ellipticity or orientation",
+      "Sigma prediction, residual or parameter preference"
+    ]
+  },
+  "failure_and_fallback_rules": {
+    "fewer_than_8_finite_clean_crossmatches": "do not relax thresholds; preregister a second independent X-ray morphology catalog before reading it",
+    "fewer_than_3_secure_relaxed_or_disturbed": "do not relabel intermediate systems; expand the externally selected clean source frame or register a second catalog",
+    "source_completeness_removes_balance": "do not choose by lensing quality; enlarge the metadata pool until the frozen balance is restored",
+    "no_cluster_is_admitted_by_this_protocol": true
+  },
+  "required_gates": {
+    "v19ch_parent_hash_decision_and_162_clean_candidates_exact": true,
+    "primary_and_secondary_sources_registered_before_value_access": true,
+    "signed_uncertainty_aware_delta_states_frozen": true,
+    "multimetric_confirmation_directions_and_medians_frozen": true,
+    "minimum_three_state_diversity_and_failure_fallbacks_frozen": true,
+    "lensing_and_sigma_outcomes_forbidden_from_selection": true,
+    "no_cluster_target_action_constant_or_solar_setting_selected": true
+  },
+  "authorization": {
+    "download_registered_source_tables_after_this_freeze": true,
+    "read_registered_xray_morphology_values_after_this_freeze": true,
+    "resolve_catalog_names_under_frozen_rule": true,
+    "select_or_admit_cluster_here": false,
+    "open_raw_lensing_coordinate_map_or_halo_target": false,
+    "select_or_change_action_or_gravity_formula": false,
+    "fit_universal_constants": false,
+    "perform_detailed_solar_optimization": false
+  },
+  "claim_boundary": [
+    "V19CJ defines source-state strata; it does not select a cluster and is not evidence for Sigma Gravity.",
+    "X-ray concentration, centroid shift, power ratios, asymmetry and profile shape are baryonic source diagnostics, not lensing targets.",
+    "The signed delta boundary and multimetric directions are fixed before any candidate value is read.",
+    "A balanced shortlist must survive source-completeness filtering without using lensing quality as a replacement criterion.",
+    "Solar-System work remains a later hard veto and is not optimized here."
+  ],
+  "implementation": {
+    "runner": "scripts/preregister_sigma_v19cj_cluster_morphology.py",
+    "tests": "tests/test_sigma_v19cj_cluster_morphology_preregistration.py"
+  },
+  "outputs": {
+    "report": "results/sigma_v19cj_cluster_morphology_preregistration/report.json"
+  }
+}
