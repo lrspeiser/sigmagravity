@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19y_hsc_member_photometry.json"
 RUNNER = ROOT / "scripts" / "download_sigma_v19y_hsc_member_photometry.py"
 REPORT = ROOT / "results" / "sigma_v19y_hsc_member_photometry" / "provenance.json"
+COVERAGE = ROOT / "results" / "sigma_v19y_hsc_member_photometry" / "coverage_analysis.json"
 
 
 def sha256(path: Path) -> str:
@@ -187,3 +188,17 @@ def test_v19y_real_report_if_acquisition_has_run() -> None:
         url_path = ROOT / row["query_url_path"]
         assert sha256(csv_path) == row["csv_sha256"]
         assert sha256(url_path) == row["query_url_sha256"]
+
+
+def test_v19y_coverage_analysis_if_it_has_run() -> None:
+    if not COVERAGE.exists():
+        pytest.skip("V19Y descriptive candidate-coverage analysis has not run")
+    coverage = json.loads(COVERAGE.read_text(encoding="utf-8"))
+    assert coverage["acquisition_report_sha256"] == sha256(REPORT)
+    assert coverage["candidate_rows"] == 855
+    assert coverage["clusters"]["BULLET"]["member_cones"] == 78
+    assert coverage["clusters"]["ABELL2146"]["member_cones"] == 63
+    assert coverage["counterpart_selection_performed"] is False
+    assert coverage["photometric_quality_cut_performed"] is False
+    assert coverage["stellar_mass_inference_performed"] is False
+    assert coverage["mass_current_constructed"] is False

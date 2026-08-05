@@ -1,0 +1,160 @@
+{
+  "acquisition_report": "results/sigma_v19y_hsc_member_photometry/provenance.json",
+  "acquisition_report_sha256": "a03ef4bb091a9df269b396b0410d2c4fccb7cc2e6bab445de067cc1c68908222",
+  "analysis_runner": "scripts/analyze_sigma_v19y_hsc_member_photometry.py",
+  "analysis_runner_sha256": "d014cf324a95fa92d04600504eb58a735a58653d04da8459f47c9a4b55b3779e",
+  "candidate_rows": 855,
+  "clusters": {
+    "ABELL2146": {
+      "all_candidate_separation_arcsec": {
+        "count": 62,
+        "maximum": 0.9999001884552547,
+        "mean": 0.6248134443098666,
+        "median": 0.7258176662191897,
+        "minimum": 0.08187973013650901,
+        "p25": 0.4308716592974358,
+        "p75": 0.8190966982370644
+      },
+      "candidate_band_combinations": {
+        "A_F435W+A_F606W+A_F814W": 60,
+        "NO_REQUESTED_BAND": 2
+      },
+      "candidate_count_per_member": {
+        "count": 63,
+        "maximum": 2.0,
+        "mean": 0.9841269841269841,
+        "median": 1.0,
+        "minimum": 0.0,
+        "p25": 1.0,
+        "p75": 1.0
+      },
+      "candidate_measurement_coverage": {
+        "A_F435W": {
+          "candidate_rows": 60,
+          "fraction_of_all_members": 0.9206349206349206,
+          "fraction_of_candidates": 0.967741935483871,
+          "member_cones_with_at_least_one": 58
+        },
+        "A_F606W": {
+          "candidate_rows": 60,
+          "fraction_of_all_members": 0.9206349206349206,
+          "fraction_of_candidates": 0.967741935483871,
+          "member_cones_with_at_least_one": 58
+        },
+        "A_F814W": {
+          "candidate_rows": 60,
+          "fraction_of_all_members": 0.9206349206349206,
+          "fraction_of_candidates": 0.967741935483871,
+          "member_cones_with_at_least_one": 58
+        }
+      },
+      "candidate_rows": 62,
+      "candidates_with_all_three_bands": 60,
+      "candidates_with_num_images_gt_one": 60,
+      "counterpart_selected": false,
+      "fraction_of_candidates_with_all_three_bands": 0.967741935483871,
+      "fraction_of_candidates_with_num_images_gt_one": 0.967741935483871,
+      "member_cones": 63,
+      "members_with_candidates": 58,
+      "members_with_exactly_one_candidate": 54,
+      "members_with_exactly_one_candidate_and_all_three_bands": 54,
+      "members_with_multiple_candidates": 4,
+      "members_without_candidates": 5,
+      "nearest_candidate_separation_per_nonempty_cone_arcsec": {
+        "count": 58,
+        "maximum": 0.9658332243560205,
+        "mean": 0.6153165542211421,
+        "median": 0.7224569565647619,
+        "minimum": 0.08187973013650901,
+        "p25": 0.4308716592974358,
+        "p75": 0.8142501547760493
+      },
+      "returned_filter_schema_cones": {
+        "A_F435W+A_F606W+A_F814W": 58,
+        "EMPTY_CONE": 5
+      }
+    },
+    "BULLET": {
+      "all_candidate_separation_arcsec": {
+        "count": 793,
+        "maximum": 5.999890828091091,
+        "mean": 3.8439178144354105,
+        "median": 4.088145381454972,
+        "minimum": 0.07887935520418601,
+        "p25": 2.7295361234830042,
+        "p75": 5.172262624761601
+      },
+      "candidate_band_combinations": {
+        "A_F435W": 1,
+        "A_F435W+A_F606W+A_F814W": 46,
+        "A_F606W": 118,
+        "A_F606W+A_F814W": 56,
+        "A_F814W": 1,
+        "NO_REQUESTED_BAND": 571
+      },
+      "candidate_count_per_member": {
+        "count": 78,
+        "maximum": 53.0,
+        "mean": 10.166666666666666,
+        "median": 8.5,
+        "minimum": 0.0,
+        "p25": 0.5,
+        "p75": 17.0
+      },
+      "candidate_measurement_coverage": {
+        "A_F435W": {
+          "candidate_rows": 47,
+          "fraction_of_all_members": 0.3076923076923077,
+          "fraction_of_candidates": 0.05926860025220681,
+          "member_cones_with_at_least_one": 24
+        },
+        "A_F606W": {
+          "candidate_rows": 220,
+          "fraction_of_all_members": 0.6923076923076923,
+          "fraction_of_candidates": 0.27742749054224464,
+          "member_cones_with_at_least_one": 54
+        },
+        "A_F814W": {
+          "candidate_rows": 103,
+          "fraction_of_all_members": 0.3076923076923077,
+          "fraction_of_candidates": 0.12988650693568726,
+          "member_cones_with_at_least_one": 24
+        }
+      },
+      "candidate_rows": 793,
+      "candidates_with_all_three_bands": 46,
+      "candidates_with_num_images_gt_one": 604,
+      "counterpart_selected": false,
+      "fraction_of_candidates_with_all_three_bands": 0.058007566204287514,
+      "fraction_of_candidates_with_num_images_gt_one": 0.7616645649432535,
+      "member_cones": 78,
+      "members_with_candidates": 58,
+      "members_with_exactly_one_candidate": 0,
+      "members_with_exactly_one_candidate_and_all_three_bands": 0,
+      "members_with_multiple_candidates": 58,
+      "members_without_candidates": 20,
+      "nearest_candidate_separation_per_nonempty_cone_arcsec": {
+        "count": 58,
+        "maximum": 4.154736026441445,
+        "mean": 1.3123462691621632,
+        "median": 1.1438788387165113,
+        "minimum": 0.07887935520418601,
+        "p25": 0.8121139381809052,
+        "p75": 1.7400350461869554
+      },
+      "returned_filter_schema_cones": {
+        "A_F435W+A_F606W+A_F814W": 24,
+        "A_F606W": 30,
+        "EMPTY_CONE": 24
+      }
+    }
+  },
+  "counterpart_selection_performed": false,
+  "generated_utc": "2026-08-05T07:24:58.521651+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "lensing_or_halo_payload_opened": false,
+  "mass_current_constructed": false,
+  "photometric_quality_cut_performed": false,
+  "status": "v19y_candidate_coverage_described_without_matching",
+  "stellar_mass_inference_performed": false
+}
