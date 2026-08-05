@@ -1,0 +1,78 @@
+{
+  "authorization_boundary": {
+    "action_derived": false,
+    "solar_optimized": false,
+    "target_or_gravity_opened": false,
+    "v19bs_run": false
+  },
+  "changed_paths": [
+    {
+      "after": 5082,
+      "before": null,
+      "path": "runtime_authorization.required_completed_cells"
+    }
+  ],
+  "claim_boundary": [
+    "V19CP repairs a count-key compatibility mismatch before any spectrum was combined.",
+    "The alias has the same 5,082 value already frozen and independently verified by V19W5.",
+    "A V19X2 scientific quality-gate failure after this repair is final for these frozen spectral rules and is not an execution failure.",
+    "No gravity theory is tested and V19BS remains separate."
+  ],
+  "config_sha256": "61ab4384d5590338a5f5adf89ce27327c473dc0d81300620816693a026f9cd1b",
+  "config_sha256_after": "44a107133c20404d6c54d57fbee1fd6b80185dc32f46a94dd40b0269d650a42d",
+  "decision": "v19x2_or_source_chain_execution_incomplete",
+  "gate_results": {
+    "failure_reports_v19w5_pass_and_config_boundary_exact": true,
+    "if_v19x2_passes_unchanged_v19br_reaches_source_decision": true,
+    "no_lensing_halo_action_gravity_holdout_or_solar_access": true,
+    "only_required_completed_cells_alias_added_and_equals_5082": true,
+    "v19x2_byte_identical_runner_reaches_registered_scientific_disposition": false
+  },
+  "generated_utc": "2026-08-05T20:27:56.610020+00:00",
+  "preflight": {
+    "authorization_source_only": true,
+    "failure_reports_exact": true,
+    "unchanged_runners_exact": true,
+    "v19w5_pass_exact": true,
+    "x2_config_boundary_exact_and_alias_absent": true
+  },
+  "protocol_version": "SIGMA-V19CP-V19X2-RUNTIME-ALIAS-REMEDIATION-1.0.0",
+  "scientific_sections_unchanged": true,
+  "status": "v19x2_runtime_alias_remediation_completed",
+  "v19br_execution": null,
+  "v19br_summary": null,
+  "v19x2_execution": {
+    "command": [
+      "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/python",
+      "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+      "--config",
+      "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+      "--output",
+      "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19x2_unified_spectral_combination_commissioning",
+      "--scratch",
+      "/home/henry/sigma-v19x2-spectral-combination/v100",
+      "--response-report",
+      "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19w5_ccd7_hardened_response_recovery/report.json"
+    ],
+    "log": "results/sigma_v19cp_v19x2_runtime_alias_remediation/v19x2_commissioning.log",
+    "log_bytes": 253,
+    "log_sha256": "5e07ce2dbbee9fb635c21cb5740e78bdd214bfdb231d283c91677feede193324",
+    "returncode": 2
+  },
+  "v19x2_report": {
+    "config_sha256": "44a107133c20404d6c54d57fbee1fd6b80185dc32f46a94dd40b0269d650a42d",
+    "execution_exception": "RuntimeError: V19X2 cell path is outside frozen archive roots: ('BULLET', 45, 554, 3)",
+    "full_494_region_combination_and_fit_authorized": false,
+    "gates": {
+      "execution_completed": false
+    },
+    "generated_utc": "2026-08-05T20:27:56.571215+00:00",
+    "gravity_formula_or_parameter_changed": false,
+    "protocol_version": "SIGMA-V19X2-UNIFIED-SPECTRAL-COMBINATION-COMMISSIONING-1.1.0",
+    "replacement_cluster_lensing_target_opened": false,
+    "runner_sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea",
+    "scientific_temperature_map_claimed": false,
+    "status": "unified_spectral_combination_commissioning_execution_failed",
+    "thermal_stress_constructed": false
+  }
+}
