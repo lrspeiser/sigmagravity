@@ -22,6 +22,19 @@ Every file must match the CADC content length and MD5, have `NAXIS=2`, have
 positive sky dimensions and contain no third FITS coordinate axis. The image
 pixels are not used to select a counterpart in this checkpoint.
 
+## Acquisition result
+
+The frozen query returned one eligible map for every release row. V19BY saved
+711 maps totaling 10,200,960 bytes: 148 Hydra TR1, 272 Hydra TR2, 147 NGC 4636
+TR1 and 144 Norma TR1. Every archive byte length and MD5 was reproduced, every
+file passed the two-dimensional FITS gate, and there were no missing,
+ambiguous or failed products. The manifest SHA-256 is
+`871df6aa9db724ad648a08762d619884f326d643c86ecd97414b79d4a2ae7aa7`.
+
+All 119 Hydra release alternatives remain distinct. This acquisition therefore
+adds spatial H I source morphology without silently resolving the previously
+measured release-policy uncertainty.
+
 ## What follows
 
 After the maps pass, a separate frozen protocol can combine H I contours,

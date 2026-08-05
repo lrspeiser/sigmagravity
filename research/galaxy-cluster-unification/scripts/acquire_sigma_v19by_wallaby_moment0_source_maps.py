@@ -370,8 +370,6 @@ def acquire(config_path: Path = DEFAULT_CONFIG) -> tuple[bytes, dict[str, Any]]:
             "files": len(download_results),
             "bytes": total_bytes,
             "release_counts": dict(sorted(release_counts.items())),
-            "reused_files": sum(item["audit"]["reused"] for item in download_results.values()),
-            "new_files": sum(not item["audit"]["reused"] for item in download_results.values()),
             "failures": failures,
             "shape_counts": dict(sorted(Counter(f"{row['naxis1']}x{row['naxis2']}" for row in manifest_rows).items())),
         },

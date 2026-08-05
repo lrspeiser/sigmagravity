@@ -2539,3 +2539,12 @@ pass. The maps will support later H I/optical spatial association, but this
 checkpoint cannot choose a counterpart, evidence split, action or constant.
 See
 [`SIGMA_V19BY_WALLABY_MOMENT0_SOURCE_MAPS.md`](SIGMA_V19BY_WALLABY_MOMENT0_SOURCE_MAPS.md).
+
+V19BY subsequently passed the unchanged contract. The archive supplied all
+711 expected maps (10,200,960 bytes): 148 Hydra TR1, 272 Hydra TR2, 147 NGC
+4636 TR1 and 144 Norma TR1. Every byte length and MD5 matched, every FITS file
+was two-dimensional with no spectral axis, and no product was missing,
+ambiguous or failed. The immutable manifest has SHA-256
+`871df6aa9db724ad648a08762d619884f326d643c86ecd97414b79d4a2ae7aa7`.
+All release alternatives remain available for later uncertainty propagation;
+no counterpart, kinematic target, evidence split or force result was opened.
