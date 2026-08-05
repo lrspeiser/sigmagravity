@@ -4,7 +4,7 @@ Registry version: `FORMULA-PRIOR-ART-REGISTRY-1.1.0`. Published-literature cutof
 
 ## What this file guarantees
 
-This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **163 Sigma protocol files** and their **145 explicit formula/action fragments** (including **16** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
+This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **164 Sigma protocol files** and their **145 explicit formula/action fragments** (including **16** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
 
 It does **not** claim to contain every equation ever published in gravitation. It is a reproducible scientific prior-art screen of the families that overlap mechanisms we have actually explored. It is not a legal novelty or patent opinion.
 
@@ -330,6 +330,7 @@ This appendix closes a gap in the older scorecard: later action-health and sourc
 | `configs/sigma_v19ba_collisionless_current_moments.json` | formula_or_action_protocol | `addendum:SIGMA-LONG-WAVE-METRIC-MODE`: `delta g_mn=A_Sigma e_mn cos(2 pi s/lambda_Sigma+phi)`<br>`addendum:SIGMA-LONG-WAVE-SOURCED-RESPONSE`: `(1-L_Sigma^2 Box) X_mn=S_mn[T,j,Pi], with lambda_Sigma approximately 2 pi L_Sigma` | NEWTON-POISSON |
 | `configs/sigma_v19bb_abell2146_luminosity_current_ensemble.json` | formula_or_action_protocol | `catalog_level_astrometric_calibration.candidate_sigma_equation`: `sigma_i(sigma_extra)=sqrt(astrometric_sigma_i^2+0.1^2+sigma_extra^2) arcsec`<br>`catalog_level_astrometric_calibration.candidate_density_equation`: `f_mi(sigma_extra)=the V19AA uniform rounding-rectangle density convolved with the candidate Gaussian at the measured east/north offset`<br>`catalog_level_astrometric_calibration.member_evidence_equation`: `Z_m=(1-q)+q sum_i[f_mi/rho_bg]`<br>`catalog_level_astrometric_calibration.candidate_posterior_equation`: `p_mi=q(f_mi/rho_bg)/Z_m`<br>`catalog_level_astrometric_calibration.null_posterior_equation`: `p_m0=(1-q)/Z_m` | NEWTON-POISSON |
 | `configs/sigma_v19bc_abell2146_collisionless_current_moments.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19bd_two_cluster_directional_source_uncertainty.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19c_source_archive_acquisition.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19d_member_catalog_extraction.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19e_chandra_acquisition.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |

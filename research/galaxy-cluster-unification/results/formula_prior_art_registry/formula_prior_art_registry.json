@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 163,
+    "sigma_protocols": 164,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 145,
     "eligibility": {
@@ -7103,6 +7103,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "dd14ef970780cdc7160217acd45686961331a1103fdfb5a791e4230d4bf061ce"
+    },
+    {
+      "config": "configs/sigma_v19bd_two_cluster_directional_source_uncertainty.json",
+      "protocol_version": "SIGMA-V19BD-TWO-CLUSTER-DIRECTIONAL-SOURCE-UNCERTAINTY-1.0.1",
+      "status": "frozen_before_computing_any_per_draw_directional_morphology_or_cross_cluster_uncertainty_interval",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "7e7c1f46e29c54679443817fb01149b79cd115887e3600209b074fb17309ed52"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

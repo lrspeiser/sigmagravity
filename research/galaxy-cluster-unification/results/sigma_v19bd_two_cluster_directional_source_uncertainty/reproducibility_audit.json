@@ -1,0 +1,23 @@
+{
+  "protocol_version": "SIGMA-V19BD-TWO-CLUSTER-DIRECTIONAL-SOURCE-UNCERTAINTY-1.0.1",
+  "runs_compared": 2,
+  "all_scientific_outputs_byte_identical": true,
+  "report_excluded_reason": "report.json contains an intentional generated_utc timestamp",
+  "outputs": {
+    "per_draw_morphology": {
+      "path": "data/derived/sigma_v19bd_two_cluster_directional_source_uncertainty/per_draw_morphology.csv",
+      "sha256_run_1": "06d2225a3ec29efc1dc804f9d5afb79f5f6f38617ae1ea55b5e2374f76f8d66d",
+      "sha256_run_2": "06d2225a3ec29efc1dc804f9d5afb79f5f6f38617ae1ea55b5e2374f76f8d66d"
+    },
+    "paired_comparison": {
+      "path": "data/derived/sigma_v19bd_two_cluster_directional_source_uncertainty/paired_comparison.csv",
+      "sha256_run_1": "93ca375ac2df9a3b77e744d38307635b753f9a652ddcd3e73f8b656a8e9d959a",
+      "sha256_run_2": "93ca375ac2df9a3b77e744d38307635b753f9a652ddcd3e73f8b656a8e9d959a"
+    },
+    "figure": {
+      "path": "results/sigma_v19bd_two_cluster_directional_source_uncertainty/directional_source_uncertainty.png",
+      "sha256_run_1": "d84424e30e3f7fd8caf6e8fbc3fcf87c261efdcbebe6b945607729312dd19352",
+      "sha256_run_2": "d84424e30e3f7fd8caf6e8fbc3fcf87c261efdcbebe6b945607729312dd19352"
+    }
+  }
+}

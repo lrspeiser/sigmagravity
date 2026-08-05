@@ -7,6 +7,13 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19bd_two_cluster_directional_source_uncertainty.json"
 SCRIPT = ROOT / "scripts" / "run_sigma_v19bd_two_cluster_directional_source_uncertainty.py"
+REPORT = ROOT / "results" / "sigma_v19bd_two_cluster_directional_source_uncertainty" / "report.json"
+REPRODUCIBILITY = (
+    ROOT
+    / "results"
+    / "sigma_v19bd_two_cluster_directional_source_uncertainty"
+    / "reproducibility_audit.json"
+)
 SPEC = importlib.util.spec_from_file_location("sigma_v19bd", SCRIPT)
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
@@ -65,3 +72,26 @@ def test_frozen_runner_hash_is_exact():
     config = json.loads(CONFIG.read_text())
     assert config["implementation"]["runner"] == str(SCRIPT.relative_to(ROOT)).replace("\\", "/")
     assert MODULE.sha256(SCRIPT) == config["implementation"]["runner_sha256"]
+
+
+def test_completed_result_passes_frozen_source_uncertainty_gates():
+    report = json.loads(REPORT.read_text())
+    assert report["decision"] == "passed"
+    assert all(report["gate_results"].values())
+    assert report["cluster_row_counts"]["BULLET"] == 8192 * 72
+    assert report["cluster_row_counts"]["ABELL2146"] == 8192 * 63
+    assert report["aggregate_reproduction"]["maximum_absolute_error_arcsec"] <= 1e-6
+    assert not report["long_wave_operator_or_parameter_selected"]
+    assert not report["cross_filter_luminosity_amplitudes_compared"]
+    assert not report["missing_luminosity_or_transverse_velocity_imputed"]
+    assert not report["lensing_halo_gas_response_or_gravity_payload_opened"]
+    assert not report["gravity_formula_or_parameter_changed"]
+
+
+def test_scientific_outputs_are_byte_reproducible():
+    audit = json.loads(REPRODUCIBILITY.read_text())
+    assert audit["runs_compared"] == 2
+    assert audit["all_scientific_outputs_byte_identical"]
+    assert len(audit["outputs"]) == 3
+    for output in audit["outputs"].values():
+        assert output["sha256_run_1"] == output["sha256_run_2"]

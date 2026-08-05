@@ -1,0 +1,331 @@
+{
+  "aggregate_reproduction": {
+    "absolute_errors_arcsec": {
+      "ABELL2146": {
+        "opposite_current_centroid_separation_arcsec": 0.0,
+        "second_moment_to_luminosity_centroid_offset_arcsec": 0.0
+      },
+      "BULLET": {
+        "opposite_current_centroid_separation_arcsec": 0.0,
+        "second_moment_to_luminosity_centroid_offset_arcsec": 0.0
+      }
+    },
+    "diagnostics": {
+      "ABELL2146": {
+        "opposite_current_centroid_separation_arcsec": 49.38935728502232,
+        "second_moment_to_luminosity_centroid_offset_arcsec": 8.602350504177586
+      },
+      "BULLET": {
+        "opposite_current_centroid_separation_arcsec": 51.633771918236455,
+        "second_moment_to_luminosity_centroid_offset_arcsec": 12.602923548984531
+      }
+    },
+    "maximum_absolute_error_arcsec": 0.0
+  },
+  "claim_boundary": [
+    "V19BD quantifies uncertainty in measured collisionless source morphology; it does not test or fit a gravitational response.",
+    "The two catalogs use different photometric bands, membership selections, redshifts, and completeness, so relative luminosity amplitudes are not compared.",
+    "Two merging clusters do not establish a population law or a galaxy-cluster transition.",
+    "A narrow uncertainty interval for a source statistic does not show that lensing follows that statistic.",
+    "No propagation length, response amplitude, source exponent, phase, polarization, or Sigma constant is selected."
+  ],
+  "cluster_row_counts": {
+    "ABELL2146": 516096,
+    "BULLET": 589824
+  },
+  "cluster_summaries": {
+    "ABELL2146": {
+      "current_axis_alignment_cos2": {
+        "mean": 0.7134416492685935,
+        "percentiles": {
+          "16.0": 0.681330724165,
+          "2.5": 0.593016673875368,
+          "50.0": 0.7135325803224143,
+          "84.0": 0.7471335107707712,
+          "97.5": 0.8264873665437347
+        },
+        "standard_deviation": 0.053803891512839465
+      },
+      "finite_luminosity_member_count": {
+        "mean": 56.23388671875,
+        "percentiles": {
+          "16.0": 55.0,
+          "2.5": 54.0,
+          "50.0": 56.0,
+          "84.0": 57.0,
+          "97.5": 58.0
+        },
+        "standard_deviation": 1.1591956274901827
+      },
+      "luminosity_axis_ellipticity": {
+        "mean": 0.7663529900829018,
+        "percentiles": {
+          "16.0": 0.7605649743792904,
+          "2.5": 0.7508045374225448,
+          "50.0": 0.764491911444755,
+          "84.0": 0.7733468541371755,
+          "97.5": 0.7804990702246417
+        },
+        "standard_deviation": 0.007825149831854223
+      },
+      "luminosity_rms_radius_arcsec": {
+        "mean": 72.0323129421875,
+        "percentiles": {
+          "16.0": 71.5230571246229,
+          "2.5": 70.55230908865173,
+          "50.0": 72.22270552262871,
+          "84.0": 72.52255852523103,
+          "97.5": 73.55472699910837
+        },
+        "standard_deviation": 0.7661917566404374
+      },
+      "normalized_current_separation": {
+        "mean": 0.68546524602933,
+        "percentiles": {
+          "16.0": 0.6603298719743312,
+          "2.5": 0.5983080656190369,
+          "50.0": 0.6822995432424406,
+          "84.0": 0.710520084690173,
+          "97.5": 0.7887083571025764
+        },
+        "standard_deviation": 0.043143917233216096
+      },
+      "normalized_second_offset": {
+        "mean": 0.12205788075672089,
+        "percentiles": {
+          "16.0": 0.08642020447765557,
+          "2.5": 0.06573837175837882,
+          "50.0": 0.12722021732412947,
+          "84.0": 0.1534146882935506,
+          "97.5": 0.18108654433314514
+        },
+        "standard_deviation": 0.03395348934226519
+      },
+      "opposite_current_separation_arcsec": {
+        "mean": 49.37289576306779,
+        "percentiles": {
+          "16.0": 47.809788115491315,
+          "2.5": 43.09149547425104,
+          "50.0": 49.213585633713365,
+          "84.0": 50.89526080398083,
+          "97.5": 56.701374954264416
+        },
+        "standard_deviation": 3.0741263725347863
+      },
+      "second_current_axis_alignment_abs_cos": {
+        "mean": 0.6495367174428148,
+        "percentiles": {
+          "16.0": 0.5533812562854941,
+          "2.5": 0.2958052544056512,
+          "50.0": 0.6798460505637465,
+          "84.0": 0.7419148860707833,
+          "97.5": 0.7981007488846782
+        },
+        "standard_deviation": 0.12558402852036823
+      },
+      "second_moment_offset_arcsec": {
+        "mean": 8.799428682344065,
+        "percentiles": {
+          "16.0": 6.192412708832469,
+          "2.5": 4.73826754933201,
+          "50.0": 9.244819993971358,
+          "84.0": 11.089538814317526,
+          "97.5": 13.041310000179047
+        },
+        "standard_deviation": 2.4719278259783892
+      }
+    },
+    "BULLET": {
+      "current_axis_alignment_cos2": {
+        "mean": 0.996239743286188,
+        "percentiles": {
+          "16.0": 0.9927910925461997,
+          "2.5": 0.9805225122025785,
+          "50.0": 0.9982959096746892,
+          "84.0": 0.9998462476009087,
+          "97.5": 0.9999964657511234
+        },
+        "standard_deviation": 0.0054442659864692156
+      },
+      "finite_luminosity_member_count": {
+        "mean": 72.0,
+        "percentiles": {
+          "16.0": 72.0,
+          "2.5": 72.0,
+          "50.0": 72.0,
+          "84.0": 72.0,
+          "97.5": 72.0
+        },
+        "standard_deviation": 0.0
+      },
+      "luminosity_axis_ellipticity": {
+        "mean": 0.47308008269279966,
+        "percentiles": {
+          "16.0": 0.469800202662234,
+          "2.5": 0.46689648904806375,
+          "50.0": 0.47301961318107166,
+          "84.0": 0.4762962609868087,
+          "97.5": 0.4796320417410654
+        },
+        "standard_deviation": 0.003265901726459117
+      },
+      "luminosity_rms_radius_arcsec": {
+        "mean": 103.3219670437637,
+        "percentiles": {
+          "16.0": 103.105528095122,
+          "2.5": 102.939746313469,
+          "50.0": 103.31855085136328,
+          "84.0": 103.53096277979594,
+          "97.5": 103.7343433941169
+        },
+        "standard_deviation": 0.21010233362173028
+      },
+      "normalized_current_separation": {
+        "mean": 0.4971875934573985,
+        "percentiles": {
+          "16.0": 0.48093193929932,
+          "2.5": 0.4654659923975375,
+          "50.0": 0.4972490518533529,
+          "84.0": 0.5132455529031409,
+          "97.5": 0.5293050612616605
+        },
+        "standard_deviation": 0.016256038051349453
+      },
+      "normalized_second_offset": {
+        "mean": 0.12253676840151123,
+        "percentiles": {
+          "16.0": 0.10640756252984274,
+          "2.5": 0.08717151649098649,
+          "50.0": 0.12325469833561228,
+          "84.0": 0.13901275353511153,
+          "97.5": 0.15310073981280276
+        },
+        "standard_deviation": 0.016754200539652892
+      },
+      "opposite_current_separation_arcsec": {
+        "mean": 51.370344562324604,
+        "percentiles": {
+          "16.0": 49.69146330863682,
+          "2.5": 48.05426581062994,
+          "50.0": 51.3717823874057,
+          "84.0": 53.0196820379905,
+          "97.5": 54.68363686447223
+        },
+        "standard_deviation": 1.68115489551214
+      },
+      "second_current_axis_alignment_abs_cos": {
+        "mean": 0.6857414651057407,
+        "percentiles": {
+          "16.0": 0.6134000749576415,
+          "2.5": 0.5361952984765944,
+          "50.0": 0.6876273624271686,
+          "84.0": 0.7586424401268568,
+          "97.5": 0.824434423135716
+        },
+        "standard_deviation": 0.07360015377511925
+      },
+      "second_moment_offset_arcsec": {
+        "mean": 12.660710076637791,
+        "percentiles": {
+          "16.0": 10.994902498072756,
+          "2.5": 8.999819308906531,
+          "50.0": 12.73432737769577,
+          "84.0": 14.362312113481396,
+          "97.5": 15.821008833602777
+        },
+        "standard_deviation": 1.731053341900272
+      }
+    }
+  },
+  "config": "configs/sigma_v19bd_two_cluster_directional_source_uncertainty.json",
+  "config_sha256": "7e7c1f46e29c54679443817fb01149b79cd115887e3600209b074fb17309ed52",
+  "cross_filter_luminosity_amplitudes_compared": false,
+  "decision": "passed",
+  "gate_results": {
+    "aggregate_centroid_diagnostics_match_parent_reports": true,
+    "all_parent_hashes_exact": true,
+    "both_parent_moment_reports_passed": true,
+    "dimensionless_statistics_within_bounds": true,
+    "exact_draw_member_and_row_counts": true,
+    "no_cross_cluster_photometric_amplitude_comparison": true,
+    "no_lensing_halo_gas_response_or_gravity_payload": true,
+    "positive_finite_luminosity_rms_radius": true,
+    "positive_luminosity_second_and_signed_current_weights": true
+  },
+  "generated_utc": "2026-08-05T12:41:57.180885+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "implementation": {
+    "runner": "scripts/run_sigma_v19bd_two_cluster_directional_source_uncertainty.py",
+    "runner_sha256": "b8613184f1f4fe30f52bc558f656afd2fe6d6b22186126c7c6d1ddb9129c8eb4"
+  },
+  "input_hashes": {
+    "v19az_bullet_ensemble": "28f292af9afc4e8161bc5f0fce48d30dcf5c9c27c4412f6cba02c6fbb19bdc47",
+    "v19az_config": "4dd175be6d04f25bdd9413155548dfbcab2884c162cf2dc2ff4c37c7d34528d0",
+    "v19az_report": "b059d6f7117c49640377b84053bef651f21686d405193405126497429ef381e0",
+    "v19ba_report": "3cc9a80e55710f553f2957cc182326953d02d4129106456103ec71f3d775c2b4",
+    "v19bb_abell_ensemble": "234937ccef9b6ce5fa1540b7e698a3c8b2440baf875822d7b91df6768aab124d",
+    "v19bb_config": "c22b5ca8cd9f35adec28165bf112f4de56c943c389fe2a7fd0bff6d917e83bf4",
+    "v19bb_report": "84c24a0515fe3e29aaaa660ae96de45d0f2e0c66555d4b8b2c46bd3f632aa6a5",
+    "v19bc_report": "e870d11437511f4fdf3c7542aedcf45cb3df67d30d2541f758d9d3f51b0cb0f4",
+    "v19h_abell_grid": "c4177a5d8bffc28f47dd8607f82ce95c3b44a7f910890365f79d7faac35074f4",
+    "v19h_bullet_grid": "874ffe6c028ab9340ff467811da79073ee6af2d00fc829fd6b89b65ba28717c4"
+  },
+  "lensing_halo_gas_response_or_gravity_payload_opened": false,
+  "long_wave_operator_or_parameter_selected": false,
+  "missing_luminosity_or_transverse_velocity_imputed": false,
+  "outputs": {
+    "figure": {
+      "bytes": 106543,
+      "path": "results/sigma_v19bd_two_cluster_directional_source_uncertainty/directional_source_uncertainty.png",
+      "sha256": "d84424e30e3f7fd8caf6e8fbc3fcf87c261efdcbebe6b945607729312dd19352"
+    },
+    "paired_comparison": {
+      "bytes": 549245,
+      "path": "data/derived/sigma_v19bd_two_cluster_directional_source_uncertainty/paired_comparison.csv",
+      "rows": 8192,
+      "sha256": "93ca375ac2df9a3b77e744d38307635b753f9a652ddcd3e73f8b656a8e9d959a"
+    },
+    "per_draw_morphology": {
+      "bytes": 6445030,
+      "path": "data/derived/sigma_v19bd_two_cluster_directional_source_uncertainty/per_draw_morphology.csv",
+      "rows": 16384,
+      "sha256": "06d2225a3ec29efc1dc804f9d5afb79f5f6f38617ae1ea55b5e2374f76f8d66d"
+    }
+  },
+  "paired_comparison_summary": {
+    "abell_minus_bullet_current_axis_alignment_cos2": {
+      "mean": -0.28279809401759465,
+      "percentiles": {
+        "16.0": -0.3153388963250475,
+        "2.5": -0.4047945156339805,
+        "50.0": -0.28241956126534373,
+        "84.0": -0.2482418610906481,
+        "97.5": -0.16714093870900715
+      },
+      "standard_deviation": 0.054070925652144185
+    },
+    "abell_minus_bullet_normalized_current_separation": {
+      "mean": 0.18827765257193152,
+      "percentiles": {
+        "16.0": 0.15616278751020712,
+        "2.5": 0.09693013135234942,
+        "50.0": 0.18701046048275782,
+        "84.0": 0.22107074242924368,
+        "97.5": 0.29120652940218217
+      },
+      "standard_deviation": 0.04605813016846156
+    },
+    "abell_minus_bullet_normalized_second_offset": {
+      "mean": -0.0004788876447903355,
+      "percentiles": {
+        "16.0": -0.04060956897787804,
+        "2.5": -0.06730504279181594,
+        "50.0": 0.0005155727370754273,
+        "84.0": 0.03668384114280547,
+        "97.5": 0.071644885103571
+      },
+      "standard_deviation": 0.03804143825678886
+    }
+  },
+  "protocol_version": "SIGMA-V19BD-TWO-CLUSTER-DIRECTIONAL-SOURCE-UNCERTAINTY-1.0.1"
+}
