@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 153,
+    "sigma_protocols": 154,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6910,6 +6910,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "9f906549ac16c94ea41bec18cf02185b289c1a98dc21bdd6af69bf45036a2b1c"
+    },
+    {
+      "config": "configs/sigma_v19at_decam_forced_photometry_validation.json",
+      "protocol_version": "SIGMA-V19AT-DECAM-FORCED-PHOTOMETRY-VALIDATION-1.0.0",
+      "status": "frozen_before_any_v19at_validation_pixel_measurement",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "2b77a8aaee4631ee4543410016e8c7ddc93a1f9d2af14c3fb7fdbb3359cb612e"
     },
     {
       "config": "configs/sigma_v19b_replacement_cluster_screen.json",

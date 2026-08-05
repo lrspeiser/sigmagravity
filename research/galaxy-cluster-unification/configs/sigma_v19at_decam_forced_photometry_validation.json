@@ -1,0 +1,129 @@
+{
+  "protocol_version": "SIGMA-V19AT-DECAM-FORCED-PHOTOMETRY-VALIDATION-1.0.0",
+  "status": "frozen_before_any_v19at_validation_pixel_measurement",
+  "purpose": "Apply the single V19AS-selected four-arcsecond area-scaled image rule once to all five sealed singleton anchors and test color prediction and retrieval without changing the measurement, calibration model or gates.",
+  "parent_artifacts": [
+    {
+      "path": "configs/sigma_v19as_decam_forced_photometry_development.json",
+      "sha256": "9f906549ac16c94ea41bec18cf02185b289c1a98dc21bdd6af69bf45036a2b1c"
+    },
+    {
+      "path": "scripts/run_sigma_v19as_decam_forced_photometry_development.py",
+      "sha256": "2d547ceced44f6e44784602a5b7ec73ed3284aaf8a75c2dcb02a9c15dafb3c5d"
+    },
+    {
+      "path": "results/sigma_v19as_decam_forced_photometry_development/report.json",
+      "sha256": "083dd477ec3178c8560252ccdccbf9ad2809690d0a146db3557508fc4f79ebd9"
+    },
+    {
+      "path": "data/derived/sigma_v19as_decam_forced_photometry_development/aggregates.csv",
+      "sha256": "2cc51be76305352fb05bb4bafb0c09a919eee82f52cb75c4b90625f4e3814fb0"
+    },
+    {
+      "path": "data/derived/sigma_v19ar_current_archive_decam_cutouts/download_manifest.csv",
+      "sha256": "fb57f563a2b868dbb1a122b55561ffa3360ae4d966ce671b5c7d07852c36cd2c"
+    },
+    {
+      "path": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+      "sha256": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f"
+    },
+    {
+      "path": "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv",
+      "sha256": "05ca7f66bc62184a84f6f980986eb303b9aaf5b3ae24f27d7183c70b8c7e27dd"
+    },
+    {
+      "path": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+      "sha256": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7"
+    }
+  ],
+  "inputs": {
+    "resolved_image_plan": "data/derived/sigma_v19ar_current_archive_decam_cutouts/download_manifest.csv",
+    "anchor_measurements": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+    "catalog_measurements": "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv",
+    "commissioning_sample": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+    "development_aggregates": "data/derived/sigma_v19as_decam_forced_photometry_development/aggregates.csv"
+  },
+  "split": {
+    "development_ids": ["29", "78", "14", "07", "06", "37", "22", "16", "23", "24"],
+    "validation_ids": ["26", "57", "66", "71", "21"]
+  },
+  "frozen_measurement": {
+    "variant": "area_scaled",
+    "aperture_diameter_arcsec": 4.0,
+    "cutout_size_arcsec": 28.0,
+    "background_annulus_arcsec": [8.0, 13.0],
+    "detection_threshold_sigma": 2.5,
+    "implementation": "Reuse the hash-bound V19AS background, watershed, aperture and area-scaling functions without modification.",
+    "exposure_selection": "none; retain every validation measurement membership"
+  },
+  "color_model": {
+    "features": ["1", "(B-R-2.4)/1.0", "(R-I-1.1)/0.5"],
+    "outputs": ["g-r", "r-i", "i-z"],
+    "fit": "Independent soft-L1 affine regressions on only the ten frozen V19AS development aggregates.",
+    "ridge_penalty": 0.25,
+    "predictive_scale": "max(0.05 mag, 1.4826 times the median absolute centered development residual)",
+    "predictive_scale_floor_mag": 0.05,
+    "validation_values_used_to_fit_or_calibrate": false
+  },
+  "calibration_boundary": [
+    "Community Pipeline MAGZERO supplies internally repeatable instrumental-characterization magnitudes but is not treated as final native-band AB calibration.",
+    "At this declination the documented Community Pipeline reference is Gaia G regardless of DECam filter, producing stable band-dependent offsets.",
+    "The validation score therefore uses the complete three-color mapping frozen from development objects. No validation-dependent zeropoint or color term is allowed.",
+    "Passing validates color consistency for these provisional singleton pairs only; it does not establish scientific total fluxes or stellar masses."
+  ],
+  "validation_gates": {
+    "required_complete_griz_objects": 5,
+    "member57_must_have_complete_griz": true,
+    "maximum_median_absolute_error_each_color_mag": 0.25,
+    "minimum_top1_retrievals": 3,
+    "minimum_mean_reciprocal_rank": 0.65,
+    "all_measurements_must_be_retained": true,
+    "failure_rule": "Fail closed without changing variant, aperture, segmentation, color model, thresholds or calibration."
+  },
+  "gates": {
+    "exact_development_anchors": 10,
+    "exact_validation_anchors": 5,
+    "exact_validation_measurements": 362,
+    "exact_validation_image_groups": 110,
+    "exact_output_measurement_rows": 362,
+    "single_variant_and_aperture_only": true,
+    "no_ambiguous_candidate_lensing_halo_or_gravity_data_read": true
+  },
+  "outputs": {
+    "measurements": "data/derived/sigma_v19at_decam_forced_photometry_validation/measurements.csv",
+    "aggregates": "data/derived/sigma_v19at_decam_forced_photometry_validation/aggregates.csv",
+    "development_color_fit": "data/derived/sigma_v19at_decam_forced_photometry_validation/development_color_fit.csv",
+    "validation_predictions": "data/derived/sigma_v19at_decam_forced_photometry_validation/validation_predictions.csv",
+    "validation_retrieval": "data/derived/sigma_v19at_decam_forced_photometry_validation/validation_retrieval.csv",
+    "group_audit": "data/derived/sigma_v19at_decam_forced_photometry_validation/group_audit.csv",
+    "report": "results/sigma_v19at_decam_forced_photometry_validation/report.json"
+  },
+  "claim_boundary": [
+    "V19AT is a once-only internal validation of one frozen image measurement and color-transfer rule on five provisional singleton pairs.",
+    "A pass authorizes only a separately frozen ambiguous-candidate image likelihood. It does not authorize an association, stellar mass, mass current, lensing or gravity claim.",
+    "A failure closes this exact four-arcsecond area-scaled route; it cannot be rescued by inspecting another aperture or deblending variant on validation.",
+    "No absolute AB-photometry claim is made because a separate field-star/color calibration remains required."
+  ],
+  "authorization": {
+    "open_each_validation_anchor_once_with_frozen_rule": true,
+    "fit_color_model_on_development_only": true,
+    "score_validation_color_prediction_and_retrieval": true,
+    "inspect_alternative_validation_variant_or_aperture": false,
+    "score_ambiguous_candidates": false,
+    "select_counterparts": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "v19as_winner_frozen_before_validation_access": true,
+    "validation_pixels_measured_before_v19at_freeze": false,
+    "validation_scores_computed_before_v19at_freeze": false,
+    "ambiguous_candidate_lensing_halo_or_gravity_payload_opened_before_v19at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19at_decam_forced_photometry_validation.py",
+    "runner_sha256": "446ef09121b7ed9b83253dd5cf6a125b252724b207d49732ab6eacd56c4a4ac1"
+  }
+}
