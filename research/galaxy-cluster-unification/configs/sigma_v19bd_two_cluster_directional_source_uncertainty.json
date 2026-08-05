@@ -1,7 +1,11 @@
 {
-  "protocol_version": "SIGMA-V19BD-TWO-CLUSTER-DIRECTIONAL-SOURCE-UNCERTAINTY-1.0.0",
+  "protocol_version": "SIGMA-V19BD-TWO-CLUSTER-DIRECTIONAL-SOURCE-UNCERTAINTY-1.0.1",
   "status": "frozen_before_computing_any_per_draw_directional_morphology_or_cross_cluster_uncertainty_interval",
   "purpose": "Determine whether the target-blind directional collisionless-source morphology seen in the V19BA Bullet and V19BC Abell 2146 ensemble means survives each catalog's full positional, photometric-state, and redshift uncertainty after normalizing angular separations by each draw's own luminosity RMS radius, without reading lensing, halo, gas-response, or gravity targets.",
+  "implementation": {
+    "runner": "scripts/run_sigma_v19bd_two_cluster_directional_source_uncertainty.py",
+    "runner_sha256": "b8613184f1f4fe30f52bc558f656afd2fe6d6b22186126c7c6d1ddb9129c8eb4"
+  },
   "parents": {
     "v19az_config": {
       "path": "configs/sigma_v19az_probabilistic_member_current_ensemble.json",
