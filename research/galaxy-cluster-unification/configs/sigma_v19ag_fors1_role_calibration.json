@@ -1,0 +1,170 @@
+{
+  "protocol_version": "SIGMA-V19AG-FORS1-ROLE-CALIBRATION-1.0.0",
+  "status": "frozen_before_any_fits_pixel_access",
+  "purpose": "Apply an ESO-derived, four-port global calibration to a complete early B/R/I science triplet, using only global detector diagnostics and no member, candidate, cutout, lensing, halo, mass, current or gravity payload.",
+  "parent_artifacts": [
+    {
+      "path": "results/sigma_v19af_fors1_header_compatibility/report.json",
+      "sha256": "b4dcc9e8f09f5246bedc61c76ac25caaf9919b7336091d1778711711645df0b6"
+    },
+    {
+      "path": "results/sigma_v19af_fors1_header_compatibility/primary_headers.json",
+      "sha256": "e13b007a0ae6a2ddd2fe6a06ae03dcaf2211c4332dcb418bf3bfb67b287822a2"
+    },
+    {
+      "path": "results/sigma_v19ae_fors1_commissioning_frames/provenance.json",
+      "sha256": "79eb03dbc91783b9c2000c62db79ac9d72e97d5be10ea99b8ad1292f5c178e7c"
+    }
+  ],
+  "selection": {
+    "primary_science_dp_ids": [
+      "OFORS.1998-12-14T05:44:56.445",
+      "OFORS.1998-12-14T05:54:16.814",
+      "OFORS.1998-12-14T06:05:25.298"
+    ],
+    "required_science_filters": [
+      "R_BESS",
+      "I_BESS",
+      "B_BESS"
+    ],
+    "bias_rule": "Use all 14 V19AF bias records. They share the early four-port science signature and bracket the science night.",
+    "flat_rule": "Use all 25 V19AF four-port B_BESS/R_BESS/I_BESS twilight flats. Their gain metadata differ from the early science epoch, but scalar-normalized flat division is explicitly tested by per-filter leave-in residual and port-boundary gates.",
+    "excluded_science_dp_ids": [
+      "OFORS.1998-12-14T05:29:52.242",
+      "OFORS.1998-12-22T07:06:10.815",
+      "OFORS.1998-12-22T07:17:21.016",
+      "OFORS.1998-12-26T05:59:26.235"
+    ],
+    "selection_boundary": "The primary science triplet was selected from headers alone because it is the only temporally complete B/R/I set with one exact four-port signature. No pixel, source, photometry or lensing result contributed to selection."
+  },
+  "decompression": {
+    "format": "historic UNIX compress .Z",
+    "wsl_distribution": "Ubuntu-24.04",
+    "executable": "gzip",
+    "arguments": [
+      "-dc",
+      "--"
+    ],
+    "persistence": "Decompressed raw FITS files exist only inside one TemporaryDirectory and are removed when the run exits."
+  },
+  "detector_model": {
+    "required_shape_yx": [
+      2048,
+      2080
+    ],
+    "required_outputs": 4,
+    "required_chip_id": "TK2048EB4-1 1604",
+    "required_read_clock_prefix": "Readout ABCD",
+    "required_per_output": {
+      "valid_nx": 1008,
+      "valid_ny": 1024,
+      "prescan_x": 16,
+      "overscan_x": 16
+    },
+    "active_mosaic_shape_yx": [
+      2048,
+      2016
+    ],
+    "port_order": [
+      "A_lower_left",
+      "B_lower_right",
+      "C_upper_left",
+      "D_upper_right"
+    ],
+    "correction": "For each output and detector row, subtract the median of that output's 16-column prescan from its 1008 valid columns. Ignore the overscan, as specified by the ESO FORS pipeline manual. Concatenate only valid port regions into a 2016-by-2048 active mosaic; no read-direction flip is applied because the FIERA header positions the outputs in detector coordinates.",
+    "bias_policy": "Prescan-only correction is primary. Bias frames test whether any residual two-dimensional bias structure is too large; no two-dimensional master bias is subtracted, consistent with the FORS cookbook warning that it may add noise when structure is small.",
+    "flat_policy": "Prescan-correct every twilight flat, divide the whole valid mosaic by one global median, median-combine by filter, then renormalize the master flat to global median one. Do not normalize ports separately, so the master flat can correct relative port gain.",
+    "science_policy": "Prescan-correct and divide by the matching normalized master flat. Pixels outside the frozen valid flat range become NaN."
+  },
+  "statistics": {
+    "robust_sigma": "1.4826 times median absolute deviation",
+    "bias_block_shape_yx": [
+      64,
+      63
+    ],
+    "boundary_strip_pixels": 24,
+    "flat_valid_response": [
+      0.5,
+      1.5
+    ],
+    "saturation_adu": 65535.0
+  },
+  "gates": {
+    "exact_science_count": 3,
+    "exact_bias_count": 14,
+    "exact_flat_counts_by_filter": {
+      "B_BESS": 5,
+      "R_BESS": 10,
+      "I_BESS": 10
+    },
+    "all_selected_compressed_hashes_match_v19ae": true,
+    "all_selected_geometry_matches_detector_model": true,
+    "bias_block_peak_to_peak_adu_max": 2.0,
+    "bias_port_median_spread_adu_max": 2.0,
+    "bias_frame_port_abs_median_adu_max": 5.0,
+    "bias_empirical_ron_adu_min": 0.3,
+    "bias_empirical_ron_adu_max": 10.0,
+    "flat_frame_global_median_adu_min": 1000.0,
+    "flat_frame_global_median_adu_max": 60000.0,
+    "flat_frame_saturated_fraction_max": 0.01,
+    "master_flat_valid_fraction_min": 0.99,
+    "master_flat_temporal_snr100_fraction_min": 0.95,
+    "calibrated_flat_boundary_fraction_max": 0.03,
+    "science_finite_fraction_min": 0.99,
+    "science_saturated_fraction_max": 0.01,
+    "science_background_must_be_positive": true,
+    "science_boundary_fraction_max": 0.05,
+    "no_member_candidate_cutout_photometry_lensing_halo_mass_current_or_gravity_access": true
+  },
+  "outputs": {
+    "directory": "results/sigma_v19ag_fors1_role_calibration",
+    "report": "results/sigma_v19ag_fors1_role_calibration/report.json",
+    "calibrated_products_policy": "Persist compressed master-flat and calibrated-science FITS products only if every frozen calibration gate passes. Otherwise persist only the metrics report."
+  },
+  "authoritative_references": [
+    {
+      "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/fors/fors-pipeline-manual-5.18.pdf",
+      "use": "Section 10.15: identify regions from ESO DET keywords, subtract prescan port-by-port and ignore overscan; Sections 11-12: create and subtract bias with propagated detector noise."
+    },
+    {
+      "url": "https://www.eso.org/sci/facilities/paranal/instruments/fors/doc/VLT-MAN-ESO-13100-4030_v1.pdf",
+      "use": "Section 5.2.1: prescan/overscan correction is adequate because FORS1 bias has little structure; a two-dimensional bias can add noise."
+    },
+    {
+      "url": "https://www.eso.org/observing/dfo/quality/FORS1/pipeline/pipe_calib.html",
+      "use": "Four-port products require port-structure handling and trimming; twilight flats are the imaging flat-field calibration."
+    },
+    {
+      "url": "https://www.eso.org/qc/FORS1/pipeline/pipe_problems.html",
+      "use": "Old FORS1 four-port reductions can create port discontinuities, motivating the frozen boundary gates."
+    }
+  ],
+  "claim_boundary": [
+    "V19AG can establish only whether this frozen archival triplet admits a defensible global detector calibration.",
+    "It does not establish astrometric registration, source detection, deblending, color calibration, cluster membership, stellar mass, baryonic current, lensing performance or gravity performance.",
+    "The compressed active mosaic removes non-science pre/overscan columns. Its inherited WCS is approximate and may not be used for astrometric claims before a separately frozen catalog solution.",
+    "A calibration failure is not a failure of Sigma Gravity; a pass only authorizes a separately frozen deblending protocol."
+  ],
+  "authorization": {
+    "interpret_global_detector_pixels": true,
+    "persist_metrics_report": true,
+    "persist_calibrated_full_frames_only_if_all_gates_pass": true,
+    "inspect_member_or_candidate_coordinates_or_cutouts": false,
+    "fit_source_photometry_or_counterparts": false,
+    "infer_stellar_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "any_fits_pixel_opened_at_freeze": false,
+    "member_or_candidate_coordinate_or_cutout_opened_at_freeze": false,
+    "photometry_or_counterpart_model_chosen_at_freeze": false,
+    "lensing_or_halo_payload_opened_at_freeze": false,
+    "gravity_formula_or_parameter_changed_at_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ag_fors1_role_calibration.py",
+    "runner_sha256": "dfcb7159072294ab0afb28cc5881d63566eeac4370d1ae3ad08c271deddb9fcd"
+  }
+}

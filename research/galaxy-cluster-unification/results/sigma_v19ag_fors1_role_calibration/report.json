@@ -1,0 +1,2546 @@
+{
+  "all_global_calibration_gates_pass": true,
+  "bias_metrics": {
+    "block_peak_to_peak_adu": 1.75,
+    "empirical_ron_adu_by_port": [
+      2.0967130275743506,
+      2.0967130275743506,
+      2.0967130275743506,
+      2.0967130275743506
+    ],
+    "empirical_ron_adu_max": 2.0967130275743506,
+    "empirical_ron_adu_min": 2.0967130275743506,
+    "frame_port_abs_median_max_adu": 1.0,
+    "master_residual_global_median_adu": 0.0,
+    "master_residual_global_sigma_adu": 1.11195,
+    "port_median_spread_adu": 1.75,
+    "port_medians_adu": [
+      1.0,
+      0.75,
+      -0.75,
+      -0.5
+    ]
+  },
+  "claim_boundary": [
+    "V19AG can establish only whether this frozen archival triplet admits a defensible global detector calibration.",
+    "It does not establish astrometric registration, source detection, deblending, color calibration, cluster membership, stellar mass, baryonic current, lensing performance or gravity performance.",
+    "The compressed active mosaic removes non-science pre/overscan columns. Its inherited WCS is approximate and may not be used for astrometric claims before a separately frozen catalog solution.",
+    "A calibration failure is not a failure of Sigma Gravity; a pass only authorizes a separately frozen deblending protocol."
+  ],
+  "decompressed_payload_persisted": false,
+  "detector_model": {
+    "active_mosaic_shape_yx": [
+      2048,
+      2016
+    ],
+    "bias_policy": "Prescan-only correction is primary. Bias frames test whether any residual two-dimensional bias structure is too large; no two-dimensional master bias is subtracted, consistent with the FORS cookbook warning that it may add noise when structure is small.",
+    "correction": "For each output and detector row, subtract the median of that output's 16-column prescan from its 1008 valid columns. Ignore the overscan, as specified by the ESO FORS pipeline manual. Concatenate only valid port regions into a 2016-by-2048 active mosaic; no read-direction flip is applied because the FIERA header positions the outputs in detector coordinates.",
+    "flat_policy": "Prescan-correct every twilight flat, divide the whole valid mosaic by one global median, median-combine by filter, then renormalize the master flat to global median one. Do not normalize ports separately, so the master flat can correct relative port gain.",
+    "port_order": [
+      "A_lower_left",
+      "B_lower_right",
+      "C_upper_left",
+      "D_upper_right"
+    ],
+    "required_chip_id": "TK2048EB4-1 1604",
+    "required_outputs": 4,
+    "required_per_output": {
+      "overscan_x": 16,
+      "prescan_x": 16,
+      "valid_nx": 1008,
+      "valid_ny": 1024
+    },
+    "required_read_clock_prefix": "Readout ABCD",
+    "required_shape_yx": [
+      2048,
+      2080
+    ],
+    "science_policy": "Prescan-correct and divide by the matching normalized master flat. Pixels outside the frozen valid flat range become NaN."
+  },
+  "file_metrics": [
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "695bb99e1ee7fc60b8cb38c235ee754f9b70c389588c424370525728ae0f7be4",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-12T13:10:23.667",
+      "filter": "",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 253.0,
+          "port": 1,
+          "prescan_global_median_adu": 253.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 230.0,
+          "port": 2,
+          "prescan_global_median_adu": 229.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 243.0,
+          "port": 3,
+          "prescan_global_median_adu": 244.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 267.0,
+          "port": 4,
+          "prescan_global_median_adu": 268.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "f33164081fa7a7ad8becfae01ba90effb7a65a57414cce6f8842fd91af0c6765",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-12T13:11:08.884",
+      "filter": "",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 253.0,
+          "port": 1,
+          "prescan_global_median_adu": 253.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 230.0,
+          "port": 2,
+          "prescan_global_median_adu": 229.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 243.0,
+          "port": 3,
+          "prescan_global_median_adu": 244.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 267.0,
+          "port": 4,
+          "prescan_global_median_adu": 268.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "5bb8d6fbf526fd46b35ac017e6293879d3ac1417b70ff0c3e8197fc33ed27d70",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-12T13:11:53.972",
+      "filter": "",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 253.0,
+          "port": 1,
+          "prescan_global_median_adu": 253.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 230.0,
+          "port": 2,
+          "prescan_global_median_adu": 229.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 243.0,
+          "port": 3,
+          "prescan_global_median_adu": 244.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 267.0,
+          "port": 4,
+          "prescan_global_median_adu": 268.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "6f7d131c23ea1206764225ef9950b01cb5a30efe4aba6b87c504aff4920b6cc4",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-12T13:12:39.035",
+      "filter": "",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 253.0,
+          "port": 1,
+          "prescan_global_median_adu": 253.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 230.0,
+          "port": 2,
+          "prescan_global_median_adu": 229.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 243.0,
+          "port": 3,
+          "prescan_global_median_adu": 244.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 267.0,
+          "port": 4,
+          "prescan_global_median_adu": 268.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "cc277a7d866d2f03c586d5a1b3e22597102a230413e653730cefc05cd2ff3638",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 1.4826,
+      "dp_id": "OFORS.1998-12-12T13:13:24.097",
+      "filter": "",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 253.0,
+          "port": 1,
+          "prescan_global_median_adu": 253.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 230.0,
+          "port": 2,
+          "prescan_global_median_adu": 229.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 243.0,
+          "port": 3,
+          "prescan_global_median_adu": 244.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 268.0,
+          "port": 4,
+          "prescan_global_median_adu": 268.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "a38502977d799b056c48765f00f95643691ec84dbaf3f015953b39cd2e709f7e",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-15T12:15:31.013",
+      "filter": "OG590",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 202.0,
+          "port": 1,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 202.0,
+          "port": 2,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 203.0,
+          "port": 3,
+          "prescan_global_median_adu": 204.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 0.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 202.0,
+          "port": 4,
+          "prescan_global_median_adu": 202.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "1414ea274bbe20b716f3224cf80baee70d1af5da69491c47c7570b1b47e4195e",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-15T12:16:15.434",
+      "filter": "OG590",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 1,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 2,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 202.0,
+          "port": 3,
+          "prescan_global_median_adu": 203.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 4,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "2ad81bc9c39ec55af37f96107fba4ee8c6fd0bcb8b7f10f33fb5849a96d436d9",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-15T12:17:44.851",
+      "filter": "OG590",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 1,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 200.0,
+          "port": 2,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 202.0,
+          "port": 3,
+          "prescan_global_median_adu": 202.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 4,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "45ada5a95686a6da4c520bac0b1a7eae5c4b12f7cfd46905a262a45d917f5bb7",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-15T12:18:28.971",
+      "filter": "OG590",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 1,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 200.0,
+          "port": 2,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 202.0,
+          "port": 3,
+          "prescan_global_median_adu": 202.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 4,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "c43733efcd5f8c92e7b228a254952a974798e49677ea433640122b8a161bc863",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-15T12:19:13.524",
+      "filter": "OG590",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 1,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 200.0,
+          "port": 2,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 202.0,
+          "port": 3,
+          "prescan_global_median_adu": 203.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 4,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "45432492f18e6d3927bb80c4182a0db507606840f88294d1aa2517ded1cd55c7",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-15T12:19:57.984",
+      "filter": "OG590",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 1,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 200.0,
+          "port": 2,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 202.0,
+          "port": 3,
+          "prescan_global_median_adu": 203.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 4,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "fc62e227b96bcdce4507edbb03960ea92de4e461d8916786e954c3b64860dc69",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-15T12:20:42.232",
+      "filter": "OG590",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 1,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 200.0,
+          "port": 2,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 202.0,
+          "port": 3,
+          "prescan_global_median_adu": 203.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 200.0,
+          "port": 4,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "3c766df10843ae8e36813295076d4e4e85ea8364a51e0f1b417e82fad85db074",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-15T12:21:26.946",
+      "filter": "OG590",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 1,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 200.0,
+          "port": 2,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 202.0,
+          "port": 3,
+          "prescan_global_median_adu": 203.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 200.0,
+          "port": 4,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "b79a41e6b20e641c5b023ac6da759a9918554ef9ebf23f785452af2afc86e83d",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 0.0,
+      "corrected_global_sigma_adu": 2.2239,
+      "dp_id": "OFORS.1998-12-15T12:22:12.071",
+      "filter": "OG590",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 1,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 1.0,
+          "corrected_valid_sigma_adu": 1.4826,
+          "overscan_global_median_adu": 200.0,
+          "port": 2,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -1.0,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 202.0,
+          "port": 3,
+          "prescan_global_median_adu": 203.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": -0.5,
+          "corrected_valid_sigma_adu": 2.2239,
+          "overscan_global_median_adu": 201.0,
+          "port": 4,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "bias"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "70e17b182eb4c104ac3a2679a5b3c8570b5e49d2153697075b1aa9adfc8dbf3d",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 30704.0,
+      "corrected_global_sigma_adu": 1556.73,
+      "dp_id": "OFORS.1998-12-22T23:59:33.253",
+      "filter": "B_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 32647.0,
+          "corrected_valid_sigma_adu": 776.8824,
+          "overscan_global_median_adu": 33817.5,
+          "port": 1,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 27821.5,
+          "corrected_valid_sigma_adu": 515.2035,
+          "overscan_global_median_adu": 27905.0,
+          "port": 2,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 31011.0,
+          "corrected_valid_sigma_adu": 633.0702,
+          "overscan_global_median_adu": 31949.0,
+          "port": 3,
+          "prescan_global_median_adu": 211.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 30502.0,
+          "corrected_valid_sigma_adu": 375.0978,
+          "overscan_global_median_adu": 30643.0,
+          "port": 4,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "27e99174578f09768504ff406571470f2924d957f5bb398498ec22d6e35573c6",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 32940.0,
+      "corrected_global_sigma_adu": 1666.4424,
+      "dp_id": "OFORS.1998-12-23T00:00:29.201",
+      "filter": "B_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 35021.0,
+          "corrected_valid_sigma_adu": 831.7385999999999,
+          "overscan_global_median_adu": 36262.0,
+          "port": 1,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 29850.0,
+          "corrected_valid_sigma_adu": 552.2685,
+          "overscan_global_median_adu": 29916.0,
+          "port": 2,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 33271.0,
+          "corrected_valid_sigma_adu": 676.0656,
+          "overscan_global_median_adu": 34259.0,
+          "port": 3,
+          "prescan_global_median_adu": 211.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 32720.0,
+          "corrected_valid_sigma_adu": 402.5259,
+          "overscan_global_median_adu": 32860.0,
+          "port": 4,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "b6fd9090b091c729c8780d8bc384e8a56966d9d695e9b483cf106034d427c011",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 34906.0,
+      "corrected_global_sigma_adu": 1759.8462,
+      "dp_id": "OFORS.1998-12-23T00:01:27.904",
+      "filter": "B_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 37107.0,
+          "corrected_valid_sigma_adu": 879.1818,
+          "overscan_global_median_adu": 38415.0,
+          "port": 1,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 31632.5,
+          "corrected_valid_sigma_adu": 585.627,
+          "overscan_global_median_adu": 31687.0,
+          "port": 2,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 35259.5,
+          "corrected_valid_sigma_adu": 712.3892999999999,
+          "overscan_global_median_adu": 36287.5,
+          "port": 3,
+          "prescan_global_median_adu": 212.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 34669.5,
+          "corrected_valid_sigma_adu": 426.2475,
+          "overscan_global_median_adu": 34803.0,
+          "port": 4,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "f599656329ce23965daa43bdf9fd8d9d909f2d17d55bda9d791240e7b75a2ad6",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 36658.0,
+      "corrected_global_sigma_adu": 1841.3891999999998,
+      "dp_id": "OFORS.1998-12-23T00:02:28.864",
+      "filter": "B_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 38962.0,
+          "corrected_valid_sigma_adu": 922.1772,
+          "overscan_global_median_adu": 40326.0,
+          "port": 1,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 33219.5,
+          "corrected_valid_sigma_adu": 616.0203,
+          "overscan_global_median_adu": 33269.0,
+          "port": 2,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 37030.5,
+          "corrected_valid_sigma_adu": 745.0065,
+          "overscan_global_median_adu": 38092.5,
+          "port": 3,
+          "prescan_global_median_adu": 212.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 36406.0,
+          "corrected_valid_sigma_adu": 447.74519999999995,
+          "overscan_global_median_adu": 36533.0,
+          "port": 4,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "c7bc2ada19408fd343928ae0d58a6bbc27e188d3b8a7d0ff5c6bdb1678ad8583",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 38129.0,
+      "corrected_global_sigma_adu": 1908.8474999999999,
+      "dp_id": "OFORS.1998-12-23T00:03:33.950",
+      "filter": "B_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 40520.0,
+          "corrected_valid_sigma_adu": 957.7596,
+          "overscan_global_median_adu": 41917.0,
+          "port": 1,
+          "prescan_global_median_adu": 211.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 34553.0,
+          "corrected_valid_sigma_adu": 641.9658,
+          "overscan_global_median_adu": 34581.0,
+          "port": 2,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 38520.0,
+          "corrected_valid_sigma_adu": 770.952,
+          "overscan_global_median_adu": 39604.0,
+          "port": 3,
+          "prescan_global_median_adu": 213.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 37861.5,
+          "corrected_valid_sigma_adu": 467.7603,
+          "overscan_global_median_adu": 37990.0,
+          "port": 4,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "6e868c4245ef79d316c7b0e391e411a6081b0e10ac8bdb98b47faf7e18a8fc01",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 33310.5,
+      "corrected_global_sigma_adu": 2207.5914,
+      "dp_id": "OFORS.1998-12-23T09:22:58.783",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 35399.5,
+          "corrected_valid_sigma_adu": 1475.187,
+          "overscan_global_median_adu": 37263.5,
+          "port": 1,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 30386.0,
+          "corrected_valid_sigma_adu": 658.2744,
+          "overscan_global_median_adu": 30757.0,
+          "port": 2,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 34053.5,
+          "corrected_valid_sigma_adu": 923.6597999999999,
+          "overscan_global_median_adu": 35235.0,
+          "port": 3,
+          "prescan_global_median_adu": 213.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 32916.5,
+          "corrected_valid_sigma_adu": 753.9020999999999,
+          "overscan_global_median_adu": 33784.0,
+          "port": 4,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 2.3475060096153847e-07,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "fccf26592f00b25e51a564c93eaf12869b5971b71f4a076014da3bc0aeac5502",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 31785.5,
+      "corrected_global_sigma_adu": 2106.0333,
+      "dp_id": "OFORS.1998-12-23T09:23:53.360",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 33774.0,
+          "corrected_valid_sigma_adu": 1408.47,
+          "overscan_global_median_adu": 35570.0,
+          "port": 1,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 28995.0,
+          "corrected_valid_sigma_adu": 626.3985,
+          "overscan_global_median_adu": 29357.0,
+          "port": 2,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 32494.0,
+          "corrected_valid_sigma_adu": 880.6644,
+          "overscan_global_median_adu": 33619.0,
+          "port": 3,
+          "prescan_global_median_adu": 213.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 31410.0,
+          "corrected_valid_sigma_adu": 723.5088,
+          "overscan_global_median_adu": 32245.5,
+          "port": 4,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "19685686a82831dd7ea6991f8b8e6df4448b1898834677dbd58fe1662a4ac55f",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 30779.5,
+      "corrected_global_sigma_adu": 2040.7988999999998,
+      "dp_id": "OFORS.1998-12-23T09:24:48.931",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 32703.0,
+          "corrected_valid_sigma_adu": 1363.2506999999998,
+          "overscan_global_median_adu": 34455.0,
+          "port": 1,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 28077.0,
+          "corrected_valid_sigma_adu": 607.1247,
+          "overscan_global_median_adu": 28432.0,
+          "port": 2,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 31466.5,
+          "corrected_valid_sigma_adu": 853.2362999999999,
+          "overscan_global_median_adu": 32569.0,
+          "port": 3,
+          "prescan_global_median_adu": 213.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 30415.5,
+          "corrected_valid_sigma_adu": 702.0110999999999,
+          "overscan_global_median_adu": 31234.0,
+          "port": 4,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "e05120a8d40dd14e3c36c0915679cca7940686654c371a07a8dd12eb36e7ceae",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 29732.0,
+      "corrected_global_sigma_adu": 1972.5992999999999,
+      "dp_id": "OFORS.1998-12-23T09:25:42.970",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 31588.0,
+          "corrected_valid_sigma_adu": 1316.5488,
+          "overscan_global_median_adu": 33283.0,
+          "port": 1,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 27120.0,
+          "corrected_valid_sigma_adu": 585.627,
+          "overscan_global_median_adu": 27476.0,
+          "port": 2,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 30396.0,
+          "corrected_valid_sigma_adu": 822.1016999999999,
+          "overscan_global_median_adu": 31464.0,
+          "port": 3,
+          "prescan_global_median_adu": 212.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 29378.0,
+          "corrected_valid_sigma_adu": 680.5133999999999,
+          "overscan_global_median_adu": 30179.0,
+          "port": 4,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "dc622e01fd160a1cb3fd58b313b7a9383ed1320b4459fcf726986a0a289364d8",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 28690.0,
+      "corrected_global_sigma_adu": 1906.6236,
+      "dp_id": "OFORS.1998-12-23T09:26:36.529",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 30480.5,
+          "corrected_valid_sigma_adu": 1269.8469,
+          "overscan_global_median_adu": 32125.5,
+          "port": 1,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 26172.0,
+          "corrected_valid_sigma_adu": 565.6119,
+          "overscan_global_median_adu": 26524.0,
+          "port": 2,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 29331.0,
+          "corrected_valid_sigma_adu": 796.1562,
+          "overscan_global_median_adu": 30369.5,
+          "port": 3,
+          "prescan_global_median_adu": 212.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 28351.0,
+          "corrected_valid_sigma_adu": 659.0156999999999,
+          "overscan_global_median_adu": 29123.0,
+          "port": 4,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "24c34037b98df3243e241a659074283b542384892cdfb486e9aa85cb74534be0",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 34167.5,
+      "corrected_global_sigma_adu": 2067.4856999999997,
+      "dp_id": "OFORS.1998-12-24T00:04:00.463",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 36201.0,
+          "corrected_valid_sigma_adu": 1725.0050999999999,
+          "overscan_global_median_adu": 38456.5,
+          "port": 1,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 31154.0,
+          "corrected_valid_sigma_adu": 802.0866,
+          "overscan_global_median_adu": 31734.0,
+          "port": 2,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 34398.0,
+          "corrected_valid_sigma_adu": 1411.4352,
+          "overscan_global_median_adu": 36434.5,
+          "port": 3,
+          "prescan_global_median_adu": 212.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 34298.5,
+          "corrected_valid_sigma_adu": 770.2107,
+          "overscan_global_median_adu": 34938.0,
+          "port": 4,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "4138e35de95f7bf9f983bd8bcf83051352c85ee0c83603a14f7b668581bccf22",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 36244.0,
+      "corrected_global_sigma_adu": 2189.8001999999997,
+      "dp_id": "OFORS.1998-12-24T00:04:59.388",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 38397.0,
+          "corrected_valid_sigma_adu": 1828.0457999999999,
+          "overscan_global_median_adu": 40776.0,
+          "port": 1,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 33047.5,
+          "corrected_valid_sigma_adu": 851.7537,
+          "overscan_global_median_adu": 33646.5,
+          "port": 2,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 36495.5,
+          "corrected_valid_sigma_adu": 1489.2717,
+          "overscan_global_median_adu": 38640.0,
+          "port": 3,
+          "prescan_global_median_adu": 212.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 36382.0,
+          "corrected_valid_sigma_adu": 818.3951999999999,
+          "overscan_global_median_adu": 37049.0,
+          "port": 4,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "20d5c3ae74b13d49b260904e7eb19c99313bcec0e82dff7e8890c6d4c0ecc0ad",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 38382.0,
+      "corrected_global_sigma_adu": 2316.5625,
+      "dp_id": "OFORS.1998-12-24T00:06:00.381",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 40657.5,
+          "corrected_valid_sigma_adu": 1935.5342999999998,
+          "overscan_global_median_adu": 43169.0,
+          "port": 1,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 35001.5,
+          "corrected_valid_sigma_adu": 901.4208,
+          "overscan_global_median_adu": 35614.0,
+          "port": 2,
+          "prescan_global_median_adu": 208.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 38651.5,
+          "corrected_valid_sigma_adu": 1572.2973,
+          "overscan_global_median_adu": 40905.5,
+          "port": 3,
+          "prescan_global_median_adu": 213.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 38527.0,
+          "corrected_valid_sigma_adu": 868.8036,
+          "overscan_global_median_adu": 39225.0,
+          "port": 4,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "b2df58157f42a0357a574276bac9d5b5837ec269dcbbeeba8b44d37db6884456",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 40319.0,
+      "corrected_global_sigma_adu": 2431.464,
+      "dp_id": "OFORS.1998-12-24T00:07:04.172",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 42704.5,
+          "corrected_valid_sigma_adu": 2033.3859,
+          "overscan_global_median_adu": 45324.0,
+          "port": 1,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 36770.0,
+          "corrected_valid_sigma_adu": 947.3814,
+          "overscan_global_median_adu": 37400.5,
+          "port": 2,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 40609.0,
+          "corrected_valid_sigma_adu": 1644.2033999999999,
+          "overscan_global_median_adu": 42957.0,
+          "port": 3,
+          "prescan_global_median_adu": 213.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 40470.0,
+          "corrected_valid_sigma_adu": 914.0228999999999,
+          "overscan_global_median_adu": 41193.0,
+          "port": 4,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "a00f7b645c610086556cbce3d4694b9d70bd60a532460daa6bbea6d7c8411a36",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 41895.0,
+      "corrected_global_sigma_adu": 2527.0917,
+      "dp_id": "OFORS.1998-12-24T00:08:12.026",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 44371.5,
+          "corrected_valid_sigma_adu": 2111.9637,
+          "overscan_global_median_adu": 47098.5,
+          "port": 1,
+          "prescan_global_median_adu": 211.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 38215.5,
+          "corrected_valid_sigma_adu": 985.1877,
+          "overscan_global_median_adu": 38865.0,
+          "port": 2,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 42203.0,
+          "corrected_valid_sigma_adu": 1707.9551999999999,
+          "overscan_global_median_adu": 44632.0,
+          "port": 3,
+          "prescan_global_median_adu": 214.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 42053.0,
+          "corrected_valid_sigma_adu": 955.5356999999999,
+          "overscan_global_median_adu": 42798.0,
+          "port": 4,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "2f1b8bd5f2007d6138333557c3fa523f12b3e9c58cc3cdb5ce3bfac90c0dab5b",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 29656.5,
+      "corrected_global_sigma_adu": 1936.2756,
+      "dp_id": "OFORS.1998-12-26T09:18:22.976",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 31468.0,
+          "corrected_valid_sigma_adu": 1397.3505,
+          "overscan_global_median_adu": 33277.0,
+          "port": 1,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 27153.0,
+          "corrected_valid_sigma_adu": 668.6526,
+          "overscan_global_median_adu": 27473.0,
+          "port": 2,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 30250.0,
+          "corrected_valid_sigma_adu": 896.973,
+          "overscan_global_median_adu": 31416.0,
+          "port": 3,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 29411.0,
+          "corrected_valid_sigma_adu": 742.7826,
+          "overscan_global_median_adu": 30130.0,
+          "port": 4,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "e9275389ec0c3257e1119d27fbc60be080e41e705669b81172c4734e361d0e56",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 29825.5,
+      "corrected_global_sigma_adu": 1942.206,
+      "dp_id": "OFORS.1998-12-26T09:19:33.214",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 31638.0,
+          "corrected_valid_sigma_adu": 1408.47,
+          "overscan_global_median_adu": 33461.0,
+          "port": 1,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 27303.0,
+          "corrected_valid_sigma_adu": 670.1351999999999,
+          "overscan_global_median_adu": 27641.0,
+          "port": 2,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 30426.0,
+          "corrected_valid_sigma_adu": 900.6795,
+          "overscan_global_median_adu": 31596.0,
+          "port": 3,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 29578.5,
+          "corrected_valid_sigma_adu": 745.0065,
+          "overscan_global_median_adu": 30303.0,
+          "port": 4,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "06cd0603cbf98ebac73d4125d7ea1d13914a255e8fbf00d5a45e72ba6aa39e0a",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 29548.5,
+      "corrected_global_sigma_adu": 1918.4843999999998,
+      "dp_id": "OFORS.1998-12-26T09:20:38.693",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 31333.5,
+          "corrected_valid_sigma_adu": 1401.057,
+          "overscan_global_median_adu": 33143.0,
+          "port": 1,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 27050.0,
+          "corrected_valid_sigma_adu": 660.4983,
+          "overscan_global_median_adu": 27361.0,
+          "port": 2,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 30147.0,
+          "corrected_valid_sigma_adu": 893.2665,
+          "overscan_global_median_adu": 31315.0,
+          "port": 3,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 29308.0,
+          "corrected_valid_sigma_adu": 736.8521999999999,
+          "overscan_global_median_adu": 30035.5,
+          "port": 4,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "f13a5061e683985b6449ddf1c6b12599e6c38ea532f766f0ad47e38c2e5ccf28",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 29110.0,
+      "corrected_global_sigma_adu": 1886.6084999999998,
+      "dp_id": "OFORS.1998-12-26T09:21:41.988",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 30856.0,
+          "corrected_valid_sigma_adu": 1384.7484,
+          "overscan_global_median_adu": 32655.0,
+          "port": 1,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 26646.0,
+          "corrected_valid_sigma_adu": 647.8961999999999,
+          "overscan_global_median_adu": 26964.0,
+          "port": 2,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 29705.5,
+          "corrected_valid_sigma_adu": 881.4056999999999,
+          "overscan_global_median_adu": 30861.0,
+          "port": 3,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 28873.0,
+          "corrected_valid_sigma_adu": 724.9914,
+          "overscan_global_median_adu": 29595.0,
+          "port": 4,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "bed2fd5fc1ae7505126ba34e9a9c4b09359ce53af7403eb964fbe2e7c0cf9838",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 28438.0,
+      "corrected_global_sigma_adu": 1839.9065999999998,
+      "dp_id": "OFORS.1998-12-26T09:22:41.991",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 30132.0,
+          "corrected_valid_sigma_adu": 1352.8725,
+          "overscan_global_median_adu": 31914.0,
+          "port": 1,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 26028.5,
+          "corrected_valid_sigma_adu": 632.3289,
+          "overscan_global_median_adu": 26345.0,
+          "port": 2,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 29027.0,
+          "corrected_valid_sigma_adu": 862.8732,
+          "overscan_global_median_adu": 30160.0,
+          "port": 3,
+          "prescan_global_median_adu": 210.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 28208.0,
+          "corrected_valid_sigma_adu": 703.4937,
+          "overscan_global_median_adu": 28930.5,
+          "port": 4,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "c76fdf23864d02049d39d29652835a7f6c2bad448190adc4247bd401390cedb4",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 27858.5,
+      "corrected_global_sigma_adu": 1810.2546,
+      "dp_id": "OFORS.1998-12-26T09:25:19.100",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 29431.5,
+          "corrected_valid_sigma_adu": 1674.5966999999998,
+          "overscan_global_median_adu": 31569.5,
+          "port": 1,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 25676.0,
+          "corrected_valid_sigma_adu": 567.8358,
+          "overscan_global_median_adu": 26067.0,
+          "port": 2,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 28336.0,
+          "corrected_valid_sigma_adu": 994.8245999999999,
+          "overscan_global_median_adu": 29826.5,
+          "port": 3,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 27895.0,
+          "corrected_valid_sigma_adu": 821.3603999999999,
+          "overscan_global_median_adu": 28604.0,
+          "port": 4,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "d366515b1a6796c9ff9ac0b21567ceaa36b1e19daf8c0040fa0754531c653cc6",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 27217.0,
+      "corrected_global_sigma_adu": 1762.8113999999998,
+      "dp_id": "OFORS.1998-12-26T09:26:15.538",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 28738.0,
+          "corrected_valid_sigma_adu": 1642.7207999999998,
+          "overscan_global_median_adu": 30841.0,
+          "port": 1,
+          "prescan_global_median_adu": 207.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 25084.0,
+          "corrected_valid_sigma_adu": 550.7859,
+          "overscan_global_median_adu": 25465.5,
+          "port": 2,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 27690.0,
+          "corrected_valid_sigma_adu": 978.516,
+          "overscan_global_median_adu": 29148.0,
+          "port": 3,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 27257.0,
+          "corrected_valid_sigma_adu": 797.6388,
+          "overscan_global_median_adu": 27955.0,
+          "port": 4,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "8de3eeeab9a5a2aafafef2223692f39cba9f1bac02476ef68f7167d8274f6d3b",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 26566.5,
+      "corrected_global_sigma_adu": 1721.2985999999999,
+      "dp_id": "OFORS.1998-12-26T09:27:10.780",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 28040.0,
+          "corrected_valid_sigma_adu": 1608.6209999999999,
+          "overscan_global_median_adu": 30094.0,
+          "port": 1,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 24480.0,
+          "corrected_valid_sigma_adu": 534.4773,
+          "overscan_global_median_adu": 24849.5,
+          "port": 2,
+          "prescan_global_median_adu": 205.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 27035.0,
+          "corrected_valid_sigma_adu": 959.9834999999999,
+          "overscan_global_median_adu": 28465.0,
+          "port": 3,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 26606.5,
+          "corrected_valid_sigma_adu": 779.8475999999999,
+          "overscan_global_median_adu": 27290.0,
+          "port": 4,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 4.6950120192307695e-07,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "bcd9d8a9a64a30ef46788cfcfeca07d4f01dc54832eb2ddc5f123dd3700d06e8",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 25980.5,
+      "corrected_global_sigma_adu": 1682.751,
+      "dp_id": "OFORS.1998-12-26T09:28:05.542",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 27407.0,
+          "corrected_valid_sigma_adu": 1578.2277,
+          "overscan_global_median_adu": 29426.5,
+          "port": 1,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 23938.5,
+          "corrected_valid_sigma_adu": 519.6513,
+          "overscan_global_median_adu": 24303.0,
+          "port": 2,
+          "prescan_global_median_adu": 205.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 26442.0,
+          "corrected_valid_sigma_adu": 945.1574999999999,
+          "overscan_global_median_adu": 27849.0,
+          "port": 3,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 26024.5,
+          "corrected_valid_sigma_adu": 764.2803,
+          "overscan_global_median_adu": 26701.0,
+          "port": 4,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "053fe2a2edb892420bcbf16688c833e15e1826533432aa61aeab10603793c595",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 25670.0,
+      "corrected_global_sigma_adu": 1661.9946,
+      "dp_id": "OFORS.1998-12-26T09:29:00.575",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 27069.0,
+          "corrected_valid_sigma_adu": 1560.4365,
+          "overscan_global_median_adu": 29075.0,
+          "port": 1,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 23649.0,
+          "corrected_valid_sigma_adu": 512.9796,
+          "overscan_global_median_adu": 24009.5,
+          "port": 2,
+          "prescan_global_median_adu": 205.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 26130.0,
+          "corrected_valid_sigma_adu": 935.5206,
+          "overscan_global_median_adu": 27530.0,
+          "port": 3,
+          "prescan_global_median_adu": 209.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 25713.5,
+          "corrected_valid_sigma_adu": 756.126,
+          "overscan_global_median_adu": 26390.0,
+          "port": 4,
+          "prescan_global_median_adu": 206.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0,
+      "role": "flat"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "fd608969ff7b422790bc7c53abf78895201d0d29f527549c5e4f8cc37af5c279",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 3619.0,
+      "corrected_global_sigma_adu": 342.4806,
+      "dp_id": "OFORS.1998-12-14T05:44:56.445",
+      "filter": "R_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 3877.0,
+          "corrected_valid_sigma_adu": 108.2298,
+          "overscan_global_median_adu": 4173.0,
+          "port": 1,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 3274.5,
+          "corrected_valid_sigma_adu": 69.6822,
+          "overscan_global_median_adu": 3473.0,
+          "port": 2,
+          "prescan_global_median_adu": 198.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 3658.0,
+          "corrected_valid_sigma_adu": 82.2843,
+          "overscan_global_median_adu": 3935.0,
+          "port": 3,
+          "prescan_global_median_adu": 202.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 3559.0,
+          "corrected_valid_sigma_adu": 156.4143,
+          "overscan_global_median_adu": 3780.0,
+          "port": 4,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.003240497295673077,
+      "role": "science"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "4cfa97c1ed6225a4adf7ac5769739fe7cd2ebf459602619c5994906f1cb5628d",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 6606.0,
+      "corrected_global_sigma_adu": 556.7162999999999,
+      "dp_id": "OFORS.1998-12-14T05:54:16.814",
+      "filter": "I_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 7019.0,
+          "corrected_valid_sigma_adu": 320.2416,
+          "overscan_global_median_adu": 7537.0,
+          "port": 1,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 6054.0,
+          "corrected_valid_sigma_adu": 157.8969,
+          "overscan_global_median_adu": 6247.0,
+          "port": 2,
+          "prescan_global_median_adu": 199.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 6628.5,
+          "corrected_valid_sigma_adu": 277.2462,
+          "overscan_global_median_adu": 7089.0,
+          "port": 3,
+          "prescan_global_median_adu": 204.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 6621.0,
+          "corrected_valid_sigma_adu": 275.7636,
+          "overscan_global_median_adu": 6805.0,
+          "port": 4,
+          "prescan_global_median_adu": 201.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0028677133413461536,
+      "role": "science"
+    },
+    {
+      "active_shape_yx": [
+        2048,
+        2016
+      ],
+      "compressed_sha256": "14c171b2cbd0fa7111d0959b4344482d8af57c5e8826c1777c6a2ee98e48aefc",
+      "corrected_finite_fraction": 1.0,
+      "corrected_global_median_adu": 717.0,
+      "corrected_global_sigma_adu": 63.751799999999996,
+      "dp_id": "OFORS.1998-12-14T06:05:25.298",
+      "filter": "B_BESS",
+      "ports": [
+        {
+          "corrected_valid_median_adu": 769.0,
+          "corrected_valid_sigma_adu": 22.238999999999997,
+          "overscan_global_median_adu": 981.0,
+          "port": 1,
+          "prescan_global_median_adu": 199.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 653.0,
+          "corrected_valid_sigma_adu": 17.7912,
+          "overscan_global_median_adu": 842.0,
+          "port": 2,
+          "prescan_global_median_adu": 198.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 725.0,
+          "corrected_valid_sigma_adu": 18.5325,
+          "overscan_global_median_adu": 936.0,
+          "port": 3,
+          "prescan_global_median_adu": 202.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        },
+        {
+          "corrected_valid_median_adu": 701.0,
+          "corrected_valid_sigma_adu": 40.0302,
+          "overscan_global_median_adu": 904.0,
+          "port": 4,
+          "prescan_global_median_adu": 200.0,
+          "prescan_row_level_sigma_adu": 0.7413
+        }
+      ],
+      "raw_saturated_fraction_proxy": 0.0010638897235576922,
+      "role": "science"
+    }
+  ],
+  "flat_filter_metrics": {
+    "B_BESS": {
+      "calibrated_boundary_fraction_max": 0.0,
+      "calibrated_frame_boundaries": [
+        {
+          "global_level_adu": 0.9999344348907471,
+          "horizontal_fraction": 0.0,
+          "maximum_fraction": 0.0,
+          "vertical_fraction": 0.0
+        },
+        {
+          "global_level_adu": 0.9999344348907471,
+          "horizontal_fraction": 0.0,
+          "maximum_fraction": 0.0,
+          "vertical_fraction": 0.0
+        },
+        {
+          "global_level_adu": 0.9999344348907471,
+          "horizontal_fraction": 0.0,
+          "maximum_fraction": 0.0,
+          "vertical_fraction": 0.0
+        },
+        {
+          "global_level_adu": 0.9999344348907471,
+          "horizontal_fraction": 0.0,
+          "maximum_fraction": 0.0,
+          "vertical_fraction": 0.0
+        },
+        {
+          "global_level_adu": 0.9999344348907471,
+          "horizontal_fraction": 0.0,
+          "maximum_fraction": 0.0,
+          "vertical_fraction": 0.0
+        }
+      ],
+      "frame_count": 5,
+      "master_global_median": 1.0,
+      "master_global_sigma": 0.050198667955398554,
+      "master_response_max": 1.652287244796753,
+      "master_response_min": 0.002915120916441083,
+      "temporal_snr100_fraction": 0.9999978201729911,
+      "valid_fraction": 0.9991292802114335
+    },
+    "I_BESS": {
+      "calibrated_boundary_fraction_max": 0.00012065846887857184,
+      "calibrated_frame_boundaries": [
+        {
+          "global_level_adu": 0.9976083636283875,
+          "horizontal_fraction": 4.248050034501217e-05,
+          "maximum_fraction": 4.248050034501217e-05,
+          "vertical_fraction": 4.0927064326769805e-05
+        },
+        {
+          "global_level_adu": 0.9976398348808289,
+          "horizontal_fraction": 1.2486841766442407e-05,
+          "maximum_fraction": 0.00011327776071375504,
+          "vertical_fraction": 0.00011327776071375504
+        },
+        {
+          "global_level_adu": 0.9976798295974731,
+          "horizontal_fraction": 4.158130848491692e-05,
+          "maximum_fraction": 0.00010168302735823073,
+          "vertical_fraction": 0.00010168302735823073
+        },
+        {
+          "global_level_adu": 0.997704029083252,
+          "horizontal_fraction": 7.46772627927528e-06,
+          "maximum_fraction": 5.771058868623936e-05,
+          "vertical_fraction": 5.771058868623936e-05
+        },
+        {
+          "global_level_adu": 0.9978366494178772,
+          "horizontal_fraction": 4.456146707818525e-05,
+          "maximum_fraction": 4.456146707818525e-05,
+          "vertical_fraction": 3.703499944835771e-05
+        },
+        {
+          "global_level_adu": 1.0012147426605225,
+          "horizontal_fraction": 5.679384121394514e-05,
+          "maximum_fraction": 5.679384121394514e-05,
+          "vertical_fraction": 2.7623000338858014e-05
+        },
+        {
+          "global_level_adu": 1.0011061429977417,
+          "horizontal_fraction": 4.09626850182671e-05,
+          "maximum_fraction": 7.073207820014726e-05,
+          "vertical_fraction": 7.073207820014726e-05
+        },
+        {
+          "global_level_adu": 1.0010015964508057,
+          "horizontal_fraction": 5.335232422016885e-05,
+          "maximum_fraction": 5.406686427668897e-05,
+          "vertical_fraction": 5.406686427668897e-05
+        },
+        {
+          "global_level_adu": 1.0009244680404663,
+          "horizontal_fraction": 8.098744658848123e-06,
+          "maximum_fraction": 7.789086774833342e-05,
+          "vertical_fraction": 7.789086774833342e-05
+        },
+        {
+          "global_level_adu": 1.00083327293396,
+          "horizontal_fraction": 2.3822007675927314e-07,
+          "maximum_fraction": 0.00012065846887857184,
+          "vertical_fraction": 0.00012065846887857184
+        }
+      ],
+      "frame_count": 10,
+      "master_global_median": 1.0,
+      "master_global_sigma": 0.06098394259214401,
+      "master_response_max": 1.5053772926330566,
+      "master_response_min": 0.10854177176952362,
+      "temporal_snr100_fraction": 0.9990311879960317,
+      "valid_fraction": 0.9999922495039683
+    },
+    "R_BESS": {
+      "calibrated_boundary_fraction_max": 0.00017330229307300962,
+      "calibrated_frame_boundaries": [
+        {
+          "global_level_adu": 0.9996878504753113,
+          "horizontal_fraction": 2.6174609448294684e-05,
+          "maximum_fraction": 0.0001588363543741618,
+          "vertical_fraction": 0.0001588363543741618
+        },
+        {
+          "global_level_adu": 0.9996562004089355,
+          "horizontal_fraction": 1.9080046040151093e-06,
+          "maximum_fraction": 8.311745056240821e-05,
+          "vertical_fraction": 8.311745056240821e-05
+        },
+        {
+          "global_level_adu": 0.9996451139450073,
+          "horizontal_fraction": 8.34761271990146e-07,
+          "maximum_fraction": 0.00015299981599476532,
+          "vertical_fraction": 0.00015299981599476532
+        },
+        {
+          "global_level_adu": 0.9996050596237183,
+          "horizontal_fraction": 1.2700805398021179e-05,
+          "maximum_fraction": 0.00012665028481407035,
+          "vertical_fraction": 0.00012665028481407035
+        },
+        {
+          "global_level_adu": 0.9996235370635986,
+          "horizontal_fraction": 9.283938250183353e-05,
+          "maximum_fraction": 0.00010744802008240464,
+          "vertical_fraction": 0.00010744802008240464
+        },
+        {
+          "global_level_adu": 1.000251054763794,
+          "horizontal_fraction": 7.174598013947323e-05,
+          "maximum_fraction": 0.00010428194787714132,
+          "vertical_fraction": 0.00010428194787714132
+        },
+        {
+          "global_level_adu": 1.000165343284607,
+          "horizontal_fraction": 5.7091809947443356e-05,
+          "maximum_fraction": 0.00012765204270085977,
+          "vertical_fraction": 0.00012765204270085977
+        },
+        {
+          "global_level_adu": 1.0001616477966309,
+          "horizontal_fraction": 3.289644627795781e-05,
+          "maximum_fraction": 0.00017330229307300962,
+          "vertical_fraction": 0.00017330229307300962
+        },
+        {
+          "global_level_adu": 1.0001206398010254,
+          "horizontal_fraction": 5.363770945525543e-06,
+          "maximum_fraction": 0.00011907571499066704,
+          "vertical_fraction": 0.00011907571499066704
+        },
+        {
+          "global_level_adu": 1.0000996589660645,
+          "horizontal_fraction": 3.111052413008538e-05,
+          "maximum_fraction": 0.00013600424533497093,
+          "vertical_fraction": 0.00013600424533497093
+        }
+      ],
+      "frame_count": 10,
+      "master_global_median": 1.0,
+      "master_global_sigma": 0.06566043067574501,
+      "master_response_max": 1.633559226989746,
+      "master_response_min": 0.05628368631005287,
+      "temporal_snr100_fraction": 0.9995616125682044,
+      "valid_fraction": 0.9994792635478671
+    }
+  },
+  "flat_frame_metrics": [
+    {
+      "dp_id": "OFORS.1998-12-22T23:59:33.253",
+      "filter": "B_BESS",
+      "global_median_adu": 30704.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-23T00:00:29.201",
+      "filter": "B_BESS",
+      "global_median_adu": 32940.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-23T00:01:27.904",
+      "filter": "B_BESS",
+      "global_median_adu": 34906.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-23T00:02:28.864",
+      "filter": "B_BESS",
+      "global_median_adu": 36658.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-23T00:03:33.950",
+      "filter": "B_BESS",
+      "global_median_adu": 38129.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-23T09:22:58.783",
+      "filter": "R_BESS",
+      "global_median_adu": 33310.5,
+      "saturated_fraction_proxy": 2.3475060096153847e-07
+    },
+    {
+      "dp_id": "OFORS.1998-12-23T09:23:53.360",
+      "filter": "R_BESS",
+      "global_median_adu": 31785.5,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-23T09:24:48.931",
+      "filter": "R_BESS",
+      "global_median_adu": 30779.5,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-23T09:25:42.970",
+      "filter": "R_BESS",
+      "global_median_adu": 29732.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-23T09:26:36.529",
+      "filter": "R_BESS",
+      "global_median_adu": 28690.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-24T00:04:00.463",
+      "filter": "I_BESS",
+      "global_median_adu": 34167.5,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-24T00:04:59.388",
+      "filter": "I_BESS",
+      "global_median_adu": 36244.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-24T00:06:00.381",
+      "filter": "I_BESS",
+      "global_median_adu": 38382.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-24T00:07:04.172",
+      "filter": "I_BESS",
+      "global_median_adu": 40319.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-24T00:08:12.026",
+      "filter": "I_BESS",
+      "global_median_adu": 41895.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:18:22.976",
+      "filter": "R_BESS",
+      "global_median_adu": 29656.5,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:19:33.214",
+      "filter": "R_BESS",
+      "global_median_adu": 29825.5,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:20:38.693",
+      "filter": "R_BESS",
+      "global_median_adu": 29548.5,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:21:41.988",
+      "filter": "R_BESS",
+      "global_median_adu": 29110.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:22:41.991",
+      "filter": "R_BESS",
+      "global_median_adu": 28438.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:25:19.100",
+      "filter": "I_BESS",
+      "global_median_adu": 27858.5,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:26:15.538",
+      "filter": "I_BESS",
+      "global_median_adu": 27217.0,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:27:10.780",
+      "filter": "I_BESS",
+      "global_median_adu": 26566.5,
+      "saturated_fraction_proxy": 4.6950120192307695e-07
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:28:05.542",
+      "filter": "I_BESS",
+      "global_median_adu": 25980.5,
+      "saturated_fraction_proxy": 0.0
+    },
+    {
+      "dp_id": "OFORS.1998-12-26T09:29:00.575",
+      "filter": "I_BESS",
+      "global_median_adu": 25670.0,
+      "saturated_fraction_proxy": 0.0
+    }
+  ],
+  "gates": {
+    "all_selected_compressed_hashes_match_v19ae": true,
+    "all_selected_geometry_matches_detector_model": true,
+    "bias_block_peak_to_peak": true,
+    "bias_empirical_ron_range": true,
+    "bias_frame_port_abs_median": true,
+    "bias_port_median_spread": true,
+    "calibrated_flat_boundaries": true,
+    "exact_selected_counts": true,
+    "flat_frame_median_range": true,
+    "flat_frame_saturation": true,
+    "master_flat_temporal_snr": true,
+    "master_flat_valid_fraction": true,
+    "no_decompressed_payload_persisted": true,
+    "no_prohibited_science_or_gravity_access": true,
+    "science_background_positive": true,
+    "science_boundaries": true,
+    "science_finite_fraction": true,
+    "science_saturation": true
+  },
+  "generated_utc": "2026-08-05T08:58:31.401043+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "input_hashes": {
+    "config": "dd26927d527e25d78d5934aa340dbf0782206bdc24c060a3f358fb376e666253",
+    "results/sigma_v19ae_fors1_commissioning_frames/provenance.json": "79eb03dbc91783b9c2000c62db79ac9d72e97d5be10ea99b8ad1292f5c178e7c",
+    "results/sigma_v19af_fors1_header_compatibility/primary_headers.json": "e13b007a0ae6a2ddd2fe6a06ae03dcaf2211c4332dcb418bf3bfb67b287822a2",
+    "results/sigma_v19af_fors1_header_compatibility/report.json": "b4dcc9e8f09f5246bedc61c76ac25caaf9919b7336091d1778711711645df0b6",
+    "runner": "dfcb7159072294ab0afb28cc5881d63566eeac4370d1ae3ad08c271deddb9fcd"
+  },
+  "lensing_or_halo_payload_opened": false,
+  "member_candidate_coordinate_or_cutout_opened": false,
+  "photometry_or_counterpart_fitted": false,
+  "products": [
+    {
+      "path": "results/sigma_v19ag_fors1_role_calibration/master_flat_B_BESS.fits.gz",
+      "sha256": "aa58e9b2770626184b6eaa5c9ddd341b357389282075c4e43f45378fcc5ab174"
+    },
+    {
+      "path": "results/sigma_v19ag_fors1_role_calibration/master_flat_I_BESS.fits.gz",
+      "sha256": "ade8c5c21b4b664e713a9c855753c0068f6e1156d50f4d66755a22344719a12d"
+    },
+    {
+      "path": "results/sigma_v19ag_fors1_role_calibration/master_flat_R_BESS.fits.gz",
+      "sha256": "8d8d09134b9df106d8fe4ab4b393a02588ef7881c12687fab0ce5061394e88f4"
+    },
+    {
+      "path": "results/sigma_v19ag_fors1_role_calibration/calibrated_R_BESS_OFORS.1998-12-14T05_44_56.445.fits.gz",
+      "sha256": "fa0ec4c8ae32030a2b66071df9dd328f373b51e8832cb05edec0cfa9e378e764"
+    },
+    {
+      "path": "results/sigma_v19ag_fors1_role_calibration/calibrated_I_BESS_OFORS.1998-12-14T05_54_16.814.fits.gz",
+      "sha256": "4d26f11531d7eb112d0229dcb735e72e3c7d1ebbc305f2d67814a8a7e92df677"
+    },
+    {
+      "path": "results/sigma_v19ag_fors1_role_calibration/calibrated_B_BESS_OFORS.1998-12-14T06_05_25.298.fits.gz",
+      "sha256": "5b8bb3863b0386a0de3b63617e3fabfb39d60136f44517b34501b9e7331e2343"
+    }
+  ],
+  "report_version": "SIGMA-V19AG-FORS1-ROLE-CALIBRATION-1.0.0",
+  "science_metrics": [
+    {
+      "background_median_adu": 3594.170166015625,
+      "background_sigma_adu": 83.4961517578125,
+      "boundary": {
+        "global_level_adu": 3594.170166015625,
+        "horizontal_fraction": 0.001395421092411682,
+        "maximum_fraction": 0.001395421092411682,
+        "vertical_fraction": 0.00041000641161451166
+      },
+      "dp_id": "OFORS.1998-12-14T05:44:56.445",
+      "filter": "R_BESS",
+      "finite_fraction": 0.9994792635478671,
+      "saturated_fraction_proxy": 0.003240497295673077
+    },
+    {
+      "background_median_adu": 6553.46484375,
+      "background_sigma_adu": 128.08636025390624,
+      "boundary": {
+        "global_level_adu": 6553.46484375,
+        "horizontal_fraction": 0.001126178482637107,
+        "maximum_fraction": 0.001126178482637107,
+        "vertical_fraction": 0.0008988565805182969
+      },
+      "dp_id": "OFORS.1998-12-14T05:54:16.814",
+      "filter": "I_BESS",
+      "finite_fraction": 0.9999922495039683,
+      "saturated_fraction_proxy": 0.0028677133413461536
+    },
+    {
+      "background_median_adu": 717.5638427734375,
+      "background_sigma_adu": 21.208220178222653,
+      "boundary": {
+        "global_level_adu": 717.5638427734375,
+        "horizontal_fraction": 0.0034311039465095504,
+        "maximum_fraction": 0.0034311039465095504,
+        "vertical_fraction": 0.0009913609127018893
+      },
+      "dp_id": "OFORS.1998-12-14T06:05:25.298",
+      "filter": "B_BESS",
+      "finite_fraction": 0.9991292802114335,
+      "saturated_fraction_proxy": 0.0010638897235576922
+    }
+  ],
+  "selection": {
+    "excluded_science_dp_ids": [
+      "OFORS.1998-12-14T05:29:52.242",
+      "OFORS.1998-12-22T07:06:10.815",
+      "OFORS.1998-12-22T07:17:21.016",
+      "OFORS.1998-12-26T05:59:26.235"
+    ],
+    "flat_counts_by_filter": {
+      "B_BESS": 5,
+      "I_BESS": 10,
+      "R_BESS": 10
+    },
+    "science_dp_ids": [
+      "OFORS.1998-12-14T05:44:56.445",
+      "OFORS.1998-12-14T05:54:16.814",
+      "OFORS.1998-12-14T06:05:25.298"
+    ],
+    "selected_role_counts": {
+      "bias": 14,
+      "flat": 25,
+      "science": 3
+    }
+  },
+  "status": "passed_global_calibration",
+  "stellar_mass_or_current_inferred": false
+}
