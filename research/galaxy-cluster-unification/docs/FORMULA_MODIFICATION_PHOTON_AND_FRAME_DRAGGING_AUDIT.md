@@ -4,7 +4,7 @@
 
 The project has not yet found a root equation.  The authoritative registry now
 contains 128 scientifically distinct scored laws, 138 explicit formula/action
-fragments across 119 protocols, and 36 directly overlapping published
+fragments across 120 protocols, and 36 directly overlapping published
 families.  The broad empirical winner is still
 
 \[

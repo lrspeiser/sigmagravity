@@ -1,0 +1,49 @@
+{
+  "status": "mandatory_pre_science_fixture_failure",
+  "protocol_version": "SIGMA-V19L-FIXTURE-CORRECTED-FRONT-LIKELIHOOD-1.0.0",
+  "generated_utc": "2026-08-05T05:32:31.693860+00:00",
+  "config_sha256": "32cba79df9051961ed066584ef087dc96143eea6930ef466e05918e66e81ab85",
+  "runner_sha256": "93fe82e6ff02ab4d8977d32a88b533912c4e12facacfc2108d010f86255bfe23",
+  "mandatory_pre_science_fixtures": {
+    "uniform": {
+      "v19j_candidate_pixels": 0,
+      "v19l_seed_count": 0,
+      "passing_seed_count": 0,
+      "retained_arc_count": 0,
+      "passed": true
+    },
+    "linear": {
+      "v19j_candidate_pixels": 9230,
+      "v19l_seed_count": 1752,
+      "passing_seed_count": 0,
+      "retained_arc_count": 0,
+      "passed": true
+    },
+    "radial": {
+      "v19j_candidate_pixels": 3120,
+      "v19l_seed_count": 236,
+      "passing_seed_count": 0,
+      "retained_arc_count": 0,
+      "passed": true
+    },
+    "step": {
+      "v19j_candidate_pixels": 516,
+      "v19l_seed_count": 64,
+      "passing_seed_count": 64,
+      "retained_arc_count": 0,
+      "passed": false
+    },
+    "masked_step": {
+      "v19j_candidate_pixels": 380,
+      "v19l_seed_count": 27,
+      "passing_seed_count": 25,
+      "retained_arc_count": 0,
+      "passed": true
+    }
+  },
+  "cluster_science_array_read": false,
+  "science_seed_fitted": false,
+  "science_arc_linked": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

@@ -1,0 +1,86 @@
+{
+  "protocol_version": "SIGMA-V19L-FIXTURE-CORRECTED-FRONT-LIKELIHOOD-1.0.0",
+  "status": "frozen after the V19K mandatory pre-science curved-step arc-sampling failure but before evaluating a V19L fixture, reopening a cluster science array, selecting a science seed, fitting a science profile, linking a science arc, running a front bootstrap, constructing a spectrum, opening a lensing target, or selecting a gravity formula",
+  "purpose": "Preserve V19K's successful smooth-null discontinuity likelihood while correcting its pre-science seed-spacing error and making the continuous null sufficiently flexible to reject every seed in deterministic smooth radial curvature before exposing cluster data.",
+  "parents": {
+    "v19k_config": "configs/sigma_v19k_smooth_null_front_likelihood.json",
+    "v19k_config_sha256": "cb72cac4c7970184941fa4649de47bdc6a2ab9f35c5dd0a63203e15f9d900bdc",
+    "v19k_runner": "scripts/run_sigma_v19k_smooth_null_fronts.py",
+    "v19k_runner_sha256": "6f2f32a80ff5d6d5b8bbf092a2b43bad1574fa9822e89c26696532d64b68931e",
+    "v19k_fixture_failure": "results/sigma_v19k_smooth_null_fronts/fixture_failure.json",
+    "v19k_fixture_failure_sha256": "3f62f1c665cb3532e71d86847a0aa11e3ba562d7c723947b237227ba16f2ba19",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "v19j_report": "results/sigma_v19j_automated_fronts/report.json",
+    "v19j_report_sha256": "06eb0add35583f8ee45c17ba65432b0d082922cb842a28631ff78a73cf8f4923"
+  },
+  "inherited_without_change": [
+    "both clusters and all source-map hashes",
+    "complete V19J nonmaximum candidate prefilter",
+    "10-kpc target-blind local-maximum seed sampling",
+    "200-kpc profile extent on each side",
+    "75-kpc tangent half-width",
+    "10-kpc profile bins and 90-percent profile-validity gate",
+    "known additive background and exact Poisson Cash likelihood",
+    "nine frozen step locations from -20 through +20 kpc",
+    "nonnegative compression with density compression at most four",
+    "five-sigma discontinuity score",
+    "30-degree normal and tangent consistency",
+    "50-to-2000-kpc curvature radius",
+    "20-kpc circle residual and 100-kpc minimum arc length",
+    "six-node minimum arc",
+    "all no-coordinate, no-lensing and no-gravity claim boundaries"
+  ],
+  "continuous_null_correction": {
+    "normalized_coordinate": "tau=t/200 kpc",
+    "continuous_null": "S0_j=exp(a+b tau_j+c tau_j^2+e tau_j^3+f tau_j^4)",
+    "discontinuous_alternative": "S1_j=exp(a+b tau_j+c tau_j^2+e tau_j^3+f tau_j^4+d H(t_j-delta))",
+    "new_nuisance_bounds": {
+      "e": [
+        -10.0,
+        10.0
+      ],
+      "f": [
+        -10.0,
+        10.0
+      ]
+    },
+    "reason": "the V19K smooth radial fixture left 52 isolated five-sigma seeds even though it formed no arc; the deterministic smooth fixture must yield zero passing seeds before a more permissive but physically correct connectivity rule is evaluated",
+    "gravity_parameter": false
+  },
+  "ridge_continuity_correction": {
+    "physical_maximum_empty_gap_kpc": 20.0,
+    "gap_closed_candidate": "binary closing of the complete V19J candidate mask with a Euclidean disk of radius floor((20 kpc/2)/pixel scale), identical to the V19J empty-gap construction",
+    "maximum_seed_neighbor_distance_kpc": 40.0,
+    "neighbor_distance_derivation": "four times the frozen 10-kpc local-maximum radius; this is a sampling search radius, not an allowed empty gap",
+    "path_test": "sample the straight segment between two candidate seed centers at half-native-pixel spacing and require every sample to lie in the gap-closed complete candidate mask",
+    "normal_and_tangent_rules": "retain the inherited 30-degree normal difference and 30-degree tangent alignment at both endpoints",
+    "component_circle_and_arc_rules": "inherit V19K without change",
+    "reason": "V19K placed adjacent significant step seeds about 30 kpc apart on a continuous injected circle; direct 20-kpc node spacing incorrectly rejected the complete underlying ridge"
+  },
+  "mandatory_pre_science_fixtures": {
+    "uniform_field": "zero passing seeds and zero retained arcs",
+    "linear_gradient": "zero passing seeds and zero retained arcs",
+    "smooth_radial_beta_profile": "zero passing seeds and zero retained arcs",
+    "curved_compression_two_step": "at least one retained arc, all 64 automatically sampled step seeds expected to remain eligible, median distance at most 16 kpc and median density compression from 1.5 to 2.5",
+    "masked_step": "zero retained arcs",
+    "same_fixture_arrays_as_v19k": true,
+    "failure_rule": "stop before cluster science; never alter a likelihood, polynomial degree, bound, seed radius, path rule, score, geometry or fixture after a fixture or science result is known"
+  },
+  "science_gate": {
+    "execute_only_if_every_fixture_passes": true,
+    "minimum_retained_arcs_per_cluster": 1,
+    "maximum_failed_seed_fraction": 0.01,
+    "required_post_hash_visual_audit": true,
+    "advance_only_after_both_machine_and_visual_gates": "run the inherited projected broken-power-law profile fits and exactly 1000 parametric bootstraps before any spectrum or shock classification"
+  },
+  "integrity": {
+    "v19j_machine_and_visual_results_preserved": true,
+    "v19k_fixture_failure_preserved": true,
+    "v19l_fixture_outcome_known_at_freeze": false,
+    "v19l_cluster_array_read_at_freeze": false,
+    "science_location_or_published_front_used": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}
