@@ -28,8 +28,13 @@ def test_frozen_preflight_report_is_current_and_target_sealed() -> None:
     assert not frozen["lensing_halo_action_gravity_or_holdout_payload_opened"]
 
 
-def test_status_snapshot_is_read_only_and_stops_at_v19w5() -> None:
+def test_status_snapshot_is_read_only_and_stops_at_v19w5(monkeypatch) -> None:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
+    monkeypatch.setattr(
+        runner,
+        "artifact_state",
+        lambda stage: {"state": "pending", "artifact": stage["artifact"]},
+    )
     status = runner.snapshot(config, active_pids=[101, 202])
     assert status["status"] == "terminal_chain_pending"
     assert status["active_base_pids"] == [101, 202]

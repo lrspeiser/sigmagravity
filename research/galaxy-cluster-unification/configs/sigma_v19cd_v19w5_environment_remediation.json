@@ -1,0 +1,130 @@
+{
+  "protocol_version": "SIGMA-V19CD-V19W5-ENVIRONMENT-REMEDIATION-1.0.0",
+  "freeze_state": "frozen_after_exact_pre_cell_v19w5_environment_failure_before_any_retry",
+  "status": "frozen after the protected V19W base process exited and the automatic V19BR handoff failed before the first V19W5 recovery cell because dmkeypar was absent from PATH, before retrying recovery, combining any spectrum, fitting gas state, scoring a source invariant, opening lensing or halo targets, selecting an action, or changing gravity physics",
+  "purpose": "Permit one target-sealed operational remediation of the exact V19W5 pre-cell environment failure: run the byte-identical frozen V19W5 runner through the declared CIAO conda environment in a fresh scratch directory, preserve the original failure evidence, and resume the unchanged V19BR source-only terminal chain.",
+  "parents": {
+    "v19w5_config": {
+      "path": "configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+      "sha256": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a"
+    },
+    "v19w5_runner": {
+      "path": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+      "sha256": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72"
+    },
+    "v19w5_failure_report": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/failure_report.json",
+      "sha256": "24806d3cf28b2e75fe668b5494e0ac09c841879c217c4a12438162563551cdee"
+    },
+    "v19br_failure_report": {
+      "path": "results/sigma_v19br_target_sealed_terminal_chain/report.json",
+      "sha256": "3b7341c37081663661185687ca9f54ca69e50eccc5e72b23b1777defd7955f62"
+    },
+    "v19w_base_terminal_report": {
+      "path": "results/sigma_v19w_full_response_production/report.json",
+      "sha256": "df6ccdfe2ae7766a698039f1e666aa2309cbc3730f32cfbc1f2cc1828bdcc6e3"
+    }
+  },
+  "required_failure_boundary": {
+    "v19w5_status": "v19w5_execution_failed_closed",
+    "v19w5_exception": "FileNotFoundError: [Errno 2] No such file or directory: 'dmkeypar'",
+    "v19br_status": "terminal_chain_failed_closed",
+    "v19br_exception": "RuntimeError: V19BR stage V19W5_RESPONSE_RECOVERY exited 1; chain stopped",
+    "base_status": "response_production_incomplete",
+    "base_completed_cells": 4698,
+    "base_expected_cells": 5082,
+    "base_missing_cells": 384,
+    "require_no_completed_failed_partial_or_quarantined_recovery_cell": true,
+    "require_no_spectrum_combination_or_fit": true,
+    "require_no_lensing_halo_action_gravity_or_holdout_access": true
+  },
+  "failed_workspace": {
+    "path": "/home/henry/sigma-v19w5-response-recovery/v100",
+    "allowed_residue": "geometry preparation, isolated PFILES and temporary directories written before the missing dmkeypar process could start",
+    "reuse_forbidden": true,
+    "delete_or_modify_forbidden": true
+  },
+  "environment": {
+    "conda_executable": "/home/henry/miniforge3/bin/conda",
+    "environment_name": "sigma-ciao-4.18",
+    "environment_prefix": "/home/henry/miniforge3/envs/sigma-ciao-4.18",
+    "required_executables": [
+      "dmkeypar",
+      "dmlist",
+      "punlearn",
+      "dmcoords",
+      "pget",
+      "dmhedit",
+      "specextract"
+    ],
+    "required_python_modules": [
+      "numpy",
+      "pycrates"
+    ],
+    "require_every_executable_from_environment_bin": true,
+    "require_python_from_environment_bin": true
+  },
+  "remediation": {
+    "v19w5_runner": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+    "v19w5_config": "configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+    "v19w5_output": "results/sigma_v19w5_ccd7_hardened_response_recovery",
+    "v19w5_report": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+    "fresh_recovery_scratch": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100",
+    "protected_base_scratch": "/home/henry/sigma-v19w-response-production/v100",
+    "v19br_runner": "scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+    "v19br_config": "configs/sigma_v19br_target_sealed_terminal_chain.json",
+    "v19br_report": "results/sigma_v19br_target_sealed_terminal_chain/report.json",
+    "same_v19w5_config_runner_manifest_masks_response_rules_and_audits": true,
+    "same_v19br_downstream_stage_commands": true,
+    "retry_count": 1
+  },
+  "authorization": {
+    "execution_failure_not_scientific_failure": true,
+    "one_manual_successor_remediation_authorized": true,
+    "automatic_retry_of_failed_v19w5_protocol": false,
+    "fresh_scratch_required": true,
+    "preserve_original_failed_workspace": true,
+    "preserve_original_failure_report": true,
+    "modify_protected_base_archive": false,
+    "change_manifest_or_drop_cell": false,
+    "change_scientific_definition_or_threshold": false,
+    "open_lensing_halo_action_gravity_or_holdout": false,
+    "derive_or_select_action": false,
+    "change_gravity_formula_or_parameter": false
+  },
+  "required_gates": {
+    "all_parent_hashes_exact": true,
+    "failure_signature_is_exact_pre_cell_environment_error": true,
+    "failed_workspace_contains_no_recovery_cell_attempt": true,
+    "base_terminal_state_is_4698_of_5082": true,
+    "ciao_environment_is_complete_and_exact": true,
+    "fresh_scratch_is_separate_and_absent": true,
+    "frozen_v19w5_runner_and_science_settings_unchanged": true,
+    "original_failure_evidence_is_preserved": true,
+    "downstream_v19br_chain_is_unchanged": true,
+    "no_target_action_or_gravity_access": true
+  },
+  "claim_boundary": [
+    "V19CD repairs a process environment, not a failed scientific or data-quality gate.",
+    "The first V19W5 attempt failed before one recovery cell was prepared or executed; its workspace and failure report remain immutable evidence.",
+    "The remediated launch uses the byte-identical V19W5 runner, config, 5,082-cell manifest, masks, response placement, product audits and protected-base checks in a new scratch directory.",
+    "A V19W5 pass only supplies a complete response archive; V19BR remains source-only and opens no lensing, halo, action, gravity-parameter or holdout payload.",
+    "A later V19BQ/V19BS scientific failure is final under its frozen rules and cannot be repaired by this protocol."
+  ],
+  "implementation": {
+    "runner": {
+      "path": "scripts/run_sigma_v19cd_v19w5_environment_remediation.py",
+      "sha256": "05516c7561eaecd18dee43f6d24ac6b61282a37401eedc6ed839bfefc71f2ebb"
+    },
+    "checker": {
+      "path": "scripts/check_sigma_v19cd_v19w5_environment_remediation.py"
+    },
+    "tests": "tests/test_sigma_v19cd_v19w5_environment_remediation.py"
+  },
+  "outputs": {
+    "preflight_report": "results/sigma_v19cd_v19w5_environment_remediation/preflight_report.json",
+    "report": "results/sigma_v19cd_v19w5_environment_remediation/report.json",
+    "v19w5_log": "results/sigma_v19cd_v19w5_environment_remediation/v19w5_execution.log",
+    "v19br_log": "results/sigma_v19cd_v19w5_environment_remediation/v19br_execution.log"
+  }
+}

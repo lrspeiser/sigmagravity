@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 199,
+    "sigma_protocols": 200,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7454,6 +7454,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "7ff89be2f7aa710dcb8fb5ecab568719fbc324f1dc23c33c8920ee99fa6daec4"
+    },
+    {
+      "config": "configs/sigma_v19cd_v19w5_environment_remediation.json",
+      "protocol_version": "SIGMA-V19CD-V19W5-ENVIRONMENT-REMEDIATION-1.0.0",
+      "status": "frozen after the protected V19W base process exited and the automatic V19BR handoff failed before the first V19W5 recovery cell because dmkeypar was absent from PATH, before retrying recovery, combining any spectrum, fitting gas state, scoring a source invariant, opening lensing or halo targets, selecting an action, or changing gravity physics",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "21dca31645754a3ed1ed456018859ad5a26c57dde109df53260828d93856723b"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

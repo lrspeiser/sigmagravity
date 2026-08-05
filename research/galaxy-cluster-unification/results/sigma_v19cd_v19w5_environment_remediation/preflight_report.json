@@ -1,0 +1,111 @@
+{
+  "claim_boundary": [
+    "V19CD repairs a process environment, not a failed scientific or data-quality gate.",
+    "The first V19W5 attempt failed before one recovery cell was prepared or executed; its workspace and failure report remain immutable evidence.",
+    "The remediated launch uses the byte-identical V19W5 runner, config, 5,082-cell manifest, masks, response placement, product audits and protected-base checks in a new scratch directory.",
+    "A V19W5 pass only supplies a complete response archive; V19BR remains source-only and opens no lensing, halo, action, gravity-parameter or holdout payload.",
+    "A later V19BQ/V19BS scientific failure is final under its frozen rules and cannot be repaired by this protocol."
+  ],
+  "config": "configs/sigma_v19cd_v19w5_environment_remediation.json",
+  "config_sha256": "21dca31645754a3ed1ed456018859ad5a26c57dde109df53260828d93856723b",
+  "decision": "remediated_launch_authorized",
+  "environment": {
+    "checks": {
+      "all_executables_from_declared_environment": true,
+      "all_required_executables_resolve": true,
+      "all_required_python_modules_import": true,
+      "python_from_declared_environment": true
+    },
+    "commands": {
+      "dmcoords": "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/dmcoords",
+      "dmhedit": "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/dmhedit",
+      "dmkeypar": "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/dmkeypar",
+      "dmlist": "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/dmlist",
+      "pget": "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/pget",
+      "punlearn": "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/punlearn",
+      "specextract": "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/specextract"
+    },
+    "modules": {
+      "numpy": true,
+      "pycrates": true
+    },
+    "python": "/home/henry/miniforge3/envs/sigma-ciao-4.18/bin/python"
+  },
+  "failure_boundary": {
+    "base_missing_cells": 384,
+    "checks": {
+      "base_terminal_state_exact": true,
+      "failure_preceded_every_recovery_cell": true,
+      "v19br_exception_exact": true,
+      "v19br_status_exact": true,
+      "v19br_target_sealed": true,
+      "v19w5_base_not_modified": true,
+      "v19w5_exception_exact": true,
+      "v19w5_no_combination_or_fit": true,
+      "v19w5_no_target_or_gravity_access": true,
+      "v19w5_status_exact": true
+    },
+    "failed_workspace": {
+      "completed_cell_reports": 0,
+      "exists": true,
+      "failed_attempt_directories": 0,
+      "geometry_prep_artifacts_allowed": true,
+      "partial_attempt_directories": 0,
+      "path": "/home/henry/sigma-v19w5-response-recovery/v100",
+      "quarantine_directories": 0
+    }
+  },
+  "fresh_recovery_scratch": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100",
+  "gates": {
+    "all_parent_hashes_exact": true,
+    "base_terminal_state_is_4698_of_5082": true,
+    "ciao_environment_is_complete_and_exact": true,
+    "downstream_v19br_chain_is_unchanged": true,
+    "failed_workspace_contains_no_recovery_cell_attempt": true,
+    "failure_signature_is_exact_pre_cell_environment_error": true,
+    "fresh_scratch_is_separate_and_absent": true,
+    "frozen_v19w5_runner_and_science_settings_unchanged": true,
+    "no_target_action_or_gravity_access": true,
+    "original_failure_evidence_is_preserved": true
+  },
+  "gravity_formula_or_parameter_changed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "parent_hashes": {
+    "v19br_failure_report": "3b7341c37081663661185687ca9f54ca69e50eccc5e72b23b1777defd7955f62",
+    "v19w5_config": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a",
+    "v19w5_failure_report": "24806d3cf28b2e75fe668b5494e0ac09c841879c217c4a12438162563551cdee",
+    "v19w5_runner": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72",
+    "v19w_base_terminal_report": "df6ccdfe2ae7766a698039f1e666aa2309cbc3730f32cfbc1f2cc1828bdcc6e3"
+  },
+  "protocol_version": "SIGMA-V19CD-V19W5-ENVIRONMENT-REMEDIATION-1.0.0",
+  "status": "v19w5_environment_remediation_preflight_passed",
+  "v19br_command": [
+    "/home/henry/miniforge3/bin/conda",
+    "run",
+    "--no-capture-output",
+    "-n",
+    "sigma-ciao-4.18",
+    "python",
+    "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/scripts/run_sigma_v19br_target_sealed_terminal_chain.py",
+    "--config",
+    "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/configs/sigma_v19br_target_sealed_terminal_chain.json",
+    "--execute"
+  ],
+  "v19w5_command": [
+    "/home/henry/miniforge3/bin/conda",
+    "run",
+    "--no-capture-output",
+    "-n",
+    "sigma-ciao-4.18",
+    "python",
+    "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+    "--config",
+    "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+    "--output",
+    "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19w5_ccd7_hardened_response_recovery",
+    "--scratch",
+    "/home/henry/sigma-v19cd-v19w5-response-recovery/v100",
+    "--base-scratch",
+    "/home/henry/sigma-v19w-response-production/v100"
+  ]
+}
