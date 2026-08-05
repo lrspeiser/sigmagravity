@@ -1,0 +1,57 @@
+{
+  "report_version": "SIGMA-V19AP-HEADER-WCS-RESOLVED-DECAM-CUTOUTS-1.0.0",
+  "status": "failed_closed_on_deterministic_header_only_sia_response",
+  "frozen_commit": "e395e7c4",
+  "frozen_resolved_plan": {
+    "path": "data/derived/sigma_v19ap_header_wcs_resolved_decam_cutouts/resolved_plan.csv",
+    "sha256": "f267d200b0a95c03b16eaeedbfa2957034a4332c51fb84b5db8dda4135530193"
+  },
+  "counts": {
+    "planned_groups": 139,
+    "planned_measurement_memberships": 1032,
+    "structurally_valid_payloads_persisted_before_failure": 49,
+    "persisted_archive_selected_hdu_payloads": 37,
+    "persisted_nsc_sia_payloads": 12,
+    "persisted_bytes": 598314240,
+    "completed_manifest_written": false,
+    "groups_silently_dropped": 0
+  },
+  "deterministic_failure": {
+    "group_number_one_based": 50,
+    "group_id": "c4d_160228_042813_ooi_g_v1_ext46",
+    "retrieval_method": "nsc_sia_group_cutout",
+    "http_status": 200,
+    "response_content_length_header": null,
+    "response_bytes": 28800,
+    "response_bytes_modulo_fits_block": 0,
+    "independent_reproductions": 4,
+    "image_data_present": false,
+    "payload_persisted": false,
+    "failure": "The header declares an image body, but the HTTP response ends after FITS headers; Astropy raises 'buffer is too small for requested array'."
+  },
+  "checksum_keyword_audit_of_49_persisted_payloads": {
+    "archive_selected_hdu_payloads": {
+      "count": 37,
+      "checksum_keyword_present": 0,
+      "datasum_keyword_present": 0,
+      "raw_payload_sha256_available_only_after_a_completed_manifest": false
+    },
+    "nsc_sia_payloads": {
+      "count": 12,
+      "checksum_keyword_present": 12,
+      "datasum_keyword_present": 12,
+      "checksum_keyword_valid": 0,
+      "datasum_keyword_valid": 0
+    },
+    "interpretation": "The readable SIA payloads carry stale invalid FITS checksum keywords. The Archive selected-HDU reconstructions omit those keywords. Structural readability must be reported separately from checksum-keyword validity."
+  },
+  "gates": {
+    "all_139_groups_retrieved": false,
+    "all_1032_memberships_retained": false,
+    "all_payloads_have_image_data": false,
+    "all_present_checksum_keywords_valid": false,
+    "no_photometry_psf_mass_current_lensing_halo_or_gravity_payload_interpreted": true,
+    "v19ap_passed": false
+  },
+  "next_protocol_requirement": "Resolve all 82 frozen exposures through the Archive, preferring an exact frozen basename and otherwise using the frozen SIA association observation ID to identify the unique DECam InstCal ooi file; then select every detector by unique full-header WCS, freeze all 139 URLs, and retry structurally invalid payloads before persistence."
+}
