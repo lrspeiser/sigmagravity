@@ -2478,3 +2478,22 @@ pairs must propagate both source reconstructions or be removed by a target-
 blind gate when the galaxy sample is frozen. No kinematic value, target
 residual, gravity formula, constant or Solar result was opened. See
 [`SIGMA_V19BV_WALLABY_CANONICAL_SOURCE_ROWS.md`](SIGMA_V19BV_WALLABY_CANONICAL_SOURCE_ROWS.md).
+
+## 2026-08-05 V19BW WALLABY source-only variety frame
+
+The blind galaxy lane now has an explicit broad-coverage frame before any
+rotation speed or velocity field is opened. The 109 names with the published
+successful-kinematic-product availability flag divide into 27 or 28 objects
+in every quartile of H I mass, relative H I compactness, source axis ratio,
+distance and source extent. They span Hydra, Norma and NGC 4636 with counts of
+35, 31 and 43, and occupy 95 distinct five-axis cells; no cell contains more
+than three names.
+
+This is source-side coverage rather than a final evidence split. Optical
+surface brightness, bulge/bar structure, stellar mass, environment and full
+3D gas geometry remain missing. The release-row audit is propagated: 103
+names keep kinematic availability under all five prespecified policies, six
+under only some, and 78 names change at least one source-metric quartile.
+No target value, formula score, action, constant, holdout label or Solar
+optimization was opened. See
+[`SIGMA_V19BW_WALLABY_SOURCE_ONLY_VARIETY_FRAME.md`](SIGMA_V19BW_WALLABY_SOURCE_ONLY_VARIETY_FRAME.md).

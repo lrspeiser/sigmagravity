@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 192,
+    "sigma_protocols": 193,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7358,6 +7358,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "8abd59993e5f5e04d551615259dddb97119db9f207849ef46c49829056b55d67"
+    },
+    {
+      "config": "configs/sigma_v19bw_wallaby_source_only_variety_frame.json",
+      "protocol_version": "SIGMA-V19BW-WALLABY-SOURCE-ONLY-VARIETY-FRAME-1.0.0",
+      "status": "source-only galaxy-variety axes frozen before opening any kinematic value, choosing an evidence split, or deriving a gravity action",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "b7b1a68fa2a653005f7181c472eaf0ee8df3c62fa3898eb1e8d369c80c3fa8b4"
     },
     {
       "config": "configs/sigma_v19c_source_archive_acquisition.json",

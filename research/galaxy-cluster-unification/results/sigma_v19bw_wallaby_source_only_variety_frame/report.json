@@ -1,0 +1,186 @@
+{
+  "access_boundary_audit": {
+    "development_validation_holdout_split_selected": false,
+    "final_galaxy_sample_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "inclination_or_kinematic_angle_read": false,
+    "kinematic_table_rows_read": false,
+    "raw_alternative_rows_retained": true,
+    "rotation_speed_or_velocity_field_read": false,
+    "solar_system_optimization_performed": false,
+    "source_columns_only": true
+  },
+  "binning": {
+    "labels": [
+      "Q1",
+      "Q2",
+      "Q3",
+      "Q4"
+    ],
+    "method": "deterministic type-7 linear quartiles at 0.25, 0.50 and 0.75",
+    "minimum_names_per_axis_quartile": 20,
+    "minimum_names_per_release_field": 8,
+    "outcome_use": "coverage diagnosis only; no target, formula score, fold, development/validation/holdout label, or final sample selection",
+    "reference_population": "the 109 canonical kflag=2 names"
+  },
+  "claim_boundary": [
+    "V19BW diagnoses whether the public WALLABY kinematic-availability lane spans varied source-side H I regimes; it does not claim that any object meets the final baryonic reconstruction or target-quality gates.",
+    "Quartiles are relative coverage labels, not galaxy classes and not inputs to the gravity equation.",
+    "The H I compactness quantity is deliberately a unit-insensitive relative proxy and is not called a physical surface density.",
+    "All five prespecified V19BV release-row choices are propagated into availability and quartile-stability flags.",
+    "No rotation speed, velocity field, fitted inclination, kinematic angle, target residual, halo fit, action, universal constant, evidence split or Solar-System optimization enters this checkpoint."
+  ],
+  "config": "configs/sigma_v19bw_wallaby_source_only_variety_frame.json",
+  "config_sha256": "b7b1a68fa2a653005f7181c472eaf0ee8df3c62fa3898eb1e8d369c80c3fa8b4",
+  "decision": "passed_source_only_variety_frame_not_final_split",
+  "gate_results": {
+    "all_five_variety_axes_have_quartile_coverage": true,
+    "all_three_release_fields_are_represented": true,
+    "complete_candidate_universe_preserved": true,
+    "kinematic_gravity_and_solar_targets_remain_sealed": true,
+    "no_final_sample_or_evidence_split_claimed": true,
+    "parent_and_input_hashes_exact": true,
+    "published_kinematic_availability_lane_reproduced": true,
+    "release_row_systematic_is_propagated": true
+  },
+  "implementation": {
+    "runner": "scripts/build_sigma_v19bw_wallaby_source_only_variety_frame.py"
+  },
+  "input_audit": {
+    "canonical": {
+      "path": "data/derived/sigma_v19bv_wallaby_canonical_source_rows/wallaby_pilot_dr1_canonical_source_only.csv",
+      "rows": 592,
+      "sha256": "2f7cd772db3efc55495483a43884b7ee5af12ab37a0d1ec5800405ddeb67d1f4"
+    },
+    "parent": {
+      "path": "results/sigma_v19bv_wallaby_canonical_source_rows/report.json",
+      "sha256": "4d2db26e9eef11ae2a5d5c4b15dd48a3c0818f48de9aec13d3fe12828cad6f3b"
+    },
+    "raw_alternatives": {
+      "path": "data/raw/sigma_v19bu_wallaby_source_metadata/wallaby_pilot_dr1_source_only.csv",
+      "rows": 711,
+      "sha256": "58e59cdfc48cf8192ff2038b949285adfa3ab0b1038603b31afcf81df8fbac4d"
+    }
+  },
+  "metric_definitions": {
+    "axis_ratio": "min(ell3s_min, ell3s_maj) / max(ell3s_min, ell3s_maj)",
+    "distance": "log10(dist_h)",
+    "hi_compactness_proxy": "log_m_hi - log10(ell3s_maj * ell3s_min * dist_h^2); a relative source-only proxy, not a calibrated physical surface density",
+    "hi_mass": "log_m_hi",
+    "source_extent_pixels": "log10(max(ell3s_maj, ell3s_min)); the archive declares both ellipse axes in catalog pixels"
+  },
+  "protocol_version": "SIGMA-V19BW-WALLABY-SOURCE-ONLY-VARIETY-FRAME-1.0.0",
+  "status": "completed_source_only_variety_frame",
+  "variety_frame": {
+    "availability_across_policy_counts_all_names": {
+      "all_policies": 103,
+      "no_policy": 483,
+      "some_policies": 6
+    },
+    "axis_quartile_counts_in_availability_lane": {
+      "axis_ratio": {
+        "Q1": 28,
+        "Q2": 27,
+        "Q3": 27,
+        "Q4": 27
+      },
+      "distance": {
+        "Q1": 28,
+        "Q2": 27,
+        "Q3": 27,
+        "Q4": 27
+      },
+      "hi_compactness_proxy": {
+        "Q1": 28,
+        "Q2": 27,
+        "Q3": 27,
+        "Q4": 27
+      },
+      "hi_mass": {
+        "Q1": 28,
+        "Q2": 27,
+        "Q3": 27,
+        "Q4": 27
+      },
+      "source_extent_pixels": {
+        "Q1": 28,
+        "Q2": 27,
+        "Q3": 27,
+        "Q4": 27
+      }
+    },
+    "axis_quartile_edges": {
+      "axis_ratio": [
+        0.4245525700446927,
+        0.5535595602763631,
+        0.6954507420693384
+      ],
+      "distance": [
+        1.3690651894285397,
+        1.6661701348406188,
+        1.785633930322926
+      ],
+      "hi_compactness_proxy": [
+        3.980621349310363,
+        4.11995403198962,
+        4.209296608957789
+      ],
+      "hi_mass": [
+        9.197367739390632,
+        9.471867117236737,
+        9.84109345479152
+      ],
+      "source_extent_pixels": [
+        1.0725101073160916,
+        1.1741002139560381,
+        1.3308595070085691
+      ]
+    },
+    "bytes": 129527,
+    "canonical_kinematic_availability_names": 109,
+    "largest_multiaxis_variety_cell": 3,
+    "minimum_axis_quartile_count": 27,
+    "minimum_release_field_count": 31,
+    "output_columns": [
+      "name",
+      "canonical_id",
+      "team_release",
+      "release_field",
+      "canonical_kflag",
+      "canonical_qflag",
+      "canonical_reliability",
+      "canonical_source_snr",
+      "kinematic_availability_across_policies",
+      "source_row_policy_sensitive",
+      "source_metric_bin_policy_sensitive",
+      "hi_mass",
+      "hi_compactness_proxy",
+      "axis_ratio",
+      "distance",
+      "source_extent_pixels",
+      "hi_mass_quartile",
+      "hi_compactness_proxy_quartile",
+      "axis_ratio_quartile",
+      "distance_quartile",
+      "source_extent_pixels_quartile",
+      "hi_mass_policy_quartiles",
+      "hi_compactness_proxy_policy_quartiles",
+      "axis_ratio_policy_quartiles",
+      "distance_policy_quartiles",
+      "source_extent_pixels_policy_quartiles",
+      "variety_cell"
+    ],
+    "path": "data/derived/sigma_v19bw_wallaby_source_only_variety_frame/wallaby_source_only_variety_frame.csv",
+    "release_field_counts_in_availability_lane": {
+      "Hydra": 35,
+      "NGC 4636": 43,
+      "Norma": 31
+    },
+    "rows": 592,
+    "sha256": "a21d0c9f0452e9c77e39bf6065ad60d0f00280dbdce9432df9a45ede01190f3f",
+    "source_metric_bin_policy_sensitive_names": 78,
+    "source_row_policy_sensitive_names": 92,
+    "unique_multiaxis_variety_cells_in_availability_lane": 95
+  }
+}

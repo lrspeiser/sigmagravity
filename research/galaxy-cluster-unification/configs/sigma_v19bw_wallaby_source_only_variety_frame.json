@@ -1,0 +1,115 @@
+{
+  "protocol_version": "SIGMA-V19BW-WALLABY-SOURCE-ONLY-VARIETY-FRAME-1.0.0",
+  "status": "source-only galaxy-variety axes frozen before opening any kinematic value, choosing an evidence split, or deriving a gravity action",
+  "purpose": "Turn the complete V19BV WALLABY source universe into a target-blind coverage frame for broad galaxy testing, while propagating release-row ambiguity and making no final sample or holdout choice.",
+  "parent": {
+    "path": "results/sigma_v19bv_wallaby_canonical_source_rows/report.json",
+    "sha256": "4d2db26e9eef11ae2a5d5c4b15dd48a3c0818f48de9aec13d3fe12828cad6f3b"
+  },
+  "canonical_input": {
+    "path": "data/derived/sigma_v19bv_wallaby_canonical_source_rows/wallaby_pilot_dr1_canonical_source_only.csv",
+    "sha256": "2f7cd772db3efc55495483a43884b7ee5af12ab37a0d1ec5800405ddeb67d1f4",
+    "rows": 592,
+    "unique_names": 592
+  },
+  "raw_alternative_input": {
+    "path": "data/raw/sigma_v19bu_wallaby_source_metadata/wallaby_pilot_dr1_source_only.csv",
+    "sha256": "58e59cdfc48cf8192ff2038b949285adfa3ab0b1038603b31afcf81df8fbac4d",
+    "rows": 711,
+    "policy_sensitive_names": 92
+  },
+  "catalog_field_units": {
+    "source": "CASDA TAP_SCHEMA.columns for AS102.wallaby_pilot_dr1_sourcefind_cat_v01",
+    "schema_query": "SELECT column_name,unit,description FROM TAP_SCHEMA.columns WHERE table_name='AS102.wallaby_pilot_dr1_sourcefind_cat_v01' AND column_name IN ('ell3s_maj','ell3s_min','dist_h','log_m_hi')",
+    "ell3s_maj": "pix",
+    "ell3s_min": "pix",
+    "dist_h": "Mpc",
+    "log_m_hi": "log10(M_HI/M_sun)"
+  },
+  "availability_lane": {
+    "metadata_rule": "canonical source row has published kflag=2",
+    "expected_names": 109,
+    "boundary": "This means a public kinematic model exists. It does not inspect or score its velocity, inclination, position angle, residual, surface-density model, or halo result."
+  },
+  "variety_axes": {
+    "hi_mass": "log_m_hi",
+    "hi_compactness_proxy": "log_m_hi - log10(ell3s_maj * ell3s_min * dist_h^2); a relative source-only proxy, not a calibrated physical surface density",
+    "axis_ratio": "min(ell3s_min, ell3s_maj) / max(ell3s_min, ell3s_maj)",
+    "distance": "log10(dist_h)",
+    "source_extent_pixels": "log10(max(ell3s_maj, ell3s_min)); the archive declares both ellipse axes in catalog pixels"
+  },
+  "binning": {
+    "reference_population": "the 109 canonical kflag=2 names",
+    "method": "deterministic type-7 linear quartiles at 0.25, 0.50 and 0.75",
+    "labels": ["Q1", "Q2", "Q3", "Q4"],
+    "minimum_names_per_axis_quartile": 20,
+    "minimum_names_per_release_field": 8,
+    "outcome_use": "coverage diagnosis only; no target, formula score, fold, development/validation/holdout label, or final sample selection"
+  },
+  "sealed_target_columns": [
+    "freq",
+    "kin_pa",
+    "vsys_model",
+    "e_vsys_model",
+    "x_model",
+    "e_x_model",
+    "y_model",
+    "e_y_model",
+    "ra_model",
+    "e_ra_model",
+    "dec_model",
+    "e_dec_model",
+    "inc_model",
+    "e_inc_model",
+    "pa_model",
+    "e_pa_model",
+    "pa_model_g",
+    "e_pa_model_g",
+    "qflag_model",
+    "rad",
+    "vrot_model",
+    "e_vrot_model",
+    "e_vrot_model_inc",
+    "rad_sd",
+    "sd_model",
+    "e_sd_model",
+    "sd_fo_model",
+    "e_sd_fo_model_inc"
+  ],
+  "access_boundary": {
+    "source_columns_only": true,
+    "raw_alternative_rows_retained": true,
+    "kinematic_table_rows_read": false,
+    "rotation_speed_or_velocity_field_read": false,
+    "inclination_or_kinematic_angle_read": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "development_validation_holdout_split_selected": false,
+    "final_galaxy_sample_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "solar_system_optimization_performed": false
+  },
+  "required_gates": {
+    "parent_and_input_hashes_exact": true,
+    "complete_candidate_universe_preserved": true,
+    "published_kinematic_availability_lane_reproduced": true,
+    "all_five_variety_axes_have_quartile_coverage": true,
+    "all_three_release_fields_are_represented": true,
+    "release_row_systematic_is_propagated": true,
+    "kinematic_gravity_and_solar_targets_remain_sealed": true,
+    "no_final_sample_or_evidence_split_claimed": true
+  },
+  "outputs": {
+    "variety_frame_csv": "data/derived/sigma_v19bw_wallaby_source_only_variety_frame/wallaby_source_only_variety_frame.csv",
+    "report": "results/sigma_v19bw_wallaby_source_only_variety_frame/report.json"
+  },
+  "claim_boundary": [
+    "V19BW diagnoses whether the public WALLABY kinematic-availability lane spans varied source-side H I regimes; it does not claim that any object meets the final baryonic reconstruction or target-quality gates.",
+    "Quartiles are relative coverage labels, not galaxy classes and not inputs to the gravity equation.",
+    "The H I compactness quantity is deliberately a unit-insensitive relative proxy and is not called a physical surface density.",
+    "All five prespecified V19BV release-row choices are propagated into availability and quartile-stability flags.",
+    "No rotation speed, velocity field, fitted inclination, kinematic angle, target residual, halo fit, action, universal constant, evidence split or Solar-System optimization enters this checkpoint."
+  ],
+  "implementation": {
+    "runner": "scripts/build_sigma_v19bw_wallaby_source_only_variety_frame.py"
+  }
+}
