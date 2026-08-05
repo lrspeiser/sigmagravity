@@ -1,0 +1,90 @@
+{
+  "protocol_version": "SIGMA-V19M-ADAPTIVE-THERMODYNAMIC-REGIONS-1.0.0",
+  "status": "frozen after the V19L third automated-ridge failure and after the content-addressed V19H source maps passed, but before running contour binning on either cluster, knowing a V19M region count or boundary, constructing a spectrum or response, fitting temperature or density, opening a lensing target, or selecting a gravity formula",
+  "purpose": "Execute the independent V19H adaptive-thermodynamic region gate exactly as preregistered, replacing the closed one-pixel front-assembly mechanism with feature-adaptive two-dimensional regions suitable for later response-aware temperature and emission-measure inference.",
+  "parents": {
+    "v19h_config": "configs/sigma_v19h_causal_observable_protocol.json",
+    "v19h_config_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "v19l_fixture_failure": "results/sigma_v19l_fixture_corrected_fronts/fixture_failure.json",
+    "v19l_fixture_failure_sha256": "987b65b6b7e361b9c2563d342d65631f815e8c43c0ce2340311bf2cdf8fac833",
+    "v17b_binning_config": "configs/sigma_v17b_temperature_regions.json",
+    "v17b_binning_config_sha256": "93f51ca712db10dd91b615d2c54c6f986b976fbcb0bbd1fb0c07ee2f5fbba507",
+    "inherited_map_runner": "scripts/run_sigma_v17b_temperature_regions.py",
+    "inherited_map_runner_sha256": "fb2e5be4d2c302fed2ec77173e45e7d3659c0161cc7341f2e3251b66bbd386a0"
+  },
+  "sample": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "same_binning_executable_thresholds_and_gates": true,
+    "lensing_targets_sealed": true
+  },
+  "runtime": {
+    "ciao_environment": "/home/henry/miniforge3/envs/sigma-ciao-4.18",
+    "contbin_root": "/home/henry/sigma-v17a-tools/contbin",
+    "contbin_commit": "420d390a889750ec81f0888989912a86f6169c00",
+    "contbin_version": "1.7",
+    "contbin_sha256": "e26afa6ce36d15abca5a69f1a622b43653da25d6b2c52721019409f4dd1203d8",
+    "make_region_files_sha256": "cfa517a69630b4294259c439ba257be8435eba4e1ba8a83ace1a5819d698082c"
+  },
+  "inputs": {
+    "per_cluster_roles": [
+      "broad_counts",
+      "broad_scaled_background",
+      "broad_background_variance",
+      "broad_exposure",
+      "analysis_mask"
+    ],
+    "source": "the exact frozen V19H map snapshots and hashes listed in the V19H source-map report",
+    "noise_map": "sqrt(abs(broad_counts+broad_background_variance))",
+    "aperture_and_exposure_mask": "the already-frozen V19H analysis mask inside 1200 kpc; do not redraw or erode it"
+  },
+  "spatial_binning": {
+    "target_signal_to_noise": 40.0,
+    "smoothing_signal_to_noise": 20.0,
+    "geometric_constraint": true,
+    "geometric_constraint_factor": 1.5,
+    "minimum_net_counts_per_region": 1300.0,
+    "source_fraction_definition": "(broad_counts-broad_scaled_background)/broad_counts",
+    "minimum_source_fraction": 0.8,
+    "minimum_valid_regions_per_cluster": 12,
+    "valid_region_rule": "all three signal-to-noise, net-count and source-fraction gates pass; invalid regions remain reported but are not admitted to spectral extraction",
+    "failure_rule": "fail before spectra; never change S/N, smoothing, aperture, mask, count cut, source-fraction cut, geometric constraint, or executable for one cluster"
+  },
+  "outputs": {
+    "frozen_products": [
+      "noise map",
+      "binned counts image",
+      "signal-to-noise image",
+      "integer bin map",
+      "all region statistics",
+      "only valid spectral region files"
+    ],
+    "post_hash_visual_audit_required": true,
+    "next_authorized_action_if_both_pass": "freeze the V19H every-observation/every-CCD response extraction implementation before constructing any spectrum"
+  },
+  "three_failure_pivot": {
+    "v19j": "smooth-gradient contours were promoted by a local contrast score",
+    "v19k": "significant step seeds were separated by an incorrect node-spacing proxy",
+    "v19l": "a straight-chord path test fragmented a known curved step",
+    "mechanism_closed": "thresholded one-pixel ridge assembly",
+    "not_changed": [
+      "five-sigma front score",
+      "minimum six nodes",
+      "100-kpc front length",
+      "20-kpc empty ridge gap",
+      "masking rules"
+    ]
+  },
+  "integrity": {
+    "v19m_region_outcome_known_at_freeze": false,
+    "v19m_contbin_run_at_freeze": false,
+    "spectrum_or_response_constructed_at_freeze": false,
+    "temperature_density_mach_or_speed_fitted_at_freeze": false,
+    "lensing_target_opened": false,
+    "gravity_formula_or_parameter_changed": false
+  }
+}

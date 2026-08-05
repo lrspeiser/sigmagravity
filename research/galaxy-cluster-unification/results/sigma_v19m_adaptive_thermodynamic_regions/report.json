@@ -1,0 +1,4149 @@
+{
+  "status": "both_adaptive_thermodynamic_region_gates_passed",
+  "protocol_version": "SIGMA-V19M-ADAPTIVE-THERMODYNAMIC-REGIONS-1.0.0",
+  "generated_utc": "2026-08-05T05:42:13.110719+00:00",
+  "config_sha256": "285cdc12694217af69a03eef532094d26ace90b53b740faa2ef511138ef587f1",
+  "runner_sha256": "1d26fe3a33e10d9b487de6140adaedae2a8b3d7b0198d6d5aa520be58f356bab",
+  "clusters": [
+    {
+      "cluster": "BULLET",
+      "region_count": 392,
+      "valid_region_count": 366,
+      "valid_region_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25,
+        26,
+        27,
+        29,
+        30,
+        31,
+        32,
+        34,
+        35,
+        36,
+        37,
+        39,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        69,
+        70,
+        72,
+        73,
+        74,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        105,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        133,
+        134,
+        135,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        147,
+        148,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391
+      ],
+      "minimum_signal_to_noise": 39.99960326458706,
+      "minimum_net_counts": 1610.820314466,
+      "minimum_source_fraction": 0.47186258663645153,
+      "gates": {
+        "minimum_valid_regions": true,
+        "all_admitted_regions_pass_every_gate": true
+      },
+      "steps": {
+        "noise_map": {
+          "command": [
+            "dmimgcalc",
+            "infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_counts.img,/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_background_variance.img",
+            "infile2=none",
+            "outfile=/home/henry/sigma-v19m-thermodynamics/regions_v100/BULLET/images/poisson_noise.img",
+            "operation=imgout=sqrt(fabs(img1+img2))",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19m-thermodynamics/regions_v100/BULLET/logs/noise_map.log",
+          "reused": true
+        },
+        "contbin": {
+          "command": [
+            "/home/henry/sigma-v17a-tools/contbin/contbin",
+            "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_counts.img",
+            "--bg=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_scaled_background.img",
+            "--expmap=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_exposure.expmap",
+            "--bgexpmap=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/BULLET/broad_exposure.expmap",
+            "--noisemap=/home/henry/sigma-v19m-thermodynamics/regions_v100/BULLET/images/poisson_noise.img",
+            "--mask=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/BULLET/analysis_mask.img",
+            "--sn=40.0",
+            "--smoothsn=20.0",
+            "--constrainfill",
+            "--constrainval=1.5",
+            "--out=/home/henry/sigma-v19m-thermodynamics/regions_v100/BULLET/images/contbin_binned_counts.fits",
+            "--outsn=/home/henry/sigma-v19m-thermodynamics/regions_v100/BULLET/images/contbin_signal_to_noise.fits",
+            "--outbinmap=/home/henry/sigma-v19m-thermodynamics/regions_v100/BULLET/images/contbin_binmap.fits"
+          ],
+          "log": "/home/henry/sigma-v19m-thermodynamics/regions_v100/BULLET/logs/contbin.log",
+          "reused": true
+        },
+        "make_region_files": {
+          "log": "/home/henry/sigma-v19m-thermodynamics/regions_v100/BULLET/logs/make_region_files.log",
+          "reused": true
+        }
+      },
+      "products": [
+        {
+          "role": "noise_map",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/images/noise_map.img",
+          "bytes": 3248640,
+          "sha256": "9a8a847bf593398ba9a2a01812f88c282f27b3ce0d9cff957ed571010e5843e0",
+          "reused": true
+        },
+        {
+          "role": "binned_image",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/images/binned_image.fits",
+          "bytes": 1681920,
+          "sha256": "51374bdaf0cd600baa7104954f1435c572fc6675593eb8f49d1b5f4b3d727d1c",
+          "reused": true
+        },
+        {
+          "role": "signal_to_noise",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/images/signal_to_noise.fits",
+          "bytes": 1681920,
+          "sha256": "54bc0490333988c7e2cffc73b8d91e48bc9fdace481fc5506d20d8177c1851d7",
+          "reused": true
+        },
+        {
+          "role": "binmap",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/images/binmap.fits",
+          "bytes": 1681920,
+          "sha256": "69a308cdc2a81f433d5f60fb66f78c1a91204ad95024886eaad541081821a0a3",
+          "reused": true
+        },
+        {
+          "role": "region_statistics",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/region_statistics.csv",
+          "bytes": 48046,
+          "sha256": "3d42e5a544d915a5fb89c1a706a57fd9f5de726a8795fde8fde205ffaa88f1bc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_0.reg",
+          "bytes": 238,
+          "sha256": "50907ba48b76bdbe50a6956c12f5eda44299c42d1f510a8ed2f78b4d77d3713d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_1.reg",
+          "bytes": 238,
+          "sha256": "cd1edb6399881638b5f27d1fd120cf9827e16620be6b85fcb1ef646483ff8052",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_2.reg",
+          "bytes": 269,
+          "sha256": "567af0693d84c782d3fc0c2ca495d685bf2d0c8a211d7ea9db05a2536f00141e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_3.reg",
+          "bytes": 265,
+          "sha256": "8e0d21bc571c06cd357511e9af5272a4e93607c045e3321ed666f80071c25004",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_4.reg",
+          "bytes": 268,
+          "sha256": "0d3e3c719d2f1b38fa5dc8ffe7996e38214bcd24eec889caf0f9740dc21add24",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_5.reg",
+          "bytes": 265,
+          "sha256": "bd7bc0a04daeea545fd83fc05e418589a0fcc1c597095691dc3ab1e5c84754c0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_6.reg",
+          "bytes": 292,
+          "sha256": "6e0bbd9d9bb67b19079c9af117e2fbd94edc475ae8ee06c1a502c8042f357362",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_7.reg",
+          "bytes": 237,
+          "sha256": "2a574e92890b1a9f0acefb770c853d878abc7753668a8f81da74dc1133310242",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_8.reg",
+          "bytes": 322,
+          "sha256": "9cd53a6f5c0d620073d8a471067781357635b8ad638d097561f1617a8ef71af7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_9.reg",
+          "bytes": 294,
+          "sha256": "3f99757613e77e27d183c9997a4e5f1495e19529b142d89ea573c23e0b18776e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_10.reg",
+          "bytes": 211,
+          "sha256": "64ed86ba2cece53c2f682c94a1a17a9d8d6d31801fb509e1f8a64f07ee8c2bb8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_11.reg",
+          "bytes": 351,
+          "sha256": "ab6931b1cfca35be978bff7ae08c644b57d985e41bcf849a7b027b9d459a88bc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_12.reg",
+          "bytes": 291,
+          "sha256": "a43b683863334f4171e466d513286d34273d9d7e35bf845b3071508b15f2ce39",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_13.reg",
+          "bytes": 239,
+          "sha256": "b9479627871c3f1e87ccd4adc44511a2ff2cc5432a31e532c3bdb2a04dfddcdd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_14.reg",
+          "bytes": 322,
+          "sha256": "1a6c696d7621d354ae9b02e63feb7e57cc0c72fb74733aec9b023f177cee55bd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_16.reg",
+          "bytes": 377,
+          "sha256": "a4d96f92e23a95ca76f5b11f45f935dba01b9932f654be7bf7b6bab0e93cf220",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_17.reg",
+          "bytes": 291,
+          "sha256": "90ad8525e1553a5b8a18cff7fc230632820cf3a26ff262c547cca8971e505a84",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_18.reg",
+          "bytes": 294,
+          "sha256": "d20c5acb015faf5ba2c9e13a2b8710007c8b68260800f597887dcc5c8c57a5d5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_19.reg",
+          "bytes": 266,
+          "sha256": "2c11509b3932f49eab570a0e9f960a8fb9a5b0a787b53af974f9b7b2ad13761a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_20.reg",
+          "bytes": 322,
+          "sha256": "3515dfee23018eb3ec4d317dd59c86f8d57b2c7a05131251bf8ef7236851e76c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_21.reg",
+          "bytes": 266,
+          "sha256": "86cb1db803afe50090838f61d02b266e60637afb88689591e97d11a889706e95",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_22.reg",
+          "bytes": 266,
+          "sha256": "afb324379a37839b255d6f1c32046ae300838454c654a644760fe2456a6b6a7c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_23.reg",
+          "bytes": 210,
+          "sha256": "83d55e7bb2ce28fa374d7d01ef3ec27878a080a221df78a37830cbf8e73dcd03",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_25.reg",
+          "bytes": 238,
+          "sha256": "cb8f939d6c7cd0b8547105c7d011c0ea100a516fc559abcc895cb0588b31554b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_26.reg",
+          "bytes": 265,
+          "sha256": "ea96d69cbb09abde0664424c8ad03ed79cc9acabe1b7147e683b9a5de3a25850",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_27.reg",
+          "bytes": 294,
+          "sha256": "8cc6d1d6dc72e08e75af3123e5106cd7ff887fc77f8239d0379aef0c059d5f0e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_29.reg",
+          "bytes": 407,
+          "sha256": "2fd76ffbfcbbd8170ecf577ca6c68cb59afe6f962c05fe2b47662ca373a65c8b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_30.reg",
+          "bytes": 293,
+          "sha256": "e77ad67b75cc9fbb763db53db54f38db4965e0ea4e122ef99a340a15d8b1b8b0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_31.reg",
+          "bytes": 517,
+          "sha256": "4ff96c132c77277f078ea54970d6e1ee4a4c1acb68ad0ebb9dd04a0ef8a6a46d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_32.reg",
+          "bytes": 293,
+          "sha256": "b98b4bf8749181a9d130c00863245f5d740db73b8c40e575c0fba8d6cfa7ccbc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_34.reg",
+          "bytes": 266,
+          "sha256": "98a4f4a1964e03c400a994780ea12cc6281ea33540e22f380f7a29262250f627",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_35.reg",
+          "bytes": 266,
+          "sha256": "06f70c6249d13f545d9a2f8fe546f04bfa9c42874ca378a026f79f5d3d3d2bc2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_36.reg",
+          "bytes": 322,
+          "sha256": "b074e741a5a07ac5bf3958f410fe48e12b20be43a530318ae2f205bc58106d91",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_37.reg",
+          "bytes": 238,
+          "sha256": "9ef0c76890575175b15583141b6673452ee98450717c71d1e3b8ee8d1d23d4d2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_39.reg",
+          "bytes": 323,
+          "sha256": "9bbeb744d549039be77392dfdd2674ca8ad9d3d03a24afdfe3356e3e8c98b323",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_41.reg",
+          "bytes": 322,
+          "sha256": "9c431d0fef27a09465b933b9db7f6982e6fe87ddeb95ad76db989f0c87d2c297",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_42.reg",
+          "bytes": 321,
+          "sha256": "d147369b4be174609b4bf07db7cd87ac6929538255328ff5eef5a1c3f2914ff8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_43.reg",
+          "bytes": 266,
+          "sha256": "0aa95333672322d0bcf8595c924655698c86585942999ab8fc7c1cf6a45bd6f7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_44.reg",
+          "bytes": 350,
+          "sha256": "824cda4f1c1bbf01232515f4d84f7aef645e7fd5a07e4885e9a6ab7a82ef0ed0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_45.reg",
+          "bytes": 295,
+          "sha256": "2073c09fd46895007ed215b883f5ab114948d8cbf1e72f5ac7919689b9fe34de",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_46.reg",
+          "bytes": 351,
+          "sha256": "f3dd54f40b793533f34a6f6394006be6d350b5f1b3d62ed2a6a6ce97798239c8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_47.reg",
+          "bytes": 377,
+          "sha256": "04aa585372538a5e731a76685ad6b1e04bd4bb92959d6b69d697b5278ccf551c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_49.reg",
+          "bytes": 321,
+          "sha256": "862cc929fe68442743d356d44fb038c5d88e055d8bbee86cc5004f6bda8f7a5e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_50.reg",
+          "bytes": 411,
+          "sha256": "0edfd1f58220b722d1c5995210c2025657968e9e07328f969b94f88347213f53",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_51.reg",
+          "bytes": 378,
+          "sha256": "721d19ab56de23afc65dc7dc76207b1175a65192e27f1c5c2562fd6532ba0958",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_52.reg",
+          "bytes": 351,
+          "sha256": "c48b501b552f2461a4aa76a4521b0850285764c7522dc890d726317385cc5d29",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_53.reg",
+          "bytes": 352,
+          "sha256": "bcd3556a9abc962ce4f0f0166b61b895599c4af3bc9941d77dd13725f0a8fda2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_54.reg",
+          "bytes": 407,
+          "sha256": "29ebce875adc68d2c4ad6112019cd20b1626889e3c980b0e9ac405cce11e26d1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_55.reg",
+          "bytes": 408,
+          "sha256": "d464d707fdf68ee94cc273f2e0cde93e452df9b9d30d04e807e00aacbe18f9bf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_56.reg",
+          "bytes": 461,
+          "sha256": "f12c26829ae2254094de6127026409e03e9f6d63ddd2fa8d98237369bd6b2ff1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_59.reg",
+          "bytes": 406,
+          "sha256": "32e0b21413fa72052741275bff9b36416c5548968c3e922bcdb73d8010cd224c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_60.reg",
+          "bytes": 406,
+          "sha256": "e18cf619a91b83886dfb5f7cbd26eb857d43e8113960f4b878897195c07fb9d3",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_61.reg",
+          "bytes": 463,
+          "sha256": "86c10e65b73557dea5f9738ff79f5a02e3b6d508e4f7671c7a3f830762f30f6c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_62.reg",
+          "bytes": 406,
+          "sha256": "e1cdbe6dbf7017951194d1d05deccfe19028986c92c16c36ae43b6c49eccc2dc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_63.reg",
+          "bytes": 463,
+          "sha256": "450007361900dde70ee13096a98ac16360fb8b3cead594c40c9919c018c8793b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_64.reg",
+          "bytes": 325,
+          "sha256": "e2f3cd01e01456a6328675cfbd0194145a987b15a5f7fc18fcd8c09e1919878a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_65.reg",
+          "bytes": 322,
+          "sha256": "5d5d4e21c77e55e16b79ef5fa355166cbb65222ee5b25652d358300d1d7fc5fb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_66.reg",
+          "bytes": 524,
+          "sha256": "a151330d9a5867da0688aaeb6cddcc151cbf8c0ba6ed36f82f3643800fd9233e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_67.reg",
+          "bytes": 322,
+          "sha256": "46166e1558e32113c80331f9956986b2b60f805b43d4d2c34f11e22e0ae2ae49",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_69.reg",
+          "bytes": 378,
+          "sha256": "a2fcc5c14dc0a474b35a6f71aebfe754d4372ff439ae6f49c8f19dbc62621660",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_70.reg",
+          "bytes": 321,
+          "sha256": "8515ff8a17b0d1cfbdd444c374e86a96ab471f8719c17f12441dd52febcb9bd0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_72.reg",
+          "bytes": 407,
+          "sha256": "77e8224690652d9f2d9a4f1827e36f4a26e8be9d9c3d5b4abe38eee5a57bc390",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_73.reg",
+          "bytes": 349,
+          "sha256": "dbb7ab3f01058e26d7cf15ba8335c455c47bb086a1e4528194336d249f625ae4",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_74.reg",
+          "bytes": 353,
+          "sha256": "c616bdaa85595905d6f83db65a305053dd3285e467d26ee24ff460628777c52f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_76.reg",
+          "bytes": 406,
+          "sha256": "9d4af800e97180cb5de1915387fa360429f1c49b7269f85764f037ef630f6339",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_77.reg",
+          "bytes": 294,
+          "sha256": "fbe02ab25319b748d86bf2b76513a56d90f55f93b481490db5f3134e12eafb37",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_78.reg",
+          "bytes": 433,
+          "sha256": "98973da4faf9a129cb3a130a5b101c76a233722e9f6523aaa03d73883d4769a3",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_79.reg",
+          "bytes": 378,
+          "sha256": "3243a87dbd1b5e121fdbcbd99e26595ca226b9ccaec49eb10b01ac9a90191dd4",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_80.reg",
+          "bytes": 380,
+          "sha256": "8a8e528cf408370a8cc67a8527fbf484436c893ee5e13c9e3e2883def5bf7227",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_81.reg",
+          "bytes": 464,
+          "sha256": "4eef0f49c7732115997a0264ecb3b6db017867b833bdf4442f9a80933c3e8229",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_82.reg",
+          "bytes": 294,
+          "sha256": "407331f2c2333261668559077ba013cf23939819c9bbb1078fdfef71bf8e00e6",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_87.reg",
+          "bytes": 435,
+          "sha256": "3c6f972afdbbd864b4a7bcffa05e2ba46de8dfd441049abe6304be1e74a82358",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_88.reg",
+          "bytes": 323,
+          "sha256": "66563d05869b48be30a20299e719d247361c48509596fc6c6c995c0c3df49b9a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_89.reg",
+          "bytes": 518,
+          "sha256": "61b5a255653581e9a04c380654a11d9b70c4091da48bbcc54e929ee232c5660d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_90.reg",
+          "bytes": 490,
+          "sha256": "f6f4b519f6e2525fa5ff06cc9f3f5cf84811bef2b9a4402ed7a029df381c44c5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_91.reg",
+          "bytes": 351,
+          "sha256": "e0b99e86272566a0dbc8ed80035c092102e690c348edb4e1bf41d55613132708",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_92.reg",
+          "bytes": 409,
+          "sha256": "ddddc9e93b76ba3755e2324c59161b23e64e1225bf134c433d19c664be2473b2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_94.reg",
+          "bytes": 324,
+          "sha256": "567b0475a845307190112ce3f63e88f53cf977bdffeb6724d8e0b27ddee5ccab",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_95.reg",
+          "bytes": 408,
+          "sha256": "c321870a910487d029cbcdc11a88d2182b4aedc65d963928e44eb4ebba7d9413",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_96.reg",
+          "bytes": 351,
+          "sha256": "e3548d4f5689c33c5df48a8959a6bfb6d6b5e8bbd7e8c2ab4d5098e6649f1fe5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_97.reg",
+          "bytes": 379,
+          "sha256": "507a134dd910ae362c8e9e002e194def63bae1c5798800403ac1dc8788a1d0e9",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_98.reg",
+          "bytes": 352,
+          "sha256": "b16acedef2050366a372b378e4aba8f36485cd2491f15bffa58d96b888eef675",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_99.reg",
+          "bytes": 408,
+          "sha256": "a737d81a58edc28d9bd0137f7fa047f143f0e65c37e91a6bc1b992201ffea989",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_100.reg",
+          "bytes": 2465,
+          "sha256": "f4ab26516595d4071126f42a0f276c88ed921d7b687c621107739570fc06eb4d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_101.reg",
+          "bytes": 1848,
+          "sha256": "45a666137f8b4db5aa338f29c06f3b89ce9e48fecd4eb1dc740ace6ba67bb15a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_102.reg",
+          "bytes": 295,
+          "sha256": "721e4d1750de589174468469b02deb7081148e14d9137c4fb69ef2f1a0faed40",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_103.reg",
+          "bytes": 377,
+          "sha256": "9df4dd4852b9804039797bd4f1a9d95e91ee24067ca93eb3ad903be514dc2017",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_105.reg",
+          "bytes": 352,
+          "sha256": "0ac26b6029623848b95221a1049e9d88ec9a5ed1658979e9b5fdec0b673bce47",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_107.reg",
+          "bytes": 434,
+          "sha256": "e1295984e7bf7654475d43f39e3169904f559dd221d161e96de9dba9b2900c98",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_108.reg",
+          "bytes": 409,
+          "sha256": "6bfdf75b881a2cc16407ce567d26ad6253840f19781ecefcf459fe68e8fde503",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_109.reg",
+          "bytes": 406,
+          "sha256": "4b5eda355365d06051e1639ea03b9da72d42d9af37f73fd7e6207a882aaa5a4c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_110.reg",
+          "bytes": 434,
+          "sha256": "f610365b119f3b435dad3ccdfe614fc57af185dbedb7ead15dce6de23c09c4ee",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_111.reg",
+          "bytes": 494,
+          "sha256": "ca8d6ea74f4f8f869205e2697efa018ec936b52dee6f2281bbc4ba4ae45a23c2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_112.reg",
+          "bytes": 350,
+          "sha256": "b024bf36c6e2e6e2e0986d955ca72995637591f48eee7a5d46e5b19c507549c0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_113.reg",
+          "bytes": 573,
+          "sha256": "506c3e7858554fb79363dfc239c6dc71df6038fbe51fe26998698aa3f68d48cb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_114.reg",
+          "bytes": 379,
+          "sha256": "eaea02f6f9b4485509bd29bb45ef3c742fcacabe220982aca6b53337dd97cbb8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_115.reg",
+          "bytes": 1840,
+          "sha256": "719a392b258bff325a0cd917c862ab48d10d09a7e537bcc65f638f38c3987643",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_116.reg",
+          "bytes": 434,
+          "sha256": "63e920ce0006ac972671dd3c387c23384b4d751cfa8d4b60eedb94e8fc2ca509",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_117.reg",
+          "bytes": 1762,
+          "sha256": "4e0df85e3f6fc09ce9d66ae756714fc979560726cffbdaec54a47d5604919e44",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_118.reg",
+          "bytes": 381,
+          "sha256": "ad59ad7e73261667b147539400837b128f36b5ff711e7c2e9924f8d8842206a9",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_119.reg",
+          "bytes": 382,
+          "sha256": "e51aaf39713602ca9a3931b4ff7448d695c0bb2b818fb8f85f8007985b0705b2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_120.reg",
+          "bytes": 1671,
+          "sha256": "241b40e6d0e29713f351444f6a204294cbea907f24c237dbd7e111da3f51b901",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_121.reg",
+          "bytes": 464,
+          "sha256": "93714445c77f40168c41bd847f2a88384d7060c1f997529b02560f5fc55567c5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_122.reg",
+          "bytes": 379,
+          "sha256": "3f9f04dc0eb222afaf0a15b45541d6cc5f4acc29074a83e4f1114f7716eea1de",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_123.reg",
+          "bytes": 464,
+          "sha256": "b4f8ffe98fee7f171d81b862e720041d2bafd94013c91687812cb60a3a4370cb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_124.reg",
+          "bytes": 518,
+          "sha256": "a3956d98cdb9678607fa8c1cdc40eff6d1e15857bccb05e4496bedcb767ca53d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_125.reg",
+          "bytes": 410,
+          "sha256": "71b3387c3b5059cfcbf4dd3f5faca8c941eae732c65786707c134b17cd96b0d0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_126.reg",
+          "bytes": 352,
+          "sha256": "f8d0c675fbd6b83bf90abe93166aca25aa9feb9465ad72ffa9f5cf81006e19c4",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_127.reg",
+          "bytes": 409,
+          "sha256": "6dfff88781fc12dc555f0e42a5e59c7f1492ca39d91c9f0aba8d391a9457237b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_128.reg",
+          "bytes": 466,
+          "sha256": "13bde7d75be23bbbcf5cd12aa02d3a05454ca68af7b2302e1c5d588abbb33262",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_129.reg",
+          "bytes": 406,
+          "sha256": "5030f7de4505cb7a09eab8c829cca01cb36e102ae625973fdf6ffb81d90eae87",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_130.reg",
+          "bytes": 517,
+          "sha256": "33ccf1e7d70cca72061b83faa93152e40efcbe8ef2bd569eca44a4e2c2835a8d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_131.reg",
+          "bytes": 269,
+          "sha256": "25f410f97817299dd6e4ec2a5bf2963a26a051954ee5fc5967d737a0bba91ee3",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_133.reg",
+          "bytes": 381,
+          "sha256": "9c5d403fa6c86532158b62503efbb8d17143c757fc1f87bbe67b3cac2d931fda",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_134.reg",
+          "bytes": 583,
+          "sha256": "cd24a3e2851e7b72e76a767f97a1668cfbcba863163a51121c5fe22dba94a874",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_135.reg",
+          "bytes": 2148,
+          "sha256": "430224a8b7ff267b51dcf6148c76129095dd876d5ffc9e6d1ea5694db7fc90ba",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_138.reg",
+          "bytes": 352,
+          "sha256": "c645a0d44b028ccb7db137aa9d54da31a06c7cff2420af9286f0d2a8d71ba178",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_139.reg",
+          "bytes": 516,
+          "sha256": "0595ccef4b769adcc15187e6f1fd4fcc210a4b18cb18e76228564dbb63679383",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_140.reg",
+          "bytes": 522,
+          "sha256": "a1ec447cf3667d388d4b3ff85d58428b655c446df7cd7186351ab809ce1840e2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_141.reg",
+          "bytes": 466,
+          "sha256": "cc5554c5e74fda9d07ab7d792c84db450c2862faca80ff164d4b4d4acedf371a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_142.reg",
+          "bytes": 463,
+          "sha256": "4b171b02efe11f517f4206b79e52fa2b6120cfb3c8f649c62c4ad08caf8c89a5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_143.reg",
+          "bytes": 573,
+          "sha256": "00b4d136594cb8274e2f340b16d720d458617ca201a8052fc6f0794555df7834",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_144.reg",
+          "bytes": 1666,
+          "sha256": "bfa5f4809f5ba73af40b69293cb726f981f3b6b5b8f8e06f2cfa828d9774d888",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_145.reg",
+          "bytes": 1358,
+          "sha256": "476a10e9d27e01c5ce4632e84a4f8701a13a9e9d6c5d58ff23cc3f636cc5fd1b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_147.reg",
+          "bytes": 465,
+          "sha256": "68feebc8cdc6804eafcf7d2def8fbcb83c3e5a4d4847a290441f693301c31ebf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_148.reg",
+          "bytes": 436,
+          "sha256": "d23a5a6b35fe631968034820e124840797044e6069a5278546fddf0c0eded7d6",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_150.reg",
+          "bytes": 549,
+          "sha256": "db7c6a0c94ec428c56481c9c012745f23505d3b1479a1d45e599c85abb0fff18",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_151.reg",
+          "bytes": 468,
+          "sha256": "8ba0980be579ce6db9aa6cea5b4706a7ee1d279292d18a53c10d90f0b3c43d01",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_152.reg",
+          "bytes": 464,
+          "sha256": "09db600e9fb7b7b67747a553c1c61f540f349284ab934a864e6e9c53399bd7a0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_153.reg",
+          "bytes": 350,
+          "sha256": "ecf7cbfa9016932d0abba1336f003223caa99d5801b580d4fa58f313cc66edcf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_154.reg",
+          "bytes": 1357,
+          "sha256": "4f8a63cf2f167c81b794462a31dc1f01971c77a7bded73dd5625a245797d1cbb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_155.reg",
+          "bytes": 1757,
+          "sha256": "e52f95a4f483be678c1c5fde07100165b49fd8c5ed02ffdce37f0b11b468cb2c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_156.reg",
+          "bytes": 576,
+          "sha256": "0e7dc5060fe5ee99518a30414567605d4247a519461a10897609d8d77f1c3e8c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_159.reg",
+          "bytes": 1412,
+          "sha256": "7b5d4d31aa82b31150ef820235b38270218789a86cc1808e8bbbee1e8603f63c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_160.reg",
+          "bytes": 1393,
+          "sha256": "b028f3bf64bf2b235e55d9b9181796164ec77089d53f7099d7eb4954064bf214",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_161.reg",
+          "bytes": 519,
+          "sha256": "968eb4219fdcc03d88f76bb9c1bcefb09cac47add23a4674fad1901706d71149",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_162.reg",
+          "bytes": 1895,
+          "sha256": "da717b4ac216288219416ed6ce7722e24a1f2cd68921620fcad4494525f5077a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_163.reg",
+          "bytes": 383,
+          "sha256": "a0dda7fbf349c74f395f1ec74bded9e4560feb3e1f71f212e65374b82bb0cff4",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_164.reg",
+          "bytes": 550,
+          "sha256": "a2e3b217bcce6cde947e978b6161131a4cb4f6718d1ac00fa8c2206d368475ae",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_165.reg",
+          "bytes": 1218,
+          "sha256": "37db8aa947edb6541f99c2964141a3fd44d9ce884dc1680f6d67c0635f4e1e06",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_166.reg",
+          "bytes": 295,
+          "sha256": "9ee180f51e72d482782798c4a8e813c33cd6a0e048fc42808f8754c038e17296",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_167.reg",
+          "bytes": 1869,
+          "sha256": "965de4ce3fa0cc78d707db9822c891c172d9f22acc5be76ca0dfa4444de69325",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_168.reg",
+          "bytes": 406,
+          "sha256": "9cbb112be09ccb0e9a4afdab8e4669cc75c326c76881025562fcd66cfdb2be55",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_169.reg",
+          "bytes": 440,
+          "sha256": "263ddd95d70d7eec420fe05bfb1b2312450059b44079482a8ff5d9e0c4c0ac69",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_170.reg",
+          "bytes": 1386,
+          "sha256": "96c68fbee23f110b2863ff53c52563f768f6b1ed6c9760dd4cc2139f45662bbd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_171.reg",
+          "bytes": 1441,
+          "sha256": "c468cba95364209c58cc375c662001f4de62f17a2dfb83793577429711cf426c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_172.reg",
+          "bytes": 1263,
+          "sha256": "4ae5de5b1d11861d45db6e339b36e0d3dc667edfaa3dddc682cb8febb8955ca8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_173.reg",
+          "bytes": 575,
+          "sha256": "c9ed0139643e71a6854c67d89fb53f04ed7063eea23c5199db3dc3c1dcd99c94",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_174.reg",
+          "bytes": 465,
+          "sha256": "d63ee78d03ad68c3a4ec31340bdb9c888a02872634a70995723402575dbd233e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_175.reg",
+          "bytes": 352,
+          "sha256": "0921c133d1d0d44cc9e69d870541cbfca8d1bfaf31eafa2a2fcd5033c8000ec8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_176.reg",
+          "bytes": 1413,
+          "sha256": "4887874ea27152ae0f7ab7fbe9c93092d086306982b5f71901f409fb0d393aaf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_177.reg",
+          "bytes": 1191,
+          "sha256": "c11d0e738649ae2fe9861caca0c5aca8c01c7759f07b95521174ecd1e2fe441b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_178.reg",
+          "bytes": 1324,
+          "sha256": "0e889ca5391c3f08be33b11838678bfe42c08655bba88e3e4e953fb64a17ce1f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_179.reg",
+          "bytes": 1096,
+          "sha256": "2d1a44961b63c0e6aaf89d4c562104053ae3473edf74635e10744cd413f56890",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_180.reg",
+          "bytes": 577,
+          "sha256": "b808c1712a059bc3c60e3b8b47dcd70c0fadff20d7ed3de4bbac2be885e841bc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_181.reg",
+          "bytes": 1381,
+          "sha256": "502d31ac10d7108d15c53e359f14fd8f4f7745d5ef0a4e37223807f1bd9b84aa",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_182.reg",
+          "bytes": 520,
+          "sha256": "244ddac6744bbe1bd3cc4d691972cac7ae8eb4b62f430288d08ef6292a42a6d0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_183.reg",
+          "bytes": 434,
+          "sha256": "30a03b7ffedd61fb8e81ee34c2aea945a0ea667723d890af7d2282593e29a50a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_184.reg",
+          "bytes": 377,
+          "sha256": "cc9ab196453eb8aff2133dcb943776655ea611c1e70d7c8c4f3e1bbcb1bff3ad",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_185.reg",
+          "bytes": 1071,
+          "sha256": "dbde736861b3b0129380d465ccc308e6c7b11602f9b4cb617b3c6ecf80dc7809",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_186.reg",
+          "bytes": 1235,
+          "sha256": "1fbae00d1ccd358cd1855761aab84f45c12dbae73ea3c7319fdb2f993cd471f1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_187.reg",
+          "bytes": 1351,
+          "sha256": "4fa26a47fd260a767ab78a84ffdb6e7dc23b6b79511ba0b311abded13e72ef23",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_188.reg",
+          "bytes": 381,
+          "sha256": "46a249c7257ef795c16ecfe76010dfa7e3810d671bcd46fd5112fe87db1c73a6",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_189.reg",
+          "bytes": 491,
+          "sha256": "def53159d2e53968c6164325f996aacd47e0d42bda3053f0545a1ce4a9dc3cec",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_190.reg",
+          "bytes": 1467,
+          "sha256": "12707eee147ed35b1b0e962bf10a972b60d53c470271114b129e281dd65e9555",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_191.reg",
+          "bytes": 407,
+          "sha256": "734c387b21c5c5e0cc4abf69b82fa8d7de024964e9e5b2c3cb796bad06edf402",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_192.reg",
+          "bytes": 436,
+          "sha256": "6afb28f1d72cb19592ab543848354dac59145286c30bbc5938c81a708deb0938",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_193.reg",
+          "bytes": 660,
+          "sha256": "55539293f722de50fc049ebb5adb8664911a13636d3ad265bad65e2debfbd2cf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_194.reg",
+          "bytes": 1046,
+          "sha256": "9dcbdd9264856127b349a7a4d58ef6b305800d08b05a025e1216ca737ef3c686",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_195.reg",
+          "bytes": 494,
+          "sha256": "82d84507a2a94aa2434a01ad254bac2c7099558f9c22160b6267b3d504bf9f95",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_196.reg",
+          "bytes": 1778,
+          "sha256": "ea528720803c6baebc6a89de8d59c0870d130f90eff296c20ee7023b489f71bd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_197.reg",
+          "bytes": 1074,
+          "sha256": "8290b2bec94f4812c0dc2a1faa58aaeefff915bd10ae1647f2762655335966a4",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_198.reg",
+          "bytes": 494,
+          "sha256": "054def5ed6e167b624da8f79bac93d8d25c8f237953a010595896282d9ea8300",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_199.reg",
+          "bytes": 493,
+          "sha256": "ac2f3a4dcbad7fb465db573d5abf4cba04c679c0a90969f001a7ef0bdfa84245",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_200.reg",
+          "bytes": 523,
+          "sha256": "31e9fe20a9c5e6da7a165a9ccc1d5d7383e4b85dfac890a1a0072fc2a05fc0bb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_201.reg",
+          "bytes": 897,
+          "sha256": "9711ca9ea8d879947651d4356658bcc127ea77da10e849993228a8939b2f0dcc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_202.reg",
+          "bytes": 1151,
+          "sha256": "1d721566b8d674c9899e5a4ac13664fc726044626480b7cdd54218bcb452b25c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_203.reg",
+          "bytes": 985,
+          "sha256": "4872abaf0e7d1c21e1c46ac7e1caf68d7f3e7663ddeb48b89b7b615976cf0e37",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_204.reg",
+          "bytes": 1327,
+          "sha256": "ed64d78172b2b64648a674f6a743dd71ecc0b73d09040bb1d1ad333500bc6f23",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_205.reg",
+          "bytes": 1149,
+          "sha256": "290603af916c7a0e7aeaf2fe898ee840f478f5bbb691402f7d995350dc7b5d47",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_206.reg",
+          "bytes": 1210,
+          "sha256": "6ca835562216429c8e48594261c83ff6078f34d9ef88b7f045bffa667738e42c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_207.reg",
+          "bytes": 1015,
+          "sha256": "7d75832bf22aa1490104fd3b3fc1368cb070454b4e556b7eb3f6d81981cb87d1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_208.reg",
+          "bytes": 983,
+          "sha256": "5c2bb44db0785e83f367d03afe4143a6df7599fbccb4e81384da7712ed34caf7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_209.reg",
+          "bytes": 550,
+          "sha256": "32c45cde4acc8c0c60b7bad40b20eae8f2d611d99fd012b4d40c4c3313d01298",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_210.reg",
+          "bytes": 1124,
+          "sha256": "cf2b1d46c26813f528a23e7fb9347f1b46d9814b2a803d3fb042e6709062ed82",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_211.reg",
+          "bytes": 605,
+          "sha256": "4227efcc4f432a673f68cb7a4a028d3b229b6bd8f34701efbe57732d36593c5c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_212.reg",
+          "bytes": 1067,
+          "sha256": "4e6fe7e50eeb2470668cd616c37cdc7b2b40b6eb5b955c030abca468265749ab",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_213.reg",
+          "bytes": 548,
+          "sha256": "19a31b4e521463bad82e0a4f9a84a3b82a7c6d05c25e6fc540f03a9d2a508ed6",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_214.reg",
+          "bytes": 518,
+          "sha256": "050fa2e5a2185f3e5d1980eb25cf10b986664bbe435c208f84c907a88b233e35",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_215.reg",
+          "bytes": 953,
+          "sha256": "18563e438ba91deffeff0670d5f8a258bd0c5f8e48b9ea8851fa1943aa5c38a2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_216.reg",
+          "bytes": 901,
+          "sha256": "b75b02ee930d2f447e709624616f2db28fc7b0ee15f8525922ea8c3a5a55a4dd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_217.reg",
+          "bytes": 552,
+          "sha256": "dc4576668070617d1067859ca695b285bfab830f7e2af4c40f91d1cfa35ddf51",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_218.reg",
+          "bytes": 465,
+          "sha256": "72c86c56b028c08b9fb1b618d15323c2ea98985ffbc5fc9fc99dbfcd96f7fb9f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_219.reg",
+          "bytes": 1151,
+          "sha256": "eaf86f4c386ca4e0f507fe0f4f160c3ae960a2c70fc232ac553fca2f85e1e7c8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_220.reg",
+          "bytes": 1037,
+          "sha256": "fd79127fac74eb563fbee8cc177f0f485ffc78c0f5e7d21a59628c622b98d0d2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_221.reg",
+          "bytes": 1036,
+          "sha256": "b02398d1ec7c28bf803695b009fadd2777a36b0345f9d6e883c7f6a732d6d7a5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_222.reg",
+          "bytes": 580,
+          "sha256": "3704d249c81b49f18a269d4e672bc3e8c0ac96ee1ff573c4feb094a731209f89",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_223.reg",
+          "bytes": 1069,
+          "sha256": "ea4e642b2c0925922268282cf1c10155631150343fd9788df8c316b756b1b244",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_224.reg",
+          "bytes": 467,
+          "sha256": "91db0e80ef67f4e4c78655aaef0208d8b47f851b2a5d38a558084a21ed4895f6",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_225.reg",
+          "bytes": 1010,
+          "sha256": "ef9bb6e244ac8ae8a4ad114be0cb343e841aefbc9b099e61e9a02a85bc5dd99e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_226.reg",
+          "bytes": 1015,
+          "sha256": "5dc7a718152d71e9d0702f5ae95530fd702b6097264f6d73083e4132373828d4",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_227.reg",
+          "bytes": 410,
+          "sha256": "63c7ca1b35737ee8328ebdc224c4f541f47dd85dbc995204b1772958604e6cf5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_228.reg",
+          "bytes": 923,
+          "sha256": "fce7fb1713273566cb88eee290cc33aa64050638c0c9f4c51551c57acdfe9c7d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_229.reg",
+          "bytes": 871,
+          "sha256": "867c04e9028e8396d6775d0050f06f25f4977f1d4129938ff9e67318ac237fe7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_230.reg",
+          "bytes": 436,
+          "sha256": "7fa887b66ca55fcfa8fe2df0e119a5ee5a3e386e587e3f0f99039439e800e18a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_231.reg",
+          "bytes": 838,
+          "sha256": "5abc2a9e58dea7fe71a11d810a764c8ecbb3785cb653a8dc8d7fd126a2b5213a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_232.reg",
+          "bytes": 786,
+          "sha256": "59967eae99fd94d6e6ff6c0a6c1f6e41b898b84e5e1e575623baf02aaa2dea0a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_233.reg",
+          "bytes": 1351,
+          "sha256": "af537973308142400ef0be5c28d0036f6527aaa92108994e0454ade9e8d65e95",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_234.reg",
+          "bytes": 903,
+          "sha256": "9044235b8a894d7c5cd3043ef27af95ae4fa0b1f0e4da07603ca44895e23fa15",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_235.reg",
+          "bytes": 1180,
+          "sha256": "5d6167e88d49fdd84f49edbee47b36bbe595e61efc15c62a985436be884dc474",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_236.reg",
+          "bytes": 467,
+          "sha256": "42ba2a1bf85ae7b6169be63ef00718bdcbda3d7caa1eadf286e3434ade7f16af",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_237.reg",
+          "bytes": 895,
+          "sha256": "0d0500196732d03758b74684ff8aaddd310b1ad1d5736ef975eaf9d37046dbd3",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_238.reg",
+          "bytes": 1065,
+          "sha256": "f4ac2499d42964317a99c8a9f8296fd86babfc73c434f0fc64ba716b650480fb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_239.reg",
+          "bytes": 1173,
+          "sha256": "6145bafc13788205a4d8464adbc3949c7d596936659335911490c5794ccecb84",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_240.reg",
+          "bytes": 804,
+          "sha256": "8791ffcc2ddbc571956dfce8e43665ef57bf6673fe6b5a547ed7c9127ce8b7a7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_241.reg",
+          "bytes": 603,
+          "sha256": "ae62607e2c8903ac3a96e62e1bd307eede16a63f485162cb7db9e328a57e9cbc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_242.reg",
+          "bytes": 1176,
+          "sha256": "6a67175a041ed37e6b3f3a5ba5895aba88411cd25d681b711b90c4fd766f1fd8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_243.reg",
+          "bytes": 1041,
+          "sha256": "b3ab4fbf83d1ffe9d3463dcc5e3d8aeb08095cd096ca6ba52a26370dbf487e76",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_244.reg",
+          "bytes": 986,
+          "sha256": "77ad021be6165ae0cc548157df8086f2707401d4518a609cbc4514ff8c102f24",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_245.reg",
+          "bytes": 523,
+          "sha256": "0dc3c4e2f545395490e699137494b1cdefc4f619eb36ff11453f5ecb68ac1ea6",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_246.reg",
+          "bytes": 1059,
+          "sha256": "61ba039ca822af0a0d6dbaec8b5db2d6927186ee3183b6853d9d3f8d26e20fa2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_247.reg",
+          "bytes": 577,
+          "sha256": "054b39bc5d837f47078054db7b3c41d19e97ba7f88450ed970107cffbf86a877",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_248.reg",
+          "bytes": 580,
+          "sha256": "e866455a38571c66ec3e7935b97ec7177060561dafc89fbd4ad184be731db4b9",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_249.reg",
+          "bytes": 381,
+          "sha256": "4b0a02270c06cd2ae1acba2c8118b264aac5c34c2199a3a644e102a046614488",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_250.reg",
+          "bytes": 1296,
+          "sha256": "34e29736efd689395f2722806d36ea440efcdea9cebc3053a58876f1e57d4935",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_251.reg",
+          "bytes": 604,
+          "sha256": "9e5cc8596c89d37b0cfccece551a6c8e102a667a844776ff84861322d6d9b495",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_252.reg",
+          "bytes": 578,
+          "sha256": "b0e132a162a86587c77d56f1359ed4b4006e22e390e66b068afa21e58e6bd02e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_253.reg",
+          "bytes": 465,
+          "sha256": "98652715afef990cc0ad35a614f1278eaec71e9e575923efb1401a4ba40ccab0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_254.reg",
+          "bytes": 463,
+          "sha256": "0e34d6b2d7a95c81cf0625b5c525a38dcf99ed80a8fc630be4a5891033e23aa9",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_255.reg",
+          "bytes": 468,
+          "sha256": "48662c3986e01965812d9f297a546da0acd7168712511f0a185ff8e649a39941",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_256.reg",
+          "bytes": 492,
+          "sha256": "e05bfdcbd1a1668c38aff89a46b1202c174f7e98e62899fa6f8e576d3c6032db",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_257.reg",
+          "bytes": 410,
+          "sha256": "cdc76ed294f960265c505b3b9dd858242cdddf8c16fc7899b2c1f19a7cf02340",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_258.reg",
+          "bytes": 606,
+          "sha256": "a590df3c70741491e8f1f61c33f6b90e8721f0411f5de8125130feb35ec15ec3",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_259.reg",
+          "bytes": 872,
+          "sha256": "ab7f4e73f4179fa4212bad36fd63b57477607ee1fedc98cbb726d4e37ed6f156",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_260.reg",
+          "bytes": 1263,
+          "sha256": "083dbbff8e71e732d4a7cae15c1592c890a7098f235037567eb1b6d3b5788e32",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_261.reg",
+          "bytes": 836,
+          "sha256": "1836e0dd4f7dc73e2142c9f431d165530858410980b4a264dd143c660cef1d48",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_262.reg",
+          "bytes": 549,
+          "sha256": "79432f191bdfcaca16b09c05618296193361ce15dc9761f2a237cdca14d995f8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_263.reg",
+          "bytes": 380,
+          "sha256": "4ae9f706ae4a4f02f348bec4845cc242b2b014bb4b149371bbb905c6cf469d9e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_264.reg",
+          "bytes": 1399,
+          "sha256": "773ba8fc94cc3bb974cd5096b640ede883f6ed58d9b1d25d63683b73fc4ab759",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_265.reg",
+          "bytes": 809,
+          "sha256": "a96d7b39fdbfd7382322603b4b688ab9cb60eb27fe943a15ea13bfd56eda729a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_266.reg",
+          "bytes": 381,
+          "sha256": "57f60a704279f45e3d507cd69364db284d7acd2fa69263325d615573185aec6a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_267.reg",
+          "bytes": 895,
+          "sha256": "f223a164f3c1f5d47e207d1eb08fad7c2e33492e6395e4a6bea246dac3f73307",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_268.reg",
+          "bytes": 725,
+          "sha256": "5322453b77c00f8f831c4efa4ed70403a7e02b62e25a0279cfa989452fe5586d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_269.reg",
+          "bytes": 1013,
+          "sha256": "e179061e71d8fbe6260def7cb2f31b653a9cef9d8b93b796a618eb19ad6726b0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_270.reg",
+          "bytes": 751,
+          "sha256": "a2004683aa2364a608c380e1b9994895b5192248920f578c62b04b4abca711ce",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_271.reg",
+          "bytes": 1036,
+          "sha256": "ee91c935ff0e902623671b390c9a58059e25ba14dcd54d5dc616509eedab5e49",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_272.reg",
+          "bytes": 439,
+          "sha256": "6a0af3149eb8af8261c715e7ce1e383e90c3db83e7c5e7ee4fed2478006002bf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_273.reg",
+          "bytes": 752,
+          "sha256": "69e430675ffb2229f5a08859c09f88b39f747c84bb970bdc96a77ae371852f93",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_274.reg",
+          "bytes": 954,
+          "sha256": "f919f0c6fb217582ac488728dedb435c64311fa8fecf3da00f76d58956573bf0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_275.reg",
+          "bytes": 758,
+          "sha256": "46cf9d63e2766f1c8389a26a0cd37f6cf36f1aa5ee94ca47fdfa1d1a33f3610f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_276.reg",
+          "bytes": 1036,
+          "sha256": "007b2ebe3f1a51fe85a9473fa8212ee82519baca2300de0435290a55d63a96dc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_277.reg",
+          "bytes": 689,
+          "sha256": "3cd3f75de1ce5ca99dcec7bd0f6bfad2fd946cbda8e7cfab7ae6cd800754f555",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_278.reg",
+          "bytes": 841,
+          "sha256": "8f77ea84efd61b3242dbfd8c6135c08988110e63cc025566f8458290077ccc1d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_279.reg",
+          "bytes": 699,
+          "sha256": "d46fbce25cc24028f71acc756431531c6c76b392b4a3029be435fe95d58657fd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_280.reg",
+          "bytes": 870,
+          "sha256": "46daa95532dbde41a3dc70c4ca0ab9afd5b6866951c85034cf5c1caccb687be3",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_281.reg",
+          "bytes": 555,
+          "sha256": "194b4ac79fe7456fb4fbf980f68296ffd8b287e5a3dcbf2e38e5af3670bb9cfa",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_282.reg",
+          "bytes": 633,
+          "sha256": "abc97d351e2e2d65af5f19b0767796e62ce6d6e96819919a4772205fb22ac7a6",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_283.reg",
+          "bytes": 728,
+          "sha256": "ce716f38a076ddd8a90dd04f5b5cf8f8a9db9bde490c01ec761a8dd5e8ac12cb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_284.reg",
+          "bytes": 926,
+          "sha256": "c149b7537f07e901c7cda8933e5d2019e10f34170e2fc358cbc6ad26f2457d9c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_285.reg",
+          "bytes": 814,
+          "sha256": "2c7ad45882ec41cd56d188546e9138bdd00084625bf4f8a9ba4ace88c4c9b7b1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_286.reg",
+          "bytes": 495,
+          "sha256": "1f6bd016c9d72e81a838a1374ef58957b6432b41893319ca4792a925ae3f6c6e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_287.reg",
+          "bytes": 870,
+          "sha256": "2b37d3f6b1ff8beb26a0b85415c6b505d2e9b6e86f4c9521ba8f51a4beb91bf8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_288.reg",
+          "bytes": 842,
+          "sha256": "81198d3c1a9329a90b45549a4a52c5c9bc764917cf46f757e2c25d8c9387f383",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_289.reg",
+          "bytes": 777,
+          "sha256": "bc061cdae13cf4fadfa2f56fa9d48a1db9ded2600f442b6a31fed497142dd291",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_290.reg",
+          "bytes": 951,
+          "sha256": "90458ab1d90453e1079a173f70fc932af58ee5efbef017ce66362db4e5ce67bf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_291.reg",
+          "bytes": 638,
+          "sha256": "dba034c91a9e3ce79ef2baa5124ba7ab9df5190d8e6ed41177c6ae37c14b4b8c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_292.reg",
+          "bytes": 552,
+          "sha256": "f50d727930793ff06d04378ea3d8a4270311d91dbe3cb0f3febeca8fe34c8ef5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_293.reg",
+          "bytes": 634,
+          "sha256": "7c9a37c2a6746d5520dafcf77ab0d2fa0181943de2279c7c893aeae80514c120",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_294.reg",
+          "bytes": 786,
+          "sha256": "34e3485c63326c234116de2c8bb2a233bf92b0e7fda704877b45fe3a72d62679",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_295.reg",
+          "bytes": 839,
+          "sha256": "9e9529dbff275f7a3577c3eae7ce0723be6cb79b55f08fedbe1c39022b72706c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_296.reg",
+          "bytes": 665,
+          "sha256": "9a7c9b94ef1a36872d92bbda5e97821222e104594fd283dc8127e480dfe0d644",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_297.reg",
+          "bytes": 752,
+          "sha256": "5673a775bc236732913f16651a5636671ed6f3205e8bef27dd9a92c9f542603f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_298.reg",
+          "bytes": 497,
+          "sha256": "e36d9df3e1f5edd8337b5a2eb79927095501cf09de7f0577cd6268a7742f3afe",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_299.reg",
+          "bytes": 840,
+          "sha256": "99a06b45a1e757779589f3ab3bd3b692b4d6aae430bbb4f4c039a1cec7168194",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_300.reg",
+          "bytes": 778,
+          "sha256": "7ef7bee14ea552d0e7bdd8f7796a67e384da215f233698c7e08fce51a3f140f1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_301.reg",
+          "bytes": 811,
+          "sha256": "1bda6c47b8b37596959f647bc23ea13d55d280eadb82a9dd29383f773c796e5a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_302.reg",
+          "bytes": 703,
+          "sha256": "a4a0f95fb174ec53be80d7fbd224be1071da8a2aa2a2be2ca58af1e6ccd48589",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_303.reg",
+          "bytes": 527,
+          "sha256": "ec131e6127a1aeca4785597e6b19ebbd27f841c58f38f23cdbcf73b06637d903",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_304.reg",
+          "bytes": 496,
+          "sha256": "5d5e1c9d7fa40e6eff2ccba759b622a82215cb63a9e1ae2b603fdf1c85eecc16",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_305.reg",
+          "bytes": 496,
+          "sha256": "8b711ed9aa6ecf47c43bc20c09e2fa6d1bd7252d41c12757f56414dc06c019a0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_306.reg",
+          "bytes": 634,
+          "sha256": "cac0f4dd62fbf3b011d3f6acfe78f530f049ad568bcb1b1363fc495e1bf15bf2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_307.reg",
+          "bytes": 549,
+          "sha256": "ec6db27c022e6519d2f3e06e15cfa3f3cac5c6352e53d99273baec506f058ac7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_308.reg",
+          "bytes": 527,
+          "sha256": "36cdd3766c8d9d22fe4ece8996b069bec81bd1c06a8aa80acf94ac52f320f8cf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_309.reg",
+          "bytes": 663,
+          "sha256": "852ae4458229441983384beacbc4c1f0848bfd2f137359179fcf31711e06723c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_310.reg",
+          "bytes": 866,
+          "sha256": "d96046b794ff380bc3181c8b5d5183023633edeae7b18e2096145deb78428855",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_311.reg",
+          "bytes": 524,
+          "sha256": "7bbffb4d8de204ebc69156400d2e30069da80d1a09fbd90ea9beb06a9a370ecd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_312.reg",
+          "bytes": 580,
+          "sha256": "d1acac916fa4c1a6790ceed53e4cb4461053805fee4bc07362cbea72f5ab7461",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_313.reg",
+          "bytes": 755,
+          "sha256": "8269518938f7f444a0483dbb6c0eb37dde04ab5db556286132a2ca0840754e69",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_314.reg",
+          "bytes": 494,
+          "sha256": "dd467cad506346c40c42a03f6ad372b88b7ca15a9e50f0ae0a0dd91b9509f6aa",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_315.reg",
+          "bytes": 438,
+          "sha256": "cbc5a16251e2fe3e3d74632ef35a066dd8049e4d587395e959fce52ef963b88a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_316.reg",
+          "bytes": 609,
+          "sha256": "a39c965f9358587c15ba95d4062e090175c2068511b9935d271b54ae7394ee51",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_317.reg",
+          "bytes": 524,
+          "sha256": "21880f6e78489b07a25e602d4b61d35085e73b6b3d63077cd418a956f9c76172",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_318.reg",
+          "bytes": 637,
+          "sha256": "3008ede387107c84af291252e95dd264689b6f753a3c6180a12dbcf98726e9b7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_319.reg",
+          "bytes": 664,
+          "sha256": "9d969d285a552b9eca53c78b4bb6a7b106a10330840fd0e45cf884954808077d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_320.reg",
+          "bytes": 552,
+          "sha256": "2667bb5d30cfd61029b31b68e9945227c600dec160ef4edc168dc7fdbf0b0ef7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_321.reg",
+          "bytes": 667,
+          "sha256": "3f11be4ddb575ad2e40f936da85acf8a7a17fea1e9482d5702e2b5d408bc8482",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_322.reg",
+          "bytes": 663,
+          "sha256": "bd7c6ee8b71eb20e56fef0fb3d99c1aa0355911b43d3082951b884d866deb563",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_323.reg",
+          "bytes": 525,
+          "sha256": "aec4f4d2f2ca61b7b68275f21a88e6d4a6faac68380e49776fbf24387bcd8178",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_324.reg",
+          "bytes": 1032,
+          "sha256": "3051b8013e994d0f193d0287def750ac4923a57100e6887e52cf7884231d43bd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_325.reg",
+          "bytes": 694,
+          "sha256": "9109a47c4215244c7e9bb86be0cba0dac54228b6a4c99f2341b872d8c412f3b4",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_326.reg",
+          "bytes": 633,
+          "sha256": "8b663c8796a54e899d0cfeef62b0ec692dcfb3083acbe0e2eb59b942e78bbca7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_327.reg",
+          "bytes": 665,
+          "sha256": "575348d2a19431c263ac74492e081cb72b4556240c7645894889235fbe8ab2ca",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_328.reg",
+          "bytes": 667,
+          "sha256": "4302ecfb0a98e0c0a87cf7323b84e603b5f2212cd33e5c4a3e083f0c5c98afe4",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_329.reg",
+          "bytes": 810,
+          "sha256": "dbd7863f57685d9dd0cccb7067e5082e54caf2a3f06c77a933dc0c8db5d2e95d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_330.reg",
+          "bytes": 577,
+          "sha256": "c7c07cde90cda4e4f5912ae4bfacebcf101314d423d7b367f2e364a1b912520c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_331.reg",
+          "bytes": 726,
+          "sha256": "49d2c7dc2a5f46a1d1b7afa33b21b1a07f1439a5269f3f0cbc4cc2fdd24a21cb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_332.reg",
+          "bytes": 837,
+          "sha256": "8e98c971ef0efd0323eda7fee03c9b18e04ce443c584e2b548514e4045ecf3b8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_333.reg",
+          "bytes": 670,
+          "sha256": "21bbb9c3c36e23228ab9fd6d8c1d60a3969d018303f4c3e90feadddfb4547870",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_334.reg",
+          "bytes": 720,
+          "sha256": "2a317dad0336f92ef4cef08aad988e14e2b92c01918c94b10e1a8ef0145ddd64",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_335.reg",
+          "bytes": 638,
+          "sha256": "fbf34a4d358ffe305f592e98817a2615624ee72e05bdc6a576bf9b6b1471d284",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_336.reg",
+          "bytes": 581,
+          "sha256": "0e74d9449bb46450ce5180d2a0e191846a616d05a0e423579269b8937a732cc1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_337.reg",
+          "bytes": 438,
+          "sha256": "2fb41999460d0b37da5516bfe0d525a366f1e866456c79cde15922d8c887b577",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_338.reg",
+          "bytes": 693,
+          "sha256": "c9ce0a7e0d33c933e8de5a5ac716278b63b6831a2ecd5796a1b4fe06d0bd8322",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_339.reg",
+          "bytes": 695,
+          "sha256": "08fce0859120a94902e666e0aaba60bd3e21b3256bd4ca63897d0fd08b7eb0b2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_340.reg",
+          "bytes": 584,
+          "sha256": "f7d795bc6f9b0d07d2ddf997b2549cbe8f11f589707d457e297ca777c712ff25",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_341.reg",
+          "bytes": 635,
+          "sha256": "ddf8c74bd2a8dada7c1890aa7476204a913f8a566cb3d0eda7d873ae78630a04",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_342.reg",
+          "bytes": 695,
+          "sha256": "9619773ad7cdddbdebe4ef38d7995c7d16edfe4b873b4db0585d9663e7f7b087",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_343.reg",
+          "bytes": 670,
+          "sha256": "a39d13d812e194bcd558aecc5b8fe58eb02a8a3a8186d8b0cabad260e1052037",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_344.reg",
+          "bytes": 725,
+          "sha256": "f419ceb67a970850f75f0b8e6b5e755f6a4e19c1d37ba724541f970d71b6d799",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_345.reg",
+          "bytes": 576,
+          "sha256": "deb380ab0db9ff409d4333a1e69054cbc461484f4846c11ed4f7c8e8633067c8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_346.reg",
+          "bytes": 607,
+          "sha256": "5b442e221371a2ea5f125c9b6b1b2b54d359cc1d4a1a9e242d2d0a32aa6b90a9",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_347.reg",
+          "bytes": 581,
+          "sha256": "b7f0481ed30cf1e7e8c381c3dfd3e3b9c4cb9a711850a11ab6650af156af4c9b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_348.reg",
+          "bytes": 606,
+          "sha256": "37c440bc451a18ebf2cea23fde5a859153b72fc2485ea7db37065ce0a537e437",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_349.reg",
+          "bytes": 724,
+          "sha256": "92388dd3499ca0315d6cf9c6826d8cbc6f6dd0d994e54985fabe79906991a374",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_350.reg",
+          "bytes": 697,
+          "sha256": "99f394598b587e6cc8c1607c748e68e9d5883984cbdbf0417ddc3d06b291ff1d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_351.reg",
+          "bytes": 696,
+          "sha256": "7a0a18c1b8a21307d1bcb77ef54b420c4b4cd5da2db494cad95c6ad5f8787b1e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_352.reg",
+          "bytes": 723,
+          "sha256": "54a9b388894d072aa8f23185e614a38889ec6e60e6108bc5d807f2a21229c066",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_353.reg",
+          "bytes": 1192,
+          "sha256": "1f30b8e093c2dd9038818ffd05917fb6f91643d6e448bee4b18e74da01221099",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_354.reg",
+          "bytes": 722,
+          "sha256": "0601684883b01fc05b43bc744fed10a6a2c59333cab35bcb944cd4dfa63a2297",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_355.reg",
+          "bytes": 751,
+          "sha256": "bcc5301a7432f58566c1ccaea4e8ebc083f6607c6f61d74d0fffc77d4edd61e3",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_356.reg",
+          "bytes": 665,
+          "sha256": "1535076b9e551fbcb14d6931ebab7c931e59265f81666bd355b84a8ea2885cde",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_357.reg",
+          "bytes": 550,
+          "sha256": "385f5989b5ead9802fb5377ada2ff2027ee373d8551f8d6385b63bea330f1c99",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_358.reg",
+          "bytes": 667,
+          "sha256": "34abda4716ebf18ed0ba413f9ab5cf12df50162e4b0c7bca699ec1b26fe5fbce",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_359.reg",
+          "bytes": 699,
+          "sha256": "3093bbd53490c9e1b9a27c611f79403584335101fc86eefac96d7a0c5d5a84be",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_360.reg",
+          "bytes": 638,
+          "sha256": "d13e58ed07561259b679f73a003dd07cc8149a20646365a77daca0ae72663f96",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_361.reg",
+          "bytes": 723,
+          "sha256": "2fe8dc6670e50469bfd81751539e97ae8a6f39c668bc4bf2fc728f3c85f3098f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_362.reg",
+          "bytes": 830,
+          "sha256": "4b26abc20a830899b417a892496dd53cd6d564bf1531326e16bbfadc315aa49d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_363.reg",
+          "bytes": 497,
+          "sha256": "e2d0e5185334312179cdcc2209f850e1468051628d26142b2174807d975f1e06",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_364.reg",
+          "bytes": 581,
+          "sha256": "3a8f5345e601f8dae1f8974ca943d501b80ee0919ab56d6c84c8a5d76fd763da",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_365.reg",
+          "bytes": 754,
+          "sha256": "89103af662836e20a4377b2ad7431f9d801df60bd8dbf345e13f781a72717321",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_366.reg",
+          "bytes": 697,
+          "sha256": "12339797e08db404742425cf1cfefbb9e092f474d3be8cf5e95d7388c1fc507c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_367.reg",
+          "bytes": 749,
+          "sha256": "1c7d2b4e8186d5c9b01c37c03d796354f9fc61f72052e4cff78a3f67149a3543",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_368.reg",
+          "bytes": 663,
+          "sha256": "2d52abb7668687bdaea523e449e5f965d0882d1bbf972b173b4672b1342a7f42",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_369.reg",
+          "bytes": 634,
+          "sha256": "059849d86d41fad8cb2826f5b8201e5a4e8e9c16ca54d6945c603a97988e471c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_370.reg",
+          "bytes": 384,
+          "sha256": "d62f2ed04cdd37e392ca7574d3ca5a5ef33f2e1dd5ffef62e97cb55e3ba7fd2b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_371.reg",
+          "bytes": 860,
+          "sha256": "b0b2d64e451ef6b9918e84528f24d64505584a6ba27c1d5729d4c1a5977da4c2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_372.reg",
+          "bytes": 635,
+          "sha256": "ab220dedc4f69b1aae5396fc9dca09f40485af3afca428addaa27b1b50f3f04c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_373.reg",
+          "bytes": 581,
+          "sha256": "afe1023a6eb42e39b39b97721e2f8da71d53f220e88e4b3ef42fb1be8af4126a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_374.reg",
+          "bytes": 664,
+          "sha256": "e7f785adb0527542ec5fedf586f10cff137f2e5379d02d8626d6efd703f38e2a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_375.reg",
+          "bytes": 637,
+          "sha256": "633ebbe5bdad7c4095a08714ec0b1acbff486583f3e5299fe114e348590ff0ed",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_376.reg",
+          "bytes": 755,
+          "sha256": "524e662c0227b1a3a5ba0cef51c9d8b8a4f49c40b155bdba531aec7506cbfbf5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_377.reg",
+          "bytes": 692,
+          "sha256": "ec36d1759337cbf7de3d9780e52f7e335d171b119de7de810e21db4a192bfc64",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_378.reg",
+          "bytes": 1199,
+          "sha256": "107e40d20b7e82b0f8c6d82e4f8a1139e8a6b236fdda95ff808ad2f30a1d2a5e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_379.reg",
+          "bytes": 837,
+          "sha256": "2ec73d5816a36099f39996580387010509e8548dd70ceddab140ea0fcf249790",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_380.reg",
+          "bytes": 664,
+          "sha256": "6075fda050c75257fc48f9fbde5917f6fc3b5614e2992c863b36fcbcc7496cc0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_381.reg",
+          "bytes": 494,
+          "sha256": "3410f435f2a10e5f7161f9f891e5e5214aa5007814432d300c53c5aee9fc92df",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_382.reg",
+          "bytes": 664,
+          "sha256": "fd83f3eb159cba0a774ef4dacb6c5d003729c6842c1606fd2139c843df4fc0b7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_383.reg",
+          "bytes": 636,
+          "sha256": "e393e73783794dca2a918924add0afa939990bd236735b0b362ae8604985aca8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_384.reg",
+          "bytes": 668,
+          "sha256": "3dfbee0e75a36fdb3431985286628ef500b7aaf0d71c94acce239e70b7fd20da",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_385.reg",
+          "bytes": 553,
+          "sha256": "49caa15a8c20a63c4dcc5805edd6922a132445d9cd0bfd4c517af3ed987dbb3f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_386.reg",
+          "bytes": 587,
+          "sha256": "ea288a3d319424d635fa65d4f73138527db4288e153944871eeb07033b316ece",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_387.reg",
+          "bytes": 610,
+          "sha256": "67bcf040901019877b91d45da9261255e3eb8b2f49120fb4677d174ad15e9e9b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_388.reg",
+          "bytes": 666,
+          "sha256": "d24cd164f1cb7ae821830c886864d80e83cfaebc3e8eb569273167cf2996c6a9",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_389.reg",
+          "bytes": 554,
+          "sha256": "d9c5361b1a065e0f390755ee7c0801b91eb3432778191ab101ecb2099cbf3fa5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_390.reg",
+          "bytes": 805,
+          "sha256": "3c5f9c56b698cd5a5a9ee07d3533ec064aafbf3ae39c29a8a6c0e9b49e1b927e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/xaf_391.reg",
+          "bytes": 813,
+          "sha256": "50c8fa870833c2eed785bf9242de587b59b9828c22d5ddabb5167cd593d94d66",
+          "reused": true
+        }
+      ]
+    },
+    {
+      "cluster": "ABELL2146",
+      "region_count": 138,
+      "valid_region_count": 128,
+      "valid_region_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40,
+        42,
+        43,
+        44,
+        45,
+        47,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137
+      ],
+      "minimum_signal_to_noise": 29.380854419783237,
+      "minimum_net_counts": 1616.581467138,
+      "minimum_source_fraction": 0.1899058675291761,
+      "gates": {
+        "minimum_valid_regions": true,
+        "all_admitted_regions_pass_every_gate": true
+      },
+      "steps": {
+        "noise_map": {
+          "command": [
+            "dmimgcalc",
+            "infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_counts.img,/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_background_variance.img",
+            "infile2=none",
+            "outfile=/home/henry/sigma-v19m-thermodynamics/regions_v100/ABELL2146/images/poisson_noise.img",
+            "operation=imgout=sqrt(fabs(img1+img2))",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19m-thermodynamics/regions_v100/ABELL2146/logs/noise_map.log",
+          "reused": true
+        },
+        "contbin": {
+          "command": [
+            "/home/henry/sigma-v17a-tools/contbin/contbin",
+            "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_counts.img",
+            "--bg=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_scaled_background.img",
+            "--expmap=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_exposure.expmap",
+            "--bgexpmap=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/broad_exposure.expmap",
+            "--noisemap=/home/henry/sigma-v19m-thermodynamics/regions_v100/ABELL2146/images/poisson_noise.img",
+            "--mask=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19h_source_maps/frozen_map_products/ABELL2146/analysis_mask.img",
+            "--sn=40.0",
+            "--smoothsn=20.0",
+            "--constrainfill",
+            "--constrainval=1.5",
+            "--out=/home/henry/sigma-v19m-thermodynamics/regions_v100/ABELL2146/images/contbin_binned_counts.fits",
+            "--outsn=/home/henry/sigma-v19m-thermodynamics/regions_v100/ABELL2146/images/contbin_signal_to_noise.fits",
+            "--outbinmap=/home/henry/sigma-v19m-thermodynamics/regions_v100/ABELL2146/images/contbin_binmap.fits"
+          ],
+          "log": "/home/henry/sigma-v19m-thermodynamics/regions_v100/ABELL2146/logs/contbin.log",
+          "reused": true
+        },
+        "make_region_files": {
+          "log": "/home/henry/sigma-v19m-thermodynamics/regions_v100/ABELL2146/logs/make_region_files.log",
+          "reused": true
+        }
+      },
+      "products": [
+        {
+          "role": "noise_map",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/images/noise_map.img",
+          "bytes": 4547520,
+          "sha256": "f2a919fe3f2f09e09ec8b3b55b95100e6f1734a5c52a9c8587183b9cf4bbfd79",
+          "reused": true
+        },
+        {
+          "role": "binned_image",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/images/binned_image.fits",
+          "bytes": 2327040,
+          "sha256": "fdc0c5e8f9b4e45edbfa04c4f9cc4c3e513cd7f072d5e5a05b5e471170f6808c",
+          "reused": true
+        },
+        {
+          "role": "signal_to_noise",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/images/signal_to_noise.fits",
+          "bytes": 2327040,
+          "sha256": "8a00c5032253213a9deb11847220ff7714d8bfca6ca2cd7d97eb76b1437f19f1",
+          "reused": true
+        },
+        {
+          "role": "binmap",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/images/binmap.fits",
+          "bytes": 2327040,
+          "sha256": "2589a141ddfbd407494b14e0bbc0e6775b64260579988475a250f156a1821452",
+          "reused": true
+        },
+        {
+          "role": "region_statistics",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/region_statistics.csv",
+          "bytes": 16890,
+          "sha256": "8ceb7f7668a980daea08e7ba62967fc598ad627d286ab739bcfb12fe04c985c2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_0.reg",
+          "bytes": 238,
+          "sha256": "c028f4315b0c2c212ddb0a18f8c58c435cadb4dd5e22f3af04968262a26d1069",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_1.reg",
+          "bytes": 266,
+          "sha256": "b2ed9a54ebe349c31f90101fe6dfa1951c531b57c26c1b75fe4ea830037f099b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_2.reg",
+          "bytes": 322,
+          "sha256": "566754c068c432e5c17e5410882f05fa2540c67f2f00b57fec626e28180c7194",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_3.reg",
+          "bytes": 293,
+          "sha256": "c6615cc5000e434181c1f847c5c6395873c0f266dd809386de02bd260712622f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_4.reg",
+          "bytes": 375,
+          "sha256": "2a8e1ad4e42a7c5446912b98b2255162bd298719335e2d7f2dd29b03a4caa127",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_6.reg",
+          "bytes": 239,
+          "sha256": "2bb2b9f6276240be20c64d51c9e3535dab87e86ba9a23287ce65a3c25fb80aa0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_7.reg",
+          "bytes": 324,
+          "sha256": "a984494af2f257953d12e114b1a63851088d7cb37dd81a36d334ad7606d6dcbb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_9.reg",
+          "bytes": 348,
+          "sha256": "7e6be39c9a11a5a7ac415a4855b8a160e399b9dfbac750c0a5740ebcce93aed5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_10.reg",
+          "bytes": 321,
+          "sha256": "f11003a8fc8c0969ae36646753ea44678c9cdd8f671bd6732e1269a32c059fc3",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_11.reg",
+          "bytes": 293,
+          "sha256": "41088f510c30577d83f5742c4e92bc77b5f2ddd4e90e200e341e0a8b5fb07a83",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_12.reg",
+          "bytes": 267,
+          "sha256": "f4b963edb770a6bcb2d7f229ac9ace29afee8da8284889dbea7543f31794fe3e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_16.reg",
+          "bytes": 322,
+          "sha256": "84234ff401f72b19ce59ec2c4d0cc889dd8f2e700ca4c26b1dd5f02b57bc0736",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_17.reg",
+          "bytes": 375,
+          "sha256": "7ae864891acf0ed096abbb9f3388f41ba33262d6e5754ec52205c741990ee9e5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_18.reg",
+          "bytes": 321,
+          "sha256": "8daaa96981b72fbca69dfaeab3ce85199da6dffd745ee80d62c9d68a5ee810f8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_19.reg",
+          "bytes": 461,
+          "sha256": "65d53dcc9717788a326cd91b72a2b4a1a0480dc3f852c8f5d96ad61c34253960",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_20.reg",
+          "bytes": 403,
+          "sha256": "5ff9542a2ae3f2cb710dbac6aff484a9e6a62930d2e4d35e4f28b710cb6eb478",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_21.reg",
+          "bytes": 348,
+          "sha256": "42f3b177d2b53b81f01b4b6447ea77f15bdf777780929cfd61f5e40b919b177c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_22.reg",
+          "bytes": 375,
+          "sha256": "b6d139ab5f585c3582ce496ebfb5efe54706d3617000e377f56b709131df2741",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_23.reg",
+          "bytes": 407,
+          "sha256": "6cecd91073e2f63b8442596f0f5a3fac37abb9a73d21f49a31cf9a480b885b59",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_24.reg",
+          "bytes": 379,
+          "sha256": "37fb75fd1b530e8a672fd2eb36d9abee38315b84e9d5fb42e91a9f6cc2d9bfd6",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_25.reg",
+          "bytes": 461,
+          "sha256": "f757f34d45f501791efdec4dae512a9327af07bfe14ca38e6e86d478e9c50ebf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_26.reg",
+          "bytes": 434,
+          "sha256": "6ec4998f0d6dc36a5a9e675bc928f42899705afbb07f85883d2d085d3f4d1a12",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_27.reg",
+          "bytes": 461,
+          "sha256": "ad02a2b4f192c3290c05acec79d0d5c6f6996be27832561d5f1c0c4763d489e3",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_28.reg",
+          "bytes": 405,
+          "sha256": "3523efa685ed9852b991dd0f22cb8d3e1355df60674d97bf741fb846d8d1d622",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_29.reg",
+          "bytes": 266,
+          "sha256": "0ea553628ad2b7143e1eb7f721a0ff42de8b183aaab337c8487a53ed742f1782",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_30.reg",
+          "bytes": 436,
+          "sha256": "9e52ebac802369e8c7d59da7744113cc54edeb744c1b5aed7195d7fcd814a1b1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_31.reg",
+          "bytes": 519,
+          "sha256": "4bb6beed8c86fab0215426907142526ae61da60b4fe402a35a1781660b892497",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_32.reg",
+          "bytes": 464,
+          "sha256": "9da4f754f3cfd1cf47667f72a48b70b20ab5ccfcaa9ddec98044ea5d2b26151e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_33.reg",
+          "bytes": 437,
+          "sha256": "e5ecd249eb8a96affd33b3b5ed02338df4f46c217f3fbb8be953de608df32135",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_34.reg",
+          "bytes": 463,
+          "sha256": "5368825e8b044be4ebb51a27457b782fc62d220d4143b1508c84aace26936262",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_35.reg",
+          "bytes": 465,
+          "sha256": "a9599aff46e26a2ad250070c7eeb9f0d4cb1e2aa5d0c8af3fc07478f14960604",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_36.reg",
+          "bytes": 377,
+          "sha256": "91bc28fe9a52afbe662dd0a5435688a5f1157243db00a04d791369a6c9dff547",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_37.reg",
+          "bytes": 493,
+          "sha256": "d43dd75f37495c12c6fff93a15d81b3ed8eeda5bfc0b982bb559045eee455f0a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_39.reg",
+          "bytes": 322,
+          "sha256": "aaa5e1df3b7e6fdbd58ba47471cfc1218051f812d4e4c3eab6a1796874f15dc6",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_40.reg",
+          "bytes": 406,
+          "sha256": "2eff1b3c8caf56126983d35ca885111f9b6123a2698e69cfae0d9ad322d845b2",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_42.reg",
+          "bytes": 1644,
+          "sha256": "45825967d3afafd16e3ae3b295aa9084c3bbc5438d2f0b79da1b6a6d5f45c342",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_43.reg",
+          "bytes": 460,
+          "sha256": "777c452fe6bf4d2b14f0ca08d6ea513a1c9bf22d4ddf7e67eae9b146cd9e4b09",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_44.reg",
+          "bytes": 466,
+          "sha256": "9f366a1180b9ef39301f1764375977dc2cb5130f5f1ad80f1869d2b52f3aec89",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_45.reg",
+          "bytes": 437,
+          "sha256": "6efcd4aa19b29a072b11f3679574cad9bfffd474e353f2e8a106115fd41fbb2e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_47.reg",
+          "bytes": 468,
+          "sha256": "5fc744049ff19ae29128135f88cae6b8906b93301452a5bf18fe7374a9c3dd5e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_49.reg",
+          "bytes": 1270,
+          "sha256": "010ffae8a8a6a2b2a55be755f9f5248f3793a0116f92f7a91825c460c7ca555b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_50.reg",
+          "bytes": 465,
+          "sha256": "172762da7ebdbf01f0ed12b30a1ccd1b279fc97dbccf6710239b8b1632dd4c77",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_51.reg",
+          "bytes": 520,
+          "sha256": "c54107da75505cacfb27263ed559a434afa918f3877146f0089c058411ce426f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_52.reg",
+          "bytes": 412,
+          "sha256": "b091cbc86b080d002492ebe9935e1d367c48fb87528671a4e3114fdd0d8c4b5e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_53.reg",
+          "bytes": 495,
+          "sha256": "df9977e3b633ae0132072c5a64d4746a11cdd58e50bc57860da78636c6679f77",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_54.reg",
+          "bytes": 439,
+          "sha256": "d21d05fe3d682ca3708f6f20ccd34203c96e28c6b8e2452c9712d96615a2bdad",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_55.reg",
+          "bytes": 494,
+          "sha256": "f1a5a3ede2283a9dc61b49c5bd112a6cb1c5c0a3274084a8bbe7894e60c9bf86",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_56.reg",
+          "bytes": 466,
+          "sha256": "194b0a84277bc0e0ada3a457ecd3e9e4ea80d1580eb37408a880e30df7dacdd0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_57.reg",
+          "bytes": 549,
+          "sha256": "3b16b4035ea21f8bf3a983508f31de61b4aadf4b29551400091fc439900280ad",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_59.reg",
+          "bytes": 297,
+          "sha256": "7111491977a4899014dbfc5b599243d86fa62694186f868b5a3933c7f07d8a96",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_60.reg",
+          "bytes": 464,
+          "sha256": "5d2a7d47fee85a6964b652fd8bfd1b7ddc08578cff2dac9283655ddf8efddb30",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_61.reg",
+          "bytes": 412,
+          "sha256": "848daf1a398916fc3fb2af7da6c63f245b478cd76d5a1e43c38ea35e8880cccd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_62.reg",
+          "bytes": 1565,
+          "sha256": "915e97c0635ada42fcfb3bffc4a59544550f1d3f89210f1765f87b9a2966b4fb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_63.reg",
+          "bytes": 409,
+          "sha256": "1ec2898544a3cb8469816f493ec1e384fd770c279575f6ed84dcfe2657a9a691",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_64.reg",
+          "bytes": 548,
+          "sha256": "d6430527429b175579047161063ca8c3c6936f37f6fd9709762cc8891e182623",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_65.reg",
+          "bytes": 693,
+          "sha256": "c5f6149fe7b420fbc5038a1cc44fbcf92b7d013ca165dd44884d036bddd714c7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_66.reg",
+          "bytes": 406,
+          "sha256": "d91e17ee8606b02a3d9e8b1a9d994923d5978b710faae342deaeb871bde5448c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_67.reg",
+          "bytes": 1112,
+          "sha256": "d14169745d74c7ec19fffe24c405144a48def920374f118166a73f14fb548da7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_68.reg",
+          "bytes": 1389,
+          "sha256": "7db1d60a13088db868979c2d97beda36f326ddb5b42cab6a52a4a31c6a9424a1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_69.reg",
+          "bytes": 1413,
+          "sha256": "3a594e7b80a76c50728b289e3c97c199579dbf0f2f7800fc150febe42578e150",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_70.reg",
+          "bytes": 718,
+          "sha256": "f604f3cb6f26fab75d9995f0c526d006a66e82be2faaf7e56892b9e390041020",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_71.reg",
+          "bytes": 492,
+          "sha256": "bab826b687440185addae522345f2c2bd3abc868730c1e069e16c1c13c8aa127",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_72.reg",
+          "bytes": 465,
+          "sha256": "e92c6012632d23bd8a936a7c33416858a045f931b4efec78962f6d75ad0d04d7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_73.reg",
+          "bytes": 494,
+          "sha256": "44249c7283399d8f763a2e595e3819db1b180d41658a551a4218ac7c731117ad",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_74.reg",
+          "bytes": 410,
+          "sha256": "7f5f943a9ec6fc958e7c499384f78dcf268293dc578624270573de8e4cbbd06b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_75.reg",
+          "bytes": 609,
+          "sha256": "ba99a4c0fc1a654798ede872ffc707d1f2ccb299d743ff1cb2198b5ed45bbfae",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_76.reg",
+          "bytes": 553,
+          "sha256": "d23c461880b5b511b400ee42a15ed3ea7ae330ad1e4148a91eaccc16bd18e11d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_77.reg",
+          "bytes": 800,
+          "sha256": "12999c9db4fafd8e7bc6d6cf75274c4f27c0d0598d7608d06a090cbb0998747b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_78.reg",
+          "bytes": 607,
+          "sha256": "7012bb91045e5f33421df142ebbccc797ae8c5bea0ce5f3722952a0cc1893b81",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_79.reg",
+          "bytes": 1155,
+          "sha256": "a0309611d3bd121ede93d2ecbf5b21b0cd847211b33d1ca63feeb4e038a71305",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_80.reg",
+          "bytes": 637,
+          "sha256": "537a76797b119a8d5047c59b66afad833674004ec1a4a62c522cc031a5083f02",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_81.reg",
+          "bytes": 692,
+          "sha256": "39334586ea1ba40857beaef23117d5b41fc0b6dd2c00ce06adab053158cfa2a9",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_82.reg",
+          "bytes": 555,
+          "sha256": "ff9d594acdb70715e9f03acc5e1a7142d71f854a3611e3f97207afb482277068",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_83.reg",
+          "bytes": 607,
+          "sha256": "abef95acb8e684f229d94a81155e93196886ed08228b5a1b8a267694a96fdf13",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_84.reg",
+          "bytes": 982,
+          "sha256": "ca34ba0f7cd66f6929c1a174e035855b75dbd38380ce895927f48b6ef21b0160",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_85.reg",
+          "bytes": 615,
+          "sha256": "d8e037d735fdc1617d742395d20222377105612084cb5bf69c54111e4cc0c73c",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_86.reg",
+          "bytes": 579,
+          "sha256": "4164fbe6d311a303a3b8c118c6b2f71e48951e2c4b75e210f2a20be823fc1f48",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_87.reg",
+          "bytes": 1276,
+          "sha256": "c29eddad7d50af61b8082d6a7564fcf3c8ae4c2ef81e7c8b0486adeb7bfb501d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_88.reg",
+          "bytes": 610,
+          "sha256": "1939a6d1c24f8d85a12d32c9d6d4b48cabb39b98e707ce493ec41f4c6e39163f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_89.reg",
+          "bytes": 1702,
+          "sha256": "c3d98a23481e00067b8ea008b59967a14939511d19d55c9748cf9cf52719a686",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_90.reg",
+          "bytes": 722,
+          "sha256": "7e259a8c708f5931c0dde239b9f013c504d9b24faa5e1ee880e74f556f6e0a48",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_91.reg",
+          "bytes": 552,
+          "sha256": "4849baf09533c7f0b857ef4fb5036c28cf10bb6d5ebb0c7926ec14ba3d9b8c62",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_92.reg",
+          "bytes": 613,
+          "sha256": "343aeaa2de057a689f9b3188588d3decea7176374f4e22a7d3000edf8983de30",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_93.reg",
+          "bytes": 580,
+          "sha256": "92cf89c7e68ce7fcb83d40e7783428fc2d8ee4bf2ac96afdc7a4722a25150d32",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_94.reg",
+          "bytes": 812,
+          "sha256": "5885a042ab8b89b728d9c19e4c857f336fa1642edf88d9aea9e0d46ef13db94a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_95.reg",
+          "bytes": 1270,
+          "sha256": "803c771f3267d7411ecd372ed3a51dff4bb4b161c3f47ef750f9fdc394aa5028",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_96.reg",
+          "bytes": 554,
+          "sha256": "685de9582f27df4698ec16783c6e3a45d644fc1f7f6b58d239949d528a1b2cfc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_97.reg",
+          "bytes": 522,
+          "sha256": "f2e5d86cf507d1f4b7860fb9b1e0f61de6a3dec0e2a637cfeb200aba8a107150",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_98.reg",
+          "bytes": 834,
+          "sha256": "b754b4b75635cc57b8fd12d78aa28c08c21461f3db89ebd6ffc844fa288558d4",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_99.reg",
+          "bytes": 699,
+          "sha256": "6d6095a8fcc9393b561ec6a1ba2926f7e9788d1dc337d68c6fde604b6696945a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_100.reg",
+          "bytes": 1184,
+          "sha256": "ec414afb68e4696a82c191a4a62cbe69cefbeb834bbe25a3dfc2a6edc8185bbc",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_101.reg",
+          "bytes": 957,
+          "sha256": "c63f3a238d3fd545194f72e779c3fd58a8a23f781d3036c22e9b5b115d6c9111",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_102.reg",
+          "bytes": 902,
+          "sha256": "9f6af6b47cf0c7dc5bd2d0ac65452e9e92196867738166c6a451f9f338e43ade",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_103.reg",
+          "bytes": 666,
+          "sha256": "60ef9fc6e4ba439a35462d1bfdc2c58c99e7c74c8edcabe2abaf75b57a04a2d1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_104.reg",
+          "bytes": 837,
+          "sha256": "ce4f0069c77d625573a8dd9b30ada1dd844f3df23380c22b9f75f8708df4e06a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_105.reg",
+          "bytes": 468,
+          "sha256": "583ccdd3974044ef32bcc58ee66d335e6605e901dfd0aeffba26e104ded09894",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_106.reg",
+          "bytes": 806,
+          "sha256": "95d1ae3204f4b5e8239ff07b66da2aa84f2fce1248031ff3ba854afc6c787ff8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_107.reg",
+          "bytes": 702,
+          "sha256": "1e2c18dc50ac363d99ec860066e6bb29ace63cf7861d3b794352686eb9f8a383",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_108.reg",
+          "bytes": 749,
+          "sha256": "c862fd9786a0dd783cec1f2ea1637be72fd7fd1b90ece1db9e95f42aad09098f",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_109.reg",
+          "bytes": 665,
+          "sha256": "a7c939ac2f19d6d31ce2c3e831b3f60e63cedefd36d5292e7be940181dfd21fa",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_110.reg",
+          "bytes": 927,
+          "sha256": "d0e8274ebb8c4c85be0ad63404fc36e0c0feba732937ec4246d306c70983948b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_111.reg",
+          "bytes": 781,
+          "sha256": "d12a6b336a160ee00d3fbc7add16cf4791f6fdf67af880054523c4ef4177cbff",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_112.reg",
+          "bytes": 785,
+          "sha256": "66cb5a91070df24c8a5ab5eb7bf996c013ad178cb0ded5b7a66f02cea562e93a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_113.reg",
+          "bytes": 724,
+          "sha256": "4a00f2c39153728f5820d4ce630e0b223d66bb09b3178dd3c2997f2cadceccd7",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_114.reg",
+          "bytes": 782,
+          "sha256": "493b19ba43709437c02853002ce88718fc673b144e7fcbb862cddf70c7407f1a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_115.reg",
+          "bytes": 697,
+          "sha256": "7ea3fb108ccdf68ebc5bafbc21982615a4bca93bf9ba8902ecb2c7d035fb8b52",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_116.reg",
+          "bytes": 640,
+          "sha256": "d18325506a1c9784f35eafa2123083f1ff76227d0cea95c00bc76a342769eaa5",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_117.reg",
+          "bytes": 783,
+          "sha256": "4657471815b5ea6790b3412f966391e9ba3ed7120a44ca8303608ab53ae73fd1",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_118.reg",
+          "bytes": 953,
+          "sha256": "f1bb48be40b9a5b668b136f2b7e047d914364b7f1626baad458a626eee306ebb",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_119.reg",
+          "bytes": 664,
+          "sha256": "919fa9fd52b5d3170291cfbb7459ec58c120929eca97980f3c6235a03b735ef8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_120.reg",
+          "bytes": 840,
+          "sha256": "10ec97c0948586f89dd324c16731763a0cff31fc07e454dde9c6b26c3e66355b",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_121.reg",
+          "bytes": 868,
+          "sha256": "c832ba4a5b31e7478cfa8a8c44693a0e2caedb1a48ebadef22b638b7fa200570",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_122.reg",
+          "bytes": 666,
+          "sha256": "b0b5e237fb6b4fa81bf50ba51d349a9481faf543a495c541671813a0907ea0cf",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_123.reg",
+          "bytes": 726,
+          "sha256": "85e20f50ad4ee2a1acff83a417a30731e4eca987a3ac36e6af98539d3a73fe34",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_124.reg",
+          "bytes": 725,
+          "sha256": "497e3a27b0ee37f6512855cddca297d12d0e3c22a09929b489f3a666de7e1961",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_125.reg",
+          "bytes": 811,
+          "sha256": "d6083e9228cf7e3292b2737773e565cf871ea01617fc55e946de6629582749f9",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_126.reg",
+          "bytes": 674,
+          "sha256": "90b7fb9596d88fc072f8043552046da25fbf29ba32fc0cca171f6bc9bc1821bd",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_127.reg",
+          "bytes": 723,
+          "sha256": "b1a105a1ff7f657ab2a6884fc21497f51b99776e8021a9f9acaafdff040d208e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_128.reg",
+          "bytes": 923,
+          "sha256": "1e5860c6c4636165e9738e87d3d14ab7f9c60ffd4de7ccd425bf33f3f94d209a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_129.reg",
+          "bytes": 555,
+          "sha256": "8b4350b700d41a52b6fef2c1e7b5424a0bcd4e516168a49261e95c841d29c8d8",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_130.reg",
+          "bytes": 668,
+          "sha256": "9a64a24a6e3a84d62982330c8b101cf5800bcd310df67a7ed1c91a2e46c4ed0a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_131.reg",
+          "bytes": 695,
+          "sha256": "6374d88e3f12e7a87ceefe76ae59c7947f20acbccb89e5d22c7556a9b1492ca9",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_132.reg",
+          "bytes": 641,
+          "sha256": "7dd4024f90d7e62449c5ecfa982738a0e78ea6273071c7389485b82e1e5f592d",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_133.reg",
+          "bytes": 728,
+          "sha256": "0637f7f0547e4d09a9c8a6f5b2231bbd6c30cc17ead4b82fbe81581a5efd6a2e",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_134.reg",
+          "bytes": 753,
+          "sha256": "883c774dec7d5e8a895b90751b3e09dc4a8eaae51aca7b84cf008595bee96aa0",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_135.reg",
+          "bytes": 836,
+          "sha256": "890aa31703597c93603063177666bbe291cb636207e97212c09a77c80dc15863",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_136.reg",
+          "bytes": 814,
+          "sha256": "ee3cba6f6aee6b9eeb2736358fce864b2932a999b4ecda301290041f31ed570a",
+          "reused": true
+        },
+        {
+          "role": "spectral_region",
+          "relative_path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/xaf_137.reg",
+          "bytes": 840,
+          "sha256": "58cc02063da473ed352fed1290565c8e99fd55cf71d0a86035ba77729216207b",
+          "reused": true
+        }
+      ]
+    }
+  ],
+  "regional_spectral_extraction_authorized": true,
+  "post_hash_visual_audit_run": false,
+  "spectrum_or_response_constructed": false,
+  "temperature_density_mach_or_speed_fitted": false,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

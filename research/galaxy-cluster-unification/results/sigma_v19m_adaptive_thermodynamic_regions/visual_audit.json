@@ -1,0 +1,39 @@
+{
+  "status": "post_hash_visual_and_topology_audit_passed",
+  "v19m_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+  "topology_diagnostics_sha256": "b8a3503115261363c1ca7524038f3954c7e358360cda5726fe4c7ecdabdde3ad",
+  "clusters": [
+    {
+      "cluster": "BULLET",
+      "diagnostic_sha256": "c1ad4fcae5fe9bf1e8b8c90fc5e636a73ca50b9ed5ddf95705568b2542c113ff",
+      "visual_findings": [
+        "region boundaries follow the registered diffuse broad-band morphology",
+        "fine central regions and progressively broader outer regions are consistent with fixed signal-to-noise binning",
+        "no disconnected, checkerboard, chip-edge-following, straight-chord, or contour-forest topology is visible",
+        "invalid low-source-fraction outskirts remain excluded without breaking admitted central regions"
+      ],
+      "passed": true
+    },
+    {
+      "cluster": "ABELL2146",
+      "diagnostic_sha256": "e70e12213161924abbf1ee060f186388194c84af4f59b75a5e7d7b7c5cea8f7a",
+      "visual_findings": [
+        "region boundaries follow the compact elongated diffuse morphology",
+        "fine central regions and broader outer regions are consistent with fixed signal-to-noise binning",
+        "the isolated masked hole is the inherited point-source exclusion rather than a disconnected admitted region",
+        "no disconnected, checkerboard, chip-edge-following, straight-chord, or contour-forest topology is visible"
+      ],
+      "passed": true
+    }
+  ],
+  "machine_topology_findings": {
+    "bullet_all_366_admitted_regions_single_component": true,
+    "abell2146_all_128_admitted_regions_single_component": true,
+    "maximum_connected_components_any_region": 1
+  },
+  "scientific_threshold_changed": false,
+  "region_selected_or_rejected_by_visual_appearance": false,
+  "regional_spectral_extraction_authorized": true,
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

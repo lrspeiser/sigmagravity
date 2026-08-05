@@ -1,0 +1,30 @@
+{
+  "status": "machine_topology_audit_complete_visual_inspection_pending",
+  "v19m_report_sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea",
+  "clusters": [
+    {
+      "cluster": "BULLET",
+      "bin_labels_inside_mask": 392,
+      "admitted_region_count": 366,
+      "disconnected_admitted_region_ids": [],
+      "maximum_connected_components_any_region": 1,
+      "all_admitted_regions_one_connected_component": true,
+      "diagnostic_path": "results/sigma_v19m_adaptive_thermodynamic_regions/bullet_region_audit.png",
+      "diagnostic_sha256": "c1ad4fcae5fe9bf1e8b8c90fc5e636a73ca50b9ed5ddf95705568b2542c113ff",
+      "diagnostic_bytes": 1064856
+    },
+    {
+      "cluster": "ABELL2146",
+      "bin_labels_inside_mask": 138,
+      "admitted_region_count": 128,
+      "disconnected_admitted_region_ids": [],
+      "maximum_connected_components_any_region": 1,
+      "all_admitted_regions_one_connected_component": true,
+      "diagnostic_path": "results/sigma_v19m_adaptive_thermodynamic_regions/abell2146_region_audit.png",
+      "diagnostic_sha256": "e70e12213161924abbf1ee060f186388194c84af4f59b75a5e7d7b7c5cea8f7a",
+      "diagnostic_bytes": 821170
+    }
+  ],
+  "lensing_target_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 120,
+    "sigma_protocols": 121,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6815,6 +6815,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "32cba79df9051961ed066584ef087dc96143eea6930ef466e05918e66e81ab85"
+    },
+    {
+      "config": "configs/sigma_v19m_adaptive_thermodynamic_regions.json",
+      "protocol_version": "SIGMA-V19M-ADAPTIVE-THERMODYNAMIC-REGIONS-1.0.0",
+      "status": "frozen after the V19L third automated-ridge failure and after the content-addressed V19H source maps passed, but before running contour binning on either cluster, knowing a V19M region count or boundary, constructing a spectrum or response, fitting temperature or density, opening a lensing target, or selecting a gravity formula",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "285cdc12694217af69a03eef532094d26ace90b53b740faa2ef511138ef587f1"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

@@ -44,3 +44,5 @@ research/galaxy-cluster-unification/configs/sigma_v17c_regional_response_support
 research/galaxy-cluster-unification/results/sigma_v17c_integrated_spectra/** -text
 research/galaxy-cluster-unification/results/sigma_v17c_integrated_temperatures/report.json -text
 research/galaxy-cluster-unification/results/sigma_v17c_regional_response_support/** -text
+research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/**/regions/*.reg -text
+research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/**/regions/*.csv text eol=crlf
