@@ -1,0 +1,417 @@
+{
+  "status": "frozen_v19i_continuous_member_field_gate_failed",
+  "protocol_version": "SIGMA-V19I-CONTINUOUS-MEMBER-FIELD-1.0.0",
+  "generated_utc": "2026-08-05T05:06:46.782253+00:00",
+  "config_sha256": "697d7ea87a24e403dfa90ec2b834deff5bd6643c73a1205dc466a140aa04e0e0",
+  "runner_sha256": "037c18e5884a305ad7d19a53c7bca5b672fe3083b27545a38d908528936814f3",
+  "failed_clusters": [
+    "BULLET"
+  ],
+  "clusters": [
+    {
+      "cluster": "BULLET",
+      "rows": 78,
+      "coordinate_origin": {
+        "ra_deg": 104.64583333333333,
+        "dec_deg": -55.946527777777774
+      },
+      "bandwidth_scores": [
+        {
+          "bandwidth_kpc": 50.0,
+          "loo_log_density": -1249.7363085530735
+        },
+        {
+          "bandwidth_kpc": 75.0,
+          "loo_log_density": -1175.0099145318168
+        },
+        {
+          "bandwidth_kpc": 100.0,
+          "loo_log_density": -1156.0577520042398
+        },
+        {
+          "bandwidth_kpc": 150.0,
+          "loo_log_density": -1147.989999605656
+        },
+        {
+          "bandwidth_kpc": 200.0,
+          "loo_log_density": -1149.4599792423976
+        },
+        {
+          "bandwidth_kpc": 300.0,
+          "loo_log_density": -1159.7800883374398
+        }
+      ],
+      "selected_bandwidth_kpc": 150.0,
+      "grid": {
+        "spacing_kpc": 5.0,
+        "shape_y_x": [
+          557,
+          603
+        ],
+        "x_bounds_kpc": [
+          -1945.0,
+          1065.0
+        ],
+        "y_bounds_kpc": [
+          -1455.0,
+          1325.0
+        ]
+      },
+      "persistent_mode_count": 2,
+      "persistent_modes": [
+        {
+          "flat_index": 171652,
+          "x_kpc": 55.0,
+          "y_kpc": -35.0,
+          "peak_density_per_kpc2": 0.00011281952100515863,
+          "saddle_density_per_kpc2": 6.483253215063416e-35,
+          "peak_to_saddle_ratio": 1.7401683578088517e+30,
+          "log_persistence": 69.63153465572853,
+          "boundary_distance_kpc": 1010.0
+        },
+        {
+          "flat_index": 253961,
+          "x_kpc": -1455.0,
+          "y_kpc": 650.0,
+          "peak_density_per_kpc2": 1.5768567629667264e-05,
+          "saddle_density_per_kpc2": 9.287163884241865e-06,
+          "peak_to_saddle_ratio": 1.6978883786494625,
+          "log_persistence": 0.5293853487728292,
+          "boundary_distance_kpc": 490.0
+        }
+      ],
+      "primary_pair": [],
+      "primary_pair_separation_kpc": null,
+      "published_label_validation": {
+        "available": false,
+        "used_for_selection": false
+      },
+      "bootstrap": {
+        "requested_draws": 2000,
+        "accepted_draws": 2000,
+        "failed_draws": 0,
+        "failure_fraction": 0.0,
+        "selected_bandwidth_counts": {
+          "50.0": 147,
+          "75.0": 796,
+          "100.0": 808,
+          "150.0": 246,
+          "200.0": 3,
+          "300.0": 0
+        },
+        "primary_mode_summaries": [],
+        "failures": [],
+        "draws_file": "results/sigma_v19i_continuous_member_field/bullet_bootstrap.json",
+        "draws_sha256": "41122c86b14d93dfca8b540bb65093afa4f070d6da796dfba785f5a93691a4d9"
+      },
+      "products": [
+        {
+          "kind": "continuous_field_arrays",
+          "path": "results/sigma_v19i_continuous_member_field/bullet_fields.npz",
+          "sha256": "4a95a73f4054da25449446994dba980de603b7db5f86ec257fcfabf20e4d6ff9",
+          "bytes": 12107282
+        },
+        {
+          "kind": "source_only_diagnostic_figure",
+          "path": "results/sigma_v19i_continuous_member_field/bullet_fields.png",
+          "sha256": "2132b7ba5b4a6a89d9c1ad0462d251e15223f716cced1611163fe22a51a0e9ff",
+          "bytes": 346635
+        }
+      ],
+      "gates": {
+        "all_bandwidth_scores_finite": true,
+        "minimum_persistent_primary_modes": false,
+        "primary_pair_separation_inside_frozen_bounds": false,
+        "each_primary_mode_recovered_in_at_least_68_percent_of_bootstraps": false,
+        "at_least_99_percent_of_bootstraps_finite": true,
+        "all_primary_field_arrays_finite": true
+      }
+    },
+    {
+      "cluster": "ABELL2146",
+      "rows": 63,
+      "coordinate_origin": {
+        "ra_deg": 239.0385,
+        "dec_deg": 66.36106
+      },
+      "bandwidth_scores": [
+        {
+          "bandwidth_kpc": 50.0,
+          "loo_log_density": -834.9791347127804
+        },
+        {
+          "bandwidth_kpc": 75.0,
+          "loo_log_density": -829.1459845831305
+        },
+        {
+          "bandwidth_kpc": 100.0,
+          "loo_log_density": -830.1643717182976
+        },
+        {
+          "bandwidth_kpc": 150.0,
+          "loo_log_density": -838.9157520266315
+        },
+        {
+          "bandwidth_kpc": 200.0,
+          "loo_log_density": -850.6663428982675
+        },
+        {
+          "bandwidth_kpc": 300.0,
+          "loo_log_density": -874.4492933810373
+        }
+      ],
+      "selected_bandwidth_kpc": 75.0,
+      "grid": {
+        "spacing_kpc": 5.0,
+        "shape_y_x": [
+          261,
+          274
+        ],
+        "x_bounds_kpc": [
+          -665.0,
+          700.0
+        ],
+        "y_bounds_kpc": [
+          -665.0,
+          635.0
+        ]
+      },
+      "persistent_mode_count": 2,
+      "persistent_modes": [
+        {
+          "flat_index": 43939,
+          "x_kpc": -170.0,
+          "y_kpc": 135.0,
+          "peak_density_per_kpc2": 0.0002939334977936096,
+          "saddle_density_per_kpc2": 2.240661753331437e-24,
+          "peak_to_saddle_ratio": 1.3118155712551726e+20,
+          "log_persistence": 46.32311396983217,
+          "boundary_distance_kpc": 495.0
+        },
+        {
+          "flat_index": 23186,
+          "x_kpc": 185.0,
+          "y_kpc": -245.0,
+          "peak_density_per_kpc2": 0.0002779098617384862,
+          "saddle_density_per_kpc2": 0.00014718464204981074,
+          "peak_to_saddle_ratio": 1.8881716045104417,
+          "log_persistence": 0.6356089558123751,
+          "boundary_distance_kpc": 420.0
+        }
+      ],
+      "primary_pair": [
+        {
+          "flat_index": 43939,
+          "x_kpc": -170.0,
+          "y_kpc": 135.0,
+          "peak_density_per_kpc2": 0.0002939334977936096,
+          "saddle_density_per_kpc2": 2.240661753331437e-24,
+          "peak_to_saddle_ratio": 1.3118155712551726e+20,
+          "log_persistence": 46.32311396983217,
+          "boundary_distance_kpc": 495.0,
+          "number_density_per_kpc2": 0.00029393349779360963,
+          "mean_velocity_km_s": 225.3862759540912,
+          "intrinsic_sigma_km_s": 1054.754669200816,
+          "number_current_per_kpc2_km_s": 0.06624857644586175,
+          "random_stress_per_kpc2_km2_s2": 327.00319498953417
+        },
+        {
+          "flat_index": 23186,
+          "x_kpc": 185.0,
+          "y_kpc": -245.0,
+          "peak_density_per_kpc2": 0.0002779098617384862,
+          "saddle_density_per_kpc2": 0.00014718464204981074,
+          "peak_to_saddle_ratio": 1.8881716045104417,
+          "log_persistence": 0.6356089558123751,
+          "boundary_distance_kpc": 420.0,
+          "number_density_per_kpc2": 0.0002779098617384862,
+          "mean_velocity_km_s": 321.11365059563394,
+          "intrinsic_sigma_km_s": 1049.3822854438322,
+          "number_current_per_kpc2_km_s": 0.08924065023937319,
+          "random_stress_per_kpc2_km2_s2": 306.0352237786139
+        }
+      ],
+      "primary_pair_separation_kpc": 520.0240379059414,
+      "published_label_validation": {
+        "available": true,
+        "rows": 63,
+        "adjusted_rand_index": 0.6497573724278174,
+        "used_for_selection": false
+      },
+      "bootstrap": {
+        "requested_draws": 2000,
+        "accepted_draws": 2000,
+        "failed_draws": 0,
+        "failure_fraction": 0.0,
+        "selected_bandwidth_counts": {
+          "50.0": 1805,
+          "75.0": 195,
+          "100.0": 0,
+          "150.0": 0,
+          "200.0": 0,
+          "300.0": 0
+        },
+        "primary_mode_summaries": [
+          {
+            "primary_mode_index": 0,
+            "recovered_draws": 1798,
+            "recovery_fraction_of_requested": 0.899,
+            "quantiles_2p5_16_50_84_97p5": {
+              "x_kpc": [
+                -215.0,
+                -200.0,
+                -180.0,
+                -145.0,
+                -95.0
+              ],
+              "y_kpc": [
+                75.0,
+                110.0,
+                135.0,
+                155.0,
+                175.0
+              ],
+              "distance_kpc": [
+                5.0,
+                14.142135623730951,
+                29.154759474226502,
+                50.0,
+                92.19544457292888
+              ],
+              "number_density_per_kpc2": [
+                0.00026110644486776994,
+                0.0003446426216897656,
+                0.0004532742732491408,
+                0.0005831473482459189,
+                0.0007057918421219619
+              ],
+              "mean_velocity_km_s": [
+                -498.9816544447104,
+                -162.50474872940163,
+                228.27006396840525,
+                613.7184480289964,
+                1081.770991797614
+              ],
+              "intrinsic_sigma_km_s": [
+                594.1664822939767,
+                811.0066241421566,
+                973.3909704286798,
+                1106.1120222671202,
+                1200.0850672555316
+              ],
+              "number_current_per_kpc2_km_s": [
+                -0.22180164028592908,
+                -0.06752203119377727,
+                0.09822500603027401,
+                0.2863585718910527,
+                0.49581206933911315
+              ],
+              "random_stress_per_kpc2_km2_s2": [
+                137.20543884621213,
+                263.6949509101796,
+                420.9615572252278,
+                609.9245496579261,
+                793.0054127513511
+              ]
+            }
+          },
+          {
+            "primary_mode_index": 1,
+            "recovered_draws": 1425,
+            "recovery_fraction_of_requested": 0.7125,
+            "quantiles_2p5_16_50_84_97p5": {
+              "x_kpc": [
+                130.0,
+                165.0,
+                210.0,
+                230.0,
+                240.0
+              ],
+              "y_kpc": [
+                -290.0,
+                -270.0,
+                -255.0,
+                -235.0,
+                -205.0
+              ],
+              "distance_kpc": [
+                10.0,
+                21.213203435596427,
+                39.05124837953327,
+                53.150729063673246,
+                71.06335201775947
+              ],
+              "number_density_per_kpc2": [
+                0.00027594455751893344,
+                0.00036901972751188087,
+                0.0004745757555923956,
+                0.0005863905589501481,
+                0.0007026739223440265
+              ],
+              "mean_velocity_km_s": [
+                -292.05184222761227,
+                -15.078598587618488,
+                364.65341280302096,
+                762.1878910620269,
+                1192.2777922640973
+              ],
+              "intrinsic_sigma_km_s": [
+                491.34903724961663,
+                739.2565469696341,
+                1040.0184643504908,
+                1226.3518072180682,
+                1376.481006702571
+              ],
+              "number_current_per_kpc2_km_s": [
+                -0.14057381024741208,
+                -0.00563704123474183,
+                0.1612631804249415,
+                0.37755251368269516,
+                0.6234491452331484
+              ],
+              "random_stress_per_kpc2_km2_s2": [
+                112.95676372908349,
+                238.01278825603984,
+                489.7255251191674,
+                770.0109266435044,
+                1042.8888415657398
+              ]
+            }
+          }
+        ],
+        "failures": [],
+        "draws_file": "results/sigma_v19i_continuous_member_field/abell2146_bootstrap.json",
+        "draws_sha256": "8714f0da0f67e4018c486f350c6d862e187f6212c0d89f508d4af6aa46818f84"
+      },
+      "products": [
+        {
+          "kind": "continuous_field_arrays",
+          "path": "results/sigma_v19i_continuous_member_field/abell2146_fields.npz",
+          "sha256": "356b80611012e51c0efb361afbcac9f2d94631ac41d340233d972a117846568c",
+          "bytes": 2673659
+        },
+        {
+          "kind": "source_only_diagnostic_figure",
+          "path": "results/sigma_v19i_continuous_member_field/abell2146_fields.png",
+          "sha256": "165134609da94fdd5db7a6febed4604e7d850a6643328467b9746f27d88c9a5c",
+          "bytes": 374335
+        }
+      ],
+      "gates": {
+        "all_bandwidth_scores_finite": true,
+        "minimum_persistent_primary_modes": true,
+        "primary_pair_separation_inside_frozen_bounds": true,
+        "each_primary_mode_recovered_in_at_least_68_percent_of_bootstraps": true,
+        "at_least_99_percent_of_bootstraps_finite": true,
+        "all_primary_field_arrays_finite": true
+      }
+    }
+  ],
+  "published_subcluster_labels_used_for_selection": false,
+  "mass_current_claimed": false,
+  "number_current_is_geometry_proxy_only": true,
+  "registered_science_images_visually_inspected": false,
+  "lensing_target_opened": false,
+  "gravity_formula_selected": false,
+  "gravity_parameter_changed": false
+}

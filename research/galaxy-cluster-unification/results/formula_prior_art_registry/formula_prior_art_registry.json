@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 116,
+    "sigma_protocols": 117,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6767,6 +6767,18 @@
         "NEWTON-POISSON"
       ],
       "sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479"
+    },
+    {
+      "config": "configs/sigma_v19i_continuous_member_field.json",
+      "protocol_version": "SIGMA-V19I-CONTINUOUS-MEMBER-FIELD-1.0.0",
+      "status": "frozen after the v19H discrete member-phase gate failed in both clusters and before any continuous member bandwidth score, density mode, velocity-current field, persistence bootstrap, causal-source construction, replacement-cluster lensing access, or gravity fit",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "697d7ea87a24e403dfa90ec2b834deff5bd6643c73a1205dc466a140aa04e0e0"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

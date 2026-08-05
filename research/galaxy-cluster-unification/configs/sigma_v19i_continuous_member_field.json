@@ -1,0 +1,131 @@
+{
+  "protocol_version": "SIGMA-V19I-CONTINUOUS-MEMBER-FIELD-1.0.0",
+  "status": "frozen after the v19H discrete member-phase gate failed in both clusters and before any continuous member bandwidth score, density mode, velocity-current field, persistence bootstrap, causal-source construction, replacement-cluster lensing access, or gravity fit",
+  "purpose": "Test whether a continuous source-only member density and line-of-sight phase field identifies merger structure that the preregistered discrete Gaussian mixture did not, without forcing a component count or using published subcluster labels.",
+  "parents": {
+    "v19h_config": "configs/sigma_v19h_causal_observable_protocol.json",
+    "v19h_config_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+    "source_map_report": "results/sigma_v19h_source_maps/report.json",
+    "source_map_report_sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af",
+    "failed_member_phase_report": "results/sigma_v19h_member_phase/report.json",
+    "failed_member_phase_report_sha256": "17f36ae5b9b574e6b89ee6f8e702ce0c7b89fc9c99df16322e117b63d36e8064",
+    "failed_member_phase_runner": "scripts/run_sigma_v19h_member_phase.py",
+    "failed_member_phase_runner_sha256": "b107441d763f193c583b7afa8aa1bebe26af62eeb90dca95f6803b825d359d51"
+  },
+  "sample": {
+    "clusters": [
+      "BULLET",
+      "ABELL2146"
+    ],
+    "same_algorithm_for_both_clusters": true,
+    "lensing_targets_sealed": true,
+    "published_subcluster_labels_validation_only": true
+  },
+  "inputs": {
+    "BULLET": {
+      "redshift": 0.296,
+      "kpc_per_arcsec_Planck18": 4.554708213666332,
+      "catalog": "data/derived/sigma_v19d_assembly_members/bullet_members.csv",
+      "catalog_sha256": "36a87b48f77e4998fc8b4136ab1b1c559b90d1b18d7d65633e8dacf167dea64b",
+      "rows": 78
+    },
+    "ABELL2146": {
+      "redshift": 0.2323,
+      "kpc_per_arcsec_Planck18": 3.822721649528813,
+      "catalog": "data/derived/sigma_v19d_assembly_members/abell2146_members.csv",
+      "catalog_sha256": "cf7c61854f4aa0317a9dd3ea8e91618e90fa7823a6cb30634147f8af39243360",
+      "rows": 63
+    }
+  },
+  "coordinate_construction": {
+    "origin": "component-wise median member right ascension and declination within each complete frozen catalog",
+    "x_kpc": "(RA-RA_median) cos(Dec_median) times 3600 times the frozen Planck18 kpc-per-arcsec conversion",
+    "y_kpc": "(Dec-Dec_median) times 3600 times the frozen Planck18 kpc-per-arcsec conversion",
+    "rest_velocity_km_s": "(cz-median(cz))/(1+cluster_redshift)",
+    "rest_velocity_error_km_s": "quoted_delta_cz/(1+cluster_redshift)",
+    "position_measurement_error": "negligible relative to the minimum 50-kpc kernel and therefore set to zero",
+    "catalog_row_selection_after_field_construction": "forbidden"
+  },
+  "spatial_kernel": {
+    "family": "normalized isotropic two-dimensional Gaussian",
+    "candidate_bandwidths_kpc": [
+      50.0,
+      75.0,
+      100.0,
+      150.0,
+      200.0,
+      300.0
+    ],
+    "selection": "maximize the summed leave-one-out log density of all catalog positions; ties within 1e-12 select the larger bandwidth",
+    "one_selected_bandwidth_per_catalog": true,
+    "bandwidth_is_measurement_nuisance_not_gravity_parameter": true,
+    "no_lensing_or_published_label_input": true
+  },
+  "continuous_fields": {
+    "evaluation_grid_spacing_kpc": 5.0,
+    "grid_padding_bandwidths": 3.0,
+    "grid_bounds": "for each selected bandwidth, floor each catalog minimum minus three bandwidths and ceil each maximum plus three bandwidths to the fixed 5-kpc lattice",
+    "number_surface_density": "n(x)=sum_i K_h(x-x_i)",
+    "mean_los_velocity": "u(x)=sum_i K_i v_i / sum_i K_i",
+    "intrinsic_los_variance": "sigma_los^2(x)=max(0,sum_i K_i[(v_i-u)^2-delta_v_i^2]/sum_i K_i)",
+    "number_current_proxy": "j_los(x)=n(x)u(x)",
+    "random_stress_proxy": "s_los(x)=n(x)sigma_los^2(x)",
+    "mass_weighting": "none because a common homogeneous stellar-mass observable is absent from the two frozen catalogs",
+    "frame_dragging_claim_boundary": "j_los is a number-current geometry proxy, not a physical baryonic mass-current source; no Lense-Thirring amplitude may be inferred until common photometry and stellar-mass uncertainties are acquired"
+  },
+  "topological_modes": {
+    "construction": "descending-density superlevel-set union-find merge tree on the fixed 5-kpc grid",
+    "mode_birth": "a new connected component at a local density maximum",
+    "mode_death": "the saddle density at which that component first merges into a component with a higher peak",
+    "global_mode_death": "the minimum positive density on the finite padded evaluation grid, making the surviving global maximum a finite-grid persistent mode",
+    "equal_density_rule": "break an exact density tie by lexicographic flattened-grid index; a zero-persistence tie artifact cannot pass the ratio gate",
+    "persistence_statistic": "log(peak_density/saddle_density)",
+    "minimum_peak_to_saddle_density_ratio": 1.5,
+    "minimum_pair_separation_kpc": 100.0,
+    "maximum_pair_separation_kpc": 1200.0,
+    "minimum_peak_density_fraction_of_global": 0.1,
+    "edge_mode_rule": "discard a mode whose peak lies within one selected bandwidth of the evaluation-grid boundary",
+    "primary_pair_rule": "among persistent modes, select the pair maximizing the product of their peak densities; break an exact tie by greater separation and then lexicographic x/y coordinates",
+    "minimum_primary_modes": 2,
+    "published_mode_coordinates_used": false
+  },
+  "uncertainty": {
+    "catalog_bootstraps": 2000,
+    "bootstrap_seed": 19009001,
+    "resample_complete_rows_with_replacement": true,
+    "perturb_each_cz_by_quoted_uncertainty": true,
+    "bandwidth_rule": "repeat the same leave-one-out bandwidth selection inside every bootstrap rather than condition on the primary bandwidth",
+    "mode_match_radius_kpc": 100.0,
+    "mode_matching": "minimum-total-distance one-to-one assignment from the two frozen primary modes to all persistent bootstrap modes; a primary mode is recovered only when its assigned distance is at most 100 kpc",
+    "minimum_mode_recovery_fraction": 0.68,
+    "reported_intervals": [
+      0.68,
+      0.95
+    ],
+    "maximum_failed_bootstrap_fraction": 0.01
+  },
+  "gates": {
+    "all_bandwidth_scores_finite": true,
+    "minimum_persistent_primary_modes_per_cluster": 2,
+    "primary_pair_separation_inside_frozen_bounds": true,
+    "each_primary_mode_recovered_in_at_least_68_percent_of_bootstraps": true,
+    "at_least_99_percent_of_bootstraps_finite": true,
+    "all_primary_field_arrays_finite": true,
+    "failure_rule": "fail continuous source identifiability; do not narrow the bandwidth grid, lower persistence or recovery thresholds, force two modes, use published labels or coordinates, or inspect lensing targets"
+  },
+  "advance_rule": {
+    "if_passed": "the continuous mode/current field may replace only the failed discrete-member portion of V19H; all frozen X-ray edge, thermodynamic, projection, clock, and lensing-seal rules remain unchanged",
+    "if_failed": "retire these member catalogs as an independently identifying assembly coordinate and require richer source-side photometry or integral-field velocities before another member-current test",
+    "causal_source_construction_authorized": false,
+    "gravity_formula_selection_authorized": false,
+    "lensing_target_access_authorized": false
+  },
+  "integrity": {
+    "failed_v19h_discrete_result_preserved": true,
+    "continuous_bandwidth_or_mode_known_at_freeze": false,
+    "published_labels_used_at_freeze": false,
+    "registered_science_image_visually_inspected": false,
+    "lensing_target_opened": false,
+    "gravity_parameter_changed": false
+  }
+}

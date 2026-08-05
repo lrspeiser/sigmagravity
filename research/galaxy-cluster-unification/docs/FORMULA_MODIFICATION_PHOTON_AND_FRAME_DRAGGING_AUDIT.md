@@ -4,7 +4,7 @@
 
 The project has not yet found a root equation.  The authoritative registry now
 contains 128 scientifically distinct scored laws, 138 explicit formula/action
-fragments across 116 protocols, and 36 directly overlapping published
+fragments across 117 protocols, and 36 directly overlapping published
 families.  The broad empirical winner is still
 
 \[
@@ -214,6 +214,45 @@ The GR value is the mandatory zero-extra-response control.  A null result would
 reject the tested susceptibility, not the existence of ordinary
 Lense-Thirring gravity.
 
+## Long-wavelength gravity mode: explicitly included, but not new
+
+The hypothesis that gravity has an additional wavelength longer than a Solar
+System has a clean mathematical meaning: the locally measured metric response
+is the high-wavenumber limit, while an extra metric mode becomes coherent only
+at wavelengths comparable to a universal length `L_Sigma`.  A representative
+one-metric transfer is
+
+\[
+ \widetilde{\bar h}_{\mu\nu}(k)=
+ \widetilde{\bar h}^{\rm GR}_{\mu\nu}(k)
+ \exp\!\left[A\exp\!\left(-(kL_\Sigma)^2\right)\right].
+\]
+
+For `k L_Sigma >> 1`, as for variation across a star system when
+`L_Sigma` is galactic, the exponential tends to one and local gravity is
+unchanged.  For wavelengths of order `L_Sigma` or longer it tends toward
+`exp(A)`, so the same baryonic source produces a larger long-scale metric
+response.  Both matter and light see the resulting metric; this is not a
+lens-only multiplier.  The two universal quantities are the strength `A` and
+the coherence length `L_Sigma`.
+
+This exact concept was already made quantitative in Sigma V3B and then tested
+as an isotropic wavelength-only operator in V3C.  It could separate Solar,
+galaxy and cluster scales and it generated nonzero shear on a manufactured
+map.  It did not reproduce the full convergence and two-shear maps across the
+two spent clusters: the joint normalized Fourier error was `0.800` against a
+frozen `0.500` plausibility gate, cross-cluster nonparametric transfer errors
+were `0.800--0.956`, and the required transfer had low radial coherence and
+negative bins.  A separate fractional long-wavelength lensing test also failed
+to transfer between SMACS J0723 and SPT-CL J0615 after its apparent gain was
+identified as a mass-sheet/source-plane degeneracy.
+
+So the long-wavelength premise remains in the idea inventory, but the already
+tested **linear, isotropic, wavelength-only** realization is not a surviving
+root equation.  A materially new version would have to let wavelength
+coherence depend covariantly on baryonic current, stress, or tidal orientation;
+changing only `A`, `L_Sigma`, or a Fourier power would repeat the closed tests.
+
 ## Decision rule for these additions
 
 1. Do not alter the frozen V19H source measurement protocol.
@@ -228,3 +267,7 @@ Lense-Thirring gravity.
 5. Neither lane can be combined with the empirical RAR/RG bridge merely because
    they repair different failures.  A combination advances only if one action
    derives the scalar, current, and photon limits with the same constants.
+6. Retain the long-wavelength premise only in a directional or source-state
+   dependent form.  The linear isotropic wavelength-only realization has
+   already failed its cross-cluster map gate and must not be recreated by
+   renaming `A`, `L_Sigma`, or the Fourier exponent.
