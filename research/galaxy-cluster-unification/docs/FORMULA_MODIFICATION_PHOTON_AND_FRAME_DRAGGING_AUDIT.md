@@ -294,6 +294,128 @@ root equation.  A materially new version would have to let wavelength
 coherence depend covariantly on baryonic current, stress, or tidal orientation;
 changing only `A`, `L_Sigma`, or a Fourier power would repeat the closed tests.
 
+### The simplest local long-wave field, and the exact prior-art boundary
+
+The phrase "wavelength longer than a stellar system" can be made more concrete
+without inserting a cosmic sinusoid.  In the linear weak field, introduce a
+retarded, low-pass copy of the conserved baryonic stress-energy,
+
+\[
+(1-L_\Sigma^2\Box)X_{\mu\nu}=T_{\mu\nu},
+\qquad
+\Box\bar h_{\mu\nu}=-{16\pi G\over c^4}
+  (T_{\mu\nu}+\alpha_\Sigma X_{\mu\nu}).
+\]
+
+In a static Fourier mode this gives
+
+\[
+\widetilde{\bar h}_{\mu\nu}(\mathbf k)\propto
+{1\over k^2}\left[1+{\alpha_\Sigma\over1+k^2L_\Sigma^2}\right]
+\widetilde T_{\mu\nu}(\mathbf k).
+\]
+
+For a point source, the scalar potential and acceleration become
+
+\[
+\Phi(r)=-{GM\over r}
+\left[1+\alpha_\Sigma(1-e^{-r/L_\Sigma})\right],
+\]
+
+\[
+{g(r)\over g_N(r)}=
+1+\alpha_\Sigma\left[
+1-\left(1+{r\over L_\Sigma}\right)e^{-r/L_\Sigma}
+\right].
+\]
+
+At `r << L_Sigma`,
+
+\[
+{g-g_N\over g_N}={\alpha_\Sigma\over2}
+\left({r\over L_\Sigma}\right)^2+O[(r/L_\Sigma)^3],
+\]
+
+which is the precise version of the user's premise: a galactic correlation
+length makes the additional *tidal* response extraordinarily small across a
+planetary system, while the response can become order unity across a galaxy or
+cluster.  A long wavelength alone does not screen the ordinary GR near field;
+the low-pass source equation is the additional physical assumption that makes
+the new component locally smooth.
+
+This point-mass acceleration is **not novel**.  It is the standard Yukawa-like
+STVG/MOG form `1+alpha-alpha(1+mu r)exp(-mu r)`, with `mu=1/L_Sigma`, already
+represented by `STVG-MOG` in the prior-art registry.  Moffat's original STVG
+paper explicitly uses this Solar-to-galaxy behavior
+([primary paper](https://arxiv.org/abs/gr-qc/0506021)).  Scalar causal kernels
+that simulate dark matter and their gravitomagnetic extensions also overlap
+published nonlocal gravity
+([modified Poisson equation](https://arxiv.org/abs/1111.4702),
+[nonlocal gravitomagnetism](https://arxiv.org/abs/1908.05431)).  Renaming
+`alpha`, `mu` or `L` would rediscover those families.
+
+The materially different diagnostic is therefore tensorial and source-state
+dependent:
+
+\[
+(1-L_\Sigma^2\Box)X_{\mu\nu}
+=\mathcal P_{\mu\nu}{}^{\rho\sigma}[T_b,u_b,\nabla T_b]\,T^b_{\rho\sigma},
+\qquad
+\Box\bar h_{\mu\nu}=-{16\pi G\over c^4}
+(T^b_{\mu\nu}+\alpha_\Sigma X_{\mu\nu}).
+\]
+
+`P=identity` is the mandatory MOG/nonlocal control.  A new candidate must derive
+`P` from a healthy covariant action so that separated baryonic currents,
+multistream stress and tidal orientation can change the two-dimensional metric
+curvature without a cluster label.  It cannot assign arbitrary weights to
+`T_00`, `T_0i` and `T_ij` in a chosen coordinate frame.  A current-sensitive
+projector generally requires a covariantly defined timelike field or matter
+frame and therefore overlaps Einstein-aether/vector-tensor prior art; a
+spin-2/traceless projector must pass ghost, constraint and characteristic
+gates.
+
+In ordinary GR scaling, cluster `T_0i/T_00` is only of order `v/c ~ 10^-3` and
+random/thermal spatial stress is of order `v^2/c^2`.  The tensor terms can
+rotate shear but are not expected to supply a factor-several missing amplitude
+without a genuine new coupling.  This is a quantitative warning, not a
+dismissal: once the V19 member mass-current and gas-stress maps exist, the
+identity control and one preregistered conserved tensor projector can be scored
+directly on raw image topology.
+
+### Frozen interpretation and test ladder
+
+`L_Sigma` is a universal propagation/correlation length, not permission to fit
+one wavelength to each object.  The literal sinusoidal reading and the
+low-pass sourced-field reading are distinct hypotheses.  The latter supplies
+the automatic Solar-System suppression above and is the cleaner first control.
+
+1. **LW0, published control:** set `P=identity` and solve the full two-dimensional
+   field with one universal pair `(alpha_Sigma,L_Sigma)`.  This is explicitly
+   scored as STVG/MOG/nonlocal prior art, not as a Sigma discovery.
+2. **LW1, directional diagnostic:** replace the identity only by one conserved
+   tensor projector derived from baryonic current, random stress and tidal
+   orientation.  Any additional coefficient counts against the project's
+   five-constant total and is frozen before a holdout is opened.
+3. **Solar gate:** calculate the metric and PPN observables, rather than merely
+   noting that `L_Sigma` is large.  The point-source control must satisfy the
+   small-baseline scaling above together with Cassini, Mercury and propagation
+   constraints.
+4. **Galaxy gate:** predict complete rotation curves for every morphology with
+   the same constants.  A successful long-wave mode must show a common,
+   baryon-derived transition near `L_Sigma`; it may not infer a separate length
+   from each observed curve.
+5. **Cluster gate:** use that frozen metric to predict the complete two-dimensional
+   convergence, both shear components, critical-curve topology and raw image
+   roots.  Matching only a radial or NFW-derived acceleration profile is
+   insufficient.
+
+The hypothesis advances only if the same universal constants pass all three
+scales.  If LW0 fails, that rejects the scalar identity realization already
+known from prior art.  If LW1 changes shear orientation but not the missing
+amplitude, the result localizes the problem to the source/coupling rather than
+disproving every possible long-wavelength gravitational mode.
+
 ## Decision rule for these additions
 
 1. Do not alter the frozen V19H source measurement protocol.
