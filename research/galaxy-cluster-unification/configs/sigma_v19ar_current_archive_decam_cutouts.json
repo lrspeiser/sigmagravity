@@ -1,0 +1,123 @@
+{
+  "protocol_version": "SIGMA-V19AR-CURRENT-ARCHIVE-DECAM-CUTOUTS-1.0.0",
+  "status": "frozen_before_v19ar_pixel_retrieval",
+  "purpose": "Preserve all frozen groups while using one universal metadata-only processing-version rule: the unique most recently updated valid DECam InstCal ooi image for the same original observation, followed by unique all-anchor header-WCS detector resolution.",
+  "parent_artifacts": [
+    {
+      "path": "results/sigma_v19aq_all_archive_decam_cutouts/report.json",
+      "sha256": "95644f63209e7c0a131d438ff718c953981df7a86794b28ac56e9c12341bba4e"
+    },
+    {
+      "path": "data/derived/sigma_v19aq_all_archive_decam_cutouts/resolved_plan.csv",
+      "sha256": "99661e740b98b3a728a0952ded3620ca1c688900994fec809f8cd1dccd1bd31e"
+    },
+    {
+      "path": "data/derived/sigma_v19an_nsc_decam_group_cutouts/group_plan.csv",
+      "sha256": "a4b82c98ecab29b4ab2174619ca50f88399fafddc427ab40cf997b42e231df22"
+    },
+    {
+      "path": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+      "sha256": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f"
+    }
+  ],
+  "inputs": {
+    "v19an_group_plan": "data/derived/sigma_v19an_nsc_decam_group_cutouts/group_plan.csv",
+    "v19am_manifest": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv"
+  },
+  "archive_identity": {
+    "authority": "NSF NOIRLab Astro Data Archive public REST API",
+    "vohdu_endpoint": "https://astroarchive.noirlab.edu/api/sia/vohdu",
+    "timeout_seconds": 180,
+    "c4d_observation_rule": "Remove only the terminal processing-version token from the frozen c4d exposure name and query the complete calibrated ooi/filter prefix.",
+    "tu_observation_rule": "Derive c4d_YYMMDD_HHMMSS from the exposure's unique frozen ct4mYYYYMMDDtHHMMSS SIA association ID and require the matching-filter ooi science product.",
+    "candidate_requirements": "All candidates must be DECam InstCal object images with the frozen filter and must share exactly one original_filename observation identity.",
+    "processing_version_rule": "Select the unique candidate with the lexically greatest Archive file_updated timestamp.",
+    "pixel_or_science_values_used_for_identity": false
+  },
+  "archive_header_resolution": {
+    "header_endpoint": "https://astroarchive.noirlab.edu/api/header/{md5}/?format=json",
+    "retrieval_endpoint": "https://astroarchive.noirlab.edu/api/retrieve/{md5}/?hdus=0,{fits_hdu_index}",
+    "timeout_seconds": 180,
+    "wcs_containment_tolerance_pixel": 1.0,
+    "selection_rule": "Require exactly one two-dimensional celestial-WCS header in the selected current Archive file to contain every frozen anchor assigned to the group.",
+    "no_arithmetic_index_mapping": true
+  },
+  "retrieval": {
+    "timeout_seconds": 300,
+    "maximum_attempts": 3,
+    "wcs_containment_tolerance_pixel": 1.0,
+    "invalid_payload_retry_rule": "HTTP failure, missing image data, decompression failure, malformed FITS, WCS mismatch, detector mismatch, non-finite image, or invalid present checksum keyword consumes one of the same three attempts and is never persisted.",
+    "resume_rule": "Reuse an existing exact V19AR output only after fully revalidating it against the frozen structural, detector, WCS, finite-pixel and present-checksum gates."
+  },
+  "frozen_resolved_plan": {
+    "path": "data/derived/sigma_v19ar_current_archive_decam_cutouts/resolved_plan.csv",
+    "sha256": "2cf636171321f3865387e5c1026bde32c0d9b7bddc1971bbbff70f2b79f93871"
+  },
+  "gates": {
+    "exact_groups": 139,
+    "exact_measurement_memberships": 1032,
+    "exact_unique_exposures": 82,
+    "unique_header_wcs_candidate_every_group": true,
+    "http_200_every_group": true,
+    "fits_structure_every_group": true,
+    "celestial_wcs_every_group": true,
+    "all_frozen_anchors_contained": true,
+    "archive_detector_identity_every_group": true,
+    "all_present_checksum_keywords_valid": true,
+    "raw_sha256_recorded_every_group": true,
+    "at_least_one_finite_pixel_every_group": true,
+    "all_groups_retained_without_science_selection": true,
+    "no_photometric_model_or_prohibited_payload_opened": true
+  },
+  "outputs": {
+    "archive_identity_directory": "data/raw/sigma_v19ar_archive_identity",
+    "archive_header_directory": "data/raw/sigma_v19ar_archive_headers",
+    "resolved_plan": "data/derived/sigma_v19ar_current_archive_decam_cutouts/resolved_plan.csv",
+    "cutout_directory": "data/raw/sigma_v19ar_current_archive_decam_cutouts",
+    "download_manifest": "data/derived/sigma_v19ar_current_archive_decam_cutouts/download_manifest.csv",
+    "report": "results/sigma_v19ar_current_archive_decam_cutouts/report.json"
+  },
+  "claim_boundary": [
+    "V19AR changes only the processing-version identity policy. All targets, group memberships, coordinates, filters, and observation identities remain frozen.",
+    "The latest-current rule uses Archive metadata only and is uniform across all exposures; it does not respond to target flux, PSF, morphology, lensing, halo, or gravity outcomes.",
+    "Each detector is independently selected by full-header WCS containment, never by detector-number arithmetic.",
+    "A pass establishes complete calibrated detector retrieval and structural integrity only; it does not establish photometry, color, stellar mass, mass current, lensing, or Sigma-field validity.",
+    "Every exact downloaded payload receives a SHA-256, and any embedded FITS CHECKSUM or DATASUM keyword that is present must validate."
+  ],
+  "authorization": {
+    "query_and_persist_current_archive_identities_for_all_82_exposures": true,
+    "query_and_persist_full_archive_headers_for_all_selected_files": true,
+    "freeze_current_archive_resolved_plan_before_new_pixel_access": true,
+    "download_every_frozen_group": true,
+    "open_pixels_for_fits_wcs_finite_value_detector_and_checksum_integrity_only": true,
+    "persist_raw_cutouts_hashes_and_integrity_metadata": true,
+    "rank_or_select_exposures_by_science_values": false,
+    "fit_or_compare_photometry": false,
+    "choose_psf_or_deblend_model": false,
+    "query_ambiguous_candidates": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "v19aq_failed_closed_at_group_50": true,
+    "v19aq_persisted_payloads_are_not_inputs_to_v19ar_identity_selection": true,
+    "resolved_groups": 139,
+    "resolved_measurement_memberships": 1032,
+    "resolved_unique_exposures_and_archive_files": 82,
+    "c4d_observation_exposures": 36,
+    "association_observation_exposures": 46,
+    "legacy_v1_exposures_replaced_by_current_processing": 14,
+    "legacy_v1_groups_replaced_by_current_processing": 25,
+    "resolved_plan_sha256_at_freeze": "2cf636171321f3865387e5c1026bde32c0d9b7bddc1971bbbff70f2b79f93871",
+    "new_image_pixels_downloaded_at_v19ar_freeze": false,
+    "photometry_psf_mass_current_lensing_halo_or_gravity_payload_interpreted": false
+  },
+  "implementation": {
+    "runner": "scripts/acquire_sigma_v19ar_current_archive_decam_cutouts.py",
+    "runner_sha256": "cb72eeb70cd49236a46e4c978aa95ec5c2fc4c29f57c15f53a70a365bc22496b",
+    "frozen_v19aq_runner": "scripts/acquire_sigma_v19aq_all_archive_decam_cutouts.py",
+    "frozen_v19aq_runner_sha256": "dc7bb3632c4e9674e87c537fc540660334f58bac70dc65e435d2e10f7cc51d86"
+  }
+}

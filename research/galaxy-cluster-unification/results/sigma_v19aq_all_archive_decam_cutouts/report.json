@@ -1,0 +1,47 @@
+{
+  "report_version": "SIGMA-V19AQ-ALL-ARCHIVE-DECAM-CUTOUTS-1.0.0",
+  "status": "failed_closed_on_corrupt_legacy_archive_product",
+  "frozen_commit": "3e56fad5",
+  "frozen_resolved_plan": {
+    "path": "data/derived/sigma_v19aq_all_archive_decam_cutouts/resolved_plan.csv",
+    "sha256": "99661e740b98b3a728a0952ded3620ca1c688900994fec809f8cd1dccd1bd31e"
+  },
+  "counts": {
+    "planned_groups": 139,
+    "planned_measurement_memberships": 1032,
+    "structurally_valid_payloads_persisted_before_failure": 49,
+    "persisted_bytes": 260069760,
+    "completed_manifest_written": false,
+    "groups_silently_dropped": 0
+  },
+  "deterministic_failure": {
+    "group_number_one_based": 50,
+    "group_id": "c4d_160228_042813_ooi_g_v1_ext46",
+    "exposure": "c4d_160228_042813_ooi_g_v1",
+    "identity_selection_rule": "exact_frozen_archive_basename",
+    "source_archive_filename": "c4d_160228_042813_ooi_g_v1.fits.fz",
+    "source_md5": "6086d04aa5339ba0fff2e02732987859",
+    "source_updated_utc": "2020-11-18 19:01:46.037675+00",
+    "fits_hdu_index": 46,
+    "header_extname": "N16",
+    "header_ccdnum": 47,
+    "retrieval_url": "https://astroarchive.noirlab.edu/api/retrieve/6086d04aa5339ba0fff2e02732987859/?hdus=0,46",
+    "retrieval_attempts": 3,
+    "payload_persisted": false,
+    "failure": "CFITSIO decompression error: hit end of compressed byte stream"
+  },
+  "diagnosis": {
+    "transport_route": "NOIRLab Archive selected-HDU retrieval",
+    "identity_issue": "The exact frozen v1 basename identifies a legacy 2020 Archive processing product. The same original observation also has a more recently updated calibrated ooi product.",
+    "interpretation": "V19AQ's exact-basename preference can preserve a structurally corrupt legacy processing version. This is a file-version policy failure, not evidence against the exposure, target, photometry, or gravity theory."
+  },
+  "gates": {
+    "all_139_groups_retrieved": false,
+    "all_1032_memberships_retained": false,
+    "fits_structure_every_group": false,
+    "invalid_payload_never_persisted": true,
+    "no_photometry_psf_mass_current_lensing_halo_or_gravity_payload_interpreted": true,
+    "v19aq_passed": false
+  },
+  "next_protocol_requirement": "For every exposure, identify the original observation from the frozen c4d prefix or frozen SIA association ID and select the unique most recently updated valid DECam InstCal ooi image before header-WCS detector resolution. Freeze all identities and URLs before new pixel access."
+}
