@@ -1,0 +1,73 @@
+{
+  "status": "runtime_empty_response_support_signature_reproduced_and_frozen",
+  "protocol_version": "SIGMA-V17C-REGIONAL-RUNTIME-RESPONSE-SUPPORT-1.0.0",
+  "generated_utc": "2026-08-05T01:32:18.0859941Z",
+  "config": "configs/sigma_v17c_regional_runtime_response_support.json",
+  "config_sha256": "75fe99de5b2e4df2e64791e63090fcbb70ee947bc6910495a82c555710807987",
+  "parent_hashes": {
+    "spectral_protocol": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86",
+    "integrated_spectra_report": "c2f5708baaed07d477b42679e476b13637e1295ba8abd3de94c22c313e2819bb",
+    "integrated_temperatures_report": "9ce3b05dc64e0ee547693921f62b1f38ad0b9974f5c71e44f07a6338381a22e0",
+    "preflight_response_support": "0b82ada1c7e3c53a28d7023693e64a9479d69ffb01a6c00d0ed39d4d156ac15d",
+    "preflight_response_support_report": "6daa56bda31851612b7575db66f3fec10733022e838421ac70c516a2f4c02ccc"
+  },
+  "discovery": {
+    "cluster": "AS295",
+    "region_id": 12,
+    "obsid": 16524,
+    "ccd_id": 3,
+    "source_pha_created": true,
+    "background_pha_created": true,
+    "arf_created": false,
+    "rmf_created": false,
+    "return_code": 1,
+    "terminal_error": "max() iterable argument is empty",
+    "diagnostic_log": "results/sigma_v17c_regional_runtime_response_support/diagnostics/as295_region012_obs16524_ccd3.log",
+    "diagnostic_log_bytes": 733,
+    "diagnostic_log_sha256": "c3cde798bdf0e6bb36bb3ff94fb0bc9d0439bee501123fdd9c5849cde5020133"
+  },
+  "successful_out_of_bound_controls": [
+    {
+      "cell": "AS295_r020_o16524_c1",
+      "warning": "chipx=-7 clipped to 1",
+      "all_four_products_nonempty": true,
+      "products": {
+        ".pi": {"bytes": 2232000, "sha256": "60ef7780d7767106cc29aefaacff0afede09ba1e2fd4cd86724cccf050ea73ab"},
+        "_bkg.pi": {"bytes": 2289600, "sha256": "f21d27d481d2f87401b33a9e0744bb0ef5f6d747d551b678a7052f3263e6e75a"},
+        ".arf": {"bytes": 40320, "sha256": "0212eec03abfde7b0ec83001c0e9d86f7a9cbfa85325a086262320f85ddd3c2b"},
+        ".rmf": {"bytes": 2220480, "sha256": "80c35c30b07f173bfde4e8ff3437747ba974b2f1b2670bb7607cfdb6b770f774"}
+      }
+    },
+    {
+      "cell": "AS295_r021_o16524_c3",
+      "warning": "chipx=1031 clipped to 1024",
+      "all_four_products_nonempty": true,
+      "products": {
+        ".pi": {"bytes": 2257920, "sha256": "734e010af62afd423fe22056ebdc478eaf60cc520818faadbd5900c98656f327"},
+        "_bkg.pi": {"bytes": 2252160, "sha256": "26a9535c0fc8d47899b27d909098488b51afd711b0637c8dbb8168506c9be908"},
+        ".arf": {"bytes": 40320, "sha256": "25d8e801a6b77f8e904c41c48497a3c5d494bea679205d83c4302d734aaa9dc7"},
+        ".rmf": {"bytes": 2243520, "sha256": "49549c8dc461e777a4f7db407bac51c76264d372c8e7e23b27ce1ac4235432e0"}
+      }
+    },
+    {
+      "cell": "AS295_r025_o16525_c3",
+      "warning": "chipy=1029 clipped to 1024",
+      "all_four_products_nonempty": true,
+      "products": {
+        ".pi": {"bytes": 2220480, "sha256": "1198597e42bdf87e22ba4e1ebc65fed2f32bc3b7a204e2e2b8495651fbc46c0f"},
+        "_bkg.pi": {"bytes": 2214720, "sha256": "d925fcb126c5e2943daa571b2e1384f9d35e0ef1a244c5b0c14878e731aa2662"},
+        ".arf": {"bytes": 40320, "sha256": "fcb64e813019843f887e8afce0928f01de9e8fa3596583b22cf1bca4067a28ee"},
+        ".rmf": {"bytes": 2252160, "sha256": "155c86ae88030d023ab423367ac21e9bd5a3c21cb413a9cc69ad4c85fee381e2"}
+      }
+    }
+  ],
+  "decision": {
+    "allowed_reason": "ciao_empty_calibrated_response_domain_after_valid_spectra",
+    "exact_signature_required": true,
+    "detector_coordinate_threshold_added": false,
+    "scientific_threshold_changed": false,
+    "temperature_or_fit_outcome_used": false,
+    "lensing_target_opened": false,
+    "regional_extraction_authorized": true
+  }
+}

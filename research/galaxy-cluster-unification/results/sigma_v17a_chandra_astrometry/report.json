@@ -1,0 +1,1042 @@
+{
+  "all_absolute_gates_passed": false,
+  "cleaning_report_sha256": "8aaffd9ffde281655a8f3f824e06aee506fc4bed6fa50d330c81d8a3c63cf334",
+  "config_sha256": "10969bf662a3dc080804ab34e2db4f5634306db21e6899450d32a987b544b322",
+  "failed_observations": [
+    {
+      "cluster": "AS295",
+      "error": null,
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": false,
+        "translation_only_matrix": true
+      },
+      "obsid": 16282
+    },
+    {
+      "cluster": "PLCKG287",
+      "error": null,
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": false,
+        "translation_only_matrix": true
+      },
+      "obsid": 17166
+    },
+    {
+      "cluster": "PLCKG287",
+      "error": null,
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": false,
+        "translation_only_matrix": true
+      },
+      "obsid": 17495
+    },
+    {
+      "cluster": "PLCKG287",
+      "error": null,
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": false,
+        "translation_only_matrix": true
+      },
+      "obsid": 18807
+    }
+  ],
+  "gaia_acquisition_sha256": "0d61e8ea881e08186ecac27723f8e5a9b409d3e2c009c8d20e36ce8d4ce7a48e",
+  "generated_utc": "2026-08-04T18:01:58.154483+00:00",
+  "lensing_target_opened": false,
+  "observation_count": 11,
+  "observations": [
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "6c26a56bd9050967b0e7ef39ce7cf8b93d4c94a47fb00b5ea60c5522c6af870c",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/AS295_gaia_dr3.csv",
+      "gaia_catalog_sha256": "674ce40e01be653a9cac17e1bcb921bca5e9c5629cd650ae1be49a0b290261e3",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 47,
+        "included_max_recomputed_arcsec": 0.37,
+        "included_pairs": 3,
+        "included_rms_recomputed_arcsec": 0.32868424564212584,
+        "max_after_arcsec": 0.37418,
+        "rms_after_arcsec": 0.234025,
+        "rms_before_arcsec": 0.644202
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/gaia_match_statistics.fits",
+      "observation_end": "2012-01-06T14:33:29",
+      "observation_epoch_jyear": 2012.0145368627532,
+      "observation_start": "2012-01-06T08:18:08",
+      "obsid": 12260,
+      "selected_xray_sources": 47,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260/gaia_translation.xform.fits",
+      "transform_sha256": "94347463718d4500ffcc42335997faaf5ab9ffd4247277083b82daae902d5458",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": 0.8092606044898881,
+        "t2": 1.5236146534903128
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/12260"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "e2db62696a37b4a186a9b52b64e441ba920d7972fd7b4598cc99341a11197d28",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/AS295_gaia_dr3.csv",
+      "gaia_catalog_sha256": "674ce40e01be653a9cac17e1bcb921bca5e9c5629cd650ae1be49a0b290261e3",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 67,
+        "included_max_recomputed_arcsec": 0.5,
+        "included_pairs": 6,
+        "included_rms_recomputed_arcsec": 0.38712616375887937,
+        "max_after_arcsec": 0.497603,
+        "rms_after_arcsec": 0.273786,
+        "rms_before_arcsec": 0.355836
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/gaia_match_statistics.fits",
+      "observation_end": "2014-07-26T06:29:52",
+      "observation_epoch_jyear": 2014.5648171755777,
+      "observation_start": "2014-07-25T17:52:37",
+      "obsid": 16127,
+      "selected_xray_sources": 67,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127/gaia_translation.xform.fits",
+      "transform_sha256": "0746137b8526c506fb78ba7b974f7bda16c68f68f5c86081ce10a7d3e8fc31d8",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": 0.6387010660894248,
+        "t2": 0.13745852050571253
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16127"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "4ff7937ec0ae6363f89ffd418c78acf005959d5d2a3b0d0864043276e9804a96",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/AS295_gaia_dr3.csv",
+      "gaia_catalog_sha256": "674ce40e01be653a9cac17e1bcb921bca5e9c5629cd650ae1be49a0b290261e3",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": false,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 21,
+        "included_max_recomputed_arcsec": 0.16,
+        "included_pairs": 2,
+        "included_rms_recomputed_arcsec": 0.16,
+        "max_after_arcsec": 0.164228,
+        "rms_after_arcsec": 0.116127,
+        "rms_before_arcsec": 0.574048
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/gaia_match_statistics.fits",
+      "observation_end": "2014-06-13T23:20:12",
+      "observation_epoch_jyear": 2014.4495630371132,
+      "observation_start": "2014-06-13T20:24:09",
+      "obsid": 16282,
+      "selected_xray_sources": 21,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282/gaia_translation.xform.fits",
+      "transform_sha256": "6de03bb2f4b6a6ec7a2adbeb5f4e85384002ee4914d4dda13bb7242a7b30285d",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -0.23515076976900673,
+        "t2": -1.59873809919236
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16282"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "5751436a67ee9aff182963f363e5162719743f95c3b079a09db638df1967d93e",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/AS295_gaia_dr3.csv",
+      "gaia_catalog_sha256": "674ce40e01be653a9cac17e1bcb921bca5e9c5629cd650ae1be49a0b290261e3",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 64,
+        "included_max_recomputed_arcsec": 0.48,
+        "included_pairs": 5,
+        "included_rms_recomputed_arcsec": 0.36493835095807625,
+        "max_after_arcsec": 0.483932,
+        "rms_after_arcsec": 0.258287,
+        "rms_before_arcsec": 0.410095
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_match_statistics.fits",
+      "observation_end": "2014-05-21T03:46:09",
+      "observation_epoch_jyear": 2014.3837891189442,
+      "observation_start": "2014-05-20T14:49:18",
+      "obsid": 16524,
+      "selected_xray_sources": 64,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_translation.xform.fits",
+      "transform_sha256": "2607aa1284c8ac36e2af3574cebafbcf71f00469b7aefa548f9afdaeac0c930b",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -0.4300448310734282,
+        "t2": 0.8083302795831514
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "e629e9410e29a1ba5c4fb5e313e7709f546bfdff0eaed7a38781b1c5811abafc",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/AS295_gaia_dr3.csv",
+      "gaia_catalog_sha256": "674ce40e01be653a9cac17e1bcb921bca5e9c5629cd650ae1be49a0b290261e3",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 69,
+        "included_max_recomputed_arcsec": 0.26,
+        "included_pairs": 3,
+        "included_rms_recomputed_arcsec": 0.20493901531919198,
+        "max_after_arcsec": 0.263441,
+        "rms_after_arcsec": 0.145249,
+        "rms_before_arcsec": 0.56201
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/gaia_match_statistics.fits",
+      "observation_end": "2014-05-18T03:14:35",
+      "observation_epoch_jyear": 2014.3755053299365,
+      "observation_start": "2014-05-17T14:06:59",
+      "obsid": 16525,
+      "selected_xray_sources": 69,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525/gaia_translation.xform.fits",
+      "transform_sha256": "bebe09665f17695d19d926cee802cfcf2e23e1d46fddc9f235819861a6cfdefd",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -0.0295536956033781,
+        "t2": -1.560289112648358
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16525"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "5775e7ea95ccf87904c9738f8a1d6c4d5c943c483b38849fa3f483f3e335ddc3",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/AS295_gaia_dr3.csv",
+      "gaia_catalog_sha256": "674ce40e01be653a9cac17e1bcb921bca5e9c5629cd650ae1be49a0b290261e3",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 71,
+        "included_max_recomputed_arcsec": 0.18,
+        "included_pairs": 4,
+        "included_rms_recomputed_arcsec": 0.1290348790056394,
+        "max_after_arcsec": 0.178598,
+        "rms_after_arcsec": 0.091101,
+        "rms_before_arcsec": 0.206502
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/gaia_match_statistics.fits",
+      "observation_end": "2014-08-13T15:23:11",
+      "observation_epoch_jyear": 2014.6150869204243,
+      "observation_start": "2014-08-13T02:19:03",
+      "obsid": 16526,
+      "selected_xray_sources": 71,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526/gaia_translation.xform.fits",
+      "transform_sha256": "abf08c8400112a0ae58c01da2929458dff533259233b2e5662cfbe966cbe55cd",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -0.503879376089003,
+        "t2": -0.17280422560736497
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16526"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "5eed3f7141c435289b337a78c576811a6b0f6f5ed6b178e3dd70fdb4ec7d78b0",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/PLCKG287_gaia_dr3.csv",
+      "gaia_catalog_sha256": "902c37c9f3a6c248b5f3318c64642ed71f6774e3a08767af4f05ff450fc8e46d",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 61,
+        "included_max_recomputed_arcsec": 0.5,
+        "included_pairs": 4,
+        "included_rms_recomputed_arcsec": 0.42432299018554254,
+        "max_after_arcsec": 0.495687,
+        "rms_after_arcsec": 0.299259,
+        "rms_before_arcsec": 0.726429
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/gaia_match_statistics.fits",
+      "observation_end": "2015-11-18T06:05:30",
+      "observation_epoch_jyear": 2015.8788528278455,
+      "observation_start": "2015-11-17T13:57:22",
+      "obsid": 17165,
+      "selected_xray_sources": 61,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165/gaia_translation.xform.fits",
+      "transform_sha256": "47237fae8b4ee5051fbd38c4960d1b13a21c7ca5814d06471afcb4a8fd09a5c9",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -1.804629962557783,
+        "t2": -0.6028032550517537
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17165"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "112315e617334dda09df057318d0855cd804ffd50e1e9f2c080669640466bf83",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/PLCKG287_gaia_dr3.csv",
+      "gaia_catalog_sha256": "902c37c9f3a6c248b5f3318c64642ed71f6774e3a08767af4f05ff450fc8e46d",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": false,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 38,
+        "included_max_recomputed_arcsec": 0.13,
+        "included_pairs": 2,
+        "included_rms_recomputed_arcsec": 0.13,
+        "max_after_arcsec": 0.131063,
+        "rms_after_arcsec": 0.092675,
+        "rms_before_arcsec": 0.45281
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/gaia_match_statistics.fits",
+      "observation_end": "2015-11-24T20:26:40",
+      "observation_epoch_jyear": 2015.897482698304,
+      "observation_start": "2015-11-24T14:13:20",
+      "obsid": 17166,
+      "selected_xray_sources": 38,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166/gaia_translation.xform.fits",
+      "transform_sha256": "2795916db1977ca9ca904c86b760de2032d7a54a2a2b80d5d60c2d8739d7f45b",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -0.6153219984551015,
+        "t2": -1.1155648035592094
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17166"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "16a84e4cda4a3cf13cc2c2c26b79c83776a34f4322e6b76478a4cf32c67d3ef9",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/PLCKG287_gaia_dr3.csv",
+      "gaia_catalog_sha256": "902c37c9f3a6c248b5f3318c64642ed71f6774e3a08767af4f05ff450fc8e46d",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 62,
+        "included_max_recomputed_arcsec": 0.45,
+        "included_pairs": 7,
+        "included_rms_recomputed_arcsec": 0.22421290902048563,
+        "max_after_arcsec": 0.445369,
+        "rms_after_arcsec": 0.157738,
+        "rms_before_arcsec": 1.124645
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_match_statistics.fits",
+      "observation_end": "2015-08-18T11:33:02",
+      "observation_epoch_jyear": 2015.6274110356933,
+      "observation_start": "2015-08-17T18:13:11",
+      "obsid": 17494,
+      "selected_xray_sources": 62,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_translation.xform.fits",
+      "transform_sha256": "4a2659bee1bf4658e97448a56078bc75c3d526219bb9e7f2d628af1bda5bd9a4",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": 3.144798157647204,
+        "t2": -0.5958310879557628
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "24f9728569007c85d5f0d68883edfaff827a43e27bb719ae96751982b96236b4",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/PLCKG287_gaia_dr3.csv",
+      "gaia_catalog_sha256": "902c37c9f3a6c248b5f3318c64642ed71f6774e3a08767af4f05ff450fc8e46d",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": false,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 54,
+        "included_max_recomputed_arcsec": 0.4,
+        "included_pairs": 2,
+        "included_rms_recomputed_arcsec": 0.4,
+        "max_after_arcsec": 0.404687,
+        "rms_after_arcsec": 0.286157,
+        "rms_before_arcsec": 0.31075
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/gaia_match_statistics.fits",
+      "observation_end": "2016-03-22T21:12:12",
+      "observation_epoch_jyear": 2016.2230767390417,
+      "observation_start": "2016-03-22T11:46:41",
+      "obsid": 17495,
+      "selected_xray_sources": 54,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495/gaia_translation.xform.fits",
+      "transform_sha256": "26df7e6907c58e0845d0696738dc5057915c4ed06e7571bb2f1782148455670f",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -0.26255486273339557,
+        "t2": 0.22880165694868992
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17495"
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "77ffe6d0fc7b96fb856b27b96fe7cbf120fe108f01cd922df8e9faa5c2cff2ec",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/PLCKG287_gaia_dr3.csv",
+      "gaia_catalog_sha256": "902c37c9f3a6c248b5f3318c64642ed71f6774e3a08767af4f05ff450fc8e46d",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": false,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 48,
+        "included_max_recomputed_arcsec": 0.0,
+        "included_pairs": 1,
+        "included_rms_recomputed_arcsec": 0.0,
+        "max_after_arcsec": 0.0,
+        "rms_after_arcsec": 0.0,
+        "rms_before_arcsec": 0.814417
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/gaia_match_statistics.fits",
+      "observation_end": "2016-03-24T00:12:15",
+      "observation_epoch_jyear": 2016.2262004715194,
+      "observation_start": "2016-03-23T15:32:33",
+      "obsid": 18807,
+      "selected_xray_sources": 48,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/sources.fits",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807/gaia_translation.xform.fits",
+      "transform_sha256": "3cc93e88fb9a61e2289a3e2db6722a874f9093ec177c89b24d75dc3743709557",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": 1.9003727387953404,
+        "t2": -1.3670204372529042
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/18807"
+    }
+  ],
+  "protocol_version": "SIGMA-V17A-GAIA-ASTROMETRY-1.0.1",
+  "reduction_config_sha256": "db6c8e671f4057e778800fde4aa048b93ac633a3fa38c675960a36736b699f70",
+  "registered_event_images_inspected": false,
+  "relative_registration_checked": false,
+  "status": "frozen_Gaia_DR3_astrometric_gate_failed",
+  "temperature_map_constructed": false
+}

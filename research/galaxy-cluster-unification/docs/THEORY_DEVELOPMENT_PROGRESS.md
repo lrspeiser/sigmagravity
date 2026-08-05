@@ -1,5 +1,55 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-04 Sigma v18B-v18D collisionless-stress result and v19 gate
+
+The AS295 public redshift releases remain 20 secure members short of the
+frozen 50-member collisionless-stress gate, but an already-spent replacement
+pair passed without weakening it: MACS J0416 retained 231 members and PLCK
+G287 retained 129. One target-blind adaptive member-stress map was frozen for
+each cluster before opening either spent GLAFIC target.
+
+The cross-transfer result is decisive. The member-stress model has symmetric
+full-field NRMSE 1.75737 versus 0.99689 for baryons-only GR, a 76.29%
+worsening. Its two directional coefficients differ by 1.15455 dex, or a
+factor of about 14.3. Residual power and shear fail in both directions; the
+maximum R50/R80 error is 29.56%; only the 1.485% resolution gate passes.
+
+Like thermal stress, the member source carries some halo-extent information:
+three of four residual-field radii are within 10%. But present-day projected
+member stress does not supply universal amplitude, phase, or shear. It is
+retired as the direct root source, and no holdout was opened. See
+[`SIGMA_V18B_V18D_COLLISIONLESS_STRESS_RESULTS.md`](SIGMA_V18B_V18D_COLLISIONLESS_STRESS_RESULTS.md).
+
+An audit of v3-v14 and P0646-P0677 shows that a generic new memory, diffusion,
+tensor AQUAL, material carrier, preferred clock, or gauge-tidal field would
+replay an already-tested family. V19 is therefore frozen as a measurement-first
+causal-assembly observability gate. It must identify time information in
+baryonic data before selecting an equation or seeing a lensing target. See
+[`SIGMA_V18_MECHANISM_EXHAUSTION_AND_V19_GATE.md`](SIGMA_V18_MECHANISM_EXHAUSTION_AND_V19_GATE.md).
+
+## 2026-08-04 Sigma v17C-v17E thermal-stress result
+
+The complete target-blind Chandra chain has now been executed on the spent
+AS295/PLCK G287 pair. It produced 298 of 299 planned detector-region spectra,
+with one exact CIAO empty-response-domain cell quarantined under a frozen
+runtime signature, then fit all 29 AS295 and 21 PLCK G287 temperature regions.
+Both regional quality gates passed. The integrated temperatures are 9.6036 and
+14.3962 keV.
+
+The best frozen thermal source improves the static symmetric full-field NRMSE
+from 0.817941 to 0.785960, only 3.910% versus the required 10%, and remains far
+above the absolute 0.500 gate. It fails transferred residual power in one
+direction and shear alignment in both. It nevertheless predicts all four
+amplitude-independent R50/R80 residual-field radii within 5.35--9.53% and is
+stable to 1.009% under doubled resolution.
+
+Projected gas density and temperature therefore contain a real clue about the
+*extent* of the apparent halo response, but they do not determine its strength,
+centroid, or tensor direction. V17F is skipped, and pressure/temperature alone
+cannot enter the root constitutive law. The next authorized source is matched
+collisionless baryonic stress or a genuinely distinct causal state. See
+[`SIGMA_V17C_V17E_THERMAL_STRESS_RESULTS.md`](SIGMA_V17C_V17E_THERMAL_STRESS_RESULTS.md).
+
 ## 2026-08-04 Sigma v18 post-pressure gravitational-flux selection
 
 The post-v17Q root variables are now frozen without selecting a convenient
@@ -1885,5 +1935,8 @@ fixed-window members rather than an additive 77 spectra or 59 members. The
 frozen 50-member stage-B gate therefore remains closed by a 20-member shortfall;
 the threshold is not lowered and PLCKG287 is not analyzed alone. Exact Sifon
 2013 cluster/member queries and a 9-arcmin Sifon 2016 cone return no AS295 rows,
-so the obvious independent ACT releases do not close the gap. See
+so the obvious independent ACT releases do not close the gap. The public MGCLS
+crossmatch contains 4,995 AS295 objects but only photometric `zPhot`, so it adds
+no measured velocities and is explicitly excluded from the member-stress
+count. See
 [`SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md`](SIGMA_V18A_COLLISIONLESS_STRESS_READINESS.md).

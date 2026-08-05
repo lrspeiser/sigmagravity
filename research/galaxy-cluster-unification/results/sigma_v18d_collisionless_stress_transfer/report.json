@@ -1,0 +1,216 @@
+{
+  "decision": "retire the tested instantaneous projected collisionless-stress source",
+  "doubled_resolution_result": {
+    "directional_coefficient_log10_difference": 1.1520414754721602,
+    "directions": [
+      {
+        "coefficient": 5676634.824260739,
+        "coefficient_nonnegative": true,
+        "fit_condition_number": 1.0,
+        "full_field_NRMSE": 2.259041847350252,
+        "halo_scale_diagnostic": {
+          "fractional_radius_errors": {
+            "R50": 0.2954493822669059,
+            "R80": 0.07738891256132062
+          },
+          "maximum_fractional_radius_error": 0.2954493822669059,
+          "predicted": {
+            "centroid_east_kpc": -15.66075719331999,
+            "centroid_north_kpc": -46.45879600471154,
+            "radii_kpc": {
+              "R50": 147.82866749928834,
+              "R80": 176.7819652159831
+            },
+            "valid": true
+          },
+          "required": {
+            "centroid_east_kpc": -27.359361965723323,
+            "centroid_north_kpc": 3.815894638555665,
+            "radii_kpc": {
+              "R50": 114.11381218199593,
+              "R80": 164.08370566549837
+            },
+            "valid": true
+          },
+          "valid": true
+        },
+        "raw_coefficient": 5676634.824260739,
+        "residual_NRMSE": 2.34503728034303,
+        "residual_convergence_correlation": 0.15773524472550499,
+        "residual_power_closed": -4.4991998461986356,
+        "residual_shear_alignment_cosine": 0.07881152217629499,
+        "test_cluster": "PLCKG287",
+        "train_cluster": "MACS0416"
+      },
+      {
+        "coefficient": 399990.3203501595,
+        "coefficient_nonnegative": true,
+        "fit_condition_number": 1.0,
+        "full_field_NRMSE": 1.0290363609859319,
+        "halo_scale_diagnostic": {
+          "fractional_radius_errors": {
+            "R50": 0.026685603679762096,
+            "R80": 0.08927628615132262
+          },
+          "maximum_fractional_radius_error": 0.08927628615132262,
+          "predicted": {
+            "centroid_east_kpc": 3.496071197620125,
+            "centroid_north_kpc": -0.7231873376720144,
+            "radii_kpc": {
+              "R50": 106.86508262164385,
+              "R80": 144.47021234367006
+            },
+            "valid": true
+          },
+          "required": {
+            "centroid_east_kpc": 3.038230427568998,
+            "centroid_north_kpc": -21.659388297297472,
+            "radii_kpc": {
+              "R50": 104.08744628212065,
+              "R80": 158.6323164169575
+            },
+            "valid": true
+          },
+          "valid": true
+        },
+        "raw_coefficient": 399990.3203501595,
+        "residual_NRMSE": 0.9814228061379515,
+        "residual_convergence_correlation": 0.4837421239156143,
+        "residual_power_closed": 0.03680927559230884,
+        "residual_shear_alignment_cosine": 0.4409723642760528,
+        "test_cluster": "MACS0416",
+        "train_cluster": "PLCKG287"
+      }
+    ],
+    "relative_improvement_over_baryon_baseline": -0.7612495073774022,
+    "symmetric_baryon_baseline_full_field_NRMSE": 0.996624399655657,
+    "symmetric_cross_cluster_full_field_NRMSE": 1.755304232933825
+  },
+  "figure": "results/sigma_v18d_collisionless_stress_transfer/collisionless_stress_transfer.png",
+  "figure_sha256": "d6dee1018b0de05571c5638858a737bff65990ec14d76a1053cb602d4906dc14",
+  "gate_results": {
+    "absolute_source_sufficiency": false,
+    "advance": false,
+    "doubled_resolution_stable": true,
+    "halo_scale_both_directions": false,
+    "material_improvement": false,
+    "positive_consistent_coefficient": false,
+    "residual_power_both_directions": false,
+    "residual_shear_alignment_both_directions": false
+  },
+  "generated_utc": "2026-08-05T02:42:22.559423+00:00",
+  "holdout_opened": false,
+  "input_hashes": {
+    "config": "1bf808ebf77200e711f713044c8c46582353cae846a543c951948af01a63d232",
+    "source_config": "217062d196aedfc4708e35e75f43ee4c206d5dd874cc3a216add6969cfe7c0e3",
+    "source_report": "ff7a4ff915f8796c801c015609ce88e626dbbbe1dff5eba52da1ba88ea8d288b"
+  },
+  "inverse_coefficient_is_physical_constant": false,
+  "lensing_target_opened": true,
+  "per_cluster_amplitude_scale_shear_or_orientation": false,
+  "primary_result": {
+    "directional_coefficient_log10_difference": 1.1545522683847027,
+    "directions": [
+      {
+        "coefficient": 5680669.331195934,
+        "coefficient_nonnegative": true,
+        "fit_condition_number": 1.0,
+        "full_field_NRMSE": 2.261971980133804,
+        "halo_scale_diagnostic": {
+          "fractional_radius_errors": {
+            "R50": 0.2956302204867528,
+            "R80": 0.07673998158918692
+          },
+          "maximum_fractional_radius_error": 0.2956302204867528,
+          "predicted": {
+            "centroid_east_kpc": -15.474784737128664,
+            "centroid_north_kpc": -46.465892976012796,
+            "radii_kpc": {
+              "R50": 147.8936521347907,
+              "R80": 176.68224728265437
+            },
+            "valid": true
+          },
+          "required": {
+            "centroid_east_kpc": -27.30528349103473,
+            "centroid_north_kpc": 3.811078918355449,
+            "radii_kpc": {
+              "R50": 114.14804146759468,
+              "R80": 164.08998486513403
+            },
+            "valid": true
+          },
+          "valid": true
+        },
+        "raw_coefficient": 5680669.331195934,
+        "residual_NRMSE": 2.348201913376857,
+        "residual_convergence_correlation": 0.1578325981559307,
+        "residual_power_closed": -4.514052225986731,
+        "residual_shear_alignment_cosine": 0.07802166021465219,
+        "test_cluster": "PLCKG287",
+        "train_cluster": "MACS0416"
+      },
+      {
+        "coefficient": 397967.1652490045,
+        "coefficient_nonnegative": true,
+        "fit_condition_number": 1.0,
+        "full_field_NRMSE": 1.0296632703623738,
+        "halo_scale_diagnostic": {
+          "fractional_radius_errors": {
+            "R50": 0.02765170216353616,
+            "R80": 0.08795346642344963
+          },
+          "maximum_fractional_radius_error": 0.08795346642344963,
+          "predicted": {
+            "centroid_east_kpc": 3.4928037903572293,
+            "centroid_north_kpc": -0.7260755962107839,
+            "radii_kpc": {
+              "R50": 106.79956330839617,
+              "R80": 144.4392295270332
+            },
+            "valid": true
+          },
+          "required": {
+            "centroid_east_kpc": 2.9697690970359694,
+            "centroid_north_kpc": -21.771769765487907,
+            "radii_kpc": {
+              "R50": 103.92583701612995,
+              "R80": 158.3682676372017
+            },
+            "valid": true
+          },
+          "valid": true
+        },
+        "raw_coefficient": 397967.1652490045,
+        "residual_NRMSE": 0.9815335726012238,
+        "residual_convergence_correlation": 0.4822237404306628,
+        "residual_power_closed": 0.036591845856678185,
+        "residual_shear_alignment_cosine": 0.44046048814181266,
+        "test_cluster": "MACS0416",
+        "train_cluster": "PLCKG287"
+      }
+    ],
+    "relative_improvement_over_baryon_baseline": -0.7628554205967302,
+    "symmetric_baryon_baseline_full_field_NRMSE": 0.996890354025554,
+    "symmetric_cross_cluster_full_field_NRMSE": 1.7573735643345414
+  },
+  "protocol_version": "SIGMA-V18D-COLLISIONLESS-STRESS-TRANSFER-1.0.0",
+  "resolution_stability": {
+    "components": {
+      "MACS0416_to_PLCKG287_R50_relative_change": 0.0004394011140054096,
+      "MACS0416_to_PLCKG287_R80_relative_change": 0.0005643913571531132,
+      "MACS0416_to_PLCKG287_full_field_NRMSE_relative_change": 0.0012953886296056068,
+      "MACS0416_to_PLCKG287_power_closed_absolute_change": 0.014852379788095504,
+      "MACS0416_to_PLCKG287_shear_alignment_absolute_change": 0.000789861961642796,
+      "PLCKG287_to_MACS0416_R50_relative_change": 0.0006134792242406661,
+      "PLCKG287_to_MACS0416_R80_relative_change": 0.00021450416717330728,
+      "PLCKG287_to_MACS0416_full_field_NRMSE_relative_change": 0.0006088489261361252,
+      "PLCKG287_to_MACS0416_power_closed_absolute_change": 0.0002174297356306587,
+      "PLCKG287_to_MACS0416_shear_alignment_absolute_change": 0.0005118761342401412,
+      "symmetric_full_field_NRMSE_relative_change": 0.0011775136730817319
+    },
+    "maximum_change": 0.014852379788095504
+  },
+  "sample_is_spent": true,
+  "status": "completed Sigma v18D collisionless-stress transfer diagnostic"
+}

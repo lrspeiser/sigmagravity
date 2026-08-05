@@ -1,0 +1,22 @@
+{
+  "status": "single_generated_FOV_restored_from_fresh_identical_reprocessing_configuration",
+  "incident": "During a response-commissioning check, CIAO wcs_update 4.18 was invoked with a separate outfile on a FITS FOV table. For non-aspect FITS tables wcs_update ignores outfile and edits infile in place, so the generated AS295 ObsID 12260 repro FOV WCS was translated. No event, aspect, mask, bad-pixel, spectrum, response, region, temperature, stress, or lensing product was modified.",
+  "target": "/home/henry/sigma-v17a-chandra/repro/AS295/12260/acisf12260_repro_fov1.fits",
+  "original_provenance_sha256": "22ce9f9bbf1bfd03d19c368708c7d12d90cc7f1801b4c9e3523c87d6f12c4190",
+  "accidentally_translated_sha256": "9642e62573eab26ec8d45fa3b6834d8b01b92602f98773823cefc779698c60e9",
+  "accidentally_translated_copy": "/home/henry/sigma-v17a-chandra/response_commissioning_preserved/acisf12260_repro_fov1_accidentally_shifted.fits",
+  "restoration_source": "/home/henry/sigma-v17a-chandra/repro_restore_20260804/AS295/12260/acisf12260_repro_fov1.fits",
+  "restored_sha256": "6bd0a34a2957d2bde869bf25b293849139b8002f323216be0eb9325d863b79e0",
+  "restoration_method": "Rerun chandra_repro from the unchanged staged ObsID 12260 inputs with the frozen check_vf_pha=yes, pix_adj=edser, set_ardlib=no configuration in a new output directory; preserve the shifted file; then replace only the generated repro_fov1 file with the fresh product.",
+  "hash_audit": {
+    "repro_products_checked": 132,
+    "products_matching_original_report_exactly": 131,
+    "documented_fresh_reprocessing_replacement": 1,
+    "other_mismatches": 0
+  },
+  "production_rule": "Never invoke wcs_update directly on a provenance FOV. Copy the FOV into the spectral work directory first, verify the copy hash, and invoke wcs_update in-place only on that copy.",
+  "spectrum_extracted": false,
+  "response_constructed": false,
+  "temperature_fit_run": false,
+  "lensing_target_opened": false
+}

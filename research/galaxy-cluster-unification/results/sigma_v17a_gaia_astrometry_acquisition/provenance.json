@@ -1,0 +1,34 @@
+{
+  "astrometric_offset_fit": false,
+  "bytes": 1322600,
+  "config_sha256": "10969bf662a3dc080804ab34e2db4f5634306db21e6899450d32a987b544b322",
+  "files": 2,
+  "generated_utc": "2026-08-04T18:01:37.658415+00:00",
+  "lensing_target_opened": false,
+  "protocol_version": "SIGMA-V17A-GAIA-ASTROMETRY-1.0.1",
+  "records": [
+    {
+      "bytes": 409295,
+      "cluster": "AS295",
+      "query": "SELECT source_id,designation,ref_epoch,ra,dec,ra_error,dec_error,pmra,pmdec,pmra_error,pmdec_error,astrometric_params_solved,phot_g_mean_mag,ruwe,duplicated_source,visibility_periods_used FROM gaiadr3.gaia_source WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',41.37358333333333,-53.037325,0.4)) ORDER BY source_id",
+      "query_sha256": "7f614eabd5f5b5a8c740d4291133522f11d0306cf87b543e38cfd110449894ee",
+      "relative_path": "data/raw/sigma_v17_gaia_dr3/AS295_gaia_dr3.csv",
+      "rows": 2127,
+      "sha256": "674ce40e01be653a9cac17e1bcb921bca5e9c5629cd650ae1be49a0b290261e3"
+    },
+    {
+      "bytes": 913305,
+      "cluster": "PLCKG287",
+      "query": "SELECT source_id,designation,ref_epoch,ra,dec,ra_error,dec_error,pmra,pmdec,pmra_error,pmdec_error,astrometric_params_solved,phot_g_mean_mag,ruwe,duplicated_source,visibility_periods_used FROM gaiadr3.gaia_source WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',177.70583333333335,-28.07897222222222,0.4)) ORDER BY source_id",
+      "query_sha256": "ca26084dfadb98fd0359d7aa915e0ccb79fcba69e52c07a8b2b68450b0827731",
+      "relative_path": "data/raw/sigma_v17_gaia_dr3/PLCKG287_gaia_dr3.csv",
+      "rows": 4615,
+      "sha256": "902c37c9f3a6c248b5f3318c64642ed71f6774e3a08767af4f05ff450fc8e46d"
+    }
+  ],
+  "registered_event_image_inspected": false,
+  "rows": 6742,
+  "status": "frozen_Gaia_DR3_reference_cones_downloaded_and_hashed",
+  "temperature_map_constructed": false,
+  "xray_source_crossmatch_run": false
+}

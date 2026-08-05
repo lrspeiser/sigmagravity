@@ -1,14 +1,14 @@
 {
-  "registry_version": "FORMULA-PRIOR-ART-REGISTRY-1.0.0",
+  "registry_version": "FORMULA-PRIOR-ART-REGISTRY-1.1.0",
   "as_of_utc": "2026-08-04",
   "scope": "Canonical published formula families directly overlapping mechanisms or controls explored in this project. This is a scientific prior-art screen, not an exhaustive bibliography or a legal novelty/patent opinion.",
   "one_law_rule": "A final Sigma candidate must be one equation or one action with the same universal constants and matter coupling in every system. A regime transition is acceptable only when it is derived from a field invariant evaluated identically everywhere; object labels, per-object gravity parameters, a lens-only multiplier, or choosing a different published law after seeing the target are not acceptable.",
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 103,
+    "sigma_protocols": 108,
     "project_formula_addenda": 14,
-    "sigma_formula_fragments": 122,
+    "sigma_formula_fragments": 138,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -5545,7 +5545,9 @@
           "json_path": "physical_question.projected_member_proxy",
           "formula": "q_member(x)=sum_i kappa_i(x) [v_los_i-vbar_los(x)]^2/c^2 using only secure spectroscopic members and a universal declared kernel",
           "published_overlap_ids": [
-            "NEWTON-POISSON"
+            "GR-EINSTEIN",
+            "FRT-GRAVITY",
+            "EMSG"
           ]
         },
         {
@@ -5663,6 +5665,26 @@
         "NEWTON-POISSON"
       ],
       "sha256": "0b82ada1c7e3c53a28d7023693e64a9479d69ffb01a6c00d0ed39d4d156ac15d"
+    },
+    {
+      "config": "configs/sigma_v17c_regional_runtime_response_support.json",
+      "protocol_version": "SIGMA-V17C-REGIONAL-RUNTIME-RESPONSE-SUPPORT-1.0.0",
+      "status": "frozen after 193 valid AS295 extraction cells and one response-only failure, but before any regional spectrum report, regional temperature, thermal-stress map, inverse coefficient, or lensing target access",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "admission_rule.action",
+          "formula": "Hash and move the two partial PHA files into a response-support quarantine, write an immutable per-cell marker, record the cell as skipped, and preserve every other cell and region.",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 1,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "75fe99de5b2e4df2e64791e63090fcbb70ee947bc6910495a82c555710807987"
     },
     {
       "config": "configs/sigma_v17c_spectral_temperature.json",
@@ -5843,9 +5865,23 @@
           "published_overlap_ids": [
             "NEWTON-POISSON"
           ]
+        },
+        {
+          "json_path": "favorable_cluster_bound.pressure_compactness_equation",
+          "formula": "Pi_cluster=3 k_B T/(mu m_p c^2)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "solar_bound.pressure_compactness_equation",
+          "formula": "Pi_sun=c_vir G M_sun/(R_sun c^2)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
         }
       ],
-      "formula_fragment_count": 6,
+      "formula_fragment_count": 8,
       "published_overlap_ids": [
         "STVG-MOG",
         "CONFORMAL-GRAVITY",
@@ -5912,6 +5948,13 @@
           ]
         },
         {
+          "json_path": "candidate_action.projected_root_equation",
+          "formula": "[1-L_sigma^2 nabla_perp^2]s_sigma is proportional to chi(Z) J_T; delta W is proportional to alpha chi(Z)s_sigma, so source and metric together give the homogeneous response factor chi^2=1/sqrt(1+Z).",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
           "json_path": "fixed_theory_choices.response_equation",
           "formula": "R(Z)=chi(Z)^2=1/sqrt(1+Z)",
           "published_overlap_ids": [
@@ -5919,7 +5962,7 @@
           ]
         }
       ],
-      "formula_fragment_count": 7,
+      "formula_fragment_count": 8,
       "published_overlap_ids": [
         "DISFORMAL-METRIC",
         "EINSTEIN-AETHER",
@@ -6170,6 +6213,13 @@
           ]
         },
         {
+          "json_path": "aether_definitions.bare_aether_equation",
+          "formula": "M_Pl^2 nabla_m J_U^m_a+2 lambda U_a=0 because c_4=0 in the selected family",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
           "json_path": "off_shell_identity.formula",
           "formula": "-nabla_m E_g^m_n+E_X nabla_n X+E_lambda nabla_n lambda+E_U^m nabla_n U_m-nabla_m(E_U^m U_n)+E_A^m nabla_n A_m-nabla_m(E_A^m A_n)+E_B,m nabla_n B^m+nabla_r(E_B,n B^r)+E_psi Lie_n psi=0",
           "published_overlap_ids": [
@@ -6177,7 +6227,7 @@
           ]
         }
       ],
-      "formula_fragment_count": 6,
+      "formula_fragment_count": 7,
       "published_overlap_ids": [
         "DISFORMAL-METRIC",
         "EINSTEIN-AETHER",
@@ -6383,6 +6433,13 @@
       "role": "formula_or_action_protocol",
       "formula_fragments": [
         {
+          "json_path": "action_class.static_field_equation",
+          "formula": "div[mu(t) g_sigma]=4 pi G alpha^2 rho_p, where rho_p=3p/c^2, t=|g_sigma|/a_sigma, mu(0)=1, mu(t)>0, and mu is monotone nondecreasing",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
           "json_path": "formula_inventory.equations",
           "formula": "TeVeS-like disformal metric g_tilde_mn=exp(2alphaX)(g_mn+2alphaX U_m U_n); AQUAL/K-mouflage flux div[mu(t) g_sigma]=4piG alpha^2 rho_p; mu(t)t=alpha^2 Pi_p/y^2; r_K=alpha sqrt[G integral(3p/c^2)dV/a_sigma]; abs(gamma-1)>=2 y_obs sqrt[(Pi_sun/Pi_cluster)x_c]",
           "published_overlap_ids": [
@@ -6393,7 +6450,7 @@
           ]
         }
       ],
-      "formula_fragment_count": 1,
+      "formula_fragment_count": 2,
       "published_overlap_ids": [
         "AQUAL",
         "K-MOUFLAGE",
@@ -6461,6 +6518,13 @@
       "role": "formula_or_action_protocol",
       "formula_fragments": [
         {
+          "json_path": "root_variables.constitutive_equation",
+          "formula": "nabla W=delta H/delta D, including spatial Euler-Lagrange derivatives when H depends on nabla D",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
           "json_path": "formula_inventory.equations",
           "formula": "nabla dot D=4 pi G rho_b; I_stat=integral{[H(D,nabla D,Z_b)-D dot nabla W]/(4piG)-rho_b W}d3x; nabla W=delta H/delta D; rho_Sigma,eff=-(4piG)^-1 nabla dot(g+D); H=D^2/2 gives Newton; H=H_0(|D|) is Legendre-dual AQUAL; minimal fixed-length elasticity gives delta g=-L^2(ds/dD)D^2/r^2",
           "published_overlap_ids": [
@@ -6470,7 +6534,7 @@
           ]
         }
       ],
-      "formula_fragment_count": 1,
+      "formula_fragment_count": 2,
       "published_overlap_ids": [
         "NEWTON-POISSON",
         "AQUAL",
@@ -6480,15 +6544,132 @@
     },
     {
       "config": "configs/sigma_v18a_collisionless_stress_readiness.json",
-      "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.1",
-      "status": "evidence audit updated after locating and querying the public SPT and ACT spectroscopy releases; no collisionless-stress feature, lensing target, or gravity score is opened",
+      "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.2",
+      "status": "evidence audit updated after locating and querying the public SPT, ACT, and MGCLS releases; no collisionless-stress feature, lensing target, or gravity score is opened",
       "role": "gate_or_data_protocol_no_new_formula_fragment",
       "formula_fragments": [],
       "formula_fragment_count": 0,
       "published_overlap_ids": [
         "NEWTON-POISSON"
       ],
-      "sha256": "4bcce6f461e70907f1b3aabdfee18a95dcc3d03b0fab99b14d8edc32f413b432"
+      "sha256": "ebd850a4035f271c2c9f112f7cd90712714845df27ba08c0f0a58624a57a3bf2"
+    },
+    {
+      "config": "configs/sigma_v18b_replacement_pair_readiness.json",
+      "protocol_version": "SIGMA-V18B-REPLACEMENT-COLLISIONLESS-PAIR-READINESS-1.0.0",
+      "status": "frozen after v17E failed and before constructing or scoring any replacement-pair collisionless-stress feature",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "universal_selection.velocity_equation",
+          "formula": "v_i=c (z_i-median(z))/(1+median(z)) after catalog quality selection",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "universal_selection.aperture_equation",
+          "formula": "R_i=theta_i D_A with the frozen Planck18 scale",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "universal_stellar_weight.absolute_magnitude_equation",
+          "formula": "M_AB=m_AB-DM+2.5 log10(1+z)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "universal_stellar_weight.mass_equation",
+          "formula": "M_star/M_sun=0.8*10^[-0.4(M_AB-4.55)]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "universal_stellar_weight.cgs_flux_to_ab_equation",
+          "formula": "m_AB=-2.5 log10(f_nu[erg s^-1 cm^-2 Hz^-1])-48.6",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 5,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "b21fb0462d1a886ae95a1687a34c23f42b1fe5a87cb24c7d5bbdd5ff0580fed9"
+    },
+    {
+      "config": "configs/sigma_v18c_collisionless_stress_maps.json",
+      "protocol_version": "SIGMA-V18C-COLLISIONLESS-STRESS-MAPS-1.0.0",
+      "status": "frozen after v18B readiness passed and before constructing either member-stress map or reading any replacement-pair lensing target",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "adaptive_kernel.bandwidth_equation",
+          "formula": "sigma_i=d_i,k/2, where d_i,k is the projected distance to member i's kth nearest selected member",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "adaptive_kernel.kernel_equation",
+          "formula": "K_i(x)=exp[-|x-x_i|^2/(2 sigma_i^2)]/(2 pi sigma_i^2)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "adaptive_kernel.local_mean_equation",
+          "formula": "vbar(x)=sum_i M_i K_i(x) v_i / sum_i M_i K_i(x)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "adaptive_kernel.stress_equation",
+          "formula": "q_member(x)=[sum_i M_i K_i(x) (v_i-vbar(x))^2/c^2]/Sigma_critical",
+          "published_overlap_ids": [
+            "GR-EINSTEIN",
+            "FRT-GRAVITY",
+            "EMSG"
+          ]
+        }
+      ],
+      "formula_fragment_count": 4,
+      "published_overlap_ids": [
+        "GR-EINSTEIN",
+        "FRT-GRAVITY",
+        "EMSG"
+      ],
+      "sha256": "217062d196aedfc4708e35e75f43ee4c206d5dd874cc3a216add6969cfe7c0e3"
+    },
+    {
+      "config": "configs/sigma_v18d_collisionless_stress_transfer.json",
+      "protocol_version": "SIGMA-V18D-COLLISIONLESS-STRESS-TRANSFER-1.0.0",
+      "status": "frozen after both v18C source maps were hashed and before loading or scoring either spent replacement-pair target in v18D",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "1bf808ebf77200e711f713044c8c46582353cae846a543c951948af01a63d232"
+    },
+    {
+      "config": "configs/sigma_v19_causal_assembly_observability_gate.json",
+      "protocol_version": "SIGMA-V19-CAUSAL-ASSEMBLY-OBSERVABILITY-GATE-1.0.0",
+      "status": "frozen after v18D failed and before constructing a causal-assembly source or loading any new lensing target",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "3f01e1c0bb74ef3bf358539dc1134606234d1c4780f1c3db9be3c9179c3d1b35"
     },
     {
       "config": "configs/sigma_v1_nonmetricity_cycle.json",

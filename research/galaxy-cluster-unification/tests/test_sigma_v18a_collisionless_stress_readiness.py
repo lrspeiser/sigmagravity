@@ -70,6 +70,20 @@ def test_report_proves_public_samples_are_duplicates_and_gate_fails() -> None:
         item["matching_rows"] == 0
         for item in report["independent_act_catalog_coverage"].values()
     )
+    mgcls = report["photometric_only_catalog_coverage"][
+        "mgcls_2022_as295_optical_crossmatch"
+    ]
+    assert mgcls["rows"] == 4995
+    assert mgcls["schema_column_count"] == 28
+    assert mgcls["redshift_columns"] == [
+        {
+            "name": "zPhot",
+            "description": "Photometric redshift (zPhot)",
+            "ucd": "src.redshift.phot",
+        }
+    ]
+    assert mgcls["has_spectroscopic_redshift"] is False
+    assert mgcls["usable_as_velocity_measurement"] is False
     assert report["stage_b_source_construction_authorized"] is False
     assert report["formula_or_kernel_selection_authorized"] is False
     assert report["lensing_target_opened"] is False
@@ -80,6 +94,23 @@ def test_report_hashes_all_inputs() -> None:
     report = json.loads(REPORT.read_text(encoding="utf-8"))
     assert report["input_hashes"]["config"] == digest(CONFIG)
     assert report["input_hashes"]["parent_gate"] == digest(ROOT / config["parent_gate"])
-    for group in ("public_inputs", "coverage_inputs"):
+    for group in ("public_inputs", "coverage_inputs", "photometric_only_inputs"):
         for name, source in config[group].items():
             assert report["input_hashes"][name] == digest(ROOT / source["raw_path"])
+
+
+def test_mgcls_schema_cannot_be_mislabeled_as_spectroscopy(tmp_path: Path) -> None:
+    module = load_module()
+    catalog = tmp_path / "catalog.tsv"
+    catalog.write_text(
+        "#Column\tzSpec\t(F8.5)\tSpectroscopic redshift [ucd=src.redshift]\n"
+        "zSpec\nunit\n-----\n0.3001\n",
+        encoding="utf-8",
+    )
+    source = {"catalog": "test", "required_redshift_ucd": "src.redshift.phot"}
+    try:
+        module.audit_photometric_catalog(catalog, source)
+    except RuntimeError as error:
+        assert "schema changed" in str(error)
+    else:
+        raise AssertionError("spectroscopic schema was accepted as photometric-only")

@@ -1,0 +1,86 @@
+{
+  "protocol_version": "SIGMA-V18B-REPLACEMENT-COLLISIONLESS-PAIR-READINESS-1.0.0",
+  "status": "frozen after v17E failed and before constructing or scoring any replacement-pair collisionless-stress feature",
+  "purpose": "Determine whether the already-spent MACS J0416 and PLCK G287 data satisfy the inherited matched collisionless-member-stress source requirements without weakening the AS295 gate or opening a holdout.",
+  "parents": {
+    "dynamical_stress_gate": "configs/sigma_v17_dynamical_stress_data_gate.json",
+    "dynamical_stress_gate_sha256": "c2705e1078711ba50c10dc9e5d1f2ff67d45aeccb8eb0787b7ae016bfc0a2417",
+    "thermal_failure_report": "results/sigma_v17e_thermal_stress_transfer/report.json",
+    "thermal_failure_report_sha256": "ec8bf5c62f73839f0ba5eca30fda57fcea688cfac962d4f9ca6127e7632765b7"
+  },
+  "universal_selection": {
+    "minimum_secure_members_inside_aperture": 50,
+    "projected_aperture_kpc": 1800.0,
+    "maximum_absolute_rest_frame_velocity_km_s": 4500.0,
+    "speed_of_light_km_s": 299792.458,
+    "velocity_equation": "v_i=c (z_i-median(z))/(1+median(z)) after catalog quality selection",
+    "aperture_equation": "R_i=theta_i D_A with the frozen Planck18 scale",
+    "minimum_is_inherited_unchanged": true
+  },
+  "universal_stellar_weight": {
+    "observed_band": "HST WFC3/IR F160W",
+    "mass_to_light_solar": 0.8,
+    "solar_absolute_ab_magnitude": 4.55,
+    "absolute_magnitude_equation": "M_AB=m_AB-DM+2.5 log10(1+z)",
+    "mass_equation": "M_star/M_sun=0.8*10^[-0.4(M_AB-4.55)]",
+    "cgs_flux_to_ab_equation": "m_AB=-2.5 log10(f_nu[erg s^-1 cm^-2 Hz^-1])-48.6",
+    "per_cluster_weight_normalization": false,
+    "per_member_fit": false
+  },
+  "clusters": {
+    "MACS0416": {
+      "member_catalog": "data/derived/p0588_macs0416_spectroscopic_member_candidates.csv",
+      "member_catalog_sha256": "31cf730221cf3d31b64d75e99f0eaee184d4cbf745f5c3344e39ebaf47659652",
+      "baryon_sources": "data/derived/p0589_macs0416_nominal_baryon_sources.csv",
+      "baryon_sources_sha256": "28a87f89fcf672af0a93bd1fc7576a6e075fdd3b45a402a51d7110e69edbe4c7",
+      "baryon_report": "results/p0589_macs0416_baryon_field/report.json",
+      "baryon_report_sha256": "8f7b5ad92ad8b80b707330f0b79fcfff42edb9341b860d64c7b0cb4daf46b866",
+      "center_ra_deg": 64.0381416667,
+      "center_dec_deg": -24.0674722222,
+      "redshift": 0.396,
+      "planck18_kpc_per_arcsec": 5.5074366258586815,
+      "planck18_distance_modulus": 41.72572739085166,
+      "redshift_column": "zspec",
+      "ra_column": "ra_deg",
+      "dec_column": "dec_deg",
+      "photometry_kind": "cgs_fnu",
+      "photometry_column": "f160w_flux_catalog_units",
+      "quality_column": "zspec_quality",
+      "minimum_quality": 3.0
+    },
+    "PLCKG287": {
+      "member_catalog": "results/sigma_v17_public_data_acquisition/plckg287_selected_spectroscopic_members.csv",
+      "member_catalog_sha256": "06eac064eb37418ea69b29044a114ae1b4ba13ce7829897cddb77c853672048d",
+      "baryon_map": "results/p0641_registered_cluster_baryon_maps/maps/PLCKG287_baryons.npz",
+      "baryon_map_sha256": "ae1ae809f1a8951b9c930dc713b005bfcb114bdebe8d578d349ae7c722c6d0a7",
+      "baryon_report": "results/p0641_registered_cluster_baryon_maps/report.json",
+      "baryon_report_sha256": "7c262ce473ec4f925172b1f5dae767617dbcf2531bc097e09e12ecead23bbcd6",
+      "center_ra_deg": 177.71343070725325,
+      "center_dec_deg": -28.08293609825516,
+      "redshift": 0.39,
+      "planck18_kpc_per_arcsec": 5.456245271296583,
+      "planck18_distance_modulus": 41.68674309174644,
+      "redshift_column": "spectroscopic_redshift",
+      "ra_column": "ra_deg",
+      "dec_column": "dec_deg",
+      "photometry_kind": "ab_magnitude",
+      "photometry_column": "f160w_kron_mag",
+      "quality_column": null,
+      "minimum_quality": null
+    }
+  },
+  "authorization": {
+    "sample_is_spent": true,
+    "source_readiness_audit_only": true,
+    "formula_or_spatial_kernel_selection_authorized": false,
+    "lensing_target_access_authorized": false,
+    "holdout_access_authorized": false,
+    "construction_if_ready": "Freeze one universal projection, local-mean, kernel, and E-mode map protocol before constructing either member-stress map."
+  },
+  "claim_boundary": [
+    "Passing readiness would authorize source construction on a spent pair, not validate collisionless stress or a gravity theory.",
+    "Only line-of-sight velocities are measured; transverse velocity and line-of-sight depth remain unavailable.",
+    "The shared F160W mass rule is a declared stellar-population approximation and must be varied symmetrically later.",
+    "No cluster-specific gravity amplitude, length, shear, orientation, or member-weight normalization is allowed."
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.1",
-  "status": "evidence audit updated after locating and querying the public SPT and ACT spectroscopy releases; no collisionless-stress feature, lensing target, or gravity score is opened",
-  "purpose": "Determine whether the public Ruel 2014 and Bayliss 2016 AS295 spectroscopy supplies an independent, deduplicated sample large enough to satisfy the already-frozen matched v17 stage-B collisionless-stress gate.",
+  "protocol_version": "SIGMA-V18A-COLLISIONLESS-STRESS-READINESS-1.0.2",
+  "status": "evidence audit updated after locating and querying the public SPT, ACT, and MGCLS releases; no collisionless-stress feature, lensing target, or gravity score is opened",
+  "purpose": "Determine whether public AS295 catalogs supply an independent, deduplicated spectroscopic sample large enough to satisfy the already-frozen matched v17 stage-B collisionless-stress gate, while explicitly rejecting photometric redshifts as velocity measurements.",
   "parent_gate": "configs/sigma_v17_dynamical_stress_data_gate.json",
   "cluster_identity": {
     "project_name": "AS295",
@@ -52,6 +52,16 @@
       "interpretation": "Nine arcmin exceeds the 1.8-Mpc stage-B aperture at the frozen AS295 angular scale."
     }
   },
+  "photometric_only_inputs": {
+    "mgcls_2022_as295_optical_crossmatch": {
+      "catalog": "J/A+A/657/A56/t3-as295",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F657%2FA56%2Ft3-as295&-out.max=unlimited",
+      "raw_path": "data/raw/sigma_v18a_collisionless_stress/AS295/mgcls2022_t3_as295.tsv",
+      "published_role": "MeerKAT compact-source catalog with DECaLS optical crossmatches",
+      "required_redshift_ucd": "src.redshift.phot",
+      "forbidden_spectroscopic_use": true
+    }
+  },
   "audit_rules": {
     "cluster_name_must_equal": "J0245-5302",
     "catalog_crossmatch_radius_arcsec": 1.0,
@@ -69,11 +79,13 @@
     "Bayliss table 2 reports 38 spectra and 29 members for AS295.",
     "An exploratory coordinate comparison indicated that the two object tables overlap almost completely.",
     "Exploratory exact-name and cone queries indicated no AS295 coverage in the Sifon 2013 or 2016 public object tables."
+    ,"The MGCLS AS295 optical crossmatch contains 4,995 catalog rows and a zPhot column but no spectroscopic-redshift column."
   ],
   "decision_rule": [
     "Stage B remains prohibited unless the deduplicated AS295 sample has at least 50 secure spectroscopic members and every other frozen stage-B prerequisite is met for both spent clusters.",
     "Do not add the Ruel and Bayliss member totals: duplicated sky positions represent the same galaxies.",
     "Do not lower the 50-member threshold, select PLCKG287 alone, or use photometric redshifts as velocity measurements after a shortfall.",
+    "A large photometric catalog does not reduce the velocity-member shortfall; its schema must be recorded as measurement coverage, not converted into line-of-sight stress.",
     "A readiness pass would authorize construction of a target-blind source proxy only; it would not validate a gravity formula or open a holdout."
   ]
 }

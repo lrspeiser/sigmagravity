@@ -34,6 +34,14 @@ catalog. That cone is wider than the frozen 1.8-Mpc aperture. These negative
 query products are retained alongside the SPT tables so catalog coverage can
 be rechecked if VizieR changes.
 
+The public MGCLS AS295 optical/radio crossmatch adds 4,995 objects and useful
+morphology, but its only redshift column is the photometric quantity `zPhot`
+(`src.redshift.phot`). It contains no spectroscopic-redshift or line-of-sight
+velocity column. The catalog is retained and hash-audited, but its 4,995 rows
+add **zero** members to the velocity-stress sample. Treating photometric
+redshifts as the missing velocities would invent the phase-space information
+the test is meant to measure.
+
 ## What this changes
 
 It closes a data-accounting loophole. The two citations used by later papers
@@ -47,6 +55,7 @@ keep the following boundaries:
 
 - do not lower the 50-member threshold after seeing the shortfall;
 - do not replace missing velocities with photometric redshifts;
+- do not count the 4,995 MGCLS photometric objects as spectra;
 - do not run or rank a PLCKG287-only stress feature;
 - do not count duplicated spectra twice; and
 - do not open any holdout or interpret catalog readiness as theory evidence.

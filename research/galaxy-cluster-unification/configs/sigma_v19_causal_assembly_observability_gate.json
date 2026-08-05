@@ -1,0 +1,67 @@
+{
+  "protocol_version": "SIGMA-V19-CAUSAL-ASSEMBLY-OBSERVABILITY-GATE-1.0.0",
+  "status": "frozen after v18D failed and before constructing a causal-assembly source or loading any new lensing target",
+  "purpose": "Determine whether a directly measured baryonic assembly-history variable contains halo extent, offset, or orientation information absent from instantaneous density, thermal stress, and projected member stress.",
+  "parents": {
+    "collisionless_transfer_config": "configs/sigma_v18d_collisionless_stress_transfer.json",
+    "collisionless_transfer_config_sha256": "1bf808ebf77200e711f713044c8c46582353cae846a543c951948af01a63d232",
+    "collisionless_transfer_report": "results/sigma_v18d_collisionless_stress_transfer/report.json",
+    "collisionless_transfer_report_sha256": "73b3d136b040cc0aca64b179dde5d4c8f366fa5a75db0ba5ca3a3bf5e15ce2cd",
+    "mechanism_audit": "docs/SIGMA_V18_MECHANISM_EXHAUSTION_AND_V19_GATE.md"
+  },
+  "mechanism_boundary": {
+    "prohibited_replays": [
+      "one-scale isotropic scalar or tensor memory",
+      "another spatial smoothing or diffusion kernel",
+      "aether-tidal or material-triad carrier",
+      "preferred-clock or ADM-trace carrier",
+      "local scalar-gauge rank-two carrier",
+      "instantaneous thermal or collisionless stress with a new exponent or amplitude"
+    ],
+    "required_new_information": "A measured time-ordering, propagation, or assembly variable that distinguishes equal instantaneous baryonic density/stress snapshots with different histories.",
+    "formula_selection_authorized": false
+  },
+  "minimum_data": {
+    "spent_development_clusters": 2,
+    "clusters_required_before_holdout": 4,
+    "secure_spectroscopic_members_each": 50,
+    "required_products": [
+      "member positions, spectroscopic redshifts, and uncertainties",
+      "X-ray surface-density and resolved-temperature maps with uncertainties",
+      "shock, cold-front, or radio-relic geometry with propagation speed or a quantitative upper bound",
+      "BCG, intracluster-light, stellar, and gas mass maps on one WCS",
+      "declared uncertainty ensemble for transverse velocity and line-of-sight depth"
+    ]
+  },
+  "source_gates": {
+    "one_universal_definition": true,
+    "object_labels_forbidden": true,
+    "lensing_or_halo_inputs_forbidden": true,
+    "per_cluster_response_length_amplitude_orientation_forbidden": true,
+    "must_distinguish_equal_snapshot_different_history_sentinels": true,
+    "minimum_history_statistic_significance_sigma_each_cluster": 5.0,
+    "maximum_doubled_resolution_change": 0.02,
+    "principal_direction_must_survive_projection_uncertainty": true,
+    "source_and_sensitivities_hashed_before_target_access": true
+  },
+  "conditional_transfer_gate": {
+    "authorized_only_after_every_source_gate_passes": true,
+    "reuse_v18d_target_scoring_and_thresholds": true,
+    "one_nonnegative_coefficient_transferred_both_directions": true,
+    "coefficient_is_not_yet_a_physical_constant": true,
+    "holdout_access": false
+  },
+  "decision_rule": [
+    "If the time-information gate fails, classify the proposal as another instantaneous-stress law and retire it.",
+    "If projection or identifiability fails, report data insufficiency without claiming a physics falsification.",
+    "If the source passes but frozen spent-pair transfer fails, retire baryonic causal history as the direct missing-field source.",
+    "Only a complete source and transfer pass authorizes derivation of a covariant one-metric action; no holdout opens at this stage."
+  ],
+  "integrity": {
+    "sample_is_spent": true,
+    "new_lensing_target_opened": false,
+    "holdout_opened": false,
+    "per_object_gravity_parameters": 0,
+    "lensing_only_physical_parameters": 0
+  }
+}

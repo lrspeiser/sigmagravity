@@ -1,0 +1,77 @@
+{
+  "protocol_version": "SIGMA-V17C-REGIONAL-RUNTIME-RESPONSE-SUPPORT-1.0.0",
+  "status": "frozen after 193 valid AS295 extraction cells and one response-only failure, but before any regional spectrum report, regional temperature, thermal-stress map, inverse coefficient, or lensing target access",
+  "frozen_utc": "2026-08-05T01:32:18.0859941Z",
+  "purpose": "Add one fail-closed runtime signature for a CIAO cell whose source and background spectra are valid but whose calibrated ARF/RMF support domain is empty. This supplements, and does not rewrite, the earlier target-blind preflight protocol.",
+  "parents": {
+    "spectral_protocol": "configs/sigma_v17c_spectral_temperature.json",
+    "spectral_protocol_sha256": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86",
+    "integrated_spectra_report": "results/sigma_v17c_integrated_spectra/report.json",
+    "integrated_spectra_report_sha256": "c2f5708baaed07d477b42679e476b13637e1295ba8abd3de94c22c313e2819bb",
+    "integrated_temperatures_report": "results/sigma_v17c_integrated_temperatures/report.json",
+    "integrated_temperatures_report_sha256": "9ce3b05dc64e0ee547693921f62b1f38ad0b9974f5c71e44f07a6338381a22e0",
+    "preflight_response_support": "configs/sigma_v17c_regional_response_support.json",
+    "preflight_response_support_sha256": "0b82ada1c7e3c53a28d7023693e64a9479d69ffb01a6c00d0ed39d4d156ac15d",
+    "preflight_response_support_report": "results/sigma_v17c_regional_response_support/report.json",
+    "preflight_response_support_report_sha256": "6daa56bda31851612b7575db66f3fec10733022e838421ac70c516a2f4c02ccc"
+  },
+  "discovery": {
+    "cluster": "AS295",
+    "region_id": 12,
+    "obsid": 16524,
+    "selected_ccd_id": 3,
+    "response_warning": "chipx=1035 for ACIS-3; using chipx=1024 for FEF and RMF look up",
+    "first_attempt_operational_failure": "AF_UNIX path too long",
+    "first_attempt_interpretation": "The long temporary path was shortened without changing the data or extraction command.",
+    "short_path_reproduction": {
+      "source_pha_created": true,
+      "background_pha_created": true,
+      "arf_created": false,
+      "rmf_created": false,
+      "terminal_error": "# specextract (8 June 2026): ERROR max() iterable argument is empty",
+      "diagnostic_log": "results/sigma_v17c_regional_runtime_response_support/diagnostics/as295_region012_obs16524_ccd3.log"
+    }
+  },
+  "controls": {
+    "why_no_detector_coordinate_threshold_was_added": "CIAO successfully clipped and constructed all four products for multiple other cells whose event-mean reference also lay slightly outside nominal CHIPX/CHIPY bounds.",
+    "successful_cells": [
+      {"cluster": "AS295", "region_id": 20, "obsid": 16524, "ccd_id": 1, "warning": "chipx=-7 clipped to 1"},
+      {"cluster": "AS295", "region_id": 21, "obsid": 16524, "ccd_id": 3, "warning": "chipx=1031 clipped to 1024"},
+      {"cluster": "AS295", "region_id": 25, "obsid": 16525, "ccd_id": 3, "warning": "chipy=1029 clipped to 1024"}
+    ]
+  },
+  "admission_rule": {
+    "allowed_reason": "ciao_empty_calibrated_response_domain_after_valid_spectra",
+    "required_product_signature": {
+      "source_pha": "present and nonempty",
+      "background_pha": "present and nonempty",
+      "arf": "absent",
+      "rmf": "absent"
+    },
+    "required_log_fragments": [
+      "Extracting src spectra",
+      "Extracting bkg spectra",
+      "ERROR max() iterable argument is empty"
+    ],
+    "action": "Hash and move the two partial PHA files into a response-support quarantine, write an immutable per-cell marker, record the cell as skipped, and preserve every other cell and region.",
+    "no_outcome_selection": "The rule uses no fitted count rate, temperature, uncertainty, morphology, lensing observable, gravity residual, object label, tunable detector-coordinate cutoff, or scientific threshold.",
+    "failure_mode": "Any mismatch in product presence, file nonemptiness, log signature, authorization, or quarantine hash aborts the run. No other CIAO failure is converted into a skip."
+  },
+  "required_upstream_state": {
+    "integrated_spectra_status": "both_frozen_integrated_spectra_extracted_combined_and_grouped",
+    "integrated_temperatures_status": "both_integrated_temperature_gates_passed",
+    "regional_fit_authorized": true,
+    "lensing_target_opened": false
+  },
+  "integrity": {
+    "completed_valid_as295_cells_at_freeze": 193,
+    "regional_spectrum_report_existed_at_freeze": false,
+    "regional_temperature_existed_at_freeze": false,
+    "thermal_stress_constructed_at_freeze": false,
+    "lensing_target_opened": false,
+    "scientific_threshold_changed": false,
+    "gravity_parameter_changed": false,
+    "core_v17c_protocol_changed": false,
+    "preflight_response_support_protocol_changed": false
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "clusters": [
+    {
+      "aperture_rejected_rows": 15,
+      "cluster": "MACS0416",
+      "common_f160w_weight_rule": true,
+      "input_rows": 247,
+      "maximum_selected_radius_kpc": 1792.9948215465163,
+      "median_redshift": 0.3979,
+      "member_gate_passed": true,
+      "minimum_required": 50,
+      "photometry_rejected_rows": 0,
+      "quality_approved_rows": 247,
+      "selected_secure_members": 231,
+      "stellar_mass_weight_range_msun": [
+        35722934.35551774,
+        765457028919.8511
+      ],
+      "summed_stellar_mass_weight_msun": 5020125368722.366,
+      "velocity_range_km_s": [
+        -4117.615847771656,
+        3045.3200540811313
+      ],
+      "velocity_rejected_rows": 1
+    },
+    {
+      "aperture_rejected_rows": 0,
+      "cluster": "PLCKG287",
+      "common_f160w_weight_rule": true,
+      "input_rows": 129,
+      "maximum_selected_radius_kpc": 763.1326271418515,
+      "median_redshift": 0.3833,
+      "member_gate_passed": true,
+      "minimum_required": 50,
+      "photometry_rejected_rows": 0,
+      "quality_approved_rows": 129,
+      "selected_secure_members": 129,
+      "stellar_mass_weight_range_msun": [
+        7290753641.467424,
+        427338895733.3694
+      ],
+      "summed_stellar_mass_weight_msun": 6379518366236.69,
+      "velocity_range_km_s": [
+        -4399.470033542973,
+        4182.747371792099
+      ],
+      "velocity_rejected_rows": 0
+    }
+  ],
+  "decision": "freeze one universal member-stress map construction on this spent pair",
+  "formula_or_spatial_kernel_selection_authorized": false,
+  "generated_utc": "2026-08-05T02:35:03.673453+00:00",
+  "gravity_parameters_fit": 0,
+  "holdout_opened": false,
+  "input_hashes": {
+    "MACS0416_baryon_report": "8f7b5ad92ad8b80b707330f0b79fcfff42edb9341b860d64c7b0cb4daf46b866",
+    "MACS0416_baryon_sources": "28a87f89fcf672af0a93bd1fc7576a6e075fdd3b45a402a51d7110e69edbe4c7",
+    "MACS0416_member_catalog": "31cf730221cf3d31b64d75e99f0eaee184d4cbf745f5c3344e39ebaf47659652",
+    "PLCKG287_baryon_map": "ae1ae809f1a8951b9c930dc713b005bfcb114bdebe8d578d349ae7c722c6d0a7",
+    "PLCKG287_baryon_report": "7c262ce473ec4f925172b1f5dae767617dbcf2531bc097e09e12ecead23bbcd6",
+    "PLCKG287_member_catalog": "06eac064eb37418ea69b29044a114ae1b4ba13ce7829897cddb77c853672048d",
+    "config": "b21fb0462d1a886ae95a1687a34c23f42b1fe5a87cb24c7d5bbdd5ff0580fed9",
+    "dynamical_stress_gate": "c2705e1078711ba50c10dc9e5d1f2ff67d45aeccb8eb0787b7ae016bfc0a2417",
+    "thermal_failure_report": "ec8bf5c62f73839f0ba5eca30fda57fcea688cfac962d4f9ca6127e7632765b7"
+  },
+  "lensing_target_opened": false,
+  "matched_pair": [
+    "MACS0416",
+    "PLCKG287"
+  ],
+  "protocol_version": "SIGMA-V18B-REPLACEMENT-COLLISIONLESS-PAIR-READINESS-1.0.0",
+  "source_construction_authorized": true,
+  "status": "completed Sigma v18B replacement-pair readiness audit"
+}

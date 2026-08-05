@@ -61,6 +61,42 @@ v17C core or cascading new hashes through completed v17G–v18 records. The
 regional report records the support-protocol hash, so the exception remains
 part of the reproducible evidence chain.
 
+## Runtime response-support supplement
+
+The first complete AS295 extraction pass later produced 193 valid calibrated
+cells and one additional response-only failure: region 12, ObsID 16524, CCD 3.
+The first attempt was obscured by an operational `AF_UNIX path too long`
+failure. Moving only the disposable CIAO `TMPDIR` to the short, isolated path
+`/tmp/sv17c/...` removed that problem without changing the command, data,
+region, response reference, or any scientific setting.
+
+With the short path, CIAO created nonempty source and background PHA files but
+no ARF or RMF, then terminated with the same
+`max() iterable argument is empty` response-domain error. The reference was
+slightly beyond the nominal detector boundary (`CHIPX=1035`, clipped to 1024),
+but a detector-coordinate cutoff would have been invalid: at least three other
+cells with clipped coordinates (`CHIPX=-7`, `CHIPX=1031`, and `CHIPY=1029`)
+successfully produced all four calibrated products.
+
+Therefore the separately frozen runtime supplement
+`configs/sigma_v17c_regional_runtime_response_support.json` admits only the
+exact conjunction:
+
+- source and background PHA files both exist and are nonempty;
+- ARF and RMF files are both absent; and
+- the log contains source extraction, background extraction, and the exact
+  empty-response-domain terminal error.
+
+The two PHA files are hashed and moved into a response-support quarantine, an
+immutable per-cell marker is written, and the cell is recorded as skipped.
+Any mismatch still aborts. The rule contains no coordinate threshold, fitted
+quantity, or gravity observable. Its config SHA256 is
+`75fe99de5b2e4df2e64791e63090fcbb70ee947bc6910495a82c555710807987`;
+the audit-report SHA256 is
+`4311d87c37768f60eff0ae6d7f3ac4738dbe625a0690e8db0c587f8a9fe06b89`.
+It was frozen before a regional spectra report, any regional temperature, any
+thermal-stress map, or any lensing-target access existed.
+
 ## Scientific interpretation
 
 The excluded cell has one source event and no usable instrumental response.

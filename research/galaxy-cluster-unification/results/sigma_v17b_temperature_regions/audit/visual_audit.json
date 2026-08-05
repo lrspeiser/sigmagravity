@@ -1,0 +1,28 @@
+{
+  "status": "passed_outcome_blind_spatial_visual_audit",
+  "completed_utc": "2026-08-04T18:30:48.4911001Z",
+  "render_manifest_sha256": "49923be5e20951b7fc7ace79c25f929e96832cfe9ed9d80b11d941b48678d7b1",
+  "outcome_data_opened": false,
+  "physics_or_binning_parameter_changed": false,
+  "clusters": {
+    "AS295": {
+      "accepted": true,
+      "notes": [
+        "The frozen circular analysis mask is centered on the deterministic X-ray centroid and remains inside the merged exposure support.",
+        "The background-subtracted exposure-corrected morphology is spatially aligned with the raw count morphology.",
+        "Contour-bin boundaries follow the elongated and multi-peaked signal without a bright artificial ring at the aperture boundary.",
+        "All 18803 mask pixels are assigned to 29 contiguous four-connected regions."
+      ]
+    },
+    "PLCKG287": {
+      "accepted": true,
+      "notes": [
+        "The frozen circular analysis mask is centered on the deterministic X-ray centroid and remains inside the merged exposure support.",
+        "The background-subtracted exposure-corrected morphology is spatially aligned with the raw count morphology.",
+        "Contour-bin boundaries follow the central and extended signal without a bright artificial ring at the aperture boundary.",
+        "All 13654 mask pixels are assigned to 21 contiguous four-connected regions."
+      ]
+    }
+  },
+  "decision": "Lock the 50 spatial regions and advance to common-rule spectral extraction without changing the aperture, exposure threshold, target signal-to-noise, smoothing, geometric constraint, net-count threshold, or source-fraction threshold."
+}

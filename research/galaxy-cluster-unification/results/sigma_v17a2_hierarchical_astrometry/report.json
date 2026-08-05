@@ -1,0 +1,2927 @@
+{
+  "all_hierarchical_gates_passed": true,
+  "cleaning_report_sha256": "8aaffd9ffde281655a8f3f824e06aee506fc4bed6fa50d330c81d8a3c63cf334",
+  "config_sha256": "8e82e45a1ea5c5e136083eb6382d032599d5728272ce7151b50c72e6d8f3ba5c",
+  "failed_observations": [],
+  "generated_utc": "2026-08-04T18:06:29.567602+00:00",
+  "lensing_target_opened": false,
+  "observation_count": 11,
+  "observations": [
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "c5ac13bcef68806a78a4120dc39b590538b5cde33affd0a9400c3e1206dadbfe",
+      "anchor_obsid": 16524,
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/pcadf12260_000N001_gaia_asol1.fits",
+            "sha256": "1e7316c16b397fe082dc199807324de3b1ca496b36b3054b0064bec4c956862e"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf12260_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/acisf12260_blanksky_gaia_evt.fits",
+            "sha256": "8fabc6d2bc6484cc252e1d518fd9759c393eaefa1db949e4e7beb8fe389d0f75",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_blanksky_evt.fits",
+            "source_sha256": "d177a59bd53f0647a5eddbe81dc5afcd1f1ceac13f47ca7928d5e2d06675fcdc"
+          },
+          "science": {
+            "asolfile_header": "pcadf12260_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/acisf12260_science_gaia_evt.fits",
+            "sha256": "0e0a6c5e928d5dcad5b3d9c429652500ba75e87e53d56a09682f06b43edeaf69",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_flareclean_evt2.fits",
+            "source_sha256": "ebb8b006a97214fd12eb7e78ffd642e8b71a19e35feed184a51335cf7fc206c7"
+          }
+        },
+        "product_bytes": 54035685,
+        "product_files": 17,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "e79590ea41e63b1dfccbba30009c30a5323b5edbad98df319ce31b8fc96aaf44"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "afc98233a4c11aabe0d96bf8ceece1ec3890308d95333518055430fbee6b7443"
+          },
+          {
+            "bytes": 38145600,
+            "relative_path": "acisf12260_blanksky_gaia_evt.fits",
+            "sha256": "8fabc6d2bc6484cc252e1d518fd9759c393eaefa1db949e4e7beb8fe389d0f75"
+          },
+          {
+            "bytes": 5811840,
+            "relative_path": "acisf12260_science_gaia_evt.fits",
+            "sha256": "0e0a6c5e928d5dcad5b3d9c429652500ba75e87e53d56a09682f06b43edeaf69"
+          },
+          {
+            "bytes": 94,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "6034a609b1132b2b12b0562620ac52bcaa7205369b3aa8c12d1cf762a03ecb7e"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 521,
+            "relative_path": "logs/parse_wcs_match_log.log",
+            "sha256": "6417028bf3e150bf2db40a82572cd68f307dfcead461f8a78141d53a7eb15243"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_xray_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 42299,
+            "relative_path": "logs/wcs_match.log",
+            "sha256": "2ad089c70998fb040812d6c64fbed62163ee4a6155c5e969beac9e95c90f5576"
+          },
+          {
+            "bytes": 401,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "adbfc452da1a44a053d4ab89dc654b6c37e2ee2d96dff937fbfde9d4d8c75c7a"
+          },
+          {
+            "bytes": 480,
+            "relative_path": "logs/wcs_update_pcadf12260_000N001_asol1.log",
+            "sha256": "bdff5e8e75bde7e92bfbd793b4cde16e5975aee41484403f83e85acc98f80c9b"
+          },
+          {
+            "bytes": 400,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "1f4b7a86fb375d9b023689fa79e9a2232002cc4c6dad25c5f76e2f33076ef062"
+          },
+          {
+            "bytes": 9930240,
+            "relative_path": "pcadf12260_000N001_gaia_asol1.fits",
+            "sha256": "1e7316c16b397fe082dc199807324de3b1ca496b36b3054b0064bec4c956862e"
+          },
+          {
+            "bytes": 28800,
+            "relative_path": "relative_match_statistics.fits",
+            "sha256": "0bec239ddadf9830d1494a18ca1f54b7160cee04fdb7d7024bffd492589b0883"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_translation.xform.fits",
+            "sha256": "a8b6c0ef0ab518a773709f85dda55dd8db873b6b55b4620eb5f8026c7879bbaf"
+          },
+          {
+            "bytes": 43200,
+            "relative_path": "xray_sources_selected.fits",
+            "sha256": "a510a6ca6b85e319a318c3fa80b7dc87b5855dc69cad956b8692f5d297d3005b"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/AS295/12260/pcadf12260_000N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/pcadf12260_000N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/relative_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/logs/wcs_update_pcadf12260_000N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/acisf12260_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/acisf12260_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 47,
+        "included_max_recomputed_arcsec": 0.37,
+        "included_pairs": 6,
+        "included_rms_recomputed_arcsec": 0.22505554869853797,
+        "max_after_arcsec": 0.369466,
+        "rms_after_arcsec": 0.157705,
+        "rms_before_arcsec": 0.513206
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/relative_match_statistics.fits",
+      "obsid": 12260,
+      "selected_xray_sources": 47,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/sources.fits",
+      "stage": "relative_to_Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/logs/wcs_match.log",
+          "reused": true
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/relative_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/logs/parse_wcs_match_log.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/logs/select_xray_sources.log",
+          "reused": true
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260/relative_translation.xform.fits",
+      "transform_sha256": "a8b6c0ef0ab518a773709f85dda55dd8db873b6b55b4620eb5f8026c7879bbaf",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": 0.9566564103236033,
+        "t2": 1.0273470025368472
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/12260"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "c5ac13bcef68806a78a4120dc39b590538b5cde33affd0a9400c3e1206dadbfe",
+      "anchor_obsid": 16524,
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/pcadf16127_000N001_gaia_asol1.fits",
+            "sha256": "1b42ad35b1fc20a3275b5f6d3e95109f620283dd28158d29927b4e345597e302"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf16127_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/acisf16127_blanksky_gaia_evt.fits",
+            "sha256": "8c817843530dcc7412065a19ff9649157a2832de95efe404e7f3565964e7d522",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_blanksky_evt.fits",
+            "source_sha256": "0d9b39cb611969ab3c763640f0d36187042b52757914d78f724e75a0b4c5f473"
+          },
+          "science": {
+            "asolfile_header": "pcadf16127_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/acisf16127_science_gaia_evt.fits",
+            "sha256": "ffdbd5c2cf135c61c8d7c40727a42be4b7c697e098dfb07ba89e493e11eebfe2",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_flareclean_evt2.fits",
+            "source_sha256": "e8773afb981b87194981689a88415a0f3d3a74a6d67e7cdf9d5200a9718022cd"
+          }
+        },
+        "product_bytes": 115159935,
+        "product_files": 17,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "024b966c829b768807a6705e739db990fbcd17ccf8990edd3a81a85e180cf3c1"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "7e421c23ff7eedf8b31ecde476483ba8728a4ee4f1b2df3a240723fdb4896e6c"
+          },
+          {
+            "bytes": 74062080,
+            "relative_path": "acisf16127_blanksky_gaia_evt.fits",
+            "sha256": "8c817843530dcc7412065a19ff9649157a2832de95efe404e7f3565964e7d522"
+          },
+          {
+            "bytes": 19598400,
+            "relative_path": "acisf16127_science_gaia_evt.fits",
+            "sha256": "ffdbd5c2cf135c61c8d7c40727a42be4b7c697e098dfb07ba89e493e11eebfe2"
+          },
+          {
+            "bytes": 94,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "f645fdacb8c4d2732ca08add229f375ba193f69bfee586196fb6d369045fb668"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 521,
+            "relative_path": "logs/parse_wcs_match_log.log",
+            "sha256": "398f907f60e92caf934364b15793e9bfc9de15bdf2fb8f8b4e11aed23a3edab9"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_xray_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 32789,
+            "relative_path": "logs/wcs_match.log",
+            "sha256": "7daef5b52d885dd19e6b1b4085ff9bdf76373f2f1162ab33432f4c9f837906df"
+          },
+          {
+            "bytes": 401,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "93693af9303c82e38bde807fa8d1a0e0d7294d304c90768640fdbd4c09b70733"
+          },
+          {
+            "bytes": 480,
+            "relative_path": "logs/wcs_update_pcadf16127_000N001_asol1.log",
+            "sha256": "318a614987afe274326489f44e90e36a24510cacafa914a9f390bae50afb2470"
+          },
+          {
+            "bytes": 400,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "49d3538a2c5003e0eb3414f03501a11f6205a66c5e9b895a4d49b21692e7cf82"
+          },
+          {
+            "bytes": 21355200,
+            "relative_path": "pcadf16127_000N001_gaia_asol1.fits",
+            "sha256": "1b42ad35b1fc20a3275b5f6d3e95109f620283dd28158d29927b4e345597e302"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_match_statistics.fits",
+            "sha256": "5e5ee8156180aa0e359d3af01021136b71a5c634293a3d4c8022f9176c4ba3cb"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_translation.xform.fits",
+            "sha256": "d95fc1cfd8cf2d43eba218ead46b031f573f41c0c76c3bdb5ee87adddaadadd4"
+          },
+          {
+            "bytes": 46080,
+            "relative_path": "xray_sources_selected.fits",
+            "sha256": "1582f56f2d8e1bd328b5f126980713d4f753da8ef069e97dd57c8d51922332c3"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16127/pcadf16127_000N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/pcadf16127_000N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/relative_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/logs/wcs_update_pcadf16127_000N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/acisf16127_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/acisf16127_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 67,
+        "included_max_recomputed_arcsec": 0.33,
+        "included_pairs": 8,
+        "included_rms_recomputed_arcsec": 0.242409777030548,
+        "max_after_arcsec": 0.332165,
+        "rms_after_arcsec": 0.171785,
+        "rms_before_arcsec": 0.42267
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/relative_match_statistics.fits",
+      "obsid": 16127,
+      "selected_xray_sources": 67,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/sources.fits",
+      "stage": "relative_to_Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/logs/wcs_match.log",
+          "reused": true
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/relative_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/logs/parse_wcs_match_log.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/logs/select_xray_sources.log",
+          "reused": true
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127/relative_translation.xform.fits",
+      "transform_sha256": "d95fc1cfd8cf2d43eba218ead46b031f573f41c0c76c3bdb5ee87adddaadadd4",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": 0.9619898797012638,
+        "t2": 0.5539007805895153
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16127"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "c5ac13bcef68806a78a4120dc39b590538b5cde33affd0a9400c3e1206dadbfe",
+      "anchor_obsid": 16524,
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/pcadf16282_000N001_gaia_asol1.fits",
+            "sha256": "4f3bb381e3e0fc877cc4483412f770e2b5c96ca506de76b738f942d0e462f065"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf16282_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/acisf16282_blanksky_gaia_evt.fits",
+            "sha256": "5f32e421a1499ddbb9cef9dfa0aa941446e83c0949ce8ac427889f12b0fcd96e",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_blanksky_evt.fits",
+            "source_sha256": "a78efa7d782cdac6b85958b1b302ae6ed85871135794178ffb02937817e445a1"
+          },
+          "science": {
+            "asolfile_header": "pcadf16282_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/acisf16282_science_gaia_evt.fits",
+            "sha256": "6c9aab2d6782111bbc7c84bac5d8247cfd5c6462c436b1f07413eacba3812d9a",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_flareclean_evt2.fits",
+            "source_sha256": "7da1fd9a342c0550df5bdde0eb98f4339b5b264e3f3b798d10230f83e7713d11"
+          }
+        },
+        "product_bytes": 45062383,
+        "product_files": 17,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "4c7ab8df35c0e0d1f71da72cc2c846ba96cf862f009dcd5478f9116901b48e34"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "251bfbbc02b826f6717ba6495440defc1cacc0b528be36f03a4890952f46d6fd"
+          },
+          {
+            "bytes": 38145600,
+            "relative_path": "acisf16282_blanksky_gaia_evt.fits",
+            "sha256": "5f32e421a1499ddbb9cef9dfa0aa941446e83c0949ce8ac427889f12b0fcd96e"
+          },
+          {
+            "bytes": 2260800,
+            "relative_path": "acisf16282_science_gaia_evt.fits",
+            "sha256": "6c9aab2d6782111bbc7c84bac5d8247cfd5c6462c436b1f07413eacba3812d9a"
+          },
+          {
+            "bytes": 94,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "a297ffda8bd4f63a51fe034ccb7ef3252ab9b21687a9952c5e7edcc900a8f820"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 521,
+            "relative_path": "logs/parse_wcs_match_log.log",
+            "sha256": "98b029e1021c4fff933ef57fa12fc2a3e35ba8befdb721bdb3cda6c989e05268"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_xray_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 25797,
+            "relative_path": "logs/wcs_match.log",
+            "sha256": "d32882b667f306566d9991ffb0beb433e136600763b6ea594addefa74fc44480"
+          },
+          {
+            "bytes": 401,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "a2859777747a7ade067c9ad21f969afc28ece1c4d035353f89f3bcff5aa07a5f"
+          },
+          {
+            "bytes": 480,
+            "relative_path": "logs/wcs_update_pcadf16282_000N001_asol1.log",
+            "sha256": "57100ea241d51105bf3ce6cf5d258576a2698599a106c6eb9aa5020e4199552b"
+          },
+          {
+            "bytes": 400,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "e374b6ffc2f229d6fc0c4a185aa99ab33bc24c367274619bfa1084fc614b50c3"
+          },
+          {
+            "bytes": 4536000,
+            "relative_path": "pcadf16282_000N001_gaia_asol1.fits",
+            "sha256": "4f3bb381e3e0fc877cc4483412f770e2b5c96ca506de76b738f942d0e462f065"
+          },
+          {
+            "bytes": 23040,
+            "relative_path": "relative_match_statistics.fits",
+            "sha256": "cfd7425befefcd227b7aa0af3251bf8b182cfcfaab906a901c271cd7f4989ab1"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_translation.xform.fits",
+            "sha256": "d366eff8a13c4eebad8b8a6b70851521b7f3ff3eaa54e999642d0bdfdf79e297"
+          },
+          {
+            "bytes": 37440,
+            "relative_path": "xray_sources_selected.fits",
+            "sha256": "0baa7f14db2b513e5a03f6cbe7e33cb423c2300d81289f070d3abfeb2f008919"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16282/pcadf16282_000N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/pcadf16282_000N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/relative_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/logs/wcs_update_pcadf16282_000N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/acisf16282_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/acisf16282_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 21,
+        "included_max_recomputed_arcsec": 0.46,
+        "included_pairs": 5,
+        "included_rms_recomputed_arcsec": 0.3419064199455752,
+        "max_after_arcsec": 0.464222,
+        "rms_after_arcsec": 0.243176,
+        "rms_before_arcsec": 0.371102
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/relative_match_statistics.fits",
+      "obsid": 16282,
+      "selected_xray_sources": 21,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/sources.fits",
+      "stage": "relative_to_Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/logs/wcs_match.log",
+          "reused": true
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/relative_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/logs/parse_wcs_match_log.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/logs/select_xray_sources.log",
+          "reused": true
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282/relative_translation.xform.fits",
+      "transform_sha256": "d366eff8a13c4eebad8b8a6b70851521b7f3ff3eaa54e999642d0bdfdf79e297",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": 0.48997157740741387,
+        "t2": -0.6396854182430616
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16282"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "c5ac13bcef68806a78a4120dc39b590538b5cde33affd0a9400c3e1206dadbfe",
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/pcadf16524_001N001_gaia_asol1.fits",
+            "sha256": "a5131495f24fca9a8b9623ccfab702e381bf5681586f5157ece7b8ac8b6ddc42"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf16524_001N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/acisf16524_blanksky_gaia_evt.fits",
+            "sha256": "6a3e7c26b03627a9c11e5a6374f1ab411d4bd10f36c54d81ad4e8012bba8dc49",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_blanksky_evt.fits",
+            "source_sha256": "412cdb96d35ee0672a9455cea406e3b392f18b6b8df64ab29f8891f076b0889d"
+          },
+          "science": {
+            "asolfile_header": "pcadf16524_001N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/acisf16524_science_gaia_evt.fits",
+            "sha256": "10cc5aa89a4d8d5981c26c5622139682d8ceffcd3b52e71551327e82b465f708",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_flareclean_evt2.fits",
+            "source_sha256": "496d0d57bbacedc4f83d174407c55f47a7902b518bd12fc1e9e9059100248cc4"
+          }
+        },
+        "product_bytes": 116163874,
+        "product_files": 15,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "6141568c5b0aa2eb87a9bdf55dcfc9e65e5e0da2729cff3e10d365205677a83f"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".reference_catalog_wcs_updated",
+            "sha256": "a530c2b5905e55beea639e9ecd34c0db1b284c4cd34eaa1aa55d2cb039d97f19"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "4aa8c3a8350a93e6b6721ef4aa8d8ec1014dc9af747ea2dac444f19ddd95006e"
+          },
+          {
+            "bytes": 74062080,
+            "relative_path": "acisf16524_blanksky_gaia_evt.fits",
+            "sha256": "6a3e7c26b03627a9c11e5a6374f1ab411d4bd10f36c54d81ad4e8012bba8dc49"
+          },
+          {
+            "bytes": 20079360,
+            "relative_path": "acisf16524_science_gaia_evt.fits",
+            "sha256": "10cc5aa89a4d8d5981c26c5622139682d8ceffcd3b52e71551327e82b465f708"
+          },
+          {
+            "bytes": 94,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "c66065e66566ab67b3ef48d0f1c1e46d174e2e030303b6278910e91d6d581635"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_anchor_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 397,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "d7636a8d0a8c505a45d7eb4ba6dfa350c0af2a34209388feef3a919a3d6eb155"
+          },
+          {
+            "bytes": 476,
+            "relative_path": "logs/wcs_update_pcadf16524_001N001_asol1.log",
+            "sha256": "cf9abe017a2188b8f9a4c8c82b4d6ae7899bea8efbf22664d437d95861257300"
+          },
+          {
+            "bytes": 396,
+            "relative_path": "logs/wcs_update_reference_catalog.log",
+            "sha256": "245478c1948ddd90a2fb6932b3d6b7f1fa0f132e41df095a1e7f6fed4b7eaf8f"
+          },
+          {
+            "bytes": 396,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "e5254726be482ab313865ec9cfdcb7c013b7cba35575fee8e46509509dea3e68"
+          },
+          {
+            "bytes": 21974400,
+            "relative_path": "pcadf16524_001N001_gaia_asol1.fits",
+            "sha256": "a5131495f24fca9a8b9623ccfab702e381bf5681586f5157ece7b8ac8b6ddc42"
+          },
+          {
+            "bytes": 46080,
+            "relative_path": "reference_xray_sources_gaia.fits",
+            "sha256": "c5ac13bcef68806a78a4120dc39b590538b5cde33affd0a9400c3e1206dadbfe"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16524/pcadf16524_001N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/pcadf16524_001N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/logs/wcs_update_pcadf16524_001N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/acisf16524_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/acisf16524_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "5751436a67ee9aff182963f363e5162719743f95c3b079a09db638df1967d93e",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/AS295_gaia_dr3.csv",
+      "gaia_catalog_sha256": "674ce40e01be653a9cac17e1bcb921bca5e9c5629cd650ae1be49a0b290261e3",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "hierarchical_steps": {
+        "catalog_wcs_update": {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/logs/wcs_update_reference_catalog.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/logs/select_anchor_sources.log",
+          "reused": true
+        }
+      },
+      "match_statistics": {
+        "candidate_pairs": 64,
+        "included_max_recomputed_arcsec": 0.48,
+        "included_pairs": 5,
+        "included_rms_recomputed_arcsec": 0.36493835095807625,
+        "max_after_arcsec": 0.483932,
+        "rms_after_arcsec": 0.258287,
+        "rms_before_arcsec": 0.410095
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_match_statistics.fits",
+      "observation_end": "2014-05-21T03:46:09",
+      "observation_epoch_jyear": 2014.3837891189442,
+      "observation_start": "2014-05-20T14:49:18",
+      "obsid": 16524,
+      "selected_xray_sources": 64,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/sources.fits",
+      "stage": "Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/AS295/16524/gaia_translation.xform.fits",
+      "transform_sha256": "2607aa1284c8ac36e2af3574cebafbcf71f00469b7aefa548f9afdaeac0c930b",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -0.4300448310734282,
+        "t2": 0.8083302795831514
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "c5ac13bcef68806a78a4120dc39b590538b5cde33affd0a9400c3e1206dadbfe",
+      "anchor_obsid": 16524,
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/pcadf16525_000N001_gaia_asol1.fits",
+            "sha256": "c0ae09a6f01cb32bcf3cdf42d515befc49735d4c77900b1a6790ee2129d1ac3f"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf16525_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/acisf16525_blanksky_gaia_evt.fits",
+            "sha256": "6c68acf3ad32b46441d001a7e1fe6d1f3986673f80aa6cbe662a0c4264ecb5bf",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_blanksky_evt.fits",
+            "source_sha256": "c494bf6bf6acc672e150cf2b61e6278cfbbb926c39a82572893e8bc1c8e4ac1e"
+          },
+          "science": {
+            "asolfile_header": "pcadf16525_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/acisf16525_science_gaia_evt.fits",
+            "sha256": "d7acab3d6c28bef85f72e05e2f6fe4460c6d0612c1d80ca55d7e50137c17fcfc",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_flareclean_evt2.fits",
+            "source_sha256": "34b1d16257406e2357f57856f4b3d6cdbd92792796de5d251c0d8d33cb3d77d0"
+          }
+        },
+        "product_bytes": 116496479,
+        "product_files": 17,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "77b0a79ce36af295b316197295e6e8006b34bfd5ac3eed8355ae308dcf955d5f"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "c0b6ce93c29c3f01562a912b2fb6c861b2ca42c34059721e5ca6ebb0a271b751"
+          },
+          {
+            "bytes": 74062080,
+            "relative_path": "acisf16525_blanksky_gaia_evt.fits",
+            "sha256": "6c68acf3ad32b46441d001a7e1fe6d1f3986673f80aa6cbe662a0c4264ecb5bf"
+          },
+          {
+            "bytes": 20171520,
+            "relative_path": "acisf16525_science_gaia_evt.fits",
+            "sha256": "d7acab3d6c28bef85f72e05e2f6fe4460c6d0612c1d80ca55d7e50137c17fcfc"
+          },
+          {
+            "bytes": 94,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "03928cdd515a4df876fd67366681b2052a64de79fcb7f68def3b3037e3e7d8e5"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 521,
+            "relative_path": "logs/parse_wcs_match_log.log",
+            "sha256": "d6542843fa74ace0186a9266d6b1d2d926b3575b4b55069e814e62417bf95ea0"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_xray_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 56053,
+            "relative_path": "logs/wcs_match.log",
+            "sha256": "dacad109326d587e75e55d99f9ca8ba5925329103382ee417d57f535a9230a4a"
+          },
+          {
+            "bytes": 401,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "09aa49f26b589a4a494292f58e90f8eb0e8b00ec73760da6e2bdd7af23ab3de0"
+          },
+          {
+            "bytes": 480,
+            "relative_path": "logs/wcs_update_pcadf16525_000N001_asol1.log",
+            "sha256": "623e17cee9f4f952e62d2ebc0dc36f9a2ef25d73750bf88ed06c49705996303c"
+          },
+          {
+            "bytes": 400,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "1ef32a174cc3fff4ca3e85736a6909ec83871da9844ad4e7acf76407095eafb1"
+          },
+          {
+            "bytes": 22095360,
+            "relative_path": "pcadf16525_000N001_gaia_asol1.fits",
+            "sha256": "c0ae09a6f01cb32bcf3cdf42d515befc49735d4c77900b1a6790ee2129d1ac3f"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_match_statistics.fits",
+            "sha256": "532650e159f3f13e488e54a5d6993c5726bf4c705a9ec83c2631919d3025ae9e"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_translation.xform.fits",
+            "sha256": "4d74f12aa50bdef99a4941bdc9e58f2df0ef28e5bfb5063da0539f71389b0f88"
+          },
+          {
+            "bytes": 46080,
+            "relative_path": "xray_sources_selected.fits",
+            "sha256": "ac525fbab08cc72a1c23f096e8fb0bc99cf2dbe6cdff295d3cb990c86408d748"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16525/pcadf16525_000N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/pcadf16525_000N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/relative_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/logs/wcs_update_pcadf16525_000N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/acisf16525_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/acisf16525_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 69,
+        "included_max_recomputed_arcsec": 0.42,
+        "included_pairs": 12,
+        "included_rms_recomputed_arcsec": 0.28837186640401197,
+        "max_after_arcsec": 0.41549,
+        "rms_after_arcsec": 0.203688,
+        "rms_before_arcsec": 0.209508
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/relative_match_statistics.fits",
+      "obsid": 16525,
+      "selected_xray_sources": 69,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/sources.fits",
+      "stage": "relative_to_Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/logs/wcs_match.log",
+          "reused": true
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/relative_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/logs/parse_wcs_match_log.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/logs/select_xray_sources.log",
+          "reused": true
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525/relative_translation.xform.fits",
+      "transform_sha256": "4d74f12aa50bdef99a4941bdc9e58f2df0ef28e5bfb5063da0539f71389b0f88",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -0.1358026906403893,
+        "t2": -0.03779304282519055
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16525"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "c5ac13bcef68806a78a4120dc39b590538b5cde33affd0a9400c3e1206dadbfe",
+      "anchor_obsid": 16524,
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/pcadf16526_000N001_gaia_asol1.fits",
+            "sha256": "da295c4988e3ccec84ea7cd8864d05460bba92e080a7e332b8155dc10ad42021"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf16526_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/acisf16526_blanksky_gaia_evt.fits",
+            "sha256": "4d299a897e8495919118fa852369e3de958a7e32248ff3d86aeb3d5966d2c2eb",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_blanksky_evt.fits",
+            "source_sha256": "e48945997305583922bee3e1b6096e7f72ddf69639570085aa1f87f349a2a4f4"
+          },
+          "science": {
+            "asolfile_header": "pcadf16526_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/acisf16526_science_gaia_evt.fits",
+            "sha256": "6606e8275ec1feb29fad6f5c691712a259496898a23a13d3751371fdf12e19b0",
+            "source": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_flareclean_evt2.fits",
+            "source_sha256": "537bf499b2c7a9d1ece16a86556c16ba6fe6a7cc89d322a86cbef8a748744d81"
+          }
+        },
+        "product_bytes": 115744775,
+        "product_files": 17,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "a5b5d0e00b4524c0635ef86d7fe4abe9e8dcc28f951c2af381ea32b28c190cab"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "94825a34e401b6eef71bc5f75f526beb820252e63943d894b63529c5fcefa06d"
+          },
+          {
+            "bytes": 74062080,
+            "relative_path": "acisf16526_blanksky_gaia_evt.fits",
+            "sha256": "4d299a897e8495919118fa852369e3de958a7e32248ff3d86aeb3d5966d2c2eb"
+          },
+          {
+            "bytes": 19460160,
+            "relative_path": "acisf16526_science_gaia_evt.fits",
+            "sha256": "6606e8275ec1feb29fad6f5c691712a259496898a23a13d3751371fdf12e19b0"
+          },
+          {
+            "bytes": 94,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "997a4b0498237af11cc8feab687b7bcaaf2214c61db7605ea28ac23b8f8f30af"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 521,
+            "relative_path": "logs/parse_wcs_match_log.log",
+            "sha256": "3eaeaa2ad751a6404fc5d8b1d6235997cfac856b4294c2d814a1d576d887bfd7"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_xray_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 30109,
+            "relative_path": "logs/wcs_match.log",
+            "sha256": "43ee1558ae6887bbf7d8c34e597ca3086151cab85bdd0e332992c02d8d37ea65"
+          },
+          {
+            "bytes": 401,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "6b61ff5d9edd2e2b77698bb7c7e3d4a755dbbc1b83a98f274df6e00c11db3c8c"
+          },
+          {
+            "bytes": 480,
+            "relative_path": "logs/wcs_update_pcadf16526_000N001_asol1.log",
+            "sha256": "1e98a64ee627b8ca0d0321d211840acaecf7fee8981a041605e48c43b99e2fcc"
+          },
+          {
+            "bytes": 400,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "0af696a9544862a8cc43e5dea0232b70e0985d65960bf485e19a6ac7d6a42f3e"
+          },
+          {
+            "bytes": 22080960,
+            "relative_path": "pcadf16526_000N001_gaia_asol1.fits",
+            "sha256": "da295c4988e3ccec84ea7cd8864d05460bba92e080a7e332b8155dc10ad42021"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_match_statistics.fits",
+            "sha256": "ee72c5544396f1e09e57f3c4a09165aa40ba8ade4937b602d71b778daedbb839"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_translation.xform.fits",
+            "sha256": "0db178b92c0f97e285d3cbbd311a0a59bfc73961fb69fd840c9dd425c8aa9829"
+          },
+          {
+            "bytes": 46080,
+            "relative_path": "xray_sources_selected.fits",
+            "sha256": "fabbb43924b255392c351490d7153d092e68f25682c18385809624cc885a3361"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16526/pcadf16526_000N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/pcadf16526_000N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/relative_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/logs/wcs_update_pcadf16526_000N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/acisf16526_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/acisf16526_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_flareclean_evt2.fits",
+      "cluster": "AS295",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 71,
+        "included_max_recomputed_arcsec": 0.47,
+        "included_pairs": 9,
+        "included_rms_recomputed_arcsec": 0.32588341473600646,
+        "max_after_arcsec": 0.467712,
+        "rms_after_arcsec": 0.230232,
+        "rms_before_arcsec": 0.378637
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/relative_match_statistics.fits",
+      "obsid": 16526,
+      "selected_xray_sources": 71,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/sources.fits",
+      "stage": "relative_to_Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/logs/wcs_match.log",
+          "reused": true
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16524/reference_xray_sources_gaia.fits",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/relative_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/logs/parse_wcs_match_log.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/logs/select_xray_sources.log",
+          "reused": true
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526/relative_translation.xform.fits",
+      "transform_sha256": "0db178b92c0f97e285d3cbbd311a0a59bfc73961fb69fd840c9dd425c8aa9829",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": 0.27398301285701465,
+        "t2": -0.8194539441216572
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/AS295/16526"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "320d5e106fd48c759468704b2db444d65b67cb9c325678ce42ed5bc0e9597761",
+      "anchor_obsid": 17494,
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/pcadf17165_000N001_gaia_asol1.fits",
+            "sha256": "1ec933f1b7455bb46dc380816ed821f80ac3aeda5e3992022dd697a0a63373e5"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf17165_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/acisf17165_blanksky_gaia_evt.fits",
+            "sha256": "5d6afd7f0edd8defcabc86d1ff51636eca29b6c82a0be2a455d87b76154ef6ba",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_blanksky_evt.fits",
+            "source_sha256": "c2ffd1ff582012247cbdc7cda3c4616d465b2ed6b1487371c3475ca995d936fc"
+          },
+          "science": {
+            "asolfile_header": "pcadf17165_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/acisf17165_science_gaia_evt.fits",
+            "sha256": "7532c72cd3f459c0399281de83ad70d79b7404ffab76ba4a8483b9570ed8fc43",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_flareclean_evt2.fits",
+            "source_sha256": "2b6093ab849634221056ec15ae9808bcb83889f1524e303c538829fe0057e805"
+          }
+        },
+        "product_bytes": 73538821,
+        "product_files": 17,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "4118ee68eabeb459d2701a5155edf5e3f2cf09b1ecf497ad14d11e1f1598b8ca"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "5f67eed9b7411cdd263ee433d780ed629bd3aba75c542d794a7db141c93ff724"
+          },
+          {
+            "bytes": 33569280,
+            "relative_path": "acisf17165_blanksky_gaia_evt.fits",
+            "sha256": "5d6afd7f0edd8defcabc86d1ff51636eca29b6c82a0be2a455d87b76154ef6ba"
+          },
+          {
+            "bytes": 12237120,
+            "relative_path": "acisf17165_science_gaia_evt.fits",
+            "sha256": "7532c72cd3f459c0399281de83ad70d79b7404ffab76ba4a8483b9570ed8fc43"
+          },
+          {
+            "bytes": 97,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "64154d2425e8331ea7718217213c4a4f56ef56fd3090fa0cbd8604db18781f2d"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 533,
+            "relative_path": "logs/parse_wcs_match_log.log",
+            "sha256": "785719ac80d689a172409b8cbe9d5db7d50660541d426ceada6f3d820eb50525"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_xray_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 13230,
+            "relative_path": "logs/wcs_match.log",
+            "sha256": "c08ec8072018dd5e04558c1d69ca33d9db899904b1e24d80cd56d02dc6daebf3"
+          },
+          {
+            "bytes": 410,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "e6310b25f761b90d422bb0d858360d24ed93e1cbc397da5fcc0b638b1c67709b"
+          },
+          {
+            "bytes": 492,
+            "relative_path": "logs/wcs_update_pcadf17165_000N001_asol1.log",
+            "sha256": "0bd06cb5850de2f8cd476ae2c48a6b86c66daee31d31d9fe60a3b7f05ffc52c0"
+          },
+          {
+            "bytes": 409,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "7d01cf63f6bba92ac9124e0ae1b6cccd5f560dfb7e9ee1e4155d227e79724fe1"
+          },
+          {
+            "bytes": 27610560,
+            "relative_path": "pcadf17165_000N001_gaia_asol1.fits",
+            "sha256": "1ec933f1b7455bb46dc380816ed821f80ac3aeda5e3992022dd697a0a63373e5"
+          },
+          {
+            "bytes": 28800,
+            "relative_path": "relative_match_statistics.fits",
+            "sha256": "e6528f7301733aae411bb1b124367ee7e22845c3ab98ed1ad72ebf8932199554"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_translation.xform.fits",
+            "sha256": "a0449240a0bc925a9fe263544bfd369682bd6eea15c9d32aaf689c4d811a6df8"
+          },
+          {
+            "bytes": 46080,
+            "relative_path": "xray_sources_selected.fits",
+            "sha256": "bf6cd2e7507864b95396dc413a6abe0c576e4ec55280b75a17c45fd541b622c2"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17165/pcadf17165_000N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/pcadf17165_000N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/relative_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/logs/wcs_update_pcadf17165_000N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/acisf17165_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/acisf17165_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 61,
+        "included_max_recomputed_arcsec": 0.38,
+        "included_pairs": 4,
+        "included_rms_recomputed_arcsec": 0.2791952721662743,
+        "max_after_arcsec": 0.381534,
+        "rms_after_arcsec": 0.196208,
+        "rms_before_arcsec": 1.213897
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/relative_match_statistics.fits",
+      "obsid": 17165,
+      "selected_xray_sources": 61,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/sources.fits",
+      "stage": "relative_to_Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/logs/wcs_match.log",
+          "reused": true
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/relative_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/logs/parse_wcs_match_log.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/logs/select_xray_sources.log",
+          "reused": true
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165/relative_translation.xform.fits",
+      "transform_sha256": "a0449240a0bc925a9fe263544bfd369682bd6eea15c9d32aaf689c4d811a6df8",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -3.4411812988579413,
+        "t2": 0.1226465830898178
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17165"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "320d5e106fd48c759468704b2db444d65b67cb9c325678ce42ed5bc0e9597761",
+      "anchor_obsid": 17494,
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/pcadf17166_001N001_gaia_asol1.fits",
+            "sha256": "99f0115848ca630dd2f8e3e11ac34d9d34f14ab86f172b444172325eae494043"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf17166_001N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/acisf17166_blanksky_gaia_evt.fits",
+            "sha256": "32e4f3f8820f240990ec9300d0f148bbfb0ef95fb6641128254cd6b095a8c1f6",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_blanksky_evt.fits",
+            "source_sha256": "9598cd76e6e20c835274edfb39cf2aaef505e58c665a98ada6bb54dc4adb48e8"
+          },
+          "science": {
+            "asolfile_header": "pcadf17166_001N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/acisf17166_science_gaia_evt.fits",
+            "sha256": "42b228082a137cd1b4fd98353ef99338a4b11c6b3b014ac2e9b679df4c12433f",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_flareclean_evt2.fits",
+            "source_sha256": "b158b81a6824a2e11eb76044b8f14af70d1955f589ae6d608d5f1828ff2c1e46"
+          }
+        },
+        "product_bytes": 54358291,
+        "product_files": 17,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "5285a28e001bee1f0a61117e660d41ccf3d4df9d4a00c9e5abca37450a0abc73"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "933ef2a66b97c010c3ce2c800aff443bb058c3a6da69017c10133fa207ca1667"
+          },
+          {
+            "bytes": 38145600,
+            "relative_path": "acisf17166_blanksky_gaia_evt.fits",
+            "sha256": "32e4f3f8820f240990ec9300d0f148bbfb0ef95fb6641128254cd6b095a8c1f6"
+          },
+          {
+            "bytes": 5650560,
+            "relative_path": "acisf17166_science_gaia_evt.fits",
+            "sha256": "42b228082a137cd1b4fd98353ef99338a4b11c6b3b014ac2e9b679df4c12433f"
+          },
+          {
+            "bytes": 97,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "1e73147865633b74662e1677e8124d8f9856c813a1cdd88c76fa52bc3db05bd2"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 533,
+            "relative_path": "logs/parse_wcs_match_log.log",
+            "sha256": "a541be0cadae5ac99d8660e05b61197bfbab25b304bfbbbda7e2dbfcf7816a90"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_xray_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 4860,
+            "relative_path": "logs/wcs_match.log",
+            "sha256": "26db6fadab1212696c464ddbedcea851ce0721d73da848d486d4a396f3768c52"
+          },
+          {
+            "bytes": 410,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "1003bfb3ea9eb863e97935021b61488d98260a782fed361e12c1da7076a91b6b"
+          },
+          {
+            "bytes": 492,
+            "relative_path": "logs/wcs_update_pcadf17166_001N001_asol1.log",
+            "sha256": "b9e51e9ab736cf779d419cec90590a33933b03b8fa5a7a5592e60fd4344153a2"
+          },
+          {
+            "bytes": 409,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "756e7feba2a456418dcd18f9d13892c14d2814ce6f01a7faf9ec038c8dbdfac1"
+          },
+          {
+            "bytes": 10457280,
+            "relative_path": "pcadf17166_001N001_gaia_asol1.fits",
+            "sha256": "99f0115848ca630dd2f8e3e11ac34d9d34f14ab86f172b444172325eae494043"
+          },
+          {
+            "bytes": 25920,
+            "relative_path": "relative_match_statistics.fits",
+            "sha256": "a23e2cf5c235766c83a4b96d199418e6151683a73dd2551a56bf800b4f4e889d"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_translation.xform.fits",
+            "sha256": "aeddf014b2b239f253d275441594a85883e615fc302ae2c07bb4e7ebcc08e225"
+          },
+          {
+            "bytes": 40320,
+            "relative_path": "xray_sources_selected.fits",
+            "sha256": "4f9dc9700f3f56cebcafcb2c81a6c21ae1e506c186beca1001168cf464988013"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17166/pcadf17166_001N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/pcadf17166_001N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/relative_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/logs/wcs_update_pcadf17166_001N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/acisf17166_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/acisf17166_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 38,
+        "included_max_recomputed_arcsec": 0.26,
+        "included_pairs": 4,
+        "included_rms_recomputed_arcsec": 0.2009353129741012,
+        "max_after_arcsec": 0.260656,
+        "rms_after_arcsec": 0.141973,
+        "rms_before_arcsec": 1.265762
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/relative_match_statistics.fits",
+      "obsid": 17166,
+      "selected_xray_sources": 38,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/sources.fits",
+      "stage": "relative_to_Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/logs/wcs_match.log",
+          "reused": true
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/relative_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/logs/parse_wcs_match_log.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/logs/select_xray_sources.log",
+          "reused": true
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166/relative_translation.xform.fits",
+      "transform_sha256": "aeddf014b2b239f253d275441594a85883e615fc302ae2c07bb4e7ebcc08e225",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -3.5659513991350877,
+        "t2": -0.5957341154824007
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17166"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "320d5e106fd48c759468704b2db444d65b67cb9c325678ce42ed5bc0e9597761",
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/pcadf17494_000N001_gaia_asol1.fits",
+            "sha256": "640a8c9dbf7de8ec1f23b1d7ea52da3ed8c8140f58c3d9081d5ea7b64379c4c8"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf17494_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/acisf17494_blanksky_gaia_evt.fits",
+            "sha256": "0b8621c662204082fc618abaa9353118b9e5f49a2077355104905afcdd0cd600",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_blanksky_evt.fits",
+            "source_sha256": "36033ccf870b37ec322490030927d9bd797ec35bb88565cb3b58a0e98638f78a"
+          },
+          "science": {
+            "asolfile_header": "pcadf17494_000N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/acisf17494_science_gaia_evt.fits",
+            "sha256": "48b6734264ce5d5f1513674d87e83f1a883675fd3c1c0683a05f725234d22721",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_flareclean_evt2.fits",
+            "source_sha256": "4b472a7a31c49bf6808a57dc82d1bd07e6d1f08f850a48430e832f37f8d65a94"
+          }
+        },
+        "product_bytes": 82424716,
+        "product_files": 15,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "601b753b674ad426b275f4a68e0db969cf0dc801f10e837e8ab82bec73b56cb8"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".reference_catalog_wcs_updated",
+            "sha256": "d6ac656961787ec5b371b83157fdcfff404d94d531c2dc06b6f91a37af00fa0c"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "df3dcacd563cfbcd1e8e576b119ac9198848d64a9fa99f4295ae446f4ee70eb1"
+          },
+          {
+            "bytes": 38145600,
+            "relative_path": "acisf17494_blanksky_gaia_evt.fits",
+            "sha256": "0b8621c662204082fc618abaa9353118b9e5f49a2077355104905afcdd0cd600"
+          },
+          {
+            "bytes": 14906880,
+            "relative_path": "acisf17494_science_gaia_evt.fits",
+            "sha256": "48b6734264ce5d5f1513674d87e83f1a883675fd3c1c0683a05f725234d22721"
+          },
+          {
+            "bytes": 97,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "ee30f0bde9e7869e43da77577fdcfb10d308d26ebdb7b4d32a1df0c88704449f"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_anchor_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 406,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "4d43136691ec85e67520f5f31de6ee41e529c264e0f5f8f0558c2ac7e4c693c9"
+          },
+          {
+            "bytes": 488,
+            "relative_path": "logs/wcs_update_pcadf17494_000N001_asol1.log",
+            "sha256": "838f8b184347346acb35d54c8c5e4038211bfe09542aab8c630b6c6760b70d5f"
+          },
+          {
+            "bytes": 405,
+            "relative_path": "logs/wcs_update_reference_catalog.log",
+            "sha256": "2c20aea0366ac14b31183933fb5b3aa13fd6931d2e56b600c1e260436a956fda"
+          },
+          {
+            "bytes": 405,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "cf468092aa1220ea7856193583ff2a45d19b0aa1a17dff9e6a5d6bae35974fee"
+          },
+          {
+            "bytes": 29324160,
+            "relative_path": "pcadf17494_000N001_gaia_asol1.fits",
+            "sha256": "640a8c9dbf7de8ec1f23b1d7ea52da3ed8c8140f58c3d9081d5ea7b64379c4c8"
+          },
+          {
+            "bytes": 46080,
+            "relative_path": "reference_xray_sources_gaia.fits",
+            "sha256": "320d5e106fd48c759468704b2db444d65b67cb9c325678ce42ed5bc0e9597761"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17494/pcadf17494_000N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/pcadf17494_000N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/logs/wcs_update_pcadf17494_000N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/acisf17494_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/acisf17494_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "epoch_reference": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_dr3_observation_epoch.dat",
+      "epoch_reference_sha256": "16a84e4cda4a3cf13cc2c2c26b79c83776a34f4322e6b76478a4cf32c67d3ef9",
+      "gaia_catalog": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v17_gaia_dr3/PLCKG287_gaia_dr3.csv",
+      "gaia_catalog_sha256": "902c37c9f3a6c248b5f3318c64642ed71f6774e3a08767af4f05ff450fc8e46d",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "hierarchical_steps": {
+        "catalog_wcs_update": {
+          "command": [
+            "wcs_update",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "outfile=",
+            "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/logs/wcs_update_reference_catalog.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/logs/select_anchor_sources.log",
+          "reused": true
+        }
+      },
+      "match_statistics": {
+        "candidate_pairs": 62,
+        "included_max_recomputed_arcsec": 0.45,
+        "included_pairs": 7,
+        "included_rms_recomputed_arcsec": 0.22421290902048563,
+        "max_after_arcsec": 0.445369,
+        "rms_after_arcsec": 0.157738,
+        "rms_before_arcsec": 1.124645
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_match_statistics.fits",
+      "observation_end": "2015-08-18T11:33:02",
+      "observation_epoch_jyear": 2015.6274110356933,
+      "observation_start": "2015-08-17T18:13:11",
+      "obsid": 17494,
+      "selected_xray_sources": 62,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/sources.fits",
+      "stage": "Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_dr3_observation_epoch.dat",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/logs/wcs_match.log",
+          "reused": false
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_dr3_observation_epoch.dat",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/logs/parse_wcs_match_log.log",
+          "reused": false
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0.0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/logs/select_xray_sources.log",
+          "reused": false
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v101/PLCKG287/17494/gaia_translation.xform.fits",
+      "transform_sha256": "4a2659bee1bf4658e97448a56078bc75c3d526219bb9e7f2d628af1bda5bd9a4",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": 3.144798157647204,
+        "t2": -0.5958310879557628
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "320d5e106fd48c759468704b2db444d65b67cb9c325678ce42ed5bc0e9597761",
+      "anchor_obsid": 17494,
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/pcadf17495_001N001_gaia_asol1.fits",
+            "sha256": "cf8f25e88294ab50c6c0cd79ff4e015dcc0d261e6bc6405f797ff576be186776"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf17495_001N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/acisf17495_blanksky_gaia_evt.fits",
+            "sha256": "bfe50f32ff6ed0f99e77394b3d85dcd1385c63c1416a314c110f0db8a99eb205",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_blanksky_evt.fits",
+            "source_sha256": "ea5d68c96af490a9f159637d5997a70347c89fb20653ea63a38f20f9b918197a"
+          },
+          "science": {
+            "asolfile_header": "pcadf17495_001N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/acisf17495_science_gaia_evt.fits",
+            "sha256": "f8ea71fc162a38b0c6dadafbb896b2c43e8fc8c5cf118a3e9450ec03a959b67f",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_flareclean_evt2.fits",
+            "source_sha256": "00230c2a2497279683687214d7881b71cbd33f552e36a65f9db7809023d6f724"
+          }
+        },
+        "product_bytes": 57233531,
+        "product_files": 17,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "f3fe92d151d98ec7e05b62821446f4139606c854577e0f585e7e8617cf6bfc35"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "5dd0780418b21c7c011c561b71f81889f4163c11ab5cad51e7400f8adf29c669"
+          },
+          {
+            "bytes": 33569280,
+            "relative_path": "acisf17495_blanksky_gaia_evt.fits",
+            "sha256": "bfe50f32ff6ed0f99e77394b3d85dcd1385c63c1416a314c110f0db8a99eb205"
+          },
+          {
+            "bytes": 7611840,
+            "relative_path": "acisf17495_science_gaia_evt.fits",
+            "sha256": "f8ea71fc162a38b0c6dadafbb896b2c43e8fc8c5cf118a3e9450ec03a959b67f"
+          },
+          {
+            "bytes": 97,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "1ede5e4942d530e4bf9b7a604d01049a46ce1e7b767290874bc7dca5798ff53b"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 533,
+            "relative_path": "logs/parse_wcs_match_log.log",
+            "sha256": "c568d607c4045bc532058213d1958496975163b1f2406b936bcf59c65d50541e"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_xray_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 17380,
+            "relative_path": "logs/wcs_match.log",
+            "sha256": "93995436a2ce5a5785b592d6bae39d3099b5b5bbc2715333aabe84852cceb385"
+          },
+          {
+            "bytes": 410,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "71699745253a33cab6f37b779b5a3411a8908cb2a168dcae67d75524315b333f"
+          },
+          {
+            "bytes": 492,
+            "relative_path": "logs/wcs_update_pcadf17495_001N001_asol1.log",
+            "sha256": "fb0b53200b267d013a4e28b84ab088326758a3089929c32ed001d57525c6b746"
+          },
+          {
+            "bytes": 409,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "8744827e780912952de534ae0bd2cd23d6f38d694fd13b25110c42b9ec526bd4"
+          },
+          {
+            "bytes": 15929280,
+            "relative_path": "pcadf17495_001N001_gaia_asol1.fits",
+            "sha256": "cf8f25e88294ab50c6c0cd79ff4e015dcc0d261e6bc6405f797ff576be186776"
+          },
+          {
+            "bytes": 28800,
+            "relative_path": "relative_match_statistics.fits",
+            "sha256": "a7a26ae4efde6662ea99cfbba788ab5a2b9569a29ef8e210307fcb8f20679f1e"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_translation.xform.fits",
+            "sha256": "6c8c5a1e6abd8542f725c9d14b70ef031e25b5c97fe9a1303d9fc8a7dacb1496"
+          },
+          {
+            "bytes": 43200,
+            "relative_path": "xray_sources_selected.fits",
+            "sha256": "e51150a2639d23a8416c1b5ff0fec824acf921d83cda3e6a489979c8d10967ba"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17495/pcadf17495_001N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/pcadf17495_001N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/relative_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/logs/wcs_update_pcadf17495_001N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/acisf17495_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/acisf17495_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 54,
+        "included_max_recomputed_arcsec": 0.47,
+        "included_pairs": 6,
+        "included_rms_recomputed_arcsec": 0.3356585566713095,
+        "max_after_arcsec": 0.470009,
+        "rms_after_arcsec": 0.238052,
+        "rms_before_arcsec": 0.94191
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/relative_match_statistics.fits",
+      "obsid": 17495,
+      "selected_xray_sources": 54,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/sources.fits",
+      "stage": "relative_to_Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/logs/wcs_match.log",
+          "reused": true
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/relative_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/logs/parse_wcs_match_log.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/logs/select_xray_sources.log",
+          "reused": true
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495/relative_translation.xform.fits",
+      "transform_sha256": "6c8c5a1e6abd8542f725c9d14b70ef031e25b5c97fe9a1303d9fc8a7dacb1496",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -2.5788477062130823,
+        "t2": 0.45997622429763396
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17495"
+    },
+    {
+      "anchor_catalog": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+      "anchor_catalog_sha256": "320d5e106fd48c759468704b2db444d65b67cb9c325678ce42ed5bc0e9597761",
+      "anchor_obsid": 17494,
+      "application": {
+        "corrected_aspect_list": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/corrected_asol1.lis",
+        "corrected_aspects": [
+          {
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/pcadf18807_001N001_gaia_asol1.fits",
+            "sha256": "2ed18dc1ebea9ad8b1a909e2da2b6ad574127f4d99403249ab858a3a6a754b89"
+          }
+        ],
+        "corrected_events": {
+          "blanksky": {
+            "asolfile_header": "pcadf18807_001N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/acisf18807_blanksky_gaia_evt.fits",
+            "sha256": "99ae7de7ff6176ccd21fcfa6e2e88da366f35942765f4e125f45baa6f664eb4c",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_blanksky_evt.fits",
+            "source_sha256": "7a51d81c4d538488fad4c1fcfc8112941a4ed893122fb6ce78bd6666dc7f3051"
+          },
+          "science": {
+            "asolfile_header": "pcadf18807_001N001_gaia_asol1.fits",
+            "path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/acisf18807_science_gaia_evt.fits",
+            "sha256": "eea6912a1f2d5cf79d7655bffd74635b141d0eccdd6ba9d78d706ed3d82f946b",
+            "source": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_flareclean_evt2.fits",
+            "source_sha256": "360143d4e9c589a16650ffc7d87e8d55c3b37049c017afabb1c21bc6b72a4a8b"
+          }
+        },
+        "product_bytes": 54354843,
+        "product_files": 17,
+        "products": [
+          {
+            "bytes": 65,
+            "relative_path": ".blanksky_event_wcs_updated",
+            "sha256": "08bd3d2ca1cecc43e03ee2141bd4eec8198c30be38b36426afb9dd0bf4ff097f"
+          },
+          {
+            "bytes": 65,
+            "relative_path": ".science_event_wcs_updated",
+            "sha256": "120ba15c0c3418c2063602c56c4b348958519165e23badb4eb8f5d1d31791a41"
+          },
+          {
+            "bytes": 33569280,
+            "relative_path": "acisf18807_blanksky_gaia_evt.fits",
+            "sha256": "99ae7de7ff6176ccd21fcfa6e2e88da366f35942765f4e125f45baa6f664eb4c"
+          },
+          {
+            "bytes": 6488640,
+            "relative_path": "acisf18807_science_gaia_evt.fits",
+            "sha256": "eea6912a1f2d5cf79d7655bffd74635b141d0eccdd6ba9d78d706ed3d82f946b"
+          },
+          {
+            "bytes": 97,
+            "relative_path": "corrected_asol1.lis",
+            "sha256": "b11cda9503bd1b26e079a37bf840993fca225f04918e7310118d87dbd2e580e3"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_blanksky_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/copy_science_event.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 533,
+            "relative_path": "logs/parse_wcs_match_log.log",
+            "sha256": "1e19452220a040ea94a4d526caab6434d9e4d92cfd5fc8b59acf83f7e5f6a4df"
+          },
+          {
+            "bytes": 0,
+            "relative_path": "logs/select_xray_sources.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 15812,
+            "relative_path": "logs/wcs_match.log",
+            "sha256": "6c24b823272a97f86d682884c3019fc58e096d61705b6c175ec3808aa19b0cd3"
+          },
+          {
+            "bytes": 410,
+            "relative_path": "logs/wcs_update_blanksky_event.log",
+            "sha256": "7bbbcba27e74fd3ef6978ae8544615797a6f20b9b2697786891ccf1ccab2d026"
+          },
+          {
+            "bytes": 492,
+            "relative_path": "logs/wcs_update_pcadf18807_001N001_asol1.log",
+            "sha256": "7ef3dee0e3e61af1e46ff80a1515b412359f152324cb0320d407f51fee1736b7"
+          },
+          {
+            "bytes": 409,
+            "relative_path": "logs/wcs_update_science_event.log",
+            "sha256": "c7a275bb2b2c9732a4b5b24bef85f271ecb78acec6fc83f034c5fceb5c4cbfff"
+          },
+          {
+            "bytes": 14175360,
+            "relative_path": "pcadf18807_001N001_gaia_asol1.fits",
+            "sha256": "2ed18dc1ebea9ad8b1a909e2da2b6ad574127f4d99403249ab858a3a6a754b89"
+          },
+          {
+            "bytes": 28800,
+            "relative_path": "relative_match_statistics.fits",
+            "sha256": "5b92c8779136dcc2c863a6609b863907f3af00adf6f2bc054936303598a2d788"
+          },
+          {
+            "bytes": 31680,
+            "relative_path": "relative_translation.xform.fits",
+            "sha256": "08af525b0fe32de8fb6da6d092c603a364c080923532c8e5f6f0fc0f85714835"
+          },
+          {
+            "bytes": 43200,
+            "relative_path": "xray_sources_selected.fits",
+            "sha256": "639d5c5520a6c69711ab73dd0239b09b83c0d46708eb562d902245b4570bb282"
+          }
+        ],
+        "steps": {
+          "aspect_updates": [
+            {
+              "command": [
+                "wcs_update",
+                "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/18807/pcadf18807_001N001_asol1.fits",
+                "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/pcadf18807_001N001_gaia_asol1.fits",
+                "transformfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/relative_translation.xform.fits",
+                "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/initial_0.5-7.0_thresh.img",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/logs/wcs_update_pcadf18807_001N001_asol1.log",
+              "reused": true
+            }
+          ],
+          "event_updates": [
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_flareclean_evt2.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/acisf18807_science_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/logs/copy_science_event.log",
+                "reused": true
+              },
+              "label": "science",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/logs/wcs_update_science_event.log",
+                "reused": true
+              }
+            },
+            {
+              "copy": {
+                "command": [
+                  "dmcopy",
+                  "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_blanksky_evt.fits",
+                  "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/acisf18807_blanksky_gaia_evt.fits",
+                  "opt=all",
+                  "clobber=no",
+                  "mode=h"
+                ],
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/logs/copy_blanksky_event.log",
+                "reused": true
+              },
+              "label": "blanksky",
+              "update": {
+                "ASOLFILE_header_repaired": true,
+                "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/logs/wcs_update_blanksky_event.log",
+                "reused": true
+              }
+            }
+          ]
+        }
+      },
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_blanksky_evt.fits",
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_flareclean_evt2.fits",
+      "cluster": "PLCKG287",
+      "gates": {
+        "maximum_final_radial_rms": true,
+        "maximum_individual_residual": true,
+        "minimum_final_source_pairs": true,
+        "translation_only_matrix": true
+      },
+      "match_statistics": {
+        "candidate_pairs": 48,
+        "included_max_recomputed_arcsec": 0.37,
+        "included_pairs": 4,
+        "included_rms_recomputed_arcsec": 0.268467875173176,
+        "max_after_arcsec": 0.367932,
+        "rms_after_arcsec": 0.188902,
+        "rms_before_arcsec": 0.519519
+      },
+      "match_statistics_path": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/relative_match_statistics.fits",
+      "obsid": 18807,
+      "selected_xray_sources": 48,
+      "source_catalog": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/sources.fits",
+      "stage": "relative_to_Gaia_anchor",
+      "steps": {
+        "match": {
+          "command": [
+            "wcs_match",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/relative_translation.xform.fits",
+            "wcsfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "radius=2.0",
+            "residlim=0.5",
+            "residtype=0",
+            "residfac=0.0",
+            "method=trans",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/logs/wcs_match.log",
+          "reused": true
+        },
+        "parse": {
+          "command": [
+            "parse_wcs_match_log",
+            "infile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/xray_sources_selected.fits",
+            "refsrcfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/17494/reference_xray_sources_gaia.fits",
+            "logfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/logs/wcs_match.log",
+            "outfile=/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/relative_match_statistics.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/logs/parse_wcs_match_log.log",
+          "reused": true
+        },
+        "source_selection": {
+          "command": [
+            "dmcopy",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/sources.fits[SRC_SIGNIFICANCE>=3.0,NET_COUNTS>0]",
+            "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/xray_sources_selected.fits",
+            "clobber=no",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/logs/select_xray_sources.log",
+          "reused": true
+        }
+      },
+      "transform": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807/relative_translation.xform.fits",
+      "transform_sha256": "08af525b0fe32de8fb6da6d092c603a364c080923532c8e5f6f0fc0f85714835",
+      "transform_values": {
+        "a11": 1.0,
+        "a12": 0.0,
+        "a21": 0.0,
+        "a22": 1.0,
+        "t1": -1.376610124033391,
+        "t2": -0.2002451944376844
+      },
+      "wcs_image": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/initial_0.5-7.0_thresh.img",
+      "work": "/home/henry/sigma-v17a-chandra/astrometry_v102/PLCKG287/18807"
+    }
+  ],
+  "parent_direct_report_sha256": "7e5eb8f0352112d6138c214841fe14bcf4dde7dcc59b6c12df135cba06201fa0",
+  "protocol_version": "SIGMA-V17A2-HIERARCHICAL-ASTROMETRY-1.0.0",
+  "reference_obsids": {
+    "AS295": 16524,
+    "PLCKG287": 17494
+  },
+  "registered_event_images_inspected": false,
+  "status": "all_frozen_observations_hierarchically_registered_to_Gaia_DR3",
+  "temperature_map_constructed": false,
+  "transforms_applied": true
+}

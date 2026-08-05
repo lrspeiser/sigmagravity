@@ -1,0 +1,2822 @@
+{
+  "astrometry_completed": false,
+  "clean_exposure_seconds": 400362.3623303224,
+  "config_sha256": "db6c8e671f4057e778800fde4aa048b93ac633a3fa38c675960a36736b699f70",
+  "event_images_visually_inspected": false,
+  "generated_utc": "2026-08-04T17:49:50.920760+00:00",
+  "jobs": 2,
+  "lensing_target_opened": false,
+  "minimum_retained_exposure_fraction": 0.9833594028458849,
+  "observation_count": 11,
+  "observations": [
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_blanksky_evt.fits",
+      "blanksky_event_rows": 865664,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.039651573",
+        "BKGSCAL1": "0.040456116",
+        "BKGSCAL2": "0.038258724",
+        "BKGSCAL3": "0.042446516",
+        "BKGSCAL6": "0.079025552"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_flareclean_evt2.fits",
+      "clean_event_rows": 49848,
+      "clean_exposure_seconds": 19769.951012332,
+      "cluster": "AS295",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/AS295/12260/acisf12260_repro_fov1.fits",
+      "obsid": 12260,
+      "original_event_rows": 49936,
+      "original_exposure_seconds": 19796.367177806,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "aa5b22195ecdea947955aa6b9600d2bfa5e22fd113731883c78811ab3e7ef78c",
+        "selected_sources": 47,
+        "wavdetect_sources": 55
+      },
+      "product_bytes": 139635984,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 38139840,
+          "relative_path": "acisf12260_blanksky_evt.fits",
+          "sha256": "d177a59bd53f0647a5eddbe81dc5afcd1f1ceac13f47ca7928d5e2d06675fcdc"
+        },
+        {
+          "bytes": 5806080,
+          "relative_path": "acisf12260_flareclean_evt2.fits",
+          "sha256": "ebb8b006a97214fd12eb7e78ffd642e8b71a19e35feed184a51335cf7fc206c7"
+        },
+        {
+          "bytes": 5224320,
+          "relative_path": "acisf12260_nosrc_evt2.fits",
+          "sha256": "7bda7fa7e61bb7e0eb132bac387766a6c1fdcde589f49327770ceb73e1f3b451"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "0befa57e04681ab631c512810a0363314a9c37b2848c4dd8f1ae563f07bc66e6"
+        },
+        {
+          "bytes": 83520,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "24b6e1f000e6ba73358360ccc6489eafe3582caf0fb67b3d7917290faa93bc0b"
+        },
+        {
+          "bytes": 1014,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "84de276e2ef42148bbf795b8b2ac56507cfd60464620425d121ef898710823ac"
+        },
+        {
+          "bytes": 1186,
+          "relative_path": "logs/deflare.log",
+          "sha256": "6642ddd5d5e0b803fb97de5a683bbfcf45b0afb379d586f91e97c7ee61b4d078"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1508,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "ee0077cb90b7fee49442a81e46ad61f553e827446964c5cdf3012a7fdbe17e49"
+        },
+        {
+          "bytes": 494,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "271c83a4ce05cf60c6d792dbf6e492c3d3a5207268aae7a5fde407970dfe6ecc"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2710,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "3ed62277b0a2eae7554dbf0597bdecb58125eedd073b672a4fa0e5448ea01055"
+        },
+        {
+          "bytes": 24022080,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "7cd54df0b3687f2cc9a300f3367d7cb928f88e32397dddc612bfaaf107f37beb"
+        },
+        {
+          "bytes": 12018240,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "906714835a758457bb470962baf682c4f0bda93d2d5d1f11843362926f808642"
+        },
+        {
+          "bytes": 12021120,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "a392fb96fa4de97b3de269d634ed9eefd9c61153c8093fc3ab6c8b9ce723f81f"
+        },
+        {
+          "bytes": 12084480,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "9ef5d7d2218954735a03db1df707b41d10847257774dffb316c1de54b28c02c3"
+        },
+        {
+          "bytes": 12087360,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "3e2e0c9b1c9407aeac0df9f1954220ac588972e88ed3bd6c9bda536c766f709e"
+        },
+        {
+          "bytes": 28800,
+          "relative_path": "source_detect_b2/initial_12260.fov",
+          "sha256": "5686455debdd0f037b6c3a302c6a02e34d0955654a0421b16386219ff3cd218e"
+        },
+        {
+          "bytes": 3166,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "aa5b22195ecdea947955aa6b9600d2bfa5e22fd113731883c78811ab3e7ef78c"
+        },
+        {
+          "bytes": 12018240,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "d520e6f3d90cbf7c3cbcb0e31d212c8e67723f7102a5b349d9244edba62bf980"
+        },
+        {
+          "bytes": 6019200,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "f7b92a3ad23f4fd123dfbb602da2323115dbe6fd7e20ba97b42537a0b9b8c108"
+        },
+        {
+          "bytes": 43200,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "95e9f7ca7c87c1cb96627aec39f4faedf4e346a09f6623f3d657ca2d783fa596"
+        },
+        {
+          "bytes": 3456,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "0bc2b8ee437a0983dae8df8dd080f00d33542f14b467174ff84cfe571b7bbab7"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/AS295/12260/acisf12260_repro_evt2.fits",
+      "repro_event_sha256": "435fdde39dfe720d6182b936e3ab2bb16c67d75c7615761df205c59a6d13efb5",
+      "retained_exposure_fraction": 0.9986656053993777,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/AS295/12260/acisf12260_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=12260",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/logs/blanksky.log",
+          "reused": true
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/logs/deflare.log",
+          "reused": true
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/12260/acisf12260_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/AS295/12260/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/logs/flare_filter.log",
+          "reused": true
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/AS295/12260/acisf12260_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/logs/lightcurve.log",
+          "reused": true
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/12260/acisf12260_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/acisf12260_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/logs/source_mask.log",
+          "reused": true
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/AS295/12260/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/12260/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_blanksky_evt.fits",
+      "blanksky_event_rows": 1681958,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.066001274",
+        "BKGSCAL1": "0.068184666",
+        "BKGSCAL2": "0.065914959",
+        "BKGSCAL3": "0.071887664",
+        "BKGSCAL7": "0.10561714"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_flareclean_evt2.fits",
+      "clean_event_rows": 170821,
+      "clean_exposure_seconds": 43322.165214504,
+      "cluster": "AS295",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/AS295/16127/acisf16127_repro_fov1.fits",
+      "obsid": 16127,
+      "original_event_rows": 170821,
+      "original_exposure_seconds": 43322.165214504,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "c8b412239de4dbc90ca62d02042dbbd7e39968eddd206d0a02ed4ff081be935b",
+        "selected_sources": 67,
+        "wavdetect_sources": 75
+      },
+      "product_bytes": 189675690,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 74059200,
+          "relative_path": "acisf16127_blanksky_evt.fits",
+          "sha256": "0d9b39cb611969ab3c763640f0d36187042b52757914d78f724e75a0b4c5f473"
+        },
+        {
+          "bytes": 19595520,
+          "relative_path": "acisf16127_flareclean_evt2.fits",
+          "sha256": "e8773afb981b87194981689a88415a0f3d3a74a6d67e7cdf9d5200a9718022cd"
+        },
+        {
+          "bytes": 17009280,
+          "relative_path": "acisf16127_nosrc_evt2.fits",
+          "sha256": "337cc987e3ebd06a625cb3cb0fd01b9218728243dd79296b6c53af5e57e889dd"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "a8ed11e24d41479bbbb8f9f05ce7bf463087e0df82838dc215aaf63447b9eaf9"
+        },
+        {
+          "bytes": 95040,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "943be39447206b02308add887059e7e8325a577aad7ff32edeb0098261c69487"
+        },
+        {
+          "bytes": 1014,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "577a18181ac92bea0ab8a7f087f9f4362a7cf8cbf8000f98fa9a2d3a77eb0774"
+        },
+        {
+          "bytes": 1187,
+          "relative_path": "logs/deflare.log",
+          "sha256": "7ebb16e3c389bccd4955bc6979d1913e336d146547689d58f9ae6016a21c99f8"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1508,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "838df248c50c55313b95763f27fdbff0485a2ddf00f914abcab83a87b7f3b7b0"
+        },
+        {
+          "bytes": 494,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "b3189b4efc9af451769d7e6508cb440a3ddcde9eba96cc31cbf93243a2f5a40e"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2712,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "cfd949e28511c75e4243d99188a7952f593bccf5571c2b716c4a87c20a7a04bc"
+        },
+        {
+          "bytes": 20963520,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "616eeb0791f16ab31d1b9f0067f63e058c8806fd35b701787d9ed192aa9b2b10"
+        },
+        {
+          "bytes": 10488960,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "335c86309a25843ffa1cacd4df7a40a02c9c456bcb0017dbb0f62b0ec3840a63"
+        },
+        {
+          "bytes": 10491840,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "d940667fde2b94bd37ddc3b8405dc8ae72ef22db6ed703b88972aa82507a9854"
+        },
+        {
+          "bytes": 10555200,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "6795a8ac421a95fec33ba1b21624474a616b48d261620346c09bcf1c44919fb6"
+        },
+        {
+          "bytes": 10558080,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "5e2531320c60d17b01faaa36202a3f7e9f621b0273982680e24b8f744bafa511"
+        },
+        {
+          "bytes": 28800,
+          "relative_path": "source_detect_b2/initial_16127.fov",
+          "sha256": "480fbc0a1296798cbb18cb9d1a0b2b1a6eb341e0d67cb48ec3debfd3a6be6425"
+        },
+        {
+          "bytes": 4496,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "c8b412239de4dbc90ca62d02042dbbd7e39968eddd206d0a02ed4ff081be935b"
+        },
+        {
+          "bytes": 10488960,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "d23fba381cf578560fb7bd24f2b12ecdb68775e5c9e98eb75af5c4d070fb844b"
+        },
+        {
+          "bytes": 5256000,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "fccc319a9a03e0cce5520e69eac4d37fdbfa97c3a220815fe43d9ce246f9f893"
+        },
+        {
+          "bytes": 43200,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "aa212727a194260becf4e1a62d6f0c54cef372c88398e8f275dc96596bd67e8a"
+        },
+        {
+          "bytes": 4709,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "a91c95613ffb20b510fcb5115bd362ca4dd857f7df0668cdd406c14c6718634a"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/AS295/16127/acisf16127_repro_evt2.fits",
+      "repro_event_sha256": "cb4ce322ddc72658867c18178fe6a096b3f0fba860fd7405d1b7d03ba326b7a6",
+      "retained_exposure_fraction": 1.0,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/AS295/16127/acisf16127_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=16127",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16127/acisf16127_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/AS295/16127/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/AS295/16127/acisf16127_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16127/acisf16127_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/acisf16127_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/AS295/16127/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16127/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_blanksky_evt.fits",
+      "blanksky_event_rows": 865664,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.013809999",
+        "BKGSCAL1": "0.01396273",
+        "BKGSCAL2": "0.013687871",
+        "BKGSCAL3": "0.01464518",
+        "BKGSCAL6": "0.029873902"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_flareclean_evt2.fits",
+      "clean_event_rows": 18723,
+      "clean_exposure_seconds": 9027.0926573834,
+      "cluster": "AS295",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/AS295/16282/acisf16282_repro_fov1.fits",
+      "obsid": 16282,
+      "original_event_rows": 18723,
+      "original_exposure_seconds": 9027.0926573834,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "c66bc7bb6c1f9a2da64a6b2c903289767fa9b29b198cd99221a946c7e12bf535",
+        "selected_sources": 21,
+        "wavdetect_sources": 25
+      },
+      "product_bytes": 138998708,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 38139840,
+          "relative_path": "acisf16282_blanksky_evt.fits",
+          "sha256": "a78efa7d782cdac6b85958b1b302ae6ed85871135794178ffb02937817e445a1"
+        },
+        {
+          "bytes": 2257920,
+          "relative_path": "acisf16282_flareclean_evt2.fits",
+          "sha256": "7da1fd9a342c0550df5bdde0eb98f4339b5b264e3f3b798d10230f83e7713d11"
+        },
+        {
+          "bytes": 2180160,
+          "relative_path": "acisf16282_nosrc_evt2.fits",
+          "sha256": "1cc6841f1aa36def61c9551c6ccbcd35cbc7cbdc4ed6ccfd86e2c6c8c5620095"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "4c96a92450fd999b8408dffe2202033eb7146289614cb296a444762cf0a35e42"
+        },
+        {
+          "bytes": 72000,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "1ee08467fe9407c1debfe3cccffe474d3f74a7b0704f9fa44f300a7febe44fb5"
+        },
+        {
+          "bytes": 1010,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "bd9b547766673953968b00ec5c115133635a49b50beed4181db10ca58fc9e590"
+        },
+        {
+          "bytes": 1183,
+          "relative_path": "logs/deflare.log",
+          "sha256": "43aa5336ec9516f591b8cdb4c6793778509b7860b55e663a9b4f69e2a6ecd2a5"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1508,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "0c4a4237065d47fe41069e1c4f3695eb9d88439206b7dcfef6c6549411346fc0"
+        },
+        {
+          "bytes": 494,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "c57a9e5201d197ae0e24f9b9c883b75d9334fd8c52509a76501d5468916de746"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2710,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "ca5be518621b3164beaebdacdf55af9ec4e0f3d59825a925a2a6c3f3f450dd01"
+        },
+        {
+          "bytes": 25617600,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "1da91bb9bfe863c96f95217599b6341e5177fc1cf1cf880b8e1d726ca8a6ff16"
+        },
+        {
+          "bytes": 12816000,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "90fd5a2e2664351be7a18f90729d9ef55ca8f41301f6d6acb752957a5dd2ca9d"
+        },
+        {
+          "bytes": 12818880,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "88afc7382648dfccdbe20f61f433729fb28b1ba94dc623951dee9996525b384c"
+        },
+        {
+          "bytes": 12879360,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "6ce7f73d0298d1373b4bc097a3b7419adda97b50e3c0560c36b473585369a61b"
+        },
+        {
+          "bytes": 12882240,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "45dc1dff378e8a76533ef3e660c13419bd7f2208e908822abb933342cea4e4bf"
+        },
+        {
+          "bytes": 28800,
+          "relative_path": "source_detect_b2/initial_16282.fov",
+          "sha256": "d030fa88ce2302c22e3158f906f2d897d470dbe9bdace9cbb951fe316a6c2432"
+        },
+        {
+          "bytes": 1399,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "c66bc7bb6c1f9a2da64a6b2c903289767fa9b29b198cd99221a946c7e12bf535"
+        },
+        {
+          "bytes": 12816000,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "42339a64893e7fb4b1cee9441cfebae86bea69bb488f5ebbaaab5280a98e7087"
+        },
+        {
+          "bytes": 6419520,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "cedae0d25f757bab0eb36c6461f95cf9effe219ac6cfe5d9fac8da2b979eb518"
+        },
+        {
+          "bytes": 34560,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "ea5bd586c7098f0f3f9089efbf98dcbe401b1f84e5777a078befd367ebb6e1ce"
+        },
+        {
+          "bytes": 1554,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "f351aa12a01c5efc755fdf9938a9bef8b332e1bb9044153ead47435c1bf73480"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/AS295/16282/acisf16282_repro_evt2.fits",
+      "repro_event_sha256": "723eaf6655fcdb26f9be6628af85d51f12067f639327d785f0c81f730b8c0a43",
+      "retained_exposure_fraction": 1.0,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/AS295/16282/acisf16282_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=16282",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16282/acisf16282_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/AS295/16282/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/AS295/16282/acisf16282_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16282/acisf16282_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/acisf16282_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/AS295/16282/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16282/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_blanksky_evt.fits",
+      "blanksky_event_rows": 1681958,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.071173213",
+        "BKGSCAL1": "0.071030915",
+        "BKGSCAL2": "0.070290588",
+        "BKGSCAL3": "0.077410236",
+        "BKGSCAL7": "0.10933746"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_flareclean_evt2.fits",
+      "clean_event_rows": 175047,
+      "clean_exposure_seconds": 44605.334250772,
+      "cluster": "AS295",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/AS295/16524/acisf16524_repro_fov1.fits",
+      "obsid": 16524,
+      "original_event_rows": 175047,
+      "original_exposure_seconds": 44605.334250772,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "9cc9df35e7643e81d50a3edd2db08ab4416230d58d962bdc26dbf631326d12be",
+        "selected_sources": 64,
+        "wavdetect_sources": 75
+      },
+      "product_bytes": 195686036,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 74059200,
+          "relative_path": "acisf16524_blanksky_evt.fits",
+          "sha256": "412cdb96d35ee0672a9455cea406e3b392f18b6b8df64ab29f8891f076b0889d"
+        },
+        {
+          "bytes": 20076480,
+          "relative_path": "acisf16524_flareclean_evt2.fits",
+          "sha256": "496d0d57bbacedc4f83d174407c55f47a7902b518bd12fc1e9e9059100248cc4"
+        },
+        {
+          "bytes": 17248320,
+          "relative_path": "acisf16524_nosrc_evt2.fits",
+          "sha256": "1215674bc2ed5d0b8ed033a06770b0a2ca97d53257735252657c3c1b1f3b25d1"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "a31808de65919d1d462008bf97d1c3bb23988e5a9cf1bb288911c6589bef354d"
+        },
+        {
+          "bytes": 95040,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "19e687818320aa6baaf16cf45eb2463cdd1e3afcc7092e37db09d8e5197edc35"
+        },
+        {
+          "bytes": 1014,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "a3a66a1a472aa11535cef3aae7ecd0e85ae2aaf98e3330fd0e02f146ff9938fe"
+        },
+        {
+          "bytes": 1187,
+          "relative_path": "logs/deflare.log",
+          "sha256": "5f94541d6f839f67f659f666887f18b777f2107fd0cc51d69600051d7e949b05"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1508,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "885d17a25d4eaa4d9b01293beb401e3c065c9d652251abc64ede80d4c83dd196"
+        },
+        {
+          "bytes": 494,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "96fa0783af0da83d19327264db4e042bafa412d7504afd23565892bd0d7ad5a4"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2712,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "a6dbb53ea5620eea2d7be64deccfacfa8f17b073c7a221851abe71f949eafe5b"
+        },
+        {
+          "bytes": 22374720,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "c720d2c1e2227af6366ecb6749960777f957c2b8010376d7cecbedd4bf95f50e"
+        },
+        {
+          "bytes": 11194560,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "259343051628caf7fa9a0fc09688843a57efc3285ac46e901e3aef75a3069d98"
+        },
+        {
+          "bytes": 11197440,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "ac056a05c2bcfbe06e5d01cae76545bfdc81a97e9f490833dd683e037489f58f"
+        },
+        {
+          "bytes": 11260800,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "672ecf3cda09a67e0d40880568e6182df4e142c0aa597586ffcca63a86b6a6e7"
+        },
+        {
+          "bytes": 11263680,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "f5cb4da851f0f06f8a296005272d1196eea9ddc416cf13c092fa6cdb6f425418"
+        },
+        {
+          "bytes": 28800,
+          "relative_path": "source_detect_b2/initial_16524.fov",
+          "sha256": "965ccc8410af49bcda9cf816d948eafd867aabe82999f2f8852d6ccba2e8ff01"
+        },
+        {
+          "bytes": 4294,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "9cc9df35e7643e81d50a3edd2db08ab4416230d58d962bdc26dbf631326d12be"
+        },
+        {
+          "bytes": 11194560,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "250868c565db5b219328a9841fcf8151b3a97728c8d50bc5861f688d791f89c8"
+        },
+        {
+          "bytes": 5607360,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "d3d7a025555aac00f5a0a5ee29c753b5907355049078d4cf2564268feaa4da63"
+        },
+        {
+          "bytes": 43200,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "89730ec6974f55cfe908c357d8b79817316b318f2ba320a953f4d4dc3a59cdea"
+        },
+        {
+          "bytes": 4697,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "ec904a0bad00c4a9408e77aa44152f26b14f80fd1b13bbbee685b1f5440753dc"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/AS295/16524/acisf16524_repro_evt2.fits",
+      "repro_event_sha256": "a11d5810d7f55956b177863d260382bb365eb5ba32d79c687f87dfed62046807",
+      "retained_exposure_fraction": 1.0,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/AS295/16524/acisf16524_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=16524",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16524/acisf16524_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/AS295/16524/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/AS295/16524/acisf16524_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16524/acisf16524_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/acisf16524_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/AS295/16524/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16524/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_blanksky_evt.fits",
+      "blanksky_event_rows": 1681958,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.070102535",
+        "BKGSCAL1": "0.070565492",
+        "BKGSCAL2": "0.072534502",
+        "BKGSCAL3": "0.076863632",
+        "BKGSCAL7": "0.10756588"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_flareclean_evt2.fits",
+      "clean_event_rows": 175855,
+      "clean_exposure_seconds": 44481.384124446,
+      "cluster": "AS295",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/AS295/16525/acisf16525_repro_fov1.fits",
+      "obsid": 16525,
+      "original_event_rows": 175855,
+      "original_exposure_seconds": 44481.384124446,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "390938f4f1db3b64336fa1ec52160fc2212ba7fb8a38989d69126d2586a914d4",
+        "selected_sources": 69,
+        "wavdetect_sources": 79
+      },
+      "product_bytes": 180727935,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 74059200,
+          "relative_path": "acisf16525_blanksky_evt.fits",
+          "sha256": "c494bf6bf6acc672e150cf2b61e6278cfbbb926c39a82572893e8bc1c8e4ac1e"
+        },
+        {
+          "bytes": 20168640,
+          "relative_path": "acisf16525_flareclean_evt2.fits",
+          "sha256": "34b1d16257406e2357f57856f4b3d6cdbd92792796de5d251c0d8d33cb3d77d0"
+        },
+        {
+          "bytes": 15024960,
+          "relative_path": "acisf16525_nosrc_evt2.fits",
+          "sha256": "b70b21f8ac53e74f8a23a47ba9460a669ed08bbbc010cee99749bdf3fe2c6c39"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "76dfe4b87a9725ebd8761dbf083e262e61fabfc5eb9e801dc926ddafe3c143f2"
+        },
+        {
+          "bytes": 95040,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "6ec8bf236875846d9a4ba1477500079fdf1e96f560d3535c5dff0c76d551635d"
+        },
+        {
+          "bytes": 1013,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "5664435070ca15740578b9e59706e4c7bf23f16243153883c95667de7d4a7567"
+        },
+        {
+          "bytes": 1184,
+          "relative_path": "logs/deflare.log",
+          "sha256": "2a3c220164f8b1a02e6a7787e14eca4958252048b154583ab993651c3bcd6f29"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1508,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "6b2a1def45a448234a46c6ca28ca9d868bd02eddd7daf2ce085508a2928b7324"
+        },
+        {
+          "bytes": 494,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "d5da9c8184f747cdc24f1cae0f0cc04b6ec0bea53fb4f7e4151eb2dbf4f3e62c"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2712,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "d1a12863cb0a2aa1a84a01d7c443b2f17b3b01fffd4e4cc56e05250d0e27122f"
+        },
+        {
+          "bytes": 18953280,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "0400e3fc217cdb1959c1b132eef354f18b0aadf9c32bf39302be0c31e5d17199"
+        },
+        {
+          "bytes": 9483840,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "0ec58b0fbeaa3145519173d63371fd7d88038e0312aaab79423fd8e6b7b96fdd"
+        },
+        {
+          "bytes": 9486720,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "a48a4f8fc65e0f97e6fc97164fadb60fa73342c197cf7f307ed5a9b6a3a17520"
+        },
+        {
+          "bytes": 9550080,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "9bf70d9811e36441ac850d3337ffb2663c99222eddc2ba03249bf5637d8722fd"
+        },
+        {
+          "bytes": 9552960,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "38e794aaf0021b84a7add29a9788948cd67a4956e09181b8e0ccd3ee7b3bb9cf"
+        },
+        {
+          "bytes": 28800,
+          "relative_path": "source_detect_b2/initial_16525.fov",
+          "sha256": "93467b277975b4968b422b5783b4feb8a2a30415a4638a6e8566f2c4d90b73e6"
+        },
+        {
+          "bytes": 4646,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "390938f4f1db3b64336fa1ec52160fc2212ba7fb8a38989d69126d2586a914d4"
+        },
+        {
+          "bytes": 9483840,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "935ba16b17ab67beb1e9a8b9817d93f3b8ab20f961a7e8638835b83f40b7ffae"
+        },
+        {
+          "bytes": 4752000,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "4fb693a91597ef9b3706098dc9be5650751ac1db38b3278c5416ba46e41c9be4"
+        },
+        {
+          "bytes": 46080,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "a31af00e0248e0482b539fc67fcfa89bc4a4f6ba555f7f131af58327dc5f15a3"
+        },
+        {
+          "bytes": 4968,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "15bb2bde3d67e76354f9704b48ac0c34d5dd1a7efe62af835e46759d7f4e2947"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/AS295/16525/acisf16525_repro_evt2.fits",
+      "repro_event_sha256": "38e3ff3710dd741f9e4d27bfa93aff810366769b1ec4d351f809208d13c26b16",
+      "retained_exposure_fraction": 1.0,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/AS295/16525/acisf16525_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=16525",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16525/acisf16525_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/AS295/16525/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/AS295/16525/acisf16525_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16525/acisf16525_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/acisf16525_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/AS295/16525/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16525/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_blanksky_evt.fits",
+      "blanksky_event_rows": 1681958,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.069902912",
+        "BKGSCAL1": "0.066967405",
+        "BKGSCAL2": "0.067485698",
+        "BKGSCAL3": "0.073734805",
+        "BKGSCAL7": "0.10374922"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_flareclean_evt2.fits",
+      "clean_event_rows": 169611,
+      "clean_exposure_seconds": 43741.418020672,
+      "cluster": "AS295",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/AS295/16526/acisf16526_repro_fov1.fits",
+      "obsid": 16526,
+      "original_event_rows": 172423,
+      "original_exposure_seconds": 44481.61871853,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "11a81b025801a2f21943371ccf4dd0de6f9e0e7d04f55d6db761ee5fd4c6f037",
+        "selected_sources": 71,
+        "wavdetect_sources": 81
+      },
+      "product_bytes": 166377361,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 74059200,
+          "relative_path": "acisf16526_blanksky_evt.fits",
+          "sha256": "e48945997305583922bee3e1b6096e7f72ddf69639570085aa1f87f349a2a4f4"
+        },
+        {
+          "bytes": 19457280,
+          "relative_path": "acisf16526_flareclean_evt2.fits",
+          "sha256": "537bf499b2c7a9d1ece16a86556c16ba6fe6a7cc89d322a86cbef8a748744d81"
+        },
+        {
+          "bytes": 17305920,
+          "relative_path": "acisf16526_nosrc_evt2.fits",
+          "sha256": "26776ee3c3e716455d7c454483204b53db1461159278548a5cd6ec9873f94440"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "79052c36138b9053ed8c2c2508f25f6e8f4452fb0835bdcaaadb9daa907db4de"
+        },
+        {
+          "bytes": 95040,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "6ed6a3c1c891dae7738d31a615aa4991360fbd7db2cb4c6cc40c8c7f34d2b1dc"
+        },
+        {
+          "bytes": 1011,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "8614bc3eaa3491ad286cc03ff9c91b45521bb8947d23eef8bcbf275c99e28fb1"
+        },
+        {
+          "bytes": 1419,
+          "relative_path": "logs/deflare.log",
+          "sha256": "f6567f12bd5476651f456bd2f777bb283a1382b2e57130254da4d072ef54c5cd"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1508,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "0382fd79e8e8b39754e2c5b512762a67514b49624fa7ad1ecee4d94a3e905fe7"
+        },
+        {
+          "bytes": 494,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "2c9c4fabb554901c86fe2d470c39e1af3ccabc3377ce872c8b95dd059541f3af"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2712,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "b617ba0f31adcc1ac84bc1833fda16e66b91e3aea8d6e88eb84c97217c4ceb59"
+        },
+        {
+          "bytes": 14708160,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "04a3b579f9c96951777e0af8bb74708a67fa3194f397f04a88a3dfecee897099"
+        },
+        {
+          "bytes": 7361280,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "1cdda40686281a289e23387cd7416fdd94329e956890e3a93c3ee8deec09b6a7"
+        },
+        {
+          "bytes": 7364160,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "abf1273b1c467fff8ce5e23d05d1e9f9e7ee4dc755987f0b5159ef415ae3f82f"
+        },
+        {
+          "bytes": 7427520,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "6e39064f665a5a64c5a6a681ac3a32710e378c03c352eda59c92c5cee203a111"
+        },
+        {
+          "bytes": 7427520,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "877fe3cba258f30c470862d5bdb67b4566980f63d649f3814e6952776aa7a806"
+        },
+        {
+          "bytes": 28800,
+          "relative_path": "source_detect_b2/initial_16526.fov",
+          "sha256": "dae04e5f700e2db0f358034396bdfa0489dd0313ff64d76610d4fb2d984d5c89"
+        },
+        {
+          "bytes": 4764,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "11a81b025801a2f21943371ccf4dd0de6f9e0e7d04f55d6db761ee5fd4c6f037"
+        },
+        {
+          "bytes": 7361280,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "cfc80bd3110abc7634fa53d37bb5cf23c47f7b293092cecbffa702d056a4595e"
+        },
+        {
+          "bytes": 3692160,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "f4f3f82d34e8472d2aafa6d4119fcf654b7c2f87981f866e15c5f23069d8a0ea"
+        },
+        {
+          "bytes": 46080,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "bd8ae0bc2982a85aaf18cf6abab48fbc7da5d9e0adf77eb4f6e4f8372416a555"
+        },
+        {
+          "bytes": 5083,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "347c54e84eac721310a2bf4bf68048a1dab07121b81013a7771c26435b1f1167"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/AS295/16526/acisf16526_repro_evt2.fits",
+      "repro_event_sha256": "d06d8a93994f6233c675277b33ff86f467e157da841b9b0891fb870390e90fc1",
+      "retained_exposure_fraction": 0.9833594028458849,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/AS295/16526/acisf16526_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=16526",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16526/acisf16526_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/AS295/16526/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/AS295/16526/acisf16526_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/AS295/16526/acisf16526_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/acisf16526_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/AS295/16526/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/AS295/16526/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_blanksky_evt.fits",
+      "blanksky_event_rows": 761743,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.095181927",
+        "BKGSCAL1": "0.094499044",
+        "BKGSCAL2": "0.094001271",
+        "BKGSCAL3": "0.10114033"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_flareclean_evt2.fits",
+      "clean_event_rows": 106296,
+      "clean_exposure_seconds": 54856.327168029,
+      "cluster": "PLCKG287",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17165/acisf17165_repro_fov1.fits",
+      "obsid": 17165,
+      "original_event_rows": 107260,
+      "original_exposure_seconds": 55349.794299934,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "90526ca0a2c85a16d607f34c8b1da55fec8d6509459f0e2fc4f6c3f2548bcc4a",
+        "selected_sources": 61,
+        "wavdetect_sources": 65
+      },
+      "product_bytes": 95107084,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 33566400,
+          "relative_path": "acisf17165_blanksky_evt.fits",
+          "sha256": "c2ffd1ff582012247cbdc7cda3c4616d465b2ed6b1487371c3475ca995d936fc"
+        },
+        {
+          "bytes": 12234240,
+          "relative_path": "acisf17165_flareclean_evt2.fits",
+          "sha256": "2b6093ab849634221056ec15ae9808bcb83889f1524e303c538829fe0057e805"
+        },
+        {
+          "bytes": 11456640,
+          "relative_path": "acisf17165_nosrc_evt2.fits",
+          "sha256": "3b21f28c59c8e72d99cad3a26693a790c7cb912d4fbb8822f2c0587b4548d52e"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "4b9bf9264bdc6209498a8aa03f938b96fd3850e38ccb45cecd69848757d76511"
+        },
+        {
+          "bytes": 83520,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "96326eb2eb9e2eb02024ce77257e7ebec42ef011bd2d6e4078228c80995f13b8"
+        },
+        {
+          "bytes": 836,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "992c9c79d1e88a38fdf192e7749612d68a29be3dc5b82019d6b6f9f913066c85"
+        },
+        {
+          "bytes": 1351,
+          "relative_path": "logs/deflare.log",
+          "sha256": "5633fcf179fa3497dbc956cfac77b9d0e73118665b090f7b84432cc20200023e"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1532,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "1f2c1ba0922476912aa54cc51b3f74d6b7225bad6b3cf293a9572006efc135a7"
+        },
+        {
+          "bytes": 503,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "50eb8830994999a11d64fcaed27aaaa900eb315a9364080039bdd1e00a4cc435"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2769,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "10b2cbe6ae889e7c1482115282c0eff0a5be306d98423d8cc5edb9b15bfbe7ff"
+        },
+        {
+          "bytes": 9990720,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "b070b47954f2e54acc236934342f7a88aa9e2f54e7623ae969cff4e01231403b"
+        },
+        {
+          "bytes": 5002560,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "020b73eff5ef68478ae23da9489644f3248144f823311f75e1fe1594e7cb0ef7"
+        },
+        {
+          "bytes": 5005440,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "5aabf1d49369f60a77d3234e9bb9dcd1224263716ff9a1e639eef8c3e9598936"
+        },
+        {
+          "bytes": 5068800,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "68ee5d8e1e62067bca4fc485bab5aa603b1421ae8631a9cc93c8aa7646203489"
+        },
+        {
+          "bytes": 5071680,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "9c5a2b8c9ed131f9f3631582ee7198bcd6f94c986090bfaba46929ed38b237c8"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "source_detect_b2/initial_17165.fov",
+          "sha256": "d7dac0e627d7397ada86a655243cc2f54a5fa39f2bc6072a316ba941e2d84dbd"
+        },
+        {
+          "bytes": 4107,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "90526ca0a2c85a16d607f34c8b1da55fec8d6509459f0e2fc4f6c3f2548bcc4a"
+        },
+        {
+          "bytes": 5002560,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "5fbdc081a418cb16c49f2aa9603db519f7c55773d603ea26bdedf630d6dcc42f"
+        },
+        {
+          "bytes": 2511360,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "45a5a7c8dbf751db4661d6b08184a237d7cd76fe2d141f0a62378f13657a54d0"
+        },
+        {
+          "bytes": 46080,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "2d64a56aa7cbf2d4e9a45a0e09e354bb7cf903e713b5017a7b3e7774578544c3"
+        },
+        {
+          "bytes": 4096,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "da67978a4f419065686c16b7dc11c10ea646d026d5df54a7abc1f62ef3cde323"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17165/acisf17165_repro_evt2.fits",
+      "repro_event_sha256": "7bf74ff9c07ff2305ad01ebd89090f3727737736be6d40e7d3016c7c182497a3",
+      "retained_exposure_fraction": 0.9910845715300952,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/PLCKG287/17165/acisf17165_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=17165",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17165/acisf17165_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17165/acisf17165_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17165/acisf17165_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/acisf17165_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17165/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_blanksky_evt.fits",
+      "blanksky_event_rows": 865664,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.038090918",
+        "BKGSCAL1": "0.037681472",
+        "BKGSCAL2": "0.037342459",
+        "BKGSCAL3": "0.040392045",
+        "BKGSCAL6": "0.072357565"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_flareclean_evt2.fits",
+      "clean_event_rows": 48439,
+      "clean_exposure_seconds": 20597.420303908,
+      "cluster": "PLCKG287",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17166/acisf17166_repro_fov1.fits",
+      "obsid": 17166,
+      "original_event_rows": 49095,
+      "original_exposure_seconds": 20844.15386986,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "d0f4d0081051a4dc64030c028f0c09c0740049bb98a62598e16bfa0d39482d13",
+        "selected_sources": 38,
+        "wavdetect_sources": 43
+      },
+      "product_bytes": 115707736,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 38139840,
+          "relative_path": "acisf17166_blanksky_evt.fits",
+          "sha256": "9598cd76e6e20c835274edfb39cf2aaef505e58c665a98ada6bb54dc4adb48e8"
+        },
+        {
+          "bytes": 5644800,
+          "relative_path": "acisf17166_flareclean_evt2.fits",
+          "sha256": "b158b81a6824a2e11eb76044b8f14af70d1955f589ae6d608d5f1828ff2c1e46"
+        },
+        {
+          "bytes": 5454720,
+          "relative_path": "acisf17166_nosrc_evt2.fits",
+          "sha256": "1dcc2373731a571b059ffcaa229e1c7a0ec8dacdf514115ae7725e22a6a7037d"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "add10b05a0984099ece8951e28edaa60b8dd98bb88723ad31be13e1d6fd3110f"
+        },
+        {
+          "bytes": 80640,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "9ae2248e2e81df3074c3c7d4005852fdb193344f66bc4c78171a97f86b017163"
+        },
+        {
+          "bytes": 1014,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "58b0c497da40e335b50197c4124a3591eac0f69314e1dbad5a3f351950c4e37a"
+        },
+        {
+          "bytes": 1267,
+          "relative_path": "logs/deflare.log",
+          "sha256": "ce74a17537be990122e8ac0d672b526e1c2e51a131496940fa9aa221cb6d6530"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1532,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "a2c346c43c63ecbe7d47e49c93292a6373ad13b0e45c7a77bf76d72d9751b858"
+        },
+        {
+          "bytes": 503,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "170e00a1327d138878b20bd5ae1b3533f1efd43865a16782bade4a6a919776b6"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2767,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "2222e4428d207b1bd68d1283db53c06d0e55b4354736130297ab28061ddbebd2"
+        },
+        {
+          "bytes": 17622720,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "d3e5095db2c6037076c755b512d3a2e45cf72a3b823cd0574a238a8d4e54c758"
+        },
+        {
+          "bytes": 8818560,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "0e20c7aa6d8c8ec7b0b37005953eb2f4e6cbb3913e22cb87872bf9c03237443d"
+        },
+        {
+          "bytes": 8821440,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "e059335cf1b95bd54ed676347b863f858ebca1196d970e1115d7cba795162846"
+        },
+        {
+          "bytes": 8887680,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "e6dc2a4aeea1874d08ce1b74202e178eaf95a3970f01d74e93cbb4b172abf2eb"
+        },
+        {
+          "bytes": 8890560,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "bec326ddb574475f0810906841759162e5486e748f582c321f5c4d5a208b7217"
+        },
+        {
+          "bytes": 28800,
+          "relative_path": "source_detect_b2/initial_17166.fov",
+          "sha256": "d4ea1b07ca0301612c8232902543078cff432298863f9bfda17c8630ede82681"
+        },
+        {
+          "bytes": 2545,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "d0f4d0081051a4dc64030c028f0c09c0740049bb98a62598e16bfa0d39482d13"
+        },
+        {
+          "bytes": 8818560,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "085f33201787373f170fbec270e176b2139a63f60003d53959bc0b681c7a9681"
+        },
+        {
+          "bytes": 4420800,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "cf1c30ef34bf8d2f1e5f09a957f33c8640aca150ca2bc526b74b1fcb16a0f6ca"
+        },
+        {
+          "bytes": 40320,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "dcb8f30dcc5baf8c3efb1dff07e51f61d2a241d518ad68a0307bf5259767d2ed"
+        },
+        {
+          "bytes": 2698,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "72090f3b130c28ae6e450a8c46f70456c0ecd7ece65b60b426178cb65d83e5ca"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17166/acisf17166_repro_evt2.fits",
+      "repro_event_sha256": "49664fca2d506095ddaab1451d74c910928144cb4fb0643eefbe0b3b3c0ae720",
+      "retained_exposure_fraction": 0.9881629368362718,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/PLCKG287/17166/acisf17166_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=17166",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17166/acisf17166_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17166/acisf17166_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17166/acisf17166_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/acisf17166_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17166/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_blanksky_evt.fits",
+      "blanksky_event_rows": 865664,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.097432174",
+        "BKGSCAL1": "0.096468143",
+        "BKGSCAL2": "0.097834624",
+        "BKGSCAL3": "0.10536236",
+        "BKGSCAL6": "0.19053277"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_flareclean_evt2.fits",
+      "clean_event_rows": 129642,
+      "clean_exposure_seconds": 59043.152754592,
+      "cluster": "PLCKG287",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17494/acisf17494_repro_fov1.fits",
+      "obsid": 17494,
+      "original_event_rows": 130268,
+      "original_exposure_seconds": 59289.886320545,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "244a66cd55aea5101e1db8ddd7801b351df638d8dd54c6413ade13b8e4d1637d",
+        "selected_sources": 62,
+        "wavdetect_sources": 68
+      },
+      "product_bytes": 159054912,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 38139840,
+          "relative_path": "acisf17494_blanksky_evt.fits",
+          "sha256": "36033ccf870b37ec322490030927d9bd797ec35bb88565cb3b58a0e98638f78a"
+        },
+        {
+          "bytes": 14901120,
+          "relative_path": "acisf17494_flareclean_evt2.fits",
+          "sha256": "4b472a7a31c49bf6808a57dc82d1bd07e6d1f08f850a48430e832f37f8d65a94"
+        },
+        {
+          "bytes": 14184000,
+          "relative_path": "acisf17494_nosrc_evt2.fits",
+          "sha256": "33a4975a4f646e72974d1216041c9109e166fbf89e9be5867e1163eda325bd03"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "424f7471f4fad60d99c4e954a32320ec517aae1a9d397c8c95df419fbca66c81"
+        },
+        {
+          "bytes": 97920,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "2595345821081a2de813014b8251bdff8148901ae53618a333c9b2b0c6d90c9b"
+        },
+        {
+          "bytes": 1014,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "8a449580f2721327ed3285b93baf0e7027d947d8f52ac2a3eaf51feba3355daf"
+        },
+        {
+          "bytes": 1271,
+          "relative_path": "logs/deflare.log",
+          "sha256": "983b3b4ed575b7e655170d09b874b54d9086aaf98ffc427e6ca2f0b3636d8a01"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1532,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "25060f8a5cb2305a5ad851119ac18c751dd72f290397a8a2898486ef1f6cf992"
+        },
+        {
+          "bytes": 503,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "aeeea820261cb980882afa3eb21ff2ffa6c4ae810892b72873e5cb2581cb2136"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2769,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "9299ede1d2a239fb937e7280a2975c8a422d6974ff3d73e055504c65c088cbda"
+        },
+        {
+          "bytes": 24379200,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "7517d439a60eb5a18c55aaa306e4f240c5e9e29f0813c94ccc246a509ffd2d7d"
+        },
+        {
+          "bytes": 12196800,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "ef4e8cdf706b7796a5293530b32380096c7783cb359da72553be5f63ba8fdf16"
+        },
+        {
+          "bytes": 12199680,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "328be1a4044e6301ea32f016dcff4f17b371c2a0c480be2d8afaa6e92ef1f3a6"
+        },
+        {
+          "bytes": 12265920,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "9139a0489e22614e3e3a12d4239ac84ec3c659b67202f250dd35475df153d2b3"
+        },
+        {
+          "bytes": 12268800,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "3257acd21ad4b56e8ecbc2bafc23bd7130cc42a14dcce888b20cac43ff50563f"
+        },
+        {
+          "bytes": 28800,
+          "relative_path": "source_detect_b2/initial_17494.fov",
+          "sha256": "0cbbdd87c6d8ea1567417f93aaa8816a6bab36aa09a9e78809c45922700c3fd8"
+        },
+        {
+          "bytes": 4156,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "244a66cd55aea5101e1db8ddd7801b351df638d8dd54c6413ade13b8e4d1637d"
+        },
+        {
+          "bytes": 12196800,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "7e6d00fde827ad812d2d8aac6c5aa99c6cc5263a2ece18c52fb0e169444adac8"
+        },
+        {
+          "bytes": 6108480,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "cada9e67f3bfdea8ce46afca3004615971f3d76801bb48dac6730284ac5ffaea"
+        },
+        {
+          "bytes": 46080,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "54f00d3ae6786aea7970e14d74f020d97de4bd2cc1754d35babd698d61477ce8"
+        },
+        {
+          "bytes": 4257,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "c5a957b1e629940221e4dc98dc2a77a53c687ed97c2ba03ea0b4166e2e7b89e3"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17494/acisf17494_repro_evt2.fits",
+      "repro_event_sha256": "fc2067cb5d942c2fe87408bb8c1d759970046db41ab85eeb67b8020ea2cb4a9a",
+      "retained_exposure_fraction": 0.9958385218581959,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/PLCKG287/17494/acisf17494_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=17494",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17494/acisf17494_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17494/acisf17494_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17494/acisf17494_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/acisf17494_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17494/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_blanksky_evt.fits",
+      "blanksky_event_rows": 761743,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.061482623",
+        "BKGSCAL1": "0.063154504",
+        "BKGSCAL2": "0.059370209",
+        "BKGSCAL3": "0.065460369"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_flareclean_evt2.fits",
+      "clean_event_rows": 65717,
+      "clean_exposure_seconds": 32230.636031422,
+      "cluster": "PLCKG287",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17495/acisf17495_repro_fov1.fits",
+      "obsid": 17495,
+      "original_event_rows": 65717,
+      "original_exposure_seconds": 32230.636031422,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "dbcf9d63d7c9b4296aa15a812e269d383912787f9585aabe1f5e4818502d8b20",
+        "selected_sources": 54,
+        "wavdetect_sources": 56
+      },
+      "product_bytes": 94907138,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 33566400,
+          "relative_path": "acisf17495_blanksky_evt.fits",
+          "sha256": "ea5d68c96af490a9f159637d5997a70347c89fb20653ea63a38f20f9b918197a"
+        },
+        {
+          "bytes": 7608960,
+          "relative_path": "acisf17495_flareclean_evt2.fits",
+          "sha256": "00230c2a2497279683687214d7881b71cbd33f552e36a65f9db7809023d6f724"
+        },
+        {
+          "bytes": 7084800,
+          "relative_path": "acisf17495_nosrc_evt2.fits",
+          "sha256": "103d4ea1e7490cd9c3e091cc3094bce96bce3b0f358919ed17a4397d0bb97d0b"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "9a7339a9b9339aa17ade618b4ba8da98563875179b67f9e5fb745cbc12a5143c"
+        },
+        {
+          "bytes": 77760,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "6039241627e7e4056864c073ca42c1565dd4dbcae3b466425f845991db158fd6"
+        },
+        {
+          "bytes": 835,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "c9177b0835bf8c84aaa57eda6c5aab957ebba2e2af5403408f95fa0f9ccfcab3"
+        },
+        {
+          "bytes": 1190,
+          "relative_path": "logs/deflare.log",
+          "sha256": "384c37d48a3f3ecd18b145d43fcf24025cfb8f758d34888d9a31c9e9baf60cb4"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1532,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "769c6bcc983b3a93e8da2422e3a8c83e07f1fac155875707778c37b844c999d2"
+        },
+        {
+          "bytes": 503,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "bd404dcdc575550170c0286ec5ce75d35df2bfdc679146da36a835203fe5a2b0"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2767,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "6178693bc1716f001cfbac44527e2f3920e09d34d6d62178242e9b23879a837a"
+        },
+        {
+          "bytes": 12340800,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "e4b6796bfc3b59067881534a3189fc33ab518e571e5063ba949976e755015737"
+        },
+        {
+          "bytes": 6177600,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "ec5a4e669380a4e0c8dd2aff9230670cfb893e6f3213ca5405551d9f47c5867b"
+        },
+        {
+          "bytes": 6180480,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "6f6e4da94c35ceb240cab40abf3104aab7da5d73529e389394306b30f74773cb"
+        },
+        {
+          "bytes": 6240960,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "56f977e0c9dfc7b2f0ff6e34018bfaa6c3d82f089c1ccd460de49b4393d00e0a"
+        },
+        {
+          "bytes": 6243840,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "a9d1ddc35775613488f45fb6090aee8075f5f81fb996081e89f76dba5c64b61c"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "source_detect_b2/initial_17495.fov",
+          "sha256": "6fbab6d5122565724dc3da9f3ed70a8392f74aad8e7217886ced78417ac43ebc"
+        },
+        {
+          "bytes": 3624,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "dbcf9d63d7c9b4296aa15a812e269d383912787f9585aabe1f5e4818502d8b20"
+        },
+        {
+          "bytes": 6177600,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "63bf39007ede01494adb7bc217ec0964cdb2be8ff197151154a6e2f5acd3043d"
+        },
+        {
+          "bytes": 3098880,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "8795875038f30ca25afd4db636c498ba4e2757a3b724a06b7b7c2b901311f36a"
+        },
+        {
+          "bytes": 43200,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "c64ca362fdc11708d223d06b7ce143718330dbe6d8855f0f30e69363b4a4ea34"
+        },
+        {
+          "bytes": 3517,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "abc642045416c9205d6c9a7dd2858765e069cd37946a36890145e7676edc1c9b"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17495/acisf17495_repro_evt2.fits",
+      "repro_event_sha256": "8939212523507c63934dc09aea4ed7debc5be2ad171d7e02ae1976b6cf9db09e",
+      "retained_exposure_fraction": 1.0,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/PLCKG287/17495/acisf17495_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=17495",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17495/acisf17495_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/PLCKG287/17495/acisf17495_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/17495/acisf17495_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/acisf17495_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/17495/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    },
+    {
+      "blanksky_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_blanksky_evt.fits",
+      "blanksky_event_rows": 761743,
+      "blanksky_scaling": {
+        "BKGSCAL0": "0.052245714",
+        "BKGSCAL1": "0.049889911",
+        "BKGSCAL2": "0.053143349",
+        "BKGSCAL3": "0.055093769"
+      },
+      "clean_event": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_flareclean_evt2.fits",
+      "clean_event_rows": 55874,
+      "clean_exposure_seconds": 28687.480792262,
+      "cluster": "PLCKG287",
+      "fov": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/18807/acisf18807_repro_fov1.fits",
+      "obsid": 18807,
+      "original_event_rows": 55902,
+      "original_exposure_seconds": 28699.981818265,
+      "point_sources": {
+        "ellipse_expansion": 1.5,
+        "minimum_significance": 3.0,
+        "region_sha256": "2035946cb27eb51ff9bb1987d65e5946c26e2b2486b4d765af8b453b49d47879",
+        "selected_sources": 48,
+        "wavdetect_sources": 50
+      },
+      "product_bytes": 92622526,
+      "product_files": 23,
+      "products": [
+        {
+          "bytes": 33566400,
+          "relative_path": "acisf18807_blanksky_evt.fits",
+          "sha256": "7a51d81c4d538488fad4c1fcfc8112941a4ed893122fb6ce78bd6666dc7f3051"
+        },
+        {
+          "bytes": 6485760,
+          "relative_path": "acisf18807_flareclean_evt2.fits",
+          "sha256": "360143d4e9c589a16650ffc7d87e8d55c3b37049c017afabb1c21bc6b72a4a8b"
+        },
+        {
+          "bytes": 5970240,
+          "relative_path": "acisf18807_nosrc_evt2.fits",
+          "sha256": "c1d6b46cad3a5f6a6d5c81d7676cef7e3bcb85b8c306ca4b5a99fea4396ca313"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "flare_clean.gti",
+          "sha256": "ee5cc7f8752a9795203a7403e4ab63eaa16194b314f92345a86b259720bd3344"
+        },
+        {
+          "bytes": 74880,
+          "relative_path": "flare_lightcurve.fits",
+          "sha256": "7eac196be7389a0d14374d2743b403d053940949afcfe7ab81bcc19e594acfde"
+        },
+        {
+          "bytes": 836,
+          "relative_path": "logs/blanksky.log",
+          "sha256": "f9abda74f1dbf2857c9131ce0bf41750ebcc12ee71098c805abc5b8a9e08e6c1"
+        },
+        {
+          "bytes": 1195,
+          "relative_path": "logs/deflare.log",
+          "sha256": "e18549a7d3aead33b4b7d29c342ac64550ef4c8d2c84376002945d6852a38628"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/flare_filter.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 1532,
+          "relative_path": "logs/fluximage.log",
+          "sha256": "59da32f7c8f40484cc4ce26acff51fcce00b45fa0b2b503569ea3ff7ca7f9c61"
+        },
+        {
+          "bytes": 503,
+          "relative_path": "logs/lightcurve.log",
+          "sha256": "81702887d74a70e308f383c04bc71eb34cdbfef492a449ee5ce55872d7e65dba"
+        },
+        {
+          "bytes": 25,
+          "relative_path": "logs/source_mask.log",
+          "sha256": "8ce69dd6ba50b346ac71fe3bec12207ce681cdd3fb5e71530bb41e5567114ca8"
+        },
+        {
+          "bytes": 2767,
+          "relative_path": "logs/wavdetect.log",
+          "sha256": "3afd9650a7d305bfcc487a5d31029db6d55212d167253f563198710ef7eaa07d"
+        },
+        {
+          "bytes": 12329280,
+          "relative_path": "source_detect_b2/background.fits",
+          "sha256": "358b191714a778b8e1f7571d7b9d3d9213a39dedf27bfc93dbb18bd136e761ad"
+        },
+        {
+          "bytes": 6171840,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_flux.img",
+          "sha256": "062d19817843d6e89005e59f14b838045e4305d7191624abf47f93afd84e3c14"
+        },
+        {
+          "bytes": 6174720,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.expmap",
+          "sha256": "a505d7d1b8485ac207f2d4fb314d94a259fd17d9737089ec51ceb027da40671b"
+        },
+        {
+          "bytes": 6235200,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.img",
+          "sha256": "1e657865d47623264ba1de55084ee4c9712bb7168b65854ee21231e567a148f3"
+        },
+        {
+          "bytes": 6238080,
+          "relative_path": "source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+          "sha256": "9c41818993620f751c9aeaefed4ec4c764905899a31fd27102c14a156dadadec"
+        },
+        {
+          "bytes": 25920,
+          "relative_path": "source_detect_b2/initial_18807.fov",
+          "sha256": "e6c446009791671cee0f7079a93a68608e60b07bdfc6697b1ada99ed4b5737b6"
+        },
+        {
+          "bytes": 3219,
+          "relative_path": "source_detect_b2/point_sources_expanded.reg",
+          "sha256": "2035946cb27eb51ff9bb1987d65e5946c26e2b2486b4d765af8b453b49d47879"
+        },
+        {
+          "bytes": 6171840,
+          "relative_path": "source_detect_b2/recon.fits",
+          "sha256": "324c58bd2cd04e223ce5327a37ae519e0ed19c5b795a16a1195bd844712d9aa2"
+        },
+        {
+          "bytes": 3096000,
+          "relative_path": "source_detect_b2/scell.fits",
+          "sha256": "512534424e6524e0e2912a852707bac979b1d9c97fb1cf473a794a831027fd63"
+        },
+        {
+          "bytes": 43200,
+          "relative_path": "source_detect_b2/sources.fits",
+          "sha256": "8da5ccbecddf01b72eeb09dd1c9187270e5c04320a580dfa1ead25da6b286516"
+        },
+        {
+          "bytes": 3144,
+          "relative_path": "source_detect_b2/sources.reg",
+          "sha256": "1ec2affb0daeee433516b21db7f8dd1bf34f6a6cb2e63c506f014e1f3b0977a0"
+        }
+      ],
+      "repro_event": "/home/henry/sigma-v17a-chandra/repro/PLCKG287/18807/acisf18807_repro_evt2.fits",
+      "repro_event_sha256": "a7d5271a27cd082f77df55899d3ae6229540a208250e6b917b9999b0f476d0d9",
+      "retained_exposure_fraction": 0.9995644239051382,
+      "steps": {
+        "blanksky": {
+          "command": [
+            "blanksky",
+            "evtfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_flareclean_evt2.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_blanksky_evt.fits",
+            "asolfile=@/home/henry/sigma-v17a-chandra/repro/PLCKG287/18807/acisf18807_asol1.lis",
+            "weight_method=particle",
+            "bkgparams=[energy=9000:12000]",
+            "random=18807",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/logs/blanksky.log",
+          "reused": false
+        },
+        "deflare": {
+          "command": [
+            "deflare",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/flare_lightcurve.fits",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/flare_clean.gti",
+            "method=sigma",
+            "nsigma=3",
+            "minlength=1",
+            "plot=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/logs/deflare.log",
+          "reused": false
+        },
+        "flare_filter": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/18807/acisf18807_repro_evt2.fits[@/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/flare_clean.gti]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_flareclean_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/logs/flare_filter.log",
+          "reused": false
+        },
+        "fluximage": {
+          "command": [
+            "fluximage",
+            "/home/henry/sigma-v17a-chandra/repro/PLCKG287/18807/acisf18807_repro_evt2.fits",
+            "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/initial",
+            "bands=0.5:7.0:2.3",
+            "binsize=2",
+            "psfecf=0.9",
+            "parallel=no",
+            "cleanup=yes",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/logs/fluximage.log",
+          "reused": true
+        },
+        "lightcurve": {
+          "command": [
+            "dmextract",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_nosrc_evt2.fits[energy=500:12000][bin time=::250]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/flare_lightcurve.fits",
+            "opt=ltc1",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/logs/lightcurve.log",
+          "reused": false
+        },
+        "source_mask": {
+          "command": [
+            "dmcopy",
+            "infile=/home/henry/sigma-v17a-chandra/repro/PLCKG287/18807/acisf18807_repro_evt2.fits[exclude sky=region(/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/point_sources_expanded.reg)]",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/acisf18807_nosrc_evt2.fits",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/logs/source_mask.log",
+          "reused": false
+        },
+        "wavdetect": {
+          "command": [
+            "wavdetect",
+            "infile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/initial_0.5-7.0_thresh.img",
+            "outfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/sources.fits",
+            "scellfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/scell.fits",
+            "imagefile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/recon.fits",
+            "defnbkgfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/background.fits",
+            "expfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/initial_0.5-7.0_thresh.expmap",
+            "psffile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/initial_0.5-7.0_thresh.psfmap",
+            "scales=1 2 4 8 16",
+            "regfile=/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/source_detect_b2/sources.reg",
+            "sigthresh=1e-06",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v17a-chandra/clean/PLCKG287/18807/logs/wavdetect.log",
+          "reused": true
+        }
+      }
+    }
+  ],
+  "product_bytes": 1568501110,
+  "product_files": 253,
+  "protocol_version": "SIGMA-V17A-CHANDRA-REDUCTION-1.0.2",
+  "repro_report_sha256": "a349c6a5ab7b89aa9968a8053ceb5f5cab29c9e51512cb48fd0392e203361b6e",
+  "scratch": "/home/henry/sigma-v17a-chandra",
+  "status": "all_frozen_chandra_observations_flare_cleaned_with_blanksky",
+  "temperature_map_constructed": false
+}

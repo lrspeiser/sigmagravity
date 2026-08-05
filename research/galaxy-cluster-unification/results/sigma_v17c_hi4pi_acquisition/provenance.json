@@ -1,0 +1,41 @@
+{
+  "endpoint": "https://heasarc.gsfc.nasa.gov/cgi-bin/Tools/w3nh/w3nh.pl",
+  "generated_utc": "2026-08-04T18:34:18.846640+00:00",
+  "lensing_target_opened": false,
+  "records": [
+    {
+      "average_nh_cm2": 3.33e+20,
+      "bytes": 28027,
+      "center_dec_deg": -53.03636090155288,
+      "center_ra_deg": 41.37250896134495,
+      "cluster": "AS295",
+      "cone_radius_deg": 0.1,
+      "map": "h1_nh_HI4PI.fits",
+      "query_url": "https://heasarc.gsfc.nasa.gov/cgi-bin/Tools/w3nh/w3nh.pl?Entry=41.37250896134495%2C-53.03636090155288&NR=GRB%2FSIMBAD%2BSesame%2FNED&CoordSys=Equatorial&equinox=2000&radius=0.1&usemap=0",
+      "relative_path": "data/raw/sigma_v17_hi4pi/AS295_HI4PI.html",
+      "reused": false,
+      "sha256": "cda5b1104841a8d7b38028c04f1ee8b10ee7197b100ca1a3262a1ebfcdf69f3e",
+      "weighted_average_nh_cm2": 3.31e+20
+    },
+    {
+      "average_nh_cm2": 7e+20,
+      "bytes": 27988,
+      "center_dec_deg": -28.07826395695455,
+      "center_ra_deg": 177.7060448155868,
+      "cluster": "PLCKG287",
+      "cone_radius_deg": 0.1,
+      "map": "h1_nh_HI4PI.fits",
+      "query_url": "https://heasarc.gsfc.nasa.gov/cgi-bin/Tools/w3nh/w3nh.pl?Entry=177.70604481558681%2C-28.07826395695455&NR=GRB%2FSIMBAD%2BSesame%2FNED&CoordSys=Equatorial&equinox=2000&radius=0.1&usemap=0",
+      "relative_path": "data/raw/sigma_v17_hi4pi/PLCKG287_HI4PI.html",
+      "reused": false,
+      "sha256": "9ce28d1d095c0d3f60638c969fa3794dd5ccc7b3268c2a80e29ca418dd7c0446",
+      "weighted_average_nh_cm2": 6.94e+20
+    }
+  ],
+  "selection": "inverse-distance weighted average within the frozen 0.1-degree HI4PI cone",
+  "source": "NASA_HEASARC_nH_version_3_HI4PI_web_interface",
+  "spectrum_extracted": false,
+  "status": "frozen_HI4PI_columns_downloaded_and_hashed",
+  "temperature_fit_run": false,
+  "temperature_region_report_sha256": "e58698a2d14c124908810fc54ed829cf64834c4ec6d01fa58fc88faa8d0ee75a"
+}

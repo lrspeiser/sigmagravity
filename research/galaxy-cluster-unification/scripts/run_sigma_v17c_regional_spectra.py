@@ -56,12 +56,142 @@ DEFAULT_INTEGRATED_TEMPERATURES = (
 DEFAULT_RESPONSE_SUPPORT = (
     ROOT / "configs" / "sigma_v17c_regional_response_support.json"
 )
+DEFAULT_RESPONSE_SUPPORT_REPORT = (
+    ROOT / "results" / "sigma_v17c_regional_response_support" / "report.json"
+)
+DEFAULT_RUNTIME_RESPONSE_SUPPORT = (
+    ROOT / "configs" / "sigma_v17c_regional_runtime_response_support.json"
+)
+DEFAULT_RUNTIME_RESPONSE_SUPPORT_REPORT = (
+    ROOT / "results" / "sigma_v17c_regional_runtime_response_support" / "report.json"
+)
 DEFAULT_OUTPUT = ROOT / "results" / "sigma_v17c_regional_spectra"
+REGIONAL_RUNTIME_TMP_ROOT = Path("/tmp/sv17c")
+MAX_REGIONAL_RUNTIME_TMP_BYTES = 64
 
 OFF_CCD_RESPONSE_REASON = "event_mean_response_reference_maps_off_selected_ccd"
 MISSING_CCD_SUPPORT_REASON = (
     "event_mean_response_reference_lacks_source_background_ccd_support"
 )
+EMPTY_CALIBRATED_RESPONSE_REASON = (
+    "ciao_empty_calibrated_response_domain_after_valid_spectra"
+)
+
+
+def response_support_skip_marker(task: dict[str, Any]) -> Path:
+    return task["log"].with_suffix(".response_support_skip.json")
+
+
+def load_response_support_skip(task: dict[str, Any]) -> dict[str, Any] | None:
+    marker = response_support_skip_marker(task)
+    if not marker.is_file():
+        return None
+    record = json.loads(marker.read_text(encoding="utf-8"))
+    identity = {
+        "cluster": task["cluster"],
+        "region_id": int(task["region_id"]),
+        "obsid": int(task["obsid"]),
+        "ccd_id": int(task["ccd_id"]),
+    }
+    if any(record.get(key) != value for key, value in identity.items()):
+        raise RuntimeError(f"response-support marker identity changed: {marker}")
+    if record.get("reason") != EMPTY_CALIBRATED_RESPONSE_REASON:
+        raise RuntimeError(f"response-support marker reason changed: {marker}")
+    for product in record.get("quarantined_partial_products", []):
+        path = Path(product["path"])
+        if not path.is_file() or path.stat().st_size != product["bytes"]:
+            raise RuntimeError(f"quarantined response-support product changed: {path}")
+        if sha256(path) != product["sha256"]:
+            raise RuntimeError(f"quarantined response-support hash changed: {path}")
+    if any(
+        path.exists()
+        for path in (
+            task["source_pha"],
+            task["background_pha"],
+            task["arf"],
+            task["rmf"],
+        )
+    ):
+        raise RuntimeError(f"response-support marker has live extraction products: {marker}")
+    return {
+        **record,
+        "marker": str(marker),
+        "marker_sha256": sha256(marker),
+        "reused": True,
+    }
+
+
+def classify_and_quarantine_empty_response_support(
+    task: dict[str, Any],
+) -> dict[str, Any] | None:
+    products = {
+        "source_pha": task["source_pha"],
+        "background_pha": task["background_pha"],
+        "arf": task["arf"],
+        "rmf": task["rmf"],
+    }
+    signature = {
+        name: path.is_file() and path.stat().st_size > 0
+        for name, path in products.items()
+    }
+    log = task["log"]
+    log_text = log.read_text(encoding="utf-8") if log.is_file() else ""
+    required_fragments = (
+        "Extracting src spectra",
+        "Extracting bkg spectra",
+        "ERROR max() iterable argument is empty",
+    )
+    matches = (
+        signature
+        == {
+            "source_pha": True,
+            "background_pha": True,
+            "arf": False,
+            "rmf": False,
+        }
+        and all(fragment in log_text for fragment in required_fragments)
+    )
+    if not matches:
+        return None
+    if task.get("allow_empty_calibrated_response_skip") is not True:
+        raise RuntimeError("empty calibrated-response skip is not frozen")
+    quarantine = task["source_pha"].parent.parent / "response_support_quarantine"
+    quarantine.mkdir(parents=True, exist_ok=True)
+    quarantined = []
+    for name in ("source_pha", "background_pha"):
+        source = products[name]
+        destination = quarantine / source.name
+        if destination.exists():
+            raise RuntimeError(f"response-support quarantine collision: {destination}")
+        source.replace(destination)
+        quarantined.append(
+            {
+                "kind": name,
+                "path": str(destination),
+                "bytes": destination.stat().st_size,
+                "sha256": sha256(destination),
+            }
+        )
+    record = {
+        "cluster": task["cluster"],
+        "region_id": int(task["region_id"]),
+        "obsid": int(task["obsid"]),
+        "ccd_id": int(task["ccd_id"]),
+        "reason": EMPTY_CALIBRATED_RESPONSE_REASON,
+        "source_band_events": int(task["source_band_events"]),
+        "background_band_events": int(task["background_band_events"]),
+        "response_reference": task["response_reference"],
+        "product_signature": signature,
+        "required_log_fragments": list(required_fragments),
+        "log": str(log),
+        "log_sha256": sha256(log),
+        "quarantined_partial_products": quarantined,
+        "reused": False,
+    }
+    marker = response_support_skip_marker(task)
+    record["marker"] = str(marker)
+    marker.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return {**record, "marker_sha256": sha256(marker)}
 
 
 def region_id(path: Path) -> int:
@@ -90,6 +220,18 @@ def execute_regional_cell(task: dict, scratch: Path, namespace: str) -> dict[str
     obsid = int(task["obsid"])
     chip = int(task["ccd_id"])
     rid = int(task["region_id"])
+    runtime_tmp = (
+        REGIONAL_RUNTIME_TMP_ROOT
+        / namespace
+        / task["cluster"]
+        / f"r{rid:03d}"
+        / f"{obsid}c{chip}"
+    )
+    if len(os.fsencode(runtime_tmp)) > MAX_REGIONAL_RUNTIME_TMP_BYTES:
+        raise RuntimeError(f"regional runtime path is not AF_UNIX-safe: {runtime_tmp}")
+    existing_skip = load_response_support_skip(task)
+    if existing_skip is not None:
+        return {"response_support_skip": existing_skip}
     env = isolated_environment(
         os.environ,
         scratch
@@ -98,19 +240,20 @@ def execute_regional_cell(task: dict, scratch: Path, namespace: str) -> dict[str
         / task["cluster"]
         / f"region_{rid:03d}"
         / f"{obsid}_ccd{chip}",
-        scratch
-        / f"tmp_{namespace}"
-        / "regional"
-        / task["cluster"]
-        / f"region_{rid:03d}"
-        / f"{obsid}_ccd{chip}",
+        runtime_tmp,
     )
-    step = run_step(
-        task["command"],
-        task["log"],
-        [task["source_pha"], task["background_pha"], task["arf"], task["rmf"]],
-        env,
-    )
+    try:
+        step = run_step(
+            task["command"],
+            task["log"],
+            [task["source_pha"], task["background_pha"], task["arf"], task["rmf"]],
+            env,
+        )
+    except RuntimeError:
+        skip = classify_and_quarantine_empty_response_support(task)
+        if skip is None:
+            raise
+        return {"response_support_skip": skip}
     scaling = verify_blanksky_scaling(
         task["source_pha"],
         task["background_pha"],
@@ -133,6 +276,7 @@ def execute_regional_cell(task: dict, scratch: Path, namespace: str) -> dict[str
         "rmf_sha256": sha256(task["rmf"]),
         "blanksky_scaling": scaling,
         "translated_fov": task["translated_fov"],
+        "runtime_tmp": str(runtime_tmp),
         "step": step,
     }
 
@@ -213,6 +357,7 @@ def plan_region(
     response_support: dict[str, Any],
     work: Path,
     env: dict[str, str],
+    runtime_response_support: dict[str, Any] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     rid = region_id(path)
     region_work = work / f"region_{rid:03d}"
@@ -224,6 +369,11 @@ def plan_region(
     skipped = []
     allowed_response_skips = set(
         response_support["admission_rule"]["allowed_calibrated_response_skip_reasons"]
+    )
+    allow_empty_response_skip = (
+        runtime_response_support is not None
+        and runtime_response_support["admission_rule"]["allowed_reason"]
+        == EMPTY_CALIBRATED_RESPONSE_REASON
     )
     for context in contexts:
         obsid = int(context["obsid"])
@@ -358,6 +508,7 @@ def plan_region(
                     "rmf": rmf,
                     "bkgscale_value": float(bkgscale_value),
                     "translated_fov": context["translated_fov_record"],
+                    "allow_empty_calibrated_response_skip": allow_empty_response_skip,
                     "command": command,
                     "log": logs / f"{obsid}_ccd{chip}_specextract.log",
                 }
@@ -469,6 +620,7 @@ def build_cluster(
     cluster_name: str,
     config: dict,
     response_support: dict[str, Any],
+    runtime_response_support: dict[str, Any],
     region_row: dict,
     astrometry_rows: dict[int, dict],
     repro_rows: dict[int, dict],
@@ -507,6 +659,7 @@ def build_cluster(
             response_support,
             work,
             planning_env,
+            runtime_response_support,
         )
         all_tasks.extend(tasks)
         skipped_by_region[region_id(path)] = skipped
@@ -524,7 +677,14 @@ def build_cluster(
             pool.submit(execute_regional_cell, task, scratch, namespace)
             for task in all_tasks
         ]
-        extracted = [future.result() for future in futures]
+        outcomes = [future.result() for future in futures]
+    extracted = []
+    for outcome in outcomes:
+        if "response_support_skip" in outcome:
+            skip = outcome["response_support_skip"]
+            skipped_by_region.setdefault(int(skip["region_id"]), []).append(skip)
+        else:
+            extracted.append(outcome)
     extracted_by_region: dict[int, list[dict[str, Any]]] = {}
     for row in extracted:
         extracted_by_region.setdefault(int(row["region_id"]), []).append(row)
@@ -655,6 +815,95 @@ def validate_response_support(
         raise RuntimeError("regional response-support integrity boundary changed")
 
 
+def validate_runtime_response_support(
+    runtime_path: Path,
+    runtime_support: dict[str, Any],
+    runtime_report_path: Path,
+    runtime_report: dict[str, Any],
+    config_path: Path,
+    integrated_spectra_path: Path,
+    integrated_spectra: dict[str, Any],
+    integrated_temperatures_path: Path,
+    integrated_temperatures: dict[str, Any],
+    preflight_path: Path,
+    preflight_report_path: Path,
+) -> None:
+    expected_status = (
+        "frozen after 193 valid AS295 extraction cells and one response-only "
+        "failure, but before any regional spectrum report, regional temperature, "
+        "thermal-stress map, inverse coefficient, or lensing target access"
+    )
+    if runtime_support.get("status") != expected_status or not runtime_path.is_file():
+        raise RuntimeError("regional runtime response-support protocol is not frozen")
+    parents = runtime_support["parents"]
+    checks = (
+        ("spectral_protocol_sha256", config_path),
+        ("integrated_spectra_report_sha256", integrated_spectra_path),
+        ("integrated_temperatures_report_sha256", integrated_temperatures_path),
+        ("preflight_response_support_sha256", preflight_path),
+        ("preflight_response_support_report_sha256", preflight_report_path),
+    )
+    for key, path in checks:
+        if parents.get(key) != sha256(path):
+            raise RuntimeError(f"runtime response-support parent changed: {key}")
+    required = runtime_support["required_upstream_state"]
+    if integrated_spectra.get("status") != required["integrated_spectra_status"]:
+        raise RuntimeError("runtime response support lacks integrated spectra")
+    if integrated_temperatures.get("status") != required[
+        "integrated_temperatures_status"
+    ]:
+        raise RuntimeError("runtime response support lacks integrated temperatures")
+    if integrated_temperatures.get("regional_fit_authorized") is not required[
+        "regional_fit_authorized"
+    ]:
+        raise RuntimeError("runtime response support is not authorized")
+    if integrated_temperatures.get("lensing_target_opened") is not False:
+        raise RuntimeError("runtime response support was frozen after target access")
+    rule = runtime_support["admission_rule"]
+    if rule.get("allowed_reason") != EMPTY_CALIBRATED_RESPONSE_REASON:
+        raise RuntimeError("runtime response-support reason changed")
+    expected_fragments = {
+        "Extracting src spectra",
+        "Extracting bkg spectra",
+        "ERROR max() iterable argument is empty",
+    }
+    if set(rule.get("required_log_fragments", [])) != expected_fragments:
+        raise RuntimeError("runtime response-support signature changed")
+    integrity = runtime_support["integrity"]
+    if integrity.get("completed_valid_as295_cells_at_freeze") != 193:
+        raise RuntimeError("runtime response-support completion boundary changed")
+    if any(
+        integrity[key]
+        for key in (
+            "regional_spectrum_report_existed_at_freeze",
+            "regional_temperature_existed_at_freeze",
+            "thermal_stress_constructed_at_freeze",
+            "lensing_target_opened",
+            "scientific_threshold_changed",
+            "gravity_parameter_changed",
+            "core_v17c_protocol_changed",
+            "preflight_response_support_protocol_changed",
+        )
+    ):
+        raise RuntimeError("runtime response-support integrity boundary changed")
+    if runtime_report.get("status") != (
+        "runtime_empty_response_support_signature_reproduced_and_frozen"
+    ):
+        raise RuntimeError("runtime response-support report status changed")
+    if runtime_report.get("config_sha256") != sha256(runtime_path):
+        raise RuntimeError("runtime response-support report used another config")
+    discovery = runtime_report["discovery"]
+    diagnostic = ROOT / discovery["diagnostic_log"]
+    if not diagnostic.is_file() or discovery["diagnostic_log_sha256"] != sha256(
+        diagnostic
+    ):
+        raise RuntimeError("runtime response-support diagnostic changed")
+    if runtime_report["decision"].get("lensing_target_opened") is not False:
+        raise RuntimeError("runtime response-support report opened the target")
+    if not runtime_report_path.is_file():
+        raise RuntimeError("runtime response-support report is absent")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
@@ -673,6 +922,21 @@ def main() -> None:
     parser.add_argument(
         "--response-support", type=Path, default=DEFAULT_RESPONSE_SUPPORT
     )
+    parser.add_argument(
+        "--response-support-report",
+        type=Path,
+        default=DEFAULT_RESPONSE_SUPPORT_REPORT,
+    )
+    parser.add_argument(
+        "--runtime-response-support",
+        type=Path,
+        default=DEFAULT_RUNTIME_RESPONSE_SUPPORT,
+    )
+    parser.add_argument(
+        "--runtime-response-support-report",
+        type=Path,
+        default=DEFAULT_RUNTIME_RESPONSE_SUPPORT_REPORT,
+    )
     parser.add_argument("--scratch", type=Path, default=DEFAULT_SCRATCH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
@@ -689,6 +953,9 @@ def main() -> None:
         "integrated_spectra": args.integrated_spectra.resolve(),
         "integrated_temperatures": args.integrated_temperatures.resolve(),
         "response_support": args.response_support.resolve(),
+        "response_support_report": args.response_support_report.resolve(),
+        "runtime_response_support": args.runtime_response_support.resolve(),
+        "runtime_response_support_report": args.runtime_response_support_report.resolve(),
     }
     loaded = {
         name: json.loads(path.read_text(encoding="utf-8")) for name, path in paths.items()
@@ -711,6 +978,19 @@ def main() -> None:
         loaded["integrated_spectra"],
         paths["integrated_temperatures"],
         loaded["integrated_temperatures"],
+    )
+    validate_runtime_response_support(
+        paths["runtime_response_support"],
+        loaded["runtime_response_support"],
+        paths["runtime_response_support_report"],
+        loaded["runtime_response_support_report"],
+        paths["config"],
+        paths["integrated_spectra"],
+        loaded["integrated_spectra"],
+        paths["integrated_temperatures"],
+        loaded["integrated_temperatures"],
+        paths["response_support"],
+        paths["response_support_report"],
     )
     if regions["status"] != "both_clusters_passed_frozen_temperature_region_gate":
         raise RuntimeError("temperature-region gate has not passed")
@@ -743,6 +1023,7 @@ def main() -> None:
                 cluster_name,
                 config,
                 loaded["response_support"],
+                loaded["runtime_response_support"],
                 region_rows[cluster_name],
                 astrometry_rows,
                 repro_rows,
@@ -762,6 +1043,13 @@ def main() -> None:
             paths["integrated_temperatures"]
         ),
         "response_support_config_sha256": sha256(paths["response_support"]),
+        "response_support_report_sha256": sha256(paths["response_support_report"]),
+        "runtime_response_support_config_sha256": sha256(
+            paths["runtime_response_support"]
+        ),
+        "runtime_response_support_report_sha256": sha256(
+            paths["runtime_response_support_report"]
+        ),
         "clusters": clusters,
         "regional_temperature_fit_authorized": True,
         "thermal_stress_constructed": False,

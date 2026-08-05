@@ -1,0 +1,99 @@
+{
+  "protocol_version": "SIGMA-V18D-COLLISIONLESS-STRESS-TRANSFER-1.0.0",
+  "status": "frozen after both v18C source maps were hashed and before loading or scoring either spent replacement-pair target in v18D",
+  "purpose": "Test whether a target-blind projected member random-stress field supplies transferable apparent-halo amplitude, extent, and one-metric shear structure on the spent MACS J0416 and PLCK G287 pair.",
+  "parents": {
+    "source_config": "configs/sigma_v18c_collisionless_stress_maps.json",
+    "source_config_sha256": "217062d196aedfc4708e35e75f43ee4c206d5dd874cc3a216add6969cfe7c0e3",
+    "source_report": "results/sigma_v18c_collisionless_stress_maps/report.json",
+    "source_report_sha256": "ff7a4ff915f8796c801c015609ce88e626dbbbe1dff5eba52da1ba88ea8d288b"
+  },
+  "sample": {
+    "clusters": ["MACS0416", "PLCKG287"],
+    "sample_is_spent": true,
+    "source_redshift": 2.0,
+    "target_interpretation": "same-method GLAFIC conventional lens reconstructions used as spent inverse targets, not raw observations or holdouts"
+  },
+  "clusters": {
+    "MACS0416": {
+      "center_ra_deg": 64.0381416667,
+      "center_dec_deg": -24.0674722222,
+      "redshift": 0.396,
+      "kpc_per_arcsec": 5.5074366258586815,
+      "dls_over_ds_at_z2": 0.7012460254775283,
+      "target_kappa_dls_over_ds_1": "data/raw/p0590_macs0416_kappa/hlsp_frontier_model_macs0416_glafic_v4_kappa.fits",
+      "target_kappa_sha256": "cd5609a2be4c6b031aea169d3636d228811af94d97480f78ab47e29e87929c76",
+      "baryon_kind": "compressed_points",
+      "baryon_input": "data/derived/p0589_macs0416_nominal_baryon_sources.csv",
+      "baryon_input_sha256": "28a87f89fcf672af0a93bd1fc7576a6e075fdd3b45a402a51d7110e69edbe4c7",
+      "member_stress_product": "results/sigma_v18c_collisionless_stress_maps/MACS0416_collisionless_stress_features.npz",
+      "member_stress_product_sha256": "78066d266b13825927dda88cc79ac1821fdb1cf9d87f3f285b263dcdc0cf403c"
+    },
+    "PLCKG287": {
+      "center_ra_deg": 177.71343070725325,
+      "center_dec_deg": -28.08293609825516,
+      "redshift": 0.39,
+      "kpc_per_arcsec": 5.456245271296583,
+      "dls_over_ds_at_z2": 0.7052950368400732,
+      "target_kappa_dls_over_ds_1": "data/raw/p0633_relics_lensing_comparators/PLCKG287/glafic/v2/hlsp_relics_model_model_plckg287p32_glafic_v2_kappa.fits",
+      "target_kappa_sha256": "27fdf1d5816232889b2983116a50bd4260901253b59f0cba9f8711b321c0f100",
+      "baryon_kind": "registered_surface_density",
+      "baryon_input": "results/p0641_registered_cluster_baryon_maps/maps/PLCKG287_baryons.npz",
+      "baryon_input_sha256": "ae1ae809f1a8951b9c930dc713b005bfcb114bdebe8d578d349ae7c722c6d0a7",
+      "member_stress_product": "results/sigma_v18c_collisionless_stress_maps/PLCKG287_collisionless_stress_features.npz",
+      "member_stress_product_sha256": "e65e11f968c3051234ed1f048a9cf018c22df8b38043daed679eb4d2b38d3c53"
+    }
+  },
+  "map_protocol": {
+    "primary_grid_points": 193,
+    "doubled_grid_points": 385,
+    "half_width_kpc": 350.0,
+    "analysis_radius_kpc": 200.0,
+    "coordinate_convention": "x positive east and y positive north",
+    "target_scaling": "multiply the public kappa map normalized at DLS/DS=1 by DLS/DS at source redshift 2",
+    "target_gaussian_smoothing_kpc": 15.0,
+    "target_winsor_percentile_inside_analysis_mask": 99.5,
+    "baryon_gaussian_smoothing_kpc": 22.029746503434726,
+    "baryon_baseline": "baryon-only GR convergence with coefficient fixed to one",
+    "member_source": "the frozen v18C q_member map at primary neighbor rank 8",
+    "fourier_padding_factor": 2,
+    "one_metric_rule": "target, baryon baseline, and member source each generate convergence and both shear components from one E-mode potential"
+  },
+  "fit": {
+    "intercept": false,
+    "feature_count": 1,
+    "feature": "member_random_stress",
+    "coefficient_constraint": "nonnegative",
+    "selection": "fit the one coefficient on one spent cluster and transfer it unchanged to the other, in both directions",
+    "per_cluster_amplitude_scale_shear_or_orientation": false,
+    "inverse_coefficient_is_physical_constant": false
+  },
+  "gates": {
+    "maximum_symmetric_cross_cluster_full_field_NRMSE": 0.5,
+    "minimum_relative_improvement_over_baryon_baseline": 0.1,
+    "minimum_residual_shear_alignment_cosine_each_direction": 0.5,
+    "minimum_residual_power_closed_each_direction": 0.25,
+    "maximum_fractional_R50_or_R80_error_each_direction": 0.25,
+    "maximum_directional_coefficient_log10_difference": 0.15,
+    "maximum_map_resolution_change": 0.02
+  },
+  "decision_rule": [
+    "Advance only if every amplitude, full-field, power, shear, extent, coefficient-consistency, and resolution gate passes.",
+    "If the member source passes, derive a baryon-forced covariant state equation before opening a holdout; the inverse coefficient cannot be declared fundamental.",
+    "If it fails, retire the tested instantaneous projected collisionless-stress source and move to causal history or a materially different mechanism.",
+    "Do not tune the neighbor rank, target smoothing, baryon smoothing, aperture, coefficient, or map orientation per cluster."
+  ],
+  "integrity": {
+    "source_maps_frozen_before_target_opened": true,
+    "target_values_known_when_protocol_frozen": true,
+    "sample_is_spent": true,
+    "holdout_opened": false,
+    "per_cluster_gravity_parameters": 0,
+    "lensing_only_physical_parameters": 0
+  },
+  "prior_art": {
+    "frontier_glafic_readme": "https://stdatu.stsci.edu/missions/hlsp/frontier/macs0416/models/glafic/v4/hlsp_frontier_model_macs0416_glafic_v4_readme.pdf",
+    "archive_normalization": "GLAFIC kappa and shear products are scaled to DLS/DOS=1",
+    "claim_boundary": "This diagnostic use of measured member velocity variance resembles Jeans and stress-energy information; it is not claimed as a new field equation."
+  }
+}

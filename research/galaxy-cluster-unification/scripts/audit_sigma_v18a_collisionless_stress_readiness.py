@@ -42,7 +42,11 @@ def fetch(url: str) -> bytes:
 
 def acquire_inputs(config: dict[str, Any], refresh: bool) -> dict[str, Path]:
     paths: dict[str, Path] = {}
-    sources = {**config["public_inputs"], **config["coverage_inputs"]}
+    sources = {
+        **config["public_inputs"],
+        **config["coverage_inputs"],
+        **config.get("photometric_only_inputs", {}),
+    }
     for name, source in sources.items():
         path = ROOT / source["raw_path"]
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -79,6 +83,50 @@ def vizier_row_count(path: Path) -> int:
     if len(lines) < 3:
         raise RuntimeError(f"malformed VizieR table in {path}")
     return len(lines) - 3
+
+
+def vizier_schema_columns(path: Path) -> list[dict[str, str]]:
+    columns = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("#Column\t"):
+            continue
+        fields = line.split("\t")
+        if len(fields) < 4:
+            raise RuntimeError(f"malformed VizieR column declaration in {path}")
+        description = fields[3]
+        metadata = "\t".join(fields[3:])
+        ucd = ""
+        if "[ucd=" in metadata:
+            ucd = metadata.split("[ucd=", 1)[1].split("]", 1)[0]
+        columns.append({"name": fields[1], "description": description, "ucd": ucd})
+    if not columns:
+        raise RuntimeError(f"no VizieR schema columns in {path}")
+    return columns
+
+
+def audit_photometric_catalog(
+    path: Path, source: dict[str, Any]
+) -> dict[str, Any]:
+    columns = vizier_schema_columns(path)
+    redshift_columns = [
+        column
+        for column in columns
+        if "redshift" in column["description"].lower()
+        or "redshift" in column["ucd"].lower()
+    ]
+    required_ucd = source["required_redshift_ucd"]
+    if [column["ucd"] for column in redshift_columns] != [required_ucd]:
+        raise RuntimeError("MGCLS redshift schema changed; re-audit before use")
+    if any("spect" in column["description"].lower() for column in redshift_columns):
+        raise RuntimeError("MGCLS now declares a spectroscopic redshift column")
+    return {
+        "catalog": source["catalog"],
+        "rows": vizier_row_count(path),
+        "schema_column_count": len(columns),
+        "redshift_columns": redshift_columns,
+        "has_spectroscopic_redshift": False,
+        "usable_as_velocity_measurement": False,
+    }
 
 
 def angular_separation_arcsec(a: dict[str, str], b: dict[str, str]) -> float:
@@ -231,6 +279,12 @@ def run(config_path: Path, output: Path, refresh: bool) -> dict[str, Any]:
     }
     if any(item["matching_rows"] != 0 for item in coverage.values()):
         raise RuntimeError("an ACT coverage query now contains rows; re-audit before use")
+    photometric_only = {
+        name: audit_photometric_catalog(paths[name], source)
+        for name, source in config.get("photometric_only_inputs", {}).items()
+    }
+    if any(item["rows"] == 0 for item in photometric_only.values()):
+        raise RuntimeError("a declared photometric coverage catalog is empty")
     if stage_b_authorized:
         decision = (
             "AS295 spectroscopy is source-ready; stage B still requires the unchanged "
@@ -265,6 +319,7 @@ def run(config_path: Path, output: Path, refresh: bool) -> dict[str, Any]:
             },
         },
         "independent_act_catalog_coverage": coverage,
+        "photometric_only_catalog_coverage": photometric_only,
         "deduplication": {
             "radius_arcsec": radius,
             "member_projected_aperture_kpc": aperture_kpc,
@@ -286,6 +341,7 @@ def run(config_path: Path, output: Path, refresh: bool) -> dict[str, Any]:
             "The fixed velocity window is a transparent readiness count, not a replacement for the papers' membership algorithms.",
             "The same galaxies appearing in two releases do not provide independent phase-space information.",
             "A source-readiness pass would not be evidence for a modified-gravity formula.",
+            "MGCLS supplies optical/radio morphology and photometric redshifts, not the line-of-sight velocities required by the frozen collisionless-stress source.",
         ],
     }
     output.mkdir(parents=True, exist_ok=True)

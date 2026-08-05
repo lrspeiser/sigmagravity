@@ -1,0 +1,20 @@
+Running specextract
+Version: 8 June 2026
+
+WARNING: Extracting background spectra from blanksky background files.
+
+Warning: Skip adding 'bell_nh' header keyword.  No valid data at the source location in the Bell Labs HI Survey (the survey covers RA > -40 deg).
+
+chipx=1035 for ACIS-3; using chipx=1024 for FEF and RMF look up.
+
+WARNING: Unweighted responses will be created at the 'refcoord' position.
+
+Warning: Skip adding 'bell_nh' header keyword.  No valid data at the source location in the Bell Labs HI Survey (the survey covers RA > -40 deg).
+
+chipx=1035 for ACIS-3; using chipx=1024 for FEF and RMF look up.
+
+Extracting src spectra
+
+Extracting bkg spectra
+
+# specextract (8 June 2026): ERROR max() iterable argument is empty

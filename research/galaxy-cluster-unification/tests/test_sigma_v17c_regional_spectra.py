@@ -11,6 +11,12 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "run_sigma_v17c_regional_spectra.py"
 CONFIG = ROOT / "configs" / "sigma_v17c_spectral_temperature.json"
 SUPPORT = ROOT / "configs" / "sigma_v17c_regional_response_support.json"
+RUNTIME_SUPPORT = (
+    ROOT / "configs" / "sigma_v17c_regional_runtime_response_support.json"
+)
+RUNTIME_SUPPORT_REPORT = (
+    ROOT / "results" / "sigma_v17c_regional_runtime_response_support" / "report.json"
+)
 SUPPORT_REPORT = (
     ROOT / "results" / "sigma_v17c_regional_response_support" / "report.json"
 )
@@ -115,10 +121,100 @@ def test_every_region_cell_has_private_ciao_state(monkeypatch, tmp_path: Path) -
         "translated_fov": {},
     }
     result = module.execute_regional_cell(task, tmp_path, "spectral_v17c_v107")
-    expected_tail = Path("regional") / "AS295" / "region_007" / "16524_ccd2"
-    assert str(captured["pfiles"]).endswith(str(expected_tail))
-    assert str(captured["scratch"]).endswith(str(expected_tail))
+    expected_pfiles_tail = (
+        Path("regional") / "AS295" / "region_007" / "16524_ccd2"
+    )
+    expected_runtime = (
+        module.REGIONAL_RUNTIME_TMP_ROOT
+        / "spectral_v17c_v107"
+        / "AS295"
+        / "r007"
+        / "16524c2"
+    )
+    assert str(captured["pfiles"]).endswith(str(expected_pfiles_tail))
+    assert captured["scratch"] == expected_runtime
+    assert len(str(expected_runtime).encode()) <= module.MAX_REGIONAL_RUNTIME_TMP_BYTES
+    assert result["runtime_tmp"] == str(expected_runtime)
     assert result["region_id"] == 7
+
+
+def test_exact_empty_response_signature_is_quarantined_and_reusable(
+    tmp_path: Path,
+) -> None:
+    module = _load_module()
+    individual = tmp_path / "region_012" / "individual"
+    logs = tmp_path / "region_012" / "logs"
+    individual.mkdir(parents=True)
+    logs.mkdir(parents=True)
+    outroot = individual / "acisf16524_ccd3_region012"
+    source = outroot.with_suffix(".pi")
+    background = outroot.with_name(outroot.name + "_bkg.pi")
+    arf = outroot.with_suffix(".arf")
+    rmf = outroot.with_suffix(".rmf")
+    source.write_bytes(b"source")
+    background.write_bytes(b"background")
+    log = logs / "16524_ccd3_specextract.log"
+    log.write_text(
+        "Extracting src spectra\nExtracting bkg spectra\n"
+        "# specextract: ERROR max() iterable argument is empty\n",
+        encoding="utf-8",
+    )
+    task = {
+        "cluster": "AS295",
+        "region_id": 12,
+        "obsid": 16524,
+        "ccd_id": 3,
+        "source_pha": source,
+        "background_pha": background,
+        "arf": arf,
+        "rmf": rmf,
+        "source_band_events": 7,
+        "background_band_events": 5,
+        "response_reference": {"ra_deg": 1.0, "dec_deg": 2.0},
+        "allow_empty_calibrated_response_skip": True,
+        "log": log,
+    }
+
+    record = module.classify_and_quarantine_empty_response_support(task)
+
+    assert record is not None
+    assert record["reason"] == module.EMPTY_CALIBRATED_RESPONSE_REASON
+    assert not source.exists()
+    assert not background.exists()
+    assert len(record["quarantined_partial_products"]) == 2
+    marker = module.response_support_skip_marker(task)
+    assert marker.is_file()
+    reused = module.load_response_support_skip(task)
+    assert reused is not None and reused["reused"] is True
+    assert reused["marker_sha256"] == _sha256(marker)
+
+
+def test_other_partial_response_failures_remain_fatal(tmp_path: Path) -> None:
+    module = _load_module()
+    source = tmp_path / "source.pi"
+    background = tmp_path / "background.pi"
+    source.write_bytes(b"source")
+    background.write_bytes(b"background")
+    log = tmp_path / "cell.log"
+    log.write_text("some other CIAO error\n", encoding="utf-8")
+    task = {
+        "cluster": "AS295",
+        "region_id": 12,
+        "obsid": 16524,
+        "ccd_id": 3,
+        "source_pha": source,
+        "background_pha": background,
+        "arf": tmp_path / "source.arf",
+        "rmf": tmp_path / "source.rmf",
+        "source_band_events": 7,
+        "background_band_events": 5,
+        "response_reference": {},
+        "allow_empty_calibrated_response_skip": True,
+        "log": log,
+    }
+
+    assert module.classify_and_quarantine_empty_response_support(task) is None
+    assert source.is_file() and background.is_file()
 
 
 def test_region_planning_preserves_frozen_extraction_conventions(
@@ -264,6 +360,37 @@ def test_response_support_freeze_is_hashed_and_target_blind() -> None:
     assert support["integrity"]["lensing_target_opened"] is False
 
 
+def test_runtime_response_support_supplement_is_hashed_and_fail_closed() -> None:
+    module = _load_module()
+    runtime = json.loads(RUNTIME_SUPPORT.read_text(encoding="utf-8"))
+    runtime_report = json.loads(RUNTIME_SUPPORT_REPORT.read_text(encoding="utf-8"))
+    spectra = json.loads(INTEGRATED_SPECTRA.read_text(encoding="utf-8"))
+    temperatures = json.loads(INTEGRATED_TEMPERATURES.read_text(encoding="utf-8"))
+
+    module.validate_runtime_response_support(
+        RUNTIME_SUPPORT,
+        runtime,
+        RUNTIME_SUPPORT_REPORT,
+        runtime_report,
+        CONFIG,
+        INTEGRATED_SPECTRA,
+        spectra,
+        INTEGRATED_TEMPERATURES,
+        temperatures,
+        SUPPORT,
+        SUPPORT_REPORT,
+    )
+    rule = runtime["admission_rule"]
+    assert rule["allowed_reason"] == module.EMPTY_CALIBRATED_RESPONSE_REASON
+    assert "No other CIAO failure" in rule["failure_mode"]
+    assert runtime["integrity"]["lensing_target_opened"] is False
+    assert runtime_report["config_sha256"] == _sha256(RUNTIME_SUPPORT)
+    diagnostic = ROOT / runtime_report["discovery"]["diagnostic_log"]
+    assert runtime_report["discovery"]["diagnostic_log_sha256"] == _sha256(
+        diagnostic
+    )
+
+
 def test_response_support_diagnostic_logs_are_immutable() -> None:
     report = json.loads(SUPPORT_REPORT.read_text(encoding="utf-8"))
 
@@ -291,3 +418,4 @@ def test_regional_runner_matches_frozen_region_gates_and_claim_boundary() -> Non
     assert '"regional_temperature_fit_authorized": True' in source
     assert "event_mean_response_reference_maps_off_selected_ccd" in source
     assert "response_support_config_sha256" in source
+    assert "runtime_response_support_config_sha256" in source

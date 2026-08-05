@@ -180,3 +180,23 @@ cluster topology, competitive galaxy predictions, and Solar consistency.
 
 The authoritative target-blind freeze is
 `configs/sigma_v18_post_pressure_flux_selection.json`.
+
+## Postscript: thermal and collisionless branches completed
+
+The conditional evidence chain is now complete. V17E found that thermal stress
+predicts the transferred residual-field R50/R80 radii to within about
+5.4%-9.5%, but fails absolute field accuracy, material improvement, residual
+power, and shear. V17F was therefore skipped.
+
+The AS295 catalog shortfall was not used to weaken the member gate. An
+already-spent MACS J0416/PLCK G287 replacement pair supplied 231 and 129 secure
+members. Its target-blind instantaneous collisionless-stress source then failed
+v18D: symmetric NRMSE worsened from 0.99689 to 1.75737, and the directional
+strengths differed by a factor of about 14.3. Only numerical resolution passed.
+
+Pressure, temperature, and current projected member stress are therefore
+excluded from the root constitutive law as direct local sources. Their common
+surviving clue is spatial extent. V19 may test a measured causal assembly
+variable, but only after the mechanism-exhaustion and observability gate in
+`SIGMA_V18_MECHANISM_EXHAUSTION_AND_V19_GATE.md`; another generic memory or
+smoothing term is prohibited.

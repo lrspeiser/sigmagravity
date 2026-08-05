@@ -1,0 +1,50 @@
+{
+  "protocol_version": "SIGMA-V18C-COLLISIONLESS-STRESS-MAPS-1.0.0",
+  "status": "frozen after v18B readiness passed and before constructing either member-stress map or reading any replacement-pair lensing target",
+  "purpose": "Construct target-blind projected collisionless baryonic stress maps on the spent MACS J0416 and PLCK G287 replacement pair with one universal selection, stellar-mass rule, and adaptive coarse-graining rule.",
+  "parents": {
+    "readiness_config": "configs/sigma_v18b_replacement_pair_readiness.json",
+    "readiness_config_sha256": "b21fb0462d1a886ae95a1687a34c23f42b1fe5a87cb24c7d5bbdd5ff0580fed9",
+    "readiness_report": "results/sigma_v18b_replacement_pair_readiness/report.json",
+    "readiness_report_sha256": "56ebe3b0ecb780b2523955b77af6dcbd9d49be336f7bc1e261b27b02293fb315"
+  },
+  "grid": {
+    "coordinate_convention": "x positive east and y positive north",
+    "half_width_kpc": 350.0,
+    "points_per_axis": 193,
+    "analysis_radius_kpc": 200.0
+  },
+  "adaptive_kernel": {
+    "primary_neighbor_rank": 8,
+    "declared_sensitivity_neighbor_ranks": [6, 8, 12],
+    "bandwidth_equation": "sigma_i=d_i,k/2, where d_i,k is the projected distance to member i's kth nearest selected member",
+    "kernel_equation": "K_i(x)=exp[-|x-x_i|^2/(2 sigma_i^2)]/(2 pi sigma_i^2)",
+    "local_mean_equation": "vbar(x)=sum_i M_i K_i(x) v_i / sum_i M_i K_i(x)",
+    "stress_equation": "q_member(x)=[sum_i M_i K_i(x) (v_i-vbar(x))^2/c^2]/Sigma_critical",
+    "selection_rule": "the primary rank is fixed before any map or target is constructed; sensitivities are reported and cannot be selected using lensing",
+    "fixed_physical_length": false,
+    "per_cluster_bandwidth": false
+  },
+  "lensing_geometry": {
+    "source_redshift": 2.0,
+    "critical_surface_density_msun_kpc2": {
+      "MACS0416": 2087494782.4351466,
+      "PLCKG287": 2094983503.0843925
+    },
+    "role": "dimensionless source-unit conversion only; no lensing target is read"
+  },
+  "authorization": {
+    "required_readiness_status": "completed Sigma v18B replacement-pair readiness audit",
+    "required_source_construction_authorized": true,
+    "inverse_coefficient_fit": false,
+    "lensing_target_opened": false,
+    "formula_or_kernel_selection_from_target": false,
+    "holdout_opened": false
+  },
+  "claim_boundary": [
+    "These are measured-source diagnostics, not a gravity law or a dark-matter map.",
+    "Adaptive bandwidth is a target-blind estimator of the measured member phase-space field, not a physical Sigma propagation length.",
+    "A later transfer test must use all three one-metric channels and the same primary source construction in both clusters.",
+    "A passing transfer would still require a covariant action that generates the coarse-graining dynamically."
+  ]
+}

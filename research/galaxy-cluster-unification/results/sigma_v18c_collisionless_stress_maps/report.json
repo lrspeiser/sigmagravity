@@ -1,0 +1,129 @@
+{
+  "clusters": [
+    {
+      "cluster": "MACS0416",
+      "product": "results/sigma_v18c_collisionless_stress_maps/MACS0416_collisionless_stress_features.npz",
+      "product_bytes": 3379850,
+      "product_sha256": "78066d266b13825927dda88cc79ac1821fdb1cf9d87f3f285b263dcdc0cf403c",
+      "rank_diagnostics": [
+        {
+          "bandwidth_kpc": {
+            "maximum": 506.0858039735457,
+            "median": 52.579240892490404,
+            "minimum": 10.498212745750148
+          },
+          "neighbor_rank": 6,
+          "q_member_maximum": 2.4299788099959764e-07,
+          "source_extent": {
+            "R50_kpc": 164.7408816096754,
+            "R80_kpc": 340.36360808242637,
+            "centroid_east_kpc": 22.99263881988756,
+            "centroid_north_kpc": -3.4331233493171402
+          }
+        },
+        {
+          "bandwidth_kpc": {
+            "maximum": 542.9420715718163,
+            "median": 56.942292947977734,
+            "minimum": 14.29929020472503
+          },
+          "neighbor_rank": 8,
+          "q_member_maximum": 1.755422317060265e-07,
+          "source_extent": {
+            "R50_kpc": 169.3132337196312,
+            "R80_kpc": 336.55737566348904,
+            "centroid_east_kpc": 21.073705539261287,
+            "centroid_north_kpc": -6.494682712082271
+          }
+        },
+        {
+          "bandwidth_kpc": {
+            "maximum": 578.7682305548562,
+            "median": 70.86323417908885,
+            "minimum": 19.760975345631696
+          },
+          "neighbor_rank": 12,
+          "q_member_maximum": 1.4139134646179096e-07,
+          "source_extent": {
+            "R50_kpc": 178.9601142999808,
+            "R80_kpc": 332.6963519598083,
+            "centroid_east_kpc": 15.887344024227287,
+            "centroid_north_kpc": -10.74504451375544
+          }
+        }
+      ],
+      "selected_members": 231
+    },
+    {
+      "cluster": "PLCKG287",
+      "product": "results/sigma_v18c_collisionless_stress_maps/PLCKG287_collisionless_stress_features.npz",
+      "product_bytes": 3385670,
+      "product_sha256": "e65e11f968c3051234ed1f048a9cf018c22df8b38043daed679eb4d2b38d3c53",
+      "rank_diagnostics": [
+        {
+          "bandwidth_kpc": {
+            "maximum": 187.34640351984896,
+            "median": 46.06353288275691,
+            "minimum": 21.920848018887845
+          },
+          "neighbor_rank": 6,
+          "q_member_maximum": 6.698612822456436e-07,
+          "source_extent": {
+            "R50_kpc": 233.9769320136094,
+            "R80_kpc": 300.52788501023804,
+            "centroid_east_kpc": -32.346252879343396,
+            "centroid_north_kpc": -95.76091510167926
+          }
+        },
+        {
+          "bandwidth_kpc": {
+            "maximum": 202.00356151340762,
+            "median": 56.03384164973092,
+            "minimum": 32.64153897406169
+          },
+          "neighbor_rank": 8,
+          "q_member_maximum": 6.538579689630238e-07,
+          "source_extent": {
+            "R50_kpc": 235.07961912432307,
+            "R80_kpc": 305.2868561247589,
+            "centroid_east_kpc": -32.51764028358727,
+            "centroid_north_kpc": -92.89028346843523
+          }
+        },
+        {
+          "bandwidth_kpc": {
+            "maximum": 238.34967136123794,
+            "median": 73.93093080117504,
+            "minimum": 44.729897211668984
+          },
+          "neighbor_rank": 12,
+          "q_member_maximum": 6.133025584812655e-07,
+          "source_extent": {
+            "R50_kpc": 234.60976579898988,
+            "R80_kpc": 307.39882198233937,
+            "centroid_east_kpc": -41.72427260011964,
+            "centroid_north_kpc": -91.23168514264694
+          }
+        }
+      ],
+      "selected_members": 129
+    }
+  ],
+  "figure": "results/sigma_v18c_collisionless_stress_maps/collisionless_stress_maps.png",
+  "figure_sha256": "e6e28faab2bad498b8b6e13c1e2dfe6bd21e79088a6921257b8b1b4f76be32ba",
+  "fixed_physical_length": false,
+  "generated_utc": "2026-08-05T02:37:01.976949+00:00",
+  "holdout_opened": false,
+  "input_hashes": {
+    "config": "217062d196aedfc4708e35e75f43ee4c206d5dd874cc3a216add6969cfe7c0e3",
+    "readiness_config": "b21fb0462d1a886ae95a1687a34c23f42b1fe5a87cb24c7d5bbdd5ff0580fed9",
+    "readiness_report": "56ebe3b0ecb780b2523955b77af6dcbd9d49be336f7bc1e261b27b02293fb315"
+  },
+  "inverse_coefficient_fit": false,
+  "lensing_target_opened": false,
+  "per_cluster_bandwidth_amplitude_or_orientation": false,
+  "primary_neighbor_rank": 8,
+  "protocol_version": "SIGMA-V18C-COLLISIONLESS-STRESS-MAPS-1.0.0",
+  "source_maps_frozen": true,
+  "status": "both_target_blind_collisionless_stress_maps_constructed_and_frozen"
+}

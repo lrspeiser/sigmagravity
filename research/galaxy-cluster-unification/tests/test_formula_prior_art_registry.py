@@ -359,3 +359,38 @@ def test_v18_flux_selection_registers_newtonian_and_aqual_ancestry() -> None:
     assert {"NEWTON-POISSON", "AQUAL"}.issubset(
         set(v18["published_overlap_ids"])
     )
+
+
+def test_v18b_and_v18c_measurement_equations_are_not_lost() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+
+    v18b = protocols["sigma_v18b_replacement_pair_readiness.json"]
+    v18b_text = " ".join(
+        fragment["formula"] for fragment in v18b["formula_fragments"]
+    )
+    assert "v_i=c" in v18b_text
+    assert "M_star/M_sun" in v18b_text
+
+    v18c = protocols["sigma_v18c_collisionless_stress_maps.json"]
+    v18c_text = " ".join(
+        fragment["formula"] for fragment in v18c["formula_fragments"]
+    )
+    assert "sigma_i=d_i,k/2" in v18c_text
+    assert "q_member" in v18c_text
+    assert {"GR-EINSTEIN", "FRT-GRAVITY", "EMSG"}.issubset(
+        set(v18c["published_overlap_ids"])
+    )
+
+
+def test_v19_observability_gate_does_not_pretend_to_be_a_formula() -> None:
+    report = _load(REPORT)
+    protocols = {
+        Path(item["config"]).name: item for item in report["sigma_protocol_inventory"]
+    }
+    v19 = protocols["sigma_v19_causal_assembly_observability_gate.json"]
+
+    assert v19["role"] == "gate_or_data_protocol_no_new_formula_fragment"
+    assert v19["formula_fragment_count"] == 0

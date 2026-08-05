@@ -1,0 +1,2308 @@
+{
+  "decision": "the tested resolved projected gas thermal-stress source fails at least one frozen transfer gate; do not rescue it with an object switch or private parameter",
+  "doubled_grid_points": 385,
+  "doubled_resolution_result": {
+    "alpha": 1.0,
+    "directions": [
+      {
+        "full_field_NRMSE": 0.6385404198510456,
+        "halo_scale_diagnostic": {
+          "fractional_radius_errors": {
+            "R50": 0.0626118087313153,
+            "R80": 0.061869353969557526
+          },
+          "maximum_fractional_radius_error": 0.0626118087313153,
+          "predicted": {
+            "centroid_east_kpc": -53.042942294581124,
+            "centroid_north_kpc": 16.289948078705013,
+            "field_energy": 1587.4392347540006,
+            "radii_kpc": {
+              "R50": 106.02884537284635,
+              "R80": 148.98751192540516
+            },
+            "valid": true
+          },
+          "required": {
+            "centroid_east_kpc": -33.40094679154427,
+            "centroid_north_kpc": -2.7574069197897604,
+            "field_energy": 11825.582375496107,
+            "radii_kpc": {
+              "R50": 99.78135430231801,
+              "R80": 158.81318082489173
+            },
+            "valid": true
+          },
+          "valid": true
+        },
+        "residual_NRMSE": 0.8370844851557709,
+        "residual_convergence_correlation": 0.4846091484257057,
+        "residual_power_closed": 0.2992895647114979,
+        "residual_shear_alignment_cosine": 0.478093829541639,
+        "test_cluster": "PLCKG287",
+        "thermal_coefficients": {
+          "thermal_contrast_smooth_150kpc": -68637.5960147191,
+          "thermal_contrast_smooth_25kpc": 110572.60099704332,
+          "thermal_contrast_smooth_75kpc": 9213.283565368867,
+          "thermal_total_smooth_150kpc": 14625.251526022126,
+          "thermal_total_smooth_25kpc": 19091.38264281621,
+          "thermal_total_smooth_75kpc": 16247.99515831906
+        },
+        "thermal_fit_condition_number": 83792.8293643842,
+        "train_cluster": "AS295"
+      },
+      {
+        "full_field_NRMSE": 0.9048500271800642,
+        "halo_scale_diagnostic": {
+          "fractional_radius_errors": {
+            "R50": 0.1447414236302411,
+            "R80": 0.05673606353862581
+          },
+          "maximum_fractional_radius_error": 0.1447414236302411,
+          "predicted": {
+            "centroid_east_kpc": 8.16531525809367,
+            "centroid_north_kpc": -5.431289928415739,
+            "field_energy": 48.744750441222955,
+            "radii_kpc": {
+              "R50": 130.88797811615478,
+              "R80": 172.93922048217374
+            },
+            "valid": true
+          },
+          "required": {
+            "centroid_east_kpc": -26.38723785546654,
+            "centroid_north_kpc": 1.6859072212032304,
+            "field_energy": 6163.748965927179,
+            "radii_kpc": {
+              "R50": 114.3384658004937,
+              "R80": 163.65412939827473
+            },
+            "valid": true
+          },
+          "valid": true
+        },
+        "residual_NRMSE": 1.0320364631165115,
+        "residual_convergence_correlation": 0.14578436803797334,
+        "residual_power_closed": -0.06509926120203868,
+        "residual_shear_alignment_cosine": 0.051715801762289786,
+        "test_cluster": "AS295",
+        "thermal_coefficients": {
+          "thermal_contrast_smooth_150kpc": 23810.343815340282,
+          "thermal_contrast_smooth_25kpc": 31859.61520327663,
+          "thermal_contrast_smooth_75kpc": 40655.58901577004,
+          "thermal_total_smooth_150kpc": 6901.312352454606,
+          "thermal_total_smooth_25kpc": 8849.734089392647,
+          "thermal_total_smooth_75kpc": 8585.611006465499
+        },
+        "thermal_fit_condition_number": 79592.10708253515,
+        "train_cluster": "PLCKG287"
+      }
+    ],
+    "static_symmetric_cross_cluster_full_field_NRMSE": 0.8162060459575169,
+    "symmetric_cross_cluster_full_field_NRMSE": 0.7830987930878557
+  },
+  "family_results": {
+    "thermal_component": {
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 1.0524760689971913,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.17627080156010017,
+                  "R80": 0.027664243326424323
+                },
+                "maximum_fractional_radius_error": 0.17627080156010017,
+                "predicted": {
+                  "centroid_east_kpc": 30.883773745407275,
+                  "centroid_north_kpc": -39.04581274073322,
+                  "field_energy": 6353.224224000029,
+                  "radii_kpc": {
+                    "R50": 117.2858318963827,
+                    "R80": 162.6971503875804
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.6746465743074903,
+              "residual_convergence_correlation": 0.3434701351948695,
+              "residual_power_closed": -1.8044411488398127,
+              "residual_shear_alignment_cosine": 0.4437213266111579,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": -2623686.715312291,
+                "thermal_contrast_smooth_25kpc": 1563728.659966898,
+                "thermal_contrast_smooth_75kpc": -2166840.2236833572,
+                "thermal_total_smooth_150kpc": -3242777.6564331795,
+                "thermal_total_smooth_25kpc": -1559914.61995097,
+                "thermal_total_smooth_75kpc": 4540487.569506524
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.9222688315521702,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.21192472265137186,
+                  "R80": 0.10259791351076483
+                },
+                "maximum_fractional_radius_error": 0.21192472265137186,
+                "predicted": {
+                  "centroid_east_kpc": 6.845292994832913,
+                  "centroid_north_kpc": 18.687905835343383,
+                  "field_energy": 140.17951251466172,
+                  "radii_kpc": {
+                    "R50": 144.68253592260086,
+                    "R80": 176.55454722995748
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0996529187688109,
+              "residual_convergence_correlation": 0.20992656884126226,
+              "residual_power_closed": -0.20923654175676498,
+              "residual_shear_alignment_cosine": 0.19055099171882997,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": -2563117.782100671,
+                "thermal_contrast_smooth_25kpc": 947358.4328137467,
+                "thermal_contrast_smooth_75kpc": -319137.7562671575,
+                "thermal_total_smooth_150kpc": -212658.3748930177,
+                "thermal_total_smooth_25kpc": -1025496.8382194871,
+                "thermal_total_smooth_75kpc": 1474576.868058692
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.9895164661248407
+        },
+        {
+          "alpha": 1e-06,
+          "directions": [
+            {
+              "full_field_NRMSE": 1.0520793623152207,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.17572174427333545,
+                  "R80": 0.02787605038563158
+                },
+                "maximum_fractional_radius_error": 0.17572174427333545,
+                "predicted": {
+                  "centroid_east_kpc": 30.712061727628523,
+                  "centroid_north_kpc": -39.06121662668019,
+                  "field_energy": 6326.386788335502,
+                  "radii_kpc": {
+                    "R50": 117.23108545487318,
+                    "R80": 162.73068313447587
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.6731518642116845,
+              "residual_convergence_correlation": 0.3426082361251393,
+              "residual_power_closed": -1.7994371607150352,
+              "residual_shear_alignment_cosine": 0.44310809550000857,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": -2684723.420829045,
+                "thermal_contrast_smooth_25kpc": 1530242.8520264572,
+                "thermal_contrast_smooth_75kpc": -2095976.5125398624,
+                "thermal_total_smooth_150kpc": -3205696.3777479897,
+                "thermal_total_smooth_25kpc": -1524207.9965450675,
+                "thermal_total_smooth_75kpc": 4473460.466006793
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.9221189396654507,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.2115887298345963,
+                  "R80": 0.10259190116202722
+                },
+                "maximum_fractional_radius_error": 0.2115887298345963,
+                "predicted": {
+                  "centroid_east_kpc": 7.0250667815643055,
+                  "centroid_north_kpc": 18.707962213060856,
+                  "field_energy": 139.37736105938262,
+                  "radii_kpc": {
+                    "R50": 144.6424242788046,
+                    "R80": 176.55358449685582
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0992992561431145,
+              "residual_convergence_correlation": 0.21037948283651303,
+              "residual_power_closed": -0.2084588545568049,
+              "residual_shear_alignment_cosine": 0.18997584280389332,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": -2578440.073814949,
+                "thermal_contrast_smooth_25kpc": 934963.2959854399,
+                "thermal_contrast_smooth_75kpc": -295172.7680073973,
+                "thermal_total_smooth_150kpc": -203255.72271526564,
+                "thermal_total_smooth_25kpc": -1014201.0184730965,
+                "thermal_total_smooth_75kpc": 1454751.242123534
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.9892356452077878
+        },
+        {
+          "alpha": 0.0001,
+          "directions": [
+            {
+              "full_field_NRMSE": 1.0459741829072833,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.15456705709741336,
+                  "R80": 0.025274225517670498
+                },
+                "maximum_fractional_radius_error": 0.15456705709741336,
+                "predicted": {
+                  "centroid_east_kpc": 23.04247736127547,
+                  "centroid_north_kpc": -39.066383050387884,
+                  "field_energy": 5355.978345291478,
+                  "radii_kpc": {
+                    "R50": 115.12175392964532,
+                    "R80": 162.3187689372332
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.6241507160124673,
+              "residual_convergence_correlation": 0.301718000563375,
+              "residual_power_closed": -1.63786554832381,
+              "residual_shear_alignment_cosine": 0.4113422874190444,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": -5034365.541850623,
+                "thermal_contrast_smooth_25kpc": 257222.47778400028,
+                "thermal_contrast_smooth_75kpc": 611210.0982538796,
+                "thermal_total_smooth_150kpc": -1763425.1479943518,
+                "thermal_total_smooth_25kpc": -165047.7829001929,
+                "thermal_total_smooth_75kpc": 1898238.4941146718
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.9172901154288464,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.19929647777895784,
+                  "R80": 0.10092734303895116
+                },
+                "maximum_fractional_radius_error": 0.19929647777895784,
+                "predicted": {
+                  "centroid_east_kpc": 13.7739484582994,
+                  "centroid_north_kpc": 19.10651059714713,
+                  "field_energy": 110.08085128959246,
+                  "radii_kpc": {
+                    "R50": 143.17494518016989,
+                    "R80": 176.28704553269083
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0870266951814782,
+              "residual_convergence_correlation": 0.21503304637288825,
+              "residual_power_closed": -0.18162703603716635,
+              "residual_shear_alignment_cosine": 0.17922637737223357,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": -3054470.612297621,
+                "thermal_contrast_smooth_25kpc": 423821.22864784807,
+                "thermal_contrast_smooth_75kpc": 615221.7110765362,
+                "thermal_total_smooth_150kpc": 137729.12282465442,
+                "thermal_total_smooth_25kpc": -541789.1765744637,
+                "thermal_total_smooth_75kpc": 665322.5049912451
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.983738569735889
+        },
+        {
+          "alpha": 0.01,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.8571922061016551,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.12135092984324455,
+                  "R80": 0.02066512882217902
+                },
+                "maximum_fractional_radius_error": 0.12135092984324455,
+                "predicted": {
+                  "centroid_east_kpc": 5.217864827414378,
+                  "centroid_north_kpc": -37.81577907687421,
+                  "field_energy": 1617.491243090663,
+                  "radii_kpc": {
+                    "R50": 111.80977754443344,
+                    "R80": 161.58906864544335
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.2761231207052661,
+              "residual_convergence_correlation": 0.12053820757731748,
+              "residual_power_closed": -0.6284902191985473,
+              "residual_shear_alignment_cosine": 0.32215571195446707,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": -4783115.891990413,
+                "thermal_contrast_smooth_25kpc": 56437.81443471919,
+                "thermal_contrast_smooth_75kpc": 1030407.7142917116,
+                "thermal_total_smooth_150kpc": -170458.76834141082,
+                "thermal_total_smooth_25kpc": 236842.92452474879,
+                "thermal_total_smooth_75kpc": 160934.50716917124
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.915214511322841,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.10424167184177567,
+                  "R80": 0.07614394522815453
+                },
+                "maximum_fractional_radius_error": 0.10424167184177567,
+                "predicted": {
+                  "centroid_east_kpc": 0.2268487121103867,
+                  "centroid_north_kpc": 15.021063468966974,
+                  "field_energy": 62.00221731507723,
+                  "radii_kpc": {
+                    "R50": 131.8270700872889,
+                    "R80": 172.3185802148373
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0693605060688334,
+              "residual_convergence_correlation": 0.01875667338394517,
+              "residual_power_closed": -0.14353189193979143,
+              "residual_shear_alignment_cosine": 0.39550077807868794,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": -1099953.7979686828,
+                "thermal_contrast_smooth_25kpc": -18742.2623526999,
+                "thermal_contrast_smooth_75kpc": 392825.0069295184,
+                "thermal_total_smooth_150kpc": -1833.8792837546246,
+                "thermal_total_smooth_25kpc": 29315.970055058406,
+                "thermal_total_smooth_75kpc": 79644.51358211621
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8866780926405392
+        },
+        {
+          "alpha": 1.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.6450457679919509,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.07180718496424893,
+                  "R80": 0.05345183197900754
+                },
+                "maximum_fractional_radius_error": 0.07180718496424893,
+                "predicted": {
+                  "centroid_east_kpc": -52.20791357687312,
+                  "centroid_north_kpc": 16.169694599670382,
+                  "field_energy": 370.5898111936283,
+                  "radii_kpc": {
+                    "R50": 106.86977620657123,
+                    "R80": 149.85506272274162
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.842410047960061,
+              "residual_convergence_correlation": 0.48174623223392943,
+              "residual_power_closed": 0.29034531109592765,
+              "residual_shear_alignment_cosine": 0.47255113239288316,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": -84351.05259198022,
+                "thermal_contrast_smooth_25kpc": 108537.17827802838,
+                "thermal_contrast_smooth_75kpc": -426.81899755589416,
+                "thermal_total_smooth_150kpc": 15125.401113386757,
+                "thermal_total_smooth_25kpc": 20084.18267503261,
+                "thermal_total_smooth_75kpc": 17032.949338959697
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.9051968962750083,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.09526773334868502,
+                  "R80": 0.07994983679473285
+                },
+                "maximum_fractional_radius_error": 0.09526773334868502,
+                "predicted": {
+                  "centroid_east_kpc": 8.242112745830077,
+                  "centroid_north_kpc": -5.56217355475552,
+                  "field_energy": 11.835771761334584,
+                  "radii_kpc": {
+                    "R50": 130.7557393733207,
+                    "R80": 172.9280022481187
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0296723498582077,
+              "residual_convergence_correlation": 0.13832036451311996,
+              "residual_power_closed": -0.060225148062523104,
+              "residual_shear_alignment_cosine": 0.05281156776274984,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 24907.903341260106,
+                "thermal_contrast_smooth_25kpc": 31346.99262930128,
+                "thermal_contrast_smooth_75kpc": 40325.80143884704,
+                "thermal_total_smooth_150kpc": 6840.100912281043,
+                "thermal_total_smooth_25kpc": 8636.369430494758,
+                "thermal_total_smooth_75kpc": 8420.021042597195
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.785959752096198
+        },
+        {
+          "alpha": 100.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7261688133849541,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.09019401131126131,
+                  "R80": 0.04496680201589317
+                },
+                "maximum_fractional_radius_error": 0.09019401131126131,
+                "predicted": {
+                  "centroid_east_kpc": -49.469294182077576,
+                  "centroid_north_kpc": 16.638265560533267,
+                  "field_energy": 1.7122725159588292,
+                  "radii_kpc": {
+                    "R50": 108.70312463380709,
+                    "R80": 151.19839076486895
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.987532071211048,
+              "residual_convergence_correlation": 0.518411079888162,
+              "residual_power_closed": 0.024780408329617587,
+              "residual_shear_alignment_cosine": 0.467141928951979,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 6845.253295499353,
+                "thermal_contrast_smooth_25kpc": 3346.4438425487842,
+                "thermal_contrast_smooth_75kpc": 4490.773147967338,
+                "thermal_total_smooth_150kpc": 793.5945135832559,
+                "thermal_total_smooth_25kpc": 687.5893567937925,
+                "thermal_total_smooth_75kpc": 687.4093678059018
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8953608601231389,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.0989485752687628,
+                  "R80": 0.08119234631751168
+                },
+                "maximum_fractional_radius_error": 0.0989485752687628,
+                "predicted": {
+                  "centroid_east_kpc": 5.722870510557818,
+                  "centroid_north_kpc": -5.647301007742077,
+                  "field_energy": 0.046243404982245176,
+                  "radii_kpc": {
+                    "R50": 131.1951672795045,
+                    "R80": 173.12696027582314
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0017778197484326,
+              "residual_convergence_correlation": 0.08701132093316799,
+              "residual_power_closed": -0.0035588001399231572,
+              "residual_shear_alignment_cosine": 0.03470250736012788,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 3450.9960581820023,
+                "thermal_contrast_smooth_25kpc": 1430.6760114526846,
+                "thermal_contrast_smooth_75kpc": 2128.19010318803,
+                "thermal_total_smooth_150kpc": 544.3425859719399,
+                "thermal_total_smooth_25kpc": 465.40084324247783,
+                "thermal_total_smooth_75kpc": 491.46796711166047
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8151663067660977
+        },
+        {
+          "alpha": 10000.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7330913508694006,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.090429660504031,
+                  "R80": 0.044975100035988584
+                },
+                "maximum_fractional_radius_error": 0.090429660504031,
+                "predicted": {
+                  "centroid_east_kpc": -49.43676124941824,
+                  "centroid_north_kpc": 16.636422330105063,
+                  "field_energy": 0.00018937254159599758,
+                  "radii_kpc": {
+                    "R50": 108.72662118882916,
+                    "R80": 151.19707704374636
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.9998677381074962,
+              "residual_convergence_correlation": 0.5186873001950091,
+              "residual_power_closed": 0.00026450629179941565,
+              "residual_shear_alignment_cosine": 0.46694184953815737,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 73.21653907217936,
+                "thermal_contrast_smooth_25kpc": 34.75938737882096,
+                "thermal_contrast_smooth_75kpc": 47.7164415563248,
+                "thermal_total_smooth_150kpc": 8.32079941388386,
+                "thermal_total_smooth_25kpc": 7.164164972692532,
+                "thermal_total_smooth_75kpc": 7.183373055266077
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.894726234838626,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.0990909327872203,
+                  "R80": 0.08136247971291273
+                },
+                "maximum_fractional_radius_error": 0.0990909327872203,
+                "predicted": {
+                  "centroid_east_kpc": 5.683019645431129,
+                  "centroid_north_kpc": -5.64121077767407,
+                  "field_energy": 5.14654517462557e-06,
+                  "radii_kpc": {
+                    "R50": 131.21216226804884,
+                    "R80": 173.15420304875573
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0000186585477628,
+              "residual_convergence_correlation": 0.08612659216844763,
+              "residual_power_closed": -3.731744366719525e-05,
+              "residual_shear_alignment_cosine": 0.03454945192921593,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 36.60858126674499,
+                "thermal_contrast_smooth_25kpc": 15.014381268782072,
+                "thermal_contrast_smooth_75kpc": 22.39370697638974,
+                "thermal_total_smooth_150kpc": 5.758478876574111,
+                "thermal_total_smooth_25kpc": 4.901453002556094,
+                "thermal_total_smooth_75kpc": 5.182484066044003
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8179113533959614
+        },
+        {
+          "alpha": 1000000.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7331649540468957,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.09043234909392912,
+                  "R80": 0.04493577041963593
+                },
+                "maximum_fractional_radius_error": 0.09043234909392912,
+                "predicted": {
+                  "centroid_east_kpc": -49.43643521246129,
+                  "centroid_north_kpc": 16.63640322070277,
+                  "field_energy": 1.8956797818040787e-08,
+                  "radii_kpc": {
+                    "R50": 108.72688926783138,
+                    "R80": 151.20330360708937
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.999998676579887,
+              "residual_convergence_correlation": 0.5186900521722023,
+              "residual_power_closed": 2.6468384746181073e-06,
+              "residual_shear_alignment_cosine": 0.466939833303503,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 0.7326659053479307,
+                "thermal_contrast_smooth_25kpc": 0.34772979392311704,
+                "thermal_contrast_smooth_75kpc": 0.4774595223304838,
+                "thermal_total_smooth_150kpc": 0.08324841348295499,
+                "thermal_total_smooth_25kpc": 0.07167192137059408,
+                "thermal_total_smooth_75kpc": 0.07186621200191053
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8947195767413467,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.09908994986650299,
+                  "R80": 0.08136419326277115
+                },
+                "maximum_fractional_radius_error": 0.09908994986650299,
+                "predicted": {
+                  "centroid_east_kpc": 5.6826191340457,
+                  "centroid_north_kpc": -5.641148893850014,
+                  "field_energy": 5.152204528318377e-10,
+                  "radii_kpc": {
+                    "R50": 131.21204492457088,
+                    "R80": 173.15447743256846
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0000001866777637,
+              "residual_convergence_correlation": 0.08611768540457711,
+              "residual_power_closed": -3.733555622442708e-07,
+              "residual_shear_alignment_cosine": 0.03454792644335872,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 0.3663072672327708,
+                "thermal_contrast_smooth_25kpc": 0.15021845035843695,
+                "thermal_contrast_smooth_75kpc": 0.22405436602198173,
+                "thermal_total_smooth_150kpc": 0.057618039134462715,
+                "thermal_total_smooth_25kpc": 0.04904064041839592,
+                "thermal_total_smooth_75kpc": 0.05185310202461537
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8179406979869632
+        },
+        {
+          "alpha": 100000000.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7331656905419702,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.09043237598082557,
+                  "R80": 0.04493576539397911
+                },
+                "maximum_fractional_radius_error": 0.09043237598082557,
+                "predicted": {
+                  "centroid_east_kpc": -49.43643195202057,
+                  "centroid_north_kpc": 16.636403029540947,
+                  "field_energy": 1.895699340393956e-12,
+                  "radii_kpc": {
+                    "R50": 108.72689194872086,
+                    "R80": 151.20330440273838
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.9999999867657187,
+              "residual_convergence_correlation": 0.5186900796909509,
+              "residual_power_closed": 2.6468562452919286e-08,
+              "residual_shear_alignment_cosine": 0.4669398131396125,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 0.007326709130269239,
+                "thermal_contrast_smooth_25kpc": 0.003477311537992808,
+                "thermal_contrast_smooth_75kpc": 0.00477462474893348,
+                "thermal_total_smooth_150kpc": 0.0008324881787951736,
+                "thermal_total_smooth_25kpc": 0.0007167222423874747,
+                "thermal_total_smooth_75kpc": 0.0007186653697956977
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8947195101277353,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.09908994003736056,
+                  "R80": 0.08136421039949594
+                },
+                "maximum_fractional_radius_error": 0.09908994003736056,
+                "predicted": {
+                  "centroid_east_kpc": 5.682615128730867,
+                  "centroid_north_kpc": -5.6411482749132436,
+                  "field_energy": 5.152261168822051e-14,
+                  "radii_kpc": {
+                    "R50": 131.21204375114382,
+                    "R80": 173.15448017660293
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0000000018667867,
+              "residual_convergence_correlation": 0.08611759633095598,
+              "residual_power_closed": -3.7335734504040374e-09,
+              "residual_shear_alignment_cosine": 0.034547911189010475,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 0.0036630948300163035,
+                "thermal_contrast_smooth_25kpc": 0.001502191971440681,
+                "thermal_contrast_smooth_75kpc": 0.0022405553962985946,
+                "thermal_total_smooth_150kpc": 0.0005761837182228667,
+                "thermal_total_smooth_25kpc": 0.0004904090166645394,
+                "thermal_total_smooth_75kpc": 0.0005185338479452102
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8179409916342066
+        },
+        {
+          "alpha": 1000000000000.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7331656979806174,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.09043237625238347,
+                  "R80": 0.04493576534322007
+                },
+                "maximum_fractional_radius_error": 0.09043237625238347,
+                "predicted": {
+                  "centroid_east_kpc": -49.436431919090104,
+                  "centroid_north_kpc": 16.636403027610207,
+                  "field_energy": 1.8956995379372233e-20,
+                  "radii_kpc": {
+                    "R50": 108.72689197579787,
+                    "R80": 151.20330441077442
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.9999999999986765,
+              "residual_convergence_correlation": 0.51869007996889,
+              "residual_power_closed": 2.6469937353112982e-12,
+              "residual_shear_alignment_cosine": 0.466939812935957,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 7.326709636047378e-07,
+                "thermal_contrast_smooth_25kpc": 3.4773116753409827e-07,
+                "thermal_contrast_smooth_75kpc": 4.77462504714384e-07,
+                "thermal_total_smooth_150kpc": 8.324882196394318e-08,
+                "thermal_total_smooth_25kpc": 7.167222729773115e-08,
+                "thermal_total_smooth_75kpc": 7.186654026186062e-08
+              },
+              "thermal_fit_condition_number": 79388.08942093943,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8947195094549346,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.09908993993808611,
+                  "R80": 0.08136421057257703
+                },
+                "maximum_fractional_radius_error": 0.09908993993808611,
+                "predicted": {
+                  "centroid_east_kpc": 5.6826150882771636,
+                  "centroid_north_kpc": -5.641148268661973,
+                  "field_energy": 5.152261740895886e-22,
+                  "radii_kpc": {
+                    "R50": 131.2120437392922,
+                    "R80": 173.1544802043177
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0000000000001867,
+              "residual_convergence_correlation": 0.08611759543131167,
+              "residual_power_closed": -3.7347902548390266e-13,
+              "residual_shear_alignment_cosine": 0.034547911034941634,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_contrast_smooth_150kpc": 3.663095053810194e-07,
+                "thermal_contrast_smooth_25kpc": 1.5021920468664427e-07,
+                "thermal_contrast_smooth_75kpc": 2.240555514833642e-07,
+                "thermal_total_smooth_150kpc": 5.7618375182452304e-08,
+                "thermal_total_smooth_25kpc": 4.904090430507388e-08,
+                "thermal_total_smooth_75kpc": 5.185338765051287e-08
+              },
+              "thermal_fit_condition_number": 82053.79077135106,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8179409946000643
+        }
+      ],
+      "cross_cluster_scores": [
+        {
+          "full_field_NRMSE": 0.6450457679919509,
+          "halo_scale_diagnostic": {
+            "fractional_radius_errors": {
+              "R50": 0.07180718496424893,
+              "R80": 0.05345183197900754
+            },
+            "maximum_fractional_radius_error": 0.07180718496424893,
+            "predicted": {
+              "centroid_east_kpc": -52.20791357687312,
+              "centroid_north_kpc": 16.169694599670382,
+              "field_energy": 370.5898111936283,
+              "radii_kpc": {
+                "R50": 106.86977620657123,
+                "R80": 149.85506272274162
+              },
+              "valid": true
+            },
+            "required": {
+              "centroid_east_kpc": -33.26099674144199,
+              "centroid_north_kpc": -2.8786510213413794,
+              "field_energy": 2958.4683260264387,
+              "radii_kpc": {
+                "R50": 99.70988971317259,
+                "R80": 158.31741879132574
+              },
+              "valid": true
+            },
+            "valid": true
+          },
+          "residual_NRMSE": 0.842410047960061,
+          "residual_convergence_correlation": 0.48174623223392943,
+          "residual_power_closed": 0.29034531109592765,
+          "residual_shear_alignment_cosine": 0.47255113239288316,
+          "test_cluster": "PLCKG287",
+          "thermal_coefficients": {
+            "thermal_contrast_smooth_150kpc": -84351.05259198022,
+            "thermal_contrast_smooth_25kpc": 108537.17827802838,
+            "thermal_contrast_smooth_75kpc": -426.81899755589416,
+            "thermal_total_smooth_150kpc": 15125.401113386757,
+            "thermal_total_smooth_25kpc": 20084.18267503261,
+            "thermal_total_smooth_75kpc": 17032.949338959697
+          },
+          "thermal_fit_condition_number": 79388.08942093943,
+          "train_cluster": "AS295"
+        },
+        {
+          "full_field_NRMSE": 0.9051968962750083,
+          "halo_scale_diagnostic": {
+            "fractional_radius_errors": {
+              "R50": 0.09526773334868502,
+              "R80": 0.07994983679473285
+            },
+            "maximum_fractional_radius_error": 0.09526773334868502,
+            "predicted": {
+              "centroid_east_kpc": 8.242112745830077,
+              "centroid_north_kpc": -5.56217355475552,
+              "field_energy": 11.835771761334584,
+              "radii_kpc": {
+                "R50": 130.7557393733207,
+                "R80": 172.9280022481187
+              },
+              "valid": true
+            },
+            "required": {
+              "centroid_east_kpc": -32.80860361250537,
+              "centroid_north_kpc": -4.575888911361682,
+              "field_energy": 1583.667191185996,
+              "radii_kpc": {
+                "R50": 119.3824444855565,
+                "R80": 160.12595803650026
+              },
+              "valid": true
+            },
+            "valid": true
+          },
+          "residual_NRMSE": 1.0296723498582077,
+          "residual_convergence_correlation": 0.13832036451311996,
+          "residual_power_closed": -0.060225148062523104,
+          "residual_shear_alignment_cosine": 0.05281156776274984,
+          "test_cluster": "AS295",
+          "thermal_coefficients": {
+            "thermal_contrast_smooth_150kpc": 24907.903341260106,
+            "thermal_contrast_smooth_25kpc": 31346.99262930128,
+            "thermal_contrast_smooth_75kpc": 40325.80143884704,
+            "thermal_total_smooth_150kpc": 6840.100912281043,
+            "thermal_total_smooth_25kpc": 8636.369430494758,
+            "thermal_total_smooth_75kpc": 8420.021042597195
+          },
+          "thermal_fit_condition_number": 82053.79077135106,
+          "train_cluster": "PLCKG287"
+        }
+      ],
+      "feature_names": [
+        "thermal_total_smooth_25kpc",
+        "thermal_total_smooth_75kpc",
+        "thermal_total_smooth_150kpc",
+        "thermal_contrast_smooth_25kpc",
+        "thermal_contrast_smooth_75kpc",
+        "thermal_contrast_smooth_150kpc"
+      ],
+      "selected_alpha": 1.0,
+      "symmetric_cross_cluster_full_field_NRMSE": 0.785959752096198,
+      "zero_thermal_limit_NRMSE": 0.8179409946000643,
+      "zero_thermal_limit_difference_from_static": 2.965405698773793e-13
+    },
+    "thermal_total": {
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.9919528852764338,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.3559224835885509,
+                  "R80": 0.08831599524032316
+                },
+                "maximum_fractional_radius_error": 0.3559224835885509,
+                "predicted": {
+                  "centroid_east_kpc": -0.9051230781790374,
+                  "centroid_north_kpc": -23.909955207324593,
+                  "field_energy": 3306.720472501955,
+                  "radii_kpc": {
+                    "R50": 135.19888129822547,
+                    "R80": 172.2993791957607
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.3612513648961975,
+              "residual_convergence_correlation": 0.4519220940489765,
+              "residual_power_closed": -0.8530052784317605,
+              "residual_shear_alignment_cosine": 0.4221515179097156,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": -2074738.712589461,
+                "thermal_total_smooth_25kpc": 187240.04039859102,
+                "thermal_total_smooth_75kpc": 1525385.7071529357
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.9173278392112093,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.04457072075836801,
+                  "R80": 0.05393773206657393
+                },
+                "maximum_fractional_radius_error": 0.05393773206657393,
+                "predicted": {
+                  "centroid_east_kpc": -3.5903662972781225,
+                  "centroid_north_kpc": 7.481977322793971,
+                  "field_energy": 43.30719180627322,
+                  "radii_kpc": {
+                    "R50": 124.70340608217361,
+                    "R80": 168.76278905797648
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0601190026844096,
+              "residual_convergence_correlation": -0.13046654550286768,
+              "residual_power_closed": -0.12385229985258728,
+              "residual_shear_alignment_cosine": 0.30853575976496883,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": -339867.74259286973,
+                "thermal_total_smooth_25kpc": -46516.71650306068,
+                "thermal_total_smooth_75kpc": 380323.9500814297
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.9553692718525513
+        },
+        {
+          "alpha": 1e-06,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.9915291488551614,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.3559000403961335,
+                  "R80": 0.08839851204826317
+                },
+                "maximum_fractional_radius_error": 0.3559000403961335,
+                "predicted": {
+                  "centroid_east_kpc": -0.9630810818811261,
+                  "centroid_north_kpc": -23.899440290211505,
+                  "field_energy": 3302.4439602918364,
+                  "radii_kpc": {
+                    "R50": 135.19664348998472,
+                    "R80": 172.31244304380067
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.3606445642506297,
+              "residual_convergence_correlation": 0.4518954972435631,
+              "residual_power_closed": -0.8513536302247862,
+              "residual_shear_alignment_cosine": 0.4221266819141487,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": -2072549.1683537427,
+                "thermal_total_smooth_25kpc": 187870.6870764311,
+                "thermal_total_smooth_75kpc": 1522956.6851487344
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.917323638283334,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.044565654656381376,
+                  "R80": 0.053936534421192346
+                },
+                "maximum_fractional_radius_error": 0.053936534421192346,
+                "predicted": {
+                  "centroid_east_kpc": -3.5895289901780885,
+                  "centroid_north_kpc": 7.482743031302089,
+                  "field_energy": 43.300896772458124,
+                  "radii_kpc": {
+                    "R50": 124.70280127853444,
+                    "R80": 168.76259728386236
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0601125633304052,
+              "residual_convergence_correlation": -0.1304052796410501,
+              "residual_power_closed": -0.12383864693096225,
+              "residual_shear_alignment_cosine": 0.3085582152425207,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": -339733.44153406477,
+                "thermal_total_smooth_25kpc": -46429.98970330922,
+                "thermal_total_smooth_75kpc": 380119.5127155863
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.9551472950238653
+        },
+        {
+          "alpha": 0.0001,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.9554434531344388,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.3436463796590774,
+                  "R80": 0.08380114237239816
+                },
+                "maximum_fractional_radius_error": 0.3436463796590774,
+                "predicted": {
+                  "centroid_east_kpc": -6.2738600155022155,
+                  "centroid_north_kpc": -22.90858149498574,
+                  "field_energy": 2944.4712091082984,
+                  "radii_kpc": {
+                    "R50": 133.97483232931023,
+                    "R80": 171.5845993434882
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.3087685114965582,
+              "residual_convergence_correlation": 0.449357582941728,
+              "residual_power_closed": -0.7128750166849165,
+              "residual_shear_alignment_cosine": 0.4197188272928092,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": -1882819.1316072163,
+                "thermal_total_smooth_25kpc": 241404.13722677503,
+                "thermal_total_smooth_75kpc": 1313679.002179943
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.9169331144707025,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.04506800823707096,
+                  "R80": 0.054356620076064184
+                },
+                "maximum_fractional_radius_error": 0.054356620076064184,
+                "predicted": {
+                  "centroid_east_kpc": -3.516047713983387,
+                  "centroid_north_kpc": 7.555657016323861,
+                  "field_energy": 42.717444552153914,
+                  "radii_kpc": {
+                    "R50": 124.76277347699323,
+                    "R80": 168.8298639018061
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0595121067820892,
+              "residual_convergence_correlation": -0.12453805007879065,
+              "residual_power_closed": -0.12256590441782111,
+              "residual_shear_alignment_cosine": 0.31055930477185545,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": -327120.36545916833,
+                "thermal_total_smooth_25kpc": -38315.426619602884,
+                "thermal_total_smooth_75kpc": 360952.6178692381
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.9363862794142178
+        },
+        {
+          "alpha": 0.01,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.6656459329364091,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.0012229811640296865,
+                  "R80": 0.10109957398817597
+                },
+                "maximum_fractional_radius_error": 0.10109957398817597,
+                "predicted": {
+                  "centroid_east_kpc": -69.0455680881093,
+                  "centroid_north_kpc": 4.127443968146705,
+                  "field_energy": 603.8050692704019,
+                  "radii_kpc": {
+                    "R50": 99.83183303015927,
+                    "R80": 142.31159519661506
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.8840505745675368,
+              "residual_convergence_correlation": 0.42728025454292073,
+              "residual_power_closed": 0.21845458160680808,
+              "residual_shear_alignment_cosine": 0.41365250983210083,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": -375155.6291598355,
+                "thermal_total_smooth_25kpc": 291138.61235770734,
+                "thermal_total_smooth_75kpc": 56560.52081449167
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.9124811039350578,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.05929981799162464,
+                  "R80": 0.060469554258421314
+                },
+                "maximum_fractional_radius_error": 0.060469554258421314,
+                "predicted": {
+                  "centroid_east_kpc": -4.79310354454525,
+                  "centroid_north_kpc": 8.405503209666067,
+                  "field_energy": 34.339240966350246,
+                  "radii_kpc": {
+                    "R50": 126.46180171494524,
+                    "R80": 169.8087033441701
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0518089429349364,
+              "residual_convergence_correlation": -0.044861648123145866,
+              "residual_power_closed": -0.10630205243790836,
+              "residual_shear_alignment_cosine": 0.29611168219137074,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": -110081.90639187727,
+                "thermal_total_smooth_25kpc": 64963.557948372945,
+                "thermal_total_smooth_75kpc": 70582.1853616038
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7986570831944471
+        },
+        {
+          "alpha": 1.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.6701587262181341,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.2614495378081688,
+                  "R80": 0.04800579099468737
+                },
+                "maximum_fractional_radius_error": 0.2614495378081688,
+                "predicted": {
+                  "centroid_east_kpc": -30.768027778832803,
+                  "centroid_north_kpc": 13.805832640403676,
+                  "field_energy": 213.85130080911173,
+                  "radii_kpc": {
+                    "R50": 125.77899429358504,
+                    "R80": 165.9175717086405
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.8804205034591402,
+              "residual_convergence_correlation": 0.48960886619967237,
+              "residual_power_closed": 0.22485973708875406,
+              "residual_shear_alignment_cosine": 0.5495765890588429,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 15770.954811543457,
+                "thermal_total_smooth_25kpc": 21871.281455057455,
+                "thermal_total_smooth_75kpc": 17843.26998875192
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.909657502577596,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.08847625688532156,
+                  "R80": 0.07408377169581257
+                },
+                "maximum_fractional_radius_error": 0.08847625688532156,
+                "predicted": {
+                  "centroid_east_kpc": -9.184983157041895,
+                  "centroid_north_kpc": 5.210203800244776,
+                  "field_energy": 17.14416564548071,
+                  "radii_kpc": {
+                    "R50": 129.94495631145824,
+                    "R80": 171.98869295424961
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0395450030089266,
+              "residual_convergence_correlation": -0.2564792057156385,
+              "residual_power_closed": -0.08065381328082921,
+              "residual_shear_alignment_cosine": 0.21390459571839165,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 11507.7270842831,
+                "thermal_total_smooth_25kpc": 14226.50614033169,
+                "thermal_total_smooth_75kpc": 13492.627531527853
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.7989335048431819
+        },
+        {
+          "alpha": 100.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7305182785586961,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.2701045858033197,
+                  "R80": 0.05341677635379941
+                },
+                "maximum_fractional_radius_error": 0.2701045858033197,
+                "predicted": {
+                  "centroid_east_kpc": -29.238500919694715,
+                  "centroid_north_kpc": 13.40690105684021,
+                  "field_energy": 0.32254136452711174,
+                  "radii_kpc": {
+                    "R50": 126.64198817464376,
+                    "R80": 166.77422494381278
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.9949437261096467,
+              "residual_convergence_correlation": 0.4919658520207629,
+              "residual_power_closed": 0.010086981875052414,
+              "residual_shear_alignment_cosine": 0.5541805362970103,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 806.3276701008049,
+                "thermal_total_smooth_25kpc": 697.4396884361076,
+                "thermal_total_smooth_75kpc": 697.729792770716
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8952489380031506,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.08936635977883826,
+                  "R80": 0.07480268898415333
+                },
+                "maximum_fractional_radius_error": 0.08936635977883826,
+                "predicted": {
+                  "centroid_east_kpc": -9.343316966513445,
+                  "centroid_north_kpc": 5.0348836603793545,
+                  "field_energy": 0.02540303497217192,
+                  "radii_kpc": {
+                    "R50": 130.05121897072993,
+                    "R80": 172.10381027379418
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0014021366900854,
+              "residual_convergence_correlation": -0.271441031062924,
+              "residual_power_closed": -0.002806239367468377,
+              "residual_shear_alignment_cosine": 0.20689827473868588,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 558.379971851332,
+                "thermal_total_smooth_25kpc": 477.0128864088308,
+                "thermal_total_smooth_75kpc": 503.7473006493605
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8170457809401288
+        },
+        {
+          "alpha": 10000.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7331383553108682,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.27005428724874025,
+                  "R80": 0.053490906029113675
+                },
+                "maximum_fractional_radius_error": 0.27005428724874025,
+                "predicted": {
+                  "centroid_east_kpc": -29.223084341039392,
+                  "centroid_north_kpc": 13.402774290629944,
+                  "field_energy": 3.419338354758852e-05,
+                  "radii_kpc": {
+                    "R50": 126.6369729113139,
+                    "R80": 166.78596096266438
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.9999477817049032,
+              "residual_convergence_correlation": 0.491988852318409,
+              "residual_power_closed": 0.00010443386344327621,
+              "residual_shear_alignment_cosine": 0.554225764415428,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 8.32218869615183,
+                "thermal_total_smooth_25kpc": 7.165237413178825,
+                "thermal_total_smooth_75kpc": 7.184498496788069
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8947249387477272,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.08937479686081955,
+                  "R80": 0.07480622578365623
+                },
+                "maximum_fractional_radius_error": 0.08937479686081955,
+                "predicted": {
+                  "centroid_east_kpc": -9.344940162763995,
+                  "centroid_north_kpc": 5.033063762206427,
+                  "field_energy": 2.6917123692591975e-06,
+                  "radii_kpc": {
+                    "R50": 130.05222621020118,
+                    "R80": 172.10437660720297
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.000014380227559,
+              "residual_convergence_correlation": -0.27159720431358036,
+              "residual_power_closed": -2.8760661908933116e-05,
+              "residual_shear_alignment_cosine": 0.20682318707004113,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 5.760004793554647,
+                "thermal_total_smooth_25kpc": 4.902711476133666,
+                "thermal_total_smooth_75kpc": 5.18381665827693
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8179317098771294
+        },
+        {
+          "alpha": 1000000.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7331654244649815,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.2700537842101431,
+                  "R80": 0.053491894340271795
+                },
+                "maximum_fractional_radius_error": 0.2700537842101431,
+                "predicted": {
+                  "centroid_east_kpc": -29.222930163468533,
+                  "centroid_north_kpc": 13.402733009184791,
+                  "field_energy": 3.4213650426276496e-09,
+                  "radii_kpc": {
+                    "R50": 126.63692275339086,
+                    "R80": 166.7861174295359
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.9999994776461428,
+              "residual_convergence_correlation": 0.49198908224763743,
+              "residual_power_closed": 1.0447074414443591e-06,
+              "residual_shear_alignment_cosine": 0.5542262165942832,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 0.08324855253456254,
+                "thermal_total_smooth_25kpc": 0.07167202870761033,
+                "thermal_total_smooth_75kpc": 0.07186632464542426
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8947195637616338,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.08937488127226804,
+                  "R80": 0.07480626115466375
+                },
+                "maximum_fractional_radius_error": 0.08937488127226804,
+                "predicted": {
+                  "centroid_east_kpc": -9.344956398801331,
+                  "centroid_north_kpc": 5.03304555632654,
+                  "field_energy": 2.693294201490979e-10,
+                  "radii_kpc": {
+                    "R50": 130.05223628744625,
+                    "R80": 172.10438227101943
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.00000014383906,
+              "residual_convergence_correlation": -0.27159876671551364,
+              "residual_power_closed": -2.8767814064245556e-07,
+              "residual_shear_alignment_cosine": 0.20682243565973002,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 0.057618191856415306,
+                "thermal_total_smooth_25kpc": 0.04904076636939083,
+                "thermal_total_smooth_75kpc": 0.051853235395379116
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.817940901718677
+        },
+        {
+          "alpha": 100000000.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7331656952461886,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.27005377917975193,
+                  "R80": 0.0534919042233941
+                },
+                "maximum_fractional_radius_error": 0.27005377917975193,
+                "predicted": {
+                  "centroid_east_kpc": -29.22292862169165,
+                  "centroid_north_kpc": 13.402732596368969,
+                  "field_energy": 3.421385318599993e-13,
+                  "radii_kpc": {
+                    "R50": 126.63692225181111,
+                    "R80": 166.7861189942063
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.9999999947764443,
+              "residual_convergence_correlation": 0.4919890845469224,
+              "residual_power_closed": 1.0447111398192988e-08,
+              "residual_shear_alignment_cosine": 0.5542262211160612,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 0.0008324881927004615,
+                "thermal_total_smooth_25kpc": 0.0007167222531212705,
+                "thermal_total_smooth_75kpc": 0.000718665381060148
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8947195099979364,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.08937488211638649,
+                  "R80": 0.07480626150837413
+                },
+                "maximum_fractional_radius_error": 0.08937488211638649,
+                "predicted": {
+                  "centroid_east_kpc": -9.344956561162114,
+                  "centroid_north_kpc": 5.033045374267051,
+                  "field_energy": 2.6933100268564545e-14,
+                  "radii_kpc": {
+                    "R50": 130.05223638821917,
+                    "R80": 172.10438232765765
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0000000014383943,
+              "residual_convergence_correlation": -0.27159878233959994,
+              "residual_power_closed": -2.876788585126633e-09,
+              "residual_shear_alignment_cosine": 0.20682242814557344,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 0.0005761837334951933,
+                "thermal_total_smooth_25kpc": 0.0004904090292597389,
+                "thermal_total_smooth_75kpc": 0.0005185338612823981
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8179409936715406
+        },
+        {
+          "alpha": 1000000000000.0,
+          "directions": [
+            {
+              "full_field_NRMSE": 0.7331656979810878,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.2700537791289451,
+                  "R80": 0.0534919043232137
+                },
+                "maximum_fractional_radius_error": 0.2700537791289451,
+                "predicted": {
+                  "centroid_east_kpc": -29.2229286061197,
+                  "centroid_north_kpc": 13.402732592199529,
+                  "field_energy": 3.4213855233882335e-21,
+                  "radii_kpc": {
+                    "R50": 126.63692224674517,
+                    "R80": 166.7861190100095
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -33.26099674144199,
+                  "centroid_north_kpc": -2.8786510213413794,
+                  "field_energy": 2958.4683260264387,
+                  "radii_kpc": {
+                    "R50": 99.70988971317259,
+                    "R80": 158.31741879132574
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 0.9999999999994775,
+              "residual_convergence_correlation": 0.49198908457014495,
+              "residual_power_closed": 1.0449419107771973e-12,
+              "residual_shear_alignment_cosine": 0.5542262211617313,
+              "test_cluster": "PLCKG287",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 8.32488219640826e-08,
+                "thermal_total_smooth_25kpc": 7.16722272978386e-08,
+                "thermal_total_smooth_75kpc": 7.186654026197323e-08
+              },
+              "thermal_fit_condition_number": 4423.957865872089,
+              "train_cluster": "AS295"
+            },
+            {
+              "full_field_NRMSE": 0.8947195094549216,
+              "halo_scale_diagnostic": {
+                "fractional_radius_errors": {
+                  "R50": 0.08937488212491211,
+                  "R80": 0.0748062615119466
+                },
+                "maximum_fractional_radius_error": 0.08937488212491211,
+                "predicted": {
+                  "centroid_east_kpc": -9.34495656280196,
+                  "centroid_north_kpc": 5.0330453724282505,
+                  "field_energy": 2.6933101866933576e-22,
+                  "radii_kpc": {
+                    "R50": 130.05223638923698,
+                    "R80": 172.1043823282297
+                  },
+                  "valid": true
+                },
+                "required": {
+                  "centroid_east_kpc": -32.80860361250537,
+                  "centroid_north_kpc": -4.575888911361682,
+                  "field_energy": 1583.667191185996,
+                  "radii_kpc": {
+                    "R50": 119.3824444855565,
+                    "R80": 160.12595803650026
+                  },
+                  "valid": true
+                },
+                "valid": true
+              },
+              "residual_NRMSE": 1.0000000000001439,
+              "residual_convergence_correlation": -0.2715987824974033,
+              "residual_power_closed": -2.877698079828406e-13,
+              "residual_shear_alignment_cosine": 0.2068224280696805,
+              "test_cluster": "AS295",
+              "thermal_coefficients": {
+                "thermal_total_smooth_150kpc": 5.761837518260513e-08,
+                "thermal_total_smooth_25kpc": 4.904090430519947e-08,
+                "thermal_total_smooth_75kpc": 5.185338765064623e-08
+              },
+              "thermal_fit_condition_number": 1660.4220450453356,
+              "train_cluster": "PLCKG287"
+            }
+          ],
+          "symmetric_cross_cluster_full_field_NRMSE": 0.8179409946002679
+        }
+      ],
+      "cross_cluster_scores": [
+        {
+          "full_field_NRMSE": 0.6656459329364091,
+          "halo_scale_diagnostic": {
+            "fractional_radius_errors": {
+              "R50": 0.0012229811640296865,
+              "R80": 0.10109957398817597
+            },
+            "maximum_fractional_radius_error": 0.10109957398817597,
+            "predicted": {
+              "centroid_east_kpc": -69.0455680881093,
+              "centroid_north_kpc": 4.127443968146705,
+              "field_energy": 603.8050692704019,
+              "radii_kpc": {
+                "R50": 99.83183303015927,
+                "R80": 142.31159519661506
+              },
+              "valid": true
+            },
+            "required": {
+              "centroid_east_kpc": -33.26099674144199,
+              "centroid_north_kpc": -2.8786510213413794,
+              "field_energy": 2958.4683260264387,
+              "radii_kpc": {
+                "R50": 99.70988971317259,
+                "R80": 158.31741879132574
+              },
+              "valid": true
+            },
+            "valid": true
+          },
+          "residual_NRMSE": 0.8840505745675368,
+          "residual_convergence_correlation": 0.42728025454292073,
+          "residual_power_closed": 0.21845458160680808,
+          "residual_shear_alignment_cosine": 0.41365250983210083,
+          "test_cluster": "PLCKG287",
+          "thermal_coefficients": {
+            "thermal_total_smooth_150kpc": -375155.6291598355,
+            "thermal_total_smooth_25kpc": 291138.61235770734,
+            "thermal_total_smooth_75kpc": 56560.52081449167
+          },
+          "thermal_fit_condition_number": 4423.957865872089,
+          "train_cluster": "AS295"
+        },
+        {
+          "full_field_NRMSE": 0.9124811039350578,
+          "halo_scale_diagnostic": {
+            "fractional_radius_errors": {
+              "R50": 0.05929981799162464,
+              "R80": 0.060469554258421314
+            },
+            "maximum_fractional_radius_error": 0.060469554258421314,
+            "predicted": {
+              "centroid_east_kpc": -4.79310354454525,
+              "centroid_north_kpc": 8.405503209666067,
+              "field_energy": 34.339240966350246,
+              "radii_kpc": {
+                "R50": 126.46180171494524,
+                "R80": 169.8087033441701
+              },
+              "valid": true
+            },
+            "required": {
+              "centroid_east_kpc": -32.80860361250537,
+              "centroid_north_kpc": -4.575888911361682,
+              "field_energy": 1583.667191185996,
+              "radii_kpc": {
+                "R50": 119.3824444855565,
+                "R80": 160.12595803650026
+              },
+              "valid": true
+            },
+            "valid": true
+          },
+          "residual_NRMSE": 1.0518089429349364,
+          "residual_convergence_correlation": -0.044861648123145866,
+          "residual_power_closed": -0.10630205243790836,
+          "residual_shear_alignment_cosine": 0.29611168219137074,
+          "test_cluster": "AS295",
+          "thermal_coefficients": {
+            "thermal_total_smooth_150kpc": -110081.90639187727,
+            "thermal_total_smooth_25kpc": 64963.557948372945,
+            "thermal_total_smooth_75kpc": 70582.1853616038
+          },
+          "thermal_fit_condition_number": 1660.4220450453356,
+          "train_cluster": "PLCKG287"
+        }
+      ],
+      "feature_names": [
+        "thermal_total_smooth_25kpc",
+        "thermal_total_smooth_75kpc",
+        "thermal_total_smooth_150kpc"
+      ],
+      "selected_alpha": 0.01,
+      "symmetric_cross_cluster_full_field_NRMSE": 0.7986570831944471,
+      "zero_thermal_limit_NRMSE": 0.8179409946002679,
+      "zero_thermal_limit_difference_from_static": 9.29256671611256e-14
+    }
+  },
+  "figure": "results/sigma_v17e_thermal_stress_transfer/thermal_stress_transfer.png",
+  "figure_sha256": "24f49930b5684ce0c45ef2de6133987042369130a73ebdd04c4b7a7f39107251",
+  "gate_results": {
+    "absolute_source_sufficiency": false,
+    "advance": false,
+    "doubled_resolution_stable": true,
+    "halo_scale_both_directions": true,
+    "material_improvement": false,
+    "residual_power_both_directions": false,
+    "residual_shear_alignment_both_directions": false,
+    "static_baseline_reproduced": true,
+    "zero_thermal_limit_reproduces_static": true
+  },
+  "generated_utc": "2026-08-05T02:15:17.140454+00:00",
+  "input_hashes": {
+    "AS295_thermal_source": "1d641edefd9d8ab92f5fb4fd78974c57715791f601aed6f61aa91c65678db6ec",
+    "PLCKG287_thermal_source": "e45dc2f9490bb3ef64aaf305d2191e957ea8aeb3591d4be2ace58d23dcf449c3",
+    "config": "b81e718bf2726d0dbad906731960a0872d5ca4fc166385e29293a6bd5ed1ee23",
+    "static_baseline_config": "b290c084590363a6df5d0cfc57b4a97778684af057f7fa807bc6525f2b534bee",
+    "thermal_source_protocol": "c2e0e8d67cf59fe55048257497580d084eae70fdc1e3a37d93ef485504c6846e",
+    "thermal_source_report": "a0f93505aa25a34fbd6c356c9cfedfa696b5982e03a9b810fe6dd4f8ee88a3da"
+  },
+  "inverse_coefficients_are_physical_constants": false,
+  "lensing_target_opened": true,
+  "observational_validation_claim": false,
+  "one_metric_feature_triplets": true,
+  "per_cluster_amplitude_scale_shear_or_orientation": false,
+  "per_cluster_gravity_parameters": 0,
+  "preserved_static_baseline": {
+    "directions": [
+      {
+        "full_field_NRMSE": 0.7331656979813613,
+        "internal_coefficients": {
+          "internal_total_smooth_10kpc": 0.8052384872649633,
+          "internal_total_smooth_150kpc": 1.6727170356309384,
+          "internal_total_smooth_25kpc": 0.6594015260479333,
+          "internal_total_smooth_5kpc": 1.0508830879905018,
+          "internal_total_smooth_75kpc": 0.7895872218086043
+        },
+        "internal_fit_condition_number": 1721.2010915938479,
+        "residual_NRMSE": 1.0,
+        "residual_convergence_correlation": 0.0,
+        "residual_power_closed": 0.0,
+        "residual_shear_alignment_cosine": 0.0,
+        "test_cluster": "PLCKG287",
+        "train_cluster": "AS295"
+      },
+      {
+        "full_field_NRMSE": 0.8947195094548672,
+        "internal_coefficients": {
+          "internal_total_smooth_10kpc": 1.3315553217011742,
+          "internal_total_smooth_150kpc": 3.7095417879650894,
+          "internal_total_smooth_25kpc": 1.2979015726380618,
+          "internal_total_smooth_5kpc": 1.6454144605385488,
+          "internal_total_smooth_75kpc": 2.24347255759366
+        },
+        "internal_fit_condition_number": 624.8243637152128,
+        "residual_NRMSE": 1.0,
+        "residual_convergence_correlation": 0.0,
+        "residual_power_closed": 0.0,
+        "residual_shear_alignment_cosine": 0.0,
+        "test_cluster": "AS295",
+        "train_cluster": "PLCKG287"
+      }
+    ],
+    "symmetric_cross_cluster_full_field_NRMSE": 0.8179409946003608
+  },
+  "primary_grid_points": 193,
+  "protocol_version": "SIGMA-V17E-THERMAL-STRESS-TRANSFER-1.0.1",
+  "relative_improvement_over_static_baseline": 0.03909969388413973,
+  "resolution_stability": {
+    "components": {
+      "AS295_to_PLCKG287_full_field_NRMSE_relative_change": 0.010085095451686593,
+      "AS295_to_PLCKG287_predicted_R50_relative_change": 0.007868743283409026,
+      "AS295_to_PLCKG287_predicted_R80_relative_change": 0.005789265851775629,
+      "AS295_to_PLCKG287_residual_power_closed_absolute_change": 0.008944253615570275,
+      "AS295_to_PLCKG287_residual_shear_alignment_absolute_change": 0.005542697148755826,
+      "PLCKG287_to_AS295_full_field_NRMSE_relative_change": 0.00038319739757337564,
+      "PLCKG287_to_AS295_predicted_R50_relative_change": 0.0010113417848262515,
+      "PLCKG287_to_AS295_predicted_R80_relative_change": 6.487228158074807e-05,
+      "PLCKG287_to_AS295_residual_power_closed_absolute_change": 0.004874113139515579,
+      "PLCKG287_to_AS295_residual_shear_alignment_absolute_change": 0.0010957660004600536,
+      "symmetric_full_field_NRMSE_relative_change": 0.00364008335123005
+    },
+    "maximum_change": 0.010085095451686593,
+    "valid": true
+  },
+  "sample_is_spent": true,
+  "selected_family": "thermal_component",
+  "source_maps_frozen_before_target_opened": true,
+  "static_baseline_reproduction_difference": 0.0,
+  "status": "completed Sigma v17E thermal-stress transfer diagnostic"
+}

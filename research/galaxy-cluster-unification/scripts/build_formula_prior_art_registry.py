@@ -6,7 +6,7 @@ This script does not retype or reinterpret their measurements.  It adds:
 * final-theory eligibility flags, especially convenience-switch detection;
 * links from every tested law to the closest published formula families;
 * a curated primary-source prior-art registry; and
-* an inventory of formula/action fragments in every Sigma v1--v17 protocol.
+* an inventory of formula/action fragments in every Sigma protocol.
 
 The result is deterministic and records hashes of both source registries.
 """
@@ -128,6 +128,10 @@ def closest_published_families(text: str) -> list[str]:
             (
                 "spatial stress",
                 "stress-energy",
+                "member stress",
+                "member_random_stress",
+                "q_member",
+                "velocity variance",
                 "theta_b",
                 "q_total",
                 "q_contrast",
@@ -281,7 +285,11 @@ def extract_formula_fragments(value: Any, path: str = "") -> list[dict[str, str]
     if isinstance(value, dict):
         for key, child in value.items():
             child_path = f"{path}.{key}" if path else key
-            if key.lower() in FORMULA_FIELD_NAMES and isinstance(child, str):
+            formula_key = key.lower()
+            if (
+                formula_key in FORMULA_FIELD_NAMES
+                or formula_key.endswith("_equation")
+            ) and isinstance(child, str):
                 fragments.append({"json_path": child_path, "formula": child})
             fragments.extend(extract_formula_fragments(child, child_path))
     elif isinstance(value, list):
@@ -355,7 +363,7 @@ def build_markdown(payload: dict[str, Any]) -> str:
         "",
         "## What this file guarantees",
         "",
-        f"This file imports all **{payload['counts']['tested_scored_formulas']} scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **{payload['counts']['sigma_protocols']} Sigma v1-v17 protocol files** and their **{payload['counts']['sigma_formula_fragments']} explicit formula/action fragments** (including **{payload['counts']['project_formula_addenda']}** canonical equations recovered from result documents), and compares them with **{payload['counts']['published_families']} directly relevant published formula families**.",
+        f"This file imports all **{payload['counts']['tested_scored_formulas']} scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **{payload['counts']['sigma_protocols']} Sigma protocol files** and their **{payload['counts']['sigma_formula_fragments']} explicit formula/action fragments** (including **{payload['counts']['project_formula_addenda']}** canonical equations recovered from result documents), and compares them with **{payload['counts']['published_families']} directly relevant published formula families**.",
         "",
         "It does **not** claim to contain every equation ever published in gravitation. It is a reproducible scientific prior-art screen of the families that overlap mechanisms we have actually explored. It is not a legal novelty or patent opinion.",
         "",
@@ -510,7 +518,7 @@ def main() -> None:
         row["classification"]["final_theory_eligibility"] for row in tested
     )
     payload: dict[str, Any] = {
-        "registry_version": "FORMULA-PRIOR-ART-REGISTRY-1.0.0",
+        "registry_version": "FORMULA-PRIOR-ART-REGISTRY-1.1.0",
         "as_of_utc": published["as_of_utc"],
         "scope": published["scope"],
         "one_law_rule": published["eligibility_rule"],
