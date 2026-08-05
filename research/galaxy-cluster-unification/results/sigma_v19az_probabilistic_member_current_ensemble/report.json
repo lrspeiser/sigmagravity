@@ -1,0 +1,131 @@
+{
+  "candidate_graph": {
+    "connected_components": 45,
+    "coupled_components": 6,
+    "hypothesis_rows": 640,
+    "independent_draw_probability_of_no_candidate_collision": 0.9999999999999954,
+    "maximum_component_members": 4,
+    "shared_candidates": 60,
+    "total_cartesian_states": 450396,
+    "total_valid_states": 386969,
+    "unique_candidates": 568
+  },
+  "claim_boundary": [
+    "V19AZ propagates positional identity and spectroscopic measurement uncertainty; it does not identify a hard counterpart for an ambiguous member.",
+    "Bessel I flux is a relative luminosity proxy, not stellar mass, total baryonic mass, or a fitted mass-to-light ratio.",
+    "Only the line-of-sight velocity is observed. Transverse currents remain missing and must be marginalized in a later physics protocol.",
+    "The 78-member spectroscopic catalog is not asserted to be a complete cluster-galaxy census.",
+    "No lensing, dark-matter map, halo fit, gravity residual, or Sigma parameter enters this ensemble."
+  ],
+  "config": "configs/sigma_v19az_probabilistic_member_current_ensemble.json",
+  "config_sha256": "4dd175be6d04f25bdd9413155548dfbcab2884c162cf2dc2ff4c37c7d34528d0",
+  "decision": "passed",
+  "ensemble": {
+    "draws": 8192,
+    "maximum_absolute_sampled_vs_exact_state_probability_difference": 0.014038757527302659,
+    "rows": 589824,
+    "seed": 190126,
+    "transverse_velocity_state": "unmeasured_not_imputed"
+  },
+  "exact_posterior": {
+    "approximation": "none",
+    "maximum_absolute_local_to_joint_state_probability_change": 4.13181057014092e-15,
+    "maximum_candidate_occupancy": 0.9248301626511845,
+    "maximum_component_normalization_error": 3.3306690738754696e-16,
+    "maximum_local_normalization_error": 0.0,
+    "maximum_member_marginal_normalization_error": 4.440892098500626e-16,
+    "maximum_null_crosscheck_error": 1.942890293094024e-16,
+    "member_state_rows_including_anchors": 712,
+    "solver": "complete connected-component enumeration with log-sum-exp normalization"
+  },
+  "gate_results": {
+    "all_6_missing_bri_members_explicit": true,
+    "all_72_bri_members_in_every_draw": true,
+    "candidate_occupancy_ceiling": true,
+    "component_probability_normalization": true,
+    "every_sample_one_to_one": true,
+    "exact_candidate_hypothesis_rows": true,
+    "exact_shared_candidate_count": true,
+    "exact_unique_probabilistic_candidates": true,
+    "input_hashes_match": true,
+    "local_probability_normalization": true,
+    "maximum_conflict_component_members": true,
+    "member_marginal_normalization": true,
+    "no_lensing_halo_or_gravity_payload": true,
+    "null_probability_crosscheck": true,
+    "sampled_vs_exact_state_marginal": true
+  },
+  "generated_utc": "2026-08-05T11:49:37.714888+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "input_hashes": {
+    "anchor_manifest": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f",
+    "association_report": "2b751c1e455171b6b37b844ea22b820a3faab65ddd898672b8802b8ca94cd860",
+    "candidate_hypotheses": "ea7628d0daab8774bbe346ca721304e0ec8712025a89ac9f9508451317c3be9e",
+    "failed_signed_flux_likelihood_report": "8365d87e842cf3a5381fbdbc81d22a254953424ec25c2e3fa930fd8a09e28cd0",
+    "member_associations": "107e4d82ee35774ee47b81e8e3452ada33577cfac050cce0f80c4ab35b8a6840",
+    "published_bri": "396af209b9ba466f9396f7f0fcf4af1ced3d0725fffc143b07e0e0218d3c63a7",
+    "spectroscopic_members": "36a87b48f77e4998fc8b4136ab1b1c559b90d1b18d7d65633e8dacf167dea64b"
+  },
+  "kinematic_and_luminosity_proxies": {
+    "absolute_mass_inferred": false,
+    "nominal_cluster_median_cz_km_s": 88884.5,
+    "relative_i_luminosity_max": 36.3078054770101,
+    "relative_i_luminosity_median": 4.365343472707809,
+    "relative_i_luminosity_min": 0.8953647655495959,
+    "three_dimensional_current_inferred": false
+  },
+  "lensing_or_halo_payload_opened": false,
+  "outputs": {
+    "candidate_occupancy": {
+      "bytes": 68405,
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/candidate_occupancy.csv",
+      "sha256": "8acf3691c77b3a2e6f0960571d193347a27e9837742d7cb7cdeb8bf0d85d6947"
+    },
+    "component_partitions": {
+      "bytes": 2876,
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/component_partitions.csv",
+      "sha256": "37a851db1ed22720ca0ab33234986240cfc575dcb322100e09f463a18aa3cfd5"
+    },
+    "ensemble": {
+      "bytes": 26008392,
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/position_current_ensemble.csv.gz",
+      "sha256": "28f292af9afc4e8161bc5f0fce48d30dcf5c9c27c4412f6cba02c6fbb19bdc47"
+    },
+    "figure": {
+      "bytes": 171027,
+      "path": "results/sigma_v19az_probabilistic_member_current_ensemble/position_current_ensemble.png",
+      "sha256": "3967df3888a21c018701c81ab5b623c8207901ce20457eb3cf270862d89c934f"
+    },
+    "member_summary": {
+      "bytes": 24532,
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/member_summary.csv",
+      "sha256": "4df846e980f434bf6ba40df7012be74ac1c5bd0574627eeaa1a40d62bbf1b46e"
+    },
+    "membership_inventory": {
+      "bytes": 8577,
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/membership_inventory.csv",
+      "sha256": "4f948ec28ac00390b1d6d2312436e9756f54f3fe3c9ed83fcaf15dfc0ca12ea5"
+    },
+    "state_marginals": {
+      "bytes": 101893,
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/state_marginals.csv",
+      "sha256": "6440842de369875e079dd29b248ab23ea5c672e13af45c3aa5c4ef249fd52e2a"
+    }
+  },
+  "population": {
+    "finite_bri_members": 72,
+    "fixed_anchor_members": 15,
+    "missing_bri_member_ids": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "67"
+    ],
+    "missing_bri_members": 6,
+    "probabilistic_members": 57,
+    "spectroscopic_members": 78
+  },
+  "protocol_version": "SIGMA-V19AZ-PROBABILISTIC-MEMBER-CURRENT-ENSEMBLE-1.0.3"
+}

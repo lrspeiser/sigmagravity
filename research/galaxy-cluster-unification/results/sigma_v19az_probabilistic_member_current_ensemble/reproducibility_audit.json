@@ -1,0 +1,46 @@
+{
+  "audit_version": "SIGMA-V19AZ-REPRODUCIBILITY-AUDIT-1.0.0",
+  "protocol_version": "SIGMA-V19AZ-PROBABILISTIC-MEMBER-CURRENT-ENSEMBLE-1.0.3",
+  "config_sha256": "4dd175be6d04f25bdd9413155548dfbcab2884c162cf2dc2ff4c37c7d34528d0",
+  "runner_sha256": "dba3e889638b306b977b630c4c98a63811f3869f1c0a79f351b9a983f14849c3",
+  "method": "Run the unchanged frozen runner twice and compare SHA-256 hashes of every scientific output. The generated report is excluded because it contains an intentional run timestamp.",
+  "runs_compared": 2,
+  "all_scientific_outputs_byte_identical": true,
+  "outputs": {
+    "membership_inventory": {
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/membership_inventory.csv",
+      "sha256_run_1": "4f948ec28ac00390b1d6d2312436e9756f54f3fe3c9ed83fcaf15dfc0ca12ea5",
+      "sha256_run_2": "4f948ec28ac00390b1d6d2312436e9756f54f3fe3c9ed83fcaf15dfc0ca12ea5"
+    },
+    "state_marginals": {
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/state_marginals.csv",
+      "sha256_run_1": "6440842de369875e079dd29b248ab23ea5c672e13af45c3aa5c4ef249fd52e2a",
+      "sha256_run_2": "6440842de369875e079dd29b248ab23ea5c672e13af45c3aa5c4ef249fd52e2a"
+    },
+    "candidate_occupancy": {
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/candidate_occupancy.csv",
+      "sha256_run_1": "8acf3691c77b3a2e6f0960571d193347a27e9837742d7cb7cdeb8bf0d85d6947",
+      "sha256_run_2": "8acf3691c77b3a2e6f0960571d193347a27e9837742d7cb7cdeb8bf0d85d6947"
+    },
+    "component_partitions": {
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/component_partitions.csv",
+      "sha256_run_1": "37a851db1ed22720ca0ab33234986240cfc575dcb322100e09f463a18aa3cfd5",
+      "sha256_run_2": "37a851db1ed22720ca0ab33234986240cfc575dcb322100e09f463a18aa3cfd5"
+    },
+    "member_summary": {
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/member_summary.csv",
+      "sha256_run_1": "4df846e980f434bf6ba40df7012be74ac1c5bd0574627eeaa1a40d62bbf1b46e",
+      "sha256_run_2": "4df846e980f434bf6ba40df7012be74ac1c5bd0574627eeaa1a40d62bbf1b46e"
+    },
+    "ensemble": {
+      "path": "data/derived/sigma_v19az_probabilistic_member_current_ensemble/position_current_ensemble.csv.gz",
+      "sha256_run_1": "28f292af9afc4e8161bc5f0fce48d30dcf5c9c27c4412f6cba02c6fbb19bdc47",
+      "sha256_run_2": "28f292af9afc4e8161bc5f0fce48d30dcf5c9c27c4412f6cba02c6fbb19bdc47"
+    },
+    "figure": {
+      "path": "results/sigma_v19az_probabilistic_member_current_ensemble/position_current_ensemble.png",
+      "sha256_run_1": "3967df3888a21c018701c81ab5b623c8207901ce20457eb3cf270862d89c934f",
+      "sha256_run_2": "3967df3888a21c018701c81ab5b623c8207901ce20457eb3cf270862d89c934f"
+    }
+  }
+}

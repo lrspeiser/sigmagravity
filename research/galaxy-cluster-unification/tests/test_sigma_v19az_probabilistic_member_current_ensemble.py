@@ -8,6 +8,13 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19az_probabilistic_member_current_ensemble.json"
 SCRIPT = ROOT / "scripts" / "run_sigma_v19az_probabilistic_member_current_ensemble.py"
+REPORT = ROOT / "results" / "sigma_v19az_probabilistic_member_current_ensemble" / "report.json"
+REPRODUCIBILITY = (
+    ROOT
+    / "results"
+    / "sigma_v19az_probabilistic_member_current_ensemble"
+    / "reproducibility_audit.json"
+)
 SPEC = importlib.util.spec_from_file_location("sigma_v19az", SCRIPT)
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
@@ -55,3 +62,30 @@ def test_protocol_forbids_hard_matches_mass_and_transverse_imputation():
     assert not config["authorization"]["infer_stellar_mass"]
     assert not config["authorization"]["impute_transverse_velocity"]
     assert not config["authorization"]["read_lensing_or_halo_payload"]
+
+
+def test_completed_result_passes_exact_and_sampling_gates():
+    report = json.loads(REPORT.read_text())
+    assert report["decision"] == "passed"
+    assert all(report["gate_results"].values())
+    assert report["population"] == {
+        "finite_bri_members": 72,
+        "fixed_anchor_members": 15,
+        "missing_bri_member_ids": ["01", "02", "03", "04", "05", "67"],
+        "missing_bri_members": 6,
+        "probabilistic_members": 57,
+        "spectroscopic_members": 78,
+    }
+    assert report["exact_posterior"]["approximation"] == "none"
+    assert report["ensemble"]["rows"] == 8192 * 72
+    assert not report["lensing_or_halo_payload_opened"]
+    assert not report["gravity_formula_or_parameter_changed"]
+
+
+def test_scientific_outputs_are_byte_reproducible():
+    audit = json.loads(REPRODUCIBILITY.read_text())
+    assert audit["runs_compared"] == 2
+    assert audit["all_scientific_outputs_byte_identical"]
+    assert len(audit["outputs"]) == 7
+    for output in audit["outputs"].values():
+        assert output["sha256_run_1"] == output["sha256_run_2"]
