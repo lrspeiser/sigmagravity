@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import csv
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -17,9 +19,23 @@ assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
 
+REPORT_PATH = ROOT / "results" / "sigma_v19bz_hi_optical_spatial_information_audit" / "report.json"
+CANDIDATE_PATH = ROOT / "data" / "derived" / "sigma_v19bz_hi_optical_spatial_information_audit" / "candidate_spatial_scores.csv"
+RELEASE_PATH = ROOT / "data" / "derived" / "sigma_v19bz_hi_optical_spatial_information_audit" / "release_information.csv"
+CANDIDATE_SHA256 = "bc6dfb4cd0a30d72269a44aae20c356c982bf8bd14f0c5e1b6f686fd61adfe20"
+RELEASE_SHA256 = "deb0185973d8d99948062bc8f4efecc5e0b2c5f33289c824a5bb70a4ce000cad"
+
 
 def config() -> dict:
     return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def synthetic_header(size: int = 21) -> fits.Header:
@@ -94,3 +110,47 @@ def test_v19bz_keeps_every_target_and_assignment_channel_sealed() -> None:
     assert not boundary["gravity_action_or_constant_changed"]
     assert not boundary["lensing_payload_opened"]
     assert not boundary["solar_system_optimization_performed"]
+
+
+def test_v19bz_real_audit_finds_spatial_information_insufficient() -> None:
+    report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
+    assert all(report["gate_results"].values())
+    assert report["decision"] == "source_spatial_information_insufficient_for_hard_counterpart"
+    assert not report["information_sufficient_for_hard_counterpart"]
+    audit = report["information_audit"]
+    assert audit["robust_margin_ge_3"] == 3
+    assert np.isclose(audit["robust_margin_fraction"], 3 / 711)
+    assert audit["same_top_all_kernel_branches"] == 492
+    assert audit["duplicate_release_names"] == 119
+    assert audit["duplicate_top_stable_all_releases_and_kernels"] == 82
+    assert audit["primary_margin_grid_counts"] == {
+        "1.5": 119,
+        "2": 61,
+        "3": 24,
+        "5": 10,
+        "10": 3,
+    }
+    assert audit["field_summary"]["Norma"]["robust_margin_ge_3"] == 0
+
+
+def test_v19bz_outputs_are_exact_and_retain_all_candidate_release_pairs() -> None:
+    report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
+    assert sha256(CANDIDATE_PATH) == CANDIDATE_SHA256
+    assert sha256(RELEASE_PATH) == RELEASE_SHA256
+    assert report["outputs"]["candidate_scores"]["sha256"] == CANDIDATE_SHA256
+    assert report["outputs"]["release_information"]["sha256"] == RELEASE_SHA256
+    with CANDIDATE_PATH.open(encoding="utf-8", newline="") as stream:
+        reader = csv.DictReader(stream)
+        assert reader.fieldnames is not None
+        fields = list(reader.fieldnames)
+        rows = list(reader)
+    assert len(rows) == 18_550
+    assert len({(row["source_row_id"], row["object_id"]) for row in rows}) == 18_550
+    assert not any(
+        token in field.lower()
+        for field in fields
+        for token in ("selected", "posterior", "counterpart_probability", "gravity", "velocity")
+    )
+    with RELEASE_PATH.open(encoding="utf-8", newline="") as stream:
+        release_rows = list(csv.DictReader(stream))
+    assert len(release_rows) == 711

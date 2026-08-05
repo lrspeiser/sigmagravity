@@ -2563,3 +2563,17 @@ halo, gravity, holdout and Solar-System payload sealed. A failure can authorize
 better optical source information and uncertainty propagation, but cannot
 reject or modify a gravity theory. See
 [`SIGMA_V19BZ_HI_OPTICAL_SPATIAL_INFORMATION_AUDIT.md`](SIGMA_V19BZ_HI_OPTICAL_SPATIAL_INFORMATION_AUDIT.md).
+
+The complete V19BZ audit passed all seven access and reproducibility gates but
+found the spatial information insufficient for a hard counterpart. The
+one-beam top-to-second margin is only 1.059 at the median. Twenty-four of 711
+release maps reach 3:1 in that branch, but just three (0.42%) keep both the
+same top object and a 3:1 margin across all four beam kernels. Hydra has zero
+robust maps, NGC 4636 has three and Norma has zero. Only 82 of 119 duplicate
+Hydra names retain one top identity across both releases and every kernel.
+
+All 18,550 candidate/release pairs remain available. The result forbids a
+convenient nearest or maximum-overlap assignment and requires uniform optical
+images, foreground-star masks, deblending uncertainty and probabilistic
+mixture propagation before this blind galaxy lane can support morphology
+holdouts. No target or force result was opened.

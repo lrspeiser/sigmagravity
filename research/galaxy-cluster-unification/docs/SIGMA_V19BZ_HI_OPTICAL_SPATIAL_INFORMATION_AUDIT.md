@@ -40,6 +40,33 @@ The descriptive 3:1 margin and 90% coverage checks are exploratory because the
 source data had already been inspected. Their role is to prevent an
 unjustified hard match, not to select galaxies.
 
+## Result
+
+All seven execution gates passed and all 18,550 candidate/release pairs were
+retained. The primary one-beam branch has a median top-to-second margin of only
+1.059. Although 24 of 711 maps reach 3:1 in that single branch, only 3 maps
+(0.42%) retain both the same top identity and a margin of at least 3:1 across
+all four kernel widths. Those three are in NGC 4636; Hydra and Norma have zero.
+
+The field contrast is severe:
+
+| Field | Release maps | Median candidates | Median one-beam margin | Robust 3:1 |
+|---|---:|---:|---:|---:|
+| Hydra | 420 | 12 | 1.115 | 0 |
+| NGC 4636 | 147 | 8 | 1.064 | 3 |
+| Norma | 144 | 82 | 1.019 | 0 |
+
+Only 82 of the 119 duplicated Hydra names retain one top object across both
+releases and all four kernels. The conclusion is therefore not merely that a
+larger matching radius is noisy. The candidate identity is sensitive to the H
+I reconstruction and smoothing scale, while crowded Norma sightlines contain
+too many nearly tied optical objects.
+
+V19BZ consequently rejects a hard H I-overlap counterpart. The next legitimate
+source step is uniform optical imaging plus star masks and deblending, followed
+by a mixture that retains ambiguity. This result does not score or modify a
+gravity theory.
+
 ## Reproduction
 
 ```powershell

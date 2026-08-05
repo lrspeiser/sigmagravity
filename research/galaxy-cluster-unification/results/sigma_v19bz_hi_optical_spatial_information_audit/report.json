@@ -1,0 +1,135 @@
+{
+  "access_boundary_audit": {
+    "candidate_removed": false,
+    "development_validation_holdout_split_selected": false,
+    "gravity_action_or_constant_changed": false,
+    "gravity_formula_residual_or_halo_result_read": false,
+    "hard_counterpart_selected": false,
+    "lensing_payload_opened": false,
+    "moment0_pixels_read": true,
+    "rotation_speed_or_velocity_field_read": false,
+    "skymapper_candidate_positions_read": true,
+    "skymapper_extendedness_used_as_weight": false,
+    "solar_system_optimization_performed": false,
+    "wallaby_kinematic_table_row_read": false
+  },
+  "claim_boundary": [
+    "V19BZ measures how informative source-only H I/optical geometry is; it does not identify an optical counterpart.",
+    "All candidates and all Hydra TR1/TR2 alternatives remain in the outputs.",
+    "The margin grid is descriptive and the sufficiency rule is exploratory because source pixels were inspected before the protocol was written.",
+    "No candidate property is allowed to weight the spatial score, and no null prior or posterior is invented.",
+    "No velocity, rotation curve, lensing result, halo map, gravity residual, action, constant, holdout label or Solar-System result enters this audit."
+  ],
+  "config": "configs/sigma_v19bz_hi_optical_spatial_information_audit.json",
+  "config_sha256": "eff5b5e64c3b3a4bb7818d73be43a3454e0a993cddeb7dbdc6a98c6b4c088cca",
+  "decision": "source_spatial_information_insufficient_for_hard_counterpart",
+  "exploratory_information_sufficiency_rule": {
+    "interpretation": "A failure requires better source information or uncertainty propagation; it does not reject a gravity theory and cannot remove a galaxy.",
+    "minimum_duplicate_release_top_identity_stability": 0.9,
+    "minimum_fraction_of_release_rows_meeting_robust_margin": 0.9,
+    "minimum_top_to_second_margin_in_every_kernel_branch": 3.0
+  },
+  "gate_results": {
+    "all_711_release_maps_scored": true,
+    "all_four_kernel_branches_reported": true,
+    "every_candidate_retained_for_every_release_alternative": true,
+    "exploratory_status_reported_honestly": true,
+    "kinematic_gravity_lensing_and_solar_targets_remain_sealed": true,
+    "no_optical_weight_prior_posterior_or_hard_assignment": true,
+    "parent_and_input_hashes_exact": true
+  },
+  "information_audit": {
+    "duplicate_release_names": 119,
+    "duplicate_top_stability_fraction": 0.6890756302521008,
+    "duplicate_top_stable_all_releases_and_kernels": 82,
+    "field_summary": {
+      "Hydra": {
+        "median_candidates": 12.0,
+        "median_primary_top_margin": 1.11466316211,
+        "release_rows": 420,
+        "robust_margin_ge_3": 0,
+        "same_top_all_kernel_branches": 321
+      },
+      "NGC 4636": {
+        "median_candidates": 8.0,
+        "median_primary_top_margin": 1.06361173527,
+        "release_rows": 147,
+        "robust_margin_ge_3": 3,
+        "same_top_all_kernel_branches": 102
+      },
+      "Norma": {
+        "median_candidates": 82.0,
+        "median_primary_top_margin": 1.01932750354,
+        "release_rows": 144,
+        "robust_margin_ge_3": 0,
+        "same_top_all_kernel_branches": 69
+      }
+    },
+    "median_minimum_margin_across_kernels": 1.02221897581,
+    "median_primary_top_margin": 1.05942063274,
+    "primary_kernel_fwhm_multiplier": 1.0,
+    "primary_margin_grid_counts": {
+      "1.5": 119,
+      "10": 3,
+      "2": 61,
+      "3": 24,
+      "5": 10
+    },
+    "robust_margin_fraction": 0.004219409282700422,
+    "robust_margin_ge_3": 3,
+    "same_top_all_kernel_branches": 492
+  },
+  "information_sufficient_for_hard_counterpart": false,
+  "input_audit": {
+    "candidate_release_pair_rows": 18550,
+    "release_counts": {
+      "Hydra TR1": 148,
+      "Hydra TR2": 272,
+      "NGC 4636 TR1": 147,
+      "Norma TR1": 144
+    },
+    "release_maps": 711,
+    "unique_candidate_rows": 17094,
+    "unique_wallaby_names": 592
+  },
+  "next_evidence_if_insufficient": [
+    "uniform optical image cutouts centered on every H I source",
+    "foreground-star masks and source-deblending uncertainty",
+    "a source-only probabilistic mixture that retains ambiguous counterparts",
+    "an independent association-validation subset that contains no rotation or gravity target"
+  ],
+  "outputs": {
+    "candidate_scores": {
+      "bytes": 2611914,
+      "path": "data/derived/sigma_v19bz_hi_optical_spatial_information_audit/candidate_spatial_scores.csv",
+      "rows": 18550,
+      "sha256": "bc6dfb4cd0a30d72269a44aae20c356c982bf8bd14f0c5e1b6f686fd61adfe20"
+    },
+    "release_information": {
+      "bytes": 160703,
+      "path": "data/derived/sigma_v19bz_hi_optical_spatial_information_audit/release_information.csv",
+      "rows": 711,
+      "sha256": "deb0185973d8d99948062bc8f4efecc5e0b2c5f33289c824a5bb70a4ce000cad"
+    }
+  },
+  "protocol_version": "SIGMA-V19BZ-HI-OPTICAL-SPATIAL-INFORMATION-AUDIT-1.0.0",
+  "spatial_model": {
+    "beam_source": "geometric mean of FITS BMAJ and BMIN",
+    "candidate_prior_or_null_probability": "none",
+    "hard_counterpart_assignment": "forbidden",
+    "kernel_fwhm_multipliers": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "normalization": "normalize every smoothed positive image to unit sum over its full FITS cutout",
+    "optical_weight": "none; extended_candidate is carried only as an unweighted diagnostic because SkyMapper DR4 extended-source photometry is not optimized",
+    "primary_kernel_fwhm_multiplier": 1.0,
+    "ranking": "descending spatial likelihood ratio with object_id ascending only as a deterministic tie break",
+    "signal_image": "clip the moment-zero map at zero so negative noise cannot act as counterpart evidence",
+    "spatial_likelihood_ratio": "sample the normalized image bilinearly at each candidate and divide by the uniform per-pixel density over the same cutout",
+    "support_distance": "bilinear distance to the nearest nonzero moment-zero pixel, divided by the geometric-mean beam FWHM"
+  },
+  "status": "completed_exploratory_source_only_spatial_information_audit"
+}
