@@ -1,5 +1,5 @@
 {
-  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.0.3",
+  "protocol_version": "SIGMA-V19W2-EXACT-BINMAP-RESPONSE-COMMISSIONING-1.1.0",
   "status": "frozen after the read-only V19W live archive audit identified three implementation failure classes and before constructing any exact-bin mask, running a corrected response, reading a spectral fit, changing a scientific region or event assignment, opening lensing data, or changing gravity physics",
   "purpose": "Commission one implementation correction that restores the frozen disjoint V19P/V19Q binmap event partition, removes the invalid manually transformed low-count response coordinate, and shortens CIAO runtime paths without changing any admitted region, event, energy band, response weighting, background scaling or scientific threshold.",
   "parents": {
@@ -84,17 +84,24 @@
     "exact_bin_definition_changed": false,
     "scientific_selection_or_setting_changed": false
   },
+  "ciao_response_materialization_correction": {
+    "reason": "Protocol 1.0.3 proved that all five exact masks reproduce the frozen event counts, but CIAO dmextract propagated the pixel mask as a MASK image instead of creating the WMAP block subsequently required by weighted response generation. Four cells stopped at the missing WMAP; the all-energy zero-background cell stopped at specextract's zero-count guard.",
+    "change": "Materialize the already-verified exact source and background event subsets with dmcopy, then run the unchanged weighted response settings on those physical subsets with the frozen FOV as a redundant region filter. When an exact blank-sky subset contains zero all-energy rows, run source-only specextract, create the zero-count background PHA with dmextract, and link it as BACKFILE before the unchanged blank-sky scaling audit.",
+    "diagnostic_evidence": "A nonzero-background boundary cell completed source/background PHA plus weighted ARF/RMF through this materialized-event path; the path-length cell completed source-only weighted responses and a separate zero-count PHA through the two zero-background substeps.",
+    "exact_event_membership_changed": false,
+    "response_weighting_or_energy_grid_changed": false
+  },
   "execution": {
-    "scratch_root": "/home/henry/sv19w2",
+    "scratch_root": "/home/henry/sv19w2_v110",
     "maximum_concurrent_cells": 2,
     "attempts_per_commissioning_cell": 1,
     "base_v19w_archive_is_read_only": true
   },
   "gates": {
     "all_five_cells_use_the_exact_frozen_manifest_counts": true,
-    "all_source_and_background_pha_histograms_match_their_exact_mask_event_lists": true,
+    "all_materialized_event_subsets_and_source_background_pha_histograms_match_their_exact_mask_event_lists": true,
     "all_arf_rmf_link_and_blanksky_audits_pass": true,
-    "all_responses_use_mask_centroid_with_no_manual_refcoord": true,
+    "all_responses_use_the_exact_materialized_event_centroid_with_no_manual_refcoord": true,
     "the_path_length_cell_completes_under_the_short_runtime_root": true,
     "failure_rule": "Fail closed without changing the binmap, event membership, CCD_ID, FOV, energy band, background scaling, response weighting, response binning, concurrency, attempt count or selected commissioning cells. Do not modify or promote into the live base V19W archive."
   },
@@ -119,6 +126,6 @@
   },
   "implementation": {
     "runner": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
-    "runner_sha256": "4c09ce825216c6688c90a61656486fe15cbca624f4b7d1d82501a3a6ee079ba6"
+    "runner_sha256": "fea403d005e655a7079ca31e9fa9444fac52a0caa1e213d6125afce9c4ee6eed"
   }
 }

@@ -44,6 +44,7 @@ def test_frozen_selection_covers_all_observed_implementation_classes():
     assert off_ccd["expected_source_band_events"] == 2
     assert off_ccd["expected_background_band_events"] == 14
     assert config["execution"]["attempts_per_commissioning_cell"] == 1
+    assert config["execution"]["scratch_root"] == "/home/henry/sv19w2_v110"
     assert config["execution"]["base_v19w_archive_is_read_only"]
     assert not config["advance"]["v19x_authorized_here"]
 
@@ -58,6 +59,9 @@ def test_implementation_change_preserves_scientific_settings():
     assert "CIAO dmimgcalc" in correction["mask_writer"]
     assert "dmimgthresh" in correction["mask_writer"]
     assert config["implementation_dependency_correction"]["scientific_output_existed"] is False
+    materialized = config["ciao_response_materialization_correction"]
+    assert "Materialize" in materialized["change"]
+    assert materialized["exact_event_membership_changed"] is False
     assert correction["scientific_values_changed"] is False
 
 
@@ -71,6 +75,9 @@ def test_completed_commissioning_passes_without_authorizing_v19x():
     if not REPORT.exists():
         return
     report = json.loads(REPORT.read_text(encoding="utf-8"))
+    config = json.loads(CONFIG.read_text(encoding="utf-8"))
+    if report["protocol_version"] != config["protocol_version"]:
+        return
     assert report["status"] == (
         "exact_binmap_response_commissioning_passed_and_recovery_protocol_authorized"
     )

@@ -7,6 +7,7 @@ import argparse
 import json
 import os
 import shutil
+import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -27,7 +28,7 @@ import run_sigma_v19w_full_response_production as v19w
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / "configs" / "sigma_v19w2_exact_binmap_response_commissioning.json"
 DEFAULT_OUTPUT = ROOT / "results" / "sigma_v19w2_exact_binmap_response_commissioning"
-DEFAULT_SCRATCH = Path("/home/henry/sv19w2")
+DEFAULT_SCRATCH = Path("/home/henry/sv19w2_v110")
 
 
 def sha256(path: Path) -> str:
@@ -195,6 +196,7 @@ def prepare_mask_cell(
         "aspect": context["aspect"],
         "mask": context["mask"],
         "badpix": context["badpix"],
+        "fov": context["fov"],
         "blanksky_scale": float(row["blanksky_scale"]),
         "preflight": {
             "source_band_events": source_events,
@@ -202,6 +204,53 @@ def prepare_mask_cell(
         },
         "exact_bin_mask": mask_record,
     }
+
+
+def materialize_event_subset(
+    virtual_filter: str,
+    destination: Path,
+    log: Path,
+    env: dict[str, str],
+) -> dict[str, Any]:
+    step = v19w.inherited.run_step(
+        [
+            "dmcopy",
+            f"infile={virtual_filter}",
+            f"outfile={destination}",
+            "opt=all",
+            "clobber=no",
+            "verbose=1",
+            "mode=h",
+        ],
+        log,
+        [destination],
+        env,
+    )
+    return {
+        "path": str(destination),
+        "bytes": destination.stat().st_size,
+        "sha256": sha256(destination),
+        "all_energy_rows": v19w.inherited.event_count(str(destination), env),
+        "band_500_7000_rows": v19w.inherited.event_count(
+            str(destination) + "[energy=500:7000]", env
+        ),
+        "step": step,
+    }
+
+
+def run_in_place(command: list[str], log: Path, env: dict[str, str]) -> dict[str, Any]:
+    log.parent.mkdir(parents=True, exist_ok=True)
+    completed = subprocess.run(
+        command,
+        check=False,
+        capture_output=True,
+        text=True,
+        env=env,
+    )
+    log.write_text(completed.stdout + completed.stderr, encoding="utf-8")
+    if completed.returncode != 0:
+        raise RuntimeError(f"{command[0]} failed; inspect {log}")
+    return {"command": command, "log": str(log), "returncode": completed.returncode}
 
 
 def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
@@ -218,17 +267,52 @@ def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
         raise RuntimeError(f"V19W2 partial cell already exists: {partial}")
     products = partial / "products"
     logs = partial / "logs"
+    events = partial / "e"
     products.mkdir(parents=True)
     outroot = products / name
     source_pha = outroot.with_suffix(".pi")
     background_pha = outroot.with_name(outroot.name + "_bkg.pi")
     arf = outroot.with_suffix(".arf")
     rmf = outroot.with_suffix(".rmf")
+    env = v19w.inherited.isolated_environment(
+        os.environ,
+        scratch / "pf2" / token,
+        scratch / "t2" / token,
+    )
+    events.mkdir()
+    materialized_source = events / "s.fits"
+    materialized_background = events / "b.fits"
+    source_subset = materialize_event_subset(
+        cell["source_filter"],
+        materialized_source,
+        logs / "dmcopy_source_exact.log",
+        env,
+    )
+    background_subset = materialize_event_subset(
+        cell["background_filter"],
+        materialized_background,
+        logs / "dmcopy_background_exact.log",
+        env,
+    )
+    if (
+        source_subset["band_500_7000_rows"]
+        != cell["preflight"]["source_band_events"]
+        or background_subset["band_500_7000_rows"]
+        != cell["preflight"]["background_band_events"]
+    ):
+        raise RuntimeError(f"V19W2 materialized event count changed for {name}")
+    response_source_filter = (
+        f"{materialized_source}[sky=region({cell['fov']})]"
+    )
+    response_background_filter = (
+        f"{materialized_background}[sky=region({cell['fov']})]"
+    )
+    has_background_rows = background_subset["all_energy_rows"] > 0
     command = [
         "specextract",
-        f"infile={cell['source_filter']}",
+        f"infile={response_source_filter}",
         f"outroot={outroot}",
-        f"bkgfile={cell['background_filter']}",
+        f"bkgfile={response_background_filter if has_background_rows else ''}",
         f"asp=@{cell['aspect']}",
         f"mskfile={cell['mask']}",
         f"badpixfile={cell['badpix']}",
@@ -254,28 +338,71 @@ def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
         "verbose=1",
         "mode=h",
     ]
-    env = v19w.inherited.isolated_environment(
-        os.environ,
-        scratch / "pf2" / token,
-        scratch / "t2" / token,
-    )
     started_utc = datetime.now(UTC).isoformat()
     started = time.perf_counter()
+    expected_specextract = [source_pha, arf, rmf]
+    if has_background_rows:
+        expected_specextract.append(background_pha)
     step = v19w.inherited.run_step(
         command,
         logs / "specextract.log",
-        [source_pha, background_pha, arf, rmf],
+        expected_specextract,
         env,
     )
+    zero_background_steps = None
+    if not has_background_rows:
+        background_step = v19w.inherited.run_step(
+            [
+                "dmextract",
+                f"infile={response_background_filter}[bin PI]",
+                f"outfile={background_pha}",
+                "bkg=",
+                "error=gaussian",
+                "bkgerror=gaussian",
+                "bkgnorm=1",
+                "exp=",
+                "bkgexp=",
+                "sys_err=0",
+                "opt=pha1",
+                f"defaults={Path(sys.executable).resolve().parents[1] / 'data' / 'cxo.mdb'}",
+                "wmap=[energy=500:7000][bin det=8]",
+                "clobber=no",
+                "verbose=1",
+                "mode=h",
+            ],
+            logs / "dmextract_zero_background.log",
+            [background_pha],
+            env,
+        )
+        link_step = run_in_place(
+            [
+                "dmhedit",
+                f"infile={source_pha}[SPECTRUM]",
+                "filelist=",
+                "operation=add",
+                "key=BACKFILE",
+                f"value={background_pha.name}",
+                "comment=Sigma V19W2 exact zero-event blank-sky PHA",
+                "verbose=0",
+                "mode=h",
+            ],
+            logs / "link_zero_background.log",
+            env,
+        )
+        zero_background_steps = {
+            "reason": "the exact blank-sky event subset contains zero rows",
+            "background_pha": background_step,
+            "source_backfile_link": link_step,
+        }
     scaling = v19w.inherited.verify_blanksky_scaling(
         source_pha,
         background_pha,
         float(cell["blanksky_scale"]),
         env,
     )
-    source_audit = v19r.pha_channel_audit(source_pha, cell["source_filter"])
+    source_audit = v19r.pha_channel_audit(source_pha, response_source_filter)
     background_audit = v19r.pha_channel_audit(
-        background_pha, cell["background_filter"]
+        background_pha, response_background_filter
     )
     response = v19r.response_audit(arf, rmf)
     links = v19r.pha_links(source_pha, env)
@@ -285,6 +412,12 @@ def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
             source_audit["event_rows"] >= cell["preflight"]["source_band_events"]
             and background_audit["event_rows"]
             >= cell["preflight"]["background_band_events"]
+        ),
+        "materialized_event_subsets_match_frozen_manifest": (
+            source_subset["band_500_7000_rows"]
+            == cell["preflight"]["source_band_events"]
+            and background_subset["band_500_7000_rows"]
+            == cell["preflight"]["background_band_events"]
         ),
         "source_and_background_pha_channel_histograms_match_events": source_audit[
             "exact"
@@ -299,7 +432,7 @@ def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
             "effective_scale_relative_error_from_BKGSCALn"
         ]
         <= 1e-6,
-        "manual_refcoord_absent_and_mask_centroid_used": (
+        "manual_refcoord_absent_and_materialized_centroid_used": (
             "refcoord=" in command and "resp_pos=CENTROID" in command
         ),
     }
@@ -317,13 +450,18 @@ def execute_mask_cell(cell: dict[str, Any], scratch: Path) -> dict[str, Any]:
         "elapsed_seconds": time.perf_counter() - started,
         "preflight": cell["preflight"],
         "exact_bin_mask": cell["exact_bin_mask"],
+        "materialized_event_subsets": {
+            "source": source_subset,
+            "background": background_subset,
+        },
         "response_position": {
             "refcoord": None,
             "resp_pos": "CENTROID",
-            "reason": "CIAO-supported pixel-mask centroid; no manual cross-CCD coordinate",
+            "reason": "centroid of the exact materialized event subset; no manual cross-CCD coordinate",
         },
         "short_path_token": token,
         "step": step,
+        "zero_background_steps": zero_background_steps,
         "blanksky_scaling": scaling,
         "source_pha_channel_audit": source_audit,
         "background_pha_channel_audit": background_audit,
@@ -414,7 +552,7 @@ def run(config_path: Path, output: Path, scratch: Path) -> dict[str, Any]:
         "every_arf_rmf_link_and_blanksky_gate_passes": all(
             all(row["gates"].values()) for row in ordered
         ),
-        "every_response_uses_mask_centroid_without_manual_refcoord": all(
+        "every_response_uses_materialized_centroid_without_manual_refcoord": all(
             row["response_position"]["refcoord"] is None
             and row["response_position"]["resp_pos"] == "CENTROID"
             for row in ordered

@@ -34,6 +34,22 @@ ones, and `dmimgthresh` retains one only for the closed integer interval
 `bin_id:bin_id`, writing zero elsewhere. The independent pixel equality check
 remains unchanged.
 
+Protocol 1.0.3 proved that all five binary masks reproduce their frozen event
+counts. It then exposed a CIAO interaction: `dmextract` propagated a `MASK`
+image rather than producing the `WMAP` block required by the weighted-response
+stage. A spent diagnostic confirmed the exact workaround. `dmcopy` first
+materializes the already-verified event subset; `specextract` then sees a
+physical event file and writes a valid WMAP while retaining the identical 0.5--7
+keV count. The nonzero-background boundary case completed both PHAs and both
+weighted responses.
+
+The path-length cell has zero blank-sky rows at every energy. For that declared
+edge case, source-only `specextract` creates the weighted ARF/RMF, `dmextract`
+creates a valid zero-count background PHA, and `dmhedit` adds the ordinary
+`BACKFILE` link before the same blank-sky scaling audit. Each command and hash
+is retained. Protocol 1.1.0 uses a new scratch root so no failed response is
+reused.
+
 ## Why the binmap remains authoritative
 
 The V19P/V19Q manifest assigns every event to exactly one integer binmap pixel.
@@ -52,7 +68,7 @@ the executable filter, not the science partition.
 | `BULLET_bin154_obs4985_ccd3` | two-event centroid maps to adjacent CCD |
 | `BULLET_bin36_obs4984_ccd3` | AF_UNIX path too long in both base attempts |
 
-The products remain under `/home/henry/sv19w2` and are not promoted into the
+The products remain under `/home/henry/sv19w2_v110` and are not promoted into the
 live V19W archive.
 
 ## Advancement rule
