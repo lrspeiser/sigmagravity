@@ -1,0 +1,55 @@
+{
+  "report_version": "SIGMA-V19AR-CURRENT-ARCHIVE-DECAM-CUTOUTS-1.0.0",
+  "status": "completed_current_archive_group_acquisition",
+  "generated_utc": "2026-08-05T10:38:12.227210+00:00",
+  "config": "configs/sigma_v19ar_current_archive_decam_cutouts.json",
+  "config_sha256": "c611f1d28e97681c14223556f6b50b78fd464799d6816cc2534ddef88045a256",
+  "parent_hashes": {
+    "results/sigma_v19aq_all_archive_decam_cutouts/report.json": "95644f63209e7c0a131d438ff718c953981df7a86794b28ac56e9c12341bba4e",
+    "data/derived/sigma_v19aq_all_archive_decam_cutouts/resolved_plan.csv": "99661e740b98b3a728a0952ded3620ca1c688900994fec809f8cd1dccd1bd31e",
+    "data/derived/sigma_v19an_nsc_decam_group_cutouts/group_plan.csv": "a4b82c98ecab29b4ab2174619ca50f88399fafddc427ab40cf997b42e231df22",
+    "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f",
+    "runner": "cb72eeb70cd49236a46e4c978aa95ec5c2fc4c29f57c15f53a70a365bc22496b",
+    "frozen_v19aq_runner": "dc7bb3632c4e9674e87c537fc540660334f58bac70dc65e435d2e10f7cc51d86"
+  },
+  "frozen_resolved_plan": {
+    "path": "data/derived/sigma_v19ar_current_archive_decam_cutouts/resolved_plan.csv",
+    "sha256": "2cf636171321f3865387e5c1026bde32c0d9b7bddc1971bbbff70f2b79f93871"
+  },
+  "counts": {
+    "groups": 139,
+    "measurement_memberships": 1032,
+    "unique_exposures": 82,
+    "unique_archive_files": 82,
+    "download_bytes": 733527360,
+    "checksum_keyword_present": 0,
+    "datasum_keyword_present": 0
+  },
+  "minimum_finite_pixel_fraction": 1.0,
+  "minimum_anchor_edge_margin_pixel": 22.444585,
+  "download_manifest": "data/derived/sigma_v19ar_current_archive_decam_cutouts/download_manifest.csv",
+  "download_manifest_sha256": "fb57f563a2b868dbb1a122b55561ffa3360ae4d966ce671b5c7d07852c36cd2c",
+  "gates": {
+    "exact_groups": true,
+    "exact_measurement_memberships": true,
+    "exact_unique_exposures": true,
+    "http_200_every_group": true,
+    "fits_structure_every_group": true,
+    "celestial_wcs_every_group": true,
+    "all_frozen_anchors_contained": true,
+    "archive_detector_identity_every_group": true,
+    "all_present_checksum_keywords_valid": true,
+    "raw_sha256_recorded_every_group": true,
+    "at_least_one_finite_pixel_every_group": true,
+    "all_groups_retained_without_science_selection": true,
+    "no_photometric_model_or_prohibited_payload_opened": true,
+    "all_v19ar_acquisition_gates_pass": true
+  },
+  "claim_boundary": [
+    "V19AR changes only the processing-version identity policy. All targets, group memberships, coordinates, filters, and observation identities remain frozen.",
+    "The latest-current rule uses Archive metadata only and is uniform across all exposures; it does not respond to target flux, PSF, morphology, lensing, halo, or gravity outcomes.",
+    "Each detector is independently selected by full-header WCS containment, never by detector-number arithmetic.",
+    "A pass establishes complete calibrated detector retrieval and structural integrity only; it does not establish photometry, color, stellar mass, mass current, lensing, or Sigma-field validity.",
+    "Every exact downloaded payload receives a SHA-256, and any embedded FITS CHECKSUM or DATASUM keyword that is present must validate."
+  ]
+}

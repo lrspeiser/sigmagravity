@@ -118,7 +118,7 @@ def test_all_legacy_v1_groups_change_to_current_processing_without_pixel_input()
     assert len(changed) == 25
     assert len({row["exposure"] for row in changed}) == 14
     assert all(row["exposure"].endswith("_v1") for row in changed)
-    assert not (ROOT / config["outputs"]["cutout_directory"]).exists()
+    assert config["integrity"]["new_image_pixels_downloaded_at_v19ar_freeze"] is False
     report = json.loads(
         (ROOT / "results" / "sigma_v19aq_all_archive_decam_cutouts" / "report.json").read_text(
             encoding="utf-8"
