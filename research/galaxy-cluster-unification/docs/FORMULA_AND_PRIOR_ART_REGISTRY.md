@@ -4,7 +4,7 @@ Registry version: `FORMULA-PRIOR-ART-REGISTRY-1.1.0`. Published-literature cutof
 
 ## What this file guarantees
 
-This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **134 Sigma protocol files** and their **138 explicit formula/action fragments** (including **14** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
+This file imports all **128 scientifically distinct, scored laws** in the project's authoritative formula scorecard, inventories **153 Sigma protocol files** and their **138 explicit formula/action fragments** (including **14** canonical equations recovered from result documents), and compares them with **36 directly relevant published formula families**.
 
 It does **not** claim to contain every equation ever published in gravitation. It is a reproducible scientific prior-art screen of the families that overlap mechanisms we have actually explored. It is not a legal novelty or patent opinion.
 
@@ -300,6 +300,25 @@ This appendix closes a gap in the older scorecard: later action-health and sourc
 | `configs/sigma_v18d_collisionless_stress_transfer.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19_causal_assembly_observability_gate.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19a_assembly_history_readiness.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19aa_member_counterpart_association.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ab_bessel_nsc_transform_commissioning.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ac_nsc_measurement_photometry.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ad_fixed_aperture_color_commissioning.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ae_fors1_commissioning_frames.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19af_fors1_header_compatibility.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ag_fors1_role_calibration.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ah_fors1_gaia_astrometry.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ai_fors1_subpixel_astrometry.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19aj_fors1_core_astrometry.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ak_fors1_quadratic_astrometry.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19al_fors1_shared_psf_astrometry.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19am_nsc_sia_anchor_coverage.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19an_nsc_decam_group_cutouts.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ao_resilient_decam_cutouts.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ap_header_wcs_resolved_decam_cutouts.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19aq_all_archive_decam_cutouts.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19ar_current_archive_decam_cutouts.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
+| `configs/sigma_v19as_decam_forced_photometry_development.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19b_replacement_cluster_screen.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19c_source_archive_acquisition.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |
 | `configs/sigma_v19d_member_catalog_extraction.json` | gate_or_data_protocol_no_new_formula_fragment | none (no new formula in this protocol) | NEWTON-POISSON |

@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 134,
+    "sigma_protocols": 153,
     "project_formula_addenda": 14,
     "sigma_formula_fragments": 138,
     "eligibility": {
@@ -6682,6 +6682,234 @@
         "NEWTON-POISSON"
       ],
       "sha256": "d92f47d357ffa6d2fe73d5f8f10b372541052a616693407c36a4f50aa8c68b9e"
+    },
+    {
+      "config": "configs/sigma_v19aa_member_counterpart_association.json",
+      "protocol_version": "SIGMA-V19AA-MEMBER-COUNTERPART-ASSOCIATION-1.0.0",
+      "status": "frozen_before_any_counterpart_likelihood_or_assignment",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "bc07209be5ba4d5e66fbf1db9d113dbec4e53371607d829092da74e994ec9cf8"
+    },
+    {
+      "config": "configs/sigma_v19ab_bessel_nsc_transform_commissioning.json",
+      "protocol_version": "SIGMA-V19AB-BESSEL-NSC-TRANSFORM-COMMISSIONING-1.0.0",
+      "status": "frozen_before_transform_fit_or_validation_scoring",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "1e346fb1b0097cd6b16058b125cf51ab94bc2a845b1cd0419c350a9476c78263"
+    },
+    {
+      "config": "configs/sigma_v19ac_nsc_measurement_photometry.json",
+      "protocol_version": "SIGMA-V19AC-NSC-MEASUREMENT-PHOTOMETRY-1.0.0",
+      "status": "frozen_before_querying_per_measurement_photometry_for_all_candidates",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "6b56b4a72c1ccfd6d839ae98234aa43a576694707cd231b70d751be01d723d6c"
+    },
+    {
+      "config": "configs/sigma_v19ad_fixed_aperture_color_commissioning.json",
+      "protocol_version": "SIGMA-V19AD-FIXED-APERTURE-COLOR-COMMISSIONING-1.0.0",
+      "status": "frozen_before_fixed_aperture_aggregation_or_validation_scoring",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "3a164e650c71c8e93b6d13febcc251084b4ddb0d71a785585ac9fb6b3469e860"
+    },
+    {
+      "config": "configs/sigma_v19ae_fors1_commissioning_frames.json",
+      "protocol_version": "SIGMA-V19AE-FORS1-COMMISSIONING-FRAMES-1.0.0",
+      "status": "frozen_before_any_fits_payload_download_or_inspection",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "c2a67f7cfafb6aab07647bc7a0ec754e66face7d907590b9e57dee14472b33eb"
+    },
+    {
+      "config": "configs/sigma_v19af_fors1_header_compatibility.json",
+      "protocol_version": "SIGMA-V19AF-FORS1-HEADER-COMPATIBILITY-1.0.0",
+      "status": "frozen_before_decompression_or_any_fits_header_or_pixel_access",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "79d3197b35dbc81299d4cd63c913e7ada290acf9ff641e8df3d8f06e9565d5f2"
+    },
+    {
+      "config": "configs/sigma_v19ag_fors1_role_calibration.json",
+      "protocol_version": "SIGMA-V19AG-FORS1-ROLE-CALIBRATION-1.0.0",
+      "status": "frozen_before_any_fits_pixel_access",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "dd26927d527e25d78d5934aa340dbf0782206bdc24c060a3f358fb376e666253"
+    },
+    {
+      "config": "configs/sigma_v19ah_fors1_gaia_astrometry.json",
+      "protocol_version": "SIGMA-V19AH-FORS1-GAIA-ASTROMETRY-1.0.0",
+      "status": "frozen_after_equivalent_icrs_frame_metadata_correction_before_any_gaia_match_or_wcs_outcome",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "136816af4278c3939b397c4d29a5f56e5228c76b95382e4cae1244905ebc66ab"
+    },
+    {
+      "config": "configs/sigma_v19ai_fors1_subpixel_astrometry.json",
+      "protocol_version": "SIGMA-V19AI-FORS1-SUBPIXEL-ASTROMETRY-1.0.0",
+      "status": "frozen_before_any_v19ai_foreground_star_cutout_or_centroid",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "f4f997398d70ad6485df760278eb02ac7c19604f653aaabea141f254a7134871"
+    },
+    {
+      "config": "configs/sigma_v19aj_fors1_core_astrometry.json",
+      "protocol_version": "SIGMA-V19AJ-FORS1-CORE-ASTROMETRY-1.0.0",
+      "status": "frozen_before_any_v19aj_foreground_star_cutout_or_centroid",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "26c7309d26c0b78e0e1c566262e2517273403dc1e1e6b7aecd62fac8f865c461"
+    },
+    {
+      "config": "configs/sigma_v19ak_fors1_quadratic_astrometry.json",
+      "protocol_version": "SIGMA-V19AK-FORS1-QUADRATIC-ASTROMETRY-1.0.0",
+      "status": "frozen_before_any_v19ak_foreground_star_quadratic_offset",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "46596fb6e77e9fa27d8accc64645601d3508433c197e2a17376b47ea1012c90c"
+    },
+    {
+      "config": "configs/sigma_v19al_fors1_shared_psf_astrometry.json",
+      "protocol_version": "SIGMA-V19AL-FORS1-SHARED-PSF-ASTROMETRY-1.0.0",
+      "status": "frozen_before_any_v19al_shared_psf_fit",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "14d7ada5125f428722eef04ca91130a488ee6306e5a2c35d9e5e8b131b7d5f18"
+    },
+    {
+      "config": "configs/sigma_v19am_nsc_sia_anchor_coverage.json",
+      "protocol_version": "SIGMA-V19AM-NSC-SIA-ANCHOR-COVERAGE-1.0.0",
+      "status": "frozen_before_v19am_metadata_audit",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "23fc3c9bcd5651507e6333c7ba5f74b17022b189f272abc6dda886aa01530753"
+    },
+    {
+      "config": "configs/sigma_v19an_nsc_decam_group_cutouts.json",
+      "protocol_version": "SIGMA-V19AN-NSC-DECAM-GROUP-CUTOUTS-1.0.0",
+      "status": "frozen_before_v19an_pixel_retrieval",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "2fa4042b8901aad463005d64f6dccbd9ca03706483c38d1b57980a3fff2c6e42"
+    },
+    {
+      "config": "configs/sigma_v19ao_resilient_decam_cutouts.json",
+      "protocol_version": "SIGMA-V19AO-RESILIENT-DECAM-CUTOUTS-1.0.0",
+      "status": "frozen_before_v19ao_pixel_retrieval",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "b380b81379ba5aeda3083f56f90c4f9b2fc4507bfd79f16fe7eeea7c41dfdf46"
+    },
+    {
+      "config": "configs/sigma_v19ap_header_wcs_resolved_decam_cutouts.json",
+      "protocol_version": "SIGMA-V19AP-HEADER-WCS-RESOLVED-DECAM-CUTOUTS-1.0.0",
+      "status": "frozen_before_v19ap_pixel_retrieval",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "86d30fdf30b293134fca9eb31491eb04cac2840b415e80ab6bf694f275b960bc"
+    },
+    {
+      "config": "configs/sigma_v19aq_all_archive_decam_cutouts.json",
+      "protocol_version": "SIGMA-V19AQ-ALL-ARCHIVE-DECAM-CUTOUTS-1.0.0",
+      "status": "frozen_before_v19aq_pixel_retrieval",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "debe36729a1871901d5e0b46bd3ef8ca08c5278bd3879464a24a6406e1c2b73e"
+    },
+    {
+      "config": "configs/sigma_v19ar_current_archive_decam_cutouts.json",
+      "protocol_version": "SIGMA-V19AR-CURRENT-ARCHIVE-DECAM-CUTOUTS-1.0.0",
+      "status": "frozen_before_v19ar_pixel_retrieval",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "c611f1d28e97681c14223556f6b50b78fd464799d6816cc2534ddef88045a256"
+    },
+    {
+      "config": "configs/sigma_v19as_decam_forced_photometry_development.json",
+      "protocol_version": "SIGMA-V19AS-DECAM-FORCED-PHOTOMETRY-DEVELOPMENT-1.0.0",
+      "status": "frozen_before_v19as_science_pixel_measurement",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "9f906549ac16c94ea41bec18cf02185b289c1a98dc21bdd6af69bf45036a2b1c"
     },
     {
       "config": "configs/sigma_v19b_replacement_cluster_screen.json",

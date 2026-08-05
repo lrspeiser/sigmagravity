@@ -1,0 +1,112 @@
+{
+  "protocol_version": "SIGMA-V19AS-DECAM-FORCED-PHOTOMETRY-DEVELOPMENT-1.0.0",
+  "status": "frozen_before_v19as_science_pixel_measurement",
+  "purpose": "Compare three fixed aperture/deblending rules on the ten preregistered development singleton anchors while keeping all five validation anchors unmeasured and masked before source detection.",
+  "parent_artifacts": [
+    {
+      "path": "configs/sigma_v19ar_current_archive_decam_cutouts.json",
+      "sha256": "c611f1d28e97681c14223556f6b50b78fd464799d6816cc2534ddef88045a256"
+    },
+    {
+      "path": "data/derived/sigma_v19ar_current_archive_decam_cutouts/download_manifest.csv",
+      "sha256": "fb57f563a2b868dbb1a122b55561ffa3360ae4d966ce671b5c7d07852c36cd2c"
+    },
+    {
+      "path": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+      "sha256": "12a7dcb915753a42edbe0a2fafdcc77be19b66b6a90fd5250ca4a1d722ee7c8f"
+    },
+    {
+      "path": "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv",
+      "sha256": "05ca7f66bc62184a84f6f980986eb303b9aaf5b3ae24f27d7183c70b8c7e27dd"
+    },
+    {
+      "path": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv",
+      "sha256": "7164facd26d8fa54175ad3240f258ac73064b17a34ff9d05303799074ff2f3a7"
+    }
+  ],
+  "inputs": {
+    "resolved_image_plan": "data/derived/sigma_v19ar_current_archive_decam_cutouts/download_manifest.csv",
+    "anchor_measurements": "data/derived/sigma_v19am_nsc_sia_anchor_coverage/exposure_cutout_manifest.csv",
+    "catalog_measurements": "data/derived/sigma_v19ac_nsc_measurement_photometry/all_measurements.csv",
+    "commissioning_sample": "data/derived/sigma_v19ab_bessel_nsc_transform_commissioning/commissioning_sample.csv"
+  },
+  "split": {
+    "development_ids": ["29", "78", "14", "07", "06", "37", "22", "16", "23", "24"],
+    "validation_ids": ["26", "57", "66", "71", "21"],
+    "validation_mask_radius_arcsec": 4.0,
+    "rule": "Only development-anchor cutouts may be measured. Every known validation coordinate is masked before background estimation and source detection, including on mixed detector images."
+  },
+  "measurement": {
+    "cutout_size_arcsec": 28.0,
+    "background_annulus_arcsec": [8.0, 13.0],
+    "background_model": "Iteratively three-sigma-clipped affine plane using at least 100 finite, non-validation pixels.",
+    "psf_scale": "Use the calibrated detector FWHM header, falling back only to the primary-header seeing divided by WCS pixel scale.",
+    "detection_threshold_sigma": 2.5,
+    "segmentation": "PSF-smoothed positive-source islands split by watershed peaks; the fixed anchor coordinate is always the target marker and all other regions are contaminants.",
+    "aperture_diameters_arcsec": [4.0, 8.0],
+    "primary_aperture_diameter_arcsec": 4.0,
+    "color_filters": ["g", "r", "i", "z"],
+    "variants": ["raw", "area_scaled", "rotate180"],
+    "variant_definitions": {
+      "raw": "Sum every finite background-subtracted aperture pixel without deblending.",
+      "area_scaled": "Mask non-target watershed pixels and scale the remaining sum by total-to-clean aperture area.",
+      "rotate180": "Replace each masked pixel with its unmasked point-reflection about the fixed target coordinate; area-scale only the still-unrecoverable pixels."
+    },
+    "calibration": "magnitude = primary-header MAGZERO - 2.5 log10(positive aperture flux)",
+    "retention": "Process every one of the 670 development measurement memberships. A failed or non-positive measurement remains an explicit non-finite row and cannot remove its exposure or object."
+  },
+  "development_ranking": {
+    "rule": "Lexicographically maximize the count of development objects with complete griz, maximize valid measurement fraction, minimize median repeated-exposure robust magnitude scatter, minimize leave-one-object-out Bessel-to-DECam color error, then minimize absolute difference from the existing four-arcsecond catalog aperture as a calibration diagnostic.",
+    "ridge_penalty": 0.25,
+    "validation_performance_used": false,
+    "lensing_or_gravity_performance_used": false,
+    "recommendation_requires_separate_validation_freeze": true
+  },
+  "gates": {
+    "exact_development_anchors": 10,
+    "exact_validation_anchors": 5,
+    "exact_development_measurements": 670,
+    "exact_development_image_groups": 122,
+    "exact_output_measurement_rows": 4020,
+    "validation_anchors_measured": 0,
+    "all_validation_coordinates_masked_before_detection": true,
+    "all_development_measurements_retained": true,
+    "no_lensing_halo_or_gravity_data_read": true
+  },
+  "outputs": {
+    "measurements": "data/derived/sigma_v19as_decam_forced_photometry_development/measurements.csv",
+    "aggregates": "data/derived/sigma_v19as_decam_forced_photometry_development/aggregates.csv",
+    "ranking": "data/derived/sigma_v19as_decam_forced_photometry_development/ranking.csv",
+    "group_audit": "data/derived/sigma_v19as_decam_forced_photometry_development/group_audit.csv",
+    "report": "results/sigma_v19as_decam_forced_photometry_development/report.json"
+  },
+  "claim_boundary": [
+    "V19AS is development-only measurement commissioning, not a validation result and not a baryonic mass, lensing, halo or gravity test.",
+    "The five validation anchors remain unmeasured. Their coordinates are used only to exclude their pixels before development background estimation and segmentation.",
+    "The 180-degree rule assumes local point symmetry and may be biased for intrinsically asymmetric galaxies; validation and injection tests are required before scientific use.",
+    "A winning development variant only recommends one exact rule for a separately frozen validation run. It does not authorize ambiguous-member association or a mass-current map."
+  ],
+  "authorization": {
+    "open_development_anchor_pixels": true,
+    "measure_development_forced_photometry": true,
+    "compare_three_frozen_deblending_variants": true,
+    "open_or_measure_validation_anchor_pixels": false,
+    "score_ambiguous_candidates": false,
+    "select_counterparts": false,
+    "infer_mass_or_current": false,
+    "read_lensing_or_halo_payload": false,
+    "change_gravity_physics_or_parameters": false,
+    "open_holdout": false
+  },
+  "integrity": {
+    "all_v19ar_images_acquired_and_hash_bound_before_freeze": true,
+    "development_and_validation_ids_frozen_before_freeze": true,
+    "science_pixel_values_measured_before_v19as_freeze": false,
+    "validation_photometry_measured_before_v19as_freeze": false,
+    "lensing_halo_or_gravity_outcome_opened_before_v19as_freeze": false
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19as_decam_forced_photometry_development.py",
+    "runner_sha256": "2d547ceced44f6e44784602a5b7ec73ed3284aaf8a75c2dcb02a9c15dafb3c5d"
+  }
+}
