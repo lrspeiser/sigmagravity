@@ -110,6 +110,28 @@ lensing/halo/gravity target was opened, and no velocity fit was performed.
 This closes acquisition only; it does not yet pass the gain-reconstruction,
 spectral-reproduction, or spatial-spectral-mixing gates.
 
+### Frozen reduction-environment result
+
+The isolated A2319 calibration environment passed after one recorded,
+fail-closed path-conversion correction. The first execution downloaded and
+hash-froze NASA's current `caldb.config` and `alias_config.fits`, but stopped
+before listing or extracting any archive because `wslpath` did not preserve the
+native Windows path. Its empty staging directory was removed, and the
+correction replaced that external conversion with a deterministic local-drive
+mapping before a second frozen execution.
+
+The terminal environment contains 139 files totaling 2,361,956,732 bytes.
+HEASoft 6.36, XSPEC 12.15.1, the six pinned Resolve/CALDB executables, both
+official setup files, and the GEN/Resolve calibration indexes all matched their
+frozen hashes. Live `caldbinfo` queries report both XRISM/GEN and
+XRISM/RESOLVE as configured and accessible. The terminal report SHA-256 is
+`b9ded07723d38b7444f5bfb1abbd54337533b8c8c11fe0da043d9583d1cbd394`.
+
+This environment pass authorizes freezing the development gain-reconstruction
+protocol. It does not authorize inspecting gain/event arrays, fitting a
+spectrum or velocity, opening A3667/A754, or using lensing, halo, gravity, or
+action targets.
+
 ## The new observable source terms
 
 The signed projected gas current is

@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -55,3 +56,35 @@ def test_archive_member_validation_rejects_wrong_root() -> None:
 
 def test_shell_quote_handles_single_quotes() -> None:
     assert environment.shell_quote("sigma'gravity") == "'sigma'\"'\"'gravity'"
+
+
+def test_terminal_environment_report_passes_exact_frozen_gates() -> None:
+    report_path = (
+        ROOT
+        / "results"
+        / "sigma_v19cy_direct_icm_velocity_evidence"
+        / "development_environment_report.json"
+    )
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["protocol_version"] == "SIGMA-V19CY-A2319-ENVIRONMENT-1.0.1"
+    assert report["status"] == (
+        "a2319_frozen_heasoft_xrism_caldb_environment_installed_and_audited"
+    )
+    assert report["config_sha256"] == (
+        "279c2c5e02b910803eb5f3cc211f5ac816ef78704fb2e4bc633a58a6fb4fe5a0"
+    )
+    assert report["inventory"] == {"bytes": 2_361_956_732, "files": 139}
+    assert all(
+        (
+            report["gates"]["all_runtime_commands_exited_zero"],
+            report["gates"]["heasoft_and_xspec_versions_exact"],
+            report["gates"]["official_setup_files_installed_hash_exact"],
+            report["gates"]["runtime_executable_hashes_exact"],
+            report["gates"]["xrism_gen_and_resolve_caldbinfo_queries_passed"],
+        )
+    )
+    assert not report["gates"]["validation_or_holdout_accessed"]
+    assert not report["gates"]["scientific_fit_performed"]
+    assert report["authorization"]["freeze_gain_reconstruction_protocol"]
+    assert not report["authorization"]["inspect_A2319_event_or_gain_arrays"]
+    assert not report["authorization"]["fit_A2319_spectra_or_velocities"]

@@ -1,0 +1,144 @@
+{
+  "authorization": {
+    "access_validation_or_holdout_assets": false,
+    "derive_or_select_action": false,
+    "fit_A2319_spectra_or_velocities": false,
+    "freeze_gain_reconstruction_protocol": true,
+    "inspect_A2319_event_or_gain_arrays": false,
+    "open_lensing_halo_or_gravity_targets": false
+  },
+  "config_sha256": "279c2c5e02b910803eb5f3cc211f5ac816ef78704fb2e4bc633a58a6fb4fe5a0",
+  "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f",
+  "gates": {
+    "all_runtime_commands_exited_zero": true,
+    "heasoft_and_xspec_versions_exact": true,
+    "official_setup_files_installed_hash_exact": true,
+    "runtime_executable_hashes_exact": true,
+    "scientific_fit_performed": false,
+    "validation_or_holdout_accessed": false,
+    "xrism_gen_and_resolve_caldbinfo_queries_passed": true
+  },
+  "generated_utc": "2026-08-06T03:42:04.435247+00:00",
+  "installation": {
+    "member_audits": {
+      "caldb_general_20240822": {
+        "first": "data/gen/bcf/",
+        "last": "data/gen/caldb.indx",
+        "members": 34
+      },
+      "xrism_gen_caldb_20241115": {
+        "first": "data/xrism/gen/bcf/",
+        "last": "data/xrism/gen/caldb.indx",
+        "members": 32
+      },
+      "xrism_resolve_caldb_20260315": {
+        "first": "data/xrism/resolve/bcf/",
+        "last": "data/gen/caldb.indx",
+        "members": 155
+      }
+    },
+    "target": "/home/henry/.local/share/sigmagravity-xrism/caldb"
+  },
+  "inventory": {
+    "bytes": 2361956732,
+    "files": 139
+  },
+  "protocol_version": "SIGMA-V19CY-A2319-ENVIRONMENT-1.0.1",
+  "required_path_hashes": {
+    "command": "sha256sum '/home/henry/.local/share/sigmagravity-xrism/caldb/data/gen/caldb.indx' '/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/gen/caldb.indx' '/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/caldb.indx' '/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config' '/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits'",
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "db12a3d220558b616f175ecd84ac2f20b7b32af2355b5b1873cf99b6fba5f529  /home/henry/.local/share/sigmagravity-xrism/caldb/data/gen/caldb.indx\n9e3c885994c06153590fd8b95875b4945027ee56217a063092cbf0c39945e53e  /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/gen/caldb.indx\nac0b74669ef840eaa2981f93738c00c44ab500a93d45c93c50761280f7169132  /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/caldb.indx\nd6cc818a8f20aa744dd272497b281f18b71925123e9528f65253ffeb194e9cfa  /home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config\n808414ef6db1a8e6b7e361021499f55e3f39fb3cc2e3446530f83294de243e87  /home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits"
+  },
+  "runtime": {
+    "caldbinfo_xrism_gen": {
+      "command": "export CONDA_PREFIX='/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36'; source '/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh' >/dev/null 2>&1; export CALDB='/home/henry/.local/share/sigmagravity-xrism/caldb'; export CALDBCONFIG='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config'; export CALDBALIAS='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits'; caldbinfo infomode=INST mission=XRISM instrument=GEN chatter=20",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "...  using gpcaldbinfo 1.0.0\n ** caldbinfo 1.1.0\n ...  using infocaldb   1.0.1\n ...  using caldb_info 1.4.2\n ...... environ-var/logical CALDB defined\n ......... $CALDB = /home/henry/.local/share/sigmagravity-xrism/caldb\n ... environ-var/logical CALDBCONFIG defined\n ...   $CALDBCONFIG = /home/henry/.local/share/sigmagravity-xrism/caldb/software\n     /tools/caldb.config\n ...... environ-var/logical CALDBALIAS defined\n .........   $CALDBALIAS  = /home/henry/.local/share/sigmagravity-xrism/caldb/so\n           ftware/tools/alias_config.fits\n ......... Instrument directory: /home/henry/.local/share/sigmagravity-xrism/cal\n           db/data/xrism/gen\n ......... CALDB index file /home/henry/.local/share/sigmagravity-xrism/caldb/da\n           ta/xrism/gen/caldb.indx\n Checking that caldb.indx file exists for XRISM/GEN\n   ... CALDB index file /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/gen/caldb.indx FOUND\nCALDB_INDEX=(/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/gen/caldb.indx)\n CALDB is configured for the GEN instrument onboard XRISM\n ... CALDB appears to be set-up & accessible"
+    },
+    "caldbinfo_xrism_resolve": {
+      "command": "export CONDA_PREFIX='/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36'; source '/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh' >/dev/null 2>&1; export CALDB='/home/henry/.local/share/sigmagravity-xrism/caldb'; export CALDBCONFIG='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config'; export CALDBALIAS='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits'; caldbinfo infomode=INST mission=XRISM instrument=RESOLVE chatter=20",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "...  using gpcaldbinfo 1.0.0\n ** caldbinfo 1.1.0\n ...  using infocaldb   1.0.1\n ...  using caldb_info 1.4.2\n ...... environ-var/logical CALDB defined\n ......... $CALDB = /home/henry/.local/share/sigmagravity-xrism/caldb\n ... environ-var/logical CALDBCONFIG defined\n ...   $CALDBCONFIG = /home/henry/.local/share/sigmagravity-xrism/caldb/software\n     /tools/caldb.config\n ...... environ-var/logical CALDBALIAS defined\n .........   $CALDBALIAS  = /home/henry/.local/share/sigmagravity-xrism/caldb/so\n           ftware/tools/alias_config.fits\n ......... Instrument directory: /home/henry/.local/share/sigmagravity-xrism/cal\n           db/data/xrism/resolve\n ......... CALDB index file /home/henry/.local/share/sigmagravity-xrism/caldb/da\n           ta/xrism/resolve/caldb.indx\n Checking that caldb.indx file exists for XRISM/RESOLVE\n   ... CALDB index file /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/caldb.indx FOUND\nCALDB_INDEX=(/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/caldb.indx)\n CALDB is configured for the RESOLVE instrument onboard XRISM\n ... CALDB appears to be set-up & accessible"
+    },
+    "ftversion": {
+      "command": "export CONDA_PREFIX='/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36'; source '/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh' >/dev/null 2>&1; export CALDB='/home/henry/.local/share/sigmagravity-xrism/caldb'; export CALDBCONFIG='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config'; export CALDBALIAS='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits'; ftversion",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "26Sep2025_V6.36"
+    },
+    "inventory": {
+      "command": "export CONDA_PREFIX='/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36'; source '/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh' >/dev/null 2>&1; export CALDB='/home/henry/.local/share/sigmagravity-xrism/caldb'; export CALDBCONFIG='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config'; export CALDBALIAS='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits'; find '/home/henry/.local/share/sigmagravity-xrism/caldb' -type f | wc -l; du -sb '/home/henry/.local/share/sigmagravity-xrism/caldb' | cut -f1",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "139\n2361956732"
+    },
+    "xspec_version": {
+      "command": "export CONDA_PREFIX='/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36'; source '/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh' >/dev/null 2>&1; export CALDB='/home/henry/.local/share/sigmagravity-xrism/caldb'; export CALDBCONFIG='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config'; export CALDBALIAS='/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits'; xspec --version",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "XSPEC version: 12.15.1\n\tBuild Date/Time: Wed May 20 11:50:35 2026\n\nXSPEC12>\n XSPEC: quit"
+    }
+  },
+  "runtime_hashes": {
+    "caldbinfo": {
+      "actual_sha256": "fe7eafbae73a7213befb468c0c03fff7fa3bd15356350bde76e0827d29af9954",
+      "expected_sha256": "fe7eafbae73a7213befb468c0c03fff7fa3bd15356350bde76e0827d29af9954",
+      "passed": true,
+      "path": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/bin/caldbinfo"
+    },
+    "quzcif": {
+      "actual_sha256": "469b523a2bd5df1b1f16d83d989c9bdac37c315ec54fe224c58e2c006d4a926e",
+      "expected_sha256": "469b523a2bd5df1b1f16d83d989c9bdac37c315ec54fe224c58e2c006d4a926e",
+      "passed": true,
+      "path": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/bin/quzcif"
+    },
+    "rslgain": {
+      "actual_sha256": "6f6721fa371ec7c3aa53ae461c6394fa87516caa4942141c4bab64ced6af5dbc",
+      "expected_sha256": "6f6721fa371ec7c3aa53ae461c6394fa87516caa4942141c4bab64ced6af5dbc",
+      "passed": true,
+      "path": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/bin/rslgain"
+    },
+    "rslmkrmf": {
+      "actual_sha256": "b561a37df8cdcbfe029fbab857ee08540c0469eb6b678f0df16e37fc57fbf753",
+      "expected_sha256": "b561a37df8cdcbfe029fbab857ee08540c0469eb6b678f0df16e37fc57fbf753",
+      "passed": true,
+      "path": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/bin/rslmkrmf"
+    },
+    "rslnxbgen": {
+      "actual_sha256": "710a66dc90f2cf2cb4a4034551d34325652a2eb21df2c6c9cb0fa1f5f1f58324",
+      "expected_sha256": "710a66dc90f2cf2cb4a4034551d34325652a2eb21df2c6c9cb0fa1f5f1f58324",
+      "passed": true,
+      "path": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/bin/rslnxbgen"
+    },
+    "rslpha2pi": {
+      "actual_sha256": "3b9cb5a78a6e71bef65ebdf1159c31beec4316def7f215c04e3d5698f6e04f1f",
+      "expected_sha256": "3b9cb5a78a6e71bef65ebdf1159c31beec4316def7f215c04e3d5698f6e04f1f",
+      "passed": true,
+      "path": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/bin/rslpha2pi"
+    }
+  },
+  "setup_files": [
+    {
+      "bytes": 14602,
+      "etag": "\"390a-64aa6b1844b97\"",
+      "last_modified": "Thu, 12 Feb 2026 20:54:23 GMT",
+      "name": "caldb.config",
+      "reused": true,
+      "sha256": "d6cc818a8f20aa744dd272497b281f18b71925123e9528f65253ffeb194e9cfa",
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/caldb/software/tools/caldb.config"
+    },
+    {
+      "bytes": 14400,
+      "etag": "\"3840-3786f934afc80\"",
+      "last_modified": "Fri, 15 Dec 2000 01:58:58 GMT",
+      "name": "alias_config.fits",
+      "reused": true,
+      "sha256": "808414ef6db1a8e6b7e361021499f55e3f39fb3cc2e3446530f83294de243e87",
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/caldb/software/tools/alias_config.fits"
+    }
+  ],
+  "status": "a2319_frozen_heasoft_xrism_caldb_environment_installed_and_audited"
+}
