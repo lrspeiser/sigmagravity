@@ -1,0 +1,86 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-CALIBRATION-LINE-SHAPE-1.0.0",
+  "status": "frozen after all 21 calibration applications passed, but before any candidate energy distribution, centroid, or width was inspected",
+  "purpose": "Fit the mission Mn K-alpha Voigt template to each candidate's combined pixel-12 spectrum in each science ObsID, compare to the published centroid shifts and resolutions, and select at most one calibration candidate without reading a cluster event.",
+  "parents": {
+    "application_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_calibration_application_candidates.json",
+    "application_report_sha256": "2fe0daffdf6f6eac722d375f9420ba7f14ba6a28d04bf40a974eceb3f6b173e7"
+  },
+  "paths": {
+    "application_scratch_root": "tmp/sigma_v19cy_a2319_calibration_application",
+    "scratch_root": "tmp/sigma_v19cy_a2319_calibration_line_shape",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_calibration_line_shape.json"
+  },
+  "line_template": {
+    "wsl_path": "/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/gen/bcf/xa_gen_linefit_20190101vx001.fits",
+    "sha256": "47ab55fb8f9d43392e088e7d02ad47d892880e97c7ef1707e6ee5f3d74338377",
+    "extension": "MnKa",
+    "rows": 8,
+    "columns": ["ENERGY", "WIDTH", "AREA"],
+    "profile": "sum of normalized Voigt profiles; WIDTH is the intrinsic Lorentzian FWHM, AREA is the normalized component area, and the fitted Gaussian FWHM is the instrumental resolution"
+  },
+  "fit": {
+    "energy_column": "EPI2",
+    "energy_min_ev": 5846.5,
+    "energy_max_ev": 5942.7,
+    "bin_width_ev": 0.5,
+    "statistic": "Poisson Cash statistic on fixed bins",
+    "free_parameters": ["common_centroid_shift_ev", "instrument_gaussian_fwhm_ev", "line_normalization", "constant_background_per_ev"],
+    "bounds": {
+      "common_centroid_shift_ev": [-2.0, 2.0],
+      "instrument_gaussian_fwhm_ev": [2.0, 8.0],
+      "line_normalization": [1.0, 10000000.0],
+      "constant_background_per_ev": [0.0, 100000.0]
+    },
+    "optimizer": "scipy L-BFGS-B",
+    "require_convergence": true
+  },
+  "published_targets": {
+    "source": "A2319 Appendix A; the paper repeats 000102000 in the prose, so the three values are assigned in chronological science-ObsID order 000101000, 000102000, 000103000",
+    "000101000": {
+      "centroid_shift_ev": -0.41,
+      "centroid_stat_error_ev": 0.01,
+      "fwhm_ev": 4.45,
+      "fwhm_stat_error_ev": 0.02,
+      "energy_scale_systematic_ev": 0.51
+    },
+    "000102000": {
+      "centroid_shift_ev": 0.14,
+      "centroid_stat_error_ev": 0.01,
+      "fwhm_ev": 4.45,
+      "fwhm_stat_error_ev": 0.02,
+      "energy_scale_systematic_ev": 0.33
+    },
+    "000103000": {
+      "centroid_shift_ev": 0.04,
+      "centroid_stat_error_ev": 0.01,
+      "fwhm_ev": 4.46,
+      "fwhm_stat_error_ev": 0.02,
+      "energy_scale_systematic_ev": 0.30
+    }
+  },
+  "candidate_selection": {
+    "maximum_absolute_statistical_z_per_observable": 5.0,
+    "score": "sum of squared centroid and FWHM residuals divided by their quoted statistical variances across all three ObsIDs",
+    "tie_rule": "if passing candidates differ in total score by less than 1.0, select the lower-complexity candidate",
+    "complexity_order": ["fe55_branch_only", "branch_median_common_mode", "branch_linear_common_mode"],
+    "failure_rule": "if no candidate has all six absolute statistical residuals at or below 5, stop without applying gain to a cluster sky event"
+  },
+  "authorization": {
+    "read_candidate_calibration_epi2_distributions": true,
+    "fit_calibration_centroids_and_widths": true,
+    "rank_and_select_one_calibration_candidate": true,
+    "read_cluster_sky_event_rows": false,
+    "apply_selected_candidate_to_cluster_events": false,
+    "fit_cluster_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "This development gate may select only an A2319 energy-calibration nuisance treatment.",
+    "The selection cannot use a cluster line, velocity, lensing map, halo target, or gravity score.",
+    "Passing is necessary but not sufficient to reproduce the published A2319 science analysis."
+  ]
+}
