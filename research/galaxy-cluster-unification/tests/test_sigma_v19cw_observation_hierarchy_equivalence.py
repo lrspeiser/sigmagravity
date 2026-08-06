@@ -14,6 +14,7 @@ import run_sigma_v19cw_observation_hierarchy_equivalence as runner
 
 
 CONFIG = ROOT / "configs" / "sigma_v19cw_observation_hierarchy_equivalence.json"
+REPORT = ROOT / "results" / "sigma_v19cw_observation_hierarchy_equivalence" / "report.json"
 
 
 def test_v19cw_is_abell_only_and_seals_science() -> None:
@@ -53,3 +54,19 @@ def test_additive_weighting_is_associative() -> None:
 def test_relative_difference_handles_zero_reference() -> None:
     assert runner.relative_difference(0.0, 0.0) == 0.0
     assert np.isfinite(runner.relative_difference(1.0, 0.0))
+
+
+def test_v19cw_completed_result_authorizes_only_a_separate_bullet_freeze() -> None:
+    payload = json.loads(REPORT.read_text(encoding="utf-8"))
+    assert payload["status"] == "observation_hierarchy_equivalent_and_bullet_recovery_may_be_frozen"
+    assert payload["decision"] == "freeze_bullet_hierarchical_recovery"
+    assert all(payload["gates"].values())
+    assert payload["bullet_hierarchical_execution_authorized"]
+    assert not payload["gravity_formula_or_parameter_changed"]
+    assert not payload["source_state_or_lensing_target_opened"]
+    assert not payload["v19bq_or_v19bs_run"]
+    assert not payload["action_derived"]
+    assert payload["comparisons"]["source"]["counts_exact"]
+    assert payload["comparisons"]["source"]["grouping_exact"]
+    assert payload["comparisons"]["arf"]["relative_l2_difference"] < 1e-7
+    assert payload["comparisons"]["rmf"]["dense_relative_frobenius_difference"] < 1e-7

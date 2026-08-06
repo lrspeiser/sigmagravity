@@ -1,0 +1,601 @@
+{
+  "action_derived": false,
+  "bullet_hierarchical_execution_authorized": true,
+  "candidate_products": {
+    "arf": {
+      "bytes": 40320,
+      "path": "/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_src.arf",
+      "sha256": "125b2fec7e155d2929f93a6209e9775a43ee8a7013a687176715532d9eca1982"
+    },
+    "background": {
+      "bytes": 141120,
+      "path": "/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_bkg.pi",
+      "sha256": "ed517b9e5f037471fe92ac6cf09dafffac46dbc5a6879c77a1977bd6cfd75f88"
+    },
+    "rmf": {
+      "bytes": 2194560,
+      "path": "/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_src.rmf",
+      "sha256": "91e067ae284bb949e3948017fbc96b7338e7ebd4117188dd8d7af813221015cb"
+    },
+    "source_grouped": {
+      "bytes": 172800,
+      "path": "/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_src_grp.pi",
+      "sha256": "a446f785692509326c3533f4540747306c7290aa083cd8fcda8b7ea250e8c380"
+    }
+  },
+  "claim_boundary": [
+    "V19CW tests numerical equivalence of a supported data-reduction decomposition; it does not test or modify gravity.",
+    "The partition is the observation identifier frozen before any spectral fit, temperature, lensing or gravity outcome.",
+    "A V19CW pass authorizes a separate frozen Bullet recovery; it does not itself authorize Bullet execution, regional production, V19BQ, V19BS or action derivation.",
+    "A failed equivalence gate retires this remediation without relaxing a tolerance after seeing the result."
+  ],
+  "comparisons": {
+    "arf": {
+      "energy_grid_exact": true,
+      "max_absolute_difference": 3.0517578125e-05,
+      "max_relative_difference": 1.1535618008622412e-07,
+      "relative_l2_difference": 2.5020755788041785e-08
+    },
+    "background": {
+      "backscal_candidate": 1.0,
+      "backscal_reference": 1.0,
+      "backscal_relative_difference": 0.0,
+      "counts_exact": false,
+      "counts_max_absolute_difference": 1.5916157281026244e-12,
+      "counts_relative_l1_difference": 1.2125236952759086e-15,
+      "exposure_candidate": 551220000.0,
+      "exposure_reference": 551220000.0,
+      "exposure_relative_difference": 0.0
+    },
+    "forward_folds": {
+      "flat": {
+        "max_channel_fraction_difference": 4.481210329227108e-11,
+        "relative_l1_difference": 4.93490443060895e-09
+      },
+      "line_6p7kev_proxy": {
+        "max_channel_fraction_difference": 6.522872693076903e-10,
+        "relative_l1_difference": 5.335438581765318e-09
+      },
+      "powerlaw_e_minus_2": {
+        "max_channel_fraction_difference": 1.446834725183346e-10,
+        "relative_l1_difference": 5.906013443096641e-09
+      },
+      "thermal_8kev_proxy": {
+        "max_channel_fraction_difference": 7.684088835880863e-11,
+        "relative_l1_difference": 5.306822393109899e-09
+      }
+    },
+    "rmf": {
+      "dense_max_absolute_difference": 1.4901161193847656e-08,
+      "dense_relative_frobenius_difference": 2.489511406377501e-08,
+      "dense_shape": [
+        1070,
+        1024
+      ],
+      "energy_and_channel_grids_exact": true
+    },
+    "source": {
+      "backscal_candidate": 1.0,
+      "backscal_reference": 1.0,
+      "backscal_relative_difference": 0.0,
+      "counts_exact": true,
+      "counts_max_absolute_difference": 0.0,
+      "counts_relative_l1_difference": 0.0,
+      "exposure_candidate": 53019396.510917,
+      "exposure_reference": 53019396.510918,
+      "exposure_relative_difference": 1.8830425574199104e-14,
+      "grouping_exact": true,
+      "quality_exact": true
+    }
+  },
+  "config_sha256": "044a9332a845490a67f6bbb5487085428d9babfa156aed476a1a8f799da21365",
+  "decision": "freeze_bullet_hierarchical_recovery",
+  "final_steps": {
+    "grouping": {
+      "command": [
+        "dmgroup",
+        "infile=/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_src.pi",
+        "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_src_grp.pi",
+        "grouptype=NUM_CTS",
+        "grouptypeval=25",
+        "binspec=",
+        "xcolumn=CHANNEL",
+        "ycolumn=COUNTS",
+        "tabspec=",
+        "tabcolumn=",
+        "stopspec=",
+        "stopcolumn=",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/final/logs/final_dmgroup.log",
+      "reused": false
+    },
+    "links": {
+      "ANCRFILE": "ABELL2146_integrated_src.arf",
+      "BACKFILE": "ABELL2146_integrated_bkg.pi",
+      "RESPFILE": "ABELL2146_integrated_src.rmf"
+    },
+    "pha": {
+      "command": [
+        "combine_spectra",
+        "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_source.lis",
+        "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated",
+        "src_arfs=NONE",
+        "src_rmfs=NONE",
+        "bkg_arfs=NONE",
+        "bkg_rmfs=NONE",
+        "method=sum",
+        "bscale_method=asca",
+        "exp_origin=pha",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/final/logs/ABELL2146_integrated_pha.log",
+      "reused": false
+    },
+    "response": {
+      "command": [
+        "addresp",
+        "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_response_rmf.lis",
+        "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_response_arf.lis",
+        "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_response_pha.lis",
+        "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_src.rmf",
+        "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/final/ABELL2146_integrated_src.arf",
+        "type=rmf",
+        "method=sum",
+        "thresh=9.9999999999999995e-07",
+        "clobber=no",
+        "verbose=1",
+        "mode=h"
+      ],
+      "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/final/logs/ABELL2146_integrated_addresp.log",
+      "reused": false
+    }
+  },
+  "first_level": [
+    {
+      "cells": 128,
+      "obsid": 10464,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10464/ABELL2146_obs10464_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10464/ABELL2146_obs10464",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10464/logs/ABELL2146_obs10464_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10464/ABELL2146_obs10464_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10464/ABELL2146_obs10464_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10464/ABELL2146_obs10464_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10464/ABELL2146_obs10464_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10464/ABELL2146_obs10464_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10464/logs/ABELL2146_obs10464_addresp.log",
+        "reused": false
+      }
+    },
+    {
+      "cells": 128,
+      "obsid": 10888,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10888/ABELL2146_obs10888_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10888/ABELL2146_obs10888",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10888/logs/ABELL2146_obs10888_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10888/ABELL2146_obs10888_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10888/ABELL2146_obs10888_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10888/ABELL2146_obs10888_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10888/ABELL2146_obs10888_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10888/ABELL2146_obs10888_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs10888/logs/ABELL2146_obs10888_addresp.log",
+        "reused": false
+      }
+    },
+    {
+      "cells": 128,
+      "obsid": 12245,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12245/ABELL2146_obs12245_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12245/ABELL2146_obs12245",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12245/logs/ABELL2146_obs12245_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12245/ABELL2146_obs12245_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12245/ABELL2146_obs12245_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12245/ABELL2146_obs12245_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12245/ABELL2146_obs12245_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12245/ABELL2146_obs12245_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12245/logs/ABELL2146_obs12245_addresp.log",
+        "reused": false
+      }
+    },
+    {
+      "cells": 128,
+      "obsid": 12246,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12246/ABELL2146_obs12246_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12246/ABELL2146_obs12246",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12246/logs/ABELL2146_obs12246_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12246/ABELL2146_obs12246_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12246/ABELL2146_obs12246_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12246/ABELL2146_obs12246_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12246/ABELL2146_obs12246_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12246/ABELL2146_obs12246_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12246/logs/ABELL2146_obs12246_addresp.log",
+        "reused": false
+      }
+    },
+    {
+      "cells": 128,
+      "obsid": 12247,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12247/ABELL2146_obs12247_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12247/ABELL2146_obs12247",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12247/logs/ABELL2146_obs12247_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12247/ABELL2146_obs12247_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12247/ABELL2146_obs12247_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12247/ABELL2146_obs12247_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12247/ABELL2146_obs12247_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12247/ABELL2146_obs12247_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs12247/logs/ABELL2146_obs12247_addresp.log",
+        "reused": false
+      }
+    },
+    {
+      "cells": 128,
+      "obsid": 13020,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13020/ABELL2146_obs13020_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13020/ABELL2146_obs13020",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13020/logs/ABELL2146_obs13020_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13020/ABELL2146_obs13020_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13020/ABELL2146_obs13020_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13020/ABELL2146_obs13020_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13020/ABELL2146_obs13020_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13020/ABELL2146_obs13020_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13020/logs/ABELL2146_obs13020_addresp.log",
+        "reused": false
+      }
+    },
+    {
+      "cells": 123,
+      "obsid": 13021,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13021/ABELL2146_obs13021_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13021/ABELL2146_obs13021",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13021/logs/ABELL2146_obs13021_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13021/ABELL2146_obs13021_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13021/ABELL2146_obs13021_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13021/ABELL2146_obs13021_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13021/ABELL2146_obs13021_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13021/ABELL2146_obs13021_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13021/logs/ABELL2146_obs13021_addresp.log",
+        "reused": false
+      }
+    },
+    {
+      "cells": 128,
+      "obsid": 13023,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13023/ABELL2146_obs13023_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13023/ABELL2146_obs13023",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13023/logs/ABELL2146_obs13023_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13023/ABELL2146_obs13023_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13023/ABELL2146_obs13023_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13023/ABELL2146_obs13023_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13023/ABELL2146_obs13023_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13023/ABELL2146_obs13023_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13023/logs/ABELL2146_obs13023_addresp.log",
+        "reused": false
+      }
+    },
+    {
+      "cells": 123,
+      "obsid": 13120,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13120/ABELL2146_obs13120_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13120/ABELL2146_obs13120",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13120/logs/ABELL2146_obs13120_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13120/ABELL2146_obs13120_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13120/ABELL2146_obs13120_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13120/ABELL2146_obs13120_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13120/ABELL2146_obs13120_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13120/ABELL2146_obs13120_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13120/logs/ABELL2146_obs13120_addresp.log",
+        "reused": false
+      }
+    },
+    {
+      "cells": 128,
+      "obsid": 13138,
+      "pha_steps": {
+        "command": [
+          "combine_spectra",
+          "src_spectra=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13138/ABELL2146_obs13138_source.lis",
+          "outroot=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13138/ABELL2146_obs13138",
+          "src_arfs=NONE",
+          "src_rmfs=NONE",
+          "bkg_arfs=NONE",
+          "bkg_rmfs=NONE",
+          "method=sum",
+          "bscale_method=asca",
+          "exp_origin=pha",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13138/logs/ABELL2146_obs13138_pha.log",
+        "reused": false
+      },
+      "response_step": {
+        "command": [
+          "addresp",
+          "infile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13138/ABELL2146_obs13138_response_rmf.lis",
+          "arffile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13138/ABELL2146_obs13138_response_arf.lis",
+          "phafile=@/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13138/ABELL2146_obs13138_response_pha.lis",
+          "outfile=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13138/ABELL2146_obs13138_src.rmf",
+          "outarf=/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13138/ABELL2146_obs13138_src.arf",
+          "type=rmf",
+          "method=sum",
+          "thresh=0",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "log": "/home/henry/sigma-v19cw-observation-hierarchy/v100/obs13138/logs/ABELL2146_obs13138_addresp.log",
+        "reused": false
+      }
+    }
+  ],
+  "gates": {
+    "arf_within_tolerance": true,
+    "background_counts_within_tolerance": true,
+    "background_headers_within_tolerance": true,
+    "bullet_remained_sealed": true,
+    "forward_folds_within_tolerance": true,
+    "gravity_and_downstream_stages_remained_sealed": true,
+    "preflight_exact": true,
+    "rmf_within_tolerance": true,
+    "source_counts_and_grouping_exact": true,
+    "source_exposure_within_tolerance": true,
+    "ten_observation_groups_exact": true
+  },
+  "generated_utc": "2026-08-06T00:40:22.800966+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "preflight": {
+    "authorization_sealed": true,
+    "direct_products": {
+      "arf": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.arf",
+      "background": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_bkg.pi",
+      "rmf": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.rmf",
+      "source_grouped": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi"
+    },
+    "failure_fragments_exact": true,
+    "inputs_exact": true
+  },
+  "protocol_version": "SIGMA-V19CW-OBSERVATION-HIERARCHY-EQUIVALENCE-1.0.0",
+  "runner_sha256": "ad0c91414e1b59fb908c5b252fbb322e83459899bff29c8e50fd1e3b6a3f64e2",
+  "source_state_or_lensing_target_opened": false,
+  "status": "observation_hierarchy_equivalent_and_bullet_recovery_may_be_frozen",
+  "v19bq_or_v19bs_run": false
+}
