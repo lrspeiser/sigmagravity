@@ -618,6 +618,19 @@ no scientific input or prepared GTI, region, or Chandra-image byte and was
 made before any XRISM energy distribution, response, background, or velocity
 was generated or read.
 
+A second fail-closed interface audit was required before the first NXB or RMF
+product. `xaexpmap` accepts the exact GTI through the event-file `[GTI]`
+extension rather than the standalone GTI product; `extractor` must use
+`ccol=NONE` because the final GTI is global rather than indexed by detector
+pixel; and the installed `rslnxbgen` code distinguishes signed day offsets
+from calendar strings, so the frozen 300-day window is passed as `-300` and
+`+300`. The installed wrapper also contains an inverted `regfile` condition
+that leaves `pixels` at its default when `regfile=NONE`. Version 1.0.3 uses the
+already-frozen detector-region file and redundantly passes the exact pixel
+list. A source-only probe conserved 4,941 selected events into 4,941 PHA counts
+across 60,000 channels and the exact 49,982.354-s GTI; it did not summarize an
+energy distribution or generate an NXB, RMF, ARF, or velocity.
+
 ## The new observable source terms
 
 The signed projected gas current is

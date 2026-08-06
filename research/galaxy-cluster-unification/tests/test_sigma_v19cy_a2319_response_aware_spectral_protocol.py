@@ -23,13 +23,17 @@ def sha256(path: Path) -> str:
 
 def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     config = load()
-    assert config["protocol_version"].endswith("1.0.2")
+    assert config["protocol_version"].endswith("1.0.3")
     assert "corrected and refrozen" in config["status"]
     assert ";" in config["runtime"]["pfiles"]
     assert config["closed_failure_history"]["response_or_background_generated"] is False
     amendment = config["pre_response_interface_amendment"]
     assert amendment["response_or_background_generated"] is False
     assert amendment["validation_or_holdout_accessed"] is False
+    nxb_amendment = config["pre_nxb_interface_amendment"]
+    assert nxb_amendment["nxb_or_rmf_or_arf_generated"] is False
+    assert nxb_amendment["source_count_probe"]["selected_events"] == 4941
+    assert nxb_amendment["source_count_probe"]["pha_counts"] == 4941
     authorization = config["authorization"]
     assert authorization["read_A2319_development_energy_columns"] is True
     assert authorization["access_A3667_validation"] is False
@@ -82,6 +86,9 @@ def test_response_and_background_settings_match_frozen_science_scope():
     assert config["nxb_protocol"]["sortbin"] == "6,8,10,12,99"
     assert config["nxb_protocol"]["timefirst_days"] == 300
     assert config["nxb_protocol"]["timelast_days"] == 300
+    assert config["nxb_protocol"]["timefirst_parameter"] == "-300"
+    assert config["nxb_protocol"]["timelast_parameter"] == "+300"
+    assert "detector-region" in config["nxb_protocol"]["regfile"]
     assert config["attitude_and_arf_protocol"]["xaexpmap"] == {
         "instrume": "RESOLVE",
         "badimgfile": "NONE",

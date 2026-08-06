@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.2",
-  "status": "corrected and refrozen before response generation after the installed rslmkrmf interface audit exposed a hidden 2019 CALDB-selection time default; version 1.0.2 explicitly uses each branch event DATE-OBS, records the transitive ARF executables, and retains the already-passed exact GTIs, detector regions, and Chandra image without opening or generating any XRISM spectrum, NXB, response, velocity, validation, or holdout result",
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.3",
+  "status": "corrected and refrozen before NXB or RMF generation after installed-interface probes closed three execution-only failures: xaexpmap requires the exact GTI through the corrected event [GTI] extension, extractor requires ccol=NONE for the single global GTI, and rslnxbgen requires signed day offsets plus the frozen detector region file to work around its inverted regfile/pixels condition; source Hp extraction succeeded only as a count-conservation probe, while no NXB, RMF, ARF, energy-distribution summary or fit, velocity, validation, or holdout result was generated or opened",
   "purpose": "Reproduce the seven published A2319 detector-region velocities on the three strictly bracketed commissioning fragments using current official response and NXB tools, then decide whether the signed ICM velocity field is sufficiently identified to become a development-only Sigma source diagnostic.",
   "parents": {
     "calibration_report": {
@@ -78,6 +78,22 @@
     "chandra_image_changed": false,
     "xrism_energy_distribution_read_or_fit": false,
     "response_or_background_generated": false,
+    "velocity_fit_performed": false,
+    "validation_or_holdout_accessed": false
+  },
+  "pre_nxb_interface_amendment": {
+    "previous_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.2",
+    "discovered_by": "fail-closed installed-tool probes before the first NXB or RMF product",
+    "corrections": [
+      "pass the exact final GTI to xaexpmap as corrected_branch.evt[GTI] because the tool requires an event-like file contract",
+      "materialize each Hp selection and run extractor with ccol=NONE because PIXEL would incorrectly request multiple GTI indexing",
+      "pass the 300-day NXB window as timefirst=-300 and timelast=+300 because unsigned integers enter rslnxbgen's calendar-string branch",
+      "pass the already-frozen detector-region file to rslnxbgen because the installed wrapper's condition reads pixels only when regfile is not NONE; redundantly pass the exact pixel list"
+    ],
+    "source_count_probe": {"branch": "000101_open_0_cross_obsid", "region": "a", "selected_events": 4941, "pha_counts": 4941, "channels": 60000, "exposure_seconds": 49982.35376486182},
+    "scientific_filters_or_intervals_changed": false,
+    "nxb_or_rmf_or_arf_generated": false,
+    "xrism_energy_distribution_summarized_or_fit": false,
     "velocity_fit_performed": false,
     "validation_or_holdout_accessed": false
   },
@@ -173,10 +189,12 @@
     "base_ehk_sha256": "fa91c6e543c2979b2afd9a4cfdca768524767dd3cb9b71ac3c66647b8db81a23",
     "timefirst_days": 300,
     "timelast_days": 300,
+    "timefirst_parameter": "-300",
+    "timelast_parameter": "+300",
     "sortcol": "CORTIME",
     "sortbin": "6,8,10,12,99",
     "pixels": "exact detector-region pixel list",
-    "regfile": "NONE",
+    "regfile": "exact frozen detector-region DS9 file, with the exact pixel list passed redundantly because the installed 2025 rslnxbgen wrapper reads pixels only when regfile is not NONE",
     "diagonal_response_path": "data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf",
     "diagonal_response_sha256": "a21a12cf1a1c87f148178a0a6a01e1a7e16341ea2f887e9b8344984560dfd9ac",
     "empirical_model_path": "data/raw/sigma_v19cy_a2319_response_support/rsl_nxb_model_v1.mo",
