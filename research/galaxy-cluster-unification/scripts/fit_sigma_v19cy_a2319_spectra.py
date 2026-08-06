@@ -48,6 +48,11 @@ REPORT = (
     / "results/sigma_v19cy_direct_icm_velocity_evidence/"
     "development_response_aware_spectral.json"
 )
+ARTIFACT_INDEX = (
+    ROOT
+    / "results/sigma_v19cy_direct_icm_velocity_evidence/"
+    "development_response_aware_spectral_artifacts.json"
+)
 CHECKPOINT = (
     ROOT
     / "results/sigma_v19cy_direct_icm_velocity_evidence/"
@@ -1506,7 +1511,7 @@ def intervals_overlap(left: list[float], right: list[float], multiplier: float =
 def published_comparison(
     config: dict[str, Any], primary_by_region: dict[str, dict[str, Any]]
 ) -> dict[str, Any]:
-    comparison: dict[str, Any] = {}
+    per_region: dict[str, Any] = {}
     published = config["published_no_ssm_benchmark"]["regions"]
     for region, benchmark in published.items():
         fit = primary_by_region[region]
@@ -1514,14 +1519,131 @@ def published_comparison(
         benchmark_sigma = (
             benchmark["plus_1sigma"] if difference >= 0 else benchmark["minus_1sigma"]
         )
-        comparison[region] = {
+        fit_sigma = fit["velocity_interval_halfwidth_km_s"]
+        published_sigma = 0.5 * (
+            benchmark["minus_1sigma"] + benchmark["plus_1sigma"]
+        )
+        per_region[region] = {
             "fitted_velocity_km_s": fit["velocity_km_s"],
             "published_velocity_km_s": benchmark["velocity_km_s"],
             "difference_km_s": difference,
             "difference_over_published_directional_1sigma": difference / benchmark_sigma,
+            "fitted_profile_halfwidth_km_s": fit_sigma,
+            "published_mean_1sigma_km_s": published_sigma,
+            "combined_1sigma_km_s": math.hypot(fit_sigma, published_sigma),
             "diagnostic_only": True,
         }
-    return comparison
+    regions = list(published)
+    fitted = np.asarray(
+        [per_region[region]["fitted_velocity_km_s"] for region in regions],
+        dtype=np.float64,
+    )
+    expected = np.asarray(
+        [per_region[region]["published_velocity_km_s"] for region in regions],
+        dtype=np.float64,
+    )
+    differences = fitted - expected
+    combined_sigma = np.asarray(
+        [per_region[region]["combined_1sigma_km_s"] for region in regions],
+        dtype=np.float64,
+    )
+    weights = 1.0 / np.square(combined_sigma)
+
+    def ordinal_rank(values: np.ndarray) -> np.ndarray:
+        order = np.argsort(values, kind="stable")
+        ranks = np.empty(values.size, dtype=np.float64)
+        ranks[order] = np.arange(1, values.size + 1, dtype=np.float64)
+        return ranks
+
+    fitted_ranks = ordinal_rank(fitted)
+    expected_ranks = ordinal_rank(expected)
+    pair_agreements = [
+        np.sign(fitted[left] - fitted[right])
+        == np.sign(expected[left] - expected[right])
+        for left in range(fitted.size)
+        for right in range(left + 1, fitted.size)
+    ]
+    aggregate = {
+        "regions": regions,
+        "unweighted_rms_difference_km_s": float(
+            np.sqrt(np.mean(np.square(differences)))
+        ),
+        "inverse_combined_variance_weighted_rms_difference_km_s": float(
+            np.sqrt(np.sum(weights * np.square(differences)) / np.sum(weights))
+        ),
+        "mean_difference_km_s": float(np.mean(differences)),
+        "mean_absolute_difference_km_s": float(np.mean(np.abs(differences))),
+        "pearson_velocity_correlation": float(np.corrcoef(fitted, expected)[0, 1]),
+        "spearman_velocity_rank_correlation": float(
+            np.corrcoef(fitted_ranks, expected_ranks)[0, 1]
+        ),
+        "pairwise_velocity_rank_agreement_fraction": float(np.mean(pair_agreements)),
+        "sign_agreement_fraction": float(
+            np.mean(np.sign(fitted) == np.sign(expected))
+        ),
+        "directional_published_1sigma_agreement_fraction": float(
+            np.mean(
+                [
+                    abs(per_region[region]["difference_over_published_directional_1sigma"])
+                    <= 1.0
+                    for region in regions
+                ]
+            )
+        ),
+        "diagnostic_only": True,
+    }
+    return {"per_region": per_region, "aggregate": aggregate}
+
+
+def finalize_existing_report_diagnostics() -> dict[str, Any]:
+    """Add deterministic post-fit diagnostics without rerunning XSPEC."""
+    config = load_json(CONFIG)
+    report = load_json(REPORT)
+    if report.get("config_sha256") != preparation.sha256(CONFIG):
+        raise RuntimeError("terminal report does not match the current frozen config")
+    fits = report.get("fits", [])
+    primary = [row for row in fits if row.get("variant") == "primary"]
+    if len(primary) != 7:
+        raise RuntimeError("terminal report does not contain seven primary fits")
+    primary_by_region = {row["region"]: row for row in primary}
+    report["published_no_ssm_comparison"] = published_comparison(
+        config, primary_by_region
+    )
+    report["post_fit_diagnostics_finalized_utc"] = datetime.now(UTC).isoformat()
+    report["post_fit_diagnostics_only"] = True
+    write_json_atomic(REPORT, report)
+    return report
+
+
+def index_existing_spectral_artifacts() -> dict[str, Any]:
+    """Hash every installed fit artifact after the terminal run."""
+    config = load_json(CONFIG)
+    output_root = (ROOT / config["paths"]["product_root"] / "spectral_fits").resolve()
+    if not output_root.is_dir():
+        raise RuntimeError("installed spectral-fit artifact directory is missing")
+    artifacts = []
+    for path in sorted(candidate for candidate in output_root.rglob("*") if candidate.is_file()):
+        artifacts.append(
+            {
+                "path": str(path.relative_to(ROOT)).replace("\\", "/"),
+                "bytes": path.stat().st_size,
+                "sha256": preparation.sha256(path),
+            }
+        )
+    index = {
+        "protocol_version": (
+            "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-ARTIFACTS-1.0.0"
+        ),
+        "generated_utc": datetime.now(UTC).isoformat(),
+        "config_sha256": preparation.sha256(CONFIG),
+        "terminal_report_sha256": preparation.sha256(REPORT),
+        "artifact_count": len(artifacts),
+        "total_bytes": sum(row["bytes"] for row in artifacts),
+        "artifacts": artifacts,
+        "validation_or_holdout_accessed": False,
+    }
+    write_json_atomic(ARTIFACT_INDEX, index)
+    return index
 
 
 def generate() -> dict[str, Any]:

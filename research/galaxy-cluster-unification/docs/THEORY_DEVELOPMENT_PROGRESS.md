@@ -1,5 +1,17 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19CY A2319 response-aware spectral result
+
+All seven NXB-only prefits and 21 source-model fits completed with the frozen
+responses and mixed likelihood. All seven primary velocities converged, all
+met the 200-km/s precision threshold, and six regions passed both robustness
+branches. The terminal gate nevertheless failed because recommended NXB
+normalizations hit the public empirical model's hard bounds in every fit. Six
+regional NXB prefits had reduced chi-square 10.7--17.5; only region A was
+acceptable at 1.12. The velocity pattern is therefore not promoted to a signed
+Sigma source. A3667 validation and A754 holdout remain sealed. See
+[`SIGMA_V19CY_A2319_RESPONSE_AWARE_SPECTRAL_RESULTS.md`](SIGMA_V19CY_A2319_RESPONSE_AWARE_SPECTRAL_RESULTS.md).
+
 ## 2026-08-06 Sigma V19CY Chandra response-image gate
 
 The frozen A2319 extended-source image needed for response-aware XRISM ARFs is

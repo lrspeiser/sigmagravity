@@ -345,6 +345,28 @@ def test_markers_and_velocity_conversion_are_machine_readable():
     assert abs(fitter.velocity_km_s(config, config["fit_protocol"]["bcg_redshift"]) + 12.42) < 1e-12
 
 
+def test_published_comparison_reports_all_frozen_aggregate_diagnostics():
+    config = future_config()
+    primary = {
+        region: {
+            "velocity_km_s": benchmark["velocity_km_s"],
+            "velocity_interval_halfwidth_km_s": 25.0,
+        }
+        for region, benchmark in config["published_no_ssm_benchmark"]["regions"].items()
+    }
+    comparison = fitter.published_comparison(config, primary)
+    assert set(comparison["per_region"]) == set(primary)
+    aggregate = comparison["aggregate"]
+    assert aggregate["unweighted_rms_difference_km_s"] == pytest.approx(0.0)
+    assert aggregate[
+        "inverse_combined_variance_weighted_rms_difference_km_s"
+    ] == pytest.approx(0.0)
+    assert aggregate["pearson_velocity_correlation"] == pytest.approx(1.0)
+    assert aggregate["spearman_velocity_rank_correlation"] == pytest.approx(1.0)
+    assert aggregate["pairwise_velocity_rank_agreement_fraction"] == pytest.approx(1.0)
+    assert aggregate["sign_agreement_fraction"] == pytest.approx(1.0)
+
+
 def test_fit_audit_separates_source_and_nxb_statistic_contributions():
     config = future_config()
     nxb_path = fitter.ROOT / config["nxb_protocol"]["empirical_model_path"]
@@ -391,12 +413,16 @@ def test_interval_overlap_uses_combined_two_sigma_support():
 def test_published_comparison_is_diagnostic_and_uses_directional_error():
     config = future_config()
     primary = {
-        region: {"velocity_km_s": row["velocity_km_s"] + 10.0}
+        region: {
+            "velocity_km_s": row["velocity_km_s"] + 10.0,
+            "velocity_interval_halfwidth_km_s": 25.0,
+        }
         for region, row in config["published_no_ssm_benchmark"]["regions"].items()
     }
     comparison = fitter.published_comparison(config, primary)
-    assert set(comparison) == set(primary)
-    assert all(row["diagnostic_only"] for row in comparison.values())
-    for region, row in comparison.items():
+    per_region = comparison["per_region"]
+    assert set(per_region) == set(primary)
+    assert all(row["diagnostic_only"] for row in per_region.values())
+    for region, row in per_region.items():
         expected = 10.0 / config["published_no_ssm_benchmark"]["regions"][region]["plus_1sigma"]
         assert abs(row["difference_over_published_directional_1sigma"] - expected) < 1e-12
