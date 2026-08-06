@@ -1,0 +1,122 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-ENVIRONMENT-1.0.0",
+  "status": "frozen after the complete A2319 acquisition passed and after official setup-file HEAD metadata were inspected, but before either setup-file body was downloaded or any CALDB archive was extracted",
+  "purpose": "Install and audit the exact HEASoft/XRISM calibration environment required for the A2319 development reproduction without opening a scientific velocity outcome or any validation, holdout, lensing, halo, gravity, or action target.",
+  "parent": {
+    "acquisition_config": "configs/sigma_v19cy_a2319_development_acquisition.json",
+    "acquisition_config_sha256": "0a1f24574a14b9847eae96f1e343bf86c2a80740da06381cee343df4957ab9bb",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f",
+    "required_download_status": "all_frozen_a2319_development_payloads_downloaded_size_verified_and_sha256_hashed"
+  },
+  "runtime": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "heasoft_prefix": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "heasoft_version_token": "V6.36",
+    "xspec_version_token": "12.15.1",
+    "executables": {
+      "caldbinfo": "fe7eafbae73a7213befb468c0c03fff7fa3bd15356350bde76e0827d29af9954",
+      "quzcif": "469b523a2bd5df1b1f16d83d989c9bdac37c315ec54fe224c58e2c006d4a926e",
+      "rslgain": "6f6721fa371ec7c3aa53ae461c6394fa87516caa4942141c4bab64ced6af5dbc",
+      "rslpha2pi": "3b9cb5a78a6e71bef65ebdf1159c31beec4316def7f215c04e3d5698f6e04f1f",
+      "rslnxbgen": "710a66dc90f2cf2cb4a4034551d34325652a2eb21df2c6c9cb0fa1f5f1f58324",
+      "rslmkrmf": "b561a37df8cdcbfe029fbab857ee08540c0469eb6b678f0df16e37fc57fbf753"
+    }
+  },
+  "paths": {
+    "acquisition_raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "setup_raw_root": "data/raw/sigma_v19cy_a2319_environment_setup",
+    "caldb_install_root_wsl": "/home/henry/.local/share/sigmagravity-xrism/caldb",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_environment_report.json"
+  },
+  "archives": [
+    {
+      "role": "caldb_general_20240822",
+      "download_path": "caldb/goodfiles_gen_20240822.tar.Z",
+      "bytes": 43904803,
+      "sha256": "c342f2f455f7fc975997dd5123fd479019807b8ff28da39328dac1aee16024d8"
+    },
+    {
+      "role": "xrism_gen_caldb_20241115",
+      "download_path": "caldb/goodfiles_xrism_gen_20241115.tar.gz",
+      "bytes": 33497756,
+      "sha256": "2ec30913245e99cc9e597f9e5037b8e866d03f1c2c9476af408fd70cce159cd1"
+    },
+    {
+      "role": "xrism_resolve_caldb_20260315",
+      "download_path": "caldb/goodfiles_xrism_resolve_20260315.tar.gz",
+      "bytes": 1703596426,
+      "sha256": "e915c5b04ccf688a53aee3b65c3a72d046b1642d3659b4085b085de67fbc6e44"
+    }
+  ],
+  "official_setup_files": [
+    {
+      "name": "caldb.config",
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/caldb/software/tools/caldb.config",
+      "bytes": 14602,
+      "last_modified": "Thu, 12 Feb 2026 20:54:23 GMT",
+      "etag": "\"390a-64aa6b1844b97\""
+    },
+    {
+      "name": "alias_config.fits",
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/caldb/software/tools/alias_config.fits",
+      "bytes": 14400,
+      "last_modified": "Fri, 15 Dec 2000 01:58:58 GMT",
+      "etag": "\"3840-3786f934afc80\""
+    }
+  ],
+  "installation": {
+    "target_must_not_exist": true,
+    "extract_order": [
+      "caldb_general_20240822",
+      "xrism_gen_caldb_20241115",
+      "xrism_resolve_caldb_20260315"
+    ],
+    "allowed_archive_member_prefix": "data/",
+    "required_paths": [
+      "data/gen/caldb.indx",
+      "data/xrism/gen/caldb.indx",
+      "data/xrism/resolve/caldb.indx",
+      "software/tools/caldb.config",
+      "software/tools/alias_config.fits"
+    ],
+    "required_caldb_config_tokens": [
+      "XRISM",
+      "RESOLVE"
+    ]
+  },
+  "acceptance": {
+    "caldbinfo_mission": "XRISM",
+    "caldbinfo_instruments": [
+      "GEN",
+      "RESOLVE"
+    ],
+    "require_exact_runtime_hashes": true,
+    "require_exact_archive_hashes": true,
+    "require_setup_response_metadata_match": true,
+    "require_all_required_paths": true,
+    "require_zero_validation_or_holdout_access": true,
+    "require_zero_scientific_fit": true
+  },
+  "authorization": {
+    "download_official_setup_files": true,
+    "extract_frozen_caldb_archives_to_new_target": true,
+    "run_caldb_environment_queries": true,
+    "inspect_A2319_event_or_gain_arrays": false,
+    "fit_A2319_spectra_or_velocities": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "Passing this protocol proves only that the frozen calibration environment is complete and queryable.",
+    "It does not validate the commissioning gain interpolation, event screening, response generation, spectral model, spatial-spectral mixing, or any velocity result.",
+    "A3667 and A754 outcomes remain sealed, and no gravity or action inference is authorized."
+  ],
+  "official_sources": {
+    "xrism_caldb": "https://heasarc.gsfc.nasa.gov/docs/xrism/calib/index.html",
+    "caldb_installation": "https://heasarc.gsfc.nasa.gov/docs/heasarc/caldb/install.html",
+    "xrism_environment": "https://heasarc.gsfc.nasa.gov/docs/xrism/analysis/abc_guide/Analyses_Tools_Environment.html"
+  }
+}
