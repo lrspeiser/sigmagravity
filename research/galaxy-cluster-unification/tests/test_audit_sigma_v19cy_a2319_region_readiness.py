@@ -1,4 +1,5 @@
 import inspect
+import json
 import sys
 from pathlib import Path
 
@@ -61,3 +62,35 @@ def test_readiness_implementation_never_accesses_energy_values() -> None:
     assert not readiness.load_json(readiness.DEFAULT_CONFIG)["authorization"][
         "read_or_summarize_any_energy_column"
     ]
+
+
+def test_terminal_region_readiness_gate_passes() -> None:
+    report_path = (
+        ROOT
+        / "results"
+        / "sigma_v19cy_direct_icm_velocity_evidence"
+        / "development_region_readiness.json"
+    )
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["status"] == "a2319_detector_region_count_readiness_completed"
+    assert len(report["commands"]) == 13
+    assert all(command["exit_code"] == 0 for command in report["commands"])
+    assert all(item["partition_exact"] for item in report["branches"])
+    assert [(item["pointing"], item["region"], item["rows"]) for item in report[
+        "aggregate_detector_regions"
+    ]] == [
+        ("P1", "a", 5557),
+        ("P1", "b", 4500),
+        ("P1", "d", 3774),
+        ("P2", "b_prime", 3979),
+        ("P2", "c_prime", 3643),
+        ("P2", "d_prime", 3022),
+        ("P2", "e_prime", 3594),
+    ]
+    assert report["terminal_gate_passed"]
+    assert not report["energy_column_or_distribution_read"]
+    assert not report["spectrum_or_velocity_fit"]
+    assert not report["validation_or_holdout_accessed"]
+    assert report["decision"] == (
+        "authorize_freeze_of_a2319_detector_region_spectral_protocol"
+    )

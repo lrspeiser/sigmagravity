@@ -417,6 +417,37 @@ The retained calibration scratch tree contains nine files totaling
 280,800,000 bytes. The terminal report SHA-256 is
 `6f474938d674e353d2339cf150d5eef1f41b0231b5e8e2f31688c7bec548136e`.
 
+### Detector-region count readiness
+
+Before reading any recalibrated energy value, the published detector geometry
+was frozen from figure 1 and section 3.3 of the A2319 paper. P1 uses detector
+regions `a`, `b`, and `d`; P2 uses `b'`, `c'`, `d'`, and `e'`. Together each
+pointing partitions all 34 science pixels exactly once after excluding the
+off-field calibration pixel 12 and the aperiodically noisy pixel 27.
+
+The count-only audit then applied the official high-resolution primary,
+rise-time, frame-event, and noisy-pixel screen. It copied rows without using an
+energy column and read only output `NAXIS2` headers.
+
+| Pointing | Detector region | Aggregate screened events | Frozen floor | Result |
+|---|---|---:|---:|---|
+| P1 | a | 5,557 | 1,000 | Pass |
+| P1 | b | 4,500 | 1,000 | Pass |
+| P1 | d | 3,774 | 1,000 | Pass |
+| P2 | b' | 3,979 | 1,000 | Pass |
+| P2 | c' | 3,643 | 1,000 | Pass |
+| P2 | d' | 3,022 | 1,000 | Pass |
+| P2 | e' | 3,594 | 1,000 | Pass |
+
+All 13 mission-tool commands exited zero, and each branch's detector regions
+sum exactly to its screened full-array count. The geometry therefore remains
+usable without merging or redrawing a weak region. No energy distribution,
+spectrum, response, velocity, validation object, or holdout object was opened.
+
+The readiness scratch tree contains 13 files totaling 10,154,880 bytes. Its
+terminal report SHA-256 is
+`84452380c22ba22f415464875cd0278bf61c67382c43eca0f5cbc12a31087fc1`.
+
 ## The new observable source terms
 
 The signed projected gas current is
