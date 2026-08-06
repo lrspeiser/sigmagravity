@@ -1,0 +1,950 @@
+{
+  "regions": [
+    {
+      "correction_at_observed_fe_keV": 0.006729857497025354,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          6.489457924570616e-05,
+          -7.3991514841336415e-06
+        ],
+        [
+          -7.3991514841336415e-06,
+          8.577535020232232e-07
+        ]
+      ],
+      "group_id": 1,
+      "intercept_keV": -0.0020768930073534267,
+      "minimum_covariance_eigenvalue": 1.3935690040738751e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0033638704665068294,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 195.06985704922462,
+      "slope": 1.001703514724429,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.008142543514211294,
+      "weighted_rms_obsid_correction_dispersion_km_s": 472.1836988520269
+    },
+    {
+      "correction_at_observed_fe_keV": 0.0045759054092975844,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.201904314591008e-05,
+          -9.322560090947711e-06
+        ],
+        [
+          -9.322560090947711e-06,
+          1.0771570752543126e-06
+        ]
+      ],
+      "group_id": 2,
+      "intercept_keV": -0.006080048747851472,
+      "minimum_covariance_eigenvalue": 1.7300012124117716e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0037969526304950803,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 220.18416411333862,
+      "slope": 1.0020612114309948,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009613904624912201,
+      "weighted_rms_obsid_correction_dispersion_km_s": 557.5074960641904
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004234291858418122,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.507497805662171e-05,
+          -9.654756740564408e-06
+        ],
+        [
+          -9.654756740564408e-06,
+          1.1136969174439054e-06
+        ]
+      ],
+      "group_id": 3,
+      "intercept_keV": -0.0061722569895511755,
+      "minimum_covariance_eigenvalue": 1.7795026518552746e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003874869208164443,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 224.70252349104405,
+      "slope": 1.0020129682547714,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009825794506350117,
+      "weighted_rms_obsid_correction_dispersion_km_s": 569.7949278466614
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004692969051730112,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.077345331747669e-05,
+          -9.180352262081258e-06
+        ],
+        [
+          -9.180352262081258e-06,
+          1.0606508868387047e-06
+        ]
+      ],
+      "group_id": 4,
+      "intercept_keV": -0.005754835826223425,
+      "minimum_covariance_eigenvalue": 1.703271961483602e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0037683508402692736,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 218.52555472684406,
+      "slope": 1.002020948525646,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009593846136085493,
+      "weighted_rms_obsid_correction_dispersion_km_s": 556.3443102081926
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004350607452230953,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.425977075069101e-05,
+          -9.570584402726303e-06
+        ],
+        [
+          -9.570584402726303e-06,
+          1.105001650772437e-06
+        ]
+      ],
+      "group_id": 5,
+      "intercept_keV": -0.006286927851947364,
+      "minimum_covariance_eigenvalue": 1.7705353162956323e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038519231257920735,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 223.37188693628218,
+      "slope": 1.002057648620032,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009759896886410435,
+      "weighted_rms_obsid_correction_dispersion_km_s": 565.9735442858173
+    },
+    {
+      "correction_at_observed_fe_keV": 0.003969567752780393,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.827094071680647e-05,
+          -1.0003584829134965e-05
+        ],
+        [
+          -1.0003584829134965e-05,
+          1.1522475230478428e-06
+        ]
+      ],
+      "group_id": 6,
+      "intercept_keV": -0.006132699694383612,
+      "minimum_covariance_eigenvalue": 1.8324096569493764e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003954008184991573,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 229.29176943567788,
+      "slope": 1.001954110240526,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009979370940401454,
+      "weighted_rms_obsid_correction_dispersion_km_s": 578.7007799996528
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004237805072042735,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.553516322814052e-05,
+          -9.712759767795294e-06
+        ],
+        [
+          -9.712759767795294e-06,
+          1.1210872489255839e-06
+        ]
+      ],
+      "group_id": 7,
+      "intercept_keV": -0.006423066951662558,
+      "minimum_covariance_eigenvalue": 1.794447046108432e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038823434234027867,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 225.13595103012904,
+      "slope": 1.002062162707869,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009853651795310272,
+      "weighted_rms_obsid_correction_dispersion_km_s": 571.4103638241588
+    },
+    {
+      "correction_at_observed_fe_keV": 0.003974345930387135,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.825657296927389e-05,
+          -9.993631592201188e-06
+        ],
+        [
+          -9.993631592201188e-06,
+          1.1500895622565447e-06
+        ]
+      ],
+      "group_id": 8,
+      "intercept_keV": -0.005580244534092465,
+      "minimum_covariance_eigenvalue": 1.8238278451330743e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003957909817731904,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 229.5180239685123,
+      "slope": 1.0018481715286516,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.010003519876946847,
+      "weighted_rms_obsid_correction_dispersion_km_s": 580.1011697134375
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004175649735044935,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.617535333356704e-05,
+          -9.777035269765274e-06
+        ],
+        [
+          -9.777035269765274e-06,
+          1.1274833800246413e-06
+        ]
+      ],
+      "group_id": 9,
+      "intercept_keV": -0.00616944904815789,
+      "minimum_covariance_eigenvalue": 1.7996939550789834e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.00390117275089588,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 226.22785818261372,
+      "slope": 1.0020010817944822,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009911065564302421,
+      "weighted_rms_obsid_correction_dispersion_km_s": 574.7397713686728
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004513408082119208,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.241620261745952e-05,
+          -9.363345913283306e-06
+        ],
+        [
+          -9.363345913283308e-06,
+          1.0813398813544224e-06
+        ]
+      ],
+      "group_id": 10,
+      "intercept_keV": -0.006019517567825789,
+      "minimum_covariance_eigenvalue": 1.7341597799495597e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038084241642874425,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 220.849394977396,
+      "slope": 1.0020374136779595,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009674601276695857,
+      "weighted_rms_obsid_correction_dispersion_km_s": 561.0272770143467
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004432281214033439,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.333748871601506e-05,
+          -9.456844289703872e-06
+        ],
+        [
+          -9.456844289703872e-06,
+          1.0907819705239462e-06
+        ]
+      ],
+      "group_id": 11,
+      "intercept_keV": -0.005675929939113411,
+      "minimum_covariance_eigenvalue": 1.742816676806357e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038354929572145553,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 222.41910630230032,
+      "slope": 1.0019552599484296,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009741063174206404,
+      "weighted_rms_obsid_correction_dispersion_km_s": 564.8813828652375
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004272456322447663,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.471500260109342e-05,
+          -9.613395024327182e-06
+        ],
+        [
+          -9.613395024327182e-06,
+          1.108863106282163e-06
+        ]
+      ],
+      "group_id": 12,
+      "intercept_keV": -0.0059981516710122685,
+      "minimum_covariance_eigenvalue": 1.7714080055623907e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003866924557175704,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 224.24181552142696,
+      "slope": 1.0019866728297797,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009875443619286663,
+      "weighted_rms_obsid_correction_dispersion_km_s": 572.6740652746879
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004312237365150571,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.465600632768055e-05,
+          -9.613800153387732e-06
+        ],
+        [
+          -9.613800153387732e-06,
+          1.109772848117285e-06
+        ]
+      ],
+      "group_id": 13,
+      "intercept_keV": -0.006288284114562042,
+      "minimum_covariance_eigenvalue": 1.77704868780686e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038618951952371808,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 223.9501643047214,
+      "slope": 1.0020504889310011,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.00979729221527181,
+      "weighted_rms_obsid_correction_dispersion_km_s": 568.1420883864088
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004445611039706615,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.247511526610708e-05,
+          -9.363641721911202e-06
+        ],
+        [
+          -9.363641721911202e-06,
+          1.080596602690046e-06
+        ]
+      ],
+      "group_id": 14,
+      "intercept_keV": -0.005873139736308991,
+      "minimum_covariance_eigenvalue": 1.7291960612814448e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003813146158378809,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 221.12322202322358,
+      "slope": 1.0019959852247338,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.00975330453260038,
+      "weighted_rms_obsid_correction_dispersion_km_s": 565.5912556310818
+    },
+    {
+      "correction_at_observed_fe_keV": 0.003378667635500217,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          9.842691087971598e-05,
+          -1.1178034114495607e-05
+        ],
+        [
+          -1.1178034114495607e-05,
+          1.2903644583542307e-06
+        ]
+      ],
+      "group_id": 15,
+      "intercept_keV": -0.008590047300355508,
+      "minimum_covariance_eigenvalue": 2.0644036343900387e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0041639267993417075,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 241.4648880206438,
+      "slope": 1.0023151424711745,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.010117310287189018,
+      "weighted_rms_obsid_correction_dispersion_km_s": 586.6998420703321
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004404164255272616,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.354332106108014e-05,
+          -9.494501269133028e-06
+        ],
+        [
+          -9.494501269133028e-06,
+          1.0968607675933484e-06
+        ]
+      ],
+      "group_id": 16,
+      "intercept_keV": -0.00641904807792729,
+      "minimum_covariance_eigenvalue": 1.7605667238764574e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038327468007049435,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 222.25985749557648,
+      "slope": 1.0020935646543025,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009711026638916164,
+      "weighted_rms_obsid_correction_dispersion_km_s": 563.1395730352634
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004263776166625984,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.434789743638577e-05,
+          -9.559301077725591e-06
+        ],
+        [
+          -9.559301077725591e-06,
+          1.1011148866681454e-06
+        ]
+      ],
+      "group_id": 17,
+      "intercept_keV": -0.005405192856089827,
+      "minimum_covariance_eigenvalue": 1.751682354390249e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038649998001477363,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 224.1301994285843,
+      "slope": 1.0018702960975283,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009914357782852823,
+      "weighted_rms_obsid_correction_dispersion_km_s": 574.9306861522224
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004366485790844725,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.395315227749916e-05,
+          -9.541581197233316e-06
+        ],
+        [
+          -9.541581197233316e-06,
+          1.1023591352718136e-06
+        ]
+      ],
+      "group_id": 18,
+      "intercept_keV": -0.0064917061503070445,
+      "minimum_covariance_eigenvalue": 1.7695099307627294e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038418676877127783,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 222.7887750453144,
+      "slope": 1.0021003308590646,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009764141610815914,
+      "weighted_rms_obsid_correction_dispersion_km_s": 566.2196946032075
+    },
+    {
+      "correction_at_observed_fe_keV": 0.005088773595912258,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.682214940226968e-05,
+          -8.725249877038678e-06
+        ],
+        [
+          -8.725249877038678e-06,
+          1.0073504439778663e-06
+        ]
+      ],
+      "group_id": 19,
+      "intercept_keV": -0.004542937341862613,
+      "minimum_covariance_eigenvalue": 1.6151996099271927e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003678338202201792,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 213.30574837125604,
+      "slope": 1.001863089160501,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009397709195568336,
+      "weighted_rms_obsid_correction_dispersion_km_s": 544.9703868274612
+    },
+    {
+      "correction_at_observed_fe_keV": 0.005194962110086232,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.704261781709178e-05,
+          -8.772364739087325e-06
+        ],
+        [
+          -8.772364739087325e-06,
+          1.0154676016717913e-06
+        ]
+      ],
+      "group_id": 20,
+      "intercept_keV": -0.005263257214853275,
+      "minimum_covariance_eigenvalue": 1.6400199740227964e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003671571585927434,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 212.91335428756926,
+      "slope": 1.00202296302166,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009301542791053627,
+      "weighted_rms_obsid_correction_dispersion_km_s": 539.39372536906
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004612686025600351,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.197328525244254e-05,
+          -9.307747364718348e-06
+        ],
+        [
+          -9.307747364718348e-06,
+          1.0742810103670117e-06
+        ]
+      ],
+      "group_id": 21,
+      "intercept_keV": -0.0055002511456323094,
+      "minimum_covariance_eigenvalue": 1.7200727582849947e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003800971053683748,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 220.41719128985494,
+      "slope": 1.00195617411551,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009640804988592083,
+      "weighted_rms_obsid_correction_dispersion_km_s": 559.0674402266824
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004504935158966802,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.276446630074647e-05,
+          -9.40544655171896e-06
+        ],
+        [
+          -9.40544655171896e-06,
+          1.0865080040622342e-06
+        ]
+      ],
+      "group_id": 22,
+      "intercept_keV": -0.0061462418081735725,
+      "minimum_covariance_eigenvalue": 1.743729660738299e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003815125624160435,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 221.23801066056865,
+      "slope": 1.0020602873655842,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009696065044118412,
+      "weighted_rms_obsid_correction_dispersion_km_s": 562.2719545619943
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004652117699539021,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.130905134614392e-05,
+          -9.241698519050778e-06
+        ],
+        [
+          -9.241698519050778e-06,
+          1.0677948722235275e-06
+        ]
+      ],
+      "group_id": 23,
+      "intercept_keV": -0.005879859547314044,
+      "minimum_covariance_eigenvalue": 1.714912300018742e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003780569892699285,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 219.23413397641147,
+      "slope": 1.00203723022566,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009609502865066549,
+      "weighted_rms_obsid_correction_dispersion_km_s": 557.2522393079015
+    },
+    {
+      "correction_at_observed_fe_keV": 0.00412450051889574,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.817991717211695e-05,
+          -1.0009230108244408e-05
+        ],
+        [
+          -1.0009230108244408e-05,
+          1.1548372509550978e-06
+        ]
+      ],
+      "group_id": 24,
+      "intercept_keV": -0.006551721470058209,
+      "minimum_covariance_eigenvalue": 1.8459854214376172e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003943856203097458,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 228.70305899733935,
+      "slope": 1.0020651318951768,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009883904940338065,
+      "weighted_rms_obsid_correction_dispersion_km_s": 573.1647347889806
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004226314750177007,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.536909161046131e-05,
+          -9.698315890533228e-06
+        ],
+        [
+          -9.698315890533228e-06,
+          1.1199560795852186e-06
+        ]
+      ],
+      "group_id": 25,
+      "intercept_keV": -0.006650791970248765,
+      "minimum_covariance_eigenvalue": 1.7951686944948844e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003876290671943083,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 224.78495375667427,
+      "slope": 1.0021039895984585,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009832515853456994,
+      "weighted_rms_obsid_correction_dispersion_km_s": 570.1846967846664
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004401880186734851,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.346050845433917e-05,
+          -9.472079623111956e-06
+        ],
+        [
+          -9.472079623111956e-06,
+          1.092694106168514e-06
+        ]
+      ],
+      "group_id": 26,
+      "intercept_keV": -0.0058006364365513425,
+      "minimum_covariance_eigenvalue": 1.7466143454725556e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003837656125820489,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 222.54454781229137,
+      "slope": 1.001973501722952,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009741859405604457,
+      "weighted_rms_obsid_correction_dispersion_km_s": 564.9275560893681
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004226841369997826,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.539865674487415e-05,
+          -9.68363296022331e-06
+        ],
+        [
+          -9.68363296022331e-06,
+          1.1160739228614895e-06
+        ]
+      ],
+      "group_id": 27,
+      "intercept_keV": -0.005800772673371759,
+      "minimum_covariance_eigenvalue": 1.778636857631969e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038862903762807827,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 225.36483366439117,
+      "slope": 1.0019396698209264,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009854418473003331,
+      "weighted_rms_obsid_correction_dispersion_km_s": 571.4548232376461
+    },
+    {
+      "correction_at_observed_fe_keV": 0.005591468754838905,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.415943631669602e-05,
+          -8.456846700942931e-06
+        ],
+        [
+          -8.456846700942931e-06,
+          9.80498571591265e-07
+        ]
+      ],
+      "group_id": 28,
+      "intercept_keV": -0.004895116107744922,
+      "minimum_covariance_eigenvalue": 1.590656520900932e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0035951304123681806,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 208.48055315942028,
+      "slope": 1.002028449848046,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.008970707632056926,
+      "weighted_rms_obsid_correction_dispersion_km_s": 520.2086919930988
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004362814121556528,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.549056841679636e-05,
+          -9.713939423444325e-06
+        ],
+        [
+          -9.713939423444325e-06,
+          1.1219839760705872e-06
+        ]
+      ],
+      "group_id": 29,
+      "intercept_keV": -0.006236933504374877,
+      "minimum_covariance_eigenvalue": 1.7996844450509788e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003878113565878208,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 224.8906628387811,
+      "slope": 1.0020503392422697,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009784699462727323,
+      "weighted_rms_obsid_correction_dispersion_km_s": 567.4118383773291
+    },
+    {
+      "correction_at_observed_fe_keV": 0.00452852394959105,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.210859375367818e-05,
+          -9.317117528040067e-06
+        ],
+        [
+          -9.317117528040067e-06,
+          1.0746341635093294e-06
+        ]
+      ],
+      "group_id": 30,
+      "intercept_keV": -0.005431546971835922,
+      "minimum_covariance_eigenvalue": 1.7170718225628082e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038072621506915812,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 220.78201015140735,
+      "slope": 1.0019266047633089,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009699074176600686,
+      "weighted_rms_obsid_correction_dispersion_km_s": 562.446453267876
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004550865198479793,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.177599731887597e-05,
+          -9.280355874521213e-06
+        ],
+        [
+          -9.280355874521213e-06,
+          1.0705136743166076e-06
+        ]
+      ],
+      "group_id": 31,
+      "intercept_keV": -0.005429513447712491,
+      "minimum_covariance_eigenvalue": 1.7111293914000435e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0037990288718169674,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 220.30456473574452,
+      "slope": 1.0019305329440993,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009681115836641552,
+      "weighted_rms_obsid_correction_dispersion_km_s": 561.4050544258132
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004588000113671811,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.19688489130105e-05,
+          -9.321652658659108e-06
+        ],
+        [
+          -9.321652658659108e-06,
+          1.0776347021191402e-06
+        ]
+      ],
+      "group_id": 32,
+      "intercept_keV": -0.006178349013423256,
+      "minimum_covariance_eigenvalue": 1.7334488042644918e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003793257527295916,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 219.969886167734,
+      "slope": 1.0020825654430918,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009601929686127404,
+      "weighted_rms_obsid_correction_dispersion_km_s": 556.8130728929707
+    },
+    {
+      "correction_at_observed_fe_keV": 0.00479915467051727,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.876027591769322e-05,
+          -8.95333774384394e-06
+        ],
+        [
+          -8.95333774384394e-06,
+          1.0346429118075984e-06
+        ]
+      ],
+      "group_id": 33,
+      "intercept_keV": -0.005538486361928999,
+      "minimum_covariance_eigenvalue": 1.6627386108572264e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003720135817873712,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 215.72957978667517,
+      "slope": 1.0019996392206045,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.00956912659615669,
+      "weighted_rms_obsid_correction_dispersion_km_s": 554.9108313723558
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004838458615604303,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.867333731149128e-05,
+          -8.94605472539483e-06
+        ],
+        [
+          -8.94605472539483e-06,
+          1.0341188053248076e-06
+        ]
+      ],
+      "group_id": 34,
+      "intercept_keV": -0.005608028065458,
+      "minimum_covariance_eigenvalue": 1.6635321715713925e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0037166876731473926,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 215.5296228901343,
+      "slope": 1.002020693543083,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009475188245093087,
+      "weighted_rms_obsid_correction_dispersion_km_s": 549.4633740769963
+    },
+    {
+      "correction_at_observed_fe_keV": 0.0047792775956357145,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.970149920668624e-05,
+          -9.044526127838968e-06
+        ],
+        [
+          -9.044526127838968e-06,
+          1.0432651227114659e-06
+        ]
+      ],
+      "group_id": 35,
+      "intercept_keV": -0.004890931066386958,
+      "minimum_covariance_eigenvalue": 1.6677485192828053e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003750764073294476,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 217.50570329264355,
+      "slope": 1.0018705358844748,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.00957770021421794,
+      "weighted_rms_obsid_correction_dispersion_km_s": 555.4080129571566
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004394957912083027,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.421181921399438e-05,
+          -9.565899845569735e-06
+        ],
+        [
+          -9.565899845569735e-06,
+          1.104552695354132e-06
+        ]
+      ],
+      "group_id": 36,
+      "intercept_keV": -0.006234361091449047,
+      "minimum_covariance_eigenvalue": 1.7701941174284023e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038504281969239194,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 223.28519645176047,
+      "slope": 1.0020560593176981,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.0097595468206367,
+      "weighted_rms_obsid_correction_dispersion_km_s": 565.9532440747598
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004921595315780708,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.887225923672865e-05,
+          -8.967289493525932e-06
+        ],
+        [
+          -8.967289493525932e-06,
+          1.036405463378752e-06
+        ]
+      ],
+      "group_id": 37,
+      "intercept_keV": -0.005366709954186311,
+      "minimum_covariance_eigenvalue": 1.6664491035224742e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003722129254251479,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 215.84517857477346,
+      "slope": 1.0019900960641608,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009449523828612083,
+      "weighted_rms_obsid_correction_dispersion_km_s": 547.9751021283442
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004917468462820244,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.87288044463606e-05,
+          -8.952985563606858e-06
+        ],
+        [
+          -8.952985563606858e-06,
+          1.0349948223426347e-06
+        ]
+      ],
+      "group_id": 38,
+      "intercept_keV": -0.005454669924938625,
+      "minimum_covariance_eigenvalue": 1.6652062369332566e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003717658629418916,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 215.58592835818754,
+      "slope": 1.002006312141871,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009468036061706498,
+      "weighted_rms_obsid_correction_dispersion_km_s": 549.0486210700944
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004643364088635081,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.126945437349862e-05,
+          -9.245701398467314e-06
+        ],
+        [
+          -9.245701398467315e-06,
+          1.0692875723013537e-06
+        ]
+      ],
+      "group_id": 39,
+      "intercept_keV": -0.006268182007454399,
+      "minimum_covariance_eigenvalue": 1.7218136327918806e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0037751315691921914,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 218.91876719886199,
+      "slope": 1.002110651304557,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009610284737661075,
+      "weighted_rms_obsid_correction_dispersion_km_s": 557.2975798692471
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004375027754276213,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.327163941186393e-05,
+          -9.454279931723151e-06
+        ],
+        [
+          -9.454279931723151e-06,
+          1.091080699875032e-06
+        ]
+      ],
+      "group_id": 40,
+      "intercept_keV": -0.006039648506603438,
+      "minimum_covariance_eigenvalue": 1.7460015893972284e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003831403797585286,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 222.18197714043896,
+      "slope": 1.0020145403632985,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009771657884188177,
+      "weighted_rms_obsid_correction_dispersion_km_s": 566.6555610810843
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004772693537505431,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.97902112083515e-05,
+          -9.066848607712328e-06
+        ],
+        [
+          -9.066848607712328e-06,
+          1.047326422685987e-06
+        ]
+      ],
+      "group_id": 41,
+      "intercept_keV": -0.005475205534256918,
+      "minimum_covariance_eigenvalue": 1.6810697534866303e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0037462892879521334,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 217.2462118093216,
+      "slope": 1.0019822801786573,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009569102823754743,
+      "weighted_rms_obsid_correction_dispersion_km_s": 554.9094528177724
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004456457130421307,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          8.3284112180898e-05,
+          -9.462595557684354e-06
+        ],
+        [
+          -9.462595557684354e-06,
+          1.092878087031842e-06
+        ]
+      ],
+      "group_id": 42,
+      "intercept_keV": -0.00617839481644064,
+      "minimum_covariance_eigenvalue": 1.7528164301012993e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.0038280786245881424,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 221.9891513382343,
+      "slope": 1.0020571295706169,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.0097169004244199,
+      "weighted_rms_obsid_correction_dispersion_km_s": 563.4801921256714
+    },
+    {
+      "correction_at_observed_fe_keV": 0.004727586536164936,
+      "covariance_finite_symmetric_psd": true,
+      "covariance_intercept_slope": [
+        [
+          7.889739245761827e-05,
+          -8.967093099008434e-06
+        ],
+        [
+          -8.967093099008434e-06,
+          1.0360101104459027e-06
+        ]
+      ],
+      "group_id": 43,
+      "intercept_keV": -0.0055616753079996105,
+      "minimum_covariance_eigenvalue": 1.6639032523317606e-08,
+      "one_sigma_energy_uncertainty_at_observed_fe_keV": 0.003724358157979644,
+      "one_sigma_equivalent_velocity_uncertainty_km_s": 215.9744320451311,
+      "slope": 1.0019902810970205,
+      "weighted_rms_obsid_correction_dispersion_keV": 0.009599987820464138,
+      "weighted_rms_obsid_correction_dispersion_km_s": 556.7004646754091
+    }
+  ]
+}

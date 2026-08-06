@@ -9,6 +9,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19dd_bullet_gain_weight_transport.json"
 RUNNER = ROOT / "scripts" / "run_sigma_v19dd_bullet_gain_weight_transport.py"
+RESULT = ROOT / "results" / "sigma_v19dd_bullet_gain_weight_transport" / "report.json"
 
 
 def load_runner():
@@ -72,3 +73,18 @@ def test_runner_contains_no_source_fit_engine() -> None:
     source = RUNNER.read_text(encoding="utf-8").lower()
     for forbidden in ("sherpa", "xspec", "apec", "mekal", "fit_spectrum(", "redshift_profile"):
         assert forbidden not in source
+
+
+def test_terminal_transport_result_is_complete() -> None:
+    payload = json.loads(RESULT.read_text(encoding="utf-8"))
+    assert payload["status"] == "bullet_integrated_spectrum_and_gain_weight_transport_passed"
+    assert payload["bullet_source_redshift_fitter_authorized"] is True
+    assert all(payload["gates"].values())
+    assert payload["integrated_spectrum"]["cells"] == 3483
+    assert payload["integrated_spectrum"]["combined_full_pha_source_counts"] == 674283
+    assert payload["region_obsid_fe_weights"]["rows"] == 43 * 9
+    assert payload["effective_gain_by_region"]["rows"] == 43
+    assert payload["integrated_weight_equivalence"]["maximum_relative_difference"] <= 1e-6
+    assert payload["source_line_temperature_abundance_redshift_or_velocity_fitted"] is False
+    assert payload["obsid554_or_abell2146_opened"] is False
+    assert payload["lensing_halo_gravity_or_action_opened"] is False

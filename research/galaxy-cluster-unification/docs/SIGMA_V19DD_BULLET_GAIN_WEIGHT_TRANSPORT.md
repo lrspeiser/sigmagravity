@@ -1,5 +1,26 @@
 # Sigma V19DD Bullet gain-weight transport
 
+## Outcome
+
+The frozen transport passes every gate. The integrated spectrum uses all
+3,483 primary cells exactly once and conserves all 674,283 full-PHA source
+counts. Its source, background, ARF and RMF links are exact. All 387 regional
+ObsID weights exist, every regional weight vector sums to one, and the maximum
+direct-cell versus observation-hierarchical Fe-K response difference is
+`3.25001e-8`, below the frozen `1e-6` gate.
+
+The response-weighted regional gain covariance corresponds to 195--241 km/s
+one-sigma uncertainty at observed Fe-K, with median 221 km/s. Separately, the
+weighted RMS spread of the nine fitted mean gain corrections is 472--587 km/s,
+with median 563 km/s. The latter is a possible response-mixture broadening,
+not uncertainty in the weighted mean, and requires the preregistered
+gain-corrected sign-topology robustness branch.
+
+The result report SHA-256 is
+`7d7156ebe888a1d249dc3c6e07a1a8311d7ba349e4d018f57bc9eee1330cc095`.
+V19DD authorizes the frozen Bullet source-redshift fitter. It is not a source
+velocity or gravity result.
+
 ## Frozen preflight
 
 The payload-blind preflight passes with 43 regions and 3,483 response cells.
@@ -11,8 +32,8 @@ the runner SHA-256 is
 and the preflight-report SHA-256 is
 `3237cdf936d43ae1a87eabb7fbd9bc7362ddbe7b079483375b198e9a1ce618a0`.
 
-V19DD freezes the last mechanical input needed before source redshift fitting.
-It builds the nine-ObsID integrated Bullet spectrum from all 3,483 primary
+V19DD froze the last mechanical input needed before source redshift fitting.
+It built the nine-ObsID integrated Bullet spectrum from all 3,483 primary
 cells and derives each region's relative ObsID contribution at observed Fe-K.
 
 For a cell, the contribution is its source exposure multiplied by its ARF at

@@ -1,0 +1,149 @@
+{
+  "bullet_source_redshift_fitter_authorized": true,
+  "config_sha256": "c7143bff88665f5aa8602ba7febb9daea3083c71cdb4e813ed4b4d0268b81f1c",
+  "effective_gain_by_region": {
+    "bytes": 34880,
+    "path": "results/sigma_v19dd_bullet_gain_weight_transport/effective_gain_by_region.json",
+    "rows": 43,
+    "sha256": "bbf3fb3a45f04f93277ca2ae843cd1921b6a9dc4d2ab0e6b27e8604baf99cf78"
+  },
+  "effective_gain_summary": {
+    "maximum_equivalent_velocity_uncertainty_km_s": 241.4648880206438,
+    "maximum_obsid_correction_dispersion_km_s": 586.6998420703321,
+    "median_equivalent_velocity_uncertainty_km_s": 221.23801066056865,
+    "median_obsid_correction_dispersion_km_s": 563.1395730352634,
+    "minimum_equivalent_velocity_uncertainty_km_s": 195.06985704922462,
+    "minimum_obsid_correction_dispersion_km_s": 472.1836988520269
+  },
+  "gates": {
+    "all_effective_gain_covariances_finite_psd": true,
+    "all_gain_correction_dispersions_finite": true,
+    "direct_hierarchy_weight_equivalence": true,
+    "every_region_weight_sum_one": true,
+    "integrated_links_exact": true,
+    "integrated_source_counts_exact": true,
+    "integrated_uses_all_cells": true,
+    "region_by_obsid_weights_exact": true
+  },
+  "generated_utc": "2026-08-06T19:57:15.654861+00:00",
+  "integrated_spectrum": {
+    "cells": 3483,
+    "combined_full_pha_source_counts": 674283,
+    "expected_full_pha_source_counts": 674283,
+    "full_pha_count_conservation_exact": true,
+    "group_id": 0,
+    "label": "BULLET_primary8000_region000",
+    "links_exact": true,
+    "member_bins": 366,
+    "obsid_cell_counts": {
+      "3184": 366,
+      "4984": 370,
+      "4985": 388,
+      "4986": 404,
+      "5355": 387,
+      "5356": 387,
+      "5357": 409,
+      "5358": 401,
+      "5361": 371
+    },
+    "products": [
+      {
+        "bytes": 296640,
+        "path": "results/sigma_v19dd_bullet_gain_weight_transport/frozen_products/BULLET_primary8000_region000/BULLET_primary8000_region000_src.pi",
+        "role": "ungrouped_source_spectrum",
+        "sha256": "c349b0de3049c628bc1ec4545fec0b46dd2b94c8c464ecec162d3727601b26d8"
+      },
+      {
+        "bytes": 296640,
+        "path": "results/sigma_v19dd_bullet_gain_weight_transport/frozen_products/BULLET_primary8000_region000/BULLET_primary8000_region000_bkg.pi",
+        "role": "background_spectrum",
+        "sha256": "5bd6316c1983c57fb89037829f6070c2c1df98217519863a02c8aa1066a2b0dc"
+      },
+      {
+        "bytes": 43200,
+        "path": "results/sigma_v19dd_bullet_gain_weight_transport/frozen_products/BULLET_primary8000_region000/BULLET_primary8000_region000_src.arf",
+        "role": "source_arf",
+        "sha256": "9dd00eae4b599560494d3600031ba4ba50ffe48d5bd9b078051e2b4b15f3da62"
+      },
+      {
+        "bytes": 2217600,
+        "path": "results/sigma_v19dd_bullet_gain_weight_transport/frozen_products/BULLET_primary8000_region000/BULLET_primary8000_region000_src.rmf",
+        "role": "source_rmf",
+        "sha256": "023ab9c448c64ac56bc973dfa2ecc5ea863983c82a02fcf2321059be36271210"
+      }
+    ],
+    "root_bin_id": -1
+  },
+  "integrated_weight_equivalence": {
+    "maximum_relative_difference": 3.250011591412457e-08,
+    "obsids": [
+      {
+        "direct_cell_sum_cm2_s": 8904226655.29364,
+        "hierarchical_cm2_s": 8904226734.894896,
+        "obsid": 3184,
+        "relative_difference": 8.939715766281228e-09
+      },
+      {
+        "direct_cell_sum_cm2_s": 8372733993.55853,
+        "hierarchical_cm2_s": 8372734263.478545,
+        "obsid": 4984,
+        "relative_difference": 3.223797812551348e-08
+      },
+      {
+        "direct_cell_sum_cm2_s": 2609881260.715015,
+        "hierarchical_cm2_s": 2609881324.049018,
+        "obsid": 4985,
+        "relative_difference": 2.4267005524342475e-08
+      },
+      {
+        "direct_cell_sum_cm2_s": 4375248910.213955,
+        "hierarchical_cm2_s": 4375248945.174749,
+        "obsid": 4986,
+        "relative_difference": 7.990584116765808e-09
+      },
+      {
+        "direct_cell_sum_cm2_s": 2545924980.6370697,
+        "hierarchical_cm2_s": 2545924897.8942127,
+        "obsid": 5355,
+        "relative_difference": 3.250011591412457e-08
+      },
+      {
+        "direct_cell_sum_cm2_s": 10425029347.872095,
+        "hierarchical_cm2_s": 10425029238.970068,
+        "obsid": 5356,
+        "relative_difference": 1.0446208206824424e-08
+      },
+      {
+        "direct_cell_sum_cm2_s": 8493035734.323084,
+        "hierarchical_cm2_s": 8493035882.289604,
+        "obsid": 5357,
+        "relative_difference": 1.742210028758834e-08
+      },
+      {
+        "direct_cell_sum_cm2_s": 3427949019.0561767,
+        "hierarchical_cm2_s": 3427948965.801377,
+        "obsid": 5358,
+        "relative_difference": 1.5535470202966208e-08
+      },
+      {
+        "direct_cell_sum_cm2_s": 9122380524.362486,
+        "hierarchical_cm2_s": 9122380458.612986,
+        "obsid": 5361,
+        "relative_difference": 7.2074937127502784e-09
+      }
+    ]
+  },
+  "lensing_halo_gravity_or_action_opened": false,
+  "observed_fe_energy_keV": 5.169753086419753,
+  "obsid554_or_abell2146_opened": false,
+  "protocol_version": "SIGMA-V19DD-BULLET-GAIN-WEIGHT-TRANSPORT-1.0.0",
+  "region_obsid_fe_weights": {
+    "bytes": 19213,
+    "path": "results/sigma_v19dd_bullet_gain_weight_transport/region_obsid_fe_weights.csv",
+    "rows": 387,
+    "sha256": "53c1b6f885e82a1377659faace331e00f28b5ce8f4d70254d1d674a2489c411c"
+  },
+  "runner_sha256": "2eb59a3ad14073b81293824e73f041f4da190506b2cc54583dc3e695c0a78223",
+  "source_line_temperature_abundance_redshift_or_velocity_fitted": false,
+  "status": "bullet_integrated_spectrum_and_gain_weight_transport_passed"
+}
