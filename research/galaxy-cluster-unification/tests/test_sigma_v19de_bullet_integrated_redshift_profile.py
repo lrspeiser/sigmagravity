@@ -9,6 +9,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19de_bullet_integrated_redshift_profile.json"
 RUNNER = ROOT / "scripts" / "run_sigma_v19de_bullet_integrated_redshift_profile.py"
+RESULT = ROOT / "results" / "sigma_v19de_bullet_integrated_redshift_profile" / "report.json"
 
 
 def load_runner():
@@ -98,3 +99,13 @@ def test_runner_has_no_regional_or_gravity_engine() -> None:
     source = RUNNER.read_text(encoding="utf-8").lower()
     for forbidden in ("load_regional", "regional_source_path", "halo_map", "gravity_fit", "lens_model"):
         assert forbidden not in source
+
+
+def test_first_execution_failed_closed_and_authorizes_nothing() -> None:
+    payload = json.loads(RESULT.read_text(encoding="utf-8"))
+    assert payload["status"] == "bullet_integrated_redshift_profile_gate_failed"
+    assert payload["integrated_systematic_and_goodness_stage_authorized"] is False
+    assert payload["posterior_predictive_or_thermal_sobol_run"] is False
+    assert payload["regional_source_line_or_velocity_opened"] is False
+    assert payload["obsid554_or_abell2146_opened"] is False
+    assert payload["lensing_halo_gravity_or_action_opened"] is False

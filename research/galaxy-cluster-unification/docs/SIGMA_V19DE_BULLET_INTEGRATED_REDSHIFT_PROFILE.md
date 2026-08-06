@@ -1,5 +1,21 @@
 # Sigma V19DE Bullet integrated redshift profile
 
+## Execution disposition
+
+The first frozen execution is **invalid as a source result**. XSPEC repeatedly
+reported that it could not read `latest_coco.fits`, so the APEC continuum was
+not evaluated. The runner did fail its terminal gates, but it did not fail
+early enough: it recorded finite optimizer statistics after the XSPEC model
+had returned evaluation failures. The apparent APEC profile, its boundary
+minimum and every APEC-derived source value are forbidden from scientific use.
+
+The report SHA-256 is
+`1ca069bb4bd8d62721a8650eb1d181a57094652b41f935faf601b3e0f7df3b87`.
+This is an environment/model-data commissioning failure, not evidence for or
+against Bullet gas motion. A remediation must bind `APECROOT` to the exact
+AtomDB files declared by the active XSPEC installation and positively probe
+both thermal models before loading the source fit.
+
 ## Frozen preflight
 
 The payload-blind preflight passes. It verifies the four integrated product
@@ -12,7 +28,7 @@ the runner SHA-256 is
 and the preflight-report SHA-256 is
 `cdaba4c88d39449de6851fdcdad226a623f565f5bf96616e312ffbe2f579a096`.
 
-V19DE is the first source-line fit authorized by the completed Bullet response
+V19DE was the first source-line fit authorized by the completed Bullet response
 and gain chain. It commissions the fitting engine on the integrated,
 known-outcome Bullet spectrum before any regional velocity pattern is opened.
 
@@ -36,7 +52,7 @@ ObsID calibration measurements using the already frozen Fe-K response
 contributions. It is reported separately from the deterministic spread of the
 nine fitted mean gain corrections.
 
-This stage does not perform the 500-draw posterior-predictive goodness test or
+This stage did not perform the 500-draw posterior-predictive goodness test or
 the 4,096-point thermal-mixture Sobol propagation. A pass authorizes that next
 integrated stage, not regional velocities. No regional source line, ObsID 554,
 Abell 2146, lensing, halo, gravity or action payload is authorized.
