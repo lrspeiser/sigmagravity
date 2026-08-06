@@ -1,0 +1,87 @@
+{
+  "config": "configs/sigma_v19cy_a2319_development_acquisition.json",
+  "config_sha256": "0a1f24574a14b9847eae96f1e343bf86c2a80740da06381cee343df4957ab9bb",
+  "generated_utc": "2026-08-06T02:46:28.554866+00:00",
+  "lensing_halo_or_gravity_payload_opened": false,
+  "manifest": {
+    "bytes": 59985,
+    "path": "results/sigma_v19cy_direct_icm_velocity_evidence/development_acquisition_manifest.csv",
+    "rows": 197,
+    "sha256": "3ef7816ccfa069a49f34cf18d22d1cd22da1c4fd1dc0ac2ed9151c2e66f16cac"
+  },
+  "payload_file_bodies_downloaded": false,
+  "protocol_version": "SIGMA-V19CY-A2319-DEVELOPMENT-ACQUISITION-INVENTORY-1.0.0",
+  "remote_totals": {
+    "by_asset_group": {
+      "caldb": {
+        "bytes": 1780998985,
+        "files": 3
+      },
+      "chandra_ssm": {
+        "bytes": 265771249,
+        "files": 62
+      },
+      "official_gain_report": {
+        "bytes": 4183922,
+        "files": 1
+      },
+      "xrism_calibration_predecessor": {
+        "bytes": 1567139641,
+        "files": 15
+      },
+      "xrism_science": {
+        "bytes": 9124771397,
+        "files": 116
+      }
+    },
+    "by_observation": [
+      {
+        "asset_group": "chandra_ssm",
+        "bytes": 212483142,
+        "files": 36,
+        "obsid": "15187"
+      },
+      {
+        "asset_group": "chandra_ssm",
+        "bytes": 53288107,
+        "files": 26,
+        "obsid": "3231"
+      },
+      {
+        "asset_group": "official_gain_report",
+        "bytes": 4183922,
+        "files": 1,
+        "obsid": "000100000"
+      },
+      {
+        "asset_group": "xrism_calibration_predecessor",
+        "bytes": 1567139641,
+        "files": 15,
+        "obsid": "000100000"
+      },
+      {
+        "asset_group": "xrism_science",
+        "bytes": 2997822893,
+        "files": 40,
+        "obsid": "000101000"
+      },
+      {
+        "asset_group": "xrism_science",
+        "bytes": 2928469406,
+        "files": 38,
+        "obsid": "000102000"
+      },
+      {
+        "asset_group": "xrism_science",
+        "bytes": 3198479098,
+        "files": 38,
+        "obsid": "000103000"
+      }
+    ],
+    "bytes": 12742865194,
+    "files": 197
+  },
+  "status": "a2319_scientifically_complete_development_acquisition_frozen_before_payload_download",
+  "validation_and_holdout_outcome_seals_preserved": true,
+  "validation_or_holdout_asset_accessed": false
+}

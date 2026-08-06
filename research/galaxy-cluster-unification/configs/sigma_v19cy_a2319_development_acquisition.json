@@ -1,0 +1,149 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-DEVELOPMENT-ACQUISITION-1.0.0",
+  "status": "frozen after inspecting the published A2319 reduction method and the official 000100000 Resolve energy-scale report, but before downloading any listed XRISM, Chandra, CALDB, or gain-report payload",
+  "purpose": "Acquire the smallest defensible public dataset that can reproduce the A2319 commissioning gain history, Resolve spectra, Chandra-driven spatial-spectral mixing, and current-calibration robustness branches without opening validation or holdout outcomes.",
+  "parent": {
+    "config": "configs/sigma_v19cy_direct_icm_velocity_evidence.json",
+    "config_sha256": "65a0d59302e97f28c6773d73835d7fb218eb253b9f2ae2fb8895d561585712fe",
+    "archive_manifest": "results/sigma_v19cy_direct_icm_velocity_evidence/archive_manifest.csv",
+    "archive_manifest_sha256": "8ead31a33c419e63a7541c82199add9712d78d7e6d3071432731371b658e88b5",
+    "archive_inventory_report": "results/sigma_v19cy_direct_icm_velocity_evidence/archive_inventory_report.json",
+    "archive_inventory_report_sha256": "766cc1f229fc1cf663236a3adfb454613bd506e8eb17a168d122d13cf0ee9d50"
+  },
+  "method_authorities": {
+    "a2319_paper": "https://arxiv.org/html/2508.05067v3",
+    "a2319_method_facts": [
+      "Only open-filter intervals from Resolve ObsIDs 000101000, 000102000, and 000103000 are science exposures.",
+      "The commissioning gain reconstruction used filter-wheel Fe55 intervals and the continuously illuminated calibration pixel.",
+      "The starting fiducial for 000101000 occurs in predecessor ObsID 000100000; the later starting fiducials cross the 000101000 and 000102000 boundaries.",
+      "The 000103000 gain history must be split around its ADR recycle, excluding the first six hours after the recycle.",
+      "The SSM response uses a 0.5-7.0 keV Chandra image and cross-region ARFs."
+    ],
+    "official_data_convention": "https://heasarc.gsfc.nasa.gov/docs/xrism/analysis/abc_guide/XRISM_Data_Specifics.html",
+    "official_gain_report_index": "https://heasarc.gsfc.nasa.gov/docs/xrism/analysis/gainreports/index.html",
+    "official_gain_report": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/gainreports/0/000100000_resolve_energy_scale_report.pdf",
+    "official_rslgain_help": "https://heasarc.gsfc.nasa.gov/docs/software/lheasoft/help/rslgain.html",
+    "official_rslpha2pi_help": "https://heasarc.gsfc.nasa.gov/docs/software/lheasoft/help/rslpha2pi.html",
+    "chandra_surface_brightness_reference": "https://arxiv.org/abs/2011.11227",
+    "chandra_reference_obsids": [3231, 15187]
+  },
+  "raw_directory": "data/raw/sigma_v19cy_a2319_development",
+  "maximum_workers": 4,
+  "xrism": {
+    "science_obsids": ["000101000", "000102000", "000103000"],
+    "science_manifest_include_prefixes": [
+      "auxil/",
+      "log/",
+      "resolve/event_cl/",
+      "resolve/event_uf/",
+      "resolve/hk/"
+    ],
+    "science_manifest_exclusions": [
+      "resolve/products quick-look files, which the official guide says are not suitable for science analysis",
+      "Xtend data, which are not used by the published velocity or SSM method"
+    ],
+    "calibration_predecessor": {
+      "obsid": "000100000",
+      "object_name": "Abell2319_BS",
+      "archive_url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/data/obs/0/000100000/",
+      "include_exact_paths": [
+        "auxil/xa000100000.ehk.gz",
+        "auxil/xa000100000.mkf.gz",
+        "auxil/xa000100000.tim.gz",
+        "auxil/xa000100000_gen.gti.gz",
+        "auxil/xa000100000gen_a0.hk.gz",
+        "resolve/event_uf/xa000100000rsl_000_fe55.ghf.gz",
+        "resolve/event_uf/xa000100000rsl_000_pxcal.ghf.gz",
+        "resolve/event_uf/xa000100000rsl_a0pxcal000_uf.evt.gz",
+        "resolve/event_uf/xa000100000rsl_a0pxfw000_uf.evt.gz",
+        "resolve/event_uf/xa000100000rsl_adr.gti.gz",
+        "resolve/event_uf/xa000100000rsl_el.gti.gz",
+        "resolve/event_uf/xa000100000rsl_p0px5000_uf.evt.gz",
+        "resolve/event_uf/xa000100000rsl_px5000_exp.gti.gz",
+        "resolve/event_uf/xa000100000rsl_tel.gti.gz",
+        "resolve/hk/xa000100000rsl_a0.hk1.gz"
+      ],
+      "exclusion_reason": "The predecessor contributes a gain fiducial, not a fourth A2319 science exposure; its open-filter science events, attitude solution, products, logs, and Xtend files are outside this calibration dependency."
+    }
+  },
+  "chandra": {
+    "archive_base_url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid",
+    "obsids": [3231, 15187],
+    "included_products": {
+      "root": ["00README", "oif.fits"],
+      "primary_suffixes": [
+        "_evt2.fits.gz",
+        "_bpix1.fits.gz",
+        "_fov1.fits.gz",
+        "_eph1.fits.gz",
+        "_asol1.fits.gz"
+      ],
+      "secondary_suffixes": [
+        "_evt1.fits.gz",
+        "_flt1.fits.gz",
+        "_msk1.fits.gz",
+        "_mtl1.fits.gz",
+        "_stat1.fits.gz",
+        "_bias0.fits.gz",
+        "_pbk0.fits.gz"
+      ],
+      "secondary_aspect_suffixes": ["_osol1.fits.gz", "_aqual1.fits.gz"],
+      "secondary_ephem_suffixes": ["_eph1.fits.gz"]
+    },
+    "required_roles_per_obsid": {
+      "evt1": 1,
+      "evt2": 1,
+      "bpix1": 1,
+      "fov1": 1,
+      "asol1": 1,
+      "msk1": 1,
+      "pbk0": 1,
+      "bias0": 1
+    },
+    "scientific_use": "Reprocess the two archival ACIS-I observations and build the 0.5-7.0 keV exposure-corrected surface-brightness image used as the target-independent SSM response input."
+  },
+  "calibration": {
+    "heasoft_version": "6.36",
+    "runtime_prefix_wsl": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "caldb_install_root_wsl": "/home/henry/.local/share/sigmagravity-xrism/caldb",
+    "archives": [
+      {
+        "role": "xrism_gen_caldb_20241115",
+        "url": "https://heasarc.gsfc.nasa.gov/FTP/caldb/data/xrism/gen/goodfiles_xrism_gen_20241115.tar.gz"
+      },
+      {
+        "role": "xrism_resolve_caldb_20260315",
+        "url": "https://heasarc.gsfc.nasa.gov/FTP/caldb/data/xrism/resolve/goodfiles_xrism_resolve_20260315.tar.gz"
+      },
+      {
+        "role": "caldb_general_20240822",
+        "url": "https://heasarc.gsfc.nasa.gov/FTP/caldb/data/gen/goodfiles_gen_20240822.tar.Z"
+      }
+    ],
+    "gain_acceptance": {
+      "require_gain_history_spans_each_open_filter_exposure": true,
+      "require_no_gain_solution_inside_excluded_ADR_or_SAA_interval": true,
+      "require_pixel_12_continuous_and_intermittent_histories_consistent": true,
+      "require_each_science_obsid_cal_pixel_shift_and_fwhm_reproduced": true,
+      "published_systematic_energy_uncertainty_eV_5p4_to_9keV": {
+        "000101000": 0.51,
+        "000102000": 0.33,
+        "000103000": 0.30
+      }
+    }
+  },
+  "authorization": {
+    "inventory_and_download_all_listed_development_assets": true,
+    "download_or_open_validation_assets": false,
+    "download_or_open_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameter": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "ObsID 000100000 is a calibration dependency and cannot be scored as an additional sky region or science exposure.",
+    "The published five-region A2319 outcome is development-only and may only commission the pipeline.",
+    "A successful reproduction does not admit a dynamic gravity source; it only authorizes freezing the implementation before A3667 validation.",
+    "The A3667 and A754 outcome seals remain unchanged."
+  ]
+}

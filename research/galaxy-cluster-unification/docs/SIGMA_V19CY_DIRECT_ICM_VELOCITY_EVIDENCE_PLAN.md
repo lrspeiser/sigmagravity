@@ -56,6 +56,42 @@ velocity range across the core, including a region blueshifted by about
 230 km/s and a region with roughly 400 km/s velocity dispersion. We first have
 to reproduce those values and their spatial-spectral-mixing treatment.
 
+## Frozen A2319 acquisition closure
+
+The published Appendix and NASA's official Resolve energy-scale report show
+that the three science ObsIDs are not calibration-self-contained. The starting
+gain fiducial for 000101000 lies in predecessor ObsID 000100000, and the later
+fiducials cross the boundaries between 000101000, 000102000, and 000103000.
+The 000103000 history also crosses an ADR recycle and may use only the linear
+post-recycle interval beginning six hours later. Standard cleaned events alone
+therefore cannot reproduce the commissioning energy scale.
+
+The exact development acquisition was frozen before payload download. It has
+197 files totaling 12,742,865,194 bytes (11.868 GiB):
+
+| Asset group | Files | Remote bytes | Purpose |
+|---|---:|---:|---|
+| Three XRISM science ObsIDs | 116 | 9,124,771,397 | Unfiltered/cleaned events, auxiliary data, HK, and logs needed for gain reconstruction and screening |
+| 000100000 calibration predecessor | 15 | 1,567,139,641 | Only the Fe-55/cal-pixel gain dependency and required time/HK files; no predecessor science exposure |
+| Current CALDB archives | 3 | 1,780,998,985 | General, XRISM GEN 20241115, and Resolve 20260315 calibration |
+| Chandra ObsIDs 3231 and 15187 | 62 | 265,771,249 | Reprocessed 0.5-7.0 keV SSM surface-brightness input |
+| Official gain-quality report | 1 | 4,183,922 | Independent energy-scale acceptance reference |
+
+NASA's combined 000100000 gain report records 2,294 Fe-55 solutions and 471
+calibration-pixel solutions with zero failed fits. That does not itself prove
+our reduction. We must still verify complete open-filter time coverage, exclude
+every ADR/SAA interval, reproduce the observation-specific calibration-pixel
+centroid and width, and propagate the published 0.51, 0.33, and 0.30 eV
+systematic uncertainties for 000101000, 000102000, and 000103000.
+
+The manifest is
+`results/sigma_v19cy_direct_icm_velocity_evidence/development_acquisition_manifest.csv`
+and its SHA-256 is
+`3ef7816ccfa069a49f34cf18d22d1cd22da1c4fd1dc0ac2ed9151c2e66f16cac`.
+The predecessor cannot contribute a science region or exposure. Xtend,
+pipeline quick-look products, validation, holdout, lensing, halo, and gravity
+targets remain excluded.
+
 ## The new observable source terms
 
 The signed projected gas current is
