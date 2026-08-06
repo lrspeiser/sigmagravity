@@ -1,0 +1,108 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-CALIBRATION-APPLICATION-CANDIDATES-1.0.0",
+  "status": "frozen after the scalar topology gate passed, but before any gain-history array was copied or any calibration event energy was recalculated",
+  "purpose": "Apply three preregistered branch-level gain candidates to high-resolution pixel-12 calibration events with the audited HEASoft rslpha2pi runtime, preserving outputs for a separately frozen spectral gate without inspecting any cluster event.",
+  "parents": {
+    "topology_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_reconstruction_topology.json",
+    "topology_report_sha256": "f5fcdfe793681d228fa78ab84ecb29d5e823bfdc7de48f98a340594ccbe4624e",
+    "environment_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_environment_report.json",
+    "environment_report_sha256": "b9ded07723d38b7444f5bfb1abbd54337533b8c8c11fe0da043d9583d1cbd394",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f"
+  },
+  "paths": {
+    "raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "scratch_root": "tmp/sigma_v19cy_a2319_calibration_application",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_calibration_application_candidates.json"
+  },
+  "inputs": {
+    "calibration_event_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_a0pxcal000_uf.evt.gz",
+    "fe55_history_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_fe55.ghf.gz",
+    "gain_history_extension": "Drift_energy",
+    "event_extension": "EVENTS",
+    "calibration_pixel": 12,
+    "high_resolution_primary_itype": 0
+  },
+  "candidates": [
+    {
+      "name": "fe55_branch_only",
+      "residual_rule": "zero"
+    },
+    {
+      "name": "branch_median_common_mode",
+      "residual_rule": "add the frozen branch median calibration-pixel residual to every pixel"
+    },
+    {
+      "name": "branch_linear_common_mode",
+      "residual_rule": "add a line passing through the frozen branch median at the branch midpoint with the frozen residual slope"
+    }
+  ],
+  "synthetic_drift_history": {
+    "times_per_branch_per_pixel": 2,
+    "endpoint_times": ["branch_start", "branch_stop"],
+    "template_row_rule": "copy the nearest full Fe-55 gain-history row for the same pixel from the preregistered anchor segment; only TIME and TEMP_FIT are modified",
+    "temperature_rule": "evaluate the frozen branch pixel fit at each endpoint, then add the candidate residual",
+    "copy_only_array_rule": "non-scalar gain-history fields are copied solely to preserve the mission FITS schema and are never inspected, summarized, fitted, or used to select a candidate"
+  },
+  "event_selection": {
+    "expression": "TIME within the exact branch interval AND PIXEL==12 AND ITYPE==0",
+    "input_role": "continuously illuminated calibration pixel only",
+    "cluster_sky_events_allowed": false
+  },
+  "runtime": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "heasoft_prefix": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "caldb_root": "/home/henry/.local/share/sigmagravity-xrism/caldb",
+    "rslpha2pi": {
+      "calcpi": "yes",
+      "calcupi": "no",
+      "gainfile": "CALDB",
+      "tempidx": -1,
+      "pxphaoffset": 0,
+      "secphacol": "PHA2",
+      "addepicol": "EPI2",
+      "method": "FIT",
+      "itypecol": "ITYPE",
+      "binwidth": 0.5,
+      "offset": 0.5,
+      "tlmax": 59999,
+      "gapdt": -1,
+      "ntemp": 3,
+      "writetemp": "yes",
+      "extrap": "no",
+      "randomize": "yes",
+      "seed": 7,
+      "clobber": "yes",
+      "chatter": 2,
+      "history": "yes"
+    }
+  },
+  "terminal_gate": {
+    "required_candidate_branch_outputs": 21,
+    "require_every_ftcopy_and_rslpha2pi_exit_zero": true,
+    "require_selected_rows_positive": true,
+    "require_output_rows_equal_selected_rows": true,
+    "require_zero_null_pi_epi2_and_temp": true,
+    "require_every_synthetic_drift_has_72_rows_and_two_rows_per_pixel": true,
+    "decision_rule": "Authorize freezing a calibration-pixel line-shape gate only if all 21 candidate-branch applications pass. Do not inspect centroids, widths, or any energy distribution in this protocol."
+  },
+  "authorization": {
+    "read_and_copy_full_fe55_gain_history_rows": true,
+    "modify_only_synthetic_time_and_temp_fit": true,
+    "read_calibration_pixel_event_rows": true,
+    "recalculate_calibration_pixel_energies": true,
+    "retain_candidate_calibration_outputs": true,
+    "inspect_or_fit_energy_distribution": false,
+    "read_cluster_sky_event_rows": false,
+    "fit_cluster_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "A successful application proves only that each frozen calibration candidate is executable and complete on pixel-12 events.",
+    "No candidate may be preferred until the separately frozen centroid-and-width gate is run.",
+    "These calibration branches and residuals are observation-reduction nuisances, never Sigma Gravity parameters."
+  ]
+}
