@@ -6,7 +6,6 @@ import numpy as np
 from astropy.io import fits
 from astropy.wcs import WCS
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
@@ -20,6 +19,9 @@ def test_inputs_are_frozen_and_preparation_passed():
     assert report["terminal_gate_passed"] is True
     assert config["authorization"]["access_A3667_validation"] is False
     assert config["authorization"]["access_A754_holdout"] is False
+    assert builder.canonical_json_sha256(config["chandra_image_protocol"]) == (
+        builder.FROZEN_CHANDRA_PROTOCOL_SHA256
+    )
 
 
 def test_crop_is_positive_square_and_preserves_celestial_center(tmp_path: Path):

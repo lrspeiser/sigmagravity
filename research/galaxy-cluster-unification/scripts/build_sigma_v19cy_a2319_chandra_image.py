@@ -3,9 +3,10 @@
 
 from __future__ import annotations
 
+import argparse
+import hashlib
 import json
 import os
-import argparse
 import shlex
 import shutil
 import sys
@@ -28,7 +29,6 @@ if str(SCRIPT_DIR) not in sys.path:
 import apply_sigma_v19cy_a2319_calibration_candidates as application
 import prepare_sigma_v19cy_a2319_response_inputs as preparation
 
-
 DEFAULT_CONFIG = ROOT / "configs/sigma_v19cy_a2319_response_aware_spectral.json"
 PREPARATION_REPORT = (
     ROOT
@@ -42,15 +42,54 @@ REPORT = (
 )
 
 MERGED_FLUX_IMAGE = "0.5-7.0_flux.img"
+FROZEN_CHANDRA_PROTOCOL_SHA256 = (
+    "5e485fd746c6346b54d939022e0e1c121bf1d9800cc237afb474c5e2b1206eeb"
+)
+FROZEN_PREPARATION_REPORT_SHA256 = (
+    "67638b4ad8eaa440c1dc7eca80f72007eeaf27028461152f1e905b6260feabc8"
+)
+
+
+def canonical_json_sha256(value: Any) -> str:
+    payload = json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(payload).hexdigest()
 
 
 def validate_inputs(config_path: Path = DEFAULT_CONFIG) -> tuple[dict[str, Any], dict[str, Any]]:
-    config = preparation.validate_config(config_path)
+    config = preparation.load_json(config_path)
+    accepted_protocols = {
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.1",
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.2",
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.3",
+    }
+    if config.get("protocol_version") not in accepted_protocols:
+        raise RuntimeError("unexpected response-aware spectral protocol")
+    if canonical_json_sha256(config["chandra_image_protocol"]) != (
+        FROZEN_CHANDRA_PROTOCOL_SHA256
+    ):
+        raise RuntimeError("frozen Chandra image protocol changed")
     report = preparation.load_json(PREPARATION_REPORT)
     if not report.get("terminal_gate_passed"):
         raise RuntimeError("response input preparation did not pass")
+    if preparation.sha256(PREPARATION_REPORT) != FROZEN_PREPARATION_REPORT_SHA256:
+        raise RuntimeError("frozen response input preparation report changed")
     if report.get("config_sha256") != preparation.sha256(config_path):
-        raise RuntimeError("response input preparation belongs to a different protocol")
+        amendments = (
+            config.get("pre_response_interface_amendment", {}),
+            config.get("pre_nxb_interface_amendment", {}),
+        )
+        if config.get("protocol_version") == (
+            "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.1"
+        ) or any(
+            amendment.get(key)
+            for amendment in amendments
+            for key in (
+                "scientific_inputs_changed",
+                "prepared_gti_or_region_bytes_changed",
+                "chandra_image_changed",
+            )
+        ):
+            raise RuntimeError("response input preparation belongs to a different protocol")
     if any(
         report.get(key)
         for key in (
@@ -125,10 +164,10 @@ def crop_positive_image(source: Path, output: Path, protocol: dict[str, Any]) ->
     scale_arcsec = float(np.mean(scales_arcsec))
     center = SkyCoord(protocol["crop_center_ra_deg"], protocol["crop_center_dec_deg"], unit="deg")
     center_x, center_y = wcs.world_to_pixel(center)
-    width_pixels = int(round(protocol["crop_width_arcmin"] * 60.0 / scale_arcsec))
+    width_pixels = round(protocol["crop_width_arcmin"] * 60.0 / scale_arcsec)
     width_pixels = max(width_pixels, 1)
-    x0 = int(round(center_x - (width_pixels - 1) / 2.0))
-    y0 = int(round(center_y - (width_pixels - 1) / 2.0))
+    x0 = round(center_x - (width_pixels - 1) / 2.0)
+    y0 = round(center_y - (width_pixels - 1) / 2.0)
     x1 = x0 + width_pixels
     y1 = y0 + width_pixels
     if x0 < 0 or y0 < 0 or x1 > data.shape[1] or y1 > data.shape[0]:
