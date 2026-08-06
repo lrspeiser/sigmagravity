@@ -1,0 +1,120 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-ENDPOINT-GAIN-CANDIDATES-1.0.0",
+  "status": "frozen after both interior common/differential folds passed and both endpoint folds failed, but before either nearest-anchor endpoint candidate was applied to a held-out calibration event",
+  "purpose": "Retain the successful bracketed common/differential mechanism while testing two universal nearest-fiducial rules for the two failed endpoint extrapolation folds, without reading a cluster event.",
+  "parents": {
+    "closure_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_common_differential_gain_closure.json",
+    "closure_report_sha256": "fa3bd67b4e81c84e11812d6724fe36a56744eda5da6a82e37b5ecdd40885c13e",
+    "topology_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_reconstruction_topology.json",
+    "topology_report_sha256": "f5fcdfe793681d228fa78ab84ecb29d5e823bfdc7de48f98a340594ccbe4624e",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f",
+    "line_shape_config": "configs/sigma_v19cy_a2319_calibration_line_shape_gate.json",
+    "line_shape_config_sha256": "1db62b82b5684e1619c6a2c2cdc5adb8cd0a659e79d4e033d751ce2f4cd34c59"
+  },
+  "paths": {
+    "raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "parent_closure_scratch_root": "tmp/sigma_v19cy_a2319_common_differential_gain_closure",
+    "line_template": "tmp/sigma_v19cy_a2319_calibration_line_shape/xa_gen_linefit_20190101vx001.fits",
+    "scratch_root": "tmp/sigma_v19cy_a2319_endpoint_gain_candidates",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_endpoint_gain_candidates.json"
+  },
+  "endpoint_folds": [
+    {
+      "held_out_segment": 0,
+      "held_out_obsid": "000100000",
+      "nearest_anchor_segment": 1,
+      "nearest_anchor_obsid": "000101000",
+      "role": "backward endpoint extrapolation"
+    },
+    {
+      "held_out_segment": 3,
+      "held_out_obsid": "000103000",
+      "nearest_anchor_segment": 2,
+      "nearest_anchor_obsid": "000102000",
+      "role": "forward endpoint extrapolation"
+    }
+  ],
+  "candidates": [
+    {
+      "name": "nearest_anchor_constant",
+      "equation": "T_i(t)=C_12(t)+median_anchor[T_i^FW-C_12]",
+      "reason": "Common mode carries exact time structure; the nearest fiducial supplies a robust, time-independent differential offset that cannot amplify a noisy slope during extrapolation."
+    },
+    {
+      "name": "nearest_anchor_linear",
+      "equation": "T_i(t)=C_12(t)+a_i+b_i(t-t_anchor), with a_i and b_i fit only inside the nearest complete fiducial segment",
+      "reason": "The paper identifies locally linear detector drift outside disturbances; using only the nearest segment avoids the multi-day global trend that failed both endpoint folds."
+    }
+  ],
+  "inputs": {
+    "fe55_history_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_fe55.ghf.gz",
+    "calibration_pixel_history_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_pxcal.ghf.gz",
+    "filter_wheel_event_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_a0pxfw000_uf.evt.gz",
+    "gain_history_extension": "Drift_energy",
+    "minimum_gain_events": 200,
+    "event_selection": "held-out segment start <= TIME <= held-out segment stop AND PIXEL != 12 AND ITYPE == 0",
+    "science_event_allowed": false
+  },
+  "fit": {
+    "inherit_exact_line_template_bins_statistic_bounds_and_optimizer_from": "configs/sigma_v19cy_a2319_calibration_line_shape_gate.json",
+    "require_at_least_events_per_whole_array_fit_window": 100000,
+    "require_at_least_events_per_pixel_fit_window": 1000
+  },
+  "terminal_gate": {
+    "maximum_absolute_candidate_minus_control_whole_array_centroid_ev": 0.3,
+    "maximum_candidate_minus_control_whole_array_fwhm_ev": 0.3,
+    "maximum_per_fold_90th_percentile_absolute_per_pixel_centroid_delta_ev": 0.5,
+    "maximum_per_fold_90th_percentile_per_pixel_fwhm_increase_ev": 0.5,
+    "candidate_pass_rule": "A candidate passes only if it passes all four thresholds in both endpoint folds.",
+    "selection_rule": "Select the sole two-fold passing candidate; if both pass, select nearest_anchor_constant as the lower-complexity rule; if neither passes both, select none even if different candidates pass different endpoints.",
+    "scenario_rule": "Always report each endpoint independently. A local failure parks that endpoint for later repair and does not erase the two already-passing interior interpolation folds."
+  },
+  "runtime": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "heasoft_prefix": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "caldb_root": "/home/henry/.local/share/sigmagravity-xrism/caldb",
+    "rslpha2pi": {
+      "calcpi": "yes",
+      "calcupi": "no",
+      "gainfile": "CALDB",
+      "tempidx": -1,
+      "pxphaoffset": 0,
+      "secphacol": "PHA2",
+      "addepicol": "EPI2",
+      "method": "FIT",
+      "itypecol": "ITYPE",
+      "binwidth": 0.5,
+      "offset": 0.5,
+      "tlmax": 59999,
+      "gapdt": -1,
+      "ntemp": 3,
+      "writetemp": "yes",
+      "extrap": "no",
+      "randomize": "yes",
+      "seed": 7,
+      "clobber": "yes",
+      "chatter": 2,
+      "history": "yes"
+    }
+  },
+  "authorization": {
+    "read_filter_wheel_calibration_event_rows": true,
+    "recalculate_endpoint_filter_wheel_event_energies": true,
+    "fit_endpoint_filter_wheel_line_shapes": true,
+    "select_one_universal_endpoint_rule_after_two_fold_pass": true,
+    "freeze_science_branch_application_protocol_after_pass": true,
+    "read_cluster_sky_event_rows": false,
+    "apply_gain_to_cluster_sky_events": false,
+    "fit_cluster_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "This protocol changes only the failed endpoint extrapolation rule and preserves the successful interior interpolation evidence.",
+    "A candidate cannot be selected by switching formulas between the two endpoint folds.",
+    "No cluster photon, velocity, lensing map, halo target, or gravity score is available to this protocol."
+  ]
+}
