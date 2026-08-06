@@ -1,0 +1,65 @@
+{
+  "protocol_version": "SIGMA-V19DG-HIERARCHICAL-RESPONSE-EQUIVALENCE-1.0.0",
+  "freeze_state": "frozen_after_v19x2_direct_addresp_execution_failure_before_any_hierarchical_result",
+  "purpose": "Determine whether bounded hierarchical CIAO combination is numerically equivalent to the frozen direct operation and can safely replace only the tool-capacity failure in a separately named successor.",
+  "input": {
+    "validated_cell_index": "results/sigma_v19x2_unified_spectral_combination_commissioning/validated_cell_index.csv",
+    "validated_cell_index_sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf",
+    "terminal_v19x2_status": "unified_spectral_combination_commissioning_execution_failed",
+    "observed_failure_stage": "CIAO addresp while directly merging the 3812-cell Bullet integrated response",
+    "observed_failure_boundary": "No combined response, fit, temperature, source invariant, lensing target, halo map or gravity result was produced."
+  },
+  "controls": [
+    {
+      "id": "bullet_registered_region_169",
+      "cluster": "BULLET",
+      "bin_id": 169,
+      "expected_cells": 9
+    },
+    {
+      "id": "abell2146_registered_region_62",
+      "cluster": "ABELL2146",
+      "bin_id": 62,
+      "expected_cells": 10
+    },
+    {
+      "id": "bullet_manifest_prefix_64",
+      "cluster": "BULLET",
+      "prefix_cells": 64,
+      "expected_cells": 64
+    },
+    {
+      "id": "abell2146_manifest_prefix_64",
+      "cluster": "ABELL2146",
+      "prefix_cells": 64,
+      "expected_cells": 64
+    }
+  ],
+  "hierarchy": {
+    "chunk_size": 8,
+    "ordering": "preserve exact validated-index order within chunks and preserve chunk order in the final combination",
+    "method": "CIAO combine_spectra 4.18 with method=sum, bscale_method=asca and exp_origin=pha at both levels",
+    "reason": "CIAO defines the sum-method ARF as an exposure-weighted mean and the RMF as ARF-and-exposure weighted, operations that are associative when chunk exposures are retained. This protocol tests the actual implementation rather than assuming equivalence."
+  },
+  "tolerances": {
+    "background_counts_max_absolute": 1e-06,
+    "arf_max_relative": 1e-06,
+    "rmf_matrix_max_absolute": 1e-06,
+    "header_max_relative": 1e-12
+  },
+  "decision": {
+    "pass": "Every source spectrum is bitwise-count equivalent; background, ARF and RMF arrays pass all frozen tolerances; response structure and exposure accounting are preserved in all four controls. A separately named full-combination successor may then be frozen without changing cell membership or spectral science.",
+    "fail": "Do not use hierarchical combination and do not run the regional spectral chain. Record the implementation falsification and choose an independently derived response-combination method before opening a temperature or source result.",
+    "no_retroactive_tolerance_change": true
+  },
+  "claim_boundary": [
+    "V19DG is an implementation-equivalence test, not a gas-temperature, gravity or lensing result.",
+    "The four controls are chosen from source identities and manifest order, not response values or spectral outcomes.",
+    "A pass authorizes freezing a separately named successor; it does not authorize rewriting or rerunning the terminally failed V19X2 protocol.",
+    "No source-invariant, lensing, halo, galaxy-rotation, action, gravity-parameter or holdout payload is opened."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dg_hierarchical_response_equivalence.py",
+    "runner_sha256": "4c4750403972d9f2a4bfb45555a8905f6c46b0948a042690395e7488cb93660a"
+  }
+}

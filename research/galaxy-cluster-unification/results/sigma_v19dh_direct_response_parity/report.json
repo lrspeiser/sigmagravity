@@ -1,0 +1,72 @@
+{
+  "protocol_version": "SIGMA-V19DH-DIRECT-RESPONSE-PARITY-1.0.0",
+  "generated_utc": "2026-08-06T23:18:38.906938+00:00",
+  "config_sha256": "f1abaaecfd51bc6925ba29175390db35c765d638cdab0573f0741ce24a7bc56d",
+  "runner_sha256": "6df8885e7fb0cd896e593d75e8f72b932531713aa54f29cbb6559019c251a48c",
+  "status": "direct_array_response_parity_passed_full_successor_may_be_frozen",
+  "aggregate_pass": true,
+  "controls": [
+    {
+      "id": "bullet_manifest_suffix_128",
+      "cluster": "BULLET",
+      "cells": 128,
+      "evidence": {
+        "energy_grid_exact": true,
+        "arf_max_relative": 5.870009861603229e-08,
+        "rmf_max_absolute": 9.9989589646611e-07,
+        "rmf_elements_at_or_above_addresp_threshold": 0,
+        "rmf_row_sum_max_absolute": 1.154552874993442e-05,
+        "folded_l1_relative": {
+          "flat": 6.344514844136485e-06,
+          "power_law_1": 7.894656835833061e-06,
+          "power_law_2": 8.79410077757952e-06,
+          "thermal_5kev": 8.549559391497373e-06
+        }
+      },
+      "gates": {
+        "energy_grid_exact": true,
+        "arf_close": true,
+        "no_rmf_element_reaches_addresp_threshold": true,
+        "rmf_row_sums_close": true,
+        "all_folded_controls_close": true
+      },
+      "passed": true
+    },
+    {
+      "id": "abell2146_manifest_suffix_128",
+      "cluster": "ABELL2146",
+      "cells": 128,
+      "evidence": {
+        "energy_grid_exact": true,
+        "arf_max_relative": 5.6899187283550124e-08,
+        "rmf_max_absolute": 9.994877820336686e-07,
+        "rmf_elements_at_or_above_addresp_threshold": 0,
+        "rmf_row_sum_max_absolute": 8.670799056531564e-06,
+        "folded_l1_relative": {
+          "flat": 4.190354328621881e-06,
+          "power_law_1": 5.437722030692843e-06,
+          "power_law_2": 6.23511087258343e-06,
+          "thermal_5kev": 5.990334475411888e-06
+        }
+      },
+      "gates": {
+        "energy_grid_exact": true,
+        "arf_close": true,
+        "no_rmf_element_reaches_addresp_threshold": true,
+        "rmf_row_sums_close": true,
+        "all_folded_controls_close": true
+      },
+      "passed": true
+    }
+  ],
+  "full_combination_executed": false,
+  "spectrum_fitted": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false,
+  "claim_boundary": [
+    "V19DH validates response arithmetic only; it does not construct a terminal integrated or regional response.",
+    "No spectrum is fitted and no temperature, source invariant, lensing, halo, action, gravity parameter or holdout result is opened.",
+    "The failed hierarchical method remains rejected even if this independent direct-array method passes.",
+    "A pass authorizes a separately hash-frozen writer/successor and is not itself a scientific source result."
+  ]
+}

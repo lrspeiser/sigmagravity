@@ -1,5 +1,26 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DG--V19DH direct-response result
+
+The frozen V19X2 source-only chain was blocked before fitting because CIAO
+`addresp` could not directly merge the 3,812-cell Bullet integrated response.
+The first remediation, hierarchical `combine_spectra`, is terminally rejected:
+although counts, backgrounds, exposures and ARFs transferred, all four frozen
+controls changed the sparse RMF structure.
+
+A materially independent direct-array implementation then reproduced CIAO's
+published exposure-weighted ARF and ARF-times-exposure-weighted RMF formulas.
+After exploratory reconstruction on the registered regions and 64-cell
+prefixes, V19DH prospectively tested the untouched 128-cell suffix of each
+cluster. Both pass. Maximum ARF relative differences are below
+`5.9e-8`; no dense RMF element reaches CIAO's `1e-6` sparse threshold; and the
+worst relative L1 difference after folding four incident spectra is `8.80e-6`.
+
+This authorizes a separately frozen OGIP writer/full-combination successor. It
+does not revive V19DG2, fit a spectrum, admit I4/I5, or open any lensing, halo,
+action, gravity or holdout payload. See
+[`SIGMA_V19DG_V19DH_RESPONSE_REMEDIATION.md`](SIGMA_V19DG_V19DH_RESPONSE_REMEDIATION.md).
+
 ## 2026-08-06 Sigma V19DF public component-current result
 
 The materially independent MACS J0018.5+1626 public-data audit is complete.

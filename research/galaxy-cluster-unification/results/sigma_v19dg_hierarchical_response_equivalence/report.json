@@ -1,0 +1,11 @@
+{
+  "protocol_version": "SIGMA-V19DG-HIERARCHICAL-RESPONSE-EQUIVALENCE-1.0.0",
+  "generated_utc": "2026-08-06T23:00:18.537179+00:00",
+  "status": "hierarchical_response_equivalence_execution_failed",
+  "exception": "OSError: Could not find heap data for the 'F_CHAN' variable-length array column.",
+  "aggregate_pass": false,
+  "full_combination_executed": false,
+  "spectrum_fitted": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

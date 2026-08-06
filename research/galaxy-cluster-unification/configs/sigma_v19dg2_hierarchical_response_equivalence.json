@@ -1,0 +1,67 @@
+{
+  "protocol_version": "SIGMA-V19DG2-HIERARCHICAL-RESPONSE-EQUIVALENCE-1.0.0",
+  "freeze_state": "frozen_after_v19dg_reader_execution_failure_before_any_product_comparison",
+  "purpose": "Repeat the unchanged V19DG equivalence test after materializing variable-length RMF heap arrays while the FITS handle is open.",
+  "parents": {
+    "v19dg_runner": "scripts/run_sigma_v19dg_hierarchical_response_equivalence.py",
+    "v19dg_runner_sha256": "4c4750403972d9f2a4bfb45555a8905f6c46b0948a042690395e7488cb93660a",
+    "v19dg_failed_report": "results/sigma_v19dg_hierarchical_response_equivalence/report.json",
+    "v19dg_failed_report_sha256": "380e6c2fac1b99b4f47060df7b926274c5775a232b2c2fb83f00b62d3aac8fa1"
+  },
+  "input": {
+    "validated_cell_index": "results/sigma_v19x2_unified_spectral_combination_commissioning/validated_cell_index.csv",
+    "validated_cell_index_sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+  },
+  "controls": [
+    {
+      "id": "bullet_registered_region_169",
+      "cluster": "BULLET",
+      "bin_id": 169,
+      "expected_cells": 9
+    },
+    {
+      "id": "abell2146_registered_region_62",
+      "cluster": "ABELL2146",
+      "bin_id": 62,
+      "expected_cells": 10
+    },
+    {
+      "id": "bullet_manifest_prefix_64",
+      "cluster": "BULLET",
+      "prefix_cells": 64,
+      "expected_cells": 64
+    },
+    {
+      "id": "abell2146_manifest_prefix_64",
+      "cluster": "ABELL2146",
+      "prefix_cells": 64,
+      "expected_cells": 64
+    }
+  ],
+  "hierarchy": {
+    "chunk_size": 8,
+    "ordering": "preserve exact validated-index order within chunks and preserve chunk order in the final combination",
+    "method": "CIAO combine_spectra 4.18 with method=sum, bscale_method=asca and exp_origin=pha at both levels"
+  },
+  "tolerances": {
+    "background_counts_max_absolute": 1e-06,
+    "arf_max_relative": 1e-06,
+    "rmf_matrix_max_absolute": 1e-06,
+    "header_max_relative": 1e-12
+  },
+  "decision": {
+    "pass": "All unchanged V19DG response and spectrum gates pass in all four controls; a separately named full-combination successor may be frozen.",
+    "fail": "Do not use hierarchical combination and do not run the regional spectral chain.",
+    "no_retroactive_tolerance_change": true
+  },
+  "claim_boundary": [
+    "V19DG2 changes only FITS heap materialization in the audit reader.",
+    "Cell selection, chunking, CIAO commands, columns, headers, tolerances and decisions are unchanged from V19DG.",
+    "The V19DG failure occurred before any direct-versus-hierarchical comparison was reported.",
+    "No source-invariant, lensing, halo, galaxy-rotation, action, gravity-parameter or holdout payload is opened."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dg2_hierarchical_response_equivalence.py",
+    "runner_sha256": "db84f6ad7d544b51dcf92a139c9c5e5907e920a6ac1e8a3bdbf091d9fa6a441e"
+  }
+}

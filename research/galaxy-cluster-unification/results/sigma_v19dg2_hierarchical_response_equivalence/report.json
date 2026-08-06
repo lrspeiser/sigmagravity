@@ -1,0 +1,1276 @@
+{
+  "protocol_version": "SIGMA-V19DG2-HIERARCHICAL-RESPONSE-EQUIVALENCE-1.0.0",
+  "generated_utc": "2026-08-06T23:09:14.990438+00:00",
+  "config_sha256": "1f3b491fc104285513240127f9eb0ef5961291ec4d95faffa8ab5497da041bb0",
+  "runner_sha256": "db84f6ad7d544b51dcf92a139c9c5e5907e920a6ac1e8a3bdbf091d9fa6a441e",
+  "status": "hierarchical_response_equivalence_failed_no_successor_authorized",
+  "controls": [
+    {
+      "id": "bullet_registered_region_169",
+      "cells": 9,
+      "chunk_counts": [
+        8,
+        1
+      ],
+      "comparisons": {
+        "source": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/direct/combined_src.pi",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/hierarchical/combined_src.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 536077.11685694,
+              "hierarchical": 536077.11685694,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "background": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/direct/combined_bkg.pi",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/hierarchical/combined_bkg.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 1.687538997430238e-14,
+              "max_relative": 4.002015455513285e-15
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 13500000.0,
+              "hierarchical": 13500000.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 1.0686014620126,
+              "hierarchical": 1.0686014620126,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "arf": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/direct/combined_src.arf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/hierarchical/combined_src.arf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "SPECRESP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 6.103515625e-05,
+              "max_relative": 1.1868088099666306e-07
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 536077.11685694,
+              "hierarchical": 536077.11685694,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1070,
+              "hierarchical": 1070,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_matrix": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/direct/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/hierarchical/combined_src.rmf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "N_GRP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "F_CHAN": {
+              "same_shape": true,
+              "left_shape": [
+                1368
+              ],
+              "right_shape": [
+                1368
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "N_CHAN": {
+              "same_shape": true,
+              "left_shape": [
+                1368
+              ],
+              "right_shape": [
+                1368
+              ],
+              "max_absolute": 2.0,
+              "max_relative": 0.0035971223021582736
+            },
+            "MATRIX": {
+              "same_shape": false,
+              "left_shape": [
+                533729
+              ],
+              "right_shape": [
+                533548
+              ],
+              "max_absolute": null,
+              "max_relative": null
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_ebounds": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/direct/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_registered_region_169/hierarchical/combined_src.rmf",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MIN": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MAX": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        }
+      },
+      "gates": {
+        "source_channel_and_counts_exact": true,
+        "background_channel_exact": true,
+        "background_counts_close": true,
+        "arf_energy_grid_exact": true,
+        "arf_response_close": true,
+        "rmf_structure_exact": false,
+        "rmf_matrix_close": false,
+        "rmf_ebounds_exact": true,
+        "source_exposure_exact": true,
+        "arf_exposure_exact": true
+      },
+      "passed": false
+    },
+    {
+      "id": "abell2146_registered_region_62",
+      "cells": 10,
+      "chunk_counts": [
+        8,
+        2
+      ],
+      "comparisons": {
+        "source": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/direct/combined_src.pi",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/hierarchical/combined_src.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 418012.62993274,
+              "hierarchical": 418012.62993274,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "background": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/direct/combined_bkg.pi",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/hierarchical/combined_bkg.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 6.750155989720952e-14,
+              "max_relative": 8.24354012181647e-15
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 4340000.0,
+              "hierarchical": 4340000.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 0.90805132323204,
+              "hierarchical": 0.90805132323204,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "arf": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/direct/combined_src.arf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/hierarchical/combined_src.arf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "SPECRESP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 3.0517578125e-05,
+              "max_relative": 1.1888511441860066e-07
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 418012.62993274,
+              "hierarchical": 418012.62993274,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1070,
+              "hierarchical": 1070,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_matrix": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/direct/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/hierarchical/combined_src.rmf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "N_GRP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "F_CHAN": {
+              "same_shape": true,
+              "left_shape": [
+                1372
+              ],
+              "right_shape": [
+                1372
+              ],
+              "max_absolute": 1.0,
+              "max_relative": 0.5
+            },
+            "N_CHAN": {
+              "same_shape": true,
+              "left_shape": [
+                1372
+              ],
+              "right_shape": [
+                1372
+              ],
+              "max_absolute": 7.0,
+              "max_relative": 0.06944444444444445
+            },
+            "MATRIX": {
+              "same_shape": false,
+              "left_shape": [
+                529089
+              ],
+              "right_shape": [
+                526688
+              ],
+              "max_absolute": null,
+              "max_relative": null
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_ebounds": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/direct/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_registered_region_62/hierarchical/combined_src.rmf",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MIN": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MAX": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        }
+      },
+      "gates": {
+        "source_channel_and_counts_exact": true,
+        "background_channel_exact": true,
+        "background_counts_close": true,
+        "arf_energy_grid_exact": true,
+        "arf_response_close": true,
+        "rmf_structure_exact": false,
+        "rmf_matrix_close": false,
+        "rmf_ebounds_exact": true,
+        "source_exposure_exact": true,
+        "arf_exposure_exact": true
+      },
+      "passed": false
+    },
+    {
+      "id": "bullet_manifest_prefix_64",
+      "cells": 64,
+      "chunk_counts": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "comparisons": {
+        "source": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/direct/combined_src.pi",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/hierarchical/combined_src.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 1603274.0336687,
+              "hierarchical": 1603274.0336686,
+              "equal": false,
+              "relative_difference": 6.230023316659673e-14
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "background": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/direct/combined_bkg.pi",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/hierarchical/combined_bkg.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 2.1316282072803006e-14,
+              "max_relative": 1.1842378929334995e-15
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 28800000.0,
+              "hierarchical": 28800000.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 0.91349327107342,
+              "hierarchical": 0.91349327107342,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "arf": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/direct/combined_src.arf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/hierarchical/combined_src.arf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "SPECRESP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 3.0517578125e-05,
+              "max_relative": 1.168803648817983e-07
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 1603274.0336687,
+              "hierarchical": 1603274.0336686,
+              "equal": false,
+              "relative_difference": 6.230023316659673e-14
+            },
+            "DETCHANS": {
+              "direct": 1070,
+              "hierarchical": 1070,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_matrix": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/direct/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/hierarchical/combined_src.rmf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "N_GRP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 1.0,
+              "max_relative": 0.5
+            },
+            "F_CHAN": {
+              "same_shape": false,
+              "left_shape": [
+                1369
+              ],
+              "right_shape": [
+                1370
+              ],
+              "max_absolute": null,
+              "max_relative": null
+            },
+            "N_CHAN": {
+              "same_shape": false,
+              "left_shape": [
+                1369
+              ],
+              "right_shape": [
+                1370
+              ],
+              "max_absolute": null,
+              "max_relative": null
+            },
+            "MATRIX": {
+              "same_shape": false,
+              "left_shape": [
+                530092
+              ],
+              "right_shape": [
+                529591
+              ],
+              "max_absolute": null,
+              "max_relative": null
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_ebounds": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/direct/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/bullet_manifest_prefix_64/hierarchical/combined_src.rmf",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MIN": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MAX": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        }
+      },
+      "gates": {
+        "source_channel_and_counts_exact": true,
+        "background_channel_exact": true,
+        "background_counts_close": true,
+        "arf_energy_grid_exact": true,
+        "arf_response_close": true,
+        "rmf_structure_exact": false,
+        "rmf_matrix_close": false,
+        "rmf_ebounds_exact": true,
+        "source_exposure_exact": true,
+        "arf_exposure_exact": true
+      },
+      "passed": false
+    },
+    {
+      "id": "abell2146_manifest_prefix_64",
+      "cells": 64,
+      "chunk_counts": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "comparisons": {
+        "source": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/direct/combined_src.pi",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/hierarchical/combined_src.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 2273896.5438199,
+              "hierarchical": 2273896.5438199,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "background": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/direct/combined_bkg.pi",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/hierarchical/combined_bkg.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 28800000.0,
+              "hierarchical": 28800000.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 0.90805132323204,
+              "hierarchical": 0.90805132323204,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "arf": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/direct/combined_src.arf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/hierarchical/combined_src.arf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "SPECRESP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 6.103515625e-05,
+              "max_relative": 1.152637436165498e-07
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 2273896.5438199,
+              "hierarchical": 2273896.5438199,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1070,
+              "hierarchical": 1070,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_matrix": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/direct/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/hierarchical/combined_src.rmf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "N_GRP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 1.0,
+              "max_relative": 0.3333333333333333
+            },
+            "F_CHAN": {
+              "same_shape": false,
+              "left_shape": [
+                1356
+              ],
+              "right_shape": [
+                1358
+              ],
+              "max_absolute": null,
+              "max_relative": null
+            },
+            "N_CHAN": {
+              "same_shape": false,
+              "left_shape": [
+                1356
+              ],
+              "right_shape": [
+                1358
+              ],
+              "max_absolute": null,
+              "max_relative": null
+            },
+            "MATRIX": {
+              "same_shape": false,
+              "left_shape": [
+                382486
+              ],
+              "right_shape": [
+                382297
+              ],
+              "max_absolute": null,
+              "max_relative": null
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_ebounds": {
+          "direct": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/direct/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19dg2-hierarchical-equivalence/v101/abell2146_manifest_prefix_64/hierarchical/combined_src.rmf",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MIN": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MAX": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        }
+      },
+      "gates": {
+        "source_channel_and_counts_exact": true,
+        "background_channel_exact": true,
+        "background_counts_close": true,
+        "arf_energy_grid_exact": true,
+        "arf_response_close": true,
+        "rmf_structure_exact": false,
+        "rmf_matrix_close": false,
+        "rmf_ebounds_exact": true,
+        "source_exposure_exact": true,
+        "arf_exposure_exact": true
+      },
+      "passed": false
+    }
+  ],
+  "aggregate_pass": false,
+  "full_combination_executed": false,
+  "spectrum_fitted": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false,
+  "claim_boundary": [
+    "V19DG2 changes only FITS heap materialization in the audit reader.",
+    "Cell selection, chunking, CIAO commands, columns, headers, tolerances and decisions are unchanged from V19DG.",
+    "The V19DG failure occurred before any direct-versus-hierarchical comparison was reported.",
+    "No source-invariant, lensing, halo, galaxy-rotation, action, gravity-parameter or holdout payload is opened."
+  ]
+}

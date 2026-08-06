@@ -1,0 +1,55 @@
+{
+  "protocol_version": "SIGMA-V19DH-DIRECT-RESPONSE-PARITY-1.0.0",
+  "freeze_state": "frozen_after_v19dg2_hierarchical_failure_and_exploratory_formula_reconstruction_before_suffix_control_access",
+  "purpose": "Validate an independently implemented direct response-array calculation against CIAO addresp on untouched deterministic suffix controls before any full response successor is frozen.",
+  "parents": {
+    "v19dg2_report": "results/sigma_v19dg2_hierarchical_response_equivalence/report.json",
+    "v19dg2_report_sha256": "a0fcb9b93be4a488cd236e6f3cb7fd7eaa6004fee04248110ef78010714b033d",
+    "v19dg2_config": "configs/sigma_v19dg2_hierarchical_response_equivalence.json",
+    "v19dg2_config_sha256": "1f3b491fc104285513240127f9eb0ef5961291ec4d95faffa8ab5497da041bb0"
+  },
+  "input": {
+    "validated_cell_index": "results/sigma_v19x2_unified_spectral_combination_commissioning/validated_cell_index.csv",
+    "validated_cell_index_sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+  },
+  "controls": [
+    {
+      "id": "bullet_manifest_suffix_128",
+      "cluster": "BULLET",
+      "suffix_cells": 128
+    },
+    {
+      "id": "abell2146_manifest_suffix_128",
+      "cluster": "ABELL2146",
+      "suffix_cells": 128
+    }
+  ],
+  "reference": {
+    "ciao": "CIAO 4.18 combine_spectra/addresp method=sum",
+    "arf_formula": "sum_i(A_i(E) t_i) / sum_i(t_i)",
+    "rmf_formula": "sum_i(R_i(E,c) A_i(E) t_i) / sum_i(A_i(E) t_i)",
+    "exposure_source": "the linked source PHA EXPOSURE, matching combine_spectra exp_origin=pha",
+    "addresp_threshold": 1e-06,
+    "exploratory_disclosure": "The formulas were reconstructed on the two registered regions and two 64-cell manifest prefixes after V19DG2 failed. Those controls are excluded here. V19DH uses only the last 128 cells of each cluster and was frozen before their direct-versus-array results were computed."
+  },
+  "tolerances": {
+    "arf_max_relative": 1e-06,
+    "rmf_row_sum_max_absolute": 0.0001,
+    "folded_l1_relative": 1e-05
+  },
+  "decision": {
+    "pass": "Both suffix controls preserve the energy grid, ARF to 1e-6 relative, every dense RMF element below CIAO's 1e-6 truncation difference, RMF row sums within 1e-4, and four forward-folded spectra within 1e-5 L1. A separately named direct-array output writer and full combination successor may be frozen.",
+    "fail": "Do not create a direct-array full successor. Retire this response reconstruction and choose a joint-likelihood or another independently derived method.",
+    "no_retroactive_change": true
+  },
+  "claim_boundary": [
+    "V19DH validates response arithmetic only; it does not construct a terminal integrated or regional response.",
+    "No spectrum is fitted and no temperature, source invariant, lensing, halo, action, gravity parameter or holdout result is opened.",
+    "The failed hierarchical method remains rejected even if this independent direct-array method passes.",
+    "A pass authorizes a separately hash-frozen writer/successor and is not itself a scientific source result."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dh_direct_response_parity.py",
+    "runner_sha256": "6df8885e7fb0cd896e593d75e8f72b932531713aa54f29cbb6559019c251a48c"
+  }
+}
