@@ -1,5 +1,30 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DE2 terminal scientific result
+
+The exact AtomDB-bound rerun completes all 404 frozen APEC/MEKAL profile
+points with finite two-start fits, so the earlier missing-model-data failure is
+fully remediated. Six of seven terminal gates pass. APEC and MEKAL primary
+minima are `z=0.3008` and `z=0.2999`, with interior Delta-WStat=1 intervals
+and agreement well inside the `0.003` cross-model gate.
+
+The profile-uniqueness gate fails. APEC contains a second coarse-grid minimum
+at `z=0.3050`, separated from the primary result by `0.0042` and only
+`Delta WStat=1.7802` above the coarse global minimum, versus the frozen
+`6.63` rejection threshold. Both independent starts converge in that basin,
+and the fine profile is still descending when it reaches `z=0.305`. Both
+primary plasma fits also drive the two temperatures effectively to the frozen
+3.5 and 27 keV bounds. The nominal 1,110 and 902 km/s offsets are therefore
+diagnostics, not admitted source measurements.
+
+The integrated gain covariance passes, but it cannot remove the spectral
+ambiguity. No posterior-predictive/Sobol stage, regional velocity, ObsID 554,
+Abell 2146, lensing, gravity or action payload was opened. The current
+integrated two-temperature Chandra closure is retired without retuning; signed
+gas current remains a hypothesis awaiting a materially different direct
+measurement. See
+[`SIGMA_V19DE2_BULLET_APEC_BINDING_REMEDIATION.md`](SIGMA_V19DE2_BULLET_APEC_BINDING_REMEDIATION.md).
+
 ## 2026-08-06 Sigma V19DE2 APEC-binding remediation freeze
 
 The V19DE environment remediation is frozen and its payload-blind preflight
