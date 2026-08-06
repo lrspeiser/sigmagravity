@@ -1,0 +1,93 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-FITS-METADATA-1.0.0",
+  "status": "frozen after the A2319 environment passed but before opening any XRISM FITS header or HDU schema",
+  "purpose": "Inventory only structural FITS metadata required to freeze the commissioning gain protocol, without reading a single event, gain-history, housekeeping, GTI, energy, spectrum, or velocity row value.",
+  "parents": {
+    "acquisition_manifest": "results/sigma_v19cy_direct_icm_velocity_evidence/development_acquisition_manifest.csv",
+    "acquisition_manifest_sha256": "3ef7816ccfa069a49f34cf18d22d1cd22da1c4fd1dc0ac2ed9151c2e66f16cac",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f",
+    "environment_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_environment_report.json",
+    "environment_report_sha256": "b9ded07723d38b7444f5bfb1abbd54337533b8c8c11fe0da043d9583d1cbd394",
+    "required_environment_status": "a2319_frozen_heasoft_xrism_caldb_environment_installed_and_audited"
+  },
+  "runtime": {
+    "astropy_version": "7.1.1"
+  },
+  "selection": {
+    "asset_group_prefix": "xrism",
+    "path_regex": "\\.(fits|evt|ghf|gti|hk|mkf|ehk)(\\.gz)?$",
+    "expected_files": 87,
+    "obsids": [
+      "000100000",
+      "000101000",
+      "000102000",
+      "000103000"
+    ]
+  },
+  "header_keys": [
+    "SIMPLE",
+    "XTENSION",
+    "EXTNAME",
+    "EXTVER",
+    "TELESCOP",
+    "INSTRUME",
+    "DETNAM",
+    "OBS_ID",
+    "OBJECT",
+    "DATE-OBS",
+    "DATE-END",
+    "TSTART",
+    "TSTOP",
+    "EXPOSURE",
+    "ONTIME",
+    "LIVETIME",
+    "FILTER",
+    "DATAMODE",
+    "OBS_MODE",
+    "CREATOR",
+    "PROCVER",
+    "SOFTVER",
+    "CALDBVER",
+    "GAINFILE",
+    "PI2PIFIL",
+    "NAXIS",
+    "NAXIS1",
+    "NAXIS2",
+    "TFIELDS"
+  ],
+  "schema_keys": {
+    "column_name_prefix": "TTYPE",
+    "column_format_prefix": "TFORM",
+    "column_unit_prefix": "TUNIT"
+  },
+  "paths": {
+    "raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_fits_metadata_inventory.json"
+  },
+  "acceptance": {
+    "exact_file_count": 87,
+    "every_file_matches_terminal_download_size_and_sha256": true,
+    "every_selected_file_opens_as_fits": true,
+    "every_hdu_data_object_remains_unloaded": true,
+    "zero_table_or_image_values_read": true,
+    "zero_validation_or_holdout_access": true,
+    "zero_scientific_fit": true
+  },
+  "authorization": {
+    "open_selected_development_fits_headers": true,
+    "inspect_hdu_names_header_cards_and_column_schema": true,
+    "read_any_table_or_image_value": false,
+    "calculate_gain_solution": false,
+    "fit_spectrum_or_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "NAXIS2 row counts and TTYPE/TFORM/TUNIT schemas are header metadata, not scientific row values.",
+    "This inventory cannot establish gain coverage, calibration accuracy, event screening, a spectrum, or a velocity.",
+    "Only a later separately frozen protocol may read development row values."
+  ]
+}
