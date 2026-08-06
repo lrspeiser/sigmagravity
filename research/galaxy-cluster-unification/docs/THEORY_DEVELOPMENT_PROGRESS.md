@@ -1,5 +1,20 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DD gain-weight transport freeze
+
+The last pre-fit response transport is frozen and its payload-blind preflight
+passes across 43 regions and all 3,483 cells without opening a source PHA or
+ARF payload. V19DD will combine all 3,483
+primary Bullet cells into the nine-ObsID integrated spectrum and derive 43 by
+9 response weights from source exposure times ARF area at observed Fe-K. The
+weights transport the measured per-ObsID gain means linearly and their
+independent covariances with squared weights. A direct-cell versus
+observation-hierarchical weight check must agree within `1e-6`.
+
+This stage fits no source line, temperature, abundance, redshift or velocity;
+ObsID 554, Abell 2146 and every lensing/gravity/action payload remain sealed.
+See [`SIGMA_V19DD_BULLET_GAIN_WEIGHT_TRANSPORT.md`](SIGMA_V19DD_BULLET_GAIN_WEIGHT_TRANSPORT.md).
+
 ## 2026-08-06 Sigma V19DC Bullet gain-audit result
 
 The frozen per-ObsID detector-gain audit passes all gates. It sums the original

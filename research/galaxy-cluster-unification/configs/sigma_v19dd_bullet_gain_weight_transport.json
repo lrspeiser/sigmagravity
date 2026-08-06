@@ -1,0 +1,73 @@
+{
+  "protocol_version": "SIGMA-V19DD-BULLET-GAIN-WEIGHT-TRANSPORT-1.0.0",
+  "freeze_state": "frozen_after_v19dc_gain_pass_before_source_redshift_fit",
+  "purpose": "Build the nine-ObsID integrated Bullet spectrum and derive target-blind Fe-K response weights that transport the nine measured detector-gain covariances to every frozen source-only region.",
+  "claim_boundary": "This response transport does not fit or inspect a source line, temperature, abundance, redshift or velocity and cannot admit a Sigma source or open Abell 2146.",
+  "parents": {
+    "v19dc_commit": "99e611c1d569a427e31932b2c627c5836af48a25",
+    "v19db_config": {
+      "path": "configs/sigma_v19db_bullet_velocity_combination.json",
+      "sha256": "71372344af5d8249d59961aa9f86b94f8c976594b2f37cf1bcada156fffd7d27"
+    },
+    "v19db_report": {
+      "path": "results/sigma_v19db_bullet_velocity_combination/report.json",
+      "sha256": "25104d0a4f7840e3c25b7b2eda99ff6186c9ef3b668af8695289d422a984e4aa",
+      "required_status": "bullet_primary_velocity_region_combination_passed"
+    },
+    "v19dc_config": {
+      "path": "configs/sigma_v19dc_bullet_gain_audit.json",
+      "sha256": "bd1015b97a629cbb2cb6434088d82940dcca903fd971ae050863f4246849e6a7"
+    },
+    "v19dc_report": {
+      "path": "results/sigma_v19dc_bullet_gain_audit/report.json",
+      "sha256": "ad077394036351bcd33f0eda9a623392109754521b5c07b72ccc52c935c01883",
+      "required_status": "bullet_per_obsid_gain_audit_passed"
+    }
+  },
+  "workload": {
+    "cluster": "BULLET",
+    "regions": 43,
+    "response_cells": 3483,
+    "obsids": [3184, 4984, 4985, 4986, 5355, 5356, 5357, 5358, 5361],
+    "integrated_group_id": 0,
+    "integrated_expected_full_pha_source_counts": 674283
+  },
+  "weight_definition": {
+    "representative_fe_rest_energy_keV": 6.7,
+    "bullet_optical_redshift": 0.296,
+    "observed_fe_energy_rule": "representative_fe_rest_energy_keV / (1 + bullet_optical_redshift)",
+    "cell_contribution": "source PHA EXPOSURE times source ARF SPECRESP at observed Fe-K",
+    "region_obsid_weight": "sum cell contributions within region and ObsID, normalized over the nine ObsIDs",
+    "gain_mean_transport": "p_effective = sum_i weight_i p_i for p=(intercept,slope)",
+    "gain_covariance_transport": "C_effective = sum_i weight_i^2 C_i because the per-ObsID calibration measurements are independent",
+    "gain_correction_dispersion": "Report the response-weighted RMS dispersion of the nine fitted mean gain corrections separately from covariance uncertainty because a mixture of differently shifted responses is not exactly one shifted response.",
+    "later_primary_use": "propagate C_effective to the source redshift interval without shifting source data",
+    "later_corrected_use": "use p_effective only in the explicitly labeled gain-corrected sign-topology robustness branch"
+  },
+  "gates": {
+    "integrated_spectrum_uses_all_3483_cells_once": true,
+    "integrated_full_pha_source_counts_equal_674283": true,
+    "integrated_source_background_arf_rmf_links_exact": true,
+    "all_43_by_9_region_obsid_weights_exist_and_sum_to_one": true,
+    "direct_cell_sum_matches_observation_hierarchy_fe_weight_relative_difference_at_most": 1e-06,
+    "all_effective_gain_covariances_finite_symmetric_positive_semidefinite": true,
+    "all_response_weighted_gain_correction_dispersions_finite": true
+  },
+  "authorization": {
+    "combine_integrated_bullet_primary_spectrum": true,
+    "open_source_pha_header_and_arf_response": true,
+    "open_source_pha_counts_for_exact_combination_audit": true,
+    "fit_temperature_abundance_redshift_or_velocity": false,
+    "open_obsid554_or_abell2146": false,
+    "open_lensing_halo_gravity_or_action": false
+  },
+  "runtime": {
+    "parallel_regions": 8,
+    "scratch_root": "/home/henry/sigma-v19dd-bullet-gain-weight-transport/v100",
+    "result_root": "results/sigma_v19dd_bullet_gain_weight_transport"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dd_bullet_gain_weight_transport.py",
+    "runner_sha256": "2eb59a3ad14073b81293824e73f041f4da190506b2cc54583dc3e695c0a78223"
+  }
+}

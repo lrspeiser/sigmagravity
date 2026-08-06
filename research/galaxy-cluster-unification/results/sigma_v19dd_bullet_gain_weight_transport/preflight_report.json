@@ -1,0 +1,14 @@
+{
+  "config_sha256": "c7143bff88665f5aa8602ba7febb9daea3083c71cdb4e813ed4b4d0268b81f1c",
+  "generated_utc": "2026-08-06T18:50:47.464625+00:00",
+  "lensing_halo_gravity_or_action_opened": false,
+  "obsid554_or_abell2146_opened": false,
+  "protocol_version": "SIGMA-V19DD-BULLET-GAIN-WEIGHT-TRANSPORT-1.0.0",
+  "regions": 43,
+  "response_cells": 3483,
+  "runner_sha256": "2eb59a3ad14073b81293824e73f041f4da190506b2cc54583dc3e695c0a78223",
+  "source_line_temperature_abundance_redshift_or_velocity_fitted": false,
+  "source_pha_or_arf_payload_opened": false,
+  "source_redshift_fitted": false,
+  "status": "v19dd_payload_blind_gain_weight_plan_passed"
+}
