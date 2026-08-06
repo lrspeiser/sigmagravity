@@ -1,0 +1,113 @@
+{
+  "protocol_version": "SIGMA-V19DE-BULLET-INTEGRATED-REDSHIFT-PROFILE-1.0.0",
+  "freeze_state": "frozen_after_v19dd_transport_pass_before_integrated_source_line_access",
+  "purpose": "Commission the frozen two-temperature ungrouped-WStat shared-redshift profile on the integrated nine-ObsID Bullet spectrum before any regional velocity field is opened.",
+  "claim_boundary": "This known-outcome integrated Bullet fit validates the fitting engine only. It cannot admit signed gas current, open a regional velocity pattern, open Abell 2146, or validate gravity.",
+  "parents": {
+    "v19da_config": {
+      "path": "configs/sigma_v19da_chandra_icm_velocity_preregistration.json",
+      "sha256": "0a489feb3a1609f89711c83fc31ff4798fde6bb0558a531fe4bc634e644cfe64"
+    },
+    "v19dc_report": {
+      "path": "results/sigma_v19dc_bullet_gain_audit/report.json",
+      "sha256": "ad077394036351bcd33f0eda9a623392109754521b5c07b72ccc52c935c01883",
+      "required_status": "bullet_per_obsid_gain_audit_passed"
+    },
+    "v19dd_report": {
+      "path": "results/sigma_v19dd_bullet_gain_weight_transport/report.json",
+      "sha256": "7d7156ebe888a1d249dc3c6e07a1a8311d7ba349e4d018f57bc9eee1330cc095",
+      "required_status": "bullet_integrated_spectrum_and_gain_weight_transport_passed"
+    }
+  },
+  "data": {
+    "source": {
+      "path": "results/sigma_v19dd_bullet_gain_weight_transport/frozen_products/BULLET_primary8000_region000/BULLET_primary8000_region000_src.pi",
+      "bytes": 296640,
+      "sha256": "c349b0de3049c628bc1ec4545fec0b46dd2b94c8c464ecec162d3727601b26d8"
+    },
+    "background": {
+      "path": "results/sigma_v19dd_bullet_gain_weight_transport/frozen_products/BULLET_primary8000_region000/BULLET_primary8000_region000_bkg.pi",
+      "bytes": 296640,
+      "sha256": "5bd6316c1983c57fb89037829f6070c2c1df98217519863a02c8aa1066a2b0dc"
+    },
+    "arf": {
+      "path": "results/sigma_v19dd_bullet_gain_weight_transport/frozen_products/BULLET_primary8000_region000/BULLET_primary8000_region000_src.arf",
+      "bytes": 43200,
+      "sha256": "9dd00eae4b599560494d3600031ba4ba50ffe48d5bd9b078051e2b4b15f3da62"
+    },
+    "rmf": {
+      "path": "results/sigma_v19dd_bullet_gain_weight_transport/frozen_products/BULLET_primary8000_region000/BULLET_primary8000_region000_src.rmf",
+      "bytes": 2217600,
+      "sha256": "023ab9c448c64ac56bc973dfa2ecc5ea863983c82a02fcf2321059be36271210"
+    },
+    "expected_full_pha_source_counts": 674283
+  },
+  "model": {
+    "branches": ["apec", "mekal"],
+    "expressions": {
+      "apec": "tbabs*(apec_1+apec_2)",
+      "mekal": "tbabs*(mekal_1+mekal_2)"
+    },
+    "abundance_table": "aspl",
+    "cross_sections": "vern",
+    "fit_band_keV": [2.0, 10.0],
+    "statistic": "wstat",
+    "background_subtracted": false,
+    "galactic_nh_1e22_cm2": 0.0438,
+    "galactic_nh_fractional_interval": 0.1,
+    "temperature_range_keV": [3.5, 27.0],
+    "abundance_range_solar": [0.1, 1.6],
+    "normalization_range": [1e-08, 10.0],
+    "temperature_order_rule": "canonicalize the exchange-symmetric components after every fit so T1 <= T2",
+    "shared_redshift": true,
+    "mekal_fixed_hydrogen_density_cm3": 1.0,
+    "mekal_fixed_switch": 1
+  },
+  "optimization": {
+    "method": "neldermead",
+    "maximum_function_evaluations": 2500,
+    "profile_multistart_rule": "at every fixed redshift evaluate the warm state and one rotating frozen anchor; retain the finite minimum",
+    "anchor_states": [
+      {"T1": 5.0, "T2": 14.0, "Z1": 0.3, "Z2": 0.3, "norm1": 0.01, "norm2": 0.01},
+      {"T1": 8.0, "T2": 22.0, "Z1": 0.2, "Z2": 0.6, "norm1": 0.015, "norm2": 0.005},
+      {"T1": 3.8, "T2": 26.0, "Z1": 0.8, "Z2": 0.2, "norm1": 0.005, "norm2": 0.015}
+    ]
+  },
+  "profile": {
+    "optical_redshift_center": 0.296,
+    "half_range": 0.05,
+    "coarse_step": 0.001,
+    "fine_half_width": 0.005,
+    "fine_step": 0.0001,
+    "statistical_delta": 1.0,
+    "secondary_minimum_delta": 6.63,
+    "distinct_minimum_separation": 0.003,
+    "evaluation_order": "in increasing absolute distance from the optical center to make the warm start target-blind and deterministic"
+  },
+  "gates": {
+    "both_model_profiles_complete": true,
+    "every_profile_point_has_a_finite_multistart_fit": true,
+    "best_redshift_and_delta1_interval_interior": true,
+    "no_distinct_secondary_minimum_within_delta_6p63": true,
+    "each_best_redshift_within_0p01_of_optical": true,
+    "apec_mekal_best_redshift_difference_at_most": 0.003,
+    "integrated_gain_covariance_finite_positive_semidefinite": true
+  },
+  "authorization": {
+    "open_integrated_source_pha_and_response_after_committed_preflight": true,
+    "fit_integrated_temperature_abundance_redshift": true,
+    "run_integrated_apec_and_mekal_profiles": true,
+    "run_posterior_predictive_or_thermal_sobol": false,
+    "open_any_regional_source_line_or_velocity": false,
+    "open_obsid554_or_abell2146": false,
+    "open_lensing_halo_gravity_or_action": false
+  },
+  "runtime": {
+    "checkpoint_every_profile_points": 1,
+    "output": "results/sigma_v19de_bullet_integrated_redshift_profile"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19de_bullet_integrated_redshift_profile.py",
+    "runner_sha256": "1ded9c3a1d152fc8276eec4970702f358c99630aeabd6685d9ad36ee31213924"
+  }
+}

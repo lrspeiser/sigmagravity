@@ -1,0 +1,26 @@
+{
+  "branches": [
+    "apec",
+    "mekal"
+  ],
+  "coarse_points_per_branch": 101,
+  "config_sha256": "e5f49f693f466d6ada9ec08a38956bd4043839d5404f32599e747771afae74ec",
+  "fine_points_per_branch": 101,
+  "generated_utc": "2026-08-06T20:07:10.540598+00:00",
+  "integrated_product_sizes_verified": {
+    "arf": 43200,
+    "background": 296640,
+    "rmf": 2217600,
+    "source": 296640
+  },
+  "lensing_halo_gravity_or_action_opened": false,
+  "multistarts_per_point": 2,
+  "obsid554_or_abell2146_opened": false,
+  "posterior_predictive_or_thermal_sobol_run": false,
+  "protocol_version": "SIGMA-V19DE-BULLET-INTEGRATED-REDSHIFT-PROFILE-1.0.0",
+  "regional_source_line_or_velocity_opened": false,
+  "runner_sha256": "1ded9c3a1d152fc8276eec4970702f358c99630aeabd6685d9ad36ee31213924",
+  "source_line_temperature_abundance_redshift_or_velocity_fitted": false,
+  "source_pha_response_scientific_arrays_opened": false,
+  "status": "v19de_payload_blind_integrated_profile_plan_passed"
+}

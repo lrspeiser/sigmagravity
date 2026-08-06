@@ -1,5 +1,16 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DE integrated-profile freeze
+
+The first source-line stage after V19DD is frozen and its payload-blind
+preflight passes without opening a source PHA or response scientific array.
+V19DE will commission two-temperature APEC and MEKAL shared-redshift profiles
+on the integrated, known-outcome Bullet spectrum using ungrouped WStat. It
+cannot open a regional velocity pattern or Abell 2146. A pass authorizes the
+still-mandatory integrated posterior-predictive and thermal-mixture systematic
+stage; it does not admit signed current. See
+[`SIGMA_V19DE_BULLET_INTEGRATED_REDSHIFT_PROFILE.md`](SIGMA_V19DE_BULLET_INTEGRATED_REDSHIFT_PROFILE.md).
+
 ## 2026-08-06 Sigma V19DD gain-weight transport result
 
 The frozen transport passes every gate. It combined all 3,483 primary Bullet
