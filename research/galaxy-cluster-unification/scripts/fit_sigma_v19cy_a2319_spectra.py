@@ -193,18 +193,29 @@ def numeric_parameter_delta(spec: str) -> float | None:
 def nxb_free_parameter_indices(
     base_specs: list[str], source_group_count: int
 ) -> list[int]:
+    if len(base_specs) != NXB_PARAMETER_COUNT or source_group_count not in (1, 2):
+        raise ValueError("invalid NXB model layout")
     free: list[int] = []
     for source_index in range(source_group_count):
         offset = source_index * NXB_PARAMETER_COUNT
-        for local_index, spec in enumerate(base_specs, start=1):
-            delta = numeric_parameter_delta(spec)
-            if local_index == 1:
-                continue
-            if local_index in NXB_THAWED_NORMALIZATIONS or (
-                delta is not None and delta > 0
-            ):
-                free.append(offset + local_index)
+        free.extend(offset + local_index for local_index in NXB_THAWED_NORMALIZATIONS)
     return free
+
+
+def nxb_numeric_parameter_indices(
+    base_specs: list[str], source_group_count: int
+) -> list[int]:
+    if len(base_specs) != NXB_PARAMETER_COUNT or source_group_count not in (1, 2):
+        raise ValueError("invalid NXB model layout")
+    numeric: list[int] = []
+    for source_index in range(source_group_count):
+        offset = source_index * NXB_PARAMETER_COUNT
+        numeric.extend(
+            offset + local_index
+            for local_index, spec in enumerate(base_specs, start=1)
+            if not spec.startswith("=")
+        )
+    return numeric
 
 
 def source_free_parameter_indices(source_group_count: int, two_temperature: bool) -> list[int]:
@@ -339,13 +350,14 @@ def build_xspec_deck(
     for index in range(source_group_count + 1, 2 * source_group_count + 1):
         commands.append(f"ignore {index}:**-{nxb_band[0]} {nxb_band[1]}-**")
     commands.append("fit")
-    for source_index in range(source_group_count):
-        offset = source_index * NXB_PARAMETER_COUNT
-        commands.append(f"freeze nxb1:{offset + 1}")
-        commands.extend(
-            f"thaw nxb1:{offset + local_index}"
-            for local_index in NXB_THAWED_NORMALIZATIONS
-        )
+    commands.extend(
+        f"freeze nxb1:{index}"
+        for index in nxb_numeric_parameter_indices(nxb_specs, source_group_count)
+    )
+    commands.extend(
+        f"thaw nxb1:{index}"
+        for index in nxb_free_parameter_indices(nxb_specs, source_group_count)
+    )
     commands.append("fit")
     source_band = variant["band_keV"]
     for index in range(1, source_group_count + 1):

@@ -95,6 +95,16 @@ def test_xspec_deck_uses_mixed_statistics_and_separate_responses(tmp_path: Path)
     assert metadata["source_group_count"] == 2
     assert metadata["source_statistic"] == "cstat"
     assert metadata["nxb_statistic"] == "chi standard"
+    numeric = fitter.nxb_numeric_parameter_indices(specs, 2)
+    thawed = fitter.nxb_free_parameter_indices(specs, 2)
+    assert numeric
+    assert thawed == [
+        *(fitter.NXB_THAWED_NORMALIZATIONS),
+        *(56 + index for index in fitter.NXB_THAWED_NORMALIZATIONS),
+    ]
+    assert all(f"freeze nxb1:{index}" in deck for index in numeric)
+    assert all(f"thaw nxb1:{index}" in deck for index in thawed)
+    assert "thaw nxb1:2\n" not in deck
 
 
 def test_markers_and_velocity_conversion_are_machine_readable():
