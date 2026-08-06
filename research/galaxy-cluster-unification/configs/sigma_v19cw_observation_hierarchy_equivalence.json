@@ -1,0 +1,142 @@
+{
+  "protocol_version": "SIGMA-V19CW-OBSERVATION-HIERARCHY-EQUIVALENCE-1.0.0",
+  "freeze_state": "frozen_after_v19x2_large_stack_header_merge_failure_before_hierarchical_execution",
+  "purpose": "Determine whether a two-level observation hierarchy is numerically equivalent to the successful direct Abell 2146 combination before it may be used to remediate the mechanically failed 3812-response Bullet stack.",
+  "authorization": {
+    "run_abell2146_equivalence_commissioning": true,
+    "run_bullet_hierarchy": false,
+    "fit_temperature_or_abundance": false,
+    "change_cells_grouping_background_rule_or_response_weights": false,
+    "change_gravity_formula_parameter_source_state_or_lensing_target": false,
+    "run_v19bq_v19bs_or_derive_action": false
+  },
+  "parents": {
+    "v19x2_config": {
+      "path": "configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+      "sha256": "60543254acdfa979b2e0ab86e346ea291e1a8b1346a13f48669a44974a42c559"
+    },
+    "v19x2_runner": {
+      "path": "scripts/run_sigma_v19x2_unified_spectral_combination_commissioning.py",
+      "sha256": "e082ff535730703c34cdb88af0ab186b9fed6d1d3f62dd0e4b5ad5408da4a1ea"
+    },
+    "v19x2_terminal_report": {
+      "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/report.json",
+      "sha256": "f753c6c4cd4e6c24f797425cea3dff332c40246ddc8269a28892e5303eebbd7b",
+      "required_status": "unified_spectral_combination_commissioning_execution_failed",
+      "required_exception": "RuntimeError: combine_spectra failed; inspect /home/henry/sigma-v19x2-spectral-combination/v100/BULLET_integrated/logs/combine_spectra.log"
+    },
+    "v19cu_terminal_report": {
+      "path": "results/sigma_v19cu_astropy_base_environment_remediation/report.json",
+      "sha256": "d93ce281d76a10d74715cc88599b5728234f24ebec4e33c4d428af3741a1479c",
+      "required_status": "astropy_base_environment_remediation_failed_closed"
+    },
+    "validated_cell_index": {
+      "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/validated_cell_index.csv",
+      "sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf",
+      "rows": 5082
+    },
+    "bullet_failure_log": {
+      "path": "/home/henry/sigma-v19x2-spectral-combination/v100/BULLET_integrated/logs/combine_spectra.log",
+      "sha256": "71b0a8c875ecacd9242dda9b387bcfddbf6940b790c58a8c0519a4f3fb519a18",
+      "bytes": 2312254,
+      "required_fragments": [
+        "Prepared to combine 3812 spectra",
+        "ERROR: Unable to create the ARF file",
+        "TSTART is missing in file #2377",
+        "warning: CONTENT has 1436 different values."
+      ]
+    },
+    "unified_product_index": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+      "sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4",
+      "rows": 5082
+    }
+  },
+  "direct_reference": {
+    "cluster": "ABELL2146",
+    "cells": 1270,
+    "observation_groups": {
+      "10464": 128,
+      "10888": 128,
+      "12245": 128,
+      "12246": 128,
+      "12247": 128,
+      "13020": 128,
+      "13021": 123,
+      "13023": 128,
+      "13120": 123,
+      "13138": 128
+    },
+    "products": {
+      "source_grouped": {
+        "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+        "bytes": 895680,
+        "sha256": "8cb57aa778336370ac275ad5c0f89def10cd2b7bc8d5edcb18db58772643acd0"
+      },
+      "background": {
+        "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_bkg.pi",
+        "bytes": 864000,
+        "sha256": "d6f75867b8aba60d550d1437727ec62b43293ba293cc8e42c686d38dd6a48e46"
+      },
+      "arf": {
+        "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.arf",
+        "bytes": 1255680,
+        "sha256": "742843ee51f9cb8a4b28812a05b94fb9c82e6dfd08cea3800081e5c952d317d0"
+      },
+      "rmf": {
+        "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.rmf",
+        "bytes": 3412800,
+        "sha256": "d0a613f58280fd0dd21641c1d1336eb988dc2db9565a718feb6972935fcee0bf"
+      }
+    }
+  },
+  "hierarchy": {
+    "partition_key": "obsid",
+    "partition_uses_scientific_outcome": false,
+    "first_level_method": "sum",
+    "final_method": "sum",
+    "bscale_method": "asca",
+    "exp_origin": "pha",
+    "intermediate_rmf_threshold": 0.0,
+    "final_rmf_threshold": 1e-6,
+    "reason_for_zero_intermediate_threshold": "Prevent a second round of RMF sparsification; only the final response applies the same 1e-6 threshold as the frozen direct CIAO addresp path.",
+    "concurrency": 1,
+    "associativity": {
+      "arf": "A=sum_i(A_i t_i)/sum_i(t_i); replacing cells by observation sums leaves A unchanged.",
+      "rmf": "R is weighted by A_i t_i; observation-level numerators and denominators sum to the direct numerator and denominator.",
+      "source": "Counts and exposure are sums and therefore associative.",
+      "background_asca": "The ASCA denominator and weighted-count numerator are additive sufficient statistics; regrouping by observation leaves the final values unchanged before floating-point rounding."
+    }
+  },
+  "equivalence_gates": {
+    "source_counts_and_grouping_exact": true,
+    "source_exposure_relative_difference_at_most": 1e-12,
+    "background_counts_max_absolute_difference_at_most": 1e-8,
+    "background_counts_relative_l1_difference_at_most": 1e-12,
+    "background_exposure_and_backscal_relative_difference_at_most": 1e-12,
+    "arf_energy_grid_exact": true,
+    "arf_specrsp_relative_l2_difference_at_most": 2e-5,
+    "arf_specrsp_max_relative_difference_at_most": 5e-5,
+    "rmf_energy_and_channel_grids_exact": true,
+    "rmf_dense_relative_frobenius_difference_at_most": 5e-5,
+    "rmf_dense_max_absolute_difference_at_most": 2e-5,
+    "forward_folded_relative_l1_difference_at_most": 5e-5,
+    "forward_folded_max_channel_fraction_difference_at_most": 5e-5
+  },
+  "external_method_authority": {
+    "combine_spectra": "https://cxc.cfa.harvard.edu/ciao/ahelp/combine_spectra.html",
+    "addresp": "https://cxc.cfa.harvard.edu/ciao/ahelp/addresp.html"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19cw_observation_hierarchy_equivalence.py",
+    "runner_sha256": "ad0c91414e1b59fb908c5b252fbb322e83459899bff29c8e50fd1e3b6a3f64e2",
+    "result": "results/sigma_v19cw_observation_hierarchy_equivalence/report.json",
+    "scratch_root": "/home/henry/sigma-v19cw-observation-hierarchy/v100"
+  },
+  "claim_boundary": [
+    "V19CW tests numerical equivalence of a supported data-reduction decomposition; it does not test or modify gravity.",
+    "The partition is the observation identifier frozen before any spectral fit, temperature, lensing or gravity outcome.",
+    "A V19CW pass authorizes a separate frozen Bullet recovery; it does not itself authorize Bullet execution, regional production, V19BQ, V19BS or action derivation.",
+    "A failed equivalence gate retires this remediation without relaxing a tolerance after seeing the result."
+  ]
+}

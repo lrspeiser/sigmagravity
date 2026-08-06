@@ -1,0 +1,18 @@
+{
+  "authorization_boundary": {
+    "action_derived": false,
+    "solar_optimized": false,
+    "target_or_gravity_opened": false,
+    "v19bs_run": false
+  },
+  "claim_boundary": [
+    "V19CU changes only the local CIAO runtime dependency set and records the exact before/after inventory.",
+    "The FITS reader is required by the frozen V19X2 count-audit code and is not a scientific model or fitting dependency choice.",
+    "V19X2 code, config, cells, responses, grouping, model, fit sequence and gates remain unchanged.",
+    "No gravity theory, lensing target, action, holdout or Solar-System optimization is opened."
+  ],
+  "exception": "RuntimeError: V19CS post-execution gates failed: {'preflight_exact': True, 'x2_config_byte_identical': True, 'live_ciao_probe_passed': True, 'v19x2_reaches_registered_scientific_disposition': False, 'if_v19x2_passes_v19br_reaches_source_decision': True, 'target_and_gravity_sealed': True}; decision=v19x2_or_source_chain_execution_incomplete; x2_status=unified_spectral_combination_commissioning_execution_failed",
+  "generated_utc": "2026-08-06T00:06:24.860241+00:00",
+  "protocol_version": "SIGMA-V19CU-ASTROPY-BASE-ENVIRONMENT-REMEDIATION-1.0.0",
+  "status": "astropy_base_environment_remediation_failed_closed"
+}

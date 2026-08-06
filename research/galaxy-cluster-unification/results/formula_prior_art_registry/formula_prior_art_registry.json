@@ -6,7 +6,7 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 219,
+    "sigma_protocols": 220,
     "project_formula_addenda": 16,
     "sigma_formula_fragments": 147,
     "eligibility": {
@@ -7682,6 +7682,19 @@
         "NEWTON-POISSON"
       ],
       "sha256": "dcd46faa988bdf4624ed1e86d7ad03ad9c01bd62a0e3c284f36835b4317e401f"
+    },
+    {
+      "config": "configs/sigma_v19cw_observation_hierarchy_equivalence.json",
+      "protocol_version": "SIGMA-V19CW-OBSERVATION-HIERARCHY-EQUIVALENCE-1.0.0",
+      "status": "",
+      "role": "gate_or_data_protocol_no_new_formula_fragment",
+      "formula_fragments": [],
+      "formula_fragment_count": 0,
+      "published_overlap_ids": [
+        "RAR-EMPIRICAL",
+        "MOND-ALGEBRAIC"
+      ],
+      "sha256": "044a9332a845490a67f6bbb5487085428d9babfa156aed476a1a8f799da21365"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",
