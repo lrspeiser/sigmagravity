@@ -1,18 +1,20 @@
 # Theory-development progress against the stage gates
 
-## 2026-08-06 Sigma V19DC Bullet gain-audit freeze
+## 2026-08-06 Sigma V19DC Bullet gain-audit result
 
-The per-ObsID detector-gain audit is frozen before any source redshift fit. It
-will sum the original matched blank-sky integer counts across all 3,483 primary
-Bullet cells, rather than use the ASCA-scaled combination, and require exact
-PHA/RMF channel grids. Separate Poisson continuum-plus-Gaussian fits to Ni
-K-alpha and Au L-alpha determine the covariance of the linear relation
-`E_cal = intercept + slope * E_recorded`.
+The frozen per-ObsID detector-gain audit passes all gates. It sums the original
+matched blank-sky integer counts across all 3,483 primary Bullet cells rather
+than the ASCA-scaled backgrounds, and every product hash and 1,024-channel
+EBOUNDS grid is exact. The weakest Ni/Au line improvement is Delta Cash 573;
+the largest fixed-window centroid shift is 5.71 eV versus the 15-eV gate.
 
-Primary 0.30-keV half-windows and fixed 0.25/0.35-keV robustness windows,
-Delta-Cash line and profile gates, and a 0.015-keV maximum window-induced
-centroid shift are frozen. No source PHA, temperature, redshift, velocity,
-Abell 2146, lensing, gravity or action payload is authorized. See
+The fitted linear gains span slopes 0.99822--1.00536 and intercepts
+-0.03846--0.02150 keV. Their one-sigma uncertainties at observed Fe-K are
+equivalent to 408--853 km/s per ObsID, median 566 km/s. This is not a source
+velocity, but it is too large to ignore. The next fitter must propagate all
+nine gain covariances with the response weights of each region. No source PHA,
+temperature, redshift, velocity, Abell 2146, lensing, gravity or action payload
+was opened. See
 [`SIGMA_V19DC_BULLET_GAIN_AUDIT.md`](SIGMA_V19DC_BULLET_GAIN_AUDIT.md).
 
 ## 2026-08-06 Sigma V19DB Bullet combination result

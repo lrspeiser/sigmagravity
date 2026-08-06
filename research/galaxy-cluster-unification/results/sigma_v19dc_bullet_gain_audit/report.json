@@ -1,0 +1,1448 @@
+{
+  "background_input_manifest": {
+    "bytes": 1716764,
+    "path": "results/sigma_v19dc_bullet_gain_audit/background_input_manifest.csv",
+    "rows": 3483,
+    "sha256": "319c0005b5a510136353520b37766ffbc83c3bf4d692e23530a16b2f602a1943"
+  },
+  "blank_sky_union_spectra": {
+    "bytes": 382738,
+    "path": "results/sigma_v19dc_bullet_gain_audit/blank_sky_union_spectra.csv",
+    "rows": 9216,
+    "sha256": "61a125b39f48d8149ed92716df795239cb994925a5b99dd1efec50435a36b0b0"
+  },
+  "bullet_source_pha_opened": false,
+  "bullet_source_redshift_fitting_authorized": true,
+  "config_sha256": "bd1015b97a629cbb2cb6434088d82940dcca903fd971ae050863f4246849e6a7",
+  "gates": {
+    "3483_background_cells_used_once": true,
+    "all_gain_covariances_finite_psd": true,
+    "all_profiles_finite_and_interior": true,
+    "all_window_robustness_gates_pass": true,
+    "both_lines_detected_in_every_obsid": true,
+    "channel_and_ebounds_grids_exact": true,
+    "nine_primary_obsids_exact": true
+  },
+  "generated_utc": "2026-08-06T18:34:27.596688+00:00",
+  "lensing_halo_gravity_or_action_opened": false,
+  "obsid554_or_abell2146_opened": false,
+  "obsids": [
+    {
+      "blank_sky_full_pha_counts": 145608,
+      "cells": 366,
+      "gain": {
+        "correction_at_representative_fe_keV": 0.008706466739616475,
+        "covariance_eigenvalues": [
+          6.170853790234899e-08,
+          0.0003539969073887776
+        ],
+        "covariance_intercept_slope": [
+          [
+            0.00034971187232076087,
+            -3.8707405148722406e-05
+          ],
+          [
+            -3.8707405148722406e-05,
+            4.346743605919079e-06
+          ]
+        ],
+        "intercept_keV": 0.01789671057562181,
+        "one_sigma_energy_uncertainty_at_representative_fe_keV": 0.008103640889879736,
+        "one_sigma_equivalent_velocity_uncertainty_km_s": 469.92774713130655,
+        "relation": "E_cal_keV = intercept_keV + slope * E_recorded_keV",
+        "representative_observed_fe_energy_keV": 5.169753086419753,
+        "slope": 0.998222305072916
+      },
+      "gates": {
+        "both_lines_detected": true,
+        "gain_covariance_finite_psd": true,
+        "profiles_finite_and_interior": true,
+        "window_robustness": true
+      },
+      "maximum_window_centroid_shift_keV": 0.002108759035936103,
+      "minimum_line_delta_cash": 1043.290646603782,
+      "obsid": 3184,
+      "passed": true,
+      "primary_lines": {
+        "Au_Lalpha": {
+          "cash": -140086.72937743302,
+          "centroid_recorded_keV": 9.712669452638778,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.11513315287339904,
+          "continuum_rate_at_line_counts_per_keV": 9268.134240981502,
+          "counts": 14143,
+          "deviance": 36.304442059718696,
+          "deviance_per_channel": 0.9076110514929674,
+          "half_window_keV": 0.3,
+          "line_counts": 8844.302222731072,
+          "line_delta_cash": 2387.4765629853064,
+          "null_cash": -137699.2528144477,
+          "optimizer_success": true,
+          "profile_lower_keV": 9.70986598684855,
+          "profile_minus_keV": 0.0028034657902278326,
+          "profile_plus_keV": 0.002808845530513082,
+          "profile_sigma_conservative_keV": 0.002808845530513082,
+          "profile_upper_keV": 9.715478298169291,
+          "reference_energy_keV": 9.7133,
+          "sigma_keV": 0.11788812313493612
+        },
+        "Ni_Kalpha": {
+          "cash": -78914.29255356998,
+          "centroid_recorded_keV": 7.473589050767037,
+          "channels": 40,
+          "continuum_log_slope_per_keV": 0.255395514911246,
+          "continuum_rate_at_line_counts_per_keV": 8441.910921589519,
+          "counts": 8850,
+          "deviance": 25.808793258549166,
+          "deviance_per_channel": 0.6452198314637292,
+          "half_window_keV": 0.3,
+          "line_counts": 3938.124879318005,
+          "line_delta_cash": 1043.290646603782,
+          "null_cash": -77871.0019069662,
+          "optimizer_success": true,
+          "profile_lower_keV": 7.469862310477033,
+          "profile_minus_keV": 0.0037267402900038604,
+          "profile_plus_keV": 0.0037390360725915173,
+          "profile_sigma_conservative_keV": 0.0037390360725915173,
+          "profile_upper_keV": 7.477328086839629,
+          "reference_energy_keV": 7.4782,
+          "sigma_keV": 0.10358218983324986
+        }
+      },
+      "window_robustness": {
+        "half_window_0.25_keV": {
+          "Au_Lalpha": {
+            "cash": -130010.06816800966,
+            "centroid_recorded_keV": 9.710888738517815,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.07539269834183529,
+            "continuum_rate_at_line_counts_per_keV": 8440.264915705822,
+            "counts": 12931,
+            "deviance": 33.66602399938347,
+            "deviance_per_channel": 1.0201825454358626,
+            "half_window_keV": 0.25,
+            "line_counts": 9294.565863745554,
+            "line_delta_cash": 1449.4379466083774,
+            "null_cash": -128560.63022140128,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.1208263835760536
+          },
+          "Ni_Kalpha": {
+            "cash": -71971.68230616026,
+            "centroid_recorded_keV": 7.472804279067661,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.27149020231034005,
+            "continuum_rate_at_line_counts_per_keV": 9219.076511793226,
+            "counts": 7950,
+            "deviance": 22.07711151148753,
+            "deviance_per_channel": 0.6690033791359857,
+            "half_window_keV": 0.25,
+            "line_counts": 3547.9914504934213,
+            "line_delta_cash": 669.0512640466768,
+            "null_cash": -71302.63104211359,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.09709755844593637
+          }
+        },
+        "half_window_0.35_keV": {
+          "Au_Lalpha": {
+            "cash": -148309.05135511202,
+            "centroid_recorded_keV": 9.712105515013343,
+            "channels": 47,
+            "continuum_log_slope_per_keV": -0.07060691611257944,
+            "continuum_rate_at_line_counts_per_keV": 9294.805037512371,
+            "counts": 15173,
+            "deviance": 37.75730281697628,
+            "deviance_per_channel": 0.8033468684463038,
+            "half_window_keV": 0.35,
+            "line_counts": 8827.24736862982,
+            "line_delta_cash": 3337.615282730432,
+            "null_cash": -144971.4360723816,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.11771082672485046
+          },
+          "Ni_Kalpha": {
+            "cash": -85795.4075478824,
+            "centroid_recorded_keV": 7.475697809802973,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.1343994535274738,
+            "continuum_rate_at_line_counts_per_keV": 8524.102673730744,
+            "counts": 9744,
+            "deviance": 33.998236191214275,
+            "deviance_per_channel": 0.7233667274726442,
+            "half_window_keV": 0.35,
+            "line_counts": 3892.663022978172,
+            "line_delta_cash": 1329.304175494166,
+            "null_cash": -84466.10337238823,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.1027526678376279
+          }
+        }
+      }
+    },
+    {
+      "blank_sky_full_pha_counts": 144208,
+      "cells": 370,
+      "gain": {
+        "correction_at_representative_fe_keV": 0.011055964504339145,
+        "covariance_eigenvalues": [
+          5.328672041088688e-08,
+          0.00027522861222130954
+        ],
+        "covariance_intercept_slope": [
+          [
+            0.0002718091891534016,
+            -3.048357593228683e-05
+          ],
+          [
+            -3.0483575932286833e-05,
+            3.4727097883187865e-06
+          ]
+        ],
+        "intercept_keV": 0.01727157408036817,
+        "one_sigma_energy_uncertainty_at_representative_fe_keV": 0.007031138910291289,
+        "one_sigma_equivalent_velocity_uncertainty_km_s": 407.7336733920215,
+        "relation": "E_cal_keV = intercept_keV + slope * E_recorded_keV",
+        "representative_observed_fe_energy_keV": 5.169753086419753,
+        "slope": 0.9987976970133532
+      },
+      "gates": {
+        "both_lines_detected": true,
+        "gain_covariance_finite_psd": true,
+        "profiles_finite_and_interior": true,
+        "window_robustness": true
+      },
+      "maximum_window_centroid_shift_keV": 0.0017819113687354005,
+      "minimum_line_delta_cash": 1178.9312004009262,
+      "obsid": 4984,
+      "passed": true,
+      "primary_lines": {
+        "Au_Lalpha": {
+          "cash": -139722.5256622138,
+          "centroid_recorded_keV": 9.707700022650336,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.041260783452491366,
+          "continuum_rate_at_line_counts_per_keV": 8156.740103442262,
+          "counts": 14089,
+          "deviance": 38.710809863082275,
+          "deviance_per_channel": 0.9677702465770569,
+          "half_window_keV": 0.3,
+          "line_counts": 9462.26971128082,
+          "line_delta_cash": 2656.4669448734494,
+          "null_cash": -137066.05871734035,
+          "optimizer_success": true,
+          "profile_lower_keV": 9.705008926943652,
+          "profile_minus_keV": 0.0026910957066839103,
+          "profile_plus_keV": 0.0026891960443951035,
+          "profile_sigma_conservative_keV": 0.0026910957066839103,
+          "profile_upper_keV": 9.710389218694731,
+          "reference_energy_keV": 9.7133,
+          "sigma_keV": 0.11951132781062086
+        },
+        "Ni_Kalpha": {
+          "cash": -78853.45163744924,
+          "centroid_recorded_keV": 7.469909520446046,
+          "channels": 40,
+          "continuum_log_slope_per_keV": 0.26234161902109804,
+          "continuum_rate_at_line_counts_per_keV": 8714.771984563373,
+          "counts": 8832,
+          "deviance": 39.28068955311045,
+          "deviance_per_channel": 0.9820172388277613,
+          "half_window_keV": 0.3,
+          "line_counts": 3748.718195004066,
+          "line_delta_cash": 1178.9312004009262,
+          "null_cash": -77674.52043704831,
+          "optimizer_success": true,
+          "profile_lower_keV": 7.466717310070748,
+          "profile_minus_keV": 0.0031922103752979325,
+          "profile_plus_keV": 0.003187950778357873,
+          "profile_sigma_conservative_keV": 0.0031922103752979325,
+          "profile_upper_keV": 7.473097471224404,
+          "reference_energy_keV": 7.4782,
+          "sigma_keV": 0.09386949633551359
+        }
+      },
+      "window_robustness": {
+        "half_window_0.25_keV": {
+          "Au_Lalpha": {
+            "cash": -130558.52549041499,
+            "centroid_recorded_keV": 9.706521838675839,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.11382478212413252,
+            "continuum_rate_at_line_counts_per_keV": 7174.217811026946,
+            "counts": 12966,
+            "deviance": 34.902927266697716,
+            "deviance_per_channel": 1.0576644626272036,
+            "half_window_keV": 0.25,
+            "line_counts": 10021.937899322735,
+            "line_delta_cash": 1568.0125131768582,
+            "null_cash": -128990.51297723813,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.1232153635671679
+          },
+          "Ni_Kalpha": {
+            "cash": -71809.78484365891,
+            "centroid_recorded_keV": 7.470930053661322,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.18286633241015723,
+            "continuum_rate_at_line_counts_per_keV": 9160.67737498423,
+            "counts": 7922,
+            "deviance": 33.04073098541838,
+            "deviance_per_channel": 1.0012342722854053,
+            "half_window_keV": 0.25,
+            "line_counts": 3531.78677025935,
+            "line_delta_cash": 811.248494650732,
+            "null_cash": -70998.53634900818,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.09012243445040673
+          }
+        },
+        "half_window_0.35_keV": {
+          "Au_Lalpha": {
+            "cash": -148050.06093877283,
+            "centroid_recorded_keV": 9.70653101395921,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.05688919380192187,
+            "continuum_rate_at_line_counts_per_keV": 9156.047598224157,
+            "counts": 15130,
+            "deviance": 44.309752980542335,
+            "deviance_per_channel": 0.9427607017136667,
+            "half_window_keV": 0.35,
+            "line_counts": 8871.058502282502,
+            "line_delta_cash": 3571.8576080423372,
+            "null_cash": -144478.2033307305,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.11464338436710979
+          },
+          "Ni_Kalpha": {
+            "cash": -85802.53543814034,
+            "centroid_recorded_keV": 7.471691431814781,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.14924091632270858,
+            "continuum_rate_at_line_counts_per_keV": 8724.514903160853,
+            "counts": 9733,
+            "deviance": 48.19858360953508,
+            "deviance_per_channel": 1.0255017789262781,
+            "half_window_keV": 0.35,
+            "line_counts": 3740.8055547179083,
+            "line_delta_cash": 1453.757913161462,
+            "null_cash": -84348.77752497888,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.09371080504226231
+          }
+        }
+      }
+    },
+    {
+      "blank_sky_full_pha_counts": 142087,
+      "cells": 388,
+      "gain": {
+        "correction_at_representative_fe_keV": -0.012613708613266071,
+        "covariance_eigenvalues": [
+          2.27820105520972e-07,
+          0.001120293600590112
+        ],
+        "covariance_intercept_slope": [
+          [
+            0.001106100429417282,
+            -0.0001252830365185409
+          ],
+          [
+            -0.0001252830365185409,
+            1.4420991278351037e-05
+          ]
+        ],
+        "intercept_keV": -0.0384594838958936,
+        "one_sigma_energy_uncertainty_at_representative_fe_keV": 0.014005574483178858,
+        "one_sigma_equivalent_velocity_uncertainty_km_s": 812.1791369579839,
+        "relation": "E_cal_keV = intercept_keV + slope * E_recorded_keV",
+        "representative_observed_fe_energy_keV": 5.169753086419753,
+        "slope": 1.0049994216069082
+      },
+      "gates": {
+        "both_lines_detected": true,
+        "gain_covariance_finite_psd": true,
+        "profiles_finite_and_interior": true,
+        "window_robustness": true
+      },
+      "maximum_window_centroid_shift_keV": 0.003399096443316374,
+      "minimum_line_delta_cash": 613.5479377099691,
+      "obsid": 4985,
+      "passed": true,
+      "primary_lines": {
+        "Au_Lalpha": {
+          "cash": -127164.90975076036,
+          "centroid_recorded_keV": 9.703248851928356,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.0446502364806449,
+          "continuum_rate_at_line_counts_per_keV": 9174.072793130956,
+          "counts": 13147,
+          "deviance": 28.224377289651706,
+          "deviance_per_channel": 0.7056094322412927,
+          "half_window_keV": 0.3,
+          "line_counts": 8173.974006480862,
+          "line_delta_cash": 1078.8131808793842,
+          "null_cash": -126086.09656988097,
+          "optimizer_success": true,
+          "profile_lower_keV": 9.697569739249776,
+          "profile_minus_keV": 0.005679112678580012,
+          "profile_plus_keV": 0.005595462508962257,
+          "profile_sigma_conservative_keV": 0.005679112678580012,
+          "profile_upper_keV": 9.708844314437318,
+          "reference_energy_keV": 9.7133,
+          "sigma_keV": 0.14702852590818224
+        },
+        "Ni_Kalpha": {
+          "cash": -77456.45952028646,
+          "centroid_recorded_keV": 7.479267472490081,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.039567649808610925,
+          "continuum_rate_at_line_counts_per_keV": 8382.626071792185,
+          "counts": 8755,
+          "deviance": 33.25530727031046,
+          "deviance_per_channel": 0.8313826817577615,
+          "half_window_keV": 0.3,
+          "line_counts": 3941.447643959485,
+          "line_delta_cash": 613.5479377099691,
+          "null_cash": -76842.91158257649,
+          "optimizer_success": true,
+          "profile_lower_keV": 7.473186543255765,
+          "profile_minus_keV": 0.006080929234316024,
+          "profile_plus_keV": 0.006194139611405802,
+          "profile_sigma_conservative_keV": 0.006194139611405802,
+          "profile_upper_keV": 7.485461612101487,
+          "reference_energy_keV": 7.4782,
+          "sigma_keV": 0.1264073738522871
+        }
+      },
+      "window_robustness": {
+        "half_window_0.25_keV": {
+          "Au_Lalpha": {
+            "cash": -115016.46231503901,
+            "centroid_recorded_keV": 9.702485181946141,
+            "channels": 33,
+            "continuum_log_slope_per_keV": -0.008089943301891004,
+            "continuum_rate_at_line_counts_per_keV": 6262.141760243134,
+            "counts": 11737,
+            "deviance": 19.58385020650864,
+            "deviance_per_channel": 0.5934500062578376,
+            "half_window_keV": 0.25,
+            "line_counts": 10102.975651301522,
+            "line_delta_cash": 584.8836141592619,
+            "null_cash": -114431.57870087975,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.16136205034874637
+          },
+          "Ni_Kalpha": {
+            "cash": -69603.31222135389,
+            "centroid_recorded_keV": 7.477003421903257,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.030561717907564522,
+            "continuum_rate_at_line_counts_per_keV": 8237.28667081067,
+            "counts": 7762,
+            "deviance": 26.84860831579111,
+            "deviance_per_channel": 0.8135941913876095,
+            "half_window_keV": 0.25,
+            "line_counts": 4038.7444593457285,
+            "line_delta_cash": 357.61541250323353,
+            "null_cash": -69245.69680885065,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.12842422943208567
+          }
+        },
+        "half_window_0.35_keV": {
+          "Au_Lalpha": {
+            "cash": -136506.89509021922,
+            "centroid_recorded_keV": 9.70144848864703,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.046258173425854414,
+            "continuum_rate_at_line_counts_per_keV": 8952.70834542709,
+            "counts": 14288,
+            "deviance": 30.249860740103475,
+            "deviance_per_channel": 0.6436140583000739,
+            "half_window_keV": 0.35,
+            "line_counts": 8319.881871428935,
+            "line_delta_cash": 1697.2874139995838,
+            "null_cash": -134809.60767621963,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.14814232664148216
+          },
+          "Ni_Kalpha": {
+            "cash": -84690.57478540484,
+            "centroid_recorded_keV": 7.475868376046765,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.0814878799635696,
+            "continuum_rate_at_line_counts_per_keV": 8569.730088043756,
+            "counts": 9685,
+            "deviance": 35.620424690546606,
+            "deviance_per_channel": 0.7578813763946086,
+            "half_window_keV": 0.35,
+            "line_counts": 3823.585894582607,
+            "line_delta_cash": 853.5460573293531,
+            "null_cash": -83837.02872807549,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.1240429522508679
+          }
+        }
+      }
+    },
+    {
+      "blank_sky_full_pha_counts": 146360,
+      "cells": 404,
+      "gain": {
+        "correction_at_representative_fe_keV": 0.009156473604077002,
+        "covariance_eigenvalues": [
+          1.3369393340634796e-07,
+          0.0005812793965158618
+        ],
+        "covariance_intercept_slope": [
+          [
+            0.0005733196418555744,
+            -6.754568468958406e-05
+          ],
+          [
+            -6.754568468958406e-05,
+            8.093448593693716e-06
+          ]
+        ],
+        "intercept_keV": -0.01673868868598305,
+        "one_sigma_energy_uncertainty_at_representative_fe_keV": 0.009551907317110194,
+        "one_sigma_equivalent_velocity_uncertainty_km_s": 553.9122904548219,
+        "relation": "E_cal_keV = intercept_keV + slope * E_recorded_keV",
+        "representative_observed_fe_energy_keV": 5.169753086419753,
+        "slope": 1.0050089746758086
+      },
+      "gates": {
+        "both_lines_detected": true,
+        "gain_covariance_finite_psd": true,
+        "profiles_finite_and_interior": true,
+        "window_robustness": true
+      },
+      "maximum_window_centroid_shift_keV": 0.004414305322155698,
+      "minimum_line_delta_cash": 849.2397960923263,
+      "obsid": 4986,
+      "passed": true,
+      "primary_lines": {
+        "Au_Lalpha": {
+          "cash": -133927.65746971645,
+          "centroid_recorded_keV": 9.681544079568699,
+          "channels": 40,
+          "continuum_log_slope_per_keV": 0.4286649383492604,
+          "continuum_rate_at_line_counts_per_keV": 7338.81257028712,
+          "counts": 13682,
+          "deviance": 26.84816859116691,
+          "deviance_per_channel": 0.6712042147791728,
+          "half_window_keV": 0.3,
+          "line_counts": 9849.214649242447,
+          "line_delta_cash": 1566.5043133836298,
+          "null_cash": -132361.15315633282,
+          "optimizer_success": true,
+          "profile_lower_keV": 9.676665038996132,
+          "profile_minus_keV": 0.004879040572566495,
+          "profile_plus_keV": 0.004663077672512728,
+          "profile_sigma_conservative_keV": 0.004879040572566495,
+          "profile_upper_keV": 9.686207157241212,
+          "reference_energy_keV": 9.7133,
+          "sigma_keV": 0.14398392267374743
+        },
+        "Ni_Kalpha": {
+          "cash": -76717.0717544034,
+          "centroid_recorded_keV": 7.457583840088262,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.03064086561001656,
+          "continuum_rate_at_line_counts_per_keV": 9047.780086654866,
+          "counts": 8663,
+          "deviance": 43.88536532297867,
+          "deviance_per_channel": 1.0971341330744668,
+          "half_window_keV": 0.3,
+          "line_counts": 3391.7759811911133,
+          "line_delta_cash": 849.2397960923263,
+          "null_cash": -75867.83195831107,
+          "optimizer_success": true,
+          "profile_lower_keV": 7.45360550807572,
+          "profile_minus_keV": 0.003978332012541941,
+          "profile_plus_keV": 0.003949640656692566,
+          "profile_sigma_conservative_keV": 0.003978332012541941,
+          "profile_upper_keV": 7.461533480744954,
+          "reference_energy_keV": 7.4782,
+          "sigma_keV": 0.09967689766952295
+        }
+      },
+      "window_robustness": {
+        "half_window_0.25_keV": {
+          "Au_Lalpha": {
+            "cash": -122719.48516330848,
+            "centroid_recorded_keV": 9.678436886973673,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 4.110529163941715,
+            "continuum_rate_at_line_counts_per_keV": 1694.8904559350494,
+            "counts": 12362,
+            "deviance": 13.732403979031266,
+            "deviance_per_channel": 0.41613345391003836,
+            "half_window_keV": 0.25,
+            "line_counts": 13377.35235191033,
+            "line_delta_cash": 823.4538739028794,
+            "null_cash": -121896.0312894056,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.16225492778072417
+          },
+          "Ni_Kalpha": {
+            "cash": -69079.476956387,
+            "centroid_recorded_keV": 7.455795683620079,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.06631698585901816,
+            "continuum_rate_at_line_counts_per_keV": 8976.025066724662,
+            "counts": 7692,
+            "deviance": 38.08924464446153,
+            "deviance_per_channel": 1.1542195346806525,
+            "half_window_keV": 0.25,
+            "line_counts": 3435.702513371305,
+            "line_delta_cash": 561.7247396616731,
+            "null_cash": -68517.75221672533,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.10041455021518333
+          }
+        },
+        "half_window_0.35_keV": {
+          "Au_Lalpha": {
+            "cash": -142965.4297283873,
+            "centroid_recorded_keV": 9.683530378399928,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.20435035580007502,
+            "continuum_rate_at_line_counts_per_keV": 8717.780561944764,
+            "counts": 14793,
+            "deviance": 29.612179103216512,
+            "deviance_per_channel": 0.6300463638982237,
+            "half_window_keV": 0.35,
+            "line_counts": 8933.881697486853,
+            "line_delta_cash": 2300.5933669998485,
+            "null_cash": -140664.83636138745,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.13691251773632773
+          },
+          "Ni_Kalpha": {
+            "cash": -83417.87643968972,
+            "centroid_recorded_keV": 7.453169534766106,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.19246148207079705,
+            "continuum_rate_at_line_counts_per_keV": 8530.68836076153,
+            "counts": 9538,
+            "deviance": 52.31598392044912,
+            "deviance_per_channel": 1.1131060408606195,
+            "half_window_keV": 0.35,
+            "line_counts": 3680.9922710571477,
+            "line_delta_cash": 1134.859363892043,
+            "null_cash": -82283.01707579767,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.10495507072399395
+          }
+        }
+      }
+    },
+    {
+      "blank_sky_full_pha_counts": 141288,
+      "cells": 387,
+      "gain": {
+        "correction_at_representative_fe_keV": -0.010864311642542201,
+        "covariance_eigenvalues": [
+          2.475027173481858e-07,
+          0.0011806402189837003
+        ],
+        "covariance_intercept_slope": [
+          [
+            0.0011655090594095297,
+            -0.00013278463224317754
+          ],
+          [
+            -0.00013278463224317754,
+            1.5378662291518842e-05
+          ]
+        ],
+        "intercept_keV": -0.03477116998682739,
+        "one_sigma_energy_uncertainty_at_representative_fe_keV": 0.0142687420286611,
+        "one_sigma_equivalent_velocity_uncertainty_km_s": 827.4401453673017,
+        "relation": "E_cal_keV = intercept_keV + slope * E_recorded_keV",
+        "representative_observed_fe_energy_keV": 5.169753086419753,
+        "slope": 1.0046243714051035
+      },
+      "gates": {
+        "both_lines_detected": true,
+        "gain_covariance_finite_psd": true,
+        "profiles_finite_and_interior": true,
+        "window_robustness": true
+      },
+      "maximum_window_centroid_shift_keV": 0.005064632882238129,
+      "minimum_line_delta_cash": 594.5206968196871,
+      "obsid": 5355,
+      "passed": true,
+      "primary_lines": {
+        "Au_Lalpha": {
+          "cash": -126177.33408286727,
+          "centroid_recorded_keV": 9.703199969509825,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.1764316617061153,
+          "continuum_rate_at_line_counts_per_keV": 9204.5241508681,
+          "counts": 13067,
+          "deviance": 21.85789766130093,
+          "deviance_per_channel": 0.5464474415325233,
+          "half_window_keV": 0.3,
+          "line_counts": 8092.125040895015,
+          "line_delta_cash": 1012.5629504901153,
+          "null_cash": -125164.77113237715,
+          "optimizer_success": true,
+          "profile_lower_keV": 9.697180445349032,
+          "profile_minus_keV": 0.00601952416079321,
+          "profile_plus_keV": 0.005899960502292245,
+          "profile_sigma_conservative_keV": 0.00601952416079321,
+          "profile_upper_keV": 9.709099930012117,
+          "reference_energy_keV": 9.7133,
+          "sigma_keV": 0.1490642929422799
+        },
+        "Ni_Kalpha": {
+          "cash": -76597.28933780227,
+          "centroid_recorded_keV": 7.47838832486108,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.055203153819987326,
+          "continuum_rate_at_line_counts_per_keV": 8410.439998019669,
+          "counts": 8677,
+          "deviance": 27.34041440201087,
+          "deviance_per_channel": 0.6835103600502718,
+          "half_window_keV": 0.3,
+          "line_counts": 3843.070891109086,
+          "line_delta_cash": 594.5206968196871,
+          "null_cash": -76002.76864098258,
+          "optimizer_success": true,
+          "profile_lower_keV": 7.47223561951005,
+          "profile_minus_keV": 0.0061527053510301855,
+          "profile_plus_keV": 0.00625997272043044,
+          "profile_sigma_conservative_keV": 0.00625997272043044,
+          "profile_upper_keV": 7.4846482975815105,
+          "reference_energy_keV": 7.4782,
+          "sigma_keV": 0.1259840883165346
+        }
+      },
+      "window_robustness": {
+        "half_window_0.25_keV": {
+          "Au_Lalpha": {
+            "cash": -113768.7143995508,
+            "centroid_recorded_keV": 9.70159552439283,
+            "channels": 33,
+            "continuum_log_slope_per_keV": -0.12296771926363545,
+            "continuum_rate_at_line_counts_per_keV": 6000.255381014371,
+            "counts": 11633,
+            "deviance": 12.448435106224146,
+            "deviance_per_channel": 0.3772253062492165,
+            "half_window_keV": 0.25,
+            "line_counts": 10227.364471905905,
+            "line_delta_cash": 552.2619466995529,
+            "null_cash": -113216.45245285124,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.16470345012747048
+          },
+          "Ni_Kalpha": {
+            "cash": -68723.86815859661,
+            "centroid_recorded_keV": 7.473323691978842,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.14876048003849762,
+            "continuum_rate_at_line_counts_per_keV": 7998.470720847553,
+            "counts": 7682,
+            "deviance": 22.344013142175083,
+            "deviance_per_channel": 0.6770913073386389,
+            "half_window_keV": 0.25,
+            "line_counts": 4090.27857743011,
+            "line_delta_cash": 350.7873938525154,
+            "null_cash": -68373.0807647441,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.13015232331584298
+          }
+        },
+        "half_window_0.35_keV": {
+          "Au_Lalpha": {
+            "cash": -135589.5155424372,
+            "centroid_recorded_keV": 9.699263683987265,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.008504118703947417,
+            "continuum_rate_at_line_counts_per_keV": 8973.378815057511,
+            "counts": 14215,
+            "deviance": 25.211425752105878,
+            "deviance_per_channel": 0.5364133138745931,
+            "half_window_keV": 0.35,
+            "line_counts": 8248.367375480475,
+            "line_delta_cash": 1605.7646215667774,
+            "null_cash": -133983.75092087043,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.15013743687006303
+          },
+          "Ni_Kalpha": {
+            "cash": -83938.88347437116,
+            "centroid_recorded_keV": 7.474242660481642,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.08746533294378121,
+            "continuum_rate_at_line_counts_per_keV": 8692.712638566747,
+            "counts": 9618,
+            "deviance": 29.93579917308538,
+            "deviance_per_channel": 0.6369318972996889,
+            "half_window_keV": 0.35,
+            "line_counts": 3668.939001030805,
+            "line_delta_cash": 815.2519570959557,
+            "null_cash": -83123.63151727521,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.1224606666128405
+          }
+        }
+      }
+    },
+    {
+      "blank_sky_full_pha_counts": 140191,
+      "cells": 387,
+      "gain": {
+        "correction_at_representative_fe_keV": -0.011090191458581297,
+        "covariance_eigenvalues": [
+          2.4754574487909366e-07,
+          0.001229106631862984
+        ],
+        "covariance_intercept_slope": [
+          [
+            0.0012135906343037342,
+            -0.0001372087038077824
+          ],
+          [
+            -0.0001372087038077824,
+            1.5763543304128854e-05
+          ]
+        ],
+        "intercept_keV": -0.035319868204003235,
+        "one_sigma_energy_uncertainty_at_representative_fe_keV": 0.01470450006665642,
+        "one_sigma_equivalent_velocity_uncertainty_km_s": 852.7096255765289,
+        "relation": "E_cal_keV = intercept_keV + slope * E_recorded_keV",
+        "representative_observed_fe_energy_keV": 5.169753086419753,
+        "slope": 1.0046868150838906
+      },
+      "gates": {
+        "both_lines_detected": true,
+        "gain_covariance_finite_psd": true,
+        "profiles_finite_and_interior": true,
+        "window_robustness": true
+      },
+      "maximum_window_centroid_shift_keV": 0.005707413323547961,
+      "minimum_line_delta_cash": 573.4649268402136,
+      "obsid": 5356,
+      "passed": true,
+      "primary_lines": {
+        "Au_Lalpha": {
+          "cash": -125263.5147049869,
+          "centroid_recorded_keV": 9.703143031084768,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.1975091660092636,
+          "continuum_rate_at_line_counts_per_keV": 9109.39585398647,
+          "counts": 12986,
+          "deviance": 28.041790236910934,
+          "deviance_per_channel": 0.7010447559227734,
+          "half_window_keV": 0.3,
+          "line_counts": 8050.571365935142,
+          "line_delta_cash": 1034.8485860681249,
+          "null_cash": -124228.66611891877,
+          "optimizer_success": true,
+          "profile_lower_keV": 9.697251824444065,
+          "profile_minus_keV": 0.005891206640702862,
+          "profile_plus_keV": 0.00577097186085318,
+          "profile_sigma_conservative_keV": 0.005891206640702862,
+          "profile_upper_keV": 9.70891400294562,
+          "reference_energy_keV": 9.7133,
+          "sigma_keV": 0.14800627493038698
+        },
+        "Ni_Kalpha": {
+          "cash": -75888.0929017461,
+          "centroid_recorded_keV": 7.478469663779384,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.07847543787867549,
+          "continuum_rate_at_line_counts_per_keV": 8285.63511895566,
+          "counts": 8613,
+          "deviance": 25.813488708874424,
+          "deviance_per_channel": 0.6453372177218606,
+          "half_window_keV": 0.3,
+          "line_counts": 3860.431519788224,
+          "line_delta_cash": 573.4649268402136,
+          "null_cash": -75314.62797490589,
+          "optimizer_success": true,
+          "profile_lower_keV": 7.472067520883924,
+          "profile_minus_keV": 0.006402142895460372,
+          "profile_plus_keV": 0.006525639943022021,
+          "profile_sigma_conservative_keV": 0.006525639943022021,
+          "profile_upper_keV": 7.484995303722406,
+          "reference_energy_keV": 7.4782,
+          "sigma_keV": 0.12815844219112604
+        }
+      },
+      "window_robustness": {
+        "half_window_0.25_keV": {
+          "Au_Lalpha": {
+            "cash": -113078.87942181733,
+            "centroid_recorded_keV": 9.702325688355286,
+            "channels": 33,
+            "continuum_log_slope_per_keV": -0.23735543096088688,
+            "continuum_rate_at_line_counts_per_keV": 6139.813938698523,
+            "counts": 11573,
+            "deviance": 16.50323269447052,
+            "deviance_per_channel": 0.5000979604385005,
+            "half_window_keV": 0.25,
+            "line_counts": 10020.039923739674,
+            "line_delta_cash": 563.4129819188674,
+            "null_cash": -112515.46643989846,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.16271307817651912
+          },
+          "Ni_Kalpha": {
+            "cash": -68024.981458129,
+            "centroid_recorded_keV": 7.4740972548738975,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.0941335290488931,
+            "continuum_rate_at_line_counts_per_keV": 7350.71779430726,
+            "counts": 7619,
+            "deviance": 18.40922575452963,
+            "deviance_per_channel": 0.5578553258948372,
+            "half_window_keV": 0.25,
+            "line_counts": 4430.925997844949,
+            "line_delta_cash": 337.5513429749117,
+            "null_cash": -67687.43011515409,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.13742534966093425
+          }
+        },
+        "half_window_0.35_keV": {
+          "Au_Lalpha": {
+            "cash": -134359.88875810374,
+            "centroid_recorded_keV": 9.699451284261029,
+            "channels": 47,
+            "continuum_log_slope_per_keV": -0.021278831951535463,
+            "continuum_rate_at_line_counts_per_keV": 8706.79307732664,
+            "counts": 14103,
+            "deviance": 32.43115036240474,
+            "deviance_per_channel": 0.6900244757958456,
+            "half_window_keV": 0.35,
+            "line_counts": 8320.940531387378,
+            "line_delta_cash": 1651.5786040181702,
+            "null_cash": -132708.31015408557,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.150087549238209
+          },
+          "Ni_Kalpha": {
+            "cash": -83102.9051367854,
+            "centroid_recorded_keV": 7.472762250455836,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.11513965790618706,
+            "continuum_rate_at_line_counts_per_keV": 8513.775598296497,
+            "counts": 9541,
+            "deviance": 29.303568618907928,
+            "deviance_per_channel": 0.6234801833810197,
+            "half_window_keV": 0.35,
+            "line_counts": 3717.872588665769,
+            "line_delta_cash": 798.1524914265028,
+            "null_cash": -82304.7526453589,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.125232014009062
+          }
+        }
+      }
+    },
+    {
+      "blank_sky_full_pha_counts": 144335,
+      "cells": 409,
+      "gain": {
+        "correction_at_representative_fe_keV": 0.009134607287532744,
+        "covariance_eigenvalues": [
+          1.402818752215895e-07,
+          0.0006124366230297782
+        ],
+        "covariance_intercept_slope": [
+          [
+            0.0006041105220849738,
+            -7.091344856685595e-05
+          ],
+          [
+            -7.091344856685595e-05,
+            8.466382820025932e-06
+          ]
+        ],
+        "intercept_keV": -0.018554154262519162,
+        "one_sigma_energy_uncertainty_at_representative_fe_keV": 0.0098577871633538,
+        "one_sigma_equivalent_velocity_uncertainty_km_s": 571.6501725983459,
+        "relation": "E_cal_keV = intercept_keV + slope * E_recorded_keV",
+        "representative_observed_fe_energy_keV": 5.169753086419753,
+        "slope": 1.0053559156669951
+      },
+      "gates": {
+        "both_lines_detected": true,
+        "gain_covariance_finite_psd": true,
+        "profiles_finite_and_interior": true,
+        "window_robustness": true
+      },
+      "maximum_window_centroid_shift_keV": 0.004628064626271744,
+      "minimum_line_delta_cash": 825.8721775335725,
+      "obsid": 5357,
+      "passed": true,
+      "primary_lines": {
+        "Au_Lalpha": {
+          "cash": -131969.6320546775,
+          "centroid_recorded_keV": 9.680008843242346,
+          "channels": 40,
+          "continuum_log_slope_per_keV": 0.48850169664063026,
+          "continuum_rate_at_line_counts_per_keV": 7525.398999325628,
+          "counts": 13517,
+          "deviance": 30.123731775787057,
+          "deviance_per_channel": 0.7530932943946764,
+          "half_window_keV": 0.3,
+          "line_counts": 9540.569919524396,
+          "line_delta_cash": 1532.6883275584842,
+          "null_cash": -130436.94372711901,
+          "optimizer_success": true,
+          "profile_lower_keV": 9.675080770641083,
+          "profile_minus_keV": 0.004928072601263267,
+          "profile_plus_keV": 0.004687800137840981,
+          "profile_sigma_conservative_keV": 0.004928072601263267,
+          "profile_upper_keV": 9.684696643380187,
+          "reference_energy_keV": 9.7133,
+          "sigma_keV": 0.14238591517401183
+        },
+        "Ni_Kalpha": {
+          "cash": -75200.57456669427,
+          "centroid_recorded_keV": 7.456816076214023,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.00834524652293577,
+          "continuum_rate_at_line_counts_per_keV": 8798.72778332727,
+          "counts": 8524,
+          "deviance": 39.054384945497745,
+          "deviance_per_channel": 0.9763596236374437,
+          "half_window_keV": 0.3,
+          "line_counts": 3401.570393249104,
+          "line_delta_cash": 825.8721775335725,
+          "null_cash": -74374.7023891607,
+          "optimizer_success": true,
+          "profile_lower_keV": 7.452679017294795,
+          "profile_minus_keV": 0.004137058919228664,
+          "profile_plus_keV": 0.004101857236002537,
+          "profile_sigma_conservative_keV": 0.004137058919228664,
+          "profile_upper_keV": 7.460917933450026,
+          "reference_energy_keV": 7.4782,
+          "sigma_keV": 0.10181703983337423
+        }
+      },
+      "window_robustness": {
+        "half_window_0.25_keV": {
+          "Au_Lalpha": {
+            "cash": -120681.88252869947,
+            "centroid_recorded_keV": 9.679979245631802,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 4.7203411094595,
+            "continuum_rate_at_line_counts_per_keV": 1110.8842963590484,
+            "counts": 12189,
+            "deviance": 19.570010532123796,
+            "deviance_per_channel": 0.5930306221855696,
+            "half_window_keV": 0.25,
+            "line_counts": 13608.854605323762,
+            "line_delta_cash": 826.0610898128944,
+            "null_cash": -119855.82143888657,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.16475048276534873
+          },
+          "Ni_Kalpha": {
+            "cash": -67750.5088468737,
+            "centroid_recorded_keV": 7.455131070589555,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.07868129883049563,
+            "continuum_rate_at_line_counts_per_keV": 8697.339967226642,
+            "counts": 7572,
+            "deviance": 35.088469327275675,
+            "deviance_per_channel": 1.0632869493113841,
+            "half_window_keV": 0.25,
+            "line_counts": 3461.3672425111104,
+            "line_delta_cash": 538.3791578381206,
+            "null_cash": -67212.12968903557,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.10287489187388175
+          }
+        },
+        "half_window_0.35_keV": {
+          "Au_Lalpha": {
+            "cash": -140847.09407207038,
+            "centroid_recorded_keV": 9.68321277211006,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.18731186303722694,
+            "continuum_rate_at_line_counts_per_keV": 8674.108955645663,
+            "counts": 14612,
+            "deviance": 33.6005770629156,
+            "deviance_per_channel": 0.714905894955651,
+            "half_window_keV": 0.35,
+            "line_counts": 8780.688892210843,
+            "line_delta_cash": 2259.320983321755,
+            "null_cash": -138587.77308874863,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.1366700370499847
+          },
+          "Ni_Kalpha": {
+            "cash": -81719.41086535605,
+            "centroid_recorded_keV": 7.452188011587752,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.22574885442224313,
+            "continuum_rate_at_line_counts_per_keV": 8274.817514229442,
+            "counts": 9380,
+            "deviance": 47.38579101657879,
+            "deviance_per_channel": 1.0082083195016764,
+            "half_window_keV": 0.35,
+            "line_counts": 3698.0430435610783,
+            "line_delta_cash": 1113.2645571218454,
+            "null_cash": -80606.14630823421,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.1071807536251357
+          }
+        }
+      }
+    },
+    {
+      "blank_sky_full_pha_counts": 145688,
+      "cells": 401,
+      "gain": {
+        "correction_at_representative_fe_keV": 0.010296357744654046,
+        "covariance_eigenvalues": [
+          1.2918651741638326e-07,
+          0.0005780965570032103
+        ],
+        "covariance_intercept_slope": [
+          [
+            0.0005704312116992449,
+            -6.611778845794461e-05
+          ],
+          [
+            -6.611778845794461e-05,
+            7.79453182138183e-06
+          ]
+        ],
+        "intercept_keV": -0.015291726865760857,
+        "one_sigma_energy_uncertainty_at_representative_fe_keV": 0.009753219559008455,
+        "one_sigma_equivalent_velocity_uncertainty_km_s": 565.5863280375271,
+        "relation": "E_cal_keV = intercept_keV + slope * E_recorded_keV",
+        "representative_observed_fe_energy_keV": 5.169753086419753,
+        "slope": 1.0049495757694176
+      },
+      "gates": {
+        "both_lines_detected": true,
+        "gain_covariance_finite_psd": true,
+        "profiles_finite_and_interior": true,
+        "window_robustness": true
+      },
+      "maximum_window_centroid_shift_keV": 0.005217067396007913,
+      "minimum_line_delta_cash": 821.9862557213055,
+      "obsid": 5358,
+      "passed": true,
+      "primary_lines": {
+        "Au_Lalpha": {
+          "cash": -133237.750107764,
+          "centroid_recorded_keV": 9.680676485103522,
+          "channels": 40,
+          "continuum_log_slope_per_keV": 0.4453095591659848,
+          "continuum_rate_at_line_counts_per_keV": 8040.896733448061,
+          "counts": 13621,
+          "deviance": 31.853266005343674,
+          "deviance_per_channel": 0.7963316501335919,
+          "half_window_keV": 0.3,
+          "line_counts": 9278.448360293416,
+          "line_delta_cash": 1591.128420734458,
+          "null_cash": -131646.62168702955,
+          "optimizer_success": true,
+          "profile_lower_keV": 9.676141541880465,
+          "profile_minus_keV": 0.004534943223056587,
+          "profile_plus_keV": 0.004356014157485433,
+          "profile_sigma_conservative_keV": 0.004534943223056587,
+          "profile_upper_keV": 9.685032499261007,
+          "reference_energy_keV": 9.7133,
+          "sigma_keV": 0.13828002913920098
+        },
+        "Ni_Kalpha": {
+          "cash": -75840.70129974841,
+          "centroid_recorded_keV": 7.456584795439645,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.0034604374861050167,
+          "continuum_rate_at_line_counts_per_keV": 8835.678117200627,
+          "counts": 8584,
+          "deviance": 39.04262426904052,
+          "deviance_per_channel": 0.9760656067260131,
+          "half_window_keV": 0.3,
+          "line_counts": 3441.5972455848446,
+          "line_delta_cash": 821.9862557213055,
+          "null_cash": -75018.7150440271,
+          "optimizer_success": true,
+          "profile_lower_keV": 7.452388161603012,
+          "profile_minus_keV": 0.004196633836633268,
+          "profile_plus_keV": 0.004155090707437914,
+          "profile_sigma_conservative_keV": 0.004196633836633268,
+          "profile_upper_keV": 7.460739886147083,
+          "reference_energy_keV": 7.4782,
+          "sigma_keV": 0.10272430240082922
+        }
+      },
+      "window_robustness": {
+        "half_window_0.25_keV": {
+          "Au_Lalpha": {
+            "cash": -121856.82770472443,
+            "centroid_recorded_keV": 9.679017516843713,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 4.169658638271202,
+            "continuum_rate_at_line_counts_per_keV": 1622.4118672356012,
+            "counts": 12284,
+            "deviance": 19.111325703616494,
+            "deviance_per_channel": 0.5791310819277725,
+            "half_window_keV": 0.25,
+            "line_counts": 13221.345182169913,
+            "line_delta_cash": 879.8597743807186,
+            "null_cash": -120976.96793034372,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.1594560719520123
+          },
+          "Ni_Kalpha": {
+            "cash": -68321.08167086417,
+            "centroid_recorded_keV": 7.455051680263059,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.07526580537168395,
+            "continuum_rate_at_line_counts_per_keV": 8819.621778874069,
+            "counts": 7625,
+            "deviance": 35.82563675899029,
+            "deviance_per_channel": 1.0856253563330391,
+            "half_window_keV": 0.25,
+            "line_counts": 3455.5097842357277,
+            "line_delta_cash": 532.3781906081567,
+            "null_cash": -67788.70348025601,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.10288560594842654
+          }
+        },
+        "half_window_0.35_keV": {
+          "Au_Lalpha": {
+            "cash": -142165.45003489387,
+            "centroid_recorded_keV": 9.683498539508557,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.19450223838964673,
+            "continuum_rate_at_line_counts_per_keV": 8895.483067306734,
+            "counts": 14721,
+            "deviance": 35.484619947832726,
+            "deviance_per_channel": 0.754991913783675,
+            "half_window_keV": 0.35,
+            "line_counts": 8721.140349058482,
+            "line_delta_cash": 2329.2196124507464,
+            "null_cash": -139836.23042244313,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.1341183089438692
+          },
+          "Ni_Kalpha": {
+            "cash": -82341.03824813252,
+            "centroid_recorded_keV": 7.451367728043637,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.25731846846870937,
+            "continuum_rate_at_line_counts_per_keV": 8218.447732403363,
+            "counts": 9438,
+            "deviance": 49.46839651351812,
+            "deviance_per_channel": 1.0525190747557047,
+            "half_window_keV": 0.35,
+            "line_counts": 3794.0935861430985,
+            "line_delta_cash": 1120.5977463308227,
+            "null_cash": -81220.4405018017,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.10907062030238823
+          }
+        }
+      }
+    },
+    {
+      "blank_sky_full_pha_counts": 143544,
+      "cells": 371,
+      "gain": {
+        "correction_at_representative_fe_keV": 0.012919879146266503,
+        "covariance_eigenvalues": [
+          5.303871660280413e-08,
+          0.00028702838861915155
+        ],
+        "covariance_intercept_slope": [
+          [
+            0.0002835061531229477,
+            -3.1597288191735296e-05
+          ],
+          [
+            -3.1597288191735296e-05,
+            3.5752742128067107e-06
+          ]
+        ],
+        "intercept_keV": 0.02150269793248949,
+        "one_sigma_energy_uncertainty_at_representative_fe_keV": 0.007236008289114429,
+        "one_sigma_equivalent_velocity_uncertainty_km_s": 419.613988296743,
+        "relation": "E_cal_keV = intercept_keV + slope * E_recorded_keV",
+        "representative_observed_fe_energy_keV": 5.169753086419753,
+        "slope": 0.998339801022844
+      },
+      "gates": {
+        "both_lines_detected": true,
+        "gain_covariance_finite_psd": true,
+        "profiles_finite_and_interior": true,
+        "window_robustness": true
+      },
+      "maximum_window_centroid_shift_keV": 0.0022943004693098956,
+      "minimum_line_delta_cash": 1138.701228560254,
+      "obsid": 5361,
+      "passed": true,
+      "primary_lines": {
+        "Au_Lalpha": {
+          "cash": -138800.55193423474,
+          "centroid_recorded_keV": 9.707914371577521,
+          "channels": 40,
+          "continuum_log_slope_per_keV": -0.06478380243267932,
+          "continuum_rate_at_line_counts_per_keV": 8492.30137955686,
+          "counts": 14012,
+          "deviance": 34.82049590657085,
+          "deviance_per_channel": 0.8705123976642712,
+          "half_window_keV": 0.3,
+          "line_counts": 9168.238568929608,
+          "line_delta_cash": 2637.0314061056124,
+          "null_cash": -136163.52052812913,
+          "optimizer_success": true,
+          "profile_lower_keV": 9.705270790628857,
+          "profile_minus_keV": 0.002643580948664237,
+          "profile_plus_keV": 0.0026430233838610206,
+          "profile_sigma_conservative_keV": 0.002643580948664237,
+          "profile_upper_keV": 9.710557394961382,
+          "reference_energy_keV": 9.7133,
+          "sigma_keV": 0.11730802965925866
+        },
+        "Ni_Kalpha": {
+          "cash": -78349.1224624378,
+          "centroid_recorded_keV": 7.469097490080821,
+          "channels": 40,
+          "continuum_log_slope_per_keV": 0.27856040745080934,
+          "continuum_rate_at_line_counts_per_keV": 8618.874947297763,
+          "counts": 8789,
+          "deviance": 34.52141102382697,
+          "deviance_per_channel": 0.8630352755956743,
+          "half_window_keV": 0.3,
+          "line_counts": 3763.2229549789927,
+          "line_delta_cash": 1138.701228560254,
+          "null_cash": -77210.42123387754,
+          "optimizer_success": true,
+          "profile_lower_keV": 7.465782149737334,
+          "profile_minus_keV": 0.0033153403434873496,
+          "profile_plus_keV": 0.0033108189023947077,
+          "profile_sigma_conservative_keV": 0.0033153403434873496,
+          "profile_upper_keV": 7.472408308983216,
+          "reference_energy_keV": 7.4782,
+          "sigma_keV": 0.09594834839827268
+        }
+      },
+      "window_robustness": {
+        "half_window_0.25_keV": {
+          "Au_Lalpha": {
+            "cash": -129565.96163943838,
+            "centroid_recorded_keV": 9.706298411081812,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.12737297221013552,
+            "continuum_rate_at_line_counts_per_keV": 7585.934709203943,
+            "counts": 12882,
+            "deviance": 32.194584206075795,
+            "deviance_per_channel": 0.9755934607901756,
+            "half_window_keV": 0.25,
+            "line_counts": 9678.002875304248,
+            "line_delta_cash": 1578.6418560292514,
+            "null_cash": -127987.31978340913,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.12075455865287311
+          },
+          "Ni_Kalpha": {
+            "cash": -71403.98373773908,
+            "centroid_recorded_keV": 7.469636662993994,
+            "channels": 33,
+            "continuum_log_slope_per_keV": 0.22721561185743192,
+            "continuum_rate_at_line_counts_per_keV": 9194.213751626623,
+            "counts": 7889,
+            "deviance": 29.748708483485313,
+            "deviance_per_channel": 0.9014760146510701,
+            "half_window_keV": 0.25,
+            "line_counts": 3483.5510045703472,
+            "line_delta_cash": 767.1578840295115,
+            "null_cash": -70636.82585370957,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.09114662093434721
+          }
+        },
+        "half_window_0.35_keV": {
+          "Au_Lalpha": {
+            "cash": -147139.47307036846,
+            "centroid_recorded_keV": 9.706432194663364,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.06315292001327838,
+            "continuum_rate_at_line_counts_per_keV": 9268.67202886985,
+            "counts": 15054,
+            "deviance": 39.917132237772535,
+            "deviance_per_channel": 0.8493006859100539,
+            "half_window_keV": 0.35,
+            "line_counts": 8714.764597941366,
+            "line_delta_cash": 3539.047835398902,
+            "null_cash": -143600.42523496956,
+            "optimizer_success": true,
+            "reference_energy_keV": 9.7133,
+            "sigma_keV": 0.11348832170153905
+          },
+          "Ni_Kalpha": {
+            "cash": -85112.97276895397,
+            "centroid_recorded_keV": 7.471391790550131,
+            "channels": 47,
+            "continuum_log_slope_per_keV": 0.14042610603232059,
+            "continuum_rate_at_line_counts_per_keV": 8574.183589819078,
+            "counts": 9671,
+            "deviance": 44.68538669273193,
+            "deviance_per_channel": 0.9507529083559986,
+            "half_window_keV": 0.35,
+            "line_counts": 3783.083973678363,
+            "line_delta_cash": 1424.9462071060989,
+            "null_cash": -83688.02656184787,
+            "optimizer_success": true,
+            "reference_energy_keV": 7.4782,
+            "sigma_keV": 0.09632962907220527
+          }
+        }
+      }
+    }
+  ],
+  "protocol_version": "SIGMA-V19DC-BULLET-GAIN-AUDIT-1.0.0",
+  "runner_sha256": "ed41b7a833edc5702621746369a698458af4da91bfd9b7608fe704d37ba2a915",
+  "status": "bullet_per_obsid_gain_audit_passed",
+  "temperature_abundance_redshift_or_velocity_fitted": false
+}

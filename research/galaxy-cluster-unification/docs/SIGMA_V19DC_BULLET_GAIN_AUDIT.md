@@ -1,5 +1,28 @@
 # Sigma V19DC Bullet gain audit
 
+## Outcome
+
+The frozen gain audit passes every registered gate for all nine primary
+ObsIDs. All 3,483 original background cells and RMFs match their frozen sizes
+and SHA-256 values, and their 1,024-channel EBOUNDS grids are exact.
+
+| Result | Value |
+|---|---:|
+| Weakest line improvement | Delta Cash 573.46 |
+| Largest window-induced centroid shift | 0.00571 keV |
+| Gain slope range | 0.99822--1.00536 |
+| Gain intercept range | -0.03846--0.02150 keV |
+| Per-ObsID Fe-energy-equivalent velocity uncertainty | 407.7--852.7 km/s |
+| Median per-ObsID equivalent uncertainty | 565.6 km/s |
+
+The terminal report SHA-256 is
+`ad077394036351bcd33f0eda9a623392109754521b5c07b72ccc52c935c01883`.
+These are detector-nuisance measurements, not gas velocities. Because the
+uncertainty is not negligible, the source fitter must propagate the nine
+intercept/slope covariances with the same response weights used to combine the
+source spectra. It may not treat gain as zero or add the median per-ObsID value
+directly to every combined region.
+
 ## Frozen question
 
 Before fitting a source Fe-K redshift, V19DC asks whether the nine primary ACIS

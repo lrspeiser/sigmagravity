@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -9,6 +10,11 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19dc_bullet_gain_audit.json"
 RUNNER = ROOT / "scripts" / "run_sigma_v19dc_bullet_gain_audit.py"
+OUTPUT = ROOT / "results" / "sigma_v19dc_bullet_gain_audit"
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def load_runner():
@@ -65,3 +71,26 @@ def test_runner_never_opens_a_source_pha_or_fit_engine() -> None:
     assert '["source_pha"]' not in source
     for forbidden in ("sherpa", "xspec", "apec", "mekal", "fit_spectrum("):
         assert forbidden not in source
+
+
+def test_terminal_gain_audit_is_current_and_passes() -> None:
+    report = json.loads((OUTPUT / "report.json").read_text(encoding="utf-8"))
+    assert report["status"] == "bullet_per_obsid_gain_audit_passed"
+    assert report["runner_sha256"] == sha256(RUNNER)
+    assert report["config_sha256"] == sha256(CONFIG)
+    assert report["bullet_source_pha_opened"] is False
+    assert report["temperature_abundance_redshift_or_velocity_fitted"] is False
+    assert all(report["gates"].values())
+    assert len(report["obsids"]) == 9
+    assert sum(item["cells"] for item in report["obsids"]) == 3483
+    assert min(item["minimum_line_delta_cash"] for item in report["obsids"]) >= 25.0
+    assert max(item["maximum_window_centroid_shift_keV"] for item in report["obsids"]) <= 0.015
+    for item in report["obsids"]:
+        covariance = np.asarray(item["gain"]["covariance_intercept_slope"], dtype=float)
+        assert np.allclose(covariance, covariance.T, rtol=0.0, atol=1e-14)
+        assert np.linalg.eigvalsh(covariance).min() >= -1e-14
+    for key in ("background_input_manifest", "blank_sky_union_spectra"):
+        artifact = report[key]
+        path = ROOT / artifact["path"]
+        assert path.stat().st_size == artifact["bytes"]
+        assert sha256(path) == artifact["sha256"]
