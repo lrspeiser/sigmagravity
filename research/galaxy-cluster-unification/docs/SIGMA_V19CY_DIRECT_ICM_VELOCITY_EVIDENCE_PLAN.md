@@ -495,6 +495,32 @@ narrow, and shared-velocity two-temperature checks. Validation and holdout
 data remain sealed. The diagnosis report SHA-256 is
 `b41524c93b591b2fa7deddbd79ce33914113350d9573c113795aa362b5df1caf`.
 
+### Frozen response-support acquisition
+
+The installed XRISM V003 help still says that `xrismversion` displays the NXB
+filenames, but the installed `12Sep2025_V003` script now prints only that
+version string. The exact support was therefore frozen from NASA's official
+Resolve provisional-NXB repository before downloading a body: the 1.180 GB
+EHK database, 31.1 MB event database, 3.50 MB diagonal response, and 3,215-byte
+empirical model, totaling 1,214,248,655 bytes. Remote content length,
+last-modified time, ETag, destination, FITS structure, and post-download SHA-256
+are mandatory gates. The source-specific canned RMF is deliberately excluded;
+the scientific RMF must be generated from the A2319 branch events with
+`whichrmf=L`.
+
+This public repository is the current official support for `rslnxbgen`, but
+the acquisition protocol does not claim it is byte-identical to the
+collaboration-internal NXB database called "v2" in the A2319 paper. That is an
+explicit reproduction limitation unless independent metadata closes it.
+
+A metadata audit also found that the calibrated branch files contain the
+correct branch event rows but retain the parent observation's broader GTI
+extension. For example, the second short `000101000` branch has event times
+151202340.61--151204855.10 while its copied GTI spans as early as
+150943122.00. The response protocol must reconstruct the exact frozen branch
+GTIs before `rslnxbgen` or `xaexpmap`; using the copied GTI would incorrectly
+weight both the geomagnetic background and exposure.
+
 ## The new observable source terms
 
 The signed projected gas current is

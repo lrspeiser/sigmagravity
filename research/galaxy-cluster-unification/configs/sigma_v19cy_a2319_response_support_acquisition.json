@@ -1,0 +1,94 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-SUPPORT-ACQUISITION-1.0.0",
+  "status": "frozen before downloading any new response-support body and after the response-free line failure was diagnosed; A3667 validation and A754 holdout remain sealed",
+  "purpose": "Acquire and hash the exact official public Resolve provisional NXB support needed for a response-aware A2319 development fit without opening validation, holdout, lensing, halo, gravity, or action targets.",
+  "parent": {
+    "diagnosis_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_relative_line_failure_diagnosis.json",
+    "diagnosis_report_sha256": "b41524c93b591b2fa7deddbd79ce33914113350d9573c113795aa362b5df1caf",
+    "required_status": "response_free_shared_template_identifiability_failure_with_reduced_exposure_noise"
+  },
+  "official_repository": {
+    "index_url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/nxb/provisional/resolve/",
+    "recipe_url": "https://heasarc.gsfc.nasa.gov/docs/xrism/analysis/nxb/resolve_nxb_db.html",
+    "spectral_model_url": "https://heasarc.gsfc.nasa.gov/docs/xrism/analysis/nxb/nxb_spectral_models.html",
+    "index_last_modified_display": "2024-11-12 11:19 for the three FITS products; 2025-05-12 10:24 for the model",
+    "installed_xrismversion_behavior": "12Sep2025_V003 prints only its version even though the installed and online help still say it displays NXB filenames; exact URLs are therefore frozen from the official HEASARC repository index"
+  },
+  "raw_root": "data/raw/sigma_v19cy_a2319_response_support",
+  "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_support_acquisition.json",
+  "files": [
+    {
+      "role": "resolve_nxb_ehk",
+      "filename": "merged_reduced_rev3_fix2.ehk",
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/nxb/provisional/resolve/merged_reduced_rev3_fix2.ehk",
+      "bytes": 1179613440,
+      "last_modified": "Tue, 12 Nov 2024 16:19:31 GMT",
+      "etag": "\"464f7900-626b9950538e3\""
+    },
+    {
+      "role": "resolve_nxb_events",
+      "filename": "merged_nxb_resolve_gtifix.evt",
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/nxb/provisional/resolve/merged_nxb_resolve_gtifix.evt",
+      "bytes": 31127040,
+      "last_modified": "Tue, 12 Nov 2024 16:19:24 GMT",
+      "etag": "\"1daf600-626b9949a93b6\""
+    },
+    {
+      "role": "resolve_nxb_diagonal_response",
+      "filename": "newdiag60000.rmf",
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/nxb/provisional/resolve/newdiag60000.rmf",
+      "bytes": 3504960,
+      "last_modified": "Tue, 12 Nov 2024 16:19:31 GMT",
+      "etag": "\"357b40-626b99506ee72\""
+    },
+    {
+      "role": "resolve_nxb_empirical_model",
+      "filename": "rsl_nxb_model_v1.mo",
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/nxb/provisional/resolve/rsl_nxb_model_v1.mo",
+      "bytes": 3215,
+      "last_modified": "Mon, 12 May 2025 14:24:19 GMT",
+      "etag": "\"c8f-634f1124fc1ab\""
+    }
+  ],
+  "expected_files": 4,
+  "expected_bytes": 1214248655,
+  "minimum_free_space_reserve_bytes": 5368709120,
+  "fits_structure": {
+    "resolve_nxb_ehk": {
+      "extension": "EHK",
+      "required_columns": ["TIME", "CORTIME", "T_SAA_SXS"]
+    },
+    "resolve_nxb_events": {
+      "extension": "EVENTS",
+      "required_columns": ["TIME", "PI", "RISE_TIME", "DERIV_MAX", "ITYPE", "STATUS", "PIXEL"]
+    },
+    "resolve_nxb_diagonal_response": {
+      "required_extensions": ["MATRIX", "EBOUNDS"]
+    }
+  },
+  "authorization": {
+    "head_and_download_declared_official_support_files": true,
+    "read_support_file_headers_and_column_schemas": true,
+    "read_or_fit_A2319_science_energy_distribution": false,
+    "generate_A2319_response_or_background": false,
+    "fit_A2319_spectrum_or_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "acceptance": {
+    "require_exact_remote_size_last_modified_and_etag": true,
+    "require_exact_download_size": true,
+    "require_sha256_for_every_body": true,
+    "require_declared_fits_structure": true,
+    "require_model_prefix": "model 2:nxb1",
+    "require_zero_validation_or_holdout_access": true,
+    "require_zero_scientific_fit": true
+  },
+  "claim_boundary": [
+    "Passing proves only that the current official public provisional Resolve NXB support was acquired exactly and is structurally usable.",
+    "It does not prove that this public database is byte-identical to the collaboration-internal NXB v2 used in the A2319 paper; that relationship must be reported as an input limitation unless independently documented.",
+    "It does not generate a response, inspect a science spectrum, reproduce a velocity, admit a Sigma source, or alter the gravity theory."
+  ]
+}
