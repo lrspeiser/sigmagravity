@@ -527,14 +527,30 @@ def numeric_parameter_delta(spec: str) -> float | None:
 
 
 def nxb_free_parameter_indices(
-    base_specs: list[str], source_group_count: int
+    base_specs: list[str],
+    source_group_count: int,
+    policy: str = "normalizations_only",
 ) -> list[int]:
     if len(base_specs) != NXB_PARAMETER_COUNT or source_group_count not in (1, 2):
         raise ValueError("invalid NXB model layout")
+    if policy == "normalizations_only":
+        local_free = set(NXB_THAWED_NORMALIZATIONS)
+    elif policy == "official_preserve_delivered_shapes":
+        delivered_free = {
+            local_index
+            for local_index, spec in enumerate(base_specs, start=1)
+            if not spec.startswith("=") and numeric_parameter_delta(spec) > 0
+        }
+        # The official second-stage recipe freezes the common scale (p1), thaws
+        # the twelve listed normalizations, and explicitly leaves the delivered
+        # photon-index/Au-width shape parameters free.
+        local_free = (delivered_free - {1}) | set(NXB_THAWED_NORMALIZATIONS)
+    else:
+        raise ValueError(f"unknown NXB second-stage free policy: {policy}")
     free: list[int] = []
     for source_index in range(source_group_count):
         offset = source_index * NXB_PARAMETER_COUNT
-        free.extend(offset + local_index for local_index in NXB_THAWED_NORMALIZATIONS)
+        free.extend(offset + local_index for local_index in sorted(local_free))
     return free
 
 
@@ -694,7 +710,13 @@ def build_nxb_prefit_deck(
         commands.append(f"ignore {index}:**-{nxb_band[0]} {nxb_band[1]}-**")
     commands.append("fit")
     numeric_indices = nxb_numeric_parameter_indices(nxb_specs, source_group_count)
-    free_indices = nxb_free_parameter_indices(nxb_specs, source_group_count)
+    free_indices = nxb_free_parameter_indices(
+        nxb_specs,
+        source_group_count,
+        config["nxb_protocol"].get(
+            "second_stage_free_policy", "normalizations_only"
+        ),
+    )
     commands.extend(f"freeze nxb1:{index}" for index in numeric_indices)
     commands.extend(f"thaw nxb1:{index}" for index in free_indices)
     commands.append("fit")

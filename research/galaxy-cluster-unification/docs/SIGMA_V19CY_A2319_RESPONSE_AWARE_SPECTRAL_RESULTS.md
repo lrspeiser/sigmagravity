@@ -122,11 +122,18 @@ authorize a physical source term. Consequently:
 
 ## Next admissible evidence
 
-The most direct route is an independently specified, region-aware Resolve NXB
-model or public reproduction recipe that is demonstrably applicable to pixel
-subsets. It must be frozen before reading A3667/A754 velocities. A new protocol
-may use that external model to reproduce A2319 and then restart validation,
-but it may not tune line ratios or bounds from these A2319 residuals.
+V19CZ subsequently tested the one independently specified parameter-state
+difference in the official public reproduction recipe: the delivered-free
+photon index and Au-line widths remained free during the second fit. Six
+regional reduced chi-square values remained 10.97--17.96 and free parameters
+reached bounds everywhere. The public Resolve-v1 small-subarray route is now
+retired; see
+[`SIGMA_V19CZ_A2319_OFFICIAL_NXB_PREFIT_RESULTS.md`](SIGMA_V19CZ_A2319_OFFICIAL_NXB_PREFIT_RESULTS.md).
+
+The most direct remaining route is a newly released, independently specified
+region-aware Resolve NXB model or public reproduction recipe demonstrably
+applicable to pixel subsets. It must be frozen before reading A3667/A754
+velocities and may not tune line ratios or bounds from these A2319 residuals.
 
 If no independent regional NXB treatment becomes available, the honest route
 is to retain the published A2319 result as known development context and seek

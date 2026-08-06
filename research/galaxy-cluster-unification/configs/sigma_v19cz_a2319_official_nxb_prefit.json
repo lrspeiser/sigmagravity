@@ -1,0 +1,70 @@
+{
+  "protocol_version": "SIGMA-V19CZ-A2319-OFFICIAL-NXB-PREFIT-1.0.0",
+  "status": "frozen_after_v19cy_failure_before_any_v19cz_fit",
+  "purpose": "Test the independently published XRISM Resolve second-stage NXB parameter-state recipe on the already-spent A2319 development background spectra before any new source fit.",
+  "parent": {
+    "commit": "1303270a5d33a13cfeda5cf9768db1211413cc00",
+    "v19cy_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_aware_spectral.json",
+    "v19cy_report_sha256": "f9a2feeb4b478334c0f9ff431952597f1af194676222191f385390f228b535e2",
+    "v19cy_artifact_index": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_aware_spectral_artifacts.json",
+    "v19cy_artifact_index_sha256": "fa5280597b9304b3ab45f070547f1b6fc3854bdc890dadad836f5ba2922742dc"
+  },
+  "base_config": "configs/sigma_v19cy_a2319_response_aware_spectral.json",
+  "official_recipe": {
+    "url": "https://heasarc.gsfc.nasa.gov/docs/xrism/analysis/nxb/nxb_spectral_models.html",
+    "page_last_modified": "2025-03-19",
+    "first_stage": "Fit the delivered model with its delivered free states.",
+    "second_stage": "Freeze nxb1:1; thaw nxb1:3,7,14,20,23,29,35,41,47,50,53,56; keep the photon index and delivered-free Au widths free.",
+    "small_subset_warning": "The full-array model has nonuniform pixel contributions; uncertainties must be considered for small pixel subsets."
+  },
+  "nxb_model": {
+    "path": "data/raw/sigma_v19cy_a2319_response_support/rsl_nxb_model_v1.mo",
+    "bytes": 3215,
+    "sha256": "4521d7249196f8da18191f5fb98837063f01d95db305de90cff0d72826a8f6de"
+  },
+  "diagonal_response": {
+    "path": "data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf",
+    "bytes": 3504960,
+    "sha256": "a21a12cf1a1c87f148178a0a6a01e1a7e16341ea2f887e9b8344984560dfd9ac"
+  },
+  "fit_policy": {
+    "second_stage_free_policy": "official_preserve_delivered_shapes",
+    "statistic": "chi standard",
+    "band_keV": [1.0, 17.0],
+    "source_spectra_loaded": false,
+    "source_energy_columns_read": false,
+    "source_fit_authorized": false
+  },
+  "inputs": [
+    {"branch": "000101_open_0_cross_obsid", "region": "a", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_0_cross_obsid/a/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "846bd636e097c19c5b37d61b25784f140011e07a9ea1692c958d2dc36df61cb1"},
+    {"branch": "000101_open_1_cross_obsid", "region": "a", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_1_cross_obsid/a/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "e3751d874bd8f0ede1b28bed050f54be1f7e54ce7aa83ee6207c802db9a0008e"},
+    {"branch": "000101_open_0_cross_obsid", "region": "b", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_0_cross_obsid/b/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "56ec75423c75151194d5bfc49b428da0077a9cb7fc02bb37db32f2e118467ff2"},
+    {"branch": "000101_open_1_cross_obsid", "region": "b", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_1_cross_obsid/b/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "0b0e03260c7c90c14951fb7f5ef331dda10602ded050bada52ba41d0168fa7df"},
+    {"branch": "000101_open_0_cross_obsid", "region": "d", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_0_cross_obsid/d/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "00e3ad9d53f709811d13af9855b7adb86a2818b29b961b2cf983b53f8b55314f"},
+    {"branch": "000101_open_1_cross_obsid", "region": "d", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_1_cross_obsid/d/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "16aa7cea9cdcba61da6c987000bcfb966771a4eb85f72fed64b01471f0190b72"},
+    {"branch": "000102_open_0_cross_obsid", "region": "b_prime", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000102_open_0_cross_obsid/b_prime/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "b3fd71ec2c880ce2c554ef3994bdea618ecb0ffb5ceafb06ae25498c7f24d69e"},
+    {"branch": "000102_open_0_cross_obsid", "region": "c_prime", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000102_open_0_cross_obsid/c_prime/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "57b36f9af16db36d94e0d78da83cde6b3f670814708c297607895d0319c04e7c"},
+    {"branch": "000102_open_0_cross_obsid", "region": "d_prime", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000102_open_0_cross_obsid/d_prime/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "18fbb75bf72e6f53a80d94e10e82ab95d4f9879f49de75cec1d82f90227871a8"},
+    {"branch": "000102_open_0_cross_obsid", "region": "e_prime", "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000102_open_0_cross_obsid/e_prime/nxb_optsnmin3.pha", "bytes": 855360, "sha256": "ddc1c751a47dc1b7b5b2bfb839d6d5127ad514cf57ed7dfbe2b8d8c97f8c3f0e"}
+  ],
+  "gates": {
+    "required_regions": 7,
+    "require_all_prefits_converged": true,
+    "maximum_reduced_chi_square_each_region": 1.5,
+    "require_no_free_parameter_at_hard_bound": true,
+    "require_no_source_spectrum_loaded": true
+  },
+  "decision": {
+    "pass": "Authorize a separately frozen A2319 source-fit retry using the same official parameter-state rule; do not open A3667 or A754.",
+    "fail": "Retire the public Resolve-v1 regional NXB route. Do not widen bounds, change the band, drop lines, or open A3667/A754. Seek an independently released region-aware model or a different time-odd observable."
+  },
+  "authorization": {
+    "read_spent_grouped_nxb_spectra": true,
+    "fit_nxb_only": true,
+    "read_source_spectra_or_energy_columns": false,
+    "fit_source_velocity": false,
+    "access_a3667_validation": false,
+    "access_a754_holdout": false,
+    "open_lensing_halo_or_gravity_targets": false
+  }
+}

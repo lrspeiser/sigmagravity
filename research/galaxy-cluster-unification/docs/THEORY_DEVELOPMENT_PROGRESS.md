@@ -1,5 +1,21 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19CZ official-state regional NXB result
+
+The independently specified correction to the V19CY background parameter
+state has now been executed on all seven A2319 regions without loading a source
+spectrum.  The official recipe retains the delivered photon-index and Au-line
+width freedoms during the second fit in addition to the twelve recommended
+normalizations.  That distinction does not rescue the public regional model:
+six reduced chi-square values remain 10.97--17.96, and free parameters reach
+hard bounds in every region.  Only region A is near acceptable at 1.138.
+
+No new A2319 source fit is authorized.  The public Resolve-v1 small-subarray
+NXB route is retired pending an independently released region-aware model;
+A3667 validation and A754 holdout remain sealed.  This is an observational
+likelihood failure, not a gravity-formula result.  See
+[`SIGMA_V19CZ_A2319_OFFICIAL_NXB_PREFIT_RESULTS.md`](SIGMA_V19CZ_A2319_OFFICIAL_NXB_PREFIT_RESULTS.md).
+
 ## 2026-08-06 Sigma V19CY A2319 response-aware spectral result
 
 All seven NXB-only prefits and 21 source-model fits completed with the frozen
