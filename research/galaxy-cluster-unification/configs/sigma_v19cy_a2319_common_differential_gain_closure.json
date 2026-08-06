@@ -1,0 +1,109 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-COMMON-DIFFERENTIAL-GAIN-CLOSURE-1.0.0",
+  "status": "frozen after the calibration-only failure diagnosis passed its continuous control and identified curvature in all seven straight-line branches, but before any held-out filter-wheel event energy was recalculated or inspected",
+  "purpose": "Test a parameter-free common/differential gain decomposition on four leave-one-fiducial-segment-out main-array closures before using it in any A2319 science interval.",
+  "physical_model": {
+    "equation": "T_i(t) = C_12(t) + D_i(t), where C_12 is the exact continuously illuminated calibration-pixel TEMP_FIT history and D_i = T_i^FW - C_12 is the pixel-specific differential response inferred only from non-held-out filter-wheel fiducials",
+    "common_mode": "linearly interpolate the valid native calibration-pixel TEMP_FIT rows in time without smoothing, rescaling, or fitting their amplitudes",
+    "differential_mode": "fit one time-linear D_i model per pixel to all valid rows in the three non-held-out fiducial segments",
+    "calibration_pixel_identity": "D_12(t) is identically zero",
+    "free_per_observation_parameters": 0,
+    "free_per_pixel_performance_parameters": 0
+  },
+  "parents": {
+    "diagnosis_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_calibration_failure_diagnosis.json",
+    "diagnosis_report_sha256": "a418ad26fe170408cd19a1483aa1b543bd13076409484ac3bf2046b7bd4c2a1a",
+    "topology_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_reconstruction_topology.json",
+    "topology_report_sha256": "f5fcdfe793681d228fa78ab84ecb29d5e823bfdc7de48f98a340594ccbe4624e",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f",
+    "line_shape_config": "configs/sigma_v19cy_a2319_calibration_line_shape_gate.json",
+    "line_shape_config_sha256": "1db62b82b5684e1619c6a2c2cdc5adb8cd0a659e79d4e033d751ce2f4cd34c59"
+  },
+  "paths": {
+    "raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "line_template": "tmp/sigma_v19cy_a2319_calibration_line_shape/xa_gen_linefit_20190101vx001.fits",
+    "scratch_root": "tmp/sigma_v19cy_a2319_common_differential_gain_closure",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_common_differential_gain_closure.json"
+  },
+  "inputs": {
+    "fe55_history_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_fe55.ghf.gz",
+    "calibration_pixel_history_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_pxcal.ghf.gz",
+    "filter_wheel_event_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_a0pxfw000_uf.evt.gz",
+    "gain_history_extension": "Drift_energy",
+    "event_extension": "EVENTS",
+    "allowed_gain_columns": ["TIME", "PIXEL", "TEMP_FIT", "NEVENT", "CHISQ"],
+    "minimum_gain_events": 200,
+    "event_selection": "frozen segment start <= TIME <= frozen segment stop AND PIXEL != 12 AND ITYPE == 0",
+    "science_event_allowed": false
+  },
+  "cross_validation": {
+    "folds": 4,
+    "held_out_unit": "one complete frozen 10,800-second-gap fiducial segment and its corresponding ObsID",
+    "training_units": "the other three complete fiducial segments",
+    "candidate_history_time_grid": "all valid calibration-pixel gain-history times inside the held-out segment",
+    "control": "apply the untouched native held-out Fe-55 gain history to exactly the same selected filter-wheel events",
+    "candidate": "apply the common/differential history whose D_i fit excludes the held-out segment",
+    "fit_outputs": ["whole-main-array Mn K-alpha shift and Gaussian FWHM", "per-pixel Mn K-alpha shift and Gaussian FWHM for all 35 main-array pixels"]
+  },
+  "fit": {
+    "inherit_exact_line_template_bins_statistic_bounds_and_optimizer_from": "configs/sigma_v19cy_a2319_calibration_line_shape_gate.json",
+    "require_at_least_events_per_whole_array_fit_window": 100000,
+    "require_at_least_events_per_pixel_fit_window": 1000
+  },
+  "terminal_gate": {
+    "maximum_absolute_candidate_minus_control_whole_array_centroid_ev": 0.3,
+    "maximum_candidate_minus_control_whole_array_fwhm_ev": 0.3,
+    "maximum_per_fold_90th_percentile_absolute_per_pixel_centroid_delta_ev": 0.5,
+    "maximum_per_fold_90th_percentile_per_pixel_fwhm_increase_ev": 0.5,
+    "require_all_four_folds": true,
+    "failure_rule": "If any fold fails, do not freeze a science-interval gain application; report whether endpoint extrapolation or interior interpolation failed.",
+    "pass_rule": "If all four folds pass, authorize freezing the same no-refit equation for the seven A2319 science branches, but do not apply it to a cluster event in this protocol."
+  },
+  "runtime": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "heasoft_prefix": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "caldb_root": "/home/henry/.local/share/sigmagravity-xrism/caldb",
+    "rslpha2pi": {
+      "calcpi": "yes",
+      "calcupi": "no",
+      "gainfile": "CALDB",
+      "tempidx": -1,
+      "pxphaoffset": 0,
+      "secphacol": "PHA2",
+      "addepicol": "EPI2",
+      "method": "FIT",
+      "itypecol": "ITYPE",
+      "binwidth": 0.5,
+      "offset": 0.5,
+      "tlmax": 59999,
+      "gapdt": -1,
+      "ntemp": 3,
+      "writetemp": "yes",
+      "extrap": "no",
+      "randomize": "yes",
+      "seed": 7,
+      "clobber": "yes",
+      "chatter": 2,
+      "history": "yes"
+    }
+  },
+  "authorization": {
+    "read_filter_wheel_calibration_event_rows": true,
+    "recalculate_held_out_filter_wheel_event_energies": true,
+    "fit_held_out_filter_wheel_line_shapes": true,
+    "freeze_science_branch_application_protocol_after_pass": true,
+    "read_cluster_sky_event_rows": false,
+    "apply_gain_to_cluster_sky_events": false,
+    "fit_cluster_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "The held-out events are onboard Fe-55 calibration events, not cluster photons.",
+    "A pass establishes only that common/differential gain decomposition predicts omitted calibration intervals closely enough to freeze a science-application protocol.",
+    "No calibration nuisance coefficient is a Sigma Gravity constant or may be selected using a cluster velocity."
+  ]
+}
