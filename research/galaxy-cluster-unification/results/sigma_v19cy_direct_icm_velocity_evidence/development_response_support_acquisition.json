@@ -1,0 +1,117 @@
+{
+  "bytes": 1214248655,
+  "claim_boundary": [
+    "Passing proves only that the current official public provisional Resolve NXB support was acquired exactly and is structurally usable.",
+    "It does not prove that this public database is byte-identical to the collaboration-internal NXB v2 used in the A2319 paper; that relationship must be reported as an input limitation unless independently documented.",
+    "It does not generate a response, inspect a science spectrum, reproduce a velocity, admit a Sigma source, or alter the gravity theory."
+  ],
+  "config_sha256": "db48f7d213639f0539221bf0302365c14ca2e2e42a432b214dc57f1227306d0d",
+  "files": 4,
+  "generated_utc": "2026-08-06T07:42:38.237137+00:00",
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-SUPPORT-ACQUISITION-RESULT-1.0.1",
+  "records": [
+    {
+      "bytes": 1179613440,
+      "filename": "merged_reduced_rev3_fix2.ehk",
+      "remote_metadata": {
+        "bytes": 1179613440,
+        "etag": "\"464f7900-626b9950538e3\"",
+        "last_modified": "Tue, 12 Nov 2024 16:19:31 GMT"
+      },
+      "resumed": false,
+      "reused": true,
+      "role": "resolve_nxb_ehk",
+      "sha256": "fa91c6e543c2979b2afd9a4cfdca768524767dd3cb9b71ac3c66647b8db81a23",
+      "structure": {
+        "audited_extension": "EHK",
+        "extensions": [
+          "PRIMARY",
+          "EHK"
+        ],
+        "required_columns_present": [
+          "TIME",
+          "CORTIME",
+          "T_SAA_SXS"
+        ],
+        "rows": 16158662
+      },
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/nxb/provisional/resolve/merged_reduced_rev3_fix2.ehk"
+    },
+    {
+      "bytes": 31127040,
+      "filename": "merged_nxb_resolve_gtifix.evt",
+      "remote_metadata": {
+        "bytes": 31127040,
+        "etag": "\"1daf600-626b9949a93b6\"",
+        "last_modified": "Tue, 12 Nov 2024 16:19:24 GMT"
+      },
+      "resumed": false,
+      "reused": true,
+      "role": "resolve_nxb_events",
+      "sha256": "4c1611170b7b666ef183a224dc727c594a7988b820357d55978d77f6d02ac8e9",
+      "structure": {
+        "audited_extension": "EVENTS",
+        "extensions": [
+          "PRIMARY",
+          "EVENTS",
+          "GTI"
+        ],
+        "required_columns_present": [
+          "TIME",
+          "PI",
+          "RISE_TIME",
+          "DERIV_MAX",
+          "ITYPE",
+          "STATUS",
+          "PIXEL"
+        ],
+        "rows": 206798
+      },
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/nxb/provisional/resolve/merged_nxb_resolve_gtifix.evt"
+    },
+    {
+      "bytes": 3504960,
+      "filename": "newdiag60000.rmf",
+      "remote_metadata": {
+        "bytes": 3504960,
+        "etag": "\"357b40-626b99506ee72\"",
+        "last_modified": "Tue, 12 Nov 2024 16:19:31 GMT"
+      },
+      "resumed": false,
+      "reused": true,
+      "role": "resolve_nxb_diagonal_response",
+      "sha256": "a21a12cf1a1c87f148178a0a6a01e1a7e16341ea2f887e9b8344984560dfd9ac",
+      "structure": {
+        "extensions": [
+          "PRIMARY",
+          "MATRIX",
+          "EBOUNDS"
+        ]
+      },
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/nxb/provisional/resolve/newdiag60000.rmf"
+    },
+    {
+      "bytes": 3215,
+      "filename": "rsl_nxb_model_v1.mo",
+      "remote_metadata": {
+        "bytes": 3215,
+        "etag": "\"c8f-634f1124fc1ab\"",
+        "last_modified": "Mon, 12 May 2025 14:24:19 GMT"
+      },
+      "resumed": false,
+      "reused": true,
+      "role": "resolve_nxb_empirical_model",
+      "sha256": "4521d7249196f8da18191f5fb98837063f01d95db305de90cff0d72826a8f6de",
+      "structure": {
+        "literal_text_prefix": "model  2:nxb1 con",
+        "whitespace_normalized_text_prefix": "model 2:nxb1 con"
+      },
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/postlaunch/nxb/provisional/resolve/rsl_nxb_model_v1.mo"
+    }
+  ],
+  "response_or_background_generated": false,
+  "science_energy_distribution_read_or_fit": false,
+  "scientific_velocity_fit_performed": false,
+  "status": "official_provisional_resolve_nxb_support_acquired_hashed_and_structurally_verified",
+  "validation_or_holdout_accessed": false
+}

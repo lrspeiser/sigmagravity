@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-SUPPORT-ACQUISITION-1.0.0",
-  "status": "frozen before downloading any new response-support body and after the response-free line failure was diagnosed; A3667 validation and A754 holdout remain sealed",
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-SUPPORT-ACQUISITION-1.0.1",
+  "status": "corrected and refrozen after version 1.0.0 acquired the exact four declared bodies and structurally verified the FITS products but failed closed on the final text-only model-prefix check because the official file contains two spaces between model and 2:nxb1; no scientific event, spectrum, velocity, validation, or holdout target was accessed",
   "purpose": "Acquire and hash the exact official public Resolve provisional NXB support needed for a response-aware A2319 development fit without opening validation, holdout, lensing, halo, gravity, or action targets.",
   "parent": {
     "diagnosis_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_relative_line_failure_diagnosis.json",
@@ -85,6 +85,16 @@
     "require_model_prefix": "model 2:nxb1",
     "require_zero_validation_or_holdout_access": true,
     "require_zero_scientific_fit": true
+  },
+  "closed_failure_history": {
+    "version": "SIGMA-V19CY-A2319-RESPONSE-SUPPORT-ACQUISITION-1.0.0",
+    "failed_at": "final empirical-model text-prefix gate after all four exact-size bodies were acquired and the three FITS structures passed",
+    "root_cause": "the official file starts with 'model  2:nxb1' while the checker required the semantically identical single-space spelling 'model 2:nxb1'",
+    "correction": "collapse ASCII whitespace only for the text-prefix comparison; retain the original body byte-for-byte and leave every URL, remote metadata value, byte count, FITS requirement, and scientific boundary unchanged",
+    "science_event_or_energy_read": false,
+    "response_or_background_generated": false,
+    "velocity_fit_performed": false,
+    "validation_or_holdout_accessed": false
   },
   "claim_boundary": [
     "Passing proves only that the current official public provisional Resolve NXB support was acquired exactly and is structurally usable.",

@@ -32,7 +32,7 @@ def sha256(path: Path) -> str:
 
 def load_and_validate_config(path: Path) -> dict[str, Any]:
     config = json.loads(path.read_text(encoding="utf-8"))
-    if config.get("protocol_version") != "SIGMA-V19CY-A2319-RESPONSE-SUPPORT-ACQUISITION-1.0.0":
+    if config.get("protocol_version") != "SIGMA-V19CY-A2319-RESPONSE-SUPPORT-ACQUISITION-1.0.1":
         raise RuntimeError("unexpected response-support protocol")
     parent = ROOT / config["parent"]["diagnosis_report"]
     if not parent.is_file() or sha256(parent) != config["parent"]["diagnosis_report_sha256"]:
@@ -178,10 +178,14 @@ def main() -> int:
         if item["role"] in rules:
             structure = fits_structure(destination, rules[item["role"]])
         else:
-            prefix = destination.read_text(encoding="utf-8").lstrip()[:16]
-            if not prefix.startswith(config["acceptance"]["require_model_prefix"]):
+            first_line = destination.read_text(encoding="utf-8").splitlines()[0]
+            normalized_prefix = " ".join(first_line.split())[:16]
+            if not normalized_prefix.startswith(config["acceptance"]["require_model_prefix"]):
                 raise RuntimeError("NXB empirical model prefix changed")
-            structure = {"text_prefix": prefix}
+            structure = {
+                "literal_text_prefix": first_line[:17],
+                "whitespace_normalized_text_prefix": normalized_prefix,
+            }
         records.append(
             {
                 "role": item["role"],
@@ -194,7 +198,7 @@ def main() -> int:
         )
 
     report = {
-        "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-SUPPORT-ACQUISITION-RESULT-1.0.0",
+        "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-SUPPORT-ACQUISITION-RESULT-1.0.1",
         "status": "official_provisional_resolve_nxb_support_acquired_hashed_and_structurally_verified",
         "generated_utc": datetime.now(UTC).isoformat(),
         "config_sha256": sha256(config_path),

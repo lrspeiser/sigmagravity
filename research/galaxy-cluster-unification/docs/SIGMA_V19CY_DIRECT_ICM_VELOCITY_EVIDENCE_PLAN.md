@@ -508,6 +508,24 @@ are mandatory gates. The source-specific canned RMF is deliberately excluded;
 the scientific RMF must be generated from the A2319 branch events with
 `whichrmf=L`.
 
+The terminal acquisition passed on 2026-08-06. All four files were recovered
+at the exact frozen sizes, totaling 1,214,248,655 bytes, and their required
+FITS extensions and columns passed. Their SHA-256 values are
+`fa91c6e543c2979b2afd9a4cfdca768524767dd3cb9b71ac3c66647b8db81a23`
+(EHK),
+`4c1611170b7b666ef183a224dc727c594a7988b820357d55978d77f6d02ac8e9`
+(events),
+`a21a12cf1a1c87f148178a0a6a01e1a7e16341ea2f887e9b8344984560dfd9ac`
+(diagonal response), and
+`4521d7249196f8da18191f5fb98837063f01d95db305de90cff0d72826a8f6de`
+(empirical NXB model). Version 1.0.0 failed closed only because the official
+model's first line contains two spaces in `model  2:nxb1`; version 1.0.1
+normalizes ASCII whitespace for that text-prefix comparison while retaining
+the official file byte-for-byte. No science-energy distribution, response,
+background, velocity, validation, or holdout target was opened by this step.
+The terminal acquisition-report SHA-256 is
+`83022aba9fb834e1a17bfec91063def56ba88d133eb8b986181e8e6957863a58`.
+
 This public repository is the current official support for `rslnxbgen`, but
 the acquisition protocol does not claim it is byte-identical to the
 collaboration-internal NXB database called "v2" in the A2319 paper. That is an
