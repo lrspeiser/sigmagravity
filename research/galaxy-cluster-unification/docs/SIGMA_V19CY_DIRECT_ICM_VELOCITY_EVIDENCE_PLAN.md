@@ -155,6 +155,34 @@ and two `GTIOPEN2` intervals. The ADR files also expose separate on/off GTI
 extensions. These are schemas and row counts only: no time boundary, gain
 value, event energy, spectrum, or velocity has yet been read.
 
+### Scalar gain-timeline audit result
+
+The first frozen row-level audit read only the declared scalar gain-history
+columns and GTI `START`/`STOP` values. Across the four required calibration
+histories it found 11,405 raw Fe-55 rows and 4,219 raw calibration-pixel rows.
+None of the nine preregistered pooled count variants reproduced the official
+2,294/471 comparison, so the runner stopped before gain application exactly as
+specified. This failed comparison is retained rather than silently replacing
+it with a post-hoc filter.
+
+The timeline topology nevertheless closes the required science support. All
+six open-filter intervals have a preceding Fe-55 anchor for all 34 science
+pixels. The first five have a following anchor for all 34 pixels; only the
+final interval of 000103000 lacks one, matching the published need for a final
+one-sided forward extrapolation. The audit also recovered all ADR-on intervals
+and the six-hour post-recycle candidate times without reading an event energy
+or fitting a spectrum.
+
+Visual and text inspection of the official `000100000` Resolve energy-scale
+report then supplied the missing accounting scope. The report-specific table
+contains 2,294 Fe-55 and 471 calibration-pixel solutions with zero failures,
+and its methodology requires gain-history solutions to exclude ADR-recycle
+and SAA intervals. The earlier pooled comparison combined four ObsIDs and did
+not apply that documented report rule. A separate closure protocol must now be
+frozen to test the exact 000100000-per-report, outside-ADR/SAA accounting. No
+gain interpolation, event correction, spectrum, or velocity is authorized
+until that independently frozen closure is executed.
+
 ## The new observable source terms
 
 The signed projected gas current is
