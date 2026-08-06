@@ -1,4 +1,5 @@
 import inspect
+import json
 import sys
 from pathlib import Path
 
@@ -74,3 +75,42 @@ def test_output_audit_counts_nulls_without_summarizing_energy_values() -> None:
     assert "median(" not in source
     assert "quantile(" not in source
     assert "histogram(" not in source
+
+
+def test_terminal_application_gate_passes_without_candidate_ranking() -> None:
+    report_path = (
+        ROOT
+        / "results"
+        / "sigma_v19cy_direct_icm_velocity_evidence"
+        / "development_calibration_application_candidates.json"
+    )
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+
+    assert report["status"] == "a2319_calibration_application_candidates_completed"
+    assert len(report["applications"]) == 21
+    assert len(report["commands"]) == 28
+    assert all(command["exit_code"] == 0 for command in report["commands"])
+    assert all(application_record["passed"] for application_record in report["applications"])
+    assert sum(item["output"]["rows"] for item in report["applications"]) == 2_153_106
+    assert all(item["output"]["null_epi2"] == 0 for item in report["applications"])
+    assert all(item["output"]["null_temp"] == 0 for item in report["applications"])
+    assert all(
+        item["output"]["null_pi"] == item["output"]["negative_epi2"]
+        for item in report["applications"]
+    )
+    assert all(
+        item["output"]["null_pi_not_explained_by_negative_epi2"] == 0
+        for item in report["applications"]
+    )
+    assert all(
+        item["output"]["negative_epi2_without_null_pi"] == 0
+        for item in report["applications"]
+    )
+    assert report["negative_epi2_counts_stable_across_candidates_within_branch"]
+    assert report["terminal_gate_passed"]
+    assert report["decision"] == "authorize_calibration_pixel_line_shape_gate_freeze"
+
+    assert not report["energy_distribution_inspected_or_fit"]
+    assert not report["cluster_sky_event_accessed"]
+    assert not report["cluster_velocity_fit"]
+    assert not report["validation_or_holdout_accessed"]

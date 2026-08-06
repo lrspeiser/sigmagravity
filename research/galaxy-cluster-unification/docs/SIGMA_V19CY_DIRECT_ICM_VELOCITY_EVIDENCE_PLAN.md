@@ -222,6 +222,38 @@ This authorizes freezing calibration-application candidates only. It does not
 select the common-mode correction, calculate an event energy, fit a line, or
 measure a cluster velocity.
 
+### Calibration-application candidate result
+
+Three candidates were frozen before recalculating any calibration energy:
+
+1. the branch-specific Fe-55 fit alone;
+2. that fit plus the branch-median calibration-pixel residual; and
+3. that fit plus a linear residual passing through the frozen branch median.
+
+Each candidate was applied to high-resolution primary pixel-12 events in all
+seven branches with the audited HEASoft `rslpha2pi` executable and the archived
+pipeline settings (`method=FIT`, `secphacol=PHA2`, random seed 7). All 28
+selection/application commands exited zero. The 21 outputs contain 2,153,106
+candidate-event rows in total, with identical selected rows across candidates.
+Every row has finite `EPI2` and `TEMP`.
+
+Two fail-closed corrections are retained. Version 1.0.0 stopped after one
+application because a copied FITS extension name was normalized to uppercase;
+the correction made each drift build copy an immutable template and compare
+extension names case-insensitively. Version 1.0.1 completed all applications
+but stopped at a zero-null-PI gate. The official `rslpha2pi` rule sets PI to
+NULL for finite negative `EPI2`; a count-only audit confirmed a one-to-one
+match in every output, with no unexplained null PI and no negative `EPI2`
+retaining a PI. Version 1.0.2 therefore passed the documented gate without
+adding a performance tolerance.
+
+The 49 final scratch files occupy 498,323,520 bytes and are retained under
+`tmp/sigma_v19cy_a2319_calibration_application` for the next frozen line-shape
+test. The terminal report SHA-256 is
+`2fe0daffdf6f6eac722d375f9420ba7f14ba6a28d04bf40a974eceb3f6b173e7`.
+No centroid, width, or energy distribution has yet been inspected, so no
+candidate has been preferred. No cluster sky event has been opened.
+
 ## The new observable source terms
 
 The signed projected gas current is
