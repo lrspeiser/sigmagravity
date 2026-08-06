@@ -1,5 +1,27 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DA Chandra velocity preregistration
+
+The post-Resolve direct-velocity route is now frozen and its source-only
+preflight passes. All 5,082 validated Chandra response cells remain present;
+20,328 source, background, ARF and RMF products match their frozen byte
+lengths. No PHA, response array, line centroid, redshift, lensing or gravity
+payload was opened.
+
+One adjacency-based merge rule applied to both clusters produces 43 Bullet and
+16 Abell 2146 primary regions at 8,000 broad-band net counts, plus 35 and 12
+robustness regions at 10,000 counts. Every one of the 494 admitted V19M bins is
+used exactly once in each branch and every region is connected. The spectral
+protocol freezes two-temperature APEC with a MEKAL reproduction branch,
+global redshift profiling, thermal-mixture Sobol propagation and a per-ObsID
+Ni/Au gain audit.
+
+Bullet remains known-outcome development. Abell 2146 remains internally
+sealed until Bullet passes, but is explicitly not a pristine literature-blind
+holdout because the broad method was published on it in 2016. A pass can admit
+signed gas current as a source candidate; it cannot validate gravity. See
+[`SIGMA_V19DA_CHANDRA_ICM_VELOCITY_PREREGISTRATION.md`](SIGMA_V19DA_CHANDRA_ICM_VELOCITY_PREREGISTRATION.md).
+
 ## 2026-08-06 Sigma V19CZ official-state regional NXB result
 
 The independently specified correction to the V19CY background parameter

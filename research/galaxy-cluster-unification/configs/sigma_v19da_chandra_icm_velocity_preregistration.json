@@ -1,0 +1,261 @@
+{
+  "protocol_version": "SIGMA-V19DA-CHANDRA-ICM-VELOCITY-PREREGISTRATION-1.0.0",
+  "freeze_state": "frozen_before_any_v19da_pha_or_redshift_payload_access",
+  "status": "frozen after the independent official-state V19CZ retry retired the public Resolve-v1 regional NXB route and after source-only inspection of the already-spent V19M bin maps, broad-band region statistics and response-index metadata, but before opening any V19DA source or background PHA payload, response energy grid, line centroid, fitted temperature, abundance, redshift, published Abell 2146 velocity outcome, lensing or halo target, gravity formula or action",
+  "purpose": "Measure a signed, spatially resolved line-of-sight ICM velocity field from Chandra Fe-K centroids as a possible continuous baryonic current/stress source for a later one-metric Sigma action. This protocol tests source observability only; it does not test, select or tune a gravity formula.",
+  "scientific_question": "Does the baryonic ICM contain a reproducible time-odd spatial field, beyond density and fit noise, whose sign and direction transfer from the Bullet development system to Abell 2146 under one unchanged measurement rule?",
+  "evidence_design": {
+    "BULLET": "development-only reproduction; the published qualitative velocity result is known and cannot validate new physics",
+    "ABELL2146": "internally target-sealed transfer; a 2016 paper applied the same broad method to this cluster, so it is explicitly not a pristine literature-blind holdout even though this project has not opened its numerical velocity outcome",
+    "claim_limit": "A pass can admit a Chandra-resolvable signed source candidate for covariant derivation. It cannot validate Sigma Gravity, establish a halo replacement, or substitute for a future genuinely prospective cluster.",
+    "published_method_sources": [
+      "https://arxiv.org/abs/1508.04879",
+      "https://arxiv.org/abs/1602.07704",
+      "https://cxc.cfa.harvard.edu/sherpa/ahelp/xsapec.html"
+    ]
+  },
+  "inputs": {
+    "v19m_report": {
+      "path": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+      "sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea"
+    },
+    "v19cx_report": {
+      "path": "results/sigma_v19cx_bullet_hierarchical_recovery/report.json",
+      "sha256": "c86ecffa2ea36086b6733f717ebb0b4fb59eed2e24d58b813093f18f25f15717"
+    },
+    "validated_cell_index": {
+      "path": "results/sigma_v19cx_bullet_hierarchical_recovery/validated_cell_index.csv",
+      "sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+    },
+    "unified_product_index": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+      "sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4"
+    }
+  },
+  "metadata_contract": {
+    "required_product_index_columns": [
+      "cluster",
+      "bin_id",
+      "obsid",
+      "ccd_id",
+      "cell_name",
+      "cell_directory",
+      "source_pha_name",
+      "source_pha_bytes",
+      "source_pha_sha256",
+      "background_pha_name",
+      "background_pha_bytes",
+      "background_pha_sha256",
+      "arf_name",
+      "arf_bytes",
+      "arf_sha256",
+      "rmf_name",
+      "rmf_bytes",
+      "rmf_sha256"
+    ],
+    "required_cells": 5082,
+    "payload_access_during_preflight": "forbidden; names, byte lengths and parent hashes only"
+  },
+  "clusters": {
+    "BULLET": {
+      "role": "development_reproduction",
+      "optical_redshift_center": 0.296,
+      "galactic_nh_cm2": 4.38e20,
+      "galactic_nh_role": "measured absorption nuisance, not a gravity parameter",
+      "binmap": {
+        "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/images/binmap.fits",
+        "sha256": "69a308cdc2a81f433d5f60fb66f78c1a91204ad95024886eaad541081821a0a3"
+      },
+      "region_statistics": {
+        "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/region_statistics.csv",
+        "sha256": "3d42e5a544d915a5fb89c1a706a57fd9f5de726a8795fde8fde205ffaa88f1bc"
+      },
+      "primary_obsids": [3184, 4984, 4985, 4986, 5355, 5356, 5357, 5358, 5361],
+      "primary_observation_reason": "match the nine VFAINT observations in the published development method",
+      "observation_robustness_obsids": [554, 3184, 4984, 4985, 4986, 5355, 5356, 5357, 5358, 5361],
+      "observation_robustness_reason": "add the already-processed FAINT ObsID 554 without pretending VFAINT cleaning exists"
+    },
+    "ABELL2146": {
+      "role": "internally_sealed_nonpristine_transfer",
+      "optical_redshift_center": 0.2323,
+      "galactic_nh_cm2": 2.62e20,
+      "galactic_nh_role": "measured absorption nuisance, not a gravity parameter",
+      "binmap": {
+        "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/images/binmap.fits",
+        "sha256": "2589a141ddfbd407494b14e0bbc0e6775b64260579988475a250f156a1821452"
+      },
+      "region_statistics": {
+        "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/region_statistics.csv",
+        "sha256": "8ceb7f7668a980daea08e7ba62967fc598ad627d286ab739bcfb12fe04c985c2"
+      },
+      "primary_obsids": [12245, 12246, 12247, 13020, 13021, 13023, 13120, 13138],
+      "primary_observation_reason": "match the eight VFAINT observations disclosed in the published transfer-era method",
+      "observation_robustness_obsids": [10464, 10888, 12245, 12246, 12247, 13020, 13021, 13023, 13120, 13138],
+      "observation_robustness_reason": "include every already-frozen and calibrated V19F observation"
+    }
+  },
+  "regionization": {
+    "source_information_allowed": "only the frozen V19M 0.5-7.0 keV bin map, admission flag, broad science counts, scaled broad background counts, net counts and pixel adjacency",
+    "forbidden_region_information": [
+      "hardness ratio or any energy-resolved source count",
+      "Fe-line strength, centroid or redshift",
+      "temperature, abundance or fit statistic",
+      "shock, member, lensing, halo or gravity map",
+      "published velocity-region boundary or outcome"
+    ],
+    "adjacency": "four-neighbor shared pixel edges on the frozen integer bin map",
+    "merge_order": "repeatedly select the active connected component with the lowest net count below target; merge it with the adjacent component having the largest shared boundary, then the closest mean net-count surface brightness, then the smallest deterministic root bin ID",
+    "net_count_targets_0p5_7_keV": {
+      "primary_8000": 8000.0,
+      "robustness_10000": 10000.0
+    },
+    "minimum_regions_by_branch": {
+      "primary_8000": 16,
+      "robustness_10000": 12
+    },
+    "same_rule_and_targets_for_both_clusters": true,
+    "expected_source_only_counts_at_freeze": {
+      "BULLET": {
+        "primary_8000": 43,
+        "robustness_10000": 35
+      },
+      "ABELL2146": {
+        "primary_8000": 16,
+        "robustness_10000": 12
+      }
+    },
+    "claim_boundary": "These expected counts were learned from source-only brightness and adjacency during method development. No spectral or gravitational outcome entered them."
+  },
+  "combination": {
+    "source_and_background": "combine every validated cell named by a frozen merged region, first within ObsID and then across ObsIDs using the already-commissioned V19CW observation hierarchy and ASCA background scaling",
+    "responses": "combine ARFs and RMFs with the same exposure/backscale weighting commissioned in V19CW; never average model predictions after fitting independent cells",
+    "source_spectrum": "retain an ungrouped combined source PHA for WStat/Cash-family fitting; a grouped copy may be made for visualization only",
+    "count_conservation": "full PHA source counts must equal the sum over contributing cell PHAs exactly, separately for every region and observation branch",
+    "response_forward_fold_gate": "the hierarchical response must reproduce a direct reference forward-fold to relative tolerance 1e-8 on manufactured/reference apertures before development fitting"
+  },
+  "spectral_model": {
+    "primary": "tbabs*(apec_1+apec_2)",
+    "atomic_database": "the APEC database delivered with CIAO 4.18 / XSPEC 12.14.0k, recorded verbatim at runtime",
+    "published_model_robustness": "tbabs*(mekal_1+mekal_2)",
+    "abundance_table": "aspl",
+    "cross_sections": "vern",
+    "primary_fit_band_keV": [2.0, 10.0],
+    "thermal_admission_band_keV": [0.5, 10.0],
+    "redshift_coupling": "the two thermal components share exactly one redshift",
+    "free_parameters_primary": [
+      "T1",
+      "T2",
+      "Z1",
+      "Z2",
+      "norm1",
+      "norm2",
+      "shared redshift",
+      "Galactic nH within its nuisance interval"
+    ],
+    "temperature_order": "enforce T1 <= T2 to remove label exchange",
+    "temperature_range_keV": [3.5, 27.0],
+    "abundance_range_solar": [0.1, 1.6],
+    "normalizations": "strictly non-negative",
+    "galactic_nh_fractional_interval": 0.1,
+    "statistic": "WStat on ungrouped source and associated blank-sky background counts",
+    "optimizer": "Nelder-Mead multistart followed by Levenberg-Marquardt/covariance only where locally regular",
+    "fit_quality": "500 parametric posterior-predictive simulations per integrated spectrum and 200 per region; fail a model branch when the fraction with a lower statistic is outside [0.02,0.98]"
+  },
+  "redshift_profile": {
+    "search_interval": "optical_redshift_center plus or minus 0.05",
+    "coarse_step": 0.001,
+    "fine_half_width": 0.005,
+    "fine_step": 0.0001,
+    "profile_rule": "at every fixed redshift refit every other free parameter; choose the global profile minimum",
+    "statistical_interval": "asymmetric Delta-statistic=1 crossings around the global minimum",
+    "secondary_minimum_gate": "reject a region when another local minimum is separated from the best by Delta-statistic < 6.63",
+    "edge_gate": "reject a region when the best fit or either Delta-statistic=1 crossing reaches the frozen search boundary",
+    "velocity_definition": "v_los = c*(z_region-z_cluster)/(1+z_cluster); z_cluster is the inverse-total-variance common-redshift estimate within the same branch"
+  },
+  "thermal_structure_systematic": {
+    "purpose": "propagate the shift of the unresolved Fe-K blend caused by unknown line-of-sight temperature and abundance mixtures",
+    "sampler": "4096-point Owen-scrambled Sobol sequence in ordered T1,T2,Z1,Z2 over the frozen bounds, with seed 1900416 for every region; common points prevent outcome-dependent sampling",
+    "full_band_admission": "at fixed T1,T2,Z1,Z2, optimize non-negative norms, nH and redshift in 0.5-10 keV; retain points with Delta-statistic < 4.72 relative to the full-band optimum",
+    "hard_band_projection": "for every retained point, refit norms and redshift in 2-10 keV using the frozen global-profile search",
+    "systematic_interval": "5th and 95th percentiles of the retained hard-band redshift minima",
+    "minimum_retained_points": 64,
+    "convergence_audit": "repeat every fifth spatial region and every integrated spectrum with 8192 points; both systematic endpoints must change by less than 10 percent of the primary interval width",
+    "total_uncertainty": "add the asymmetric statistical, thermal-structure and propagated gain terms in quadrature on each side"
+  },
+  "gain_audit": {
+    "data": "per-ObsID union of the already-matched blank-sky background cells, constructed without a source spectrum",
+    "lines_keV": {
+      "Ni_Kalpha": 7.4782,
+      "Au_Lalpha": 9.7133
+    },
+    "model": "local continuum plus Gaussian lines with a per-ObsID linear gain E_cal = intercept + slope*E_recorded",
+    "primary_use": "do not post-hoc shift the source spectrum; propagate the fitted intercept/slope covariance to the observed Fe-K energy as an additional redshift systematic",
+    "robustness_use": "repeat with the fitted linear gain applied and require stable velocity sign topology",
+    "gate": "the propagated one-sigma gain uncertainty at observed Fe-K must be <= 0.2 times the median pre-gain total redshift uncertainty in each cluster; otherwise the cluster source is not admitted"
+  },
+  "reliability_gates": {
+    "minimum_reliable_regions_primary_per_cluster": 12,
+    "minimum_reliable_regions_robustness_per_cluster": 10,
+    "median_total_velocity_uncertainty_km_s_max": 1500.0,
+    "fraction_total_velocity_uncertainty_below_2500_km_s_min": 0.8,
+    "integrated_primary_and_model_robustness_goodness_pass": true,
+    "no_outcome_based_region_removal": "a region can fail only the frozen secondary-minimum, edge, finite-interval, fit-goodness or uncertainty gates; every failure remains in the report"
+  },
+  "development_reproduction_gate": {
+    "system": "BULLET",
+    "required_before_transfer": [
+      "all combination, response and gain preflights pass",
+      "at least 12 primary and 10 robustness regions are reliable",
+      "the common-redshift null has p <= 0.10 in the primary APEC branch",
+      "at least one pairwise region contrast excludes zero at 3 sigma after the familywise max-contrast calibration",
+      "at least 75 percent of reliable regions retain velocity sign across APEC versus MEKAL, 8000 versus 10000 counts, nine versus ten observations, and gain-propagated versus gain-corrected branches"
+    ],
+    "interpretation": "reproduction validates the measurement implementation only because the published Bullet outcome is known"
+  },
+  "transfer_and_source_admission_gate": {
+    "system": "ABELL2146",
+    "target_access": "forbidden until the complete Bullet development report, code and configuration are hashed and every development reproduction gate passes",
+    "required_for_time_odd_source_admission": [
+      "at least 12 primary and 10 robustness regions are reliable",
+      "the spatially constant-redshift null is rejected at p <= 0.05 or a familywise-calibrated localized contrast excludes zero at 3 sigma",
+      "at least 75 percent of reliable regions retain velocity sign across APEC versus MEKAL, 8000 versus 10000 counts, eight versus ten observations, and gain-propagated versus gain-corrected branches",
+      "the cross-validated spatial velocity field explains at least 20 percent variance beyond a fixed quadratic nuisance basis of gas surface density, radius, density gradient and density Hessian invariants",
+      "leave-one-region-out and leave-one-ObsID-out reruns retain the admitted sign topology in at least 90 percent of omissions"
+    ],
+    "if_pass": "admit signed line-of-sight gas current as an observed source candidate and freeze its covariant placement tests before opening any lensing target",
+    "if_fail": "do not use Chandra redshift noise as a Sigma source; retain the result and seek a prospective calorimeter, resolved kSZ or newly released region-aware likelihood rather than changing thresholds"
+  },
+  "forbidden_access_until_authorized": [
+    "any V19DA PHA CHANNEL, COUNTS or energy-resolved row",
+    "any V19DA ARF/RMF energy or response array",
+    "any fitted Bullet or Abell 2146 temperature, abundance, redshift or velocity",
+    "the published numerical Abell 2146 velocity result or map",
+    "any cluster lensing image, shear, convergence, halo map or halo fit",
+    "any gravity formula score, action selection or gravity parameter optimization"
+  ],
+  "authorization": {
+    "source_only_preflight_and_region_manifest": true,
+    "combine_spectra_after_preflight_pass": true,
+    "open_bullet_development_spectrum_after_combiner_hash_freeze": true,
+    "open_abell2146_before_bullet_development_pass": false,
+    "open_lensing_halo_or_gravity_payload": false,
+    "derive_or_change_action_or_gravity_constants": false
+  },
+  "runtime": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "ciao_environment": "/home/henry/miniforge3/envs/sigma-ciao-4.18",
+    "ciao_version": "4.18.0",
+    "caldb_version": "4.12.4",
+    "xspec_version": "12.14.0k",
+    "parallel_regions": 8,
+    "parallel_systematic_points_per_region": 1,
+    "reason": "XSPEC/Sherpa model evaluation is CPU-bound; region-level process parallelism avoids unsafe shared model state"
+  },
+  "implementation": {
+    "preflight": "scripts/check_sigma_v19da_chandra_icm_velocity_preflight.py",
+    "preflight_sha256": "ba5171ab18f633c05b62ab4c8a580a2a78515e8a7a636c43427f970c550c6157",
+    "preflight_output": "results/sigma_v19da_chandra_icm_velocity_preflight",
+    "future_combiner": "not yet authorized until this preflight passes and is committed",
+    "future_fitter": "not yet authorized until the combiner passes manufactured and exact-count tests"
+  }
+}

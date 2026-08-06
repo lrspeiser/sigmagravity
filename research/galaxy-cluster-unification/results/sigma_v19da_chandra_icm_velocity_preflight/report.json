@@ -1,0 +1,109 @@
+{
+  "protocol_version": "SIGMA-V19DA-CHANDRA-ICM-VELOCITY-PREREGISTRATION-1.0.0",
+  "generated_utc": "2026-08-06T17:55:07.726632+00:00",
+  "decision": "passed_target_sealed_chandra_velocity_preflight",
+  "config_sha256": "0a489feb3a1609f89711c83fc31ff4798fde6bb0558a531fe4bc634e644cfe64",
+  "runner_sha256": "ba5171ab18f633c05b62ab4c8a580a2a78515e8a7a636c43427f970c550c6157",
+  "parent_status": {
+    "v19m": "both_adaptive_thermodynamic_region_gates_passed",
+    "v19cx": "unified_spectral_combination_commissioning_gate_failed"
+  },
+  "region_summary": {
+    "BULLET": {
+      "admitted_bins": 366,
+      "adjacency_edges": 1063,
+      "connected_components": [
+        366
+      ],
+      "validated_cells": 3812,
+      "branches": {
+        "primary_8000": {
+          "target_net_counts": 8000.0,
+          "regions": 43,
+          "minimum_regions_gate": 16,
+          "minimum_net_counts": 8240.532183686,
+          "median_net_counts": 13280.49715771,
+          "maximum_net_counts": 30066.373546432,
+          "all_bins_used_once": true,
+          "all_regions_connected": true,
+          "passes_region_count_gate": true
+        },
+        "robustness_10000": {
+          "target_net_counts": 10000.0,
+          "regions": 35,
+          "minimum_regions_gate": 12,
+          "minimum_net_counts": 10035.176409191,
+          "median_net_counts": 16688.259299694,
+          "maximum_net_counts": 36451.079505259,
+          "all_bins_used_once": true,
+          "all_regions_connected": true,
+          "passes_region_count_gate": true
+        }
+      }
+    },
+    "ABELL2146": {
+      "admitted_bins": 128,
+      "adjacency_edges": 366,
+      "connected_components": [
+        128
+      ],
+      "validated_cells": 1270,
+      "branches": {
+        "primary_8000": {
+          "target_net_counts": 8000.0,
+          "regions": 16,
+          "minimum_regions_gate": 16,
+          "minimum_net_counts": 8183.090624168,
+          "median_net_counts": 11322.230543604,
+          "maximum_net_counts": 25612.214413854,
+          "all_bins_used_once": true,
+          "all_regions_connected": true,
+          "passes_region_count_gate": true
+        },
+        "robustness_10000": {
+          "target_net_counts": 10000.0,
+          "regions": 12,
+          "minimum_regions_gate": 12,
+          "minimum_net_counts": 10102.458405082,
+          "median_net_counts": 17907.864004985,
+          "maximum_net_counts": 33795.305038022,
+          "all_bins_used_once": true,
+          "all_regions_connected": true,
+          "passes_region_count_gate": true
+        }
+      }
+    }
+  },
+  "external_archive_audit": {
+    "products_checked_by_metadata_only": 20328,
+    "missing_products": [],
+    "wrong_size_products": [],
+    "all_products_present_with_frozen_sizes": true,
+    "payload_hashes_reused_from_validated_parent_not_recomputed": true
+  },
+  "gates": {
+    "both_parent_states_match": true,
+    "validated_indexes_have_5082_unique_matching_cells": true,
+    "both_admitted_bin_graphs_are_connected": true,
+    "every_merge_branch_uses_every_admitted_bin_once": true,
+    "every_merge_branch_meets_count_and_region_gates": true,
+    "external_products_present_with_frozen_sizes": true,
+    "no_spectral_or_gravity_target_opened": true
+  },
+  "access_audit": {
+    "source_or_background_pha_payload_opened": false,
+    "arf_or_rmf_payload_opened": false,
+    "channel_energy_or_line_centroid_opened": false,
+    "temperature_abundance_or_redshift_fit_opened": false,
+    "published_abell2146_velocity_outcome_opened": false,
+    "lensing_halo_gravity_action_or_formula_payload_opened": false,
+    "spatial_binmap_and_broad_count_statistics_opened": true,
+    "external_science_products_checked_by_name_and_size_only": true
+  },
+  "authorization": {
+    "build_combined_ungrouped_source_background_and_response_products": true,
+    "open_bullet_development_spectra_before_the_combiner_is_hash_frozen": false,
+    "open_abell2146_transfer_spectra_before_bullet_reproduction_passes": false,
+    "derive_or_tune_a_gravity_formula": false
+  }
+}
