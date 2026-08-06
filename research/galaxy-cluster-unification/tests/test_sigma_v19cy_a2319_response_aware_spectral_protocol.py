@@ -22,8 +22,8 @@ def sha256(path: Path) -> str:
 
 def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     config = load()
-    assert config["protocol_version"].endswith("1.0.6")
-    assert "execution interface was refrozen" in config["status"]
+    assert config["protocol_version"].endswith("1.0.7")
+    assert "separate NXB-only session" in config["status"]
     assert ";" in config["runtime"]["pfiles"]
     assert config["closed_failure_history"]["response_or_background_generated"] is False
     amendment = config["pre_response_interface_amendment"]
@@ -70,6 +70,34 @@ def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     assert execution_amendment["valid_model_optimization_or_velocity_fit_completed"] is False
     assert execution_amendment["source_result_used_to_change_model_band_or_parameters"] is False
     assert execution_amendment["validation_or_holdout_accessed"] is False
+    session_amendment = config["pre_fit_nxb_session_amendment"]
+    assert session_amendment["previous_version"].endswith("1.0.6")
+    assert session_amendment["probe_before_ignore"]["exit_code"] == 0
+    assert session_amendment["probe_ignore_first_source"]["exit_code"] == 139
+    assert session_amendment["probe_ignore_first_source"]["trigger_command"] == "ignore 1:**"
+    for key in (
+        "failure_report",
+        "lf_deck",
+        "lf_xspec_log",
+        "grouping_checkpoint_after_lf_retry",
+    ):
+        artifact = session_amendment[key]
+        path = ROOT / artifact["path"]
+        assert path.stat().st_size == artifact["bytes"]
+        assert sha256(path) == artifact["sha256"]
+    for key in ("probe_before_ignore", "probe_ignore_first_source"):
+        probe = session_amendment[key]
+        for role in ("deck", "log"):
+            path = ROOT / probe[f"{role}_path"]
+            assert path.stat().st_size == probe[f"{role}_bytes"]
+            assert sha256(path) == probe[f"{role}_sha256"]
+    assert session_amendment["valid_model_optimization_or_velocity_fit_completed"] is False
+    assert session_amendment["source_model_or_energy_band_changed"] is False
+    assert session_amendment["nxb_model_grouping_band_or_response_changed"] is False
+    assert session_amendment["validation_or_holdout_accessed"] is False
+    assert "separate NXB-only XSPEC session" in config["fit_protocol"][
+        "nxb_prefit_execution"
+    ]
     authorization = config["authorization"]
     assert authorization["read_A2319_development_energy_columns"] is True
     assert authorization["access_A3667_validation"] is False

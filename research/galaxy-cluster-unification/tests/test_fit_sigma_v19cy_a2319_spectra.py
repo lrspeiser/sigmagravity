@@ -197,6 +197,36 @@ def test_second_branch_nxb_internal_links_shift_and_background_copies_tie():
     assert lines[168] == "= nxb1:p57"
 
 
+def initial_nxb_numeric_values(specs: list[str], source_group_count: int) -> dict[str, float]:
+    values: dict[str, float] = {}
+    for source_index in range(source_group_count):
+        offset = source_index * fitter.NXB_PARAMETER_COUNT
+        for local_index, spec in enumerate(specs, start=1):
+            if not spec.startswith("="):
+                values[str(offset + local_index)] = float(spec.split()[0])
+    return values
+
+
+def test_nxb_prefit_transfer_freezes_shape_and_preserves_independent_branches():
+    config = future_config()
+    path = fitter.ROOT / config["nxb_protocol"]["empirical_model_path"]
+    _, specs = fitter.parse_nxb_model(path.read_text(encoding="utf-8"))
+    values = initial_nxb_numeric_values(specs, 2)
+    values["2"] = 0.161
+    values["58"] = 0.171
+    transferred = fitter.nxb_specs_after_prefit(specs, 2, values)
+    assert len(transferred) == 112
+    assert transferred[1].split()[:2] == ["0.161", "-1"]
+    assert float(transferred[57].split()[0]) == pytest.approx(0.171)
+    assert transferred[57].split()[1] == "-1"
+    assert transferred[7] == "= nxb1:p5/5.8980*5.8876"
+    assert transferred[56 + 7] == "= nxb1:p61/5.8980*5.8876"
+    joint = fitter.nxb_joint_model_lines(transferred, 2)
+    assert len(joint) == 224
+    assert joint[112] == "= nxb1:p1"
+    assert joint[168] == "= nxb1:p57"
+
+
 def test_primary_source_linkage_has_independent_branch_normalizations_and_zero_nxb_source():
     lines = fitter.primary_source_model_lines(2)
     assert len(lines) == 24
@@ -239,6 +269,7 @@ def test_xspec_deck_uses_mixed_statistics_and_separate_responses(tmp_path: Path)
         variant={"name": "primary", "band_keV": [3.0, 9.5]},
         nxb_expression=expression,
         nxb_specs=specs,
+        nxb_prefit_values=initial_nxb_numeric_values(specs, 2),
         log_path=tmp_path / "xspec.log",
         session_path=tmp_path / "best.xcm",
     )
@@ -247,9 +278,10 @@ def test_xspec_deck_uses_mixed_statistics_and_separate_responses(tmp_path: Path)
     assert "response 1:1" in deck and "source.rmf" in deck
     assert "arf 1:1" in deck and "source.arf" in deck
     assert deck.count("newdiag60000.rmf") == 6
-    assert "ignore 1:**\n" in deck and "ignore 2:**\n" in deck
+    assert "ignore 1:**\n" not in deck and "ignore 2:**\n" not in deck
     assert "ignore 3:**-1.0 17.0-**" in deck
     assert "ignore 1:**-3.0 9.5-**" in deck
+    assert deck.splitlines().count("fit") == 1
     assert all(f"tclout stat {index}" in deck for index in range(1, 5))
     assert metadata["source_group_count"] == 2
     assert metadata["source_statistic"] == "cstat"
@@ -264,6 +296,41 @@ def test_xspec_deck_uses_mixed_statistics_and_separate_responses(tmp_path: Path)
     assert all(f"freeze nxb1:{index}" in deck for index in numeric)
     assert all(f"thaw nxb1:{index}" in deck for index in thawed)
     assert "thaw nxb1:2\n" not in deck
+
+
+def test_nxb_only_prefit_deck_cannot_read_source_spectra(tmp_path: Path):
+    config = future_config()
+    nxb_path = fitter.ROOT / config["nxb_protocol"]["empirical_model_path"]
+    expression, specs = fitter.parse_nxb_model(nxb_path.read_text(encoding="utf-8"))
+    bundle = []
+    for branch in ("one", "two"):
+        bundle.append(
+            {
+                "source_pha": tmp_path / branch / "source.pha",
+                "nxb_pha": tmp_path / branch / "nxb.pha",
+                "rmf": tmp_path / branch / "source.rmf",
+                "arf": tmp_path / branch / "source.arf",
+            }
+        )
+    deck, metadata = fitter.build_nxb_prefit_deck(
+        config,
+        bundle,
+        nxb_expression=expression,
+        nxb_specs=specs,
+        log_path=tmp_path / "nxb_prefit.log",
+        session_path=tmp_path / "nxb_prefit.xcm",
+    )
+    assert "source.pha" not in deck
+    assert "source.rmf" not in deck
+    assert "source.arf" not in deck
+    assert deck.count("nxb.pha") == 2
+    assert deck.count("newdiag60000.rmf") == 2
+    assert "statistic chi standard 1-2" in deck
+    assert "model 1:nxb1 constant*powerlaw" in deck
+    assert "ignore 1:**-1.0 17.0-**" in deck
+    assert "ignore 1:**\n" not in deck
+    assert deck.splitlines().count("fit") == 2
+    assert metadata["source_spectra_loaded"] is False
 
 
 def test_markers_and_velocity_conversion_are_machine_readable():

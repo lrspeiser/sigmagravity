@@ -657,6 +657,33 @@ remain free in the source fit. No subtraction is used. This correction changed
 no source model, source energy band, data product, gravity formula, or target,
 and was made before any source-energy fit or velocity estimate.
 
+### NXB-prefit XSPEC execution amendment
+
+The first LF-only region-A session constructed both source models, all four
+data groups and all responses correctly, but XSPEC 12.15.1 exited with signal
+11 immediately after `ignore 1:**` hid the first complete source spectrum.
+An exact-prefix session through model construction exited zero; adding only
+that one command reproduced exit code 139. No valid optimization or velocity
+fit occurred.
+
+Protocol 1.0.7 therefore executes the unchanged NXB prefit in a separate
+NXB-only XSPEC session. It loads only the optsnmin-3 NXB RATE groups and the
+diagonal response, uses standard chi-square over 1--17 keV, fits from the
+delivered state, freezes shape, thaws the same recommended normalizations and
+fits again. Every resulting numeric value is transferred into the joint
+source session; shape stays frozen and only those normalizations remain free.
+The joint fit never fully ignores a loaded source spectrum. The exact
+region-A interface probe completed in 32.9 seconds with chi-square 1010.991619
+for 900 degrees of freedom, captured 74 numeric values and loaded no source
+PHA, RMF or ARF. Delivered-bound hits are retained and reported rather than
+used to change the public model.
+
+This is an execution separation, not a statistical or scientific change. It
+does not alter either fit band, model, grouping, response, parameter bounds,
+branch linkage, gravity target or evidence split. The LF failure, both prefix
+probes and the pre-source checkpoint are hash-archived under
+`interface_failure_a_primary_ignore_all`.
+
 ## The new observable source terms
 
 The signed projected gas current is

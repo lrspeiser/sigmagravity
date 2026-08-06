@@ -1,0 +1,436 @@
+{
+  "arf_report_sha256": "11a8112cce9434e4c585da5f314738adc4e0b25e505098ce2812b45eadac872d",
+  "completed_fits": [],
+  "component_report_sha256": "69dbed4d1ac2db21d8c22b6ace09414462632f77a75270b994f80afea88adc74",
+  "config_sha256": "ccf1a91d2e3c0b0bcdc5e07dc20d25e22dc6f408d86ee093b57a73a47fdf8762",
+  "error": "XSPEC failed for a/primary: bash: line 1: 381163 Segmentation fault      (core dumped) xspec - < /tmp/sigma_v19cy_spectral_fits_84rjd0np/a/primary/fit.xcm\n",
+  "generated_utc": "2026-08-06T15:52:00.006457+00:00",
+  "nxb_grouping": [
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000101_open_0_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_0_cross_obsid/a/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_0_cross_obsid/a/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "846bd636e097c19c5b37d61b25784f140011e07a9ea1692c958d2dc36df61cb1",
+        "total_rate": 0.008632219221567539
+      },
+      "groups_in_band": 536,
+      "maximum_channels_per_group_in_band": 151,
+      "maximum_group_width_keV_in_band": 0.0755000114440918,
+      "median_effective_counts_in_band": 9.705775966789602,
+      "minimum_effective_counts_in_band": 9.553460905101955,
+      "minimum_signal_to_noise_in_band": 3.090867338644924,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_0_cross_obsid/a/nxb.pha",
+        "sha256": "d4bc78ac3331940364e6de3cc1403ad333eaba5231df26ab2230e174bec52a24",
+        "total_rate": 0.008632219221567539
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "a",
+      "zero_variance_groups_in_band": 0
+    },
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000101_open_1_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_1_cross_obsid/a/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_1_cross_obsid/a/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "e3751d874bd8f0ede1b28bed050f54be1f7e54ce7aa83ee6207c802db9a0008e",
+        "total_rate": 0.008482965423240785
+      },
+      "groups_in_band": 388,
+      "maximum_channels_per_group_in_band": 179,
+      "maximum_group_width_keV_in_band": 0.08950042724609375,
+      "median_effective_counts_in_band": 9.370610004339099,
+      "minimum_effective_counts_in_band": 9.018132307012865,
+      "minimum_signal_to_noise_in_band": 3.003020530567992,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_1_cross_obsid/a/nxb.pha",
+        "sha256": "e87c44a922f88179bf46152053179ee7358e3b3bc542dffb7378776a2724081e",
+        "total_rate": 0.008482965423240785
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "a",
+      "zero_variance_groups_in_band": 0
+    },
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000101_open_0_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/b/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/b/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_0_cross_obsid/b/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/b/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/b/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/b/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/b/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/b/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/b/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_0_cross_obsid/b/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "56ec75423c75151194d5bfc49b428da0077a9cb7fc02bb37db32f2e118467ff2",
+        "total_rate": 0.004153384730443577
+      },
+      "groups_in_band": 268,
+      "maximum_channels_per_group_in_band": 307,
+      "maximum_group_width_keV_in_band": 0.15350055694580078,
+      "median_effective_counts_in_band": 9.689439453285315,
+      "minimum_effective_counts_in_band": 9.549525078255265,
+      "minimum_signal_to_noise_in_band": 3.090230586583348,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_0_cross_obsid/b/nxb.pha",
+        "sha256": "989297ee8d87cf09f51b9231c829c7860c60a74a9056239bb2a9e0ba0319c504",
+        "total_rate": 0.004153384730443577
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "b",
+      "zero_variance_groups_in_band": 0
+    },
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000101_open_1_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/b/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/b/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_1_cross_obsid/b/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/b/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/b/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/b/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/b/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/b/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/b/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_1_cross_obsid/b/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "0b0e03260c7c90c14951fb7f5ef331dda10602ded050bada52ba41d0168fa7df",
+        "total_rate": 0.004089572620159743
+      },
+      "groups_in_band": 195,
+      "maximum_channels_per_group_in_band": 401,
+      "maximum_group_width_keV_in_band": 0.2004995346069336,
+      "median_effective_counts_in_band": 9.35733178658409,
+      "minimum_effective_counts_in_band": 9.026546065054966,
+      "minimum_signal_to_noise_in_band": 3.0044210865081755,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_1_cross_obsid/b/nxb.pha",
+        "sha256": "d88c4cabb77e1c6fb3010104e071369dafd6c6c623bfc3cf6f11b8a19213000b",
+        "total_rate": 0.004089572620159743
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "b",
+      "zero_variance_groups_in_band": 0
+    },
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000101_open_0_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/d/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/d/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_0_cross_obsid/d/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/d/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/d/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/d/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/d/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/d/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/d/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_0_cross_obsid/d/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "00e3ad9d53f709811d13af9855b7adb86a2818b29b961b2cf983b53f8b55314f",
+        "total_rate": 0.004239483814671985
+      },
+      "groups_in_band": 282,
+      "maximum_channels_per_group_in_band": 287,
+      "maximum_group_width_keV_in_band": 0.14350032806396484,
+      "median_effective_counts_in_band": 9.68456379488702,
+      "minimum_effective_counts_in_band": 9.549525078255265,
+      "minimum_signal_to_noise_in_band": 3.090230586583348,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_0_cross_obsid/d/nxb.pha",
+        "sha256": "5af081a83037075d364098990b6442d420e2bf635e1eae9601b444f1f8a9d50a",
+        "total_rate": 0.004239483814671985
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "d",
+      "zero_variance_groups_in_band": 0
+    },
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000101_open_1_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/d/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/d/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_1_cross_obsid/d/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/d/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/d/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/d/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/d/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/d/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/d/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000101_open_1_cross_obsid/d/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "16aa7cea9cdcba61da6c987000bcfb966771a4eb85f72fed64b01471f0190b72",
+        "total_rate": 0.004217578497332397
+      },
+      "groups_in_band": 206,
+      "maximum_channels_per_group_in_band": 380,
+      "maximum_group_width_keV_in_band": 0.1900005340576172,
+      "median_effective_counts_in_band": 9.36601821062698,
+      "minimum_effective_counts_in_band": 9.026546066757259,
+      "minimum_signal_to_noise_in_band": 3.0044210867914733,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_1_cross_obsid/d/nxb.pha",
+        "sha256": "7b75ccff448f8103dc76d586d0e357d9b2582acbb7b53df4e31b510aead854d7",
+        "total_rate": 0.004217578497332397
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "d",
+      "zero_variance_groups_in_band": 0
+    },
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000102_open_0_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/b_prime/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/b_prime/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000102_open_0_cross_obsid/b_prime/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/b_prime/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/b_prime/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/b_prime/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/b_prime/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/b_prime/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/b_prime/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000102_open_0_cross_obsid/b_prime/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "b3fd71ec2c880ce2c554ef3994bdea618ecb0ffb5ceafb06ae25498c7f24d69e",
+        "total_rate": 0.004856093937121386
+      },
+      "groups_in_band": 286,
+      "maximum_channels_per_group_in_band": 255,
+      "maximum_group_width_keV_in_band": 0.12749958038330078,
+      "median_effective_counts_in_band": 9.548248586288523,
+      "minimum_effective_counts_in_band": 9.184133720633758,
+      "minimum_signal_to_noise_in_band": 3.0305335702865523,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000102_open_0_cross_obsid/b_prime/nxb.pha",
+        "sha256": "115f863cbe0006703ea18e8c67646734e17a5e195f99f78be0343b83032117d0",
+        "total_rate": 0.004856093937121386
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "b_prime",
+      "zero_variance_groups_in_band": 0
+    },
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000102_open_0_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/c_prime/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/c_prime/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000102_open_0_cross_obsid/c_prime/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/c_prime/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/c_prime/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/c_prime/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/c_prime/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/c_prime/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/c_prime/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000102_open_0_cross_obsid/c_prime/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "57b36f9af16db36d94e0d78da83cde6b3f670814708c297607895d0319c04e7c",
+        "total_rate": 0.004177705606196014
+      },
+      "groups_in_band": 268,
+      "maximum_channels_per_group_in_band": 307,
+      "maximum_group_width_keV_in_band": 0.15350055694580078,
+      "median_effective_counts_in_band": 9.549396641797886,
+      "minimum_effective_counts_in_band": 9.103242475115625,
+      "minimum_signal_to_noise_in_band": 3.0171580129511986,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000102_open_0_cross_obsid/c_prime/nxb.pha",
+        "sha256": "5a04e8015d641c332bac7ca3ee705b5160ef1507474d74d8926a99fd7753335c",
+        "total_rate": 0.004177705606196014
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "c_prime",
+      "zero_variance_groups_in_band": 0
+    },
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000102_open_0_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/d_prime/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/d_prime/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000102_open_0_cross_obsid/d_prime/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/d_prime/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/d_prime/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/d_prime/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/d_prime/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/d_prime/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/d_prime/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000102_open_0_cross_obsid/d_prime/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "18fbb75bf72e6f53a80d94e10e82ab95d4f9879f49de75cec1d82f90227871a8",
+        "total_rate": 0.0038331735814836065
+      },
+      "groups_in_band": 254,
+      "maximum_channels_per_group_in_band": 323,
+      "maximum_group_width_keV_in_band": 0.1614999771118164,
+      "median_effective_counts_in_band": 9.5416435989415,
+      "minimum_effective_counts_in_band": 9.184133950758875,
+      "minimum_signal_to_noise_in_band": 3.030533608254308,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000102_open_0_cross_obsid/d_prime/nxb.pha",
+        "sha256": "5e1f5c08e19f98c80ee9bac13549bd3c2c03a1b526c8a01c384cf2838bed628c",
+        "total_rate": 0.0038331735814836065
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "d_prime",
+      "zero_variance_groups_in_band": 0
+    },
+    {
+      "boundary_groups_excluded_by_xspec": 2,
+      "branch": "000102_open_0_cross_obsid",
+      "command": {
+        "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; mkdir -p /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/e_prime/pfiles; export PFILES='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/e_prime/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn ftcopy && ftcopy infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000102_open_0_cross_obsid/e_prime/nxb.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/e_prime/nxb_input_class_bkg.pha copyall=yes clobber=no history=yes && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/e_prime/nxb_input_class_bkg.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=BKG comment='temporary ftgrouppha compatibility class' && punlearn ftgrouppha && ftgrouppha infile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/e_prime/nxb_input_class_bkg.pha outfile=/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/e_prime/nxb_optsnmin3.pha grouptype=optsnmin groupscale=3.0 respfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/e_prime/nxb_optsnmin3.pha[SPECTRUM]' keyword=HDUCLAS2 operation=add value=DERIVED comment='XRISM weighted NXB derived spectrum' && punlearn fthedit && fthedit infile='/tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000102_open_0_cross_obsid/e_prime/nxb_optsnmin3.pha[SPECTRUM]' keyword=RESPFILE operation=add value=NONE comment='response assigned explicitly by frozen XSPEC deck'",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "constraint_band_keV": [
+        1.0,
+        17.0
+      ],
+      "grouped": {
+        "bytes": 855360,
+        "channels": 60000,
+        "grouping_scale": 3.0,
+        "grouping_type": "optsnmin",
+        "hduclas2": "DERIVED",
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/spectral_fits/grouped_nxb/000102_open_0_cross_obsid/e_prime/nxb_optsnmin3.pha",
+        "poiserr": false,
+        "respfile": "NONE",
+        "sha256": "ddc1c751a47dc1b7b5b2bfb839d6d5127ad514cf57ed7dfbe2b8d8c97f8c3f0e",
+        "total_rate": 0.0042578539266742155
+      },
+      "groups_in_band": 282,
+      "maximum_channels_per_group_in_band": 287,
+      "maximum_group_width_keV_in_band": 0.14350032806396484,
+      "median_effective_counts_in_band": 9.548897272098259,
+      "minimum_effective_counts_in_band": 9.179800157818464,
+      "minimum_signal_to_noise_in_band": 3.029818502454968,
+      "original": {
+        "bytes": 855360,
+        "channels": 60000,
+        "path": "data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000102_open_0_cross_obsid/e_prime/nxb.pha",
+        "sha256": "7b8d72b82093400f587528031dfc70440c5ea4fc199a8215170d2031eed02349",
+        "total_rate": 0.0042578539266742155
+      },
+      "rate_and_stat_err_preserved_exactly": true,
+      "region": "e_prime",
+      "zero_variance_groups_in_band": 0
+    }
+  ],
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-RESULT-1.0.1",
+  "signed_gas_current_constructed": false,
+  "staging_path": "\\\\wsl.localhost\\Ubuntu-24.04\\tmp\\sigma_v19cy_spectral_fits_84rjd0np",
+  "status": "response_aware_spectral_fit_failed_closed",
+  "terminal_gate_passed": false,
+  "validation_or_holdout_accessed": false
+}

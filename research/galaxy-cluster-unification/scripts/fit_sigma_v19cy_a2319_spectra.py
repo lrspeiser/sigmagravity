@@ -53,7 +53,7 @@ CHECKPOINT = (
     / "results/sigma_v19cy_direct_icm_velocity_evidence/"
     "development_response_aware_spectral.checkpoint.json"
 )
-EXPECTED_PROTOCOL = "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.6"
+EXPECTED_PROTOCOL = "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.7"
 EXPECTED_COMPONENT_RESULT = "SIGMA-V19CY-A2319-RESPONSE-COMPONENTS-RESULT-1.0.0"
 EXPECTED_ARF_RESULT = "SIGMA-V19CY-A2319-ARF-RESULT-1.0.0"
 NXB_PARAMETER_COUNT = 56
@@ -88,6 +88,7 @@ def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
 def write_checkpoint(
     staging: Path,
     nxb_grouping: list[dict[str, Any]],
+    nxb_prefits: list[dict[str, Any]],
     fits: list[dict[str, Any]],
     status: str,
 ) -> None:
@@ -104,6 +105,7 @@ def write_checkpoint(
             "arf_report_sha256": preparation.sha256(ARF_REPORT),
             "staging_path": str(staging),
             "nxb_grouping": nxb_grouping,
+            "nxb_prefits": nxb_prefits,
             "completed_fits": fits,
             "terminal_gate_passed": False,
             "signed_gas_current_constructed": False,
@@ -362,6 +364,67 @@ def nxb_model_lines(base_specs: list[str], source_group_count: int) -> list[str]
     return lines
 
 
+def nxb_prefit_model_lines(
+    base_specs: list[str], source_group_count: int
+) -> list[str]:
+    """Build independent delivered-state NXB models for NXB-only groups."""
+    if len(base_specs) != NXB_PARAMETER_COUNT or source_group_count not in (1, 2):
+        raise ValueError("invalid NXB prefit model layout")
+    lines: list[str] = []
+    for source_index in range(source_group_count):
+        offset = source_index * NXB_PARAMETER_COUNT
+        lines.extend(shift_nxb_link(spec, offset) for spec in base_specs)
+    return lines
+
+
+def nxb_specs_after_prefit(
+    base_specs: list[str],
+    source_group_count: int,
+    fitted_values: dict[str, float],
+) -> list[str]:
+    """Transfer NXB-only best fits into the joint fit with frozen shape."""
+    if len(base_specs) != NXB_PARAMETER_COUNT or source_group_count not in (1, 2):
+        raise ValueError("invalid NXB prefit transfer layout")
+    lines: list[str] = []
+    for source_index in range(source_group_count):
+        offset = source_index * NXB_PARAMETER_COUNT
+        for local_index, spec in enumerate(base_specs, start=1):
+            global_index = offset + local_index
+            if spec.startswith("="):
+                lines.append(shift_nxb_link(spec, offset))
+                continue
+            if str(global_index) not in fitted_values:
+                raise RuntimeError(
+                    f"missing fitted NXB parameter {global_index} during transfer"
+                )
+            fields = spec.split()
+            fields[0] = f"{fitted_values[str(global_index)]:.17g}"
+            fields[1] = (
+                fields[1]
+                if local_index in NXB_THAWED_NORMALIZATIONS
+                else "-1"
+            )
+            lines.append(" ".join(fields))
+    return lines
+
+
+def nxb_joint_model_lines(
+    prefit_specs: list[str], source_group_count: int
+) -> list[str]:
+    """Apply transferred NXB shapes to source and NXB constraint groups."""
+    expected = source_group_count * NXB_PARAMETER_COUNT
+    if len(prefit_specs) != expected or source_group_count not in (1, 2):
+        raise ValueError("invalid transferred NXB model layout")
+    lines = list(prefit_specs)
+    for source_index in range(source_group_count):
+        offset = source_index * NXB_PARAMETER_COUNT
+        lines.extend(
+            f"= nxb1:p{offset + local_index}"
+            for local_index in range(1, NXB_PARAMETER_COUNT + 1)
+        )
+    return lines
+
+
 def _primary_source_group(anchor_offset: int | None, *, background: bool) -> list[str]:
     if anchor_offset is None:
         specs = [
@@ -549,8 +612,104 @@ def marker_commands(
     return commands
 
 
+def nxb_prefit_marker_commands(
+    source_group_count: int, numeric_indices: list[int]
+) -> list[str]:
+    commands = [
+        "tclout stat",
+        f'puts "{MARKER} statistic $xspec_tclout"',
+        "tclout dof",
+        f'puts "{MARKER} dof $xspec_tclout"',
+        "tclout covar",
+        f'puts "{MARKER} covariance $xspec_tclout"',
+        "tclout varpar",
+        f'puts "{MARKER} variable_parameters $xspec_tclout"',
+    ]
+    for index in range(1, source_group_count + 1):
+        commands.extend(
+            [
+                f"tclout stat {index}",
+                f'puts "{MARKER} statistic_spectrum_{index} $xspec_tclout"',
+            ]
+        )
+    for index in numeric_indices:
+        commands.extend(
+            [
+                f"tclout param nxb1:{index}",
+                f'puts "{MARKER} nxb_parameter_{index} $xspec_tclout"',
+            ]
+        )
+    return commands
+
+
 def xspec_path(config: dict[str, Any], path: Path) -> str:
     return components.tool_path(config, path)
+
+
+def build_nxb_prefit_deck(
+    config: dict[str, Any],
+    bundle: list[dict[str, Path]],
+    *,
+    nxb_expression: str,
+    nxb_specs: list[str],
+    log_path: Path,
+    session_path: Path,
+) -> tuple[str, dict[str, Any]]:
+    """Build an NXB-only session so no source spectrum must be hidden."""
+    source_group_count = len(bundle)
+    if source_group_count not in (1, 2):
+        raise ValueError("A2319 regions require one or two NXB branches")
+    data_parts = [
+        f"{index}:{index} {xspec_path(config, row['nxb_pha'])}"
+        for index, row in enumerate(bundle, start=1)
+    ]
+    diagonal = xspec_path(
+        config, ROOT / config["nxb_protocol"]["diagonal_response_path"]
+    )
+    commands = [
+        "query yes",
+        "chatter 10",
+        f"log {xspec_path(config, log_path)}",
+        "data none",
+        "data " + " ".join(data_parts),
+    ]
+    for index in range(1, source_group_count + 1):
+        commands.append(f"response 1:{index} {diagonal}")
+    nxb_range = f"1-{source_group_count}"
+    commands.extend(
+        [
+            f"statistic chi standard {nxb_range}",
+            "method leven 1000 0.0001",
+            "model 1:nxb1 " + nxb_expression,
+            *nxb_prefit_model_lines(nxb_specs, source_group_count),
+        ]
+    )
+    nxb_band = config["fit_protocol"]["nxb_constraint_band_keV"]
+    for index in range(1, source_group_count + 1):
+        commands.append(f"ignore {index}:**-{nxb_band[0]} {nxb_band[1]}-**")
+    commands.append("fit")
+    numeric_indices = nxb_numeric_parameter_indices(nxb_specs, source_group_count)
+    free_indices = nxb_free_parameter_indices(nxb_specs, source_group_count)
+    commands.extend(f"freeze nxb1:{index}" for index in numeric_indices)
+    commands.extend(f"thaw nxb1:{index}" for index in free_indices)
+    commands.append("fit")
+    commands.extend(nxb_prefit_marker_commands(source_group_count, numeric_indices))
+    commands.extend(
+        [
+            f"save all {xspec_path(config, session_path)}",
+            "log none",
+            "exit",
+        ]
+    )
+    metadata = {
+        "source_group_count": source_group_count,
+        "nxb_numeric_parameter_indices": numeric_indices,
+        "nxb_free_parameter_indices": free_indices,
+        "nxb_statistic": "chi standard",
+        "nxb_constraint_band_keV": nxb_band,
+        "source_spectra_loaded": False,
+    }
+    return "\n".join(commands) + "\n", metadata
 
 
 def build_xspec_deck(
@@ -560,6 +719,7 @@ def build_xspec_deck(
     variant: dict[str, Any],
     nxb_expression: str,
     nxb_specs: list[str],
+    nxb_prefit_values: dict[str, float],
     log_path: Path,
     session_path: Path,
 ) -> tuple[str, dict[str, Any]]:
@@ -616,15 +776,17 @@ def build_xspec_deck(
             "model " + source_expression,
             *source_specs,
             "model 2:nxb1 " + nxb_expression,
-            *nxb_model_lines(nxb_specs, source_group_count),
+            *nxb_joint_model_lines(
+                nxb_specs_after_prefit(
+                    nxb_specs, source_group_count, nxb_prefit_values
+                ),
+                source_group_count,
+            ),
         ]
     )
     nxb_band = config["fit_protocol"]["nxb_constraint_band_keV"]
-    for index in range(1, source_group_count + 1):
-        commands.append(f"ignore {index}:**")
     for index in range(source_group_count + 1, 2 * source_group_count + 1):
         commands.append(f"ignore {index}:**-{nxb_band[0]} {nxb_band[1]}-**")
-    commands.append("fit")
     commands.extend(
         f"freeze nxb1:{index}"
         for index in nxb_numeric_parameter_indices(nxb_specs, source_group_count)
@@ -633,15 +795,9 @@ def build_xspec_deck(
         f"thaw nxb1:{index}"
         for index in nxb_free_parameter_indices(nxb_specs, source_group_count)
     )
-    commands.append("fit")
     source_band = variant["band_keV"]
     for index in range(1, source_group_count + 1):
-        commands.extend(
-            [
-                f"notice {index}:**",
-                f"ignore {index}:**-{source_band[0]} {source_band[1]}-**",
-            ]
-        )
+        commands.append(f"ignore {index}:**-{source_band[0]} {source_band[1]}-**")
     commands.append("fit")
     nxb_free = nxb_free_parameter_indices(nxb_specs, source_group_count)
     commands.extend(
@@ -886,6 +1042,58 @@ def validate_inputs() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
         or execution_amendment.get("validation_or_holdout_accessed") is not False
     ):
         raise RuntimeError("pre-fit execution amendment crossed a frozen boundary")
+    nxb_session_amendment = config.get("pre_fit_nxb_session_amendment", {})
+    if nxb_session_amendment.get("previous_version") != (
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.6"
+    ):
+        raise RuntimeError("unexpected NXB-session amendment ancestry")
+    for key in (
+        "failure_report",
+        "lf_deck",
+        "lf_xspec_log",
+        "grouping_checkpoint_after_lf_retry",
+    ):
+        artifact = nxb_session_amendment.get(key, {})
+        path = ROOT / artifact.get("path", "missing")
+        if (
+            not path.is_file()
+            or path.stat().st_size != artifact.get("bytes")
+            or preparation.sha256(path) != artifact.get("sha256")
+        ):
+            raise RuntimeError(f"archived NXB-session failure artifact changed: {key}")
+    for key in ("probe_before_ignore", "probe_ignore_first_source"):
+        probe = nxb_session_amendment.get(key, {})
+        for role in ("deck", "log"):
+            path = ROOT / probe.get(f"{role}_path", "missing")
+            if (
+                not path.is_file()
+                or path.stat().st_size != probe.get(f"{role}_bytes")
+                or preparation.sha256(path) != probe.get(f"{role}_sha256")
+            ):
+                raise RuntimeError(
+                    f"archived NXB-session diagnostic changed: {key}/{role}"
+                )
+    if (
+        nxb_session_amendment.get("probe_before_ignore", {}).get("exit_code") != 0
+        or nxb_session_amendment.get("probe_ignore_first_source", {}).get(
+            "exit_code"
+        )
+        != 139
+        or nxb_session_amendment.get(
+            "valid_model_optimization_or_velocity_fit_completed"
+        )
+        is not False
+        or nxb_session_amendment.get("source_model_or_energy_band_changed")
+        is not False
+        or nxb_session_amendment.get(
+            "nxb_model_grouping_band_or_response_changed"
+        )
+        is not False
+        or nxb_session_amendment.get("gravity_formula_or_parameters_changed")
+        is not False
+        or nxb_session_amendment.get("validation_or_holdout_accessed") is not False
+    ):
+        raise RuntimeError("pre-fit NXB-session amendment crossed a frozen boundary")
     authorization = config["authorization"]
     if not authorization["fit_A2319_development_spectra_and_velocities"]:
         raise RuntimeError("A2319 spectral fitting is not authorized")
@@ -1113,6 +1321,104 @@ def xspec_command(config: dict[str, Any], work: Path, deck: Path) -> str:
     )
 
 
+def inspect_nxb_prefit(
+    markers: dict[str, str], metadata: dict[str, Any], nxb_specs: list[str]
+) -> dict[str, Any]:
+    required = {"statistic", "dof", "covariance", "variable_parameters"}
+    required.update(
+        f"statistic_spectrum_{index}"
+        for index in range(1, metadata["source_group_count"] + 1)
+    )
+    required.update(
+        f"nxb_parameter_{index}"
+        for index in metadata["nxb_numeric_parameter_indices"]
+    )
+    missing = sorted(required - markers.keys())
+    if missing:
+        raise RuntimeError(f"NXB prefit markers missing: {missing}")
+    fitted_values: dict[str, float] = {}
+    hard_bound_hits: list[int] = []
+    for global_index in metadata["nxb_numeric_parameter_indices"]:
+        value = first_float(markers[f"nxb_parameter_{global_index}"])
+        fitted_values[str(global_index)] = value
+        local_index = (global_index - 1) % NXB_PARAMETER_COUNT
+        bounds = numeric_parameter_bounds(nxb_specs[local_index])
+        if bounds is not None and parameter_at_bound(value, bounds):
+            hard_bound_hits.append(global_index)
+    statistic = first_float(markers["statistic"])
+    dof = round(first_float(markers["dof"]))
+    return {
+        "statistic": statistic,
+        "dof": dof,
+        "statistic_by_spectrum": {
+            str(index): first_float(markers[f"statistic_spectrum_{index}"])
+            for index in range(1, metadata["source_group_count"] + 1)
+        },
+        "fitted_numeric_parameters": fitted_values,
+        "hard_bound_hits": hard_bound_hits,
+        "covariance_lower_triangle": markers["covariance"],
+        "variable_parameters": markers["variable_parameters"],
+        "converged": math.isfinite(statistic) and dof > 0,
+    }
+
+
+def run_nxb_prefit(
+    config: dict[str, Any],
+    region: str,
+    bundle: list[dict[str, Path]],
+    nxb_expression: str,
+    nxb_specs: list[str],
+    staging: Path,
+) -> dict[str, Any]:
+    work = staging / region / "nxb_prefit"
+    work.mkdir(parents=True)
+    deck = work / "prefit.xcm"
+    log = work / "xspec.log"
+    session = work / "best_prefit.xcm"
+    deck_text, metadata = build_nxb_prefit_deck(
+        config,
+        bundle,
+        nxb_expression=nxb_expression,
+        nxb_specs=nxb_specs,
+        log_path=log,
+        session_path=session,
+    )
+    write_xspec_deck(deck, deck_text)
+    command = xspec_command(config, work, deck)
+    record = application.run_wsl(
+        config["runtime"]["wsl_distribution"], command, timeout=XSPEC_TIMEOUT_SECONDS
+    )
+    if record["exit_code"] != 0:
+        raise RuntimeError(f"XSPEC NXB prefit failed for {region}: {record['stderr']}")
+    prefit = inspect_nxb_prefit(parse_markers(record["stdout"]), metadata, nxb_specs)
+    if not prefit["converged"]:
+        raise RuntimeError(f"XSPEC NXB prefit did not converge for {region}")
+    if not log.is_file() or not session.is_file():
+        raise RuntimeError(f"XSPEC did not write NXB prefit products for {region}")
+    prefit.update(
+        {
+            "region": region,
+            "metadata": metadata,
+            "command": record,
+            "deck": {
+                "bytes": deck.stat().st_size,
+                "sha256": preparation.sha256(deck),
+            },
+            "log": {
+                "bytes": log.stat().st_size,
+                "sha256": preparation.sha256(log),
+            },
+            "session": {
+                "bytes": session.stat().st_size,
+                "sha256": preparation.sha256(session),
+            },
+            "source_spectra_loaded": False,
+            "source_energy_distribution_used": False,
+        }
+    )
+    return prefit
+
+
 def run_fit(
     config: dict[str, Any],
     region: str,
@@ -1120,6 +1426,7 @@ def run_fit(
     variant: dict[str, Any],
     nxb_expression: str,
     nxb_specs: list[str],
+    nxb_prefit_values: dict[str, float],
     staging: Path,
 ) -> dict[str, Any]:
     work = staging / region / variant["name"]
@@ -1133,6 +1440,7 @@ def run_fit(
         variant=variant,
         nxb_expression=nxb_expression,
         nxb_specs=nxb_specs,
+        nxb_prefit_values=nxb_prefit_values,
         log_path=log,
         session_path=session,
     )
@@ -1233,6 +1541,7 @@ def generate() -> dict[str, Any]:
         *config["fit_protocol"]["robustness_models"],
     ]
     fits: list[dict[str, Any]] = []
+    nxb_prefits: list[dict[str, Any]] = []
     nxb_grouping: list[dict[str, Any]] = []
     resume_from_grouping = False
     if CHECKPOINT.exists():
@@ -1250,6 +1559,7 @@ def generate() -> dict[str, Any]:
             != preparation.sha256(COMPONENT_REPORT)
             or checkpoint.get("arf_report_sha256") != preparation.sha256(ARF_REPORT)
             or checkpoint.get("completed_fits") != []
+            or checkpoint.get("nxb_prefits", []) != []
             or checkpoint.get("validation_or_holdout_accessed") is not False
         ):
             raise RuntimeError("incomplete spectral checkpoint is not the frozen resume point")
@@ -1270,15 +1580,34 @@ def generate() -> dict[str, Any]:
             write_checkpoint(
                 staging,
                 nxb_grouping,
+                nxb_prefits,
                 fits,
-                "nxb_grouping_resumed_after_lf_deck_fix",
+                "nxb_grouping_resumed_after_nxb_prefit_session_fix",
             )
         else:
             bundles = prepare_grouped_nxb_spectra(
                 config, raw_bundles, staging, nxb_grouping
             )
-            write_checkpoint(staging, nxb_grouping, fits, "nxb_grouping_completed")
+            write_checkpoint(
+                staging, nxb_grouping, nxb_prefits, fits, "nxb_grouping_completed"
+            )
         for region, bundle in bundles.items():
+            prefit = run_nxb_prefit(
+                config,
+                region,
+                bundle,
+                nxb_expression,
+                nxb_specs,
+                staging,
+            )
+            nxb_prefits.append(prefit)
+            write_checkpoint(
+                staging,
+                nxb_grouping,
+                nxb_prefits,
+                fits,
+                f"nxb_prefit_completed:{region}",
+            )
             for variant in variants:
                 fit = run_fit(
                     config,
@@ -1287,12 +1616,14 @@ def generate() -> dict[str, Any]:
                     variant,
                     nxb_expression,
                     nxb_specs,
+                    prefit["fitted_numeric_parameters"],
                     staging,
                 )
                 fits.append(fit)
                 write_checkpoint(
                     staging,
                     nxb_grouping,
+                    nxb_prefits,
                     fits,
                     f"fit_completed:{region}:{variant['name']}",
                 )
@@ -1313,6 +1644,7 @@ def generate() -> dict[str, Any]:
             "component_report_sha256": preparation.sha256(COMPONENT_REPORT),
             "arf_report_sha256": preparation.sha256(ARF_REPORT),
             "nxb_grouping": nxb_grouping,
+            "nxb_prefits": nxb_prefits,
             "error": str(exc),
             "completed_fits": fits,
             "staging_path": str(staging),
@@ -1348,6 +1680,8 @@ def generate() -> dict[str, Any]:
         "response_component_gate_passed": component_report["component_gate_passed"] is True,
         "arf_gate_passed": arf_report["arf_gate_passed"] is True,
         "all_ten_nxb_grouping_gates_passed": nxb_grouping_gate_passed(nxb_grouping),
+        "all_seven_nxb_only_prefits_converged": len(nxb_prefits) == 7
+        and all(row["converged"] for row in nxb_prefits),
         "all_seven_primary_fits_converged": len(primary) == 7 and all(row["converged"] for row in primary),
         "no_free_parameter_at_hard_bound_in_any_fit": all(
             row["no_free_parameter_at_hard_bound"] for row in fits
@@ -1370,6 +1704,7 @@ def generate() -> dict[str, Any]:
         "arf_report_sha256": preparation.sha256(ARF_REPORT),
         "nxb_model_sha256": preparation.sha256(nxb_path),
         "nxb_grouping": nxb_grouping,
+        "nxb_prefits": nxb_prefits,
         "fits": fits,
         "robustness": robustness,
         "robust_regions": robust_regions,

@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.6",
-  "status": "all ten ARFs and NXB grouping gates passed; the first XSPEC invocation failed before valid optimization because a Windows CRLF deck was consumed through WSL stdin as alternating parameter answers, so the exact failed deck, log, report, and checkpoint were hashed and the execution interface was refrozen to write LF-only bytes; no source model, fit band, parameter, gravity target, validation target, or holdout target changed",
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.7",
+  "status": "all ten ARFs and NXB grouping gates passed; LF-only execution constructed the complete frozen model correctly, but XSPEC 12.15.1 reproducibly segfaulted when the first source spectrum was ignored in full for the NXB prefit; NXB shape is therefore constrained in a separate NXB-only session and transferred frozen into the unchanged joint source fit, with only the same recommended NXB normalizations free; no source model, fit band, parameter, response, gravity target, validation target, or holdout target changed",
   "purpose": "Reproduce the seven published A2319 detector-region velocities on the three strictly bracketed commissioning fragments using current official response and NXB tools, then decide whether the signed ICM velocity field is sufficiently identified to become a development-only Sigma source diagnostic.",
   "parents": {
     "calibration_report": {
@@ -183,6 +183,61 @@
     "gravity_formula_or_parameters_changed": false,
     "validation_or_holdout_accessed": false
   },
+  "pre_fit_nxb_session_amendment": {
+    "previous_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.6",
+    "failed_run_config_sha256": "ccf1a91d2e3c0b0bcdc5e07dc20d25e22dc6f408d86ee093b57a73a47fdf8762",
+    "discovered_by": "the first LF-only development XSPEC invocation and two exact-prefix diagnostic probes for region a primary",
+    "failure_report": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary_ignore_all/failure_report.json",
+      "bytes": 40485,
+      "sha256": "9d0ab1135a51238a2b5f6c677d2faa3ff990e48fbc2d75315bf3350515689559"
+    },
+    "lf_deck": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary_ignore_all/fit_lf.xcm",
+      "bytes": 16177,
+      "sha256": "4590bd9d8abb4f7382b97b5669fbdc9a4c2c058d0acc4882bf251af7eb9aa43f",
+      "carriage_returns": 0
+    },
+    "lf_xspec_log": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary_ignore_all/xspec_ignore1_crash.log",
+      "bytes": 45377,
+      "sha256": "854e36e20da772573ebf712c793eb1ea7cc3e32a20a2d1482a1c3afdc33fdc9f"
+    },
+    "grouping_checkpoint_after_lf_retry": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary_ignore_all/grouping_checkpoint_after_lf_retry.json",
+      "bytes": 40312,
+      "sha256": "4a94505c4f7a2a3bcdca55f4b4ffab342bbc7097c6e6bee3bff3c5d9330ff91a",
+      "completed_valid_fits": 0
+    },
+    "probe_before_ignore": {
+      "deck_path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary_ignore_all/probe_before_ignore.xcm",
+      "deck_bytes": 10249,
+      "deck_sha256": "15982349e32a0c916309b44b27f432a4ad34b765fc691b735e864ae84ed41a1e",
+      "log_path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary_ignore_all/probe_before_ignore.log",
+      "log_bytes": 45329,
+      "log_sha256": "38d83d4dd596e787240e138c23fcf225cae32398dfaa23061e5016b3cd218547",
+      "exit_code": 0
+    },
+    "probe_ignore_first_source": {
+      "deck_path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary_ignore_all/probe_ignore1.xcm",
+      "deck_bytes": 10255,
+      "deck_sha256": "613d6ee307d4d3af14180dbe8624d6a0222afe6a5eaadbc041f4e68217652606",
+      "log_path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary_ignore_all/probe_ignore1.log",
+      "log_bytes": 45377,
+      "log_sha256": "854e36e20da772573ebf712c793eb1ea7cc3e32a20a2d1482a1c3afdc33fdc9f",
+      "trigger_command": "ignore 1:**",
+      "exit_code": 139
+    },
+    "root_cause_boundary": "XSPEC 12.15.1 loads both source models, all four data groups, and all responses cleanly; the exact prefix through model construction exits zero, while adding only ignore 1:** produces exit 139 immediately after XSPEC reports all 60000 channels ignored",
+    "correction": "run the unchanged two-stage public NXB empirical-model prefit in a separate session containing only the grouped NXB RATE spectra and diagonal responses; transfer every fitted numeric NXB value into the joint source session, freeze all shape parameters, leave only the same twelve recommended normalizations per branch free, and never fully ignore a loaded source spectrum",
+    "statistical_equivalence": "the NXB-only session uses the same spectra, optsnmin-3 grouping, 1-17 keV band, standard chi-square, delivered parameter state, first fit, freeze-all-shape/thaw-recommended-normalizations step, and second fit; it cannot consult a source centroid or velocity because no source PHA, RMF, or ARF is loaded",
+    "valid_model_optimization_or_velocity_fit_completed": false,
+    "source_result_used_to_change_model_band_or_parameters": false,
+    "source_model_or_energy_band_changed": false,
+    "nxb_model_grouping_band_or_response_changed": false,
+    "gravity_formula_or_parameters_changed": false,
+    "validation_or_holdout_accessed": false
+  },
   "branches": [
     {
       "name": "000101_open_0_cross_obsid",
@@ -331,6 +386,7 @@
     "nxb_constraint_band_keV": [1.0, 17.0],
     "data_group_protocol": "For every branch-region product, load ungrouped source COUNTS and the optsnmin-3 grouped NXB RATE as separate data groups. Apply the regional RMF and ARF only to the source plasma channel; apply the frozen diagonal response and no ARF to the empirical NXB channel in both groups.",
     "nxb_prefit_sequence": "Without consulting source line centroids or velocities, optimally group the weighted NXB RATE spectrum to minimum signal-to-noise 3 over the full 60000-channel response grid, then fit the public 56-parameter empirical NXB model over 1-17 keV with standard chi-square, starting from the delivered state. Freeze all parameters except the model's recommended normalization parameters before the source fit; retain those normalizations as nuisance parameters.",
+    "nxb_prefit_execution": "Execute the unchanged NXB prefit once per detector region in a separate NXB-only XSPEC session, containing one grouped NXB constraint group per branch and only the frozen diagonal response. After the delivered-state fit, freeze every numeric NXB parameter, thaw only indices 3,7,14,20,23,29,35,41,47,50,53,56 in each branch, refit, and transfer all resulting values to all three source-model variants. The joint source session starts with NXB shape frozen and those same normalizations free; it never fully ignores a loaded source spectrum.",
     "xspec_stdin_deck_encoding": "UTF-8 with LF-only line endings written as bytes",
     "atomdb": {"version": "3.0.9", "xspec_apecroot": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/spectral/modelData/apec_v3.0.9"},
     "abundance_table": "lodd",
@@ -368,6 +424,7 @@
     "require_all_source_nxb_rmf_expmap_arf_commands_exit_zero": true,
     "require_all_response_matrices_finite_nonnegative": true,
     "require_all_ten_nxb_grouping_commands_exit_zero": true,
+    "require_all_seven_nxb_only_prefits_converged": true,
     "require_nxb_grouping_rate_and_stat_err_preserved_exactly": true,
     "require_nxb_grouping_zero_variance_groups_in_band": 0,
     "minimum_nxb_group_signal_to_noise_in_band": 3.0,
