@@ -92,6 +92,24 @@ The predecessor cannot contribute a science region or exposure. Xtend,
 pipeline quick-look products, validation, holdout, lensing, halo, and gravity
 targets remain excluded.
 
+### Terminal development download result
+
+The frozen acquisition completed without changing its scope or concurrency.
+All 197 files were downloaded, independently size-checked, and SHA-256 hashed.
+The local tree contains exactly 12,742,865,194 bytes and no partial files. The
+terminal provenance report has SHA-256
+`4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f` and is
+stored at
+`results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json`.
+
+The exact terminal totals are 116 A2319 science files (9,124,771,397 bytes),
+15 predecessor calibration files (1,567,139,641 bytes), three CALDB archives
+(1,780,998,985 bytes), 62 Chandra files (265,771,249 bytes), and one official
+gain report (4,183,922 bytes). No A3667 or A754 payload was accessed, no
+lensing/halo/gravity target was opened, and no velocity fit was performed.
+This closes acquisition only; it does not yet pass the gain-reconstruction,
+spectral-reproduction, or spatial-spectral-mixing gates.
+
 ## The new observable source terms
 
 The signed projected gas current is

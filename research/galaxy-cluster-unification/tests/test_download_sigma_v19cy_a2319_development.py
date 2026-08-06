@@ -1,4 +1,5 @@
 import csv
+import json
 import sys
 from pathlib import Path
 
@@ -94,3 +95,31 @@ def test_disk_preflight_preserves_a_large_reserve(tmp_path: Path) -> None:
     preflight = download.ensure_free_space(tmp_path, 1)
     assert preflight["needed_bytes"] == 1
     assert preflight["reserve_bytes"] == 5 * 1024**3
+
+
+def test_terminal_development_download_provenance_is_exact() -> None:
+    provenance_path = (
+        ROOT
+        / "results"
+        / "sigma_v19cy_direct_icm_velocity_evidence"
+        / "development_download_provenance.json"
+    )
+    provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
+    assert provenance["status"] == (
+        "all_frozen_a2319_development_payloads_downloaded_size_verified_and_sha256_hashed"
+    )
+    assert provenance["files"] == 197
+    assert provenance["bytes"] == 12_742_865_194
+    assert provenance["by_asset_group"] == {
+        "caldb": {"bytes": 1_780_998_985, "files": 3},
+        "chandra_ssm": {"bytes": 265_771_249, "files": 62},
+        "official_gain_report": {"bytes": 4_183_922, "files": 1},
+        "xrism_calibration_predecessor": {"bytes": 1_567_139_641, "files": 15},
+        "xrism_science": {"bytes": 9_124_771_397, "files": 116},
+    }
+    assert len(provenance["records"]) == 197
+    assert all(len(record["sha256"]) == 64 for record in provenance["records"])
+    assert not provenance["validation_or_holdout_asset_accessed"]
+    assert not provenance["lensing_halo_or_gravity_payload_opened"]
+    assert not provenance["scientific_velocity_fit_performed"]
+    assert provenance["validation_and_holdout_outcome_seals_preserved"]
