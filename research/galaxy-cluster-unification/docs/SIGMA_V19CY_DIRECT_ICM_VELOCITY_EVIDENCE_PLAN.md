@@ -324,6 +324,39 @@ The diagnosis retained 17 scratch files totaling 260,815,680 bytes. Its
 terminal report SHA-256 is
 `a418ad26fe170408cd19a1483aa1b543bd13076409484ac3bf2046b7bd4c2a1a`.
 
+### Common/differential held-out closure result
+
+The parameter-free decomposition
+
+\[
+T_i(t)=C_{12}(t)+D_i(t)
+\]
+
+was tested by omitting each complete filter-wheel Fe-55 interval in turn.
+The exact continuously illuminated pixel supplied common mode `C12`; a linear
+pixel-specific differential `Di` was learned from only the other three
+intervals. Candidate and native-control histories were then applied to the
+same held-out main-array Fe-55 events.
+
+| Held-out segment | Role | Whole shift delta (eV) | Whole FWHM increase (eV) | Pixel shift p90 (eV) | Pixel FWHM p90 (eV) | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 0 / 000100000 | Endpoint extrapolation | +0.204 | +0.416 | 0.691 | 0.169 | Fail |
+| 1 / 000101000 | Interior interpolation | -0.008 | +0.203 | 0.396 | 0.142 | Pass |
+| 2 / 000102000 | Interior interpolation | -0.088 | +0.256 | 0.356 | 0.135 | Pass |
+| 3 / 000103000 | Endpoint extrapolation | +0.279 | +0.396 | 0.778 | 0.167 | Fail |
+
+All twelve mission-tool commands exited zero. The global gate is false, so no
+science-branch application is authorized. The scenario pattern is nevertheless
+specific and useful: both bracketed interpolation folds pass every frozen
+whole-array and per-pixel criterion, while both one-sided extrapolation folds
+fail. The common/differential mechanism therefore remains active for bracketed
+regimes. Endpoint extrapolation is parked for a separately frozen local model;
+it is not treated as a falsification of the successful interpolation regime.
+
+The closure retained 20 scratch files totaling 4,604,342,400 bytes. Its
+terminal report SHA-256 is
+`fa3bd67b4e81c84e11812d6724fe36a56744eda5da6a82e37b5ecdd40885c13e`.
+
 ## The new observable source terms
 
 The signed projected gas current is

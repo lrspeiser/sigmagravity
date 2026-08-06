@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -8,7 +9,15 @@ SCRIPT_DIR = ROOT / "scripts"
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-import validate_sigma_v19cy_a2319_common_differential_gain as closure
+import validate_sigma_v19cy_a2319_common_differential_gain as closure  # noqa: I001
+
+
+TERMINAL_REPORT = (
+    ROOT
+    / "results"
+    / "sigma_v19cy_direct_icm_velocity_evidence"
+    / "development_common_differential_gain_closure.json"
+)
 
 
 def test_frozen_common_differential_scope_is_exact() -> None:
@@ -85,3 +94,30 @@ def test_closure_comparison_uses_frozen_whole_and_per_pixel_gates() -> None:
     comparison = closure.compare_fits(candidate, control, config["terminal_gate"])
     assert not comparison["passed"]
     assert comparison["per_pixel_absolute_centroid_delta_p90_ev"] > 0.5
+
+
+def test_terminal_closure_preserves_mixed_scenario_result() -> None:
+    report = json.loads(TERMINAL_REPORT.read_text(encoding="utf-8"))
+    assert not report["terminal_gate_passed"]
+    assert report["decision"] == "stop_without_science_branch_application"
+    assert not report["cluster_sky_event_accessed"]
+    assert not report["cluster_velocity_fit"]
+    assert not report["validation_or_holdout_accessed"]
+    assert len(report["commands"]) == 12
+    assert all(command["exit_code"] == 0 for command in report["commands"])
+    folds = {fold["segment"]: fold for fold in report["folds"]}
+    assert not folds[0]["comparison"]["passed"]
+    assert folds[1]["comparison"]["passed"]
+    assert folds[2]["comparison"]["passed"]
+    assert not folds[3]["comparison"]["passed"]
+    assert folds[1]["validation_role"] == "interior_interpolation"
+    assert folds[2]["validation_role"] == "interior_interpolation"
+    assert folds[0]["validation_role"] == "endpoint_extrapolation"
+    assert folds[3]["validation_role"] == "endpoint_extrapolation"
+    assert folds[1]["comparison"]["whole_array_centroid_delta_ev"] == (
+        -0.007665482864770368
+    )
+    assert folds[2]["comparison"]["whole_array_centroid_delta_ev"] == (
+        -0.087579930902936
+    )
+    assert not report["authorization"]["freeze_science_branch_application_protocol"]
