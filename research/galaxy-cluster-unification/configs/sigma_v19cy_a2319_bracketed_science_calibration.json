@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-BRACKETED-SCIENCE-CALIBRATION-1.0.1",
-  "status": "corrected and refrozen after version 1.0.0 stopped during header-only validation because 000102000 has the official OBJECT value Abell2319_Cor1 rather than Abell2319; no sky-event row or energy was read, selected, recalculated, summarized, or fit",
+  "protocol_version": "SIGMA-V19CY-A2319-BRACKETED-SCIENCE-CALIBRATION-1.0.2",
+  "status": "corrected and refrozen after version 1.0.1 stopped while constructing calibration history because a frozen branch extended outside valid calibration-pixel time support; no sky-event row or energy was read, selected, recalculated, summarized, or fit",
   "purpose": "Apply the held-out-validated common/differential interpolation only to the three A2319 science fragments genuinely bracketed by undisturbed Fe-55 fiducials, while excluding every one-sided or ADR-crossing fragment.",
   "parents": {
     "endpoint_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_endpoint_gain_candidates.json",
@@ -65,7 +65,8 @@
     "cleaned_sky_event_template": "xrism/{obsid}/resolve/event_cl/xa{obsid}rsl_p0px1000_cl.evt.gz",
     "gain_history_extension": "Drift_energy",
     "minimum_gain_events": 200,
-    "event_selection": "exact frozen branch TIME interval AND PIXEL != 12",
+    "event_selection": "effective TIME interval AND PIXEL != 12",
+    "effective_interval": "closed intersection of the frozen topology branch, the minimum-to-maximum valid native calibration-pixel TIME support for that ObsID, and the cleaned event header TSTART-to-TSTOP support; no common-mode extrapolation is permitted",
     "required_common_input_header": {
       "FILTER": "OPEN",
       "DETNAM": "PIXEL"
@@ -82,6 +83,17 @@
       "failed_at": "header-only validation of 000102000 cleaned OPEN event product",
       "root_cause": "the frozen common OBJECT value assumed both pointings used Abell2319, while the archive correctly labels 000102000 as Abell2319_Cor1",
       "correction": "freeze the exact hash-verified OBJECT value separately for each ObsID while retaining the common FILTER=OPEN and DETNAM=PIXEL checks",
+      "sky_event_row_read": false,
+      "energy_recalculated_or_inspected": false,
+      "cluster_spectrum_or_velocity_fit": false,
+      "partial_staging_preserved": true
+    },
+    {
+      "version": "1.0.1",
+      "staging_root": "tmp/sigma_v19cy_a2319_bracketed_science_calibration.installing.gbhpzyiz",
+      "failed_at": "construction of the first common/differential gain history before ftcopy or any sky-event row read",
+      "root_cause": "the frozen topology branch began before the valid native calibration-pixel history, so exact common-mode interpolation correctly refused to extrapolate",
+      "correction": "freeze the effective application interval as the closed intersection of topology branch, valid calibration-pixel time support, and cleaned-event TSTART/TSTOP; discard unsupported edge seconds rather than extrapolating",
       "sky_event_row_read": false,
       "energy_recalculated_or_inspected": false,
       "cluster_spectrum_or_velocity_fit": false,

@@ -34,6 +34,12 @@ def test_frozen_reduced_scope_contains_only_undisturbed_brackets() -> None:
         "000102000": "Abell2319_Cor1",
     }
     assert config["recorded_failures"][0]["sky_event_row_read"] is False
+    assert config["protocol_version"].endswith("1.0.2")
+    assert [row["version"] for row in config["recorded_failures"]] == [
+        "1.0.0",
+        "1.0.1",
+    ]
+    assert all(not row["sky_event_row_read"] for row in config["recorded_failures"])
     assert not config["authorization"]["inspect_or_fit_cluster_energy_distribution"]
     assert not config["authorization"]["fit_cluster_velocity"]
     assert not config["authorization"]["access_validation_or_holdout_assets"]
@@ -68,3 +74,30 @@ def test_bracketed_model_recovers_manufactured_differential_trend() -> None:
     ) * (700.0 - float(models[7]["time_center"]))
     assert abs(predicted - (7e-4 + 4e-8 * 700.0)) < 1e-12
     assert models[12]["differential_at_center"] == 0.0
+
+
+def test_effective_interval_intersects_all_three_time_supports() -> None:
+    history = np.zeros(3, dtype=[("TIME", "f8")])
+    history["TIME"] = [110.0, 150.0, 190.0]
+    branch = {"name": "manufactured", "start": 100.0, "stop": 200.0}
+    interval = bracketed.effective_interval(
+        branch, history, {"tstart": 120.0, "tstop": 180.0}
+    )
+    assert interval["start"] == 120.0
+    assert interval["stop"] == 180.0
+    assert interval["trimmed_start_seconds"] == 20.0
+    assert interval["trimmed_stop_seconds"] == 20.0
+
+
+def test_effective_interval_refuses_disjoint_support() -> None:
+    history = np.zeros(2, dtype=[("TIME", "f8")])
+    history["TIME"] = [210.0, 220.0]
+    branch = {"name": "disjoint", "start": 100.0, "stop": 200.0}
+    try:
+        bracketed.effective_interval(
+            branch, history, {"tstart": 100.0, "tstop": 200.0}
+        )
+    except RuntimeError as exc:
+        assert "no supported application interval" in str(exc)
+    else:
+        raise AssertionError("disjoint time supports must fail closed")

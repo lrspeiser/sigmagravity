@@ -47,14 +47,14 @@ def validate_inputs(
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     config = load_json(config_path)
     if config.get("protocol_version") != (
-        "SIGMA-V19CY-A2319-BRACKETED-SCIENCE-CALIBRATION-1.0.1"
+        "SIGMA-V19CY-A2319-BRACKETED-SCIENCE-CALIBRATION-1.0.2"
     ):
         raise RuntimeError("unexpected bracketed-science protocol")
     expected_status = (
-        "corrected and refrozen after version 1.0.0 stopped during header-only "
-        "validation because 000102000 has the official OBJECT value Abell2319_Cor1 "
-        "rather than Abell2319; no sky-event row or energy was read, selected, "
-        "recalculated, summarized, or fit"
+        "corrected and refrozen after version 1.0.1 stopped while constructing "
+        "calibration history because a frozen branch extended outside valid "
+        "calibration-pixel time support; no sky-event row or energy was read, "
+        "selected, recalculated, summarized, or fit"
     )
     if config.get("status") != expected_status:
         raise RuntimeError("bracketed-science protocol is not frozen")
@@ -145,11 +145,55 @@ def verify_cleaned_header(
         values = {key: header.get(key) for key in expected_common}
         object_value = header.get("OBJECT")
         rows = int(header["NAXIS2"])
+        tstart = float(header["TSTART"])
+        tstop = float(header["TSTOP"])
     if values != expected_common or object_value != expected_object:
         raise RuntimeError(
             f"unexpected cleaned sky header for {obsid}: {values}, OBJECT={object_value}"
         )
-    return {"header": {**values, "OBJECT": object_value}, "rows": rows}
+    if not np.isfinite([tstart, tstop]).all() or tstart >= tstop:
+        raise RuntimeError(f"invalid cleaned sky time support for {obsid}")
+    return {
+        "header": {**values, "OBJECT": object_value},
+        "rows": rows,
+        "tstart": tstart,
+        "tstop": tstop,
+    }
+
+
+def effective_interval(
+    branch: dict[str, Any],
+    common_history: np.ndarray,
+    cleaned_header: dict[str, Any],
+) -> dict[str, float]:
+    """Intersect a topology branch with both data products' supported times."""
+    if len(common_history) == 0:
+        raise RuntimeError(f"empty calibration-pixel history for {branch['name']}")
+    common_times = np.asarray(common_history["TIME"], dtype=float)
+    if not np.isfinite(common_times).all():
+        raise RuntimeError(f"non-finite calibration-pixel time for {branch['name']}")
+    original_start = float(branch["start"])
+    original_stop = float(branch["stop"])
+    common_start = float(np.min(common_times))
+    common_stop = float(np.max(common_times))
+    event_start = float(cleaned_header["tstart"])
+    event_stop = float(cleaned_header["tstop"])
+    start = max(original_start, common_start, event_start)
+    stop = min(original_stop, common_stop, event_stop)
+    if not np.isfinite([start, stop]).all() or start >= stop:
+        raise RuntimeError(f"no supported application interval for {branch['name']}")
+    return {
+        "original_start": original_start,
+        "original_stop": original_stop,
+        "common_start": common_start,
+        "common_stop": common_stop,
+        "event_start": event_start,
+        "event_stop": event_stop,
+        "start": start,
+        "stop": stop,
+        "trimmed_start_seconds": start - original_start,
+        "trimmed_stop_seconds": original_stop - stop,
+    }
 
 
 def ftcopy_command(
@@ -197,6 +241,7 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
     fe55_valid: dict[str, np.ndarray] = {}
     pxcal_valid: dict[str, np.ndarray] = {}
     sky_paths: dict[str, Path] = {}
+    sky_headers: dict[str, dict[str, Any]] = {}
     sources: list[dict[str, Any]] = []
 
     for obsid in sorted(set(anchor_obsids) | set(target_obsids)):
@@ -236,6 +281,7 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
             obsid,
         )
         sky_paths[obsid] = path
+        sky_headers[obsid] = header_audit
         sources.append(
             {
                 "obsid": obsid,
@@ -257,6 +303,10 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
         declared_anchor_obsids = [
             segments[index]["obsids"][0] for index in declared["anchor_segments"]
         ]
+        interval = effective_interval(
+            branch, pxcal_valid[branch["obsid"]], sky_headers[branch["obsid"]]
+        )
+        effective_branch = {**branch, "start": interval["start"], "stop": interval["stop"]}
         branch_dir = staging / branch["name"]
         branch_dir.mkdir()
         models = fit_bracketed_models(
@@ -269,14 +319,16 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
             fe55_hdus[template_obsid],
             fe55_data[template_obsid],
             pxcal_valid[branch["obsid"]],
-            branch,
+            effective_branch,
             models,
             extension,
         )
         selected = branch_dir / "selected_cleaned_sky.evt"
         copy_result = application.run_wsl(
             distribution,
-            ftcopy_command(config, sky_paths[branch["obsid"]], selected, branch),
+            ftcopy_command(
+                config, sky_paths[branch["obsid"]], selected, effective_branch
+            ),
             timeout=1200,
         )
         commands.append({"stage": "ftcopy", "branch": branch["name"], **copy_result})
@@ -310,6 +362,7 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
                 "obsid": branch["obsid"],
                 "anchor_segments": declared["anchor_segments"],
                 "anchor_obsids": declared_anchor_obsids,
+                "application_interval": interval,
                 "selected_rows": selected_rows,
                 "models": {str(key): value for key, value in models.items()},
                 "history": history_audit,
