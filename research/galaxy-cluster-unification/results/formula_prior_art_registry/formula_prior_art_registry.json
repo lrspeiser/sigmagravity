@@ -6,9 +6,9 @@
   "counts": {
     "tested_scored_formulas": 128,
     "published_families": 36,
-    "sigma_protocols": 221,
+    "sigma_protocols": 222,
     "project_formula_addenda": 16,
-    "sigma_formula_fragments": 147,
+    "sigma_formula_fragments": 151,
     "eligibility": {
       "comparator_or_per_object_fit_not_final_theory": 4,
       "diagnostic_not_final_theory": 11,
@@ -7708,6 +7708,47 @@
         "MOND-ALGEBRAIC"
       ],
       "sha256": "5c319d66670c8b67e274c37c46ea4ef398ea85a7d606a55ff417375f3b4f532b"
+    },
+    {
+      "config": "configs/sigma_v19cy_direct_icm_velocity_evidence.json",
+      "protocol_version": "SIGMA-V19CY-DIRECT-ICM-VELOCITY-EVIDENCE-1.0.0",
+      "status": "frozen after the terminal V19CX scientific gate failure and metadata-only public-archive selection, before downloading or reducing the Abell 3667 validation or Abell 754 holdout data, inspecting either target's velocity outcome, opening lensing or halo payloads, deriving an action, or changing a gravity formula",
+      "role": "formula_or_action_protocol",
+      "formula_fragments": [
+        {
+          "json_path": "source_candidates.J_LOS_SIGNED_GAS_CURRENT.source_equation",
+          "formula": "J_los = Sigma_gas * (v_los - v_systemic)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "source_candidates.PI_LOS_KINETIC_STRESS.source_equation",
+          "formula": "Pi_los = Sigma_gas * ((v_los - v_systemic)^2 + sigma_v^2)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "source_candidates.I4_THERMODYNAMIC_GRADIENT_STRESS.dimensionless_equation",
+          "formula": "a_i = D_i ln(n_e); k_i = D_i ln(K); Q_ij = l^2 [a_(i k_j) - delta_ij (a dot k)/2]",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        },
+        {
+          "json_path": "source_candidates.I5_BAROCLINICITY.dimensionless_equation",
+          "formula": "Z5 = |D ln(n_e) cross D ln(p)|^2 / (|D ln(n_e)|^2 |D ln(p)|^2)",
+          "published_overlap_ids": [
+            "NEWTON-POISSON"
+          ]
+        }
+      ],
+      "formula_fragment_count": 4,
+      "published_overlap_ids": [
+        "NEWTON-POISSON"
+      ],
+      "sha256": "65a0d59302e97f28c6773d73835d7fb218eb253b9f2ae2fb8895d561585712fe"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

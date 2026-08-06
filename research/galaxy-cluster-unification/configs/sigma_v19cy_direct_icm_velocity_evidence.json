@@ -1,0 +1,221 @@
+{
+  "protocol_version": "SIGMA-V19CY-DIRECT-ICM-VELOCITY-EVIDENCE-1.0.0",
+  "status": "frozen after the terminal V19CX scientific gate failure and metadata-only public-archive selection, before downloading or reducing the Abell 3667 validation or Abell 754 holdout data, inspecting either target's velocity outcome, opening lensing or halo payloads, deriving an action, or changing a gravity formula",
+  "purpose": "Determine whether directly measured sign-resolved intracluster-gas motion supplies robust time-odd source information that is absent from thermodynamic snapshots, and whether the frozen I4/I5 thermodynamic candidates predict any of that motion without using a gravity target.",
+  "parents": {
+    "v19cx_config": "configs/sigma_v19cx_bullet_hierarchical_recovery.json",
+    "v19cx_config_sha256": "5c319d66670c8b67e274c37c46ea4ef398ea85a7d606a55ff417375f3b4f532b",
+    "v19cx_report": "results/sigma_v19cx_bullet_hierarchical_recovery/report.json",
+    "v19cx_report_sha256": "c86ecffa2ea36086b6733f717ebb0b4fb59eed2e24d58b813093f18f25f15717",
+    "required_v19cx_status": "unified_spectral_combination_commissioning_gate_failed",
+    "pre_deep_direction_checkpoint": "docs/PRE_DEEP_DIRECTION_DECISION_CHECKPOINT.md",
+    "pre_deep_direction_checkpoint_sha256": "b280a893e22fe4c76fe740424b9ccffd7a7d4bce8df493de7876b52b642bf3df"
+  },
+  "archive_authority": {
+    "xrism_master_table": "DARTS xrism_master_data",
+    "query_date_utc": "2026-08-06",
+    "query_scope": "public XRISM observations with proposal_category GROUPS AND CLUSTERS OF GALAXIES and positive Resolve exposure",
+    "official_archive_documentation": "https://heasarc.gsfc.nasa.gov/docs/xrism/archive/index.html",
+    "official_data_root": "https://heasarc.gsfc.nasa.gov/FTP/xrism/data/obs/",
+    "selection_used_only_metadata_proposal_titles_and_public_access_checks": true,
+    "validation_or_holdout_scientific_outcome_opened_before_freeze": false
+  },
+  "evidence_split": {
+    "development": {
+      "cluster": "ABELL2319",
+      "role": "reproduce a published direct-velocity result and commission the instrument and spatial-spectral-mixing pipeline",
+      "outcome_known_before_freeze": true,
+      "observations": [
+        {
+          "obsid": "000101000",
+          "resolve_exposure_ks": 146.644,
+          "archive_url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/data/obs/0/000101000/"
+        },
+        {
+          "obsid": "000102000",
+          "resolve_exposure_ks": 140.565,
+          "archive_url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/data/obs/0/000102000/"
+        },
+        {
+          "obsid": "000103000",
+          "resolve_exposure_ks": 97.672,
+          "archive_url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/data/obs/0/000103000/"
+        }
+      ],
+      "primary_reference": "https://arxiv.org/abs/2508.05067",
+      "published_regions": 5,
+      "known_use_boundary": "development and pipeline reproduction only; never score as validation or holdout"
+    },
+    "validation": {
+      "cluster": "ABELL3667",
+      "role": "freeze the complete pipeline and all source tests before opening this system's velocity outcome",
+      "outcome_known_before_freeze": false,
+      "observations": [
+        {
+          "obsid": "201051010",
+          "object_name": "ABELL3667_CENTER",
+          "resolve_exposure_ks": 116.575,
+          "public_date": "2025-11-07",
+          "archive_url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/data/obs/2/201051010/"
+        },
+        {
+          "obsid": "201050010",
+          "object_name": "ABELL3667_CF_IN",
+          "resolve_exposure_ks": 298.903,
+          "public_date": "2025-11-13",
+          "archive_url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/data/obs/2/201050010/"
+        }
+      ],
+      "selection_metadata": "two public Resolve pointings totaling 415.478 ks; proposal title names gas dynamics in a cluster cold front",
+      "outcome_seal": "do not search for or read Abell 3667 XRISM velocity results until development implementation tests pass and the analysis hash is frozen"
+    },
+    "holdout": {
+      "cluster": "ABELL754",
+      "role": "untouched final source-evidence holdout",
+      "outcome_known_before_freeze": false,
+      "observations": [
+        {
+          "obsid": "201015010",
+          "object_name": "ABELL754_MAIN",
+          "resolve_exposure_ks": 119.725,
+          "public_date": "2025-12-11",
+          "archive_url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/data/obs/2/201015010/"
+        },
+        {
+          "obsid": "201016010",
+          "object_name": "ABELL754_SUB",
+          "resolve_exposure_ks": 200.372,
+          "public_date": "2026-05-08",
+          "archive_url": "https://heasarc.gsfc.nasa.gov/FTP/xrism/data/obs/2/201016010/"
+        }
+      ],
+      "selection_metadata": "two public Resolve pointings totaling 320.097 ks; proposal title independently names hydrodynamic motion relative to the merger axis",
+      "outcome_seal": "do not search for or read Abell 754 XRISM velocity results until every development and validation gate passes with frozen code and thresholds"
+    }
+  },
+  "observed_fields": {
+    "direct": [
+      "line-of-sight bulk velocity relative to the frozen systemic redshift",
+      "line-of-sight velocity dispersion",
+      "temperature",
+      "abundance",
+      "emission measure with covariance"
+    ],
+    "baryonic_reconstruction": [
+      "gas surface density",
+      "electron density",
+      "thermal pressure",
+      "entropy proxy",
+      "member-galaxy light as a nuisance control"
+    ],
+    "forbidden": [
+      "strong or weak lensing",
+      "dark-matter or total-mass maps",
+      "hydrostatic total-mass reconstructions",
+      "galaxy rotation targets",
+      "gravity parameters or action choice"
+    ]
+  },
+  "source_candidates": {
+    "J_LOS_SIGNED_GAS_CURRENT": {
+      "source_equation": "J_los = Sigma_gas * (v_los - v_systemic)",
+      "parity": "time_odd"
+    },
+    "PI_LOS_KINETIC_STRESS": {
+      "source_equation": "Pi_los = Sigma_gas * ((v_los - v_systemic)^2 + sigma_v^2)",
+      "parity": "time_even"
+    },
+    "I4_THERMODYNAMIC_GRADIENT_STRESS": {
+      "dimensionless_equation": "a_i = D_i ln(n_e); k_i = D_i ln(K); Q_ij = l^2 [a_(i k_j) - delta_ij (a dot k)/2]",
+      "parity": "time_even"
+    },
+    "I5_BAROCLINICITY": {
+      "dimensionless_equation": "Z5 = |D ln(n_e) cross D ln(p)|^2 / (|D ln(n_e)|^2 |D ln(p)|^2)",
+      "parity": "time_even"
+    },
+    "interpretation": "J_los is time-odd and can admit a causal-current or memory source; Pi_los is time-even; I4 supplies an axial direction; I5 is scalar and cannot replace a direction"
+  },
+  "spectral_robustness_branches": {
+    "all_must_agree": true,
+    "branches": [
+      "broad-band single-bapec spatial-spectral-mixing fit",
+      "broad-band two-temperature shared-velocity spatial-spectral-mixing fit",
+      "narrow Fe-K velocity fit"
+    ],
+    "source_geometry": "one target-independent sky tessellation rule based only on exposure support and preregistered X-ray counts; no feature-, lensing-, or outcome-drawn regions",
+    "systemic_velocity": "one optical systemic-redshift nuisance estimate frozen independently of the X-ray line shifts",
+    "calibration": "current official XRISM CALDB and documented gain-uncertainty propagation; development-specific commissioning caveats may not weaken validation or holdout gates"
+  },
+  "gates": {
+    "development_reproduction": {
+      "abell2319_region_velocities_agree_with_published_values": "each reproduced region agrees within the quadrature sum of reported statistical uncertainty, propagated gain uncertainty and 40 km/s",
+      "minimum_usable_independent_sky_regions": 5
+    },
+    "per_cluster_data_quality": {
+      "minimum_usable_independent_sky_regions": 8,
+      "minimum_fraction_with_velocity_uncertainty_at_most_200_km_s": 0.75,
+      "all_response_gain_and_spatial_mixing_checks_pass": true
+    },
+    "velocity_robustness": {
+      "maximum_branch_shift_km_s": 100.0,
+      "maximum_branch_shift_sigma": 1.0,
+      "maximum_velocity_gradient_axis_change_deg": 15.0,
+      "require_same_spatial_sign_topology_across_all_branches": true
+    },
+    "time_odd_source_admission": {
+      "reject_constant_velocity_field_at_sigma": 3.0,
+      "minimum_signed_current_detection_sigma": 3.0,
+      "minimum_variance_fraction_not_explained_by_gas_density_temperature_and_member_light": 0.2,
+      "require_leave_one_region_out_sign_stability_fraction": 0.9,
+      "require_development_validation_and_holdout_all_pass": true
+    },
+    "thermodynamic_source_test": {
+      "maximum_I4_to_velocity_gradient_axial_difference_deg": 30.0,
+      "minimum_I4_axis_stability_fraction": 0.9,
+      "minimum_absolute_spearman_I5_to_kinetic_stress": 0.5,
+      "require_each_cluster_separately": true,
+      "never_average_clusters_or_spectral_branches": true
+    }
+  },
+  "decision_rule": {
+    "if_velocity_field_fails": "do not admit a dynamic source or derive an action; record that available direct-velocity evidence is insufficient",
+    "if_signed_current_passes_but_I4_I5_fail": "admit P2 causal-current or memory placement to mathematical comparison; retire I4/I5 for this direct-velocity route",
+    "if_signed_current_and_I4_I5_pass": "admit P2 and the supported thermodynamic placement to a target-blind mathematical comparison",
+    "if_only_time_even_kinetic_stress_passes": "do not claim time-odd evidence; P2 remains unauthorized",
+    "action_derivation_not_authorized_by_this_plan": true,
+    "lensing_or_halo_comparison_not_authorized_by_this_plan": true
+  },
+  "execution_order": [
+    "inventory and hash only the named public files",
+    "reproduce Abell 2319 development velocities and spatial mixing",
+    "freeze code region rule calibration branches and thresholds",
+    "open and score Abell 3667 validation",
+    "only after validation passes open and score Abell 754 holdout",
+    "issue the source-evidence disposition without opening a gravity target"
+  ],
+  "authorization": {
+    "inventory_named_public_archives_now": true,
+    "download_development_data_after_inventory": true,
+    "open_validation_outcomes_before_development_freeze": false,
+    "open_holdout_outcomes_before_validation_pass": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "derive_or_select_action": false,
+    "change_gravity_formula_or_parameter": false,
+    "run_solar_system_optimization": false
+  },
+  "outputs": {
+    "root": "results/sigma_v19cy_direct_icm_velocity_evidence",
+    "archive_manifest": "results/sigma_v19cy_direct_icm_velocity_evidence/archive_manifest.csv",
+    "development_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_report.json",
+    "validation_report": "results/sigma_v19cy_direct_icm_velocity_evidence/validation_report.json",
+    "holdout_report": "results/sigma_v19cy_direct_icm_velocity_evidence/holdout_report.json",
+    "terminal_report": "results/sigma_v19cy_direct_icm_velocity_evidence/report.json"
+  },
+  "claim_boundary": [
+    "A pass would establish robust directly observed baryonic gas-current structure, not a gravity law.",
+    "Only one velocity component is observed; no full three-dimensional current or stress tensor may be claimed.",
+    "A current-source pass would authorize mathematical comparison of dynamic source placements, not lensing or galaxy fitting.",
+    "Target-specific redshift gain exposure and plasma parameters are measurement nuisances, not gravity constants.",
+    "The V19CX failure remains terminal and is not overwritten or reclassified by V19CY."
+  ]
+}

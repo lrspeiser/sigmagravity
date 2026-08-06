@@ -1,5 +1,21 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19CY direct-velocity evidence plan
+
+The post-V19CX observational pivot is now frozen before validation or holdout
+velocity outcomes are opened. Public XRISM/Resolve data provide a direct
+time-odd observable that the thermodynamic source chain lacked: signed
+line-of-sight gas current. Abell 2319 is development-only, Abell 3667 is sealed
+validation, and Abell 754 is the untouched holdout.
+
+The protocol requires three spectral-model branches, sign-topology stability,
+a spatially nonconstant velocity field, density-independent signed-current
+variance and leave-one-region-out robustness in every system. It separately
+tests whether I4 aligns with the observed velocity-gradient axis and whether I5
+tracks kinetic stress. Lensing, halo maps, action selection and gravity fitting
+remain forbidden. See
+[`SIGMA_V19CY_DIRECT_ICM_VELOCITY_EVIDENCE_PLAN.md`](SIGMA_V19CY_DIRECT_ICM_VELOCITY_EVIDENCE_PLAN.md).
+
 ## 2026-08-05 Sigma V19CX terminal source-reconstruction result
 
 The observation-hierarchical Bullet recovery succeeded mechanically: all 3,812
