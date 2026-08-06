@@ -1,0 +1,176 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-GAIN-TIMELINE-1.0.0",
+  "status": "frozen after the metadata-only closure and archived pipeline-log audit, but before reading any gain-history or GTI row value",
+  "purpose": "Recover the commissioning calibration timeline from exact scalar gain-history and GTI columns, audit cross-ObsID bracketing and ADR structure, and test preregistered count closures against the official report without applying gain to an event or fitting a spectrum.",
+  "parents": {
+    "metadata_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_fits_metadata_inventory.json",
+    "metadata_report_sha256": "90f9e075cc80536bc0c104c25533cd6dc9a3570312f3cd7c58abdaa4c6524c1e",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f"
+  },
+  "paths": {
+    "raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_timeline_evidence.json"
+  },
+  "gain_histories": {
+    "obsids": [
+      "000100000",
+      "000101000",
+      "000102000",
+      "000103000"
+    ],
+    "templates": {
+      "fe55": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_fe55.ghf.gz",
+      "calpixel": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_pxcal.ghf.gz"
+    },
+    "extension": "Drift_energy",
+    "allowed_scalar_columns": [
+      "TIME",
+      "PIXEL",
+      "COR_FIT",
+      "COR_AVE",
+      "CHISQ",
+      "SHIFT",
+      "WIDTH",
+      "TELAPSE",
+      "EXPOSURE",
+      "NEVENT",
+      "TEMP_FIT",
+      "TEMP_AVE"
+    ],
+    "forbidden_array_columns": [
+      "BINMESH",
+      "SPECTRUM",
+      "FITPROF",
+      "SHIFTS",
+      "SHLIKE",
+      "SHCHI2",
+      "WIDTHS",
+      "WDLIKE",
+      "WDCHI2"
+    ],
+    "minimum_events_from_archived_rslgain": 200,
+    "science_pixels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "calibration_pixel": 12,
+    "excluded_science_pixels": [
+      12,
+      27
+    ]
+  },
+  "science_gtis": {
+    "obsids": [
+      "000101000",
+      "000102000",
+      "000103000"
+    ],
+    "files": {
+      "open_filter": {
+        "template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_opn.gti.gz",
+        "extensions": [
+          "GTIOPEN1",
+          "GTIOPEN2"
+        ]
+      },
+      "adr": {
+        "template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_adr.gti.gz",
+        "extensions": [
+          "GTIADROFF",
+          "GTIADRON"
+        ]
+      },
+      "observation": {
+        "template": "xrism/{obsid}/auxil/xa{obsid}_gen.gti.gz",
+        "extensions": [
+          "GTIOBS"
+        ]
+      },
+      "telemetry": {
+        "template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_tel.gti.gz",
+        "extensions": [
+          "GTITEL"
+        ]
+      }
+    },
+    "allowed_columns": [
+      "START",
+      "STOP"
+    ],
+    "post_adr_linear_delay_seconds": 21600
+  },
+  "preregistered_count_variants": [
+    "raw",
+    "finite_required",
+    "finite_required_and_nevent_at_least_200",
+    "deduplicate_exact_time_pixel",
+    "deduplicate_exact_time_pixel_after_finite_and_nevent",
+    "science_pixels_after_finite_nevent_and_deduplication",
+    "calibration_pixel_after_finite_nevent_and_deduplication",
+    "within_total_open_filter_time_span",
+    "inside_an_open_filter_interval"
+  ],
+  "official_report_comparator": {
+    "fe55_solutions": 2294,
+    "calibration_pixel_solutions": 471,
+    "failed_fits": 0,
+    "use_as_fit_target": false,
+    "decision_rule": "Report every preregistered count. If no predeclared variant reproduces the official totals, stop before gain application and require a documented mission-team selection rule; do not invent a filter from the discrepancy."
+  },
+  "coverage_audit": {
+    "require_per_open_interval_per_science_pixel_nearest_preceding_and_following_fe55_times": true,
+    "report_expected_one_sided_extrapolation_cases_without_treating_them_as_failure": true,
+    "report_every_adr_on_off_interval": true,
+    "report_every_six_hour_post_adr_candidate": true
+  },
+  "authorization": {
+    "read_exact_gain_history_scalar_columns": true,
+    "read_exact_gti_start_stop_columns": true,
+    "read_gain_history_array_columns": false,
+    "read_event_rows_or_energies": false,
+    "apply_or_interpolate_gain": false,
+    "fit_spectrum_or_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "This stage measures only calibration support and interval topology.",
+    "A count match is not a gain-accuracy pass and cannot authorize spectral fitting by itself.",
+    "No filter may be added after seeing the count discrepancy unless an external mission document or archived command supplies that rule."
+  ]
+}
