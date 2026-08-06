@@ -1,0 +1,59 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-RELATIVE-LINE-FAILURE-DIAGNOSIS-1.0.0",
+  "status": "frozen after the relative-line terminal gate failed and its report was hashed, before calculating a root-cause classification or authorizing a different spectral model",
+  "purpose": "Determine from frozen reports whether the raw relative-line failure is most consistent with calibration failure, region failure, or identifiability failure of a response-free shared line template.",
+  "parents": {
+    "relative_line_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_relative_fe_line_shift.json",
+    "relative_line_report_sha256": "df73f2bdb944c2d0349b0e64c997ffc64163110468f4a094f438e7baf2b9b941",
+    "readiness_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_region_readiness.json",
+    "readiness_report_sha256": "84452380c22ba22f415464875cd0278bf61c67382c43eca0f5cbc12a31087fc1",
+    "calibration_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_bracketed_science_calibration.json",
+    "calibration_report_sha256": "6f474938d674e353d2339cf150d5eef1f41b0231b5e8e2f31688c7bec548136e"
+  },
+  "paths": {
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_relative_line_failure_diagnosis.json"
+  },
+  "published_detector_temperatures_keV": {
+    "a": 7.66,
+    "b": 7.72,
+    "d": 8.66,
+    "b_prime": 8.42,
+    "c_prime": 8.50,
+    "d_prime": 9.26,
+    "e_prime": 9.84
+  },
+  "published_phase_check": {
+    "region": "e_prime",
+    "he_like_velocity_kms": 37.7,
+    "h_like_velocity_kms": 92.6,
+    "interpretation": "the paper reports that cooler and hotter gas phases can have different velocities, so identical line shape across regions and bands is not physically guaranteed"
+  },
+  "classification_rules": {
+    "require_parent_terminal_failure": true,
+    "calibration_execution_evidence_preserved_if_all_three_branches_passed": true,
+    "region_geometry_evidence_preserved_if_all_partitions_exact_and_count_gate_passed": true,
+    "extreme_topology_evidence_preserved_if_b_prime_and_e_prime_are_recovered": true,
+    "minimum_h_like_optimizer_failures_for_sparse_band_warning": 1,
+    "minimum_maximum_he_h_velocity_disagreement_kms_for_shape_warning": 100.0,
+    "minimum_published_temperature_span_keV_for_line_ratio_warning": 1.5,
+    "minimum_primary_region_uncertainty_kms_for_reduced_exposure_warning": 75.0,
+    "decision_rule": "Authorize a response-aware plasma-model protocol only when calibration and region execution evidence are preserved, the raw template fails globally while recovering both extrema, and at least two independent line-shape/sparsity warnings are present."
+  },
+  "allowed_next_model": {
+    "model_class": "response-aware absorbed bapec plus frozen NXB treatment",
+    "must_generate": ["source PHA", "large RMF", "ARF or explicitly narrow-band response approximation", "NXB spectrum"],
+    "must_fit": ["3.0-9.5 keV one-temperature bapec", "6.2-6.7 keV narrow bapec", "broad two-temperature shared-velocity robustness model"],
+    "must_not_change": ["gain histories", "science intervals", "event screening", "pixel regions", "published benchmark", "validation and holdout seals"],
+    "claim": "This is a materially different physical/statistical closure, not a smoothing or window retune of the failed empirical template."
+  },
+  "authorization": {
+    "read_only_frozen_reports": true,
+    "read_event_or_energy_value": false,
+    "refit_relative_template": false,
+    "authorize_response_aware_development_protocol_if_rule_passes": true,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  }
+}
