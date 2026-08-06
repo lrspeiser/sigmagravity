@@ -1,0 +1,93 @@
+{
+  "protocol_version": "SIGMA-V19DC-BULLET-GAIN-AUDIT-1.0.0",
+  "freeze_state": "frozen_after_v19db_combination_pass_before_any_v19dc_gain_fit_or_source_redshift_fit",
+  "purpose": "Measure per-ObsID ACIS gain intercept and slope from the Ni K-alpha and Au L-alpha lines in the original matched blank-sky cells, without opening a Bullet source PHA or fitting an astrophysical redshift.",
+  "claim_boundary": "This detector-nuisance audit can quantify calibration uncertainty at the observed Fe-K energy. It cannot establish an ICM velocity, admit a Sigma source, open Abell 2146 or test gravity.",
+  "parents": {
+    "v19db_commit": "8aac107c4ff720bae4910f77c6240e8b2fc4cbff",
+    "v19db_config": {
+      "path": "configs/sigma_v19db_bullet_velocity_combination.json",
+      "sha256": "71372344af5d8249d59961aa9f86b94f8c976594b2f37cf1bcada156fffd7d27"
+    },
+    "v19db_runner": {
+      "path": "scripts/run_sigma_v19db_bullet_velocity_combination.py",
+      "sha256": "aeb92be4afd2e399c5a474b5fa5c5fcc930ba3e9917e1e13e7b0ec3e8e455149"
+    },
+    "v19db_report": {
+      "path": "results/sigma_v19db_bullet_velocity_combination/report.json",
+      "sha256": "25104d0a4f7840e3c25b7b2eda99ff6186c9ef3b668af8695289d422a984e4aa",
+      "required_status": "bullet_primary_velocity_region_combination_passed"
+    },
+    "v19db_manifest": {
+      "path": "results/sigma_v19db_bullet_velocity_combination/combined_region_manifest.csv",
+      "sha256": "32f49b9469c6847e6999cac78e73f046d4e40e582fd137a6fc1bf29a4c4caa57"
+    },
+    "unified_product_index": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+      "sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4"
+    }
+  },
+  "workload": {
+    "cluster": "BULLET",
+    "response_cells": 3483,
+    "obsids": [3184, 4984, 4985, 4986, 5355, 5356, 5357, 5358, 5361],
+    "excluded_obsids": [554],
+    "source_pha_access": "forbidden",
+    "background_rule": "sum integer COUNTS channel-by-channel over the original non-overlapping matched blank-sky cell PHAs separately within each ObsID; do not use an ASCA-scaled combined background as the gain spectrum",
+    "energy_grid_rule": "require identical 1024-channel EBOUNDS within and across all admitted cells before summing"
+  },
+  "line_model": {
+    "likelihood": "Poisson Cash statistic on ungrouped integer counts",
+    "model_per_line": "positive exponential-linear local continuum plus one bin-integrated Gaussian line",
+    "joint_gain_relation": "fit the two recorded centroids independently, then transform their profile covariance exactly to E_cal_keV = intercept_keV + slope * E_recorded_keV",
+    "lines_keV": {
+      "Ni_Kalpha": 7.4782,
+      "Au_Lalpha": 9.7133
+    },
+    "primary_half_window_keV": 0.30,
+    "robustness_half_windows_keV": [0.25, 0.35],
+    "centroid_search_half_width_keV": 0.15,
+    "sigma_bounds_keV": [0.01, 0.20],
+    "continuum_log_slope_bounds_per_keV": [-5.0, 5.0],
+    "multistart_centroid_offsets_keV": [-0.04, 0.0, 0.04],
+    "multistart_sigma_keV": [0.04, 0.07, 0.11],
+    "profile_interval_delta_cash": 1.0,
+    "profile_crossing_tolerance_keV": 1e-07,
+    "minimum_line_delta_cash": 25.0,
+    "maximum_window_robustness_centroid_shift_keV": 0.015
+  },
+  "propagation": {
+    "bullet_optical_redshift": 0.296,
+    "representative_fe_rest_energy_keV": 6.7,
+    "observed_fe_energy_rule": "representative_fe_rest_energy_keV / (1 + bullet_optical_redshift)",
+    "centroid_covariance": "independent Ni/Au profile variances using the larger asymmetric Delta-Cash=1 half-width for each line",
+    "gain_covariance": "Jacobian propagation from the two recorded centroids to intercept and slope",
+    "source_use": "propagate the intercept/slope covariance to each source redshift likelihood; do not shift the source data in the primary branch",
+    "later_gate": "after source fitting, one-sigma gain uncertainty at observed Fe-K must be at most 0.2 times the median pre-gain total redshift uncertainty"
+  },
+  "gates": {
+    "all_3483_background_and_rmf_inputs_match_frozen_size_and_sha256": true,
+    "all_original_background_cells_used_exactly_once": true,
+    "all_channel_and_ebounds_grids_exact": true,
+    "both_lines_detected_with_delta_cash_at_least_25_in_every_obsid": true,
+    "every_primary_profile_interval_is_finite_and_interior": true,
+    "window_robustness_centroid_shift_at_most_0p015_keV": true,
+    "every_gain_covariance_is_finite_symmetric_positive_semidefinite": true
+  },
+  "authorization": {
+    "open_original_bullet_background_pha_and_rmf_ebounds": true,
+    "open_bullet_source_pha": false,
+    "fit_temperature_abundance_redshift_or_velocity": false,
+    "open_obsid554_or_abell2146": false,
+    "open_lensing_halo_gravity_or_action": false
+  },
+  "runtime": {
+    "parallel_obsids": 9,
+    "python_environment": "existing Windows Python with Astropy and SciPy; frozen /home archive paths resolve through the Ubuntu-24.04 WSL UNC mount",
+    "result_root": "results/sigma_v19dc_bullet_gain_audit"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dc_bullet_gain_audit.py",
+    "runner_sha256": "ed41b7a833edc5702621746369a698458af4da91bfd9b7608fe704d37ba2a915"
+  }
+}

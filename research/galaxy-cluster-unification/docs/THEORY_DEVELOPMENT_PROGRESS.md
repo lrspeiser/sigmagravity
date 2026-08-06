@@ -1,5 +1,20 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DC Bullet gain-audit freeze
+
+The per-ObsID detector-gain audit is frozen before any source redshift fit. It
+will sum the original matched blank-sky integer counts across all 3,483 primary
+Bullet cells, rather than use the ASCA-scaled combination, and require exact
+PHA/RMF channel grids. Separate Poisson continuum-plus-Gaussian fits to Ni
+K-alpha and Au L-alpha determine the covariance of the linear relation
+`E_cal = intercept + slope * E_recorded`.
+
+Primary 0.30-keV half-windows and fixed 0.25/0.35-keV robustness windows,
+Delta-Cash line and profile gates, and a 0.015-keV maximum window-induced
+centroid shift are frozen. No source PHA, temperature, redshift, velocity,
+Abell 2146, lensing, gravity or action payload is authorized. See
+[`SIGMA_V19DC_BULLET_GAIN_AUDIT.md`](SIGMA_V19DC_BULLET_GAIN_AUDIT.md).
+
 ## 2026-08-06 Sigma V19DB Bullet combination result
 
 The hash-frozen Bullet-only response combination passes. All 43 primary

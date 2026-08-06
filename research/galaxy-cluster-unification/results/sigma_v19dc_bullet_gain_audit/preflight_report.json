@@ -1,0 +1,15 @@
+{
+  "background_or_rmf_payload_opened": false,
+  "bullet_source_pha_opened": false,
+  "config_sha256": "bd1015b97a629cbb2cb6434088d82940dcca903fd971ae050863f4246849e6a7",
+  "generated_utc": "2026-08-06T18:32:42.025652+00:00",
+  "lensing_halo_gravity_or_action_opened": false,
+  "obsid554_or_abell2146_opened": false,
+  "obsids": 9,
+  "protocol_version": "SIGMA-V19DC-BULLET-GAIN-AUDIT-1.0.0",
+  "response_cells": 3483,
+  "runner_sha256": "ed41b7a833edc5702621746369a698458af4da91bfd9b7608fe704d37ba2a915",
+  "source_pha_opened": false,
+  "status": "v19dc_payload_blind_gain_plan_passed",
+  "temperature_abundance_redshift_or_velocity_fitted": false
+}
