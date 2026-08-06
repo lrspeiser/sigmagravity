@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-CALIBRATION-APPLICATION-CANDIDATES-1.0.0",
-  "status": "frozen after the scalar topology gate passed, but before any gain-history array was copied or any calibration event energy was recalculated",
+  "protocol_version": "SIGMA-V19CY-A2319-CALIBRATION-APPLICATION-CANDIDATES-1.0.1",
+  "status": "corrected and refrozen after version 1.0.0 completed the first baseline branch application but failed closed before the second candidate because a cached copied FITS HDU name was normalized to uppercase; no energy distribution, cluster event, validation, holdout, lensing, halo, gravity, or action target was inspected",
   "purpose": "Apply three preregistered branch-level gain candidates to high-resolution pixel-12 calibration events with the audited HEASoft rslpha2pi runtime, preserving outputs for a separately frozen spectral gate without inspecting any cluster event.",
   "parents": {
     "topology_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_reconstruction_topology.json",
@@ -85,6 +85,18 @@
     "require_zero_null_pi_epi2_and_temp": true,
     "require_every_synthetic_drift_has_72_rows_and_two_rows_per_pixel": true,
     "decision_rule": "Authorize freezing a calibration-pixel line-shape gate only if all 21 candidate-branch applications pass. Do not inspect centroids, widths, or any energy distribution in this protocol."
+  },
+  "recorded_failure": {
+    "version": "1.0.0",
+    "staging_root": "tmp/sigma_v19cy_a2319_calibration_application.installing.qcgn0krs",
+    "completed_before_failure": "first-branch fe55_branch_only drift and calibration-event output",
+    "failed_before": "second candidate drift publication",
+    "root_cause": "the first drift build replaced the cached copied Drift_energy HDU with a new BinTableHDU whose name was normalized to DRIFT_ENERGY; the second build used a case-sensitive name lookup and raised StopIteration",
+    "correction": "copy the cached template HDUs inside every drift build and locate the copied extension case-insensitively, leaving the cached source immutable",
+    "final_scratch_root_exists": false,
+    "partial_staging_preserved": true,
+    "energy_distribution_inspected_or_fit": false,
+    "cluster_sky_event_accessed": false
   },
   "authorization": {
     "read_and_copy_full_fe55_gain_history_rows": true,

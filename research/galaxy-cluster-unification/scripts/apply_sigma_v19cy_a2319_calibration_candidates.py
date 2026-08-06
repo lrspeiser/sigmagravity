@@ -67,11 +67,11 @@ def validate_inputs(
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     config = load_json(config_path)
     if config.get("protocol_version") != (
-        "SIGMA-V19CY-A2319-CALIBRATION-APPLICATION-CANDIDATES-1.0.0"
+        "SIGMA-V19CY-A2319-CALIBRATION-APPLICATION-CANDIDATES-1.0.1"
     ):
         raise RuntimeError("unexpected calibration-application protocol")
     if config.get("status") != (
-        "frozen after the scalar topology gate passed, but before any gain-history array was copied or any calibration event energy was recalculated"
+        "corrected and refrozen after version 1.0.0 completed the first baseline branch application but failed closed before the second candidate because a cached copied FITS HDU name was normalized to uppercase; no energy distribution, cluster event, validation, holdout, lensing, halo, gravity, or action target was inspected"
     ):
         raise RuntimeError("calibration-application protocol is not frozen")
     for name in ("topology_report", "environment_report", "download_provenance"):
@@ -186,18 +186,21 @@ def build_drift_file(
             new_data["TIME"][row] = endpoint
             new_data["PIXEL"][row] = pixel
             new_data["TEMP_FIT"][row] = fitted_temperature(branch, pixel, endpoint) + residual
+    output_hdus = [hdu.copy() for hdu in start_hdus]
     table_index = next(
-        index for index, hdu in enumerate(start_hdus) if hdu.name == extension
+        index
+        for index, hdu in enumerate(output_hdus)
+        if hdu.name.casefold() == extension.casefold()
     )
-    header = start_hdus[table_index].header.copy()
+    header = output_hdus[table_index].header.copy()
     header["TSTART"] = endpoints[0]
     header["TSTOP"] = endpoints[1]
-    start_hdus[table_index] = fits.BinTableHDU(
+    output_hdus[table_index] = fits.BinTableHDU(
         data=new_data,
         header=header,
         name=extension,
     )
-    fits.HDUList(start_hdus).writeto(output, overwrite=False, checksum=True)
+    fits.HDUList(output_hdus).writeto(output, overwrite=False, checksum=True)
     counts = Counter(int(value) for value in new_data["PIXEL"])
     finite = bool(np.isfinite(np.asarray(new_data["TEMP_FIT"], dtype=float)).all())
     return {

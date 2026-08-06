@@ -55,6 +55,13 @@ def test_runtime_command_uses_only_calibration_pixel_and_frozen_parameters() -> 
     assert "cluster" not in command_source.lower()
 
 
+def test_each_drift_build_copies_cached_hdus_and_matches_extension_case_insensitively() -> None:
+    source = inspect.getsource(application.build_drift_file)
+    assert "output_hdus = [hdu.copy() for hdu in start_hdus]" in source
+    assert "hdu.name.casefold() == extension.casefold()" in source
+    assert "start_hdus[table_index] =" not in source
+
+
 def test_output_audit_counts_nulls_without_summarizing_energy_values() -> None:
     source = inspect.getsource(application.audit_output)
     assert 'data["PI"]' in source
