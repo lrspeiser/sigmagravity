@@ -1,0 +1,80 @@
+{
+  "allowed_next_model": {
+    "claim": "This is a materially different physical/statistical closure, not a smoothing or window retune of the failed empirical template.",
+    "model_class": "response-aware absorbed bapec plus frozen NXB treatment",
+    "must_fit": [
+      "3.0-9.5 keV one-temperature bapec",
+      "6.2-6.7 keV narrow bapec",
+      "broad two-temperature shared-velocity robustness model"
+    ],
+    "must_generate": [
+      "source PHA",
+      "large RMF",
+      "ARF or explicitly narrow-band response approximation",
+      "NXB spectrum"
+    ],
+    "must_not_change": [
+      "gain histories",
+      "science intervals",
+      "event screening",
+      "pixel regions",
+      "published benchmark",
+      "validation and holdout seals"
+    ]
+  },
+  "claim_boundary": [
+    "The failed empirical relative-line model remains failed and is not retuned.",
+    "The diagnosis does not prove the gain is correct; it makes calibration failure less favored than template identifiability for the observed pattern.",
+    "Only a response-aware development fit is authorized; validation and holdout data remain sealed."
+  ],
+  "config_sha256": "f649c7d4385155f3e6a8d8959223fa311ac38950b24d52d8e0b757fe6a2bdd1e",
+  "decision": "authorize_separately_frozen_response_aware_bapec_development_protocol",
+  "diagnosis": {
+    "authorize_response_aware_development_protocol": true,
+    "calibration_execution_evidence_preserved": true,
+    "calibration_failure_currently_disfavored": true,
+    "calibration_failure_ruled_out": false,
+    "extreme_topology_evidence_preserved": true,
+    "h_like_optimizer_failures": 3,
+    "he_h_absolute_velocity_differences_kms": {
+      "a": 28.19129866740309,
+      "b": 111.62099097621771,
+      "b_prime": 146.20121933491941,
+      "c_prime": 190.4009429809091,
+      "d": 18.979142614237304,
+      "d_prime": 399.5561680916624,
+      "e_prime": 95.83742648202434
+    },
+    "maximum_he_h_velocity_disagreement_kms": 399.5561680916624,
+    "parent_relative_line_gate_failed": true,
+    "primary_total_uncertainties_kms": {
+      "a": 101.94904220740578,
+      "b": 79.41958564208136,
+      "b_prime": 80.64173208965632,
+      "c_prime": 86.82723256851305,
+      "d": 77.2608382105324,
+      "d_prime": 154.5436322246626,
+      "e_prime": 121.42477046501155
+    },
+    "published_detector_temperature_span_keV": 2.1799999999999997,
+    "region_geometry_evidence_preserved": true,
+    "supported_classification": "response_free_shared_template_identifiability_failure_with_reduced_exposure_noise",
+    "warnings": {
+      "he_h_shape_disagreement": true,
+      "published_temperature_span": true,
+      "reduced_exposure_uncertainty": true,
+      "sparse_h_like_optimizer_failures": true
+    }
+  },
+  "event_or_energy_value_read": false,
+  "generated_utc": "2026-08-06T06:55:53.299481+00:00",
+  "parent_hashes": {
+    "calibration_report": "6f474938d674e353d2339cf150d5eef1f41b0231b5e8e2f31688c7bec548136e",
+    "readiness_report": "84452380c22ba22f415464875cd0278bf61c67382c43eca0f5cbc12a31087fc1",
+    "relative_line_report": "df73f2bdb944c2d0349b0e64c997ffc64163110468f4a094f438e7baf2b9b941"
+  },
+  "protocol_version": "SIGMA-V19CY-A2319-RELATIVE-LINE-FAILURE-DIAGNOSIS-1.0.0",
+  "relative_template_refit": false,
+  "status": "a2319_relative_line_failure_diagnosed_from_frozen_reports",
+  "validation_or_holdout_accessed": false
+}

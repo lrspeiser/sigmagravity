@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -39,3 +40,24 @@ def test_diagnosis_identifies_materially_different_next_closure() -> None:
     assert result["calibration_failure_currently_disfavored"]
     assert result["authorize_response_aware_development_protocol"]
     assert config["allowed_next_model"]["model_class"].startswith("response-aware")
+
+
+def test_terminal_diagnosis_authorizes_only_response_aware_development() -> None:
+    path = (
+        ROOT
+        / "results"
+        / "sigma_v19cy_direct_icm_velocity_evidence"
+        / "development_relative_line_failure_diagnosis.json"
+    )
+    report = json.loads(path.read_text(encoding="utf-8"))
+    assert report["status"] == (
+        "a2319_relative_line_failure_diagnosed_from_frozen_reports"
+    )
+    assert report["diagnosis"]["authorize_response_aware_development_protocol"]
+    assert not report["diagnosis"]["calibration_failure_ruled_out"]
+    assert not report["event_or_energy_value_read"]
+    assert not report["relative_template_refit"]
+    assert not report["validation_or_holdout_accessed"]
+    assert report["decision"] == (
+        "authorize_separately_frozen_response_aware_bapec_development_protocol"
+    )

@@ -483,6 +483,18 @@ The terminal report SHA-256 is
 the diagnostic plot SHA-256 is
 `cbe7b28f848674129f1bfe2818d9f2bf10fc7bf465ad287eb508d7eab8d0fe4d`.
 
+The subsequent frozen-report-only diagnosis did not reopen or refit an event.
+It found four independent warnings: three non-converged sparse H-like fits, a
+maximum 400 km/s He/H disagreement, a published 2.18 keV detector-temperature
+span, and 77–155 km/s primary uncertainties. Calibration execution and exact
+region partitions remain intact, and both velocity extrema were recovered.
+Calibration failure is therefore disfavored but explicitly not ruled out. The
+failed empirical template remains failed; the authorized next closure is a
+materially different response-aware absorbed `bapec` analysis with NXB, broad,
+narrow, and shared-velocity two-temperature checks. Validation and holdout
+data remain sealed. The diagnosis report SHA-256 is
+`b41524c93b591b2fa7deddbd79ce33914113350d9573c113795aa362b5df1caf`.
+
 ## The new observable source terms
 
 The signed projected gas current is
