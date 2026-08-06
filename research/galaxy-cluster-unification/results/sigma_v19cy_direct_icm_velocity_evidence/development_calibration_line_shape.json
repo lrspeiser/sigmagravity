@@ -1,0 +1,560 @@
+{
+  "authorization": {
+    "access_validation_or_holdout_assets": false,
+    "apply_selected_candidate_to_cluster_events": false,
+    "derive_or_select_action": false,
+    "fit_cluster_velocity": false,
+    "freeze_selected_candidate_cluster_event_application": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "read_cluster_sky_event_rows": false
+  },
+  "cluster_sky_event_accessed": false,
+  "cluster_velocity_fit": false,
+  "config_sha256": "1db62b82b5684e1619c6a2c2cdc5adb8cd0a659e79d4e033d751ce2f4cd34c59",
+  "decision": "stop_before_cluster_event_application",
+  "fit_results": {
+    "branch_linear_common_mode": {
+      "000101000": {
+        "cash_statistic": -2377637.0949410675,
+        "centroid_shift_ev": 0.32079261001389475,
+        "constant_background_per_ev": 21.797498267978618,
+        "converged": true,
+        "events_in_fit_window": 169974,
+        "instrument_fwhm_ev": 4.778993234074812,
+        "iterations": 14,
+        "line_normalization": 152976.7896363498,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "000102000": {
+        "cash_statistic": -2073696.4061587052,
+        "centroid_shift_ev": 0.15713701047640277,
+        "constant_background_per_ev": 16.75419189539566,
+        "converged": true,
+        "events_in_fit_window": 150472,
+        "instrument_fwhm_ev": 4.544768450237075,
+        "iterations": 11,
+        "line_normalization": 135424.950500479,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "000103000": {
+        "cash_statistic": -3647762.1716627753,
+        "centroid_shift_ev": -0.05391332232601177,
+        "constant_background_per_ev": 36.13483604579228,
+        "converged": true,
+        "events_in_fit_window": 247320,
+        "instrument_fwhm_ev": 4.598311596867162,
+        "iterations": 12,
+        "line_normalization": 222588.30819457961,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    },
+    "branch_median_common_mode": {
+      "000101000": {
+        "cash_statistic": -2369448.3329846878,
+        "centroid_shift_ev": 0.27702394101657335,
+        "constant_background_per_ev": 22.25890921268608,
+        "converged": true,
+        "events_in_fit_window": 169970,
+        "instrument_fwhm_ev": 5.260310803907778,
+        "iterations": 13,
+        "line_normalization": 152973.21888378728,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "000102000": {
+        "cash_statistic": -2061735.4277933938,
+        "centroid_shift_ev": 0.09082441984930749,
+        "constant_background_per_ev": 17.220789307011824,
+        "converged": true,
+        "events_in_fit_window": 150453,
+        "instrument_fwhm_ev": 5.281231616011889,
+        "iterations": 13,
+        "line_normalization": 135407.92649774763,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "000103000": {
+        "cash_statistic": -3633051.53833534,
+        "centroid_shift_ev": -0.10005390522648346,
+        "constant_background_per_ev": 36.18814094229872,
+        "converged": true,
+        "events_in_fit_window": 247301,
+        "instrument_fwhm_ev": 5.167128736289329,
+        "iterations": 15,
+        "line_normalization": 222571.27175388564,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    },
+    "fe55_branch_only": {
+      "000101000": {
+        "cash_statistic": -2365727.6539056757,
+        "centroid_shift_ev": -0.6000563746186853,
+        "constant_background_per_ev": 22.823897426298053,
+        "converged": true,
+        "events_in_fit_window": 169984,
+        "instrument_fwhm_ev": 5.489123338743378,
+        "iterations": 13,
+        "line_normalization": 152985.94625027405,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "000102000": {
+        "cash_statistic": -2060885.1763802676,
+        "centroid_shift_ev": 0.8197293621898131,
+        "constant_background_per_ev": 17.477563275437323,
+        "converged": true,
+        "events_in_fit_window": 150462,
+        "instrument_fwhm_ev": 5.345978163394808,
+        "iterations": 13,
+        "line_normalization": 135416.0929107798,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "000103000": {
+        "cash_statistic": -3562927.1139995307,
+        "centroid_shift_ev": -0.5135382053683766,
+        "constant_background_per_ev": 39.99868665943058,
+        "converged": true,
+        "events_in_fit_window": 247305,
+        "instrument_fwhm_ev": 8.0,
+        "iterations": 16,
+        "line_normalization": 222574.21031438163,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    }
+  },
+  "generated_utc": "2026-08-06T04:40:54.471562+00:00",
+  "line_shape_gate_passed": false,
+  "protocol_version": "SIGMA-V19CY-A2319-CALIBRATION-LINE-SHAPE-1.0.0",
+  "selected_candidate": null,
+  "selection": {
+    "passed": false,
+    "selected": null,
+    "summaries": [
+      {
+        "candidate": "fe55_branch_only",
+        "maximum_absolute_z": 177.0,
+        "observables": [
+          {
+            "centroid_z": -19.005637461868535,
+            "fwhm_z": 51.95616693716891,
+            "obsid": "000101000"
+          },
+          {
+            "centroid_z": 67.9729362189813,
+            "fwhm_z": 44.79890816974037,
+            "obsid": "000102000"
+          },
+          {
+            "centroid_z": -55.35382053683766,
+            "fwhm_z": 177.0,
+            "obsid": "000103000"
+          }
+        ],
+        "passed": false,
+        "score": 44080.9652175899
+      },
+      {
+        "candidate": "branch_median_common_mode",
+        "maximum_absolute_z": 68.70239410165732,
+        "observables": [
+          {
+            "centroid_z": 68.70239410165732,
+            "fwhm_z": 40.5155401953889,
+            "obsid": "000101000"
+          },
+          {
+            "centroid_z": -4.917558015069252,
+            "fwhm_z": 41.56158080059442,
+            "obsid": "000102000"
+          },
+          {
+            "centroid_z": -14.005390522648344,
+            "fwhm_z": 35.35643681446645,
+            "obsid": "000103000"
+          }
+        ],
+        "passed": false,
+        "score": 9559.30391600677
+      },
+      {
+        "candidate": "branch_linear_common_mode",
+        "maximum_absolute_z": 73.07926100138947,
+        "observables": [
+          {
+            "centroid_z": 73.07926100138947,
+            "fwhm_z": 16.44966170374058,
+            "obsid": "000101000"
+          },
+          {
+            "centroid_z": 1.7137010476402759,
+            "fwhm_z": 4.738422511853724,
+            "obsid": "000102000"
+          },
+          {
+            "centroid_z": -9.391332232601176,
+            "fwhm_z": 6.915579843358088,
+            "obsid": "000103000"
+          }
+        ],
+        "passed": false,
+        "score": 5772.581543531192
+      }
+    ]
+  },
+  "source_audits": [
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "bytes": 32918400,
+      "candidate": "fe55_branch_only",
+      "negative_epi2": 99,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 99,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000101000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000101_open_0_cross_obsid\\fe55_branch_only.evt",
+      "rows": 207785,
+      "sha256": "15dd6b8de46956b5de6d2a82e13c4a342439544d5f98d2f85bea5594419cc1fd"
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "bytes": 1249920,
+      "candidate": "fe55_branch_only",
+      "negative_epi2": 3,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 3,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000101000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000101_open_1_cross_obsid\\fe55_branch_only.evt",
+      "rows": 7363,
+      "sha256": "99c8c39781d442231aeec3e867b82dfcb3d8ee45c92054e03fc64412506a67f4"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "bytes": 28869120,
+      "candidate": "fe55_branch_only",
+      "negative_epi2": 97,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 97,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000102000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000102_open_0_cross_obsid\\fe55_branch_only.evt",
+      "rows": 182155,
+      "sha256": "056efd5002329f2985f6cf79653f18d55dd66e20f990b4be2a559403cd964ffb"
+    },
+    {
+      "branch": "000102_open_1_cross_obsid",
+      "bytes": 1287360,
+      "candidate": "fe55_branch_only",
+      "negative_epi2": 3,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 3,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000102000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000102_open_1_cross_obsid\\fe55_branch_only.evt",
+      "rows": 7589,
+      "sha256": "2821b6e758a465b68700b27020ee36354931ee1670fb201981d6dba48509938d"
+    },
+    {
+      "branch": "000103_final_forward",
+      "bytes": 26602560,
+      "candidate": "fe55_branch_only",
+      "negative_epi2": 91,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 91,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_final_forward\\fe55_branch_only.evt",
+      "rows": 167818,
+      "sha256": "c95d02c1f28a8c25d39061aef26a57361753e817d79422eca9f41c5a5b396699"
+    },
+    {
+      "branch": "000103_post_adr_backward",
+      "bytes": 4354560,
+      "candidate": "fe55_branch_only",
+      "negative_epi2": 22,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 22,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_post_adr_backward\\fe55_branch_only.evt",
+      "rows": 27006,
+      "sha256": "862060767c23ed48f33e2d14e8471c8882797d3f6e041ca555624491cf8dfc91"
+    },
+    {
+      "branch": "000103_pre_adr_forward",
+      "bytes": 18728640,
+      "candidate": "fe55_branch_only",
+      "negative_epi2": 59,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 59,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_pre_adr_forward\\fe55_branch_only.evt",
+      "rows": 117986,
+      "sha256": "325bac6be8dbbde7937916dd5e08dc20bedcb2f6abd43b79b81b57a811d93506"
+    },
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "bytes": 32918400,
+      "candidate": "branch_median_common_mode",
+      "negative_epi2": 99,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 99,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000101000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000101_open_0_cross_obsid\\branch_median_common_mode.evt",
+      "rows": 207785,
+      "sha256": "614c81975ecaf37dcc5170800f5e00e26e830e0418c11aa25af094294938e106"
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "bytes": 1249920,
+      "candidate": "branch_median_common_mode",
+      "negative_epi2": 3,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 3,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000101000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000101_open_1_cross_obsid\\branch_median_common_mode.evt",
+      "rows": 7363,
+      "sha256": "0319c07008cd68bac0737f59893045561960b92382dd1c42bfe7d49b96cb7d78"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "bytes": 28869120,
+      "candidate": "branch_median_common_mode",
+      "negative_epi2": 97,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 97,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000102000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000102_open_0_cross_obsid\\branch_median_common_mode.evt",
+      "rows": 182155,
+      "sha256": "b88790792fe347ca245220938a13a9735099d71450f1e8c747f9cb17bfea4b2f"
+    },
+    {
+      "branch": "000102_open_1_cross_obsid",
+      "bytes": 1287360,
+      "candidate": "branch_median_common_mode",
+      "negative_epi2": 3,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 3,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000102000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000102_open_1_cross_obsid\\branch_median_common_mode.evt",
+      "rows": 7589,
+      "sha256": "bd2774c085ae124b2abfc742539f3ffbcb4024f9d2ccf651cbdd0d6573ab0fcb"
+    },
+    {
+      "branch": "000103_final_forward",
+      "bytes": 26602560,
+      "candidate": "branch_median_common_mode",
+      "negative_epi2": 91,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 91,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_final_forward\\branch_median_common_mode.evt",
+      "rows": 167818,
+      "sha256": "f5904f7de28e6c1e8582fd904f1c56260e0c75bbaf7b94a928e98f9ebc236bf5"
+    },
+    {
+      "branch": "000103_post_adr_backward",
+      "bytes": 4354560,
+      "candidate": "branch_median_common_mode",
+      "negative_epi2": 22,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 22,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_post_adr_backward\\branch_median_common_mode.evt",
+      "rows": 27006,
+      "sha256": "3c486d120392646643434924d3c2c03ee7aeb95bfbd1fadd254151a34ae669c1"
+    },
+    {
+      "branch": "000103_pre_adr_forward",
+      "bytes": 18728640,
+      "candidate": "branch_median_common_mode",
+      "negative_epi2": 59,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 59,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_pre_adr_forward\\branch_median_common_mode.evt",
+      "rows": 117986,
+      "sha256": "52d507ca2b2ae9624f78e75bea361a98832f7683a040ffb6426c9165036f4ed7"
+    },
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "bytes": 32918400,
+      "candidate": "branch_linear_common_mode",
+      "negative_epi2": 99,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 99,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000101000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000101_open_0_cross_obsid\\branch_linear_common_mode.evt",
+      "rows": 207785,
+      "sha256": "5a0b10c9645a090c2bdbb44be435519928b416fb4b58c5d73ee05c68ca5db1b8"
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "bytes": 1249920,
+      "candidate": "branch_linear_common_mode",
+      "negative_epi2": 3,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 3,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000101000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000101_open_1_cross_obsid\\branch_linear_common_mode.evt",
+      "rows": 7363,
+      "sha256": "02115c71eb6053fbb423bd5929e95b3e5b41d1b79d8d483625590c9a4a62d5dd"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "bytes": 28869120,
+      "candidate": "branch_linear_common_mode",
+      "negative_epi2": 97,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 97,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000102000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000102_open_0_cross_obsid\\branch_linear_common_mode.evt",
+      "rows": 182155,
+      "sha256": "264fd5cde0ed43190014f5a70b0d5483f2e20eb8127afdea5ae175a1320f6a4d"
+    },
+    {
+      "branch": "000102_open_1_cross_obsid",
+      "bytes": 1287360,
+      "candidate": "branch_linear_common_mode",
+      "negative_epi2": 3,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 3,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000102000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000102_open_1_cross_obsid\\branch_linear_common_mode.evt",
+      "rows": 7589,
+      "sha256": "2f7b1ae6f1cbb4953436814b991b0fc11add0c47f07b753d4c8aa21a271efaea"
+    },
+    {
+      "branch": "000103_final_forward",
+      "bytes": 26602560,
+      "candidate": "branch_linear_common_mode",
+      "negative_epi2": 91,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 91,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_final_forward\\branch_linear_common_mode.evt",
+      "rows": 167818,
+      "sha256": "8ed0ccbc5f3310dbb010e96e2e3d80a5e5bf5144d0128fdf9e780d2d555e215e"
+    },
+    {
+      "branch": "000103_post_adr_backward",
+      "bytes": 4354560,
+      "candidate": "branch_linear_common_mode",
+      "negative_epi2": 22,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 22,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_post_adr_backward\\branch_linear_common_mode.evt",
+      "rows": 27006,
+      "sha256": "07f2f3b8f8e3745dd10911bca8bbb76c9e10f99b6d401e0d059bce505bfe2e5d"
+    },
+    {
+      "branch": "000103_pre_adr_forward",
+      "bytes": 18728640,
+      "candidate": "branch_linear_common_mode",
+      "negative_epi2": 59,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 59,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_pre_adr_forward\\branch_linear_common_mode.evt",
+      "rows": 117986,
+      "sha256": "daf2c11f2fd14762b1cad71d33c8a47e1dae2e462de59b162d8126025e01ba56"
+    }
+  ],
+  "status": "a2319_calibration_line_shape_candidates_fit",
+  "template_components": {
+    "area": [
+      0.3523299480455839,
+      0.14091197751808904,
+      0.07892670877024548,
+      0.06624563087862467,
+      0.01818154543136167,
+      0.004475380407334624,
+      0.22831940714960772,
+      0.11060940179915293
+    ],
+    "energy": [
+      5898.882,
+      5897.898,
+      5894.864,
+      5896.566,
+      5899.444,
+      5902.712,
+      5887.772,
+      5886.528
+    ],
+    "width": [
+      1.7145,
+      2.0442,
+      4.4985,
+      2.6616,
+      0.97669,
+      1.5528,
+      2.3604,
+      4.2168
+    ]
+  },
+  "template_copy": {
+    "bytes": 141120,
+    "command": "cp -- /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/gen/bcf/xa_gen_linefit_20190101vx001.fits /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_line_shape.installing.f7zvf5ex/xa_gen_linefit_20190101vx001.fits",
+    "exit_code": 0,
+    "sha256": "47ab55fb8f9d43392e088e7d02ad47d892880e97c7ef1707e6ee5f3d74338377",
+    "stderr": "",
+    "stdout": ""
+  },
+  "validation_or_holdout_accessed": false
+}

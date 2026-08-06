@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -8,7 +9,15 @@ SCRIPT_DIR = ROOT / "scripts"
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-import fit_sigma_v19cy_a2319_calibration_line_shape as line_shape
+import fit_sigma_v19cy_a2319_calibration_line_shape as line_shape  # noqa: I001
+
+
+TERMINAL_REPORT = (
+    ROOT
+    / "results"
+    / "sigma_v19cy_direct_icm_velocity_evidence"
+    / "development_calibration_line_shape.json"
+)
 
 
 def test_frozen_line_shape_scope_and_seals_are_exact() -> None:
@@ -56,3 +65,27 @@ def test_fit_recovers_manufactured_shift_and_width() -> None:
     assert fit["converged"]
     assert abs(fit["centroid_shift_ev"] - truth[0]) < 0.02
     assert abs(fit["instrument_fwhm_ev"] - truth[1]) < 0.05
+
+
+def test_terminal_line_shape_result_stops_before_cluster_events() -> None:
+    report = json.loads(TERMINAL_REPORT.read_text(encoding="utf-8"))
+    assert report["decision"] == "stop_before_cluster_event_application"
+    assert not report["line_shape_gate_passed"]
+    assert report["selected_candidate"] is None
+    assert not report["cluster_sky_event_accessed"]
+    assert not report["cluster_velocity_fit"]
+    assert not report["validation_or_holdout_accessed"]
+    assert all(not allowed for allowed in report["authorization"].values())
+
+    summaries = {row["candidate"]: row for row in report["selection"]["summaries"]}
+    assert summaries["branch_linear_common_mode"]["score"] == 5772.581543531192
+    assert summaries["branch_linear_common_mode"]["maximum_absolute_z"] == 73.07926100138947
+    assert summaries["branch_linear_common_mode"]["passed"] is False
+
+    best = report["fit_results"]["branch_linear_common_mode"]
+    assert best["000101000"]["centroid_shift_ev"] == 0.32079261001389475
+    assert best["000101000"]["instrument_fwhm_ev"] == 4.778993234074812
+    assert best["000102000"]["centroid_shift_ev"] == 0.15713701047640277
+    assert best["000102000"]["instrument_fwhm_ev"] == 4.544768450237075
+    assert best["000103000"]["centroid_shift_ev"] == -0.05391332232601177
+    assert best["000103000"]["instrument_fwhm_ev"] == 4.598311596867162

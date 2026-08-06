@@ -254,6 +254,39 @@ test. The terminal report SHA-256 is
 No centroid, width, or energy distribution has yet been inspected, so no
 candidate has been preferred. No cluster sky event has been opened.
 
+### Calibration line-shape gate result
+
+The preregistered eight-component CALDB Mn K-alpha Voigt fit rejected all
+three candidates. The required terminal action is therefore
+`stop_before_cluster_event_application`: no candidate was selected, no
+cluster sky event was opened, and no cluster velocity was fit.
+
+| Candidate | 000101 shift / FWHM (eV) | 000102 shift / FWHM (eV) | 000103 shift / FWHM (eV) | Maximum absolute z | Result |
+|---|---:|---:|---:|---:|---|
+| Fe-55 branch only | -0.600 / 5.489 | +0.820 / 5.346 | -0.514 / 8.000 | 177.00 | Fail |
+| Branch-median common mode | +0.277 / 5.260 | +0.091 / 5.281 | -0.100 / 5.167 | 68.70 | Fail |
+| Branch-linear common mode | +0.321 / 4.779 | +0.157 / 4.545 | -0.054 / 4.598 | 73.08 | Fail |
+
+The branch-linear correction had the lowest total score and substantially
+narrowed every line. It nearly reproduced the 000102000 commissioning values,
+but the frozen rule required all six observables to lie within five quoted
+statistical errors. Its 000101000 centroid was +0.731 eV above the published
+target, and its 000101000 FWHM was +0.329 eV broader. It also left smaller but
+still disqualifying residuals in 000103000.
+
+This result falsifies the three frozen long-branch approximations; it does not
+yet falsify reconstruction of the published calibration. A single linear fit
+over each full Fe-55 anchor segment can discard local boundary behavior and
+within-segment curvature. The next admissible step is calibration-only
+diagnosis, frozen before inspecting its outcomes: time-resolved Mn K-alpha
+fits can distinguish a constant reference offset from a slope error or
+curvature, while the continuous calibration-pixel gain history can provide a
+mission-pipeline baseline for the line fitter. Cluster-event access remains
+sealed until a separately frozen reconstruction passes its calibration gate.
+
+The terminal line-shape report SHA-256 is
+`868ed6bbe284b936312470b1bae7474c32881ade1bf94f9c935f6913269a1307`.
+
 ## The new observable source terms
 
 The signed projected gas current is
