@@ -1,0 +1,3492 @@
+{
+  "authorization": {
+    "access_validation_or_holdout_assets": false,
+    "apply_gain_to_cluster_sky_events": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false,
+    "fit_cluster_velocity": false,
+    "freeze_bracketed_interpolation_science_protocol": true,
+    "freeze_selected_endpoint_science_protocol": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "read_cluster_sky_event_rows": false
+  },
+  "candidate_results": {
+    "nearest_anchor_constant": [
+      {
+        "comparison": {
+          "passed": false,
+          "per_pixel": {
+            "0": {
+              "absolute_centroid_delta_ev": 0.40286815001072923,
+              "centroid_delta_ev": 0.40286815001072923,
+              "fwhm_increase_ev": 0.1680485507313607
+            },
+            "1": {
+              "absolute_centroid_delta_ev": 0.20891919645315843,
+              "centroid_delta_ev": 0.20891919645315843,
+              "fwhm_increase_ev": -0.028485169675998456
+            },
+            "10": {
+              "absolute_centroid_delta_ev": 0.4211483048215242,
+              "centroid_delta_ev": 0.4211483048215242,
+              "fwhm_increase_ev": 0.042477449493484976
+            },
+            "11": {
+              "absolute_centroid_delta_ev": 1.8001177462725417,
+              "centroid_delta_ev": -1.8001177462725417,
+              "fwhm_increase_ev": 0.04271760038484995
+            },
+            "13": {
+              "absolute_centroid_delta_ev": 0.5128132225423327,
+              "centroid_delta_ev": 0.5128132225423327,
+              "fwhm_increase_ev": 0.11036483877782288
+            },
+            "14": {
+              "absolute_centroid_delta_ev": 0.2787561167631226,
+              "centroid_delta_ev": 0.2787561167631226,
+              "fwhm_increase_ev": 0.01769872455815502
+            },
+            "15": {
+              "absolute_centroid_delta_ev": 0.6117222579655125,
+              "centroid_delta_ev": 0.6117222579655125,
+              "fwhm_increase_ev": 0.11260102636982161
+            },
+            "16": {
+              "absolute_centroid_delta_ev": 0.5402556815502515,
+              "centroid_delta_ev": 0.5402556815502515,
+              "fwhm_increase_ev": 0.012230010122474155
+            },
+            "17": {
+              "absolute_centroid_delta_ev": 0.8724015645062826,
+              "centroid_delta_ev": -0.8724015645062826,
+              "fwhm_increase_ev": 0.07388827949966092
+            },
+            "18": {
+              "absolute_centroid_delta_ev": 0.5090742406342832,
+              "centroid_delta_ev": 0.5090742406342832,
+              "fwhm_increase_ev": 0.15325701865299024
+            },
+            "19": {
+              "absolute_centroid_delta_ev": 0.02200978509859301,
+              "centroid_delta_ev": -0.02200978509859301,
+              "fwhm_increase_ev": 0.024131702707459013
+            },
+            "2": {
+              "absolute_centroid_delta_ev": 0.4339047857463683,
+              "centroid_delta_ev": 0.4339047857463683,
+              "fwhm_increase_ev": 0.05424774892886486
+            },
+            "20": {
+              "absolute_centroid_delta_ev": 0.3318810928472777,
+              "centroid_delta_ev": 0.3318810928472777,
+              "fwhm_increase_ev": 0.09758785916246016
+            },
+            "21": {
+              "absolute_centroid_delta_ev": 0.35403307990553773,
+              "centroid_delta_ev": 0.35403307990553773,
+              "fwhm_increase_ev": 0.03868341411196141
+            },
+            "22": {
+              "absolute_centroid_delta_ev": 0.496397891671585,
+              "centroid_delta_ev": 0.496397891671585,
+              "fwhm_increase_ev": 0.09717300180808497
+            },
+            "23": {
+              "absolute_centroid_delta_ev": 0.18448965948692764,
+              "centroid_delta_ev": 0.18448965948692764,
+              "fwhm_increase_ev": 0.006740289527360055
+            },
+            "24": {
+              "absolute_centroid_delta_ev": 0.3767230333006373,
+              "centroid_delta_ev": 0.3767230333006373,
+              "fwhm_increase_ev": 0.01722094707560018
+            },
+            "25": {
+              "absolute_centroid_delta_ev": 0.19725098029931387,
+              "centroid_delta_ev": 0.19725098029931387,
+              "fwhm_increase_ev": 0.06821248873539787
+            },
+            "26": {
+              "absolute_centroid_delta_ev": 0.4485001648723806,
+              "centroid_delta_ev": 0.4485001648723806,
+              "fwhm_increase_ev": 0.04092813118490746
+            },
+            "27": {
+              "absolute_centroid_delta_ev": 0.5134681231038031,
+              "centroid_delta_ev": -0.5134681231038031,
+              "fwhm_increase_ev": 0.04722580872630111
+            },
+            "28": {
+              "absolute_centroid_delta_ev": 0.4742441020776498,
+              "centroid_delta_ev": 0.4742441020776498,
+              "fwhm_increase_ev": 0.1364485272922238
+            },
+            "29": {
+              "absolute_centroid_delta_ev": 0.6443440552090404,
+              "centroid_delta_ev": -0.6443440552090404,
+              "fwhm_increase_ev": 0.024047195494543594
+            },
+            "3": {
+              "absolute_centroid_delta_ev": 0.16834764865108123,
+              "centroid_delta_ev": 0.16834764865108123,
+              "fwhm_increase_ev": 0.06435163401506916
+            },
+            "30": {
+              "absolute_centroid_delta_ev": 0.4675992264748282,
+              "centroid_delta_ev": -0.4675992264748282,
+              "fwhm_increase_ev": 0.19453177407920919
+            },
+            "31": {
+              "absolute_centroid_delta_ev": 0.0374852877616085,
+              "centroid_delta_ev": 0.0374852877616085,
+              "fwhm_increase_ev": 0.0946894451063871
+            },
+            "32": {
+              "absolute_centroid_delta_ev": 0.051702126370657714,
+              "centroid_delta_ev": 0.051702126370657714,
+              "fwhm_increase_ev": 0.044124498456657335
+            },
+            "33": {
+              "absolute_centroid_delta_ev": 0.33468483261492843,
+              "centroid_delta_ev": 0.33468483261492843,
+              "fwhm_increase_ev": 0.10515732601131944
+            },
+            "34": {
+              "absolute_centroid_delta_ev": 0.41180065137743405,
+              "centroid_delta_ev": 0.41180065137743405,
+              "fwhm_increase_ev": 0.02099729129657124
+            },
+            "35": {
+              "absolute_centroid_delta_ev": 0.4052917669028283,
+              "centroid_delta_ev": 0.4052917669028283,
+              "fwhm_increase_ev": 0.17783438277271468
+            },
+            "4": {
+              "absolute_centroid_delta_ev": 0.37342119059210965,
+              "centroid_delta_ev": 0.37342119059210965,
+              "fwhm_increase_ev": 0.10392224868650857
+            },
+            "5": {
+              "absolute_centroid_delta_ev": 0.18851018244534834,
+              "centroid_delta_ev": 0.18851018244534834,
+              "fwhm_increase_ev": 0.007862506317294127
+            },
+            "6": {
+              "absolute_centroid_delta_ev": 0.3269291686608508,
+              "centroid_delta_ev": 0.3269291686608508,
+              "fwhm_increase_ev": 0.01784400964985622
+            },
+            "7": {
+              "absolute_centroid_delta_ev": 0.36090460184708767,
+              "centroid_delta_ev": 0.36090460184708767,
+              "fwhm_increase_ev": 0.10342314915990958
+            },
+            "8": {
+              "absolute_centroid_delta_ev": 0.06230624507869448,
+              "centroid_delta_ev": 0.06230624507869448,
+              "fwhm_increase_ev": 0.039576090569420685
+            },
+            "9": {
+              "absolute_centroid_delta_ev": 0.4158608122447332,
+              "centroid_delta_ev": 0.4158608122447332,
+              "fwhm_increase_ev": -0.009286895013160823
+            }
+          },
+          "per_pixel_absolute_centroid_delta_p90_ev": 0.5831356273994082,
+          "per_pixel_fwhm_increase_p90_ev": 0.14653362210868368,
+          "whole_array_centroid_delta_ev": 0.16362996179087258,
+          "whole_array_fwhm_increase_ev": 0.1934707439734593
+        },
+        "fit": {
+          "per_pixel": {
+            "0": {
+              "cash_statistic": -372062.75890548644,
+              "centroid_shift_ev": 0.36929097300071007,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 34256,
+              "instrument_fwhm_ev": 5.029093719378765,
+              "iterations": 10,
+              "line_normalization": 30830.58807896408,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "1": {
+              "cash_statistic": -363355.67111811286,
+              "centroid_shift_ev": 0.11794403261049109,
+              "constant_background_per_ev": 0.4555126510240546,
+              "converged": true,
+              "events_in_fit_window": 33659,
+              "instrument_fwhm_ev": 5.105865652477408,
+              "iterations": 11,
+              "line_normalization": 30293.26904404276,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "10": {
+              "cash_statistic": -359755.3187170143,
+              "centroid_shift_ev": 0.35215652882284004,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 33201,
+              "instrument_fwhm_ev": 4.583674565076875,
+              "iterations": 8,
+              "line_normalization": 29881.068342632097,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "11": {
+              "cash_statistic": -485150.44148511847,
+              "centroid_shift_ev": -1.8382253898179486,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 42805,
+              "instrument_fwhm_ev": 4.605061400057301,
+              "iterations": 6,
+              "line_normalization": 38524.67934294801,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "13": {
+              "cash_statistic": -540884.182349354,
+              "centroid_shift_ev": 0.48282937954453353,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47047,
+              "instrument_fwhm_ev": 4.951443211476906,
+              "iterations": 10,
+              "line_normalization": 42342.52838517754,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "14": {
+              "cash_statistic": -386959.33480306214,
+              "centroid_shift_ev": 0.2466750750421883,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 35125,
+              "instrument_fwhm_ev": 4.11068446769529,
+              "iterations": 10,
+              "line_normalization": 31612.69994234983,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "15": {
+              "cash_statistic": -468878.7178593194,
+              "centroid_shift_ev": 0.5721962453231428,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 41464,
+              "instrument_fwhm_ev": 4.363599219842353,
+              "iterations": 11,
+              "line_normalization": 37317.80407963054,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "16": {
+              "cash_statistic": -349046.03118553956,
+              "centroid_shift_ev": 0.5012598099133365,
+              "constant_background_per_ev": 0.47891357468985774,
+              "converged": true,
+              "events_in_fit_window": 32529,
+              "instrument_fwhm_ev": 5.048494279103499,
+              "iterations": 10,
+              "line_normalization": 29276.272179355554,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "17": {
+              "cash_statistic": -335451.738329238,
+              "centroid_shift_ev": -0.8886429286338164,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 31214,
+              "instrument_fwhm_ev": 4.3667298588411505,
+              "iterations": 9,
+              "line_normalization": 28092.810358351933,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "18": {
+              "cash_statistic": -500401.69749049644,
+              "centroid_shift_ev": 0.4662644145928531,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43832,
+              "instrument_fwhm_ev": 4.4893770352934,
+              "iterations": 11,
+              "line_normalization": 39449.039252675546,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "19": {
+              "cash_statistic": -511595.70526240516,
+              "centroid_shift_ev": -0.042061369125890494,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44596,
+              "instrument_fwhm_ev": 4.347621842921424,
+              "iterations": 10,
+              "line_normalization": 40136.70968873791,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "2": {
+              "cash_statistic": -337858.3747577656,
+              "centroid_shift_ev": 0.3694747282377221,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 31462,
+              "instrument_fwhm_ev": 4.6285579397059,
+              "iterations": 9,
+              "line_normalization": 28316.008897999796,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "20": {
+              "cash_statistic": -558000.5828976531,
+              "centroid_shift_ev": 0.3066357070722524,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 48095,
+              "instrument_fwhm_ev": 4.441386794465505,
+              "iterations": 9,
+              "line_normalization": 43285.70564440086,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "21": {
+              "cash_statistic": -422174.9467036502,
+              "centroid_shift_ev": 0.315574589463915,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 37968,
+              "instrument_fwhm_ev": 4.559604359678828,
+              "iterations": 10,
+              "line_normalization": 34171.38892769086,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "22": {
+              "cash_statistic": -475664.0592157105,
+              "centroid_shift_ev": 0.45510036016506844,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 41917,
+              "instrument_fwhm_ev": 4.3297462808602685,
+              "iterations": 12,
+              "line_normalization": 37725.591322563116,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "23": {
+              "cash_statistic": -490881.1580179362,
+              "centroid_shift_ev": 0.12693983546217702,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43067,
+              "instrument_fwhm_ev": 4.2735065392034794,
+              "iterations": 11,
+              "line_normalization": 38760.53137664403,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "24": {
+              "cash_statistic": -545345.6566314024,
+              "centroid_shift_ev": 0.3441946425038745,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47025,
+              "instrument_fwhm_ev": 4.3633670797877695,
+              "iterations": 27,
+              "line_normalization": 47797.65921143627,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "25": {
+              "cash_statistic": -403967.50853298756,
+              "centroid_shift_ev": 0.12726839625049818,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 36652,
+              "instrument_fwhm_ev": 4.848235742867153,
+              "iterations": 12,
+              "line_normalization": 32986.995162205574,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "26": {
+              "cash_statistic": -490886.5579537578,
+              "centroid_shift_ev": 0.39103975803698515,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43035,
+              "instrument_fwhm_ev": 4.291757781865427,
+              "iterations": 11,
+              "line_normalization": 38731.730866383776,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "27": {
+              "cash_statistic": -550341.1680512142,
+              "centroid_shift_ev": -0.5266491106371928,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47637,
+              "instrument_fwhm_ev": 4.778797307685993,
+              "iterations": 27,
+              "line_normalization": 48548.41981653713,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "28": {
+              "cash_statistic": -498476.26648985443,
+              "centroid_shift_ev": 0.4585424689299803,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43722,
+              "instrument_fwhm_ev": 4.5136640650248125,
+              "iterations": 27,
+              "line_normalization": 44334.75849784669,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "29": {
+              "cash_statistic": -442091.9567019252,
+              "centroid_shift_ev": -0.6907717993736285,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 39439,
+              "instrument_fwhm_ev": 4.327921232295954,
+              "iterations": 11,
+              "line_normalization": 35495.31719400539,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "3": {
+              "cash_statistic": -540765.7693602692,
+              "centroid_shift_ev": 0.12942133339419254,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 46784,
+              "instrument_fwhm_ev": 4.443631261410857,
+              "iterations": 12,
+              "line_normalization": 42105.882570830436,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "30": {
+              "cash_statistic": -509144.4866892512,
+              "centroid_shift_ev": -0.48730011241146254,
+              "constant_background_per_ev": 0.005036589877976687,
+              "converged": true,
+              "events_in_fit_window": 44752,
+              "instrument_fwhm_ev": 4.823162727395481,
+              "iterations": 8,
+              "line_normalization": 40277.01663352226,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "31": {
+              "cash_statistic": -407816.9886958455,
+              "centroid_shift_ev": 0.007195576023776182,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 36867,
+              "instrument_fwhm_ev": 4.5490206218130895,
+              "iterations": 11,
+              "line_normalization": 33180.547356991105,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "32": {
+              "cash_statistic": -499386.24998037465,
+              "centroid_shift_ev": 0.04756813703687958,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43737,
+              "instrument_fwhm_ev": 4.461309045598475,
+              "iterations": 10,
+              "line_normalization": 39363.5215110569,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "33": {
+              "cash_statistic": -426255.83229623485,
+              "centroid_shift_ev": 0.2919888335188009,
+              "constant_background_per_ev": 0.47098634038444154,
+              "converged": true,
+              "events_in_fit_window": 38261,
+              "instrument_fwhm_ev": 4.390551515391506,
+              "iterations": 12,
+              "line_normalization": 34435.09120731534,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "34": {
+              "cash_statistic": -508350.007286479,
+              "centroid_shift_ev": 0.3863246993018021,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44342,
+              "instrument_fwhm_ev": 4.310059457676476,
+              "iterations": 11,
+              "line_normalization": 39908.066405488644,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "35": {
+              "cash_statistic": -540218.9857575456,
+              "centroid_shift_ev": 0.3619324290944568,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 46725,
+              "instrument_fwhm_ev": 4.349153772476206,
+              "iterations": 12,
+              "line_normalization": 42052.71636706059,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "4": {
+              "cash_statistic": -478564.3996558235,
+              "centroid_shift_ev": 0.31562433211229757,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 42196,
+              "instrument_fwhm_ev": 4.404973515775566,
+              "iterations": 9,
+              "line_normalization": 37976.59125931484,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "5": {
+              "cash_statistic": -388239.10670528235,
+              "centroid_shift_ev": 0.1395105503657323,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 35311,
+              "instrument_fwhm_ev": 4.385981984663759,
+              "iterations": 11,
+              "line_normalization": 31780.09331985456,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "6": {
+              "cash_statistic": -373701.67376656394,
+              "centroid_shift_ev": 0.2588121446757575,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 34223,
+              "instrument_fwhm_ev": 4.446140470313715,
+              "iterations": 8,
+              "line_normalization": 30800.898946972582,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "7": {
+              "cash_statistic": -481205.5787882515,
+              "centroid_shift_ev": 0.3243322584272115,
+              "constant_background_per_ev": 0.5881724156535191,
+              "converged": true,
+              "events_in_fit_window": 42531,
+              "instrument_fwhm_ev": 4.647768000903625,
+              "iterations": 9,
+              "line_normalization": 38278.0636283013,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "8": {
+              "cash_statistic": -355922.19352414215,
+              "centroid_shift_ev": -0.0058256959339877965,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 32814,
+              "instrument_fwhm_ev": 4.473883370359315,
+              "iterations": 9,
+              "line_normalization": 29532.837437943428,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "9": {
+              "cash_statistic": -344724.8028098424,
+              "centroid_shift_ev": 0.34801046770686905,
+              "constant_background_per_ev": 0.13224709355975112,
+              "converged": true,
+              "events_in_fit_window": 32044,
+              "instrument_fwhm_ev": 4.59526544108057,
+              "iterations": 8,
+              "line_normalization": 28839.77637751124,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            }
+          },
+          "whole_array": {
+            "cash_statistic": -25652422.232731834,
+            "centroid_shift_ev": 0.12351172648385446,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 1400334,
+            "instrument_fwhm_ev": 4.648377627898094,
+            "iterations": 19,
+            "line_normalization": 1260300.609208606,
+            "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+          }
+        },
+        "held_out_obsid": "000100000",
+        "held_out_segment": 0,
+        "history": {
+          "bytes": 223859520,
+          "rows": 18396,
+          "rows_per_time": 36,
+          "sha256": "b1c652cae64bb307b3ff5df3331b7c586f174e7ed076ed25e2831bef934fdf0e",
+          "temp_fit_finite": true,
+          "time_grid_rows": 511
+        },
+        "models": {
+          "0": {
+            "differential_at_center": 9.296559932377504e-05,
+            "rows": 62,
+            "slope_per_second": 0.0,
+            "time_center": 151121916.2680525
+          },
+          "1": {
+            "differential_at_center": 1.0871874040939422e-05,
+            "rows": 58,
+            "slope_per_second": 0.0,
+            "time_center": 151121155.06922987
+          },
+          "10": {
+            "differential_at_center": 4.037837534702493e-05,
+            "rows": 59,
+            "slope_per_second": 0.0,
+            "time_center": 151119982.02542996
+          },
+          "11": {
+            "differential_at_center": 3.720633009999391e-05,
+            "rows": 74,
+            "slope_per_second": 0.0,
+            "time_center": 151123004.28561816
+          },
+          "12": {
+            "differential_at_center": 0.0,
+            "rows": 0,
+            "slope_per_second": 0.0,
+            "time_center": 0.0
+          },
+          "13": {
+            "differential_at_center": 5.811873486781527e-05,
+            "rows": 86,
+            "slope_per_second": 0.0,
+            "time_center": 151120522.81340846
+          },
+          "14": {
+            "differential_at_center": 3.4208233480673145e-05,
+            "rows": 63,
+            "slope_per_second": 0.0,
+            "time_center": 151121839.12495905
+          },
+          "15": {
+            "differential_at_center": 6.852764085026053e-05,
+            "rows": 72,
+            "slope_per_second": 0.0,
+            "time_center": 151122881.802428
+          },
+          "16": {
+            "differential_at_center": 8.967187173028815e-05,
+            "rows": 54,
+            "slope_per_second": 0.0,
+            "time_center": 151121131.66549703
+          },
+          "17": {
+            "differential_at_center": 6.788722786136431e-05,
+            "rows": 49,
+            "slope_per_second": 0.0,
+            "time_center": 151120773.43679303
+          },
+          "18": {
+            "differential_at_center": 7.725370072630272e-05,
+            "rows": 77,
+            "slope_per_second": 0.0,
+            "time_center": 151121024.76839
+          },
+          "19": {
+            "differential_at_center": 5.231652384328142e-05,
+            "rows": 78,
+            "slope_per_second": 0.0,
+            "time_center": 151121801.22090152
+          },
+          "2": {
+            "differential_at_center": 4.710235206937738e-05,
+            "rows": 52,
+            "slope_per_second": 0.0,
+            "time_center": 151122618.0399515
+          },
+          "20": {
+            "differential_at_center": 8.184197293389581e-05,
+            "rows": 86,
+            "slope_per_second": 0.0,
+            "time_center": 151120990.4611398
+          },
+          "21": {
+            "differential_at_center": 2.047028881533436e-05,
+            "rows": 69,
+            "slope_per_second": 0.0,
+            "time_center": 151122190.1719445
+          },
+          "22": {
+            "differential_at_center": 5.036764949649386e-05,
+            "rows": 73,
+            "slope_per_second": 0.0,
+            "time_center": 151122445.29455122
+          },
+          "23": {
+            "differential_at_center": -1.286070999497943e-05,
+            "rows": 74,
+            "slope_per_second": 0.0,
+            "time_center": 151121515.58513728
+          },
+          "24": {
+            "differential_at_center": 4.1469400920216004e-05,
+            "rows": 83,
+            "slope_per_second": 0.0,
+            "time_center": 151120883.13883838
+          },
+          "25": {
+            "differential_at_center": 2.7984917185468194e-05,
+            "rows": 67,
+            "slope_per_second": 0.0,
+            "time_center": 151121956.83078444
+          },
+          "26": {
+            "differential_at_center": 4.9727816465817976e-05,
+            "rows": 74,
+            "slope_per_second": 0.0,
+            "time_center": 151121468.36778754
+          },
+          "27": {
+            "differential_at_center": 0.00012616998628521559,
+            "rows": 84,
+            "slope_per_second": 0.0,
+            "time_center": 151120599.9751271
+          },
+          "28": {
+            "differential_at_center": 9.727737449428259e-05,
+            "rows": 77,
+            "slope_per_second": 0.0,
+            "time_center": 151121646.3042911
+          },
+          "29": {
+            "differential_at_center": 2.6687475258045656e-05,
+            "rows": 71,
+            "slope_per_second": 0.0,
+            "time_center": 151122433.33197808
+          },
+          "3": {
+            "differential_at_center": 4.382468147709831e-05,
+            "rows": 86,
+            "slope_per_second": 0.0,
+            "time_center": 151120623.42548037
+          },
+          "30": {
+            "differential_at_center": 6.674856725263911e-05,
+            "rows": 78,
+            "slope_per_second": 0.0,
+            "time_center": 151121031.71846166
+          },
+          "31": {
+            "differential_at_center": 5.539274118469828e-05,
+            "rows": 67,
+            "slope_per_second": 0.0,
+            "time_center": 151121883.30006912
+          },
+          "32": {
+            "differential_at_center": 6.407565621863176e-05,
+            "rows": 75,
+            "slope_per_second": 0.0,
+            "time_center": 151122514.23861876
+          },
+          "33": {
+            "differential_at_center": 6.333710031530132e-05,
+            "rows": 69,
+            "slope_per_second": 0.0,
+            "time_center": 151122017.93529662
+          },
+          "34": {
+            "differential_at_center": 9.233748450895862e-05,
+            "rows": 76,
+            "slope_per_second": 0.0,
+            "time_center": 151121737.0084158
+          },
+          "35": {
+            "differential_at_center": 7.378671535883397e-05,
+            "rows": 81,
+            "slope_per_second": 0.0,
+            "time_center": 151121503.0926134
+          },
+          "4": {
+            "differential_at_center": 8.685420978294528e-05,
+            "rows": 73,
+            "slope_per_second": 0.0,
+            "time_center": 151122351.97114024
+          },
+          "5": {
+            "differential_at_center": 2.2290196823898656e-05,
+            "rows": 63,
+            "slope_per_second": 0.0,
+            "time_center": 151121835.47137785
+          },
+          "6": {
+            "differential_at_center": 5.607360927364913e-05,
+            "rows": 61,
+            "slope_per_second": 0.0,
+            "time_center": 151119670.4700234
+          },
+          "7": {
+            "differential_at_center": 3.632402089839143e-05,
+            "rows": 73,
+            "slope_per_second": 0.0,
+            "time_center": 151122162.77323553
+          },
+          "8": {
+            "differential_at_center": 4.790418795041357e-05,
+            "rows": 55,
+            "slope_per_second": 0.0,
+            "time_center": 151120097.3621285
+          },
+          "9": {
+            "differential_at_center": -5.7220474573606295e-05,
+            "rows": 52,
+            "slope_per_second": 0.0,
+            "time_center": 151120787.02341464
+          }
+        },
+        "nearest_anchor_obsid": "000101000",
+        "nearest_anchor_segment": 1,
+        "output": {
+          "bytes": 287619840,
+          "negative_epi2": 49,
+          "negative_epi2_without_null_pi": 0,
+          "null_epi2": 0,
+          "null_pi": 49,
+          "null_pi_not_explained_by_negative_epi2": 0,
+          "null_temp": 0,
+          "rows": 1819814,
+          "sha256": "38ba0a45e34e00dc3bf30f290735d3af40a93f55a5e521b22295ed871b5a4740"
+        },
+        "role": "backward endpoint extrapolation",
+        "selected_rows": 1819814
+      },
+      {
+        "comparison": {
+          "passed": false,
+          "per_pixel": {
+            "0": {
+              "absolute_centroid_delta_ev": 0.5378616548749557,
+              "centroid_delta_ev": 0.5378616548749557,
+              "fwhm_increase_ev": 0.1021230777821378
+            },
+            "1": {
+              "absolute_centroid_delta_ev": 0.355420559737598,
+              "centroid_delta_ev": 0.355420559737598,
+              "fwhm_increase_ev": 0.029116662186736697
+            },
+            "10": {
+              "absolute_centroid_delta_ev": 0.35273945473987994,
+              "centroid_delta_ev": 0.35273945473987994,
+              "fwhm_increase_ev": 0.0868189137795019
+            },
+            "11": {
+              "absolute_centroid_delta_ev": 0.16129575772652044,
+              "centroid_delta_ev": 0.16129575772652044,
+              "fwhm_increase_ev": 0.10133456574463562
+            },
+            "13": {
+              "absolute_centroid_delta_ev": 0.07772222029476586,
+              "centroid_delta_ev": 0.07772222029476586,
+              "fwhm_increase_ev": 0.10197406201505732
+            },
+            "14": {
+              "absolute_centroid_delta_ev": 0.24231360760881854,
+              "centroid_delta_ev": 0.24231360760881854,
+              "fwhm_increase_ev": 0.04153291848557927
+            },
+            "15": {
+              "absolute_centroid_delta_ev": 0.43930461049911146,
+              "centroid_delta_ev": 0.43930461049911146,
+              "fwhm_increase_ev": 0.11325096452602512
+            },
+            "16": {
+              "absolute_centroid_delta_ev": 0.08239683798377664,
+              "centroid_delta_ev": 0.08239683798377664,
+              "fwhm_increase_ev": 0.023470308691554642
+            },
+            "17": {
+              "absolute_centroid_delta_ev": 0.5846203270605713,
+              "centroid_delta_ev": -0.5846203270605713,
+              "fwhm_increase_ev": 0.15983480705722997
+            },
+            "18": {
+              "absolute_centroid_delta_ev": 0.25611522090057554,
+              "centroid_delta_ev": 0.25611522090057554,
+              "fwhm_increase_ev": 0.15636998825231263
+            },
+            "19": {
+              "absolute_centroid_delta_ev": 0.08915970350182421,
+              "centroid_delta_ev": 0.08915970350182421,
+              "fwhm_increase_ev": 0.11735528495000036
+            },
+            "2": {
+              "absolute_centroid_delta_ev": 0.269921513274082,
+              "centroid_delta_ev": 0.269921513274082,
+              "fwhm_increase_ev": 0.1248693264193923
+            },
+            "20": {
+              "absolute_centroid_delta_ev": 0.15305001925707282,
+              "centroid_delta_ev": 0.15305001925707282,
+              "fwhm_increase_ev": 0.16047839615758086
+            },
+            "21": {
+              "absolute_centroid_delta_ev": 0.25303067388049844,
+              "centroid_delta_ev": 0.25303067388049844,
+              "fwhm_increase_ev": 0.08960149943353013
+            },
+            "22": {
+              "absolute_centroid_delta_ev": 0.278493049901333,
+              "centroid_delta_ev": 0.278493049901333,
+              "fwhm_increase_ev": 0.09048191606592138
+            },
+            "23": {
+              "absolute_centroid_delta_ev": 0.2822041263919878,
+              "centroid_delta_ev": -0.2822041263919878,
+              "fwhm_increase_ev": 0.12519771289682247
+            },
+            "24": {
+              "absolute_centroid_delta_ev": 0.12247896322678867,
+              "centroid_delta_ev": 0.12247896322678867,
+              "fwhm_increase_ev": 0.05286215922328985
+            },
+            "25": {
+              "absolute_centroid_delta_ev": 0.1929422220019732,
+              "centroid_delta_ev": 0.1929422220019732,
+              "fwhm_increase_ev": 0.07434322983261676
+            },
+            "26": {
+              "absolute_centroid_delta_ev": 0.4193389717133335,
+              "centroid_delta_ev": 0.4193389717133335,
+              "fwhm_increase_ev": 0.04899903926839677
+            },
+            "27": {
+              "absolute_centroid_delta_ev": 0.5153122007022183,
+              "centroid_delta_ev": 0.5153122007022183,
+              "fwhm_increase_ev": 2.0826911903207543
+            },
+            "28": {
+              "absolute_centroid_delta_ev": 0.15073104668795556,
+              "centroid_delta_ev": 0.15073104668795556,
+              "fwhm_increase_ev": 0.11486106709222277
+            },
+            "29": {
+              "absolute_centroid_delta_ev": 1.9711430520883917,
+              "centroid_delta_ev": -1.9711430520883917,
+              "fwhm_increase_ev": 3.570771107844683
+            },
+            "3": {
+              "absolute_centroid_delta_ev": 0.3256310589491178,
+              "centroid_delta_ev": 0.3256310589491178,
+              "fwhm_increase_ev": 0.05408362725912674
+            },
+            "30": {
+              "absolute_centroid_delta_ev": 0.023266008198437417,
+              "centroid_delta_ev": -0.023266008198437417,
+              "fwhm_increase_ev": 0.05438931448550299
+            },
+            "31": {
+              "absolute_centroid_delta_ev": 0.09500244986851847,
+              "centroid_delta_ev": 0.09500244986851847,
+              "fwhm_increase_ev": 0.10414113875417819
+            },
+            "32": {
+              "absolute_centroid_delta_ev": 0.3160344266407326,
+              "centroid_delta_ev": 0.3160344266407326,
+              "fwhm_increase_ev": 0.049791692556168776
+            },
+            "33": {
+              "absolute_centroid_delta_ev": 0.49950365232090477,
+              "centroid_delta_ev": 0.49950365232090477,
+              "fwhm_increase_ev": 0.10408994000338279
+            },
+            "34": {
+              "absolute_centroid_delta_ev": 0.027345019240847267,
+              "centroid_delta_ev": 0.027345019240847267,
+              "fwhm_increase_ev": 0.03698004781460096
+            },
+            "35": {
+              "absolute_centroid_delta_ev": 0.40414047824784544,
+              "centroid_delta_ev": 0.40414047824784544,
+              "fwhm_increase_ev": 0.16248860828961575
+            },
+            "4": {
+              "absolute_centroid_delta_ev": 0.42706604575912077,
+              "centroid_delta_ev": 0.42706604575912077,
+              "fwhm_increase_ev": 0.12288846027017808
+            },
+            "5": {
+              "absolute_centroid_delta_ev": 0.25678224576525344,
+              "centroid_delta_ev": 0.25678224576525344,
+              "fwhm_increase_ev": -0.0007873115628402871
+            },
+            "6": {
+              "absolute_centroid_delta_ev": 0.7148936973807456,
+              "centroid_delta_ev": 0.7148936973807456,
+              "fwhm_increase_ev": 0.03582124932120223
+            },
+            "7": {
+              "absolute_centroid_delta_ev": 0.2920325239186007,
+              "centroid_delta_ev": 0.2920325239186007,
+              "fwhm_increase_ev": 0.0935739413779828
+            },
+            "8": {
+              "absolute_centroid_delta_ev": 0.8232059153196889,
+              "centroid_delta_ev": 0.8232059153196889,
+              "fwhm_increase_ev": 0.05856760452493681
+            },
+            "9": {
+              "absolute_centroid_delta_ev": 0.11001659609268942,
+              "centroid_delta_ev": 0.11001659609268942,
+              "fwhm_increase_ev": 0.03270611084755348
+            }
+          },
+          "per_pixel_absolute_centroid_delta_p90_ev": 0.5659168581863252,
+          "per_pixel_fwhm_increase_p90_ev": 0.1602209605174405,
+          "whole_array_centroid_delta_ev": 0.19670961630344388,
+          "whole_array_fwhm_increase_ev": 0.33174343065454703
+        },
+        "fit": {
+          "per_pixel": {
+            "0": {
+              "cash_statistic": -383426.9741475242,
+              "centroid_shift_ev": 0.518054053423395,
+              "constant_background_per_ev": 0.5875908583983909,
+              "converged": true,
+              "events_in_fit_window": 35197,
+              "instrument_fwhm_ev": 5.026660265169627,
+              "iterations": 10,
+              "line_normalization": 31677.463253401365,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "1": {
+              "cash_statistic": -371524.9984139472,
+              "centroid_shift_ev": 0.24910398306175474,
+              "constant_background_per_ev": 0.3569341851252342,
+              "converged": true,
+              "events_in_fit_window": 34346,
+              "instrument_fwhm_ev": 5.234616705790124,
+              "iterations": 11,
+              "line_normalization": 30911.576423916475,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "10": {
+              "cash_statistic": -368677.09835422155,
+              "centroid_shift_ev": 0.29510465712651585,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 33873,
+              "instrument_fwhm_ev": 4.667546078887573,
+              "iterations": 10,
+              "line_normalization": 30485.882676562684,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "11": {
+              "cash_statistic": -492812.04416336655,
+              "centroid_shift_ev": 0.1378287423621426,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43411,
+              "instrument_fwhm_ev": 4.656597461060686,
+              "iterations": 10,
+              "line_normalization": 39070.110659915765,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "13": {
+              "cash_statistic": -553351.8030850464,
+              "centroid_shift_ev": 0.012680158686080665,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47991,
+              "instrument_fwhm_ev": 4.942437634247598,
+              "iterations": 11,
+              "line_normalization": 43192.108052097894,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "14": {
+              "cash_statistic": -396386.47071279865,
+              "centroid_shift_ev": 0.18923509284659304,
+              "constant_background_per_ev": 0.12240386230378125,
+              "converged": true,
+              "events_in_fit_window": 35867,
+              "instrument_fwhm_ev": 4.116037944131583,
+              "iterations": 9,
+              "line_normalization": 32280.463627242054,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "15": {
+              "cash_statistic": -475939.51014005573,
+              "centroid_shift_ev": 0.4011791680338148,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 41940,
+              "instrument_fwhm_ev": 4.395305574048992,
+              "iterations": 10,
+              "line_normalization": 37746.207121081185,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "16": {
+              "cash_statistic": -361663.33124139684,
+              "centroid_shift_ev": 0.04913510706790335,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 33502,
+              "instrument_fwhm_ev": 5.149898051557958,
+              "iterations": 11,
+              "line_normalization": 30151.955878487002,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "17": {
+              "cash_statistic": -345407.01659496943,
+              "centroid_shift_ev": -0.6292165280743904,
+              "constant_background_per_ev": 0.05914526149751967,
+              "converged": true,
+              "events_in_fit_window": 32026,
+              "instrument_fwhm_ev": 4.408935037141394,
+              "iterations": 11,
+              "line_normalization": 28823.577096874036,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "18": {
+              "cash_statistic": -508589.91806798836,
+              "centroid_shift_ev": 0.2312701495396602,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44476,
+              "instrument_fwhm_ev": 4.604017688215592,
+              "iterations": 10,
+              "line_normalization": 40028.61775356568,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "19": {
+              "cash_statistic": -516544.05901176215,
+              "centroid_shift_ev": 0.06597316027527958,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 45017,
+              "instrument_fwhm_ev": 4.41540403504986,
+              "iterations": 10,
+              "line_normalization": 40515.54534913053,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "2": {
+              "cash_statistic": -351468.35526647593,
+              "centroid_shift_ev": 0.23655677322965732,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 32554,
+              "instrument_fwhm_ev": 4.689366769127204,
+              "iterations": 10,
+              "line_normalization": 29298.785241495858,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "20": {
+              "cash_statistic": -572650.3572374212,
+              "centroid_shift_ev": 0.11638042629247045,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 49214,
+              "instrument_fwhm_ev": 4.591626567773018,
+              "iterations": 10,
+              "line_normalization": 44292.82161256825,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "21": {
+              "cash_statistic": -441061.4277483863,
+              "centroid_shift_ev": 0.22211139604694088,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 39354,
+              "instrument_fwhm_ev": 4.425999300202434,
+              "iterations": 12,
+              "line_normalization": 35418.854900642626,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "22": {
+              "cash_statistic": -487049.6871578483,
+              "centroid_shift_ev": 0.23183065197374123,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 42821,
+              "instrument_fwhm_ev": 4.374008769613813,
+              "iterations": 12,
+              "line_normalization": 38539.09547951977,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "23": {
+              "cash_statistic": -492677.0535114839,
+              "centroid_shift_ev": -0.3293679829851971,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43258,
+              "instrument_fwhm_ev": 4.413313148765832,
+              "iterations": 11,
+              "line_normalization": 38932.42930817741,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "24": {
+              "cash_statistic": -546539.9768177151,
+              "centroid_shift_ev": 0.09457414838587756,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47236,
+              "instrument_fwhm_ev": 4.437946357993747,
+              "iterations": 10,
+              "line_normalization": 42512.622253674715,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "25": {
+              "cash_statistic": -422643.27796149434,
+              "centroid_shift_ev": 0.15038877096339032,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 38086,
+              "instrument_fwhm_ev": 4.8366835524321266,
+              "iterations": 26,
+              "line_normalization": 38717.63365863472,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "26": {
+              "cash_statistic": -495244.61518675584,
+              "centroid_shift_ev": 0.39824191332329517,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43359,
+              "instrument_fwhm_ev": 4.3266287549621225,
+              "iterations": 11,
+              "line_normalization": 39023.434687817346,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "27": {
+              "cash_statistic": -546551.9293076089,
+              "centroid_shift_ev": 0.49806232468068806,
+              "constant_background_per_ev": 0.5035808555417065,
+              "converged": true,
+              "events_in_fit_window": 48168,
+              "instrument_fwhm_ev": 6.93830347636099,
+              "iterations": 11,
+              "line_normalization": 43351.40292061761,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "28": {
+              "cash_statistic": -502436.7197407035,
+              "centroid_shift_ev": 0.11595798812267921,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44066,
+              "instrument_fwhm_ev": 4.564596294498395,
+              "iterations": 11,
+              "line_normalization": 39659.60398054041,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "29": {
+              "cash_statistic": -425116.87137606996,
+              "centroid_shift_ev": -2.0,
+              "constant_background_per_ev": 0.8540683375662271,
+              "converged": true,
+              "events_in_fit_window": 40360,
+              "instrument_fwhm_ev": 8.0,
+              "iterations": 18,
+              "line_normalization": 40994.38276345335,
+              "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+            },
+            "3": {
+              "cash_statistic": -551047.3053175227,
+              "centroid_shift_ev": 0.2999588864801257,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47561,
+              "instrument_fwhm_ev": 4.405633529124776,
+              "iterations": 10,
+              "line_normalization": 42805.143504878026,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "30": {
+              "cash_statistic": -527038.0572326942,
+              "centroid_shift_ev": -0.051355331838251236,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 45753,
+              "instrument_fwhm_ev": 4.225744184939382,
+              "iterations": 9,
+              "line_normalization": 41177.91898306386,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "31": {
+              "cash_statistic": -421921.27645421226,
+              "centroid_shift_ev": 0.06369119509050138,
+              "constant_background_per_ev": 0.14602520931961352,
+              "converged": true,
+              "events_in_fit_window": 37953,
+              "instrument_fwhm_ev": 4.476270340887828,
+              "iterations": 12,
+              "line_normalization": 34157.87855224449,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "32": {
+              "cash_statistic": -504237.68490214663,
+              "centroid_shift_ev": 0.27630730947754184,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44030,
+              "instrument_fwhm_ev": 4.375746857642205,
+              "iterations": 12,
+              "line_normalization": 39627.3664693959,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "33": {
+              "cash_statistic": -444726.96490436996,
+              "centroid_shift_ev": 0.4713554836710403,
+              "constant_background_per_ev": 0.10620789662419242,
+              "converged": true,
+              "events_in_fit_window": 39646,
+              "instrument_fwhm_ev": 4.323517058976139,
+              "iterations": 12,
+              "line_normalization": 35681.57978829037,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "34": {
+              "cash_statistic": -511911.864095458,
+              "centroid_shift_ev": -0.023029671751115196,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44654,
+              "instrument_fwhm_ev": 4.345166635946373,
+              "iterations": 10,
+              "line_normalization": 40188.82174704487,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "35": {
+              "cash_statistic": -538115.059970011,
+              "centroid_shift_ev": 0.381817635205103,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 46579,
+              "instrument_fwhm_ev": 4.378308186023494,
+              "iterations": 12,
+              "line_normalization": 41921.365682173615,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "4": {
+              "cash_statistic": -490320.0793504927,
+              "centroid_shift_ev": 0.41206673242700337,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43028,
+              "instrument_fwhm_ev": 4.439155189561531,
+              "iterations": 11,
+              "line_normalization": 38725.39762353801,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "5": {
+              "cash_statistic": -398708.78934178734,
+              "centroid_shift_ev": 0.20836511985669218,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 36113,
+              "instrument_fwhm_ev": 4.354594390508845,
+              "iterations": 10,
+              "line_normalization": 32501.91883325209,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "6": {
+              "cash_statistic": -381945.5586176446,
+              "centroid_shift_ev": 0.6639679377915679,
+              "constant_background_per_ev": 0.22613551963557207,
+              "converged": true,
+              "events_in_fit_window": 34856,
+              "instrument_fwhm_ev": 4.398049905782376,
+              "iterations": 12,
+              "line_normalization": 31370.572242905964,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "7": {
+              "cash_statistic": -494039.70334032725,
+              "centroid_shift_ev": 0.24390692560739674,
+              "constant_background_per_ev": 0.1760954872969828,
+              "converged": true,
+              "events_in_fit_window": 43483,
+              "instrument_fwhm_ev": 4.702407616581043,
+              "iterations": 11,
+              "line_normalization": 39134.89337857276,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "8": {
+              "cash_statistic": -364936.7908389977,
+              "centroid_shift_ev": 0.7727902196303877,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 33459,
+              "instrument_fwhm_ev": 4.351929444532656,
+              "iterations": 10,
+              "line_normalization": 30113.279650495402,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "9": {
+              "cash_statistic": -359990.5910632926,
+              "centroid_shift_ev": 0.024221272871263837,
+              "constant_background_per_ev": 0.044654590188578765,
+              "converged": true,
+              "events_in_fit_window": 33219,
+              "instrument_fwhm_ev": 4.601145672289827,
+              "iterations": 11,
+              "line_normalization": 29897.23790938424,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            }
+          },
+          "whole_array": {
+            "cash_statistic": -26129742.83589991,
+            "centroid_shift_ev": 0.15882186375755936,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 1426456,
+            "instrument_fwhm_ev": 4.782322157782891,
+            "iterations": 15,
+            "line_normalization": 1283813.2626922461,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          }
+        },
+        "held_out_obsid": "000103000",
+        "held_out_segment": 3,
+        "history": {
+          "bytes": 231261120,
+          "rows": 19008,
+          "rows_per_time": 36,
+          "sha256": "1bd6989a3ac1199c11fc967796c0584d94085edd947e866aa67999f0148c2836",
+          "temp_fit_finite": true,
+          "time_grid_rows": 528
+        },
+        "models": {
+          "0": {
+            "differential_at_center": 9.317077463327078e-05,
+            "rows": 61,
+            "slope_per_second": 0.0,
+            "time_center": 151376239.4364331
+          },
+          "1": {
+            "differential_at_center": 1.0957746512413324e-05,
+            "rows": 57,
+            "slope_per_second": 0.0,
+            "time_center": 151375938.62526542
+          },
+          "10": {
+            "differential_at_center": 4.077151664294565e-05,
+            "rows": 55,
+            "slope_per_second": 0.0,
+            "time_center": 151373632.47486377
+          },
+          "11": {
+            "differential_at_center": 4.268448600516783e-05,
+            "rows": 71,
+            "slope_per_second": 0.0,
+            "time_center": 151376188.30591303
+          },
+          "12": {
+            "differential_at_center": 0.0,
+            "rows": 0,
+            "slope_per_second": 0.0,
+            "time_center": 0.0
+          },
+          "13": {
+            "differential_at_center": 5.85583557807072e-05,
+            "rows": 84,
+            "slope_per_second": 0.0,
+            "time_center": 151375846.33485705
+          },
+          "14": {
+            "differential_at_center": 3.349721001257716e-05,
+            "rows": 61,
+            "slope_per_second": 0.0,
+            "time_center": 151375057.47615376
+          },
+          "15": {
+            "differential_at_center": 6.813906352629018e-05,
+            "rows": 71,
+            "slope_per_second": 0.0,
+            "time_center": 151374686.78494564
+          },
+          "16": {
+            "differential_at_center": 9.014304010006649e-05,
+            "rows": 54,
+            "slope_per_second": 0.0,
+            "time_center": 151375875.5506168
+          },
+          "17": {
+            "differential_at_center": 7.078290616743116e-05,
+            "rows": 49,
+            "slope_per_second": 0.0,
+            "time_center": 151376014.475177
+          },
+          "18": {
+            "differential_at_center": 7.68900624022982e-05,
+            "rows": 74,
+            "slope_per_second": 0.0,
+            "time_center": 151375434.95676613
+          },
+          "19": {
+            "differential_at_center": 5.2697028011250424e-05,
+            "rows": 74,
+            "slope_per_second": 0.0,
+            "time_center": 151376938.2681906
+          },
+          "2": {
+            "differential_at_center": 4.783167137100558e-05,
+            "rows": 49,
+            "slope_per_second": 0.0,
+            "time_center": 151375898.03958732
+          },
+          "20": {
+            "differential_at_center": 8.115656132129043e-05,
+            "rows": 86,
+            "slope_per_second": 0.0,
+            "time_center": 151375450.70986632
+          },
+          "21": {
+            "differential_at_center": 2.3010893245981046e-05,
+            "rows": 67,
+            "slope_per_second": 0.0,
+            "time_center": 151375728.95958585
+          },
+          "22": {
+            "differential_at_center": 5.0395628986024676e-05,
+            "rows": 72,
+            "slope_per_second": 0.0,
+            "time_center": 151376713.29835626
+          },
+          "23": {
+            "differential_at_center": -1.2485131161692198e-05,
+            "rows": 71,
+            "slope_per_second": 0.0,
+            "time_center": 151376067.70870492
+          },
+          "24": {
+            "differential_at_center": 4.203701224344755e-05,
+            "rows": 84,
+            "slope_per_second": 0.0,
+            "time_center": 151374657.33880347
+          },
+          "25": {
+            "differential_at_center": 2.7905255711224708e-05,
+            "rows": 66,
+            "slope_per_second": 0.0,
+            "time_center": 151375145.4908431
+          },
+          "26": {
+            "differential_at_center": 4.979971319764298e-05,
+            "rows": 73,
+            "slope_per_second": 0.0,
+            "time_center": 151375644.40129736
+          },
+          "27": {
+            "differential_at_center": 0.0001132362134908041,
+            "rows": 84,
+            "slope_per_second": 0.0,
+            "time_center": 151377259.29886258
+          },
+          "28": {
+            "differential_at_center": 9.729162222772703e-05,
+            "rows": 73,
+            "slope_per_second": 0.0,
+            "time_center": 151377212.72861525
+          },
+          "29": {
+            "differential_at_center": 2.6945013777077143e-05,
+            "rows": 69,
+            "slope_per_second": 0.0,
+            "time_center": 151376171.81206262
+          },
+          "3": {
+            "differential_at_center": 4.423278298143832e-05,
+            "rows": 84,
+            "slope_per_second": 0.0,
+            "time_center": 151375664.97848582
+          },
+          "30": {
+            "differential_at_center": 6.702010657861496e-05,
+            "rows": 78,
+            "slope_per_second": 0.0,
+            "time_center": 151375289.539815
+          },
+          "31": {
+            "differential_at_center": 5.603011211513867e-05,
+            "rows": 66,
+            "slope_per_second": 0.0,
+            "time_center": 151376084.40833932
+          },
+          "32": {
+            "differential_at_center": 6.378286137734973e-05,
+            "rows": 73,
+            "slope_per_second": 0.0,
+            "time_center": 151376173.28044966
+          },
+          "33": {
+            "differential_at_center": 6.398396424135352e-05,
+            "rows": 68,
+            "slope_per_second": 0.0,
+            "time_center": 151375319.74831772
+          },
+          "34": {
+            "differential_at_center": 9.17749536455334e-05,
+            "rows": 76,
+            "slope_per_second": 0.0,
+            "time_center": 151375807.67547345
+          },
+          "35": {
+            "differential_at_center": 7.389077819749262e-05,
+            "rows": 81,
+            "slope_per_second": 0.0,
+            "time_center": 151375684.2108402
+          },
+          "4": {
+            "differential_at_center": 8.638059066049669e-05,
+            "rows": 72,
+            "slope_per_second": 0.0,
+            "time_center": 151376613.197355
+          },
+          "5": {
+            "differential_at_center": 2.1512580827890565e-05,
+            "rows": 60,
+            "slope_per_second": 0.0,
+            "time_center": 151375784.54060328
+          },
+          "6": {
+            "differential_at_center": 5.765281122234109e-05,
+            "rows": 58,
+            "slope_per_second": 0.0,
+            "time_center": 151376560.37228137
+          },
+          "7": {
+            "differential_at_center": 3.6148259742897065e-05,
+            "rows": 72,
+            "slope_per_second": 0.0,
+            "time_center": 151376630.21779937
+          },
+          "8": {
+            "differential_at_center": 4.7834876542463683e-05,
+            "rows": 54,
+            "slope_per_second": 0.0,
+            "time_center": 151373423.84734833
+          },
+          "9": {
+            "differential_at_center": -5.6880800312065355e-05,
+            "rows": 50,
+            "slope_per_second": 0.0,
+            "time_center": 151376944.92497727
+          }
+        },
+        "nearest_anchor_obsid": "000102000",
+        "nearest_anchor_segment": 2,
+        "output": {
+          "bytes": 297743040,
+          "negative_epi2": 50,
+          "negative_epi2_without_null_pi": 0,
+          "null_epi2": 0,
+          "null_pi": 50,
+          "null_pi_not_explained_by_negative_epi2": 0,
+          "null_temp": 0,
+          "rows": 1883886,
+          "sha256": "0ddaf5013870699a93aa2be08f6e4f364b1c7c72fdd3c6240e177cd108677ecb"
+        },
+        "role": "forward endpoint extrapolation",
+        "selected_rows": 1883886
+      }
+    ],
+    "nearest_anchor_linear": [
+      {
+        "comparison": {
+          "passed": false,
+          "per_pixel": {
+            "0": {
+              "absolute_centroid_delta_ev": 0.7584578089985006,
+              "centroid_delta_ev": -0.7584578089985006,
+              "fwhm_increase_ev": 0.15823778428358448
+            },
+            "1": {
+              "absolute_centroid_delta_ev": 0.4122807689155703,
+              "centroid_delta_ev": -0.4122807689155703,
+              "fwhm_increase_ev": -0.014849758346007214
+            },
+            "10": {
+              "absolute_centroid_delta_ev": 0.7389377953413511,
+              "centroid_delta_ev": -0.7389377953413511,
+              "fwhm_increase_ev": 0.04278571470533077
+            },
+            "11": {
+              "absolute_centroid_delta_ev": 1.9618923564545931,
+              "centroid_delta_ev": -1.9618923564545931,
+              "fwhm_increase_ev": 0.014115829773811761
+            },
+            "13": {
+              "absolute_centroid_delta_ev": 1.005102627274788,
+              "centroid_delta_ev": -1.005102627274788,
+              "fwhm_increase_ev": 0.11615912663060168
+            },
+            "14": {
+              "absolute_centroid_delta_ev": 0.22335145972459552,
+              "centroid_delta_ev": -0.22335145972459552,
+              "fwhm_increase_ev": 0.01280522740564205
+            },
+            "15": {
+              "absolute_centroid_delta_ev": 0.9104500482243013,
+              "centroid_delta_ev": -0.9104500482243013,
+              "fwhm_increase_ev": 0.10236009078072161
+            },
+            "16": {
+              "absolute_centroid_delta_ev": 0.20368361762302967,
+              "centroid_delta_ev": -0.20368361762302967,
+              "fwhm_increase_ev": 0.01217668096974478
+            },
+            "17": {
+              "absolute_centroid_delta_ev": 1.9837586358724661,
+              "centroid_delta_ev": -1.9837586358724661,
+              "fwhm_increase_ev": 0.286263660426024
+            },
+            "18": {
+              "absolute_centroid_delta_ev": 0.7705246833269582,
+              "centroid_delta_ev": -0.7705246833269582,
+              "fwhm_increase_ev": 0.14350313837531736
+            },
+            "19": {
+              "absolute_centroid_delta_ev": 0.5546790764197151,
+              "centroid_delta_ev": -0.5546790764197151,
+              "fwhm_increase_ev": 0.014397984490609694
+            },
+            "2": {
+              "absolute_centroid_delta_ev": 0.9713437745703631,
+              "centroid_delta_ev": -0.9713437745703631,
+              "fwhm_increase_ev": 0.06252945912144003
+            },
+            "20": {
+              "absolute_centroid_delta_ev": 0.46520312294888594,
+              "centroid_delta_ev": -0.46520312294888594,
+              "fwhm_increase_ev": 0.09141424906242523
+            },
+            "21": {
+              "absolute_centroid_delta_ev": 0.8088360208620092,
+              "centroid_delta_ev": -0.8088360208620092,
+              "fwhm_increase_ev": 0.02410490624239081
+            },
+            "22": {
+              "absolute_centroid_delta_ev": 0.6415803648601461,
+              "centroid_delta_ev": -0.6415803648601461,
+              "fwhm_increase_ev": 0.08090630534968035
+            },
+            "23": {
+              "absolute_centroid_delta_ev": 0.23162443438251878,
+              "centroid_delta_ev": 0.23162443438251878,
+              "fwhm_increase_ev": 0.011400449227576104
+            },
+            "24": {
+              "absolute_centroid_delta_ev": 0.5200170063037027,
+              "centroid_delta_ev": -0.5200170063037027,
+              "fwhm_increase_ev": 0.017714883154448913
+            },
+            "25": {
+              "absolute_centroid_delta_ev": 0.6511094263261503,
+              "centroid_delta_ev": -0.6511094263261503,
+              "fwhm_increase_ev": 0.06547347141964988
+            },
+            "26": {
+              "absolute_centroid_delta_ev": 0.3567352152409935,
+              "centroid_delta_ev": -0.3567352152409935,
+              "fwhm_increase_ev": 0.036713440350315096
+            },
+            "27": {
+              "absolute_centroid_delta_ev": 2.0131809875333895,
+              "centroid_delta_ev": 2.0131809875333895,
+              "fwhm_increase_ev": 3.268428501040308
+            },
+            "28": {
+              "absolute_centroid_delta_ev": 1.260393727053722,
+              "centroid_delta_ev": -1.260393727053722,
+              "fwhm_increase_ev": 0.12242542033585035
+            },
+            "29": {
+              "absolute_centroid_delta_ev": 0.6704831492501193,
+              "centroid_delta_ev": -0.6704831492501193,
+              "fwhm_increase_ev": 0.026828902432916912
+            },
+            "3": {
+              "absolute_centroid_delta_ev": 1.4112757539980358,
+              "centroid_delta_ev": -1.4112757539980358,
+              "fwhm_increase_ev": 0.02791758978366765
+            },
+            "30": {
+              "absolute_centroid_delta_ev": 0.4918801930751485,
+              "centroid_delta_ev": -0.4918801930751485,
+              "fwhm_increase_ev": 0.19190731307837794
+            },
+            "31": {
+              "absolute_centroid_delta_ev": 1.1762298357201257,
+              "centroid_delta_ev": -1.1762298357201257,
+              "fwhm_increase_ev": 0.0828557772493097
+            },
+            "32": {
+              "absolute_centroid_delta_ev": 0.6881433060406736,
+              "centroid_delta_ev": -0.6881433060406736,
+              "fwhm_increase_ev": 0.05216788542109718
+            },
+            "33": {
+              "absolute_centroid_delta_ev": 0.6933902426688432,
+              "centroid_delta_ev": -0.6933902426688432,
+              "fwhm_increase_ev": 0.09440510667679192
+            },
+            "34": {
+              "absolute_centroid_delta_ev": 0.09100058122427868,
+              "centroid_delta_ev": -0.09100058122427868,
+              "fwhm_increase_ev": 0.006958062489018424
+            },
+            "35": {
+              "absolute_centroid_delta_ev": 1.1433478444114182,
+              "centroid_delta_ev": -1.1433478444114182,
+              "fwhm_increase_ev": 0.1757055103261509
+            },
+            "4": {
+              "absolute_centroid_delta_ev": 1.0384075165857625,
+              "centroid_delta_ev": -1.0384075165857625,
+              "fwhm_increase_ev": 0.09029833960971789
+            },
+            "5": {
+              "absolute_centroid_delta_ev": 0.11885079810408858,
+              "centroid_delta_ev": 0.11885079810408858,
+              "fwhm_increase_ev": 0.002630285528151255
+            },
+            "6": {
+              "absolute_centroid_delta_ev": 0.2809622939065076,
+              "centroid_delta_ev": -0.2809622939065076,
+              "fwhm_increase_ev": 0.0032712781786088385
+            },
+            "7": {
+              "absolute_centroid_delta_ev": 0.889706799030477,
+              "centroid_delta_ev": -0.889706799030477,
+              "fwhm_increase_ev": 0.08842966362089566
+            },
+            "8": {
+              "absolute_centroid_delta_ev": 0.8261063933310073,
+              "centroid_delta_ev": -0.8261063933310073,
+              "fwhm_increase_ev": 0.06702186375365393
+            },
+            "9": {
+              "absolute_centroid_delta_ev": 0.26125334601717937,
+              "centroid_delta_ev": -0.26125334601717937,
+              "fwhm_increase_ev": -0.003682077692251262
+            }
+          },
+          "per_pixel_absolute_centroid_delta_p90_ev": 1.3509229432203105,
+          "per_pixel_fwhm_increase_p90_ev": 0.16871841990912434,
+          "whole_array_centroid_delta_ev": -0.6509869517832311,
+          "whole_array_fwhm_increase_ev": 0.5279801064121257
+        },
+        "fit": {
+          "per_pixel": {
+            "0": {
+              "cash_statistic": -372091.29341981775,
+              "centroid_shift_ev": -0.7920349860085197,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 34254,
+              "instrument_fwhm_ev": 5.019282952930989,
+              "iterations": 11,
+              "line_normalization": 30828.77575849431,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "1": {
+              "cash_statistic": -363306.7597741588,
+              "centroid_shift_ev": -0.5032559327582377,
+              "constant_background_per_ev": 0.36634685200853606,
+              "converged": true,
+              "events_in_fit_window": 33656,
+              "instrument_fwhm_ev": 5.119501063807399,
+              "iterations": 10,
+              "line_normalization": 30290.570887071233,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "10": {
+              "cash_statistic": -359771.57184437895,
+              "centroid_shift_ev": -0.8079295713400353,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 33201,
+              "instrument_fwhm_ev": 4.583982830288721,
+              "iterations": 11,
+              "line_normalization": 29881.065152737,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "11": {
+              "cash_statistic": -485048.5936455287,
+              "centroid_shift_ev": -2.0,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 42800,
+              "instrument_fwhm_ev": 4.576459629446263,
+              "iterations": 5,
+              "line_normalization": 38520.18079267317,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "13": {
+              "cash_statistic": -540882.133957617,
+              "centroid_shift_ev": -1.0350864702725873,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47046,
+              "instrument_fwhm_ev": 4.957237499329684,
+              "iterations": 12,
+              "line_normalization": 42341.64247176215,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "14": {
+              "cash_statistic": -386971.1845220998,
+              "centroid_shift_ev": -0.25543250144552987,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 35124,
+              "instrument_fwhm_ev": 4.105790970542777,
+              "iterations": 11,
+              "line_normalization": 31611.82879378033,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "15": {
+              "cash_statistic": -468917.8188952041,
+              "centroid_shift_ev": -0.949976060866671,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 41467,
+              "instrument_fwhm_ev": 4.353358284253253,
+              "iterations": 9,
+              "line_normalization": 37320.523527718535,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "16": {
+              "cash_statistic": -349550.81370127376,
+              "centroid_shift_ev": -0.2426794892599446,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 32533,
+              "instrument_fwhm_ev": 5.04844094995077,
+              "iterations": 32,
+              "line_normalization": 33030.388403145465,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "17": {
+              "cash_statistic": -334069.05191911367,
+              "centroid_shift_ev": -2.0,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 31210,
+              "instrument_fwhm_ev": 4.579105239767514,
+              "iterations": 5,
+              "line_normalization": 28089.14493262852,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "18": {
+              "cash_statistic": -500453.6911262706,
+              "centroid_shift_ev": -0.8133345093683884,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43826,
+              "instrument_fwhm_ev": 4.4796231550157275,
+              "iterations": 11,
+              "line_normalization": 39443.67450069779,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "19": {
+              "cash_statistic": -511638.0121960387,
+              "centroid_shift_ev": -0.5747306604470126,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44597,
+              "instrument_fwhm_ev": 4.337888124704575,
+              "iterations": 11,
+              "line_normalization": 40137.51229963962,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "2": {
+              "cash_statistic": -337867.1882109755,
+              "centroid_shift_ev": -1.0357738320790093,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 31467,
+              "instrument_fwhm_ev": 4.636839649898475,
+              "iterations": 10,
+              "line_normalization": 28320.50386052589,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "20": {
+              "cash_statistic": -558065.0282207214,
+              "centroid_shift_ev": -0.4904485087239112,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 48095,
+              "instrument_fwhm_ev": 4.4352131843654705,
+              "iterations": 12,
+              "line_normalization": 43285.72749423547,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "21": {
+              "cash_statistic": -422221.0694205258,
+              "centroid_shift_ev": -0.847294511303632,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 37964,
+              "instrument_fwhm_ev": 4.545025851809258,
+              "iterations": 11,
+              "line_normalization": 34167.82671907968,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "22": {
+              "cash_statistic": -475757.79933109996,
+              "centroid_shift_ev": -0.6828778963666627,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 41922,
+              "instrument_fwhm_ev": 4.313479584401864,
+              "iterations": 11,
+              "line_normalization": 37730.00028162538,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "23": {
+              "cash_statistic": -490866.0704570331,
+              "centroid_shift_ev": 0.17407461035776817,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43066,
+              "instrument_fwhm_ev": 4.2781666989036955,
+              "iterations": 10,
+              "line_normalization": 38759.63796159565,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "24": {
+              "cash_statistic": -544672.4602031545,
+              "centroid_shift_ev": -0.5525453971004656,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47024,
+              "instrument_fwhm_ev": 4.363861015866618,
+              "iterations": 12,
+              "line_normalization": 42321.810164694856,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "25": {
+              "cash_statistic": -403990.877388173,
+              "centroid_shift_ev": -0.7210920103749661,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 36648,
+              "instrument_fwhm_ev": 4.845496725551405,
+              "iterations": 12,
+              "line_normalization": 32983.42363774727,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "26": {
+              "cash_statistic": -490920.93190507224,
+              "centroid_shift_ev": -0.41419562207638894,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43037,
+              "instrument_fwhm_ev": 4.287543091030835,
+              "iterations": 11,
+              "line_normalization": 38733.550332605126,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "27": {
+              "cash_statistic": -532220.6959896039,
+              "centroid_shift_ev": 2.0,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47633,
+              "instrument_fwhm_ev": 8.0,
+              "iterations": 12,
+              "line_normalization": 48480.72017821213,
+              "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+            },
+            "28": {
+              "cash_statistic": -497891.5855118661,
+              "centroid_shift_ev": -1.2760953602013916,
+              "constant_background_per_ev": 0.4004389587421352,
+              "converged": true,
+              "events_in_fit_window": 43715,
+              "instrument_fwhm_ev": 4.499640958068439,
+              "iterations": 12,
+              "line_normalization": 39343.67690435231,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "29": {
+              "cash_statistic": -442089.3189891408,
+              "centroid_shift_ev": -0.7169108934147075,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 39439,
+              "instrument_fwhm_ev": 4.330702939234327,
+              "iterations": 11,
+              "line_normalization": 35495.31745640668,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "3": {
+              "cash_statistic": -540911.6204995825,
+              "centroid_shift_ev": -1.4502020692549245,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 46774,
+              "instrument_fwhm_ev": 4.407197217179456,
+              "iterations": 6,
+              "line_normalization": 42096.784808654724,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "30": {
+              "cash_statistic": -509164.4384430325,
+              "centroid_shift_ev": -0.5115810790117828,
+              "constant_background_per_ev": 0.010327404024041946,
+              "converged": true,
+              "events_in_fit_window": 44752,
+              "instrument_fwhm_ev": 4.820538266394649,
+              "iterations": 9,
+              "line_normalization": 40276.98552449174,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "31": {
+              "cash_statistic": -407853.7770559223,
+              "centroid_shift_ev": -1.206519547457958,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 36862,
+              "instrument_fwhm_ev": 4.537186953956012,
+              "iterations": 12,
+              "line_normalization": 33176.069244206294,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "32": {
+              "cash_statistic": -499354.0846139967,
+              "centroid_shift_ev": -0.6922772953744518,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43739,
+              "instrument_fwhm_ev": 4.469352432562915,
+              "iterations": 12,
+              "line_normalization": 39365.33584129232,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "33": {
+              "cash_statistic": -426318.700362726,
+              "centroid_shift_ev": -0.7360862417649707,
+              "constant_background_per_ev": 0.43356751481289746,
+              "converged": true,
+              "events_in_fit_window": 38260,
+              "instrument_fwhm_ev": 4.379799296056978,
+              "iterations": 12,
+              "line_normalization": 34434.1814720349,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "34": {
+              "cash_statistic": -508404.41942396964,
+              "centroid_shift_ev": -0.11647653329991065,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44337,
+              "instrument_fwhm_ev": 4.296020228868923,
+              "iterations": 11,
+              "line_normalization": 39903.56851539564,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "35": {
+              "cash_statistic": -540199.4156961661,
+              "centroid_shift_ev": -1.1867071822197897,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 46713,
+              "instrument_fwhm_ev": 4.347024900029642,
+              "iterations": 13,
+              "line_normalization": 42041.9263663036,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "4": {
+              "cash_statistic": -478604.8498094054,
+              "centroid_shift_ev": -1.0962043750655746,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 42194,
+              "instrument_fwhm_ev": 4.391349606698776,
+              "iterations": 12,
+              "line_normalization": 37974.815381515305,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "5": {
+              "cash_statistic": -388244.50662986137,
+              "centroid_shift_ev": 0.06985116602447253,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 35310,
+              "instrument_fwhm_ev": 4.380749763874616,
+              "iterations": 10,
+              "line_normalization": 31779.21127757525,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "6": {
+              "cash_statistic": -373771.94969164324,
+              "centroid_shift_ev": -0.3490793178916009,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 34226,
+              "instrument_fwhm_ev": 4.4315677388424675,
+              "iterations": 12,
+              "line_normalization": 30803.584839863124,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "7": {
+              "cash_statistic": -481279.4845603755,
+              "centroid_shift_ev": -0.9262791424503533,
+              "constant_background_per_ev": 0.49878366799790536,
+              "converged": true,
+              "events_in_fit_window": 42528,
+              "instrument_fwhm_ev": 4.632774515364611,
+              "iterations": 10,
+              "line_normalization": 38275.37159112163,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "8": {
+              "cash_statistic": -355812.06715264695,
+              "centroid_shift_ev": -0.8942383343436896,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 32809,
+              "instrument_fwhm_ev": 4.501329143543548,
+              "iterations": 9,
+              "line_normalization": 29528.271151907433,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "9": {
+              "cash_statistic": -344728.10522580316,
+              "centroid_shift_ev": -0.3291036905550435,
+              "constant_background_per_ev": 0.04004809958316079,
+              "converged": true,
+              "events_in_fit_window": 32041,
+              "instrument_fwhm_ev": 4.600870258401479,
+              "iterations": 9,
+              "line_normalization": 28837.04260795582,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            }
+          },
+          "whole_array": {
+            "cash_statistic": -25572655.225619942,
+            "centroid_shift_ev": -0.6911051870902492,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 1400269,
+            "instrument_fwhm_ev": 4.982886990336761,
+            "iterations": 15,
+            "line_normalization": 1260244.795239255,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          }
+        },
+        "held_out_obsid": "000100000",
+        "held_out_segment": 0,
+        "history": {
+          "bytes": 223859520,
+          "rows": 18396,
+          "rows_per_time": 36,
+          "sha256": "77a17174edca68c11ebcf1c0cb6f546750935d1f8730f0f593729d53d4af299d",
+          "temp_fit_finite": true,
+          "time_grid_rows": 511
+        },
+        "models": {
+          "0": {
+            "differential_at_center": 9.260990561479876e-05,
+            "rows": 62,
+            "slope_per_second": 1.6578619271643793e-11,
+            "time_center": 151121916.2680525
+          },
+          "1": {
+            "differential_at_center": 1.0830333602552776e-05,
+            "rows": 58,
+            "slope_per_second": 9.679181981100217e-12,
+            "time_center": 151121155.06922987
+          },
+          "10": {
+            "differential_at_center": 4.010880709787726e-05,
+            "rows": 59,
+            "slope_per_second": 1.971765908713441e-11,
+            "time_center": 151119982.02542996
+          },
+          "11": {
+            "differential_at_center": 3.74955419640262e-05,
+            "rows": 74,
+            "slope_per_second": 6.50352042100253e-12,
+            "time_center": 151123004.28561816
+          },
+          "12": {
+            "differential_at_center": 0.0,
+            "rows": 0,
+            "slope_per_second": 0.0,
+            "time_center": 0.0
+          },
+          "13": {
+            "differential_at_center": 5.769051262792838e-05,
+            "rows": 86,
+            "slope_per_second": 2.2483671145727212e-11,
+            "time_center": 151120522.81340846
+          },
+          "14": {
+            "differential_at_center": 3.404734847054246e-05,
+            "rows": 63,
+            "slope_per_second": 7.346180529332136e-12,
+            "time_center": 151121839.12495905
+          },
+          "15": {
+            "differential_at_center": 6.795769339657787e-05,
+            "rows": 72,
+            "slope_per_second": 2.200105800039337e-11,
+            "time_center": 151122881.802428
+          },
+          "16": {
+            "differential_at_center": 8.962290326250768e-05,
+            "rows": 54,
+            "slope_per_second": 1.349638797865029e-11,
+            "time_center": 151121131.66549703
+          },
+          "17": {
+            "differential_at_center": 6.751342951718664e-05,
+            "rows": 49,
+            "slope_per_second": 3.1476816016621246e-11,
+            "time_center": 151120773.43679303
+          },
+          "18": {
+            "differential_at_center": 7.683751760712431e-05,
+            "rows": 77,
+            "slope_per_second": 1.8697290020347173e-11,
+            "time_center": 151121024.76839
+          },
+          "19": {
+            "differential_at_center": 5.2401846291592254e-05,
+            "rows": 78,
+            "slope_per_second": 8.922122627478773e-12,
+            "time_center": 151121801.22090152
+          },
+          "2": {
+            "differential_at_center": 4.704971750967051e-05,
+            "rows": 52,
+            "slope_per_second": 2.194092201113035e-11,
+            "time_center": 151122618.0399515
+          },
+          "20": {
+            "differential_at_center": 8.165803467943155e-05,
+            "rows": 86,
+            "slope_per_second": 1.2252226349194622e-11,
+            "time_center": 151120990.4611398
+          },
+          "21": {
+            "differential_at_center": 2.0395548946925592e-05,
+            "rows": 69,
+            "slope_per_second": 1.8743860550560882e-11,
+            "time_center": 151122190.1719445
+          },
+          "22": {
+            "differential_at_center": 5.0267026152462816e-05,
+            "rows": 73,
+            "slope_per_second": 1.792410275360876e-11,
+            "time_center": 151122445.29455122
+          },
+          "23": {
+            "differential_at_center": -1.2895973007610697e-05,
+            "rows": 74,
+            "slope_per_second": -9.118673718563978e-13,
+            "time_center": 151121515.58513728
+          },
+          "24": {
+            "differential_at_center": 4.153058394508716e-05,
+            "rows": 83,
+            "slope_per_second": 1.4870410909503308e-11,
+            "time_center": 151120883.13883838
+          },
+          "25": {
+            "differential_at_center": 2.8036063995326684e-05,
+            "rows": 67,
+            "slope_per_second": 1.432257622983419e-11,
+            "time_center": 151121956.83078444
+          },
+          "26": {
+            "differential_at_center": 4.9564394064123246e-05,
+            "rows": 74,
+            "slope_per_second": 1.2469287570731468e-11,
+            "time_center": 151121468.36778754
+          },
+          "27": {
+            "differential_at_center": 0.00012231254938933444,
+            "rows": 84,
+            "slope_per_second": -1.0141672946236e-10,
+            "time_center": 151120599.9751271
+          },
+          "28": {
+            "differential_at_center": 9.697885838111534e-05,
+            "rows": 77,
+            "slope_per_second": 2.6176752297053178e-11,
+            "time_center": 151121646.3042911
+          },
+          "29": {
+            "differential_at_center": 2.664937173212344e-05,
+            "rows": 71,
+            "slope_per_second": 2.9165409759440355e-13,
+            "time_center": 151122433.33197808
+          },
+          "3": {
+            "differential_at_center": 4.420635662586885e-05,
+            "rows": 86,
+            "slope_per_second": 2.6293788000884307e-11,
+            "time_center": 151120623.42548037
+          },
+          "30": {
+            "differential_at_center": 6.67502763451474e-05,
+            "rows": 78,
+            "slope_per_second": 3.610104241977463e-13,
+            "time_center": 151121031.71846166
+          },
+          "31": {
+            "differential_at_center": 5.519312181097911e-05,
+            "rows": 67,
+            "slope_per_second": 1.858343636791781e-11,
+            "time_center": 151121883.30006912
+          },
+          "32": {
+            "differential_at_center": 6.387270935169197e-05,
+            "rows": 75,
+            "slope_per_second": 1.1002508857094516e-11,
+            "time_center": 151122514.23861876
+          },
+          "33": {
+            "differential_at_center": 6.318988705226554e-05,
+            "rows": 69,
+            "slope_per_second": 1.586617977466519e-11,
+            "time_center": 151122017.93529662
+          },
+          "34": {
+            "differential_at_center": 9.239445498819913e-05,
+            "rows": 76,
+            "slope_per_second": 8.633495870964744e-12,
+            "time_center": 151121737.0084158
+          },
+          "35": {
+            "differential_at_center": 7.320312362483549e-05,
+            "rows": 81,
+            "slope_per_second": 2.222631287300955e-11,
+            "time_center": 151121503.0926134
+          },
+          "4": {
+            "differential_at_center": 8.668647570414306e-05,
+            "rows": 73,
+            "slope_per_second": 2.1213931695306275e-11,
+            "time_center": 151122351.97114024
+          },
+          "5": {
+            "differential_at_center": 2.227538849664914e-05,
+            "rows": 63,
+            "slope_per_second": 1.0484462654362352e-12,
+            "time_center": 151121835.47137785
+          },
+          "6": {
+            "differential_at_center": 5.60363491832134e-05,
+            "rows": 61,
+            "slope_per_second": 9.434947630187118e-12,
+            "time_center": 151119670.4700234
+          },
+          "7": {
+            "differential_at_center": 3.5927413731860475e-05,
+            "rows": 73,
+            "slope_per_second": 1.834861600853001e-11,
+            "time_center": 151122162.77323553
+          },
+          "8": {
+            "differential_at_center": 4.7592575405021835e-05,
+            "rows": 55,
+            "slope_per_second": 1.2916958296508441e-11,
+            "time_center": 151120097.3621285
+          },
+          "9": {
+            "differential_at_center": -5.7278761419115e-05,
+            "rows": 52,
+            "slope_per_second": 1.1898069677715917e-11,
+            "time_center": 151120787.02341464
+          }
+        },
+        "nearest_anchor_obsid": "000101000",
+        "nearest_anchor_segment": 1,
+        "output": {
+          "bytes": 287619840,
+          "negative_epi2": 49,
+          "negative_epi2_without_null_pi": 0,
+          "null_epi2": 0,
+          "null_pi": 49,
+          "null_pi_not_explained_by_negative_epi2": 0,
+          "null_temp": 0,
+          "rows": 1819814,
+          "sha256": "0176beb9fcfe2545d621cabda43f3cef9d0bec5224b21401b424c17e7b24ad1e"
+        },
+        "role": "backward endpoint extrapolation",
+        "selected_rows": 1819814
+      },
+      {
+        "comparison": {
+          "passed": false,
+          "per_pixel": {
+            "0": {
+              "absolute_centroid_delta_ev": 0.38679927232084665,
+              "centroid_delta_ev": -0.38679927232084665,
+              "fwhm_increase_ev": 0.10412366107084203
+            },
+            "1": {
+              "absolute_centroid_delta_ev": 0.13996579558241012,
+              "centroid_delta_ev": -0.13996579558241012,
+              "fwhm_increase_ev": 0.028159551939447525
+            },
+            "10": {
+              "absolute_centroid_delta_ev": 0.9957825743179177,
+              "centroid_delta_ev": -0.9957825743179177,
+              "fwhm_increase_ev": 0.07872185998011627
+            },
+            "11": {
+              "absolute_centroid_delta_ev": 2.023467015364378,
+              "centroid_delta_ev": 2.023467015364378,
+              "fwhm_increase_ev": 1.6884092160171713
+            },
+            "13": {
+              "absolute_centroid_delta_ev": 0.36325200271942515,
+              "centroid_delta_ev": -0.36325200271942515,
+              "fwhm_increase_ev": 0.08379193415858488
+            },
+            "14": {
+              "absolute_centroid_delta_ev": 0.10340776846845562,
+              "centroid_delta_ev": -0.10340776846845562,
+              "fwhm_increase_ev": 0.03278731386929756
+            },
+            "15": {
+              "absolute_centroid_delta_ev": 0.5759550230615778,
+              "centroid_delta_ev": -0.5759550230615778,
+              "fwhm_increase_ev": 0.10521242094884276
+            },
+            "16": {
+              "absolute_centroid_delta_ev": 0.36468301664773695,
+              "centroid_delta_ev": 0.36468301664773695,
+              "fwhm_increase_ev": 0.032804754568394934
+            },
+            "17": {
+              "absolute_centroid_delta_ev": 1.0272263200614702,
+              "centroid_delta_ev": -1.0272263200614702,
+              "fwhm_increase_ev": 0.15034574661165845
+            },
+            "18": {
+              "absolute_centroid_delta_ev": 0.5143533459043427,
+              "centroid_delta_ev": -0.5143533459043427,
+              "fwhm_increase_ev": 0.142782917543248
+            },
+            "19": {
+              "absolute_centroid_delta_ev": 1.0372846855446918,
+              "centroid_delta_ev": -1.0372846855446918,
+              "fwhm_increase_ev": 0.13304297376490393
+            },
+            "2": {
+              "absolute_centroid_delta_ev": 0.6400790613189972,
+              "centroid_delta_ev": -0.6400790613189972,
+              "fwhm_increase_ev": 0.1207276189820563
+            },
+            "20": {
+              "absolute_centroid_delta_ev": 0.7582467747486638,
+              "centroid_delta_ev": -0.7582467747486638,
+              "fwhm_increase_ev": 0.15013020785092746
+            },
+            "21": {
+              "absolute_centroid_delta_ev": 0.32633896980682625,
+              "centroid_delta_ev": -0.32633896980682625,
+              "fwhm_increase_ev": 0.0702044581466934
+            },
+            "22": {
+              "absolute_centroid_delta_ev": 0.5846374552398691,
+              "centroid_delta_ev": -0.5846374552398691,
+              "fwhm_increase_ev": 0.08860895062280338
+            },
+            "23": {
+              "absolute_centroid_delta_ev": 0.1620037189429493,
+              "centroid_delta_ev": -0.1620037189429493,
+              "fwhm_increase_ev": 0.1287847659835064
+            },
+            "24": {
+              "absolute_centroid_delta_ev": 0.7023084924275745,
+              "centroid_delta_ev": -0.7023084924275745,
+              "fwhm_increase_ev": 0.055797988678718546
+            },
+            "25": {
+              "absolute_centroid_delta_ev": 0.8265712366838246,
+              "centroid_delta_ev": -0.8265712366838246,
+              "fwhm_increase_ev": 0.07912958512800472
+            },
+            "26": {
+              "absolute_centroid_delta_ev": 0.2019831193491593,
+              "centroid_delta_ev": -0.2019831193491593,
+              "fwhm_increase_ev": 0.059390479866669565
+            },
+            "27": {
+              "absolute_centroid_delta_ev": 1.9827501239784697,
+              "centroid_delta_ev": -1.9827501239784697,
+              "fwhm_increase_ev": 2.684818822602068
+            },
+            "28": {
+              "absolute_centroid_delta_ev": 0.8271387045844673,
+              "centroid_delta_ev": -0.8271387045844673,
+              "fwhm_increase_ev": 0.12068733545731813
+            },
+            "29": {
+              "absolute_centroid_delta_ev": 1.9711430520883917,
+              "centroid_delta_ev": -1.9711430520883917,
+              "fwhm_increase_ev": 3.570771107844683
+            },
+            "3": {
+              "absolute_centroid_delta_ev": 0.030638302181080393,
+              "centroid_delta_ev": 0.030638302181080393,
+              "fwhm_increase_ev": 0.06445861402604613
+            },
+            "30": {
+              "absolute_centroid_delta_ev": 1.519758500750046,
+              "centroid_delta_ev": -1.519758500750046,
+              "fwhm_increase_ev": 0.07802137671191822
+            },
+            "31": {
+              "absolute_centroid_delta_ev": 1.4626761591539144,
+              "centroid_delta_ev": -1.4626761591539144,
+              "fwhm_increase_ev": 0.15376912390672448
+            },
+            "32": {
+              "absolute_centroid_delta_ev": 0.30558689321183063,
+              "centroid_delta_ev": -0.30558689321183063,
+              "fwhm_increase_ev": 0.036083295704868235
+            },
+            "33": {
+              "absolute_centroid_delta_ev": 0.34038211546588715,
+              "centroid_delta_ev": -0.34038211546588715,
+              "fwhm_increase_ev": 0.0766295438843505
+            },
+            "34": {
+              "absolute_centroid_delta_ev": 0.32888642006027724,
+              "centroid_delta_ev": -0.32888642006027724,
+              "fwhm_increase_ev": 0.032293961222280565
+            },
+            "35": {
+              "absolute_centroid_delta_ev": 0.42749977685938634,
+              "centroid_delta_ev": -0.42749977685938634,
+              "fwhm_increase_ev": 0.1523455704353962
+            },
+            "4": {
+              "absolute_centroid_delta_ev": 0.5895796923842267,
+              "centroid_delta_ev": -0.5895796923842267,
+              "fwhm_increase_ev": 0.12093555177246795
+            },
+            "5": {
+              "absolute_centroid_delta_ev": 0.1578176095864125,
+              "centroid_delta_ev": -0.1578176095864125,
+              "fwhm_increase_ev": -0.01343356386901906
+            },
+            "6": {
+              "absolute_centroid_delta_ev": 1.8116381814279965,
+              "centroid_delta_ev": 1.8116381814279965,
+              "fwhm_increase_ev": 0.07361241507962646
+            },
+            "7": {
+              "absolute_centroid_delta_ev": 0.7983326670582566,
+              "centroid_delta_ev": -0.7983326670582566,
+              "fwhm_increase_ev": 0.09893004970784869
+            },
+            "8": {
+              "absolute_centroid_delta_ev": 0.1675178846889133,
+              "centroid_delta_ev": 0.1675178846889133,
+              "fwhm_increase_ev": 0.04887970673387798
+            },
+            "9": {
+              "absolute_centroid_delta_ev": 0.7128627245956461,
+              "centroid_delta_ev": -0.7128627245956461,
+              "fwhm_increase_ev": 0.01934855259553281
+            }
+          },
+          "per_pixel_absolute_centroid_delta_p90_ev": 1.6948863091568167,
+          "per_pixel_fwhm_increase_p90_ev": 0.15319970251819318,
+          "whole_array_centroid_delta_ev": -0.486825225753478,
+          "whole_array_fwhm_increase_ev": 0.7463892996757204
+        },
+        "fit": {
+          "per_pixel": {
+            "0": {
+              "cash_statistic": -383418.9181880265,
+              "centroid_shift_ev": -0.40660687377240745,
+              "constant_background_per_ev": 0.6254165202713134,
+              "converged": true,
+              "events_in_fit_window": 35198,
+              "instrument_fwhm_ev": 5.0286608484583315,
+              "iterations": 10,
+              "line_normalization": 31678.371063786508,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "1": {
+              "cash_statistic": -371541.03611562063,
+              "centroid_shift_ev": -0.2462823722582534,
+              "constant_background_per_ev": 0.35739882958679875,
+              "converged": true,
+              "events_in_fit_window": 34346,
+              "instrument_fwhm_ev": 5.233659595542835,
+              "iterations": 11,
+              "line_normalization": 30911.57624880171,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "10": {
+              "cash_statistic": -368698.408625059,
+              "centroid_shift_ev": -1.0534173719312818,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 33869,
+              "instrument_fwhm_ev": 4.659449025088187,
+              "iterations": 11,
+              "line_normalization": 30482.319664791794,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "11": {
+              "cash_statistic": -488176.75504904275,
+              "centroid_shift_ev": 2.0,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43428,
+              "instrument_fwhm_ev": 6.243672111333222,
+              "iterations": 29,
+              "line_normalization": 44190.21292742447,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "13": {
+              "cash_statistic": -553411.2616220232,
+              "centroid_shift_ev": -0.42829406432811035,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47990,
+              "instrument_fwhm_ev": 4.924255506391126,
+              "iterations": 11,
+              "line_normalization": 43191.20243209881,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "14": {
+              "cash_statistic": -396412.7356917275,
+              "centroid_shift_ev": -0.15648628323068112,
+              "constant_background_per_ev": 0.03120378517745262,
+              "converged": true,
+              "events_in_fit_window": 35864,
+              "instrument_fwhm_ev": 4.107292339515301,
+              "iterations": 12,
+              "line_normalization": 32277.77396550111,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "15": {
+              "cash_statistic": -475990.3743452765,
+              "centroid_shift_ev": -0.6140804655268743,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 41941,
+              "instrument_fwhm_ev": 4.3872670304718095,
+              "iterations": 12,
+              "line_normalization": 37747.11247501383,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "16": {
+              "cash_statistic": -361637.4334994373,
+              "centroid_shift_ev": 0.33142128573186364,
+              "constant_background_per_ev": 0.11077612377241634,
+              "converged": true,
+              "events_in_fit_window": 33506,
+              "instrument_fwhm_ev": 5.1592324974347985,
+              "iterations": 12,
+              "line_normalization": 30155.559089939743,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "17": {
+              "cash_statistic": -345442.80657751625,
+              "centroid_shift_ev": -1.0718225210752892,
+              "constant_background_per_ev": 0.09819140225208449,
+              "converged": true,
+              "events_in_fit_window": 32027,
+              "instrument_fwhm_ev": 4.399445976695822,
+              "iterations": 12,
+              "line_normalization": 28824.484891427386,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "18": {
+              "cash_statistic": -508695.5275812301,
+              "centroid_shift_ev": -0.539198417265258,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44476,
+              "instrument_fwhm_ev": 4.590430617506527,
+              "iterations": 9,
+              "line_normalization": 40028.58706291432,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "19": {
+              "cash_statistic": -516439.162163811,
+              "centroid_shift_ev": -1.0604712287712363,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 45017,
+              "instrument_fwhm_ev": 4.431091723864763,
+              "iterations": 12,
+              "line_normalization": 40515.52990762432,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "2": {
+              "cash_statistic": -351506.3775853232,
+              "centroid_shift_ev": -0.6734438013634219,
+              "constant_background_per_ev": 0.10897170322836025,
+              "converged": true,
+              "events_in_fit_window": 32559,
+              "instrument_fwhm_ev": 4.685225061689868,
+              "iterations": 11,
+              "line_normalization": 29303.27114954202,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "20": {
+              "cash_statistic": -572738.1559212831,
+              "centroid_shift_ev": -0.7949163677132661,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 49212,
+              "instrument_fwhm_ev": 4.581278379466364,
+              "iterations": 12,
+              "line_normalization": 44291.04058847837,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "21": {
+              "cash_statistic": -441140.24917702226,
+              "centroid_shift_ev": -0.3572582476403838,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 39353,
+              "instrument_fwhm_ev": 4.406602258915597,
+              "iterations": 12,
+              "line_normalization": 35417.9261187129,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "22": {
+              "cash_statistic": -487067.7302345562,
+              "centroid_shift_ev": -0.6312998531674608,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 42827,
+              "instrument_fwhm_ev": 4.372135804170695,
+              "iterations": 11,
+              "line_normalization": 38544.521817358036,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "23": {
+              "cash_statistic": -492660.68946185,
+              "centroid_shift_ev": -0.20916757553615858,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43255,
+              "instrument_fwhm_ev": 4.416900201852516,
+              "iterations": 11,
+              "line_normalization": 38929.778349845525,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "24": {
+              "cash_statistic": -546488.6535076097,
+              "centroid_shift_ev": -0.7302133072684857,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47230,
+              "instrument_fwhm_ev": 4.4408821874491755,
+              "iterations": 12,
+              "line_normalization": 42507.19328968967,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "25": {
+              "cash_statistic": -422111.68042467174,
+              "centroid_shift_ev": -0.8691246877224075,
+              "constant_background_per_ev": 0.28074130908206807,
+              "converged": true,
+              "events_in_fit_window": 38089,
+              "instrument_fwhm_ev": 4.8414699077275145,
+              "iterations": 12,
+              "line_normalization": 34280.27696612766,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "26": {
+              "cash_statistic": -495211.03171913204,
+              "centroid_shift_ev": -0.22308017773919764,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43356,
+              "instrument_fwhm_ev": 4.337020195560395,
+              "iterations": 10,
+              "line_normalization": 39020.6071509136,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "27": {
+              "cash_statistic": -545061.3948555806,
+              "centroid_shift_ev": -2.0,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 48164,
+              "instrument_fwhm_ev": 7.540431108642304,
+              "iterations": 21,
+              "line_normalization": 48883.688095170044,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "28": {
+              "cash_statistic": -502420.0753367717,
+              "centroid_shift_ev": -0.8619117631497436,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44064,
+              "instrument_fwhm_ev": 4.570422562863491,
+              "iterations": 10,
+              "line_normalization": 39657.804415330604,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "29": {
+              "cash_statistic": -431984.4109876942,
+              "centroid_shift_ev": -2.0,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 40369,
+              "instrument_fwhm_ev": 8.0,
+              "iterations": 19,
+              "line_normalization": 41090.885739339516,
+              "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+            },
+            "3": {
+              "cash_statistic": -551011.6646806502,
+              "centroid_shift_ev": 0.004966129712088258,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 47560,
+              "instrument_fwhm_ev": 4.416008515891695,
+              "iterations": 10,
+              "line_normalization": 42804.22325748317,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "30": {
+              "cash_statistic": -526918.0014535309,
+              "centroid_shift_ev": -1.54784782438986,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 45750,
+              "instrument_fwhm_ev": 4.249376247165797,
+              "iterations": 7,
+              "line_normalization": 41175.18357208975,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "31": {
+              "cash_statistic": -421718.68604019657,
+              "centroid_shift_ev": -1.4939874139319314,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 37946,
+              "instrument_fwhm_ev": 4.525898326040374,
+              "iterations": 10,
+              "line_normalization": 34151.55202465171,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "32": {
+              "cash_statistic": -504300.3109344067,
+              "centroid_shift_ev": -0.3453140103750214,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44034,
+              "instrument_fwhm_ev": 4.362038460790904,
+              "iterations": 11,
+              "line_normalization": 39630.80194466486,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "33": {
+              "cash_statistic": -444853.22109041555,
+              "centroid_shift_ev": -0.3685302841157516,
+              "constant_background_per_ev": 0.259000498941302,
+              "converged": true,
+              "events_in_fit_window": 39650,
+              "instrument_fwhm_ev": 4.296056662857107,
+              "iterations": 11,
+              "line_normalization": 35685.19131141244,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "34": {
+              "cash_statistic": -511930.73852161807,
+              "centroid_shift_ev": -0.3792611110522397,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 44653,
+              "instrument_fwhm_ev": 4.340480549354052,
+              "iterations": 11,
+              "line_normalization": 40187.92065229644,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "35": {
+              "cash_statistic": -538177.123376058,
+              "centroid_shift_ev": -0.4498226199021288,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 46578,
+              "instrument_fwhm_ev": 4.3681651481692745,
+              "iterations": 12,
+              "line_normalization": 41920.418996915716,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "4": {
+              "cash_statistic": -490335.0175991217,
+              "centroid_shift_ev": -0.604579005716344,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 43027,
+              "instrument_fwhm_ev": 4.437202281063821,
+              "iterations": 12,
+              "line_normalization": 38724.519357670164,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "5": {
+              "cash_statistic": -398748.1643898876,
+              "centroid_shift_ev": -0.2062347354949738,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 36110,
+              "instrument_fwhm_ev": 4.341948138202667,
+              "iterations": 10,
+              "line_normalization": 32499.217604920857,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "6": {
+              "cash_statistic": -381783.81550266396,
+              "centroid_shift_ev": 1.7607124218388188,
+              "constant_background_per_ev": 0.3411959767973482,
+              "converged": true,
+              "events_in_fit_window": 34859,
+              "instrument_fwhm_ev": 4.4358410715408,
+              "iterations": 12,
+              "line_normalization": 31373.28328957377,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "7": {
+              "cash_statistic": -494017.92033444985,
+              "centroid_shift_ev": -0.8464582653694604,
+              "constant_background_per_ev": 0.18410355443207038,
+              "converged": true,
+              "events_in_fit_window": 43482,
+              "instrument_fwhm_ev": 4.707763724910909,
+              "iterations": 12,
+              "line_normalization": 39133.98565321163,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "8": {
+              "cash_statistic": -364996.45017798804,
+              "centroid_shift_ev": 0.11710218899961217,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 33454,
+              "instrument_fwhm_ev": 4.342241546741597,
+              "iterations": 10,
+              "line_normalization": 30108.810149242967,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            },
+            "9": {
+              "cash_statistic": -360018.98744948884,
+              "centroid_shift_ev": -0.7986580478170717,
+              "constant_background_per_ev": 0.0,
+              "converged": true,
+              "events_in_fit_window": 33213,
+              "instrument_fwhm_ev": 4.5877881140378065,
+              "iterations": 11,
+              "line_normalization": 29891.857744759185,
+              "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+            }
+          },
+          "whole_array": {
+            "cash_statistic": -26082081.199340448,
+            "centroid_shift_ev": -0.5247129782993625,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 1426456,
+            "instrument_fwhm_ev": 5.196968026804065,
+            "iterations": 13,
+            "line_normalization": 1283815.998088001,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          }
+        },
+        "held_out_obsid": "000103000",
+        "held_out_segment": 3,
+        "history": {
+          "bytes": 231261120,
+          "rows": 19008,
+          "rows_per_time": 36,
+          "sha256": "0981795deb29eb36c58666734e6bffb917e82dda7a4a17f905a749d56251af49",
+          "temp_fit_finite": true,
+          "time_grid_rows": 528
+        },
+        "models": {
+          "0": {
+            "differential_at_center": 9.293809108011874e-05,
+            "rows": 61,
+            "slope_per_second": -1.3754775278308906e-11,
+            "time_center": 151376239.4364331
+          },
+          "1": {
+            "differential_at_center": 1.092279027427398e-05,
+            "rows": 57,
+            "slope_per_second": -7.873860132894e-12,
+            "time_center": 151375938.62526542
+          },
+          "10": {
+            "differential_at_center": 4.051126261744333e-05,
+            "rows": 55,
+            "slope_per_second": -2.334853371308391e-11,
+            "time_center": 151373632.47486377
+          },
+          "11": {
+            "differential_at_center": 4.148526022867475e-05,
+            "rows": 71,
+            "slope_per_second": 5.630105090334822e-11,
+            "time_center": 151376188.30591303
+          },
+          "12": {
+            "differential_at_center": 0.0,
+            "rows": 0,
+            "slope_per_second": 0.0,
+            "time_center": 0.0
+          },
+          "13": {
+            "differential_at_center": 5.850684326288213e-05,
+            "rows": 84,
+            "slope_per_second": -6.94984427748301e-12,
+            "time_center": 151375846.33485705
+          },
+          "14": {
+            "differential_at_center": 3.345137966266873e-05,
+            "rows": 61,
+            "slope_per_second": -5.428313243553967e-12,
+            "time_center": 151375057.47615376
+          },
+          "15": {
+            "differential_at_center": 6.787236773942592e-05,
+            "rows": 71,
+            "slope_per_second": -1.5570109338257293e-11,
+            "time_center": 151374686.78494564
+          },
+          "16": {
+            "differential_at_center": 9.006696667837885e-05,
+            "rows": 54,
+            "slope_per_second": 5.616734200928617e-12,
+            "time_center": 151375875.5506168
+          },
+          "17": {
+            "differential_at_center": 7.032560397763561e-05,
+            "rows": 49,
+            "slope_per_second": -5.899169287755209e-12,
+            "time_center": 151376014.475177
+          },
+          "18": {
+            "differential_at_center": 7.659257566551566e-05,
+            "rows": 74,
+            "slope_per_second": -1.1380100061101678e-11,
+            "time_center": 151375434.95676613
+          },
+          "19": {
+            "differential_at_center": 5.301136734156587e-05,
+            "rows": 74,
+            "slope_per_second": -2.004754259008806e-11,
+            "time_center": 151376938.2681906
+          },
+          "2": {
+            "differential_at_center": 4.7727175363522456e-05,
+            "rows": 49,
+            "slope_per_second": -1.4316726067884036e-11,
+            "time_center": 151375898.03958732
+          },
+          "20": {
+            "differential_at_center": 8.087097447310121e-05,
+            "rows": 86,
+            "slope_per_second": -1.3998366381840509e-11,
+            "time_center": 151375450.70986632
+          },
+          "21": {
+            "differential_at_center": 2.2780668198433032e-05,
+            "rows": 67,
+            "slope_per_second": -8.725899742703406e-12,
+            "time_center": 151375728.95958585
+          },
+          "22": {
+            "differential_at_center": 5.032697942494361e-05,
+            "rows": 72,
+            "slope_per_second": -1.4087943712235903e-11,
+            "time_center": 151376713.29835626
+          },
+          "23": {
+            "differential_at_center": -1.2571930670659416e-05,
+            "rows": 71,
+            "slope_per_second": 2.2703165675564513e-12,
+            "time_center": 151376067.70870492
+          },
+          "24": {
+            "differential_at_center": 4.204746809110283e-05,
+            "rows": 84,
+            "slope_per_second": -1.3710201530460232e-11,
+            "time_center": 151374657.33880347
+          },
+          "25": {
+            "differential_at_center": 2.7818707911215365e-05,
+            "rows": 66,
+            "slope_per_second": -1.7095860742199365e-11,
+            "time_center": 151375145.4908431
+          },
+          "26": {
+            "differential_at_center": 4.970279860212182e-05,
+            "rows": 73,
+            "slope_per_second": -9.950785412821697e-12,
+            "time_center": 151375644.40129736
+          },
+          "27": {
+            "differential_at_center": 0.00011559969380252352,
+            "rows": 84,
+            "slope_per_second": -4.9945787613003173e-11,
+            "time_center": 151377259.29886258
+          },
+          "28": {
+            "differential_at_center": 9.746809253930458e-05,
+            "rows": 73,
+            "slope_per_second": -1.6617189032735032e-11,
+            "time_center": 151377212.72861525
+          },
+          "29": {
+            "differential_at_center": 2.699887546602549e-05,
+            "rows": 69,
+            "slope_per_second": 2.2549078042323087e-11,
+            "time_center": 151376171.81206262
+          },
+          "3": {
+            "differential_at_center": 4.419583451398728e-05,
+            "rows": 84,
+            "slope_per_second": -4.619514845858056e-12,
+            "time_center": 151375664.97848582
+          },
+          "30": {
+            "differential_at_center": 6.739004210196254e-05,
+            "rows": 78,
+            "slope_per_second": -2.5649526246951816e-11,
+            "time_center": 151375289.539815
+          },
+          "31": {
+            "differential_at_center": 5.614810409866059e-05,
+            "rows": 66,
+            "slope_per_second": -2.601330815765326e-11,
+            "time_center": 151376084.40833932
+          },
+          "32": {
+            "differential_at_center": 6.374258265648621e-05,
+            "rows": 73,
+            "slope_per_second": -1.004276294319289e-11,
+            "time_center": 151376173.28044966
+          },
+          "33": {
+            "differential_at_center": 6.370628239119073e-05,
+            "rows": 68,
+            "slope_per_second": -1.2716457560302726e-11,
+            "time_center": 151375319.74831772
+          },
+          "34": {
+            "differential_at_center": 9.179521785239817e-05,
+            "rows": 76,
+            "slope_per_second": -6.16177406021017e-12,
+            "time_center": 151375807.67547345
+          },
+          "35": {
+            "differential_at_center": 7.368505584156172e-05,
+            "rows": 81,
+            "slope_per_second": -1.2763672649285226e-11,
+            "time_center": 151375684.2108402
+          },
+          "4": {
+            "differential_at_center": 8.609856638522788e-05,
+            "rows": 72,
+            "slope_per_second": -1.5109820034423883e-11,
+            "time_center": 151376613.197355
+          },
+          "5": {
+            "differential_at_center": 2.1534279065678105e-05,
+            "rows": 60,
+            "slope_per_second": -6.771826358713394e-12,
+            "time_center": 151375784.54060328
+          },
+          "6": {
+            "differential_at_center": 5.733478368430222e-05,
+            "rows": 58,
+            "slope_per_second": 1.8975222411013926e-11,
+            "time_center": 151376560.37228137
+          },
+          "7": {
+            "differential_at_center": 3.598006921641917e-05,
+            "rows": 72,
+            "slope_per_second": -1.7142219209865783e-11,
+            "time_center": 151376630.21779937
+          },
+          "8": {
+            "differential_at_center": 4.7613835780846806e-05,
+            "rows": 54,
+            "slope_per_second": -9.756954142216213e-12,
+            "time_center": 151373423.84734833
+          },
+          "9": {
+            "differential_at_center": -5.681920318049329e-05,
+            "rows": 50,
+            "slope_per_second": -1.5477491721823087e-11,
+            "time_center": 151376944.92497727
+          }
+        },
+        "nearest_anchor_obsid": "000102000",
+        "nearest_anchor_segment": 2,
+        "output": {
+          "bytes": 297743040,
+          "negative_epi2": 50,
+          "negative_epi2_without_null_pi": 0,
+          "null_epi2": 0,
+          "null_pi": 50,
+          "null_pi_not_explained_by_negative_epi2": 0,
+          "null_temp": 0,
+          "rows": 1883886,
+          "sha256": "24993fe06984f8e5d0c705a14d1f4ad5bf59a7a8ca34e6a2edf5d006b0413d77"
+        },
+        "role": "forward endpoint extrapolation",
+        "selected_rows": 1883886
+      }
+    ]
+  },
+  "cluster_sky_event_accessed": false,
+  "cluster_velocity_fit": false,
+  "commands": [
+    {
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; ftcopy '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000100000/resolve/event_uf/xa000100000rsl_a0pxfw000_uf.evt.gz[EVENTS][TIME>=150783125.37277633&&TIME<=150939676.93133748&&PIXEL!=12&&ITYPE==0]' /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/selected_main_array_fe55_hp.evt copyall=yes clobber=yes history=yes",
+      "exit_code": 0,
+      "held_out_segment": 0,
+      "obsid": "000100000",
+      "stage": "ftcopy",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "candidate": "nearest_anchor_constant",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/selected_main_array_fe55_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/nearest_anchor_constant/calibrated.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/nearest_anchor_constant/gain.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "held_out_segment": 0,
+      "obsid": "000100000",
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-12\nrslpha2pi: INFO:    START TIME: 04:07:45\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  FE55\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/selected_main_array_fe55_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/nearest_anchor_constant/calibrated.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/nearest_anchor_constant/gain.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         1819814\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       1819814\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       49\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      2650\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    },
+    {
+      "candidate": "nearest_anchor_linear",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/selected_main_array_fe55_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/nearest_anchor_linear/calibrated.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/nearest_anchor_linear/gain.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "held_out_segment": 0,
+      "obsid": "000100000",
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-12\nrslpha2pi: INFO:    START TIME: 04:07:45\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  FE55\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/selected_main_array_fe55_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/nearest_anchor_linear/calibrated.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_0_000100000/nearest_anchor_linear/gain.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         1819814\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       1819814\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       49\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      2647\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    },
+    {
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; ftcopy '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000103000/resolve/event_uf/xa000103000rsl_a0pxfw000_uf.evt.gz[EVENTS][TIME>=151549351.47936425&&TIME<=151708012.3741&&PIXEL!=12&&ITYPE==0]' /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/selected_main_array_fe55_hp.evt copyall=yes clobber=yes history=yes",
+      "exit_code": 0,
+      "held_out_segment": 3,
+      "obsid": "000103000",
+      "stage": "ftcopy",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "candidate": "nearest_anchor_constant",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/selected_main_array_fe55_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/nearest_anchor_constant/calibrated.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/nearest_anchor_constant/gain.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "held_out_segment": 3,
+      "obsid": "000103000",
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-21\nrslpha2pi: INFO:    START TIME: 00:57:50\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  FE55\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/selected_main_array_fe55_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/nearest_anchor_constant/calibrated.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/nearest_anchor_constant/gain.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         1883886\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       1883886\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       50\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      2678\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    },
+    {
+      "candidate": "nearest_anchor_linear",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/selected_main_array_fe55_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/nearest_anchor_linear/calibrated.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/nearest_anchor_linear/gain.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "held_out_segment": 3,
+      "obsid": "000103000",
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-21\nrslpha2pi: INFO:    START TIME: 00:57:50\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  FE55\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/selected_main_array_fe55_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/nearest_anchor_linear/calibrated.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_endpoint_gain_candidates.installing.z_szijma/segment_3_000103000/nearest_anchor_linear/gain.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         1883886\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       1883886\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       50\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      2678\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    }
+  ],
+  "config_sha256": "63b4bce31c650df936665c873c2da338e77f2cd8f76010fc5af8efc9d50c1671",
+  "decision": "retain_interior_interpolation_and_park_endpoint_extrapolation",
+  "generated_utc": "2026-08-06T06:13:29.159967+00:00",
+  "interior_interpolation_evidence_preserved": true,
+  "protocol_version": "SIGMA-V19CY-A2319-ENDPOINT-GAIN-CANDIDATES-1.0.0",
+  "selection": {
+    "passed": false,
+    "selected": null,
+    "summaries": [
+      {
+        "candidate": "nearest_anchor_constant",
+        "fold_passes": [
+          false,
+          false
+        ],
+        "passed_both_endpoint_folds": false
+      },
+      {
+        "candidate": "nearest_anchor_linear",
+        "fold_passes": [
+          false,
+          false
+        ],
+        "passed_both_endpoint_folds": false
+      }
+    ]
+  },
+  "source_files": [
+    {
+      "bytes": 9346251,
+      "held_out_segment": 0,
+      "kind": "held_pxcal",
+      "obsid": "000100000",
+      "path": "xrism/000100000/resolve/event_uf/xa000100000rsl_000_pxcal.ghf.gz",
+      "sha256": "d1f6364d5a2e17dced1d4cc467588cde4cad1134fb6ab5ad44195aa1a57e047b"
+    },
+    {
+      "bytes": 150130393,
+      "held_out_segment": 0,
+      "kind": "held_events",
+      "obsid": "000100000",
+      "path": "xrism/000100000/resolve/event_uf/xa000100000rsl_a0pxfw000_uf.evt.gz",
+      "sha256": "5374e298338466cc3f18f2e38ddaa4b3c02cb8f0d523f57f6b3ef2c2bfbadb3d"
+    },
+    {
+      "bytes": 21712198,
+      "held_out_segment": 0,
+      "kind": "anchor_fe55",
+      "obsid": "000101000",
+      "path": "xrism/000101000/resolve/event_uf/xa000101000rsl_000_fe55.ghf.gz",
+      "sha256": "73022ef1ac83cd85637739c101b5aac41efe7964361b80bb540ed9077f4a0386"
+    },
+    {
+      "bytes": 6114504,
+      "held_out_segment": 0,
+      "kind": "anchor_pxcal",
+      "obsid": "000101000",
+      "path": "xrism/000101000/resolve/event_uf/xa000101000rsl_000_pxcal.ghf.gz",
+      "sha256": "1febbe26a631fbafab4d3dc640566b5064cf5d816979f3d7dc3233ca5136e6df"
+    },
+    {
+      "bytes": 7578928,
+      "held_out_segment": 3,
+      "kind": "held_pxcal",
+      "obsid": "000103000",
+      "path": "xrism/000103000/resolve/event_uf/xa000103000rsl_000_pxcal.ghf.gz",
+      "sha256": "851eab1ab56e327a2af2d82af721a38deebab863aa0ba2ef88258cb2401f0bde"
+    },
+    {
+      "bytes": 156466872,
+      "held_out_segment": 3,
+      "kind": "held_events",
+      "obsid": "000103000",
+      "path": "xrism/000103000/resolve/event_uf/xa000103000rsl_a0pxfw000_uf.evt.gz",
+      "sha256": "94b2d0cc87083e61c002de26a051254092da5beacbc948b92f3d27dd4d9663ce"
+    },
+    {
+      "bytes": 21356311,
+      "held_out_segment": 3,
+      "kind": "anchor_fe55",
+      "obsid": "000102000",
+      "path": "xrism/000102000/resolve/event_uf/xa000102000rsl_000_fe55.ghf.gz",
+      "sha256": "105534153ead31a9f5da83c9b8f85dcacdd63f0bab0bcaa8f86386dc0efb2a4e"
+    },
+    {
+      "bytes": 5948051,
+      "held_out_segment": 3,
+      "kind": "anchor_pxcal",
+      "obsid": "000102000",
+      "path": "xrism/000102000/resolve/event_uf/xa000102000rsl_000_pxcal.ghf.gz",
+      "sha256": "7ccc79b6a8fb0c4a2b8183cde6898aec8b0c2855c93a96235160cc7dfd5fdaa9"
+    }
+  ],
+  "status": "a2319_endpoint_gain_candidates_completed",
+  "validation_or_holdout_accessed": false
+}

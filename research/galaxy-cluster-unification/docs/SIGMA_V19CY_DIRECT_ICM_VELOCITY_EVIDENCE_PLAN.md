@@ -357,6 +357,36 @@ The closure retained 20 scratch files totaling 4,604,342,400 bytes. Its
 terminal report SHA-256 is
 `fa3bd67b4e81c84e11812d6724fe36a56744eda5da6a82e37b5ecdd40885c13e`.
 
+### Endpoint extrapolation falsification and reduced-scope decision
+
+Two additional endpoint rules were frozen together and tested on both failed
+outer folds. Neither was allowed to switch by endpoint:
+
+| Candidate | Fold | Whole shift delta (eV) | Whole FWHM increase (eV) | Pixel shift p90 (eV) | Pixel FWHM p90 (eV) | Result |
+|---|---:|---:|---:|---:|---:|---|
+| Nearest-anchor constant | 0 | +0.164 | +0.194 | 0.583 | 0.146 | Fail |
+| Nearest-anchor constant | 3 | +0.197 | +0.332 | 0.566 | 0.160 | Fail |
+| Nearest-anchor linear | 0 | -0.651 | +0.528 | 1.351 | 0.169 | Fail |
+| Nearest-anchor linear | 3 | -0.487 | +0.746 | 1.695 | 0.153 | Fail |
+
+All six mission-tool commands exited zero. The constant rule came close at
+whole-array level but failed the frozen per-pixel 90th-percentile criterion at
+both ends. The local linear rule was materially worse. Together with the
+earlier global-linear endpoint failure, three physically distinct closures
+now fail the same endpoint gate. We therefore stop modifying one-sided
+differential extrapolation and park those branches rather than adding another
+calibration degree of freedom.
+
+This is not a falsification of common/differential interpolation: both
+bracketed held-out folds passed. The authorized next step is a reduced-scope
+A2319 development protocol using only the four bracketed science intervals.
+The three one-sided intervals around the ADR and final tail remain excluded
+and explicitly unresolved.
+
+The endpoint experiment retained 10 scratch files totaling 2,636,691,840
+bytes. Its terminal report SHA-256 is
+`9616b6774e38f4a253dede22b02783afec6e9e30d8fa186d0f4701c00aecb2ed`.
+
 ## The new observable source terms
 
 The signed projected gas current is

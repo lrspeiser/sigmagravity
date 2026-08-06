@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -8,7 +9,15 @@ SCRIPT_DIR = ROOT / "scripts"
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-import test_sigma_v19cy_a2319_endpoint_gain_candidates as endpoint
+import test_sigma_v19cy_a2319_endpoint_gain_candidates as endpoint  # noqa: I001
+
+
+TERMINAL_REPORT = (
+    ROOT
+    / "results"
+    / "sigma_v19cy_direct_icm_velocity_evidence"
+    / "development_endpoint_gain_candidates.json"
+)
 
 
 def test_frozen_endpoint_scope_preserves_successful_interior_evidence() -> None:
@@ -85,3 +94,31 @@ def test_selection_requires_one_rule_to_pass_both_endpoints() -> None:
     selection = endpoint.select_candidate(both, order)
     assert selection["passed"]
     assert selection["selected"] == "nearest_anchor_constant"
+
+
+def test_terminal_result_parks_endpoints_and_preserves_interpolation() -> None:
+    report = json.loads(TERMINAL_REPORT.read_text(encoding="utf-8"))
+    assert not report["selection"]["passed"]
+    assert report["selection"]["selected"] is None
+    assert report["decision"] == (
+        "retain_interior_interpolation_and_park_endpoint_extrapolation"
+    )
+    assert report["interior_interpolation_evidence_preserved"]
+    assert not report["cluster_sky_event_accessed"]
+    assert not report["cluster_velocity_fit"]
+    assert not report["validation_or_holdout_accessed"]
+    assert len(report["commands"]) == 6
+    assert all(command["exit_code"] == 0 for command in report["commands"])
+    for candidate in ("nearest_anchor_constant", "nearest_anchor_linear"):
+        folds = report["candidate_results"][candidate]
+        assert len(folds) == 2
+        assert all(not fold["comparison"]["passed"] for fold in folds)
+    constant = report["candidate_results"]["nearest_anchor_constant"]
+    assert constant[0]["comparison"]["whole_array_centroid_delta_ev"] == (
+        0.16362996179087258
+    )
+    assert constant[1]["comparison"]["whole_array_centroid_delta_ev"] == (
+        0.19670961630344388
+    )
+    assert report["authorization"]["freeze_bracketed_interpolation_science_protocol"]
+    assert not report["authorization"]["freeze_selected_endpoint_science_protocol"]
