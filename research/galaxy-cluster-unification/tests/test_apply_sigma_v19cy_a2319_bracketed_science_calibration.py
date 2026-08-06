@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -101,3 +102,42 @@ def test_effective_interval_refuses_disjoint_support() -> None:
         assert "no supported application interval" in str(exc)
     else:
         raise AssertionError("disjoint time supports must fail closed")
+
+
+def test_terminal_bracketed_science_calibration_passes_without_energy_inspection() -> None:
+    report_path = (
+        ROOT
+        / "results"
+        / "sigma_v19cy_direct_icm_velocity_evidence"
+        / "development_bracketed_science_calibration.json"
+    )
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+
+    assert report["protocol_version"].endswith("1.0.2")
+    assert report["status"] == "a2319_bracketed_science_calibration_completed"
+    assert [item["branch"] for item in report["applications"]] == [
+        "000101_open_0_cross_obsid",
+        "000101_open_1_cross_obsid",
+        "000102_open_0_cross_obsid",
+    ]
+    assert [item["selected_rows"] for item in report["applications"]] == [
+        18_301,
+        857,
+        19_038,
+    ]
+    assert len(report["commands"]) == 6
+    assert all(command["exit_code"] == 0 for command in report["commands"])
+    assert all(item["passed"] for item in report["applications"])
+    assert all(
+        item["output"]["rows"] == item["selected_rows"]
+        for item in report["applications"]
+    )
+    assert all(item["output"]["null_epi2"] == 0 for item in report["applications"])
+    assert all(item["output"]["null_temp"] == 0 for item in report["applications"])
+    assert report["terminal_gate_passed"]
+    assert report["decision"] == "authorize_freeze_of_reduced_a2319_spectral_region_protocol"
+    assert report["cluster_sky_event_rows_read"]
+    assert report["cluster_sky_event_energies_recalculated"]
+    assert not report["cluster_energy_distribution_inspected_or_fit"]
+    assert not report["cluster_velocity_fit"]
+    assert not report["validation_or_holdout_accessed"]

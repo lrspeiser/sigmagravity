@@ -379,13 +379,43 @@ calibration degree of freedom.
 
 This is not a falsification of common/differential interpolation: both
 bracketed held-out folds passed. The authorized next step is a reduced-scope
-A2319 development protocol using only the four bracketed science intervals.
-The three one-sided intervals around the ADR and final tail remain excluded
-and explicitly unresolved.
+A2319 development protocol using only the three genuinely bracketed science
+fragments. A fourth topology branch was also rejected because its following
+anchor lies across the ADR, so it is not an undisturbed bracket. The three
+one-sided intervals around the ADR and final tail remain excluded and
+explicitly unresolved.
 
 The endpoint experiment retained 10 scratch files totaling 2,636,691,840
 bytes. Its terminal report SHA-256 is
 `9616b6774e38f4a253dede22b02783afec6e9e30d8fa186d0f4701c00aecb2ed`.
+
+### Reduced A2319 bracketed science calibration
+
+The science calibration was frozen before any cluster-event row was opened.
+Two fail-closed setup stops were recorded and preserved: version 1.0.0 found
+that the second pointing's official `OBJECT` value is `Abell2319_Cor1`, and
+version 1.0.1 found that a topology branch extended beyond valid native
+calibration-pixel time support. Neither stop read a sky-event row. Version
+1.0.2 therefore froze the application interval as the intersection of the
+topology branch, valid calibration-pixel support, and cleaned-event
+`TSTART`/`TSTOP`; it never extrapolates common mode.
+
+| Science fragment | Supported interval (mission seconds) | Selected/output rows | Null EPI2 | Null TEMP | Result |
+|---|---:|---:|---:|---:|---|
+| 000101 open 0 | 150943122.000–151036810.979 | 18,301 / 18,301 | 0 | 0 | Pass |
+| 000101 open 1 | 151201971.014–151204864.023 | 857 / 857 | 0 | 0 | Pass |
+| 000102 open 0 | 151208096.000–151289711.018 | 19,038 / 19,038 | 0 | 0 | Pass |
+
+All six `ftcopy`/`rslpha2pi` mission-tool commands exited zero. The calibration
+gate passed for all 38,196 retained events. No cluster energy distribution was
+summarized or fit, no velocity was estimated, and the A3667 validation and
+A754 holdout assets remained sealed. The short 857-event fragment is valid
+but may limit the number of independently useful spatial/spectral regions;
+the next protocol must freeze that handling before inspecting Fe-K energies.
+
+The retained calibration scratch tree contains nine files totaling
+280,800,000 bytes. The terminal report SHA-256 is
+`6f474938d674e353d2339cf150d5eef1f41b0231b5e8e2f31688c7bec548136e`.
 
 ## The new observable source terms
 
