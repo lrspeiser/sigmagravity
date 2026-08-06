@@ -47,12 +47,14 @@ def validate_inputs(
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     config = load_json(config_path)
     if config.get("protocol_version") != (
-        "SIGMA-V19CY-A2319-BRACKETED-SCIENCE-CALIBRATION-1.0.0"
+        "SIGMA-V19CY-A2319-BRACKETED-SCIENCE-CALIBRATION-1.0.1"
     ):
         raise RuntimeError("unexpected bracketed-science protocol")
     expected_status = (
-        "frozen after endpoint extrapolation was parked and before any cleaned A2319 "
-        "sky-event row or recalibrated cluster energy was read"
+        "corrected and refrozen after version 1.0.0 stopped during header-only "
+        "validation because 000102000 has the official OBJECT value Abell2319_Cor1 "
+        "rather than Abell2319; no sky-event row or energy was read, selected, "
+        "recalculated, summarized, or fit"
     )
     if config.get("status") != expected_status:
         raise RuntimeError("bracketed-science protocol is not frozen")
@@ -132,14 +134,22 @@ def fit_bracketed_models(
     return models
 
 
-def verify_cleaned_header(path: Path, expected: dict[str, str], obsid: str) -> dict[str, Any]:
+def verify_cleaned_header(
+    path: Path,
+    expected_common: dict[str, str],
+    expected_object: str,
+    obsid: str,
+) -> dict[str, Any]:
     with fits.open(path, memmap=True, mode="readonly") as hdus:
         header = hdus["EVENTS"].header
-        values = {key: header.get(key) for key in expected}
+        values = {key: header.get(key) for key in expected_common}
+        object_value = header.get("OBJECT")
         rows = int(header["NAXIS2"])
-    if values != expected or str(values.get("OBJECT")) != expected["OBJECT"]:
-        raise RuntimeError(f"unexpected cleaned sky header for {obsid}: {values}")
-    return {"header": values, "rows": rows}
+    if values != expected_common or object_value != expected_object:
+        raise RuntimeError(
+            f"unexpected cleaned sky header for {obsid}: {values}, OBJECT={object_value}"
+        )
+    return {"header": {**values, "OBJECT": object_value}, "rows": rows}
 
 
 def ftcopy_command(
@@ -220,7 +230,10 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
         relative = config["inputs"]["cleaned_sky_event_template"].format(obsid=obsid)
         path, record = closure.verified_raw_path(raw_root, relative, provenance_by_path)
         header_audit = verify_cleaned_header(
-            path, config["inputs"]["required_input_header"], obsid
+            path,
+            config["inputs"]["required_common_input_header"],
+            config["inputs"]["required_object_by_obsid"][obsid],
+            obsid,
         )
         sky_paths[obsid] = path
         sources.append(

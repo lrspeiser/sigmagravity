@@ -29,6 +29,11 @@ def test_frozen_reduced_scope_contains_only_undisturbed_brackets() -> None:
     branches = {row["name"]: row for row in topology["branches"]}
     assert all(name in branches for name in set(included) | excluded)
     assert config["terminal_gate"]["required_branch_outputs"] == 3
+    assert config["inputs"]["required_object_by_obsid"] == {
+        "000101000": "Abell2319",
+        "000102000": "Abell2319_Cor1",
+    }
+    assert config["recorded_failures"][0]["sky_event_row_read"] is False
     assert not config["authorization"]["inspect_or_fit_cluster_energy_distribution"]
     assert not config["authorization"]["fit_cluster_velocity"]
     assert not config["authorization"]["access_validation_or_holdout_assets"]
