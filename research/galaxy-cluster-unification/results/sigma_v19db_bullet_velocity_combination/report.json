@@ -1,0 +1,2176 @@
+{
+  "abell2146_payload_opened": false,
+  "bullet_spectral_fitting_authorized": true,
+  "combined_region_manifest": {
+    "bytes": 36448,
+    "path": "results/sigma_v19db_bullet_velocity_combination/combined_region_manifest.csv",
+    "rows": 43,
+    "sha256": "32f49b9469c6847e6999cac78e73f046d4e40e582fd137a6fc1bf29a4c4caa57"
+  },
+  "config_sha256": "71372344af5d8249d59961aa9f86b94f8c976594b2f37cf1bcada156fffd7d27",
+  "equivalence_pilot": {
+    "arf": {
+      "energy_grid_exact": true,
+      "max_absolute_difference": 6.103515625e-05,
+      "max_relative_difference": 1.1904366509731403e-07,
+      "relative_l2_difference": 2.7926560415309933e-08
+    },
+    "background": {
+      "backscal_candidate": 1.0,
+      "backscal_reference": 1.0,
+      "backscal_relative_difference": 0.0,
+      "counts_exact": false,
+      "counts_max_absolute_difference": 9.237055564881302e-14,
+      "counts_relative_l1_difference": 2.336183807179471e-15,
+      "exposure_candidate": 82500000.0,
+      "exposure_reference": 82500000.0,
+      "exposure_relative_difference": 0.0
+    },
+    "forward_folds": {
+      "flat": {
+        "max_channel_fraction_difference": 5.347606947734112e-11,
+        "relative_l1_difference": 4.784698893607173e-09
+      },
+      "line_6p7kev_proxy": {
+        "max_channel_fraction_difference": 5.177436018442916e-10,
+        "relative_l1_difference": 3.966974953036414e-09
+      },
+      "powerlaw_e_minus_2": {
+        "max_channel_fraction_difference": 1.6086356679106128e-10,
+        "relative_l1_difference": 5.645841956611248e-09
+      },
+      "thermal_8kev_proxy": {
+        "max_channel_fraction_difference": 8.679551890978223e-11,
+        "relative_l1_difference": 5.202120188831813e-09
+      }
+    },
+    "gates": {
+      "arf_energy_grid_exact": true,
+      "background_relative_l1_at_most_1e_12": true,
+      "every_forward_fold_relative_l1_at_most_1e_8": true,
+      "rmf_energy_and_channel_grids_exact": true,
+      "source_counts_exact": true,
+      "source_exposure_exact_to_1e_12": true
+    },
+    "group_id": 1,
+    "passed": true,
+    "rmf": {
+      "dense_max_absolute_difference": 1.4901161193847656e-08,
+      "dense_relative_frobenius_difference": 2.5919288880836055e-08,
+      "dense_shape": [
+        1070,
+        1024
+      ],
+      "energy_and_channel_grids_exact": true
+    },
+    "selection_rule": "lowest deterministic group_id in the already-frozen source-only primary manifest",
+    "source": {
+      "backscal_candidate": 1.0,
+      "backscal_reference": 1.0,
+      "backscal_relative_difference": 0.0,
+      "counts_exact": true,
+      "counts_max_absolute_difference": 0.0,
+      "counts_relative_l1_difference": 0.0,
+      "exposure_candidate": 3273829.2364675,
+      "exposure_reference": 3273829.2364675,
+      "exposure_relative_difference": 0.0
+    }
+  },
+  "gates": {
+    "3483_cells_partitioned_exactly_once": true,
+    "366_bins_partitioned_exactly_once": true,
+    "43_regions_combined": true,
+    "all_region_links_exact": true,
+    "all_regions_conserve_full_pha_counts_exactly": true,
+    "all_regions_have_four_frozen_products": true,
+    "direct_hierarchical_pilot_passed": true
+  },
+  "generated_utc": "2026-08-06T18:20:04.977973+00:00",
+  "lensing_halo_gravity_or_action_payload_opened": false,
+  "plan": {
+    "obsid_cell_counts": {
+      "3184": 366,
+      "4984": 370,
+      "4985": 388,
+      "4986": 404,
+      "5355": 387,
+      "5356": 387,
+      "5357": 409,
+      "5358": 401,
+      "5361": 371
+    },
+    "regions": 43,
+    "response_cells": 3483,
+    "source_bins": 366
+  },
+  "protocol_version": "SIGMA-V19DB-BULLET-VELOCITY-COMBINATION-1.0.0",
+  "regions": [
+    {
+      "cells": 55,
+      "combined_full_pha_source_counts": 11790,
+      "expected_full_pha_source_counts": 11790,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 1,
+      "label": "BULLET_primary8000_region001",
+      "links_exact": true,
+      "member_bins": 7,
+      "obsid_cell_counts": {
+        "3184": 7,
+        "4984": 7,
+        "4985": 7,
+        "4986": 7,
+        "5355": 3,
+        "5356": 3,
+        "5357": 7,
+        "5358": 7,
+        "5361": 7
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region001/BULLET_primary8000_region001_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "b019ade52f3d10a189da309b6da07191bbf2bab4d508cd1e5a2a716ed563ebbb"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region001/BULLET_primary8000_region001_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "4023e6afe2b6562f75fcf454ad4f9cc11ec19ae2bc4d5f0ac53e85b7c298454d"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region001/BULLET_primary8000_region001_src.arf",
+          "role": "source_arf",
+          "sha256": "6a1ab2dcad8ca7914c8e94db1a9976a2849bacb6851efe6e606b7b3c3c90104c"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region001/BULLET_primary8000_region001_src.rmf",
+          "role": "source_rmf",
+          "sha256": "04ec374f4543d0629516474b00aabb4e2cab964cf7db284e4d337ad0c76a2a72"
+        }
+      ],
+      "root_bin_id": 0
+    },
+    {
+      "cells": 153,
+      "combined_full_pha_source_counts": 31234,
+      "expected_full_pha_source_counts": 31234,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 2,
+      "label": "BULLET_primary8000_region002",
+      "links_exact": true,
+      "member_bins": 17,
+      "obsid_cell_counts": {
+        "3184": 17,
+        "4984": 17,
+        "4985": 17,
+        "4986": 17,
+        "5355": 17,
+        "5356": 17,
+        "5357": 17,
+        "5358": 17,
+        "5361": 17
+      },
+      "products": [
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region002/BULLET_primary8000_region002_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "7e23565c5adb51070abf9fecb10c697980f328d7d112a0566b598990002b2230"
+        },
+        {
+          "bytes": 74880,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region002/BULLET_primary8000_region002_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "00c4f98149a3dc144c4103df462f280c42084a99aff98aa18ddf52d5bbe71842"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region002/BULLET_primary8000_region002_src.arf",
+          "role": "source_arf",
+          "sha256": "b68c31e98779714fb7f630306806fb7024094c25b155f0dfb49931ee2d5b7bfd"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region002/BULLET_primary8000_region002_src.rmf",
+          "role": "source_rmf",
+          "sha256": "f0c9e36dbb929a6d3cb21ca312071ead5dbc53cb5e2511c8cc335cb6477c5661"
+        }
+      ],
+      "root_bin_id": 4
+    },
+    {
+      "cells": 108,
+      "combined_full_pha_source_counts": 20762,
+      "expected_full_pha_source_counts": 20762,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 3,
+      "label": "BULLET_primary8000_region003",
+      "links_exact": true,
+      "member_bins": 12,
+      "obsid_cell_counts": {
+        "3184": 12,
+        "4984": 12,
+        "4985": 12,
+        "4986": 12,
+        "5355": 12,
+        "5356": 12,
+        "5357": 12,
+        "5358": 12,
+        "5361": 12
+      },
+      "products": [
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region003/BULLET_primary8000_region003_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "166dcce751c230e6057ece9a5514ca6187a818867278d6a02d6321270cee7fdf"
+        },
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region003/BULLET_primary8000_region003_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "919d8bdb03ea7ec8655f88237e5dd9ef853c8c557827a0d9cca472f4034b3414"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region003/BULLET_primary8000_region003_src.arf",
+          "role": "source_arf",
+          "sha256": "c7fd51d350f78a4a7409e727d7422adc206c62bcc0866454dfd1ad3632f3c4be"
+        },
+        {
+          "bytes": 2217600,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region003/BULLET_primary8000_region003_src.rmf",
+          "role": "source_rmf",
+          "sha256": "476474e6128f45e1dac2cc0ffc342c6e5275997a9f49ebc904e466170b0123f0"
+        }
+      ],
+      "root_bin_id": 5
+    },
+    {
+      "cells": 135,
+      "combined_full_pha_source_counts": 26413,
+      "expected_full_pha_source_counts": 26413,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 4,
+      "label": "BULLET_primary8000_region004",
+      "links_exact": true,
+      "member_bins": 15,
+      "obsid_cell_counts": {
+        "3184": 15,
+        "4984": 15,
+        "4985": 15,
+        "4986": 15,
+        "5355": 15,
+        "5356": 15,
+        "5357": 15,
+        "5358": 15,
+        "5361": 15
+      },
+      "products": [
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region004/BULLET_primary8000_region004_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "221840e7b94a2e149219cff38031b18c2aeac6ab23a4caa99ee8f1f08e36dca4"
+        },
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region004/BULLET_primary8000_region004_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "ee766727bac7258651ade323730b28e91fbf62f74e2069b2d4c24008afc36316"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region004/BULLET_primary8000_region004_src.arf",
+          "role": "source_arf",
+          "sha256": "e71f4a39fc2ccc47bbfcb786b0296bac59aa90d46dd061c5045b4abb16fa32bc"
+        },
+        {
+          "bytes": 2217600,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region004/BULLET_primary8000_region004_src.rmf",
+          "role": "source_rmf",
+          "sha256": "d9e4e5dcb1dd105a8d5cbd6e0e6f89b80dbf3e11c02906b278272eb774f0ce44"
+        }
+      ],
+      "root_bin_id": 9
+    },
+    {
+      "cells": 63,
+      "combined_full_pha_source_counts": 11461,
+      "expected_full_pha_source_counts": 11461,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 5,
+      "label": "BULLET_primary8000_region005",
+      "links_exact": true,
+      "member_bins": 7,
+      "obsid_cell_counts": {
+        "3184": 7,
+        "4984": 7,
+        "4985": 7,
+        "4986": 7,
+        "5355": 7,
+        "5356": 7,
+        "5357": 7,
+        "5358": 7,
+        "5361": 7
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region005/BULLET_primary8000_region005_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "ef84e665907633a000ceda70a401540aebbc53e702e5a639fa691809d27ee827"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region005/BULLET_primary8000_region005_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "0eca7df560a3c4ac769f2b7694dc729ffbe7c39af6c9e972f9e66d9298c55980"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region005/BULLET_primary8000_region005_src.arf",
+          "role": "source_arf",
+          "sha256": "bccb716cd6b5a66d4d5e4aa980f7bf8b4cee00e49c6504bfefa8e4eb40b74573"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region005/BULLET_primary8000_region005_src.rmf",
+          "role": "source_rmf",
+          "sha256": "25f465ba15c3ce90e1b492137c94d23eb1fcbf18762c2d1d49cca288614fca54"
+        }
+      ],
+      "root_bin_id": 10
+    },
+    {
+      "cells": 96,
+      "combined_full_pha_source_counts": 14768,
+      "expected_full_pha_source_counts": 14768,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 6,
+      "label": "BULLET_primary8000_region006",
+      "links_exact": true,
+      "member_bins": 9,
+      "obsid_cell_counts": {
+        "3184": 9,
+        "4984": 8,
+        "4985": 9,
+        "4986": 15,
+        "5355": 9,
+        "5356": 9,
+        "5357": 14,
+        "5358": 14,
+        "5361": 9
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region006/BULLET_primary8000_region006_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "d637985fa7f2f7f83a190ea17bea03d588e2ca67888831b16a768c26df288f2b"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region006/BULLET_primary8000_region006_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "863e2da72a212041037b30ad3ae1de7f645d29ac8fcabf2429a59323c5ccada3"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region006/BULLET_primary8000_region006_src.arf",
+          "role": "source_arf",
+          "sha256": "624c7112890e63c835fd947a775f0067e6bbf9d76cdbdf55d065d1301a14cc06"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region006/BULLET_primary8000_region006_src.rmf",
+          "role": "source_rmf",
+          "sha256": "aa697044091be80eb90b76096ac2e59b5a94ac06570b8f13c68af89e9e96d250"
+        }
+      ],
+      "root_bin_id": 17
+    },
+    {
+      "cells": 72,
+      "combined_full_pha_source_counts": 13528,
+      "expected_full_pha_source_counts": 13528,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 7,
+      "label": "BULLET_primary8000_region007",
+      "links_exact": true,
+      "member_bins": 8,
+      "obsid_cell_counts": {
+        "3184": 8,
+        "4984": 8,
+        "4985": 8,
+        "4986": 8,
+        "5355": 8,
+        "5356": 8,
+        "5357": 8,
+        "5358": 8,
+        "5361": 8
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region007/BULLET_primary8000_region007_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "6d7269bcd00d6446601b40a3766789ef11b7a6e2de67e3f6cb5110f44551a93c"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region007/BULLET_primary8000_region007_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "74126a3b6ae34dc7cbffea55f961d6649e18fd45b5bd5820d692e82ef8b59f7c"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region007/BULLET_primary8000_region007_src.arf",
+          "role": "source_arf",
+          "sha256": "c1c14c6e20aa90319aab8e0768be47fb2519dc92b7a208785334e4e16b8bf90a"
+        },
+        {
+          "bytes": 2214720,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region007/BULLET_primary8000_region007_src.rmf",
+          "role": "source_rmf",
+          "sha256": "1f3e6c2ef9434dc5a8f6fad4e8b5fa05361603853db94255f05c7c40afcbebc0"
+        }
+      ],
+      "root_bin_id": 18
+    },
+    {
+      "cells": 146,
+      "combined_full_pha_source_counts": 24805,
+      "expected_full_pha_source_counts": 24805,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 8,
+      "label": "BULLET_primary8000_region008",
+      "links_exact": true,
+      "member_bins": 14,
+      "obsid_cell_counts": {
+        "3184": 14,
+        "4984": 14,
+        "4985": 14,
+        "4986": 20,
+        "5355": 14,
+        "5356": 14,
+        "5357": 22,
+        "5358": 20,
+        "5361": 14
+      },
+      "products": [
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region008/BULLET_primary8000_region008_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "25928f8d3c4236934395c18da7bf746e247eccf3c95604408f3f1ebe180b131e"
+        },
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region008/BULLET_primary8000_region008_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "148bafd7772c2cf9efd8fe18697d420771d0622eef589e7e873d7aca21ec36cd"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region008/BULLET_primary8000_region008_src.arf",
+          "role": "source_arf",
+          "sha256": "262183a89dc93363c2218404018e51c015007c551481f1529507af9666e4a68d"
+        },
+        {
+          "bytes": 2217600,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region008/BULLET_primary8000_region008_src.rmf",
+          "role": "source_rmf",
+          "sha256": "e327d65b4c18c4a30f243343c574fae5d704ac36f52c0f5b1bafdadcc875af56"
+        }
+      ],
+      "root_bin_id": 19
+    },
+    {
+      "cells": 54,
+      "combined_full_pha_source_counts": 10585,
+      "expected_full_pha_source_counts": 10585,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 9,
+      "label": "BULLET_primary8000_region009",
+      "links_exact": true,
+      "member_bins": 6,
+      "obsid_cell_counts": {
+        "3184": 6,
+        "4984": 6,
+        "4985": 6,
+        "4986": 6,
+        "5355": 6,
+        "5356": 6,
+        "5357": 6,
+        "5358": 6,
+        "5361": 6
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region009/BULLET_primary8000_region009_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "271ff6f8a7ce8b616e8fe7397dced77e87d89f76abb05fcaefbf85a7dea0700a"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region009/BULLET_primary8000_region009_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "ef5e97067018f1dbde8e2883914e11ce6d0e5d55887ec9bf1e7a789814c514c3"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region009/BULLET_primary8000_region009_src.arf",
+          "role": "source_arf",
+          "sha256": "ffbae72d59a91f5685f965396f46d43da0b38945ab7b0bff655b1c0b26acdf46"
+        },
+        {
+          "bytes": 2211840,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region009/BULLET_primary8000_region009_src.rmf",
+          "role": "source_rmf",
+          "sha256": "a69fc9e5a99215cbbd790fccbc96705ac25930c93611070d322e9b8a5300c443"
+        }
+      ],
+      "root_bin_id": 29
+    },
+    {
+      "cells": 72,
+      "combined_full_pha_source_counts": 13312,
+      "expected_full_pha_source_counts": 13312,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 10,
+      "label": "BULLET_primary8000_region010",
+      "links_exact": true,
+      "member_bins": 8,
+      "obsid_cell_counts": {
+        "3184": 8,
+        "4984": 8,
+        "4985": 8,
+        "4986": 8,
+        "5355": 8,
+        "5356": 8,
+        "5357": 8,
+        "5358": 8,
+        "5361": 8
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region010/BULLET_primary8000_region010_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "90a5b8890808421b1e5805eead802cc73238f9d5cb022b718328daf363b2f214"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region010/BULLET_primary8000_region010_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "7ce321bb548a5e4e3d82bf319e339882ee0552e0dda2b4e294f8024fff6c722b"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region010/BULLET_primary8000_region010_src.arf",
+          "role": "source_arf",
+          "sha256": "f0b388fd1939c76409b4e4d07ee66a85dc89730aaffe2a15a01e7feb4ad535ba"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region010/BULLET_primary8000_region010_src.rmf",
+          "role": "source_rmf",
+          "sha256": "c85ed3be4cf7b323d1f4595a552fa797c20951c043bf1f97f2004815f0cafd41"
+        }
+      ],
+      "root_bin_id": 39
+    },
+    {
+      "cells": 63,
+      "combined_full_pha_source_counts": 11982,
+      "expected_full_pha_source_counts": 11982,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 11,
+      "label": "BULLET_primary8000_region011",
+      "links_exact": true,
+      "member_bins": 7,
+      "obsid_cell_counts": {
+        "3184": 7,
+        "4984": 7,
+        "4985": 7,
+        "4986": 7,
+        "5355": 7,
+        "5356": 7,
+        "5357": 7,
+        "5358": 7,
+        "5361": 7
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region011/BULLET_primary8000_region011_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "ae558ab0b1953e4ef5608620e604fb73c12f7ae7a4e863019f49d39fe5dbbd4b"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region011/BULLET_primary8000_region011_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "dd4ef9f0df156618df57b722cd7e6d2046ec50e71505b102e854e244fc897e0a"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region011/BULLET_primary8000_region011_src.arf",
+          "role": "source_arf",
+          "sha256": "d97c8edac51eed844d168ae0d76825c963cddc95551a39d47341cd9e8383e825"
+        },
+        {
+          "bytes": 2211840,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region011/BULLET_primary8000_region011_src.rmf",
+          "role": "source_rmf",
+          "sha256": "83c684fc9b8e54137445081db18cab596452b51e9f8699962b7bc0053144757a"
+        }
+      ],
+      "root_bin_id": 76
+    },
+    {
+      "cells": 54,
+      "combined_full_pha_source_counts": 9865,
+      "expected_full_pha_source_counts": 9865,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 12,
+      "label": "BULLET_primary8000_region012",
+      "links_exact": true,
+      "member_bins": 6,
+      "obsid_cell_counts": {
+        "3184": 6,
+        "4984": 6,
+        "4985": 6,
+        "4986": 6,
+        "5355": 6,
+        "5356": 6,
+        "5357": 6,
+        "5358": 6,
+        "5361": 6
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region012/BULLET_primary8000_region012_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "f06e5c58348d3adbdbbf6743079055dff1eda8c89ee87764513b732708a67143"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region012/BULLET_primary8000_region012_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "1f146aea210a2d145ab304509eb29235fd0a37e09fa7f473b1726192d1a1511e"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region012/BULLET_primary8000_region012_src.arf",
+          "role": "source_arf",
+          "sha256": "448788b2a3dc32dcaa9a161a07a0b236d3afaebc4db8af21f9329593fdebba07"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region012/BULLET_primary8000_region012_src.rmf",
+          "role": "source_rmf",
+          "sha256": "3fa87304d29934b27bbede1851ddffb152b38423ccd5551cc0bd8057c3792529"
+        }
+      ],
+      "root_bin_id": 88
+    },
+    {
+      "cells": 72,
+      "combined_full_pha_source_counts": 13591,
+      "expected_full_pha_source_counts": 13591,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 13,
+      "label": "BULLET_primary8000_region013",
+      "links_exact": true,
+      "member_bins": 8,
+      "obsid_cell_counts": {
+        "3184": 8,
+        "4984": 8,
+        "4985": 8,
+        "4986": 8,
+        "5355": 8,
+        "5356": 8,
+        "5357": 8,
+        "5358": 8,
+        "5361": 8
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region013/BULLET_primary8000_region013_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "fff1ff439014d15b899bacbff0c69098e8459d59a2938c99d3a76dba3f679045"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region013/BULLET_primary8000_region013_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "c1b353a69c343db75b42871a57a5135255575e908e7ce5414ff71fe70e862362"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region013/BULLET_primary8000_region013_src.arf",
+          "role": "source_arf",
+          "sha256": "8049c9cba402403fbdf83631940335c28671be79f71baab25ca3c6cb6600449b"
+        },
+        {
+          "bytes": 2217600,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region013/BULLET_primary8000_region013_src.rmf",
+          "role": "source_rmf",
+          "sha256": "210fdff585e5ba6e936a9f8dc77e86a729942709fed5bc40f32f7c0d9b0dff59"
+        }
+      ],
+      "root_bin_id": 92
+    },
+    {
+      "cells": 72,
+      "combined_full_pha_source_counts": 13619,
+      "expected_full_pha_source_counts": 13619,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 14,
+      "label": "BULLET_primary8000_region014",
+      "links_exact": true,
+      "member_bins": 8,
+      "obsid_cell_counts": {
+        "3184": 8,
+        "4984": 8,
+        "4985": 8,
+        "4986": 8,
+        "5355": 8,
+        "5356": 8,
+        "5357": 8,
+        "5358": 8,
+        "5361": 8
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region014/BULLET_primary8000_region014_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "ef67ed0cb8fd3c22860a2072bea510262b460f8567a4249062528e92ccb30119"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region014/BULLET_primary8000_region014_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "3b97970465bcd025f12aee1df0f71db36567077f495dcc022e27a50d026cbebf"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region014/BULLET_primary8000_region014_src.arf",
+          "role": "source_arf",
+          "sha256": "8cb1fb64f87b1483df2baea996570261ec8abe4e65d6e8b19d28faa3fa90f249"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region014/BULLET_primary8000_region014_src.rmf",
+          "role": "source_rmf",
+          "sha256": "5335cf4e5d0dfc84e3f6ec645d2c0a7468a91a07d6b6903c6e5346c7154d9d1c"
+        }
+      ],
+      "root_bin_id": 94
+    },
+    {
+      "cells": 80,
+      "combined_full_pha_source_counts": 16825,
+      "expected_full_pha_source_counts": 16825,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 15,
+      "label": "BULLET_primary8000_region015",
+      "links_exact": true,
+      "member_bins": 7,
+      "obsid_cell_counts": {
+        "3184": 7,
+        "4984": 7,
+        "4985": 10,
+        "4986": 7,
+        "5355": 12,
+        "5356": 12,
+        "5357": 9,
+        "5358": 9,
+        "5361": 7
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region015/BULLET_primary8000_region015_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "c1c540241182090118fef7046e08e341b2d93fd45bb85270d89f252c5e884693"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region015/BULLET_primary8000_region015_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "1acfd728236dcf1f72b3b127f4223a78c38acb76e03b6d1754de9f2bc0dcb031"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region015/BULLET_primary8000_region015_src.arf",
+          "role": "source_arf",
+          "sha256": "329c1f5ff07a2cc44e6cac4fb54d305e419eb9d8eec0ffb784c99fb039117070"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region015/BULLET_primary8000_region015_src.rmf",
+          "role": "source_rmf",
+          "sha256": "8a850828ad9037a9999dfccf8089ffe0ca9a5f96616c0cef64dba07bbd0608a5"
+        }
+      ],
+      "root_bin_id": 100
+    },
+    {
+      "cells": 135,
+      "combined_full_pha_source_counts": 33770,
+      "expected_full_pha_source_counts": 33770,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 16,
+      "label": "BULLET_primary8000_region016",
+      "links_exact": true,
+      "member_bins": 15,
+      "obsid_cell_counts": {
+        "3184": 15,
+        "4984": 15,
+        "4985": 15,
+        "4986": 15,
+        "5355": 15,
+        "5356": 15,
+        "5357": 15,
+        "5358": 15,
+        "5361": 15
+      },
+      "products": [
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region016/BULLET_primary8000_region016_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "92d95465c1d035cdd20fa6280cae2ae7f093f2dd5905c759f017c9db51ddeee1"
+        },
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region016/BULLET_primary8000_region016_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "184cf9ae0b7b76b2c471391b0d094d089c51d93fee2385e43331d26e6b81fff0"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region016/BULLET_primary8000_region016_src.arf",
+          "role": "source_arf",
+          "sha256": "193595678f0c7acb07a3746ef55c428e4f7d2371b0aac5f0fad06baef43a95b2"
+        },
+        {
+          "bytes": 2203200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region016/BULLET_primary8000_region016_src.rmf",
+          "role": "source_rmf",
+          "sha256": "2f067b16405d4d7c66ce54a173556e2161df6f813ee5203d7b8a90b6c8fe7077"
+        }
+      ],
+      "root_bin_id": 101
+    },
+    {
+      "cells": 64,
+      "combined_full_pha_source_counts": 10225,
+      "expected_full_pha_source_counts": 10225,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 17,
+      "label": "BULLET_primary8000_region017",
+      "links_exact": true,
+      "member_bins": 6,
+      "obsid_cell_counts": {
+        "3184": 6,
+        "4984": 6,
+        "4985": 6,
+        "4986": 10,
+        "5355": 6,
+        "5356": 6,
+        "5357": 9,
+        "5358": 9,
+        "5361": 6
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region017/BULLET_primary8000_region017_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "65bd61f2dd21d4458e1752f589312a009fdfcdd64fe7c5cb61823fe201b5ce72"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region017/BULLET_primary8000_region017_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "76558c34dbfa30bd960c81f4e040abb98de8779754466c6d38484a01871e0e31"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region017/BULLET_primary8000_region017_src.arf",
+          "role": "source_arf",
+          "sha256": "d8f5794007b19712788fb303282509e21f68f5cba6ba1cd08e0071eef8f12ef4"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region017/BULLET_primary8000_region017_src.rmf",
+          "role": "source_rmf",
+          "sha256": "3c8b8f47efd63a972515f08a06f2db13f28ee73ec5da5b07e9ce0de99dfa0ddc"
+        }
+      ],
+      "root_bin_id": 109
+    },
+    {
+      "cells": 117,
+      "combined_full_pha_source_counts": 22495,
+      "expected_full_pha_source_counts": 22495,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 18,
+      "label": "BULLET_primary8000_region018",
+      "links_exact": true,
+      "member_bins": 13,
+      "obsid_cell_counts": {
+        "3184": 13,
+        "4984": 13,
+        "4985": 13,
+        "4986": 13,
+        "5355": 13,
+        "5356": 13,
+        "5357": 13,
+        "5358": 13,
+        "5361": 13
+      },
+      "products": [
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region018/BULLET_primary8000_region018_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "341219ddc1440216664aa19d98bdff1be98140d2cae2f9fc6b0f4135275b7a90"
+        },
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region018/BULLET_primary8000_region018_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "34e2ffc3a0796826d0968208df19a8e3407f41fa7cbf89fb3bd9ffc5a91897e3"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region018/BULLET_primary8000_region018_src.arf",
+          "role": "source_arf",
+          "sha256": "650d4f75db6f4233f250d6458a2e8278928ef786626864dddeeed70a250e9cd5"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region018/BULLET_primary8000_region018_src.rmf",
+          "role": "source_rmf",
+          "sha256": "4f1a72f120bdcba63c98c0708c5c4fcb527038d2a4bdd9063ddf1c0de76c1e0e"
+        }
+      ],
+      "root_bin_id": 114
+    },
+    {
+      "cells": 65,
+      "combined_full_pha_source_counts": 16530,
+      "expected_full_pha_source_counts": 16530,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 19,
+      "label": "BULLET_primary8000_region019",
+      "links_exact": true,
+      "member_bins": 7,
+      "obsid_cell_counts": {
+        "3184": 7,
+        "4984": 8,
+        "4985": 7,
+        "4986": 7,
+        "5355": 7,
+        "5356": 7,
+        "5357": 7,
+        "5358": 7,
+        "5361": 8
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region019/BULLET_primary8000_region019_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "51838973c02d48420b6f17e2777fce63ac1ace43813dcba96099bebccbb31e53"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region019/BULLET_primary8000_region019_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "7e93e0d4c4d28362c855d7309f53e790f78c3a8b5f833d408f0a417bb9d8554e"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region019/BULLET_primary8000_region019_src.arf",
+          "role": "source_arf",
+          "sha256": "75927b67195ec3821007f3706b9265368ce7b9cb23c8f579b8eca0fa24cb4e3b"
+        },
+        {
+          "bytes": 2208960,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region019/BULLET_primary8000_region019_src.rmf",
+          "role": "source_rmf",
+          "sha256": "a4c8a543e06fe500ddb155e0a1846ac21429990560f2ef420f60bf5e39b00192"
+        }
+      ],
+      "root_bin_id": 117
+    },
+    {
+      "cells": 131,
+      "combined_full_pha_source_counts": 25376,
+      "expected_full_pha_source_counts": 25376,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 20,
+      "label": "BULLET_primary8000_region020",
+      "links_exact": true,
+      "member_bins": 12,
+      "obsid_cell_counts": {
+        "3184": 12,
+        "4984": 15,
+        "4985": 12,
+        "4986": 16,
+        "5355": 12,
+        "5356": 12,
+        "5357": 19,
+        "5358": 18,
+        "5361": 15
+      },
+      "products": [
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region020/BULLET_primary8000_region020_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "30d20b3a61c113059f7ecd555999745d16fc13a26aae2f29e22f03c2f3da3a3b"
+        },
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region020/BULLET_primary8000_region020_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "b0fe3dd1603e28ae5e98f65e1eee523014edf8bff96d5205b87115017eba46a7"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region020/BULLET_primary8000_region020_src.arf",
+          "role": "source_arf",
+          "sha256": "ab7e69ebec215cefb110c2d84537787ebf48db134bd0d4c490daea162a13f588"
+        },
+        {
+          "bytes": 2211840,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region020/BULLET_primary8000_region020_src.rmf",
+          "role": "source_rmf",
+          "sha256": "901a6dfdf39586d6ede8ff2b1b26f7f650cdfa6f5b128cf0973915de9f984a8b"
+        }
+      ],
+      "root_bin_id": 120
+    },
+    {
+      "cells": 61,
+      "combined_full_pha_source_counts": 10339,
+      "expected_full_pha_source_counts": 10339,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 21,
+      "label": "BULLET_primary8000_region021",
+      "links_exact": true,
+      "member_bins": 6,
+      "obsid_cell_counts": {
+        "3184": 6,
+        "4984": 6,
+        "4985": 6,
+        "4986": 7,
+        "5355": 6,
+        "5356": 6,
+        "5357": 9,
+        "5358": 9,
+        "5361": 6
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region021/BULLET_primary8000_region021_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "ec706a6c2abded00f6142cf17bef66948316a259c55c36461bceabd48468e0b0"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region021/BULLET_primary8000_region021_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "921e3e1342639daed0e8809ba26c85921ea05012889430575ca6d8bec94c0cbb"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region021/BULLET_primary8000_region021_src.arf",
+          "role": "source_arf",
+          "sha256": "73fa72acaf820ec1b1fb5c7021e834150957b93d134b729e1eccbb5a0bced02e"
+        },
+        {
+          "bytes": 2214720,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region021/BULLET_primary8000_region021_src.rmf",
+          "role": "source_rmf",
+          "sha256": "ce0e27f666294a86c01d50fc4da7396223c66b0b0246f1172765c99bfc535649"
+        }
+      ],
+      "root_bin_id": 128
+    },
+    {
+      "cells": 45,
+      "combined_full_pha_source_counts": 12075,
+      "expected_full_pha_source_counts": 12075,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 22,
+      "label": "BULLET_primary8000_region022",
+      "links_exact": true,
+      "member_bins": 5,
+      "obsid_cell_counts": {
+        "3184": 5,
+        "4984": 5,
+        "4985": 5,
+        "4986": 5,
+        "5355": 5,
+        "5356": 5,
+        "5357": 5,
+        "5358": 5,
+        "5361": 5
+      },
+      "products": [
+        {
+          "bytes": 63360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region022/BULLET_primary8000_region022_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "5d92ace72682634f141ba1eaf031f069cd4428b0184acfa3cfe2e8e496abbe93"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region022/BULLET_primary8000_region022_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "eccf964007e60aa4bb2988c9db2dbf57b383c7f294be5592acda6138f4f5a699"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region022/BULLET_primary8000_region022_src.arf",
+          "role": "source_arf",
+          "sha256": "80364a41e90caaad62532615e20db8e3b81c9b07cf72b47cd0f97f6dd7ade675"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region022/BULLET_primary8000_region022_src.rmf",
+          "role": "source_rmf",
+          "sha256": "8b6e30754e1c04ac0920d48265c1e56830eedb1a46d3c653a1c3fe1648c12e8f"
+        }
+      ],
+      "root_bin_id": 129
+    },
+    {
+      "cells": 45,
+      "combined_full_pha_source_counts": 8924,
+      "expected_full_pha_source_counts": 8924,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 23,
+      "label": "BULLET_primary8000_region023",
+      "links_exact": true,
+      "member_bins": 5,
+      "obsid_cell_counts": {
+        "3184": 5,
+        "4984": 5,
+        "4985": 5,
+        "4986": 5,
+        "5355": 5,
+        "5356": 5,
+        "5357": 5,
+        "5358": 5,
+        "5361": 5
+      },
+      "products": [
+        {
+          "bytes": 63360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region023/BULLET_primary8000_region023_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "fce9e15e501afe1f162b2a176e0e55367380f4dabd2e30034723345db5b23698"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region023/BULLET_primary8000_region023_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "b85c12197f95a9f6db0edec6946c34cb4aa9ddba99e1a90fc6ab90926877878a"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region023/BULLET_primary8000_region023_src.arf",
+          "role": "source_arf",
+          "sha256": "683d838c435ee656786c103958f40debb6521901c8e854d6eb18934809c99c1a"
+        },
+        {
+          "bytes": 2217600,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region023/BULLET_primary8000_region023_src.rmf",
+          "role": "source_rmf",
+          "sha256": "38edad868f8c32369119d5845ce48d8f6381d34eacfc1f3bc68248a0f27e310d"
+        }
+      ],
+      "root_bin_id": 134
+    },
+    {
+      "cells": 128,
+      "combined_full_pha_source_counts": 23765,
+      "expected_full_pha_source_counts": 23765,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 24,
+      "label": "BULLET_primary8000_region024",
+      "links_exact": true,
+      "member_bins": 12,
+      "obsid_cell_counts": {
+        "3184": 12,
+        "4984": 13,
+        "4985": 17,
+        "4986": 12,
+        "5355": 18,
+        "5356": 19,
+        "5357": 12,
+        "5358": 12,
+        "5361": 13
+      },
+      "products": [
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region024/BULLET_primary8000_region024_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "65801ac7e355a9ee3f0908d51780d3bb1bbf9fa213b1652531603f05e126e16f"
+        },
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region024/BULLET_primary8000_region024_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "d8146e620c7413a1fc29dbc51d62b9b0b15ad16485e57788078c7e5fcd69ac73"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region024/BULLET_primary8000_region024_src.arf",
+          "role": "source_arf",
+          "sha256": "c553ba03ad5f5d16604a1751720e94e5538666a3249abbfe9a5b82011d5cec63"
+        },
+        {
+          "bytes": 2217600,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region024/BULLET_primary8000_region024_src.rmf",
+          "role": "source_rmf",
+          "sha256": "74998e7dc8e63b1b613ed48f29b5137fed14dc68e3d616c3914c8bec146e071b"
+        }
+      ],
+      "root_bin_id": 154
+    },
+    {
+      "cells": 45,
+      "combined_full_pha_source_counts": 11131,
+      "expected_full_pha_source_counts": 11131,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 25,
+      "label": "BULLET_primary8000_region025",
+      "links_exact": true,
+      "member_bins": 5,
+      "obsid_cell_counts": {
+        "3184": 5,
+        "4984": 5,
+        "4985": 5,
+        "4986": 5,
+        "5355": 5,
+        "5356": 5,
+        "5357": 5,
+        "5358": 5,
+        "5361": 5
+      },
+      "products": [
+        {
+          "bytes": 63360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region025/BULLET_primary8000_region025_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "fde281ab3150bd163e59f95b1993946482b9b43bd51342277d43d8ef1545bb94"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region025/BULLET_primary8000_region025_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "a098abcd4ab546e67427fc7a59cfa75929fca3c70009c2693fb1e49d819ce9ee"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region025/BULLET_primary8000_region025_src.arf",
+          "role": "source_arf",
+          "sha256": "5ba34564597b62612321f4735bc44056cb978cbea037897c1597cf33d47ca5ae"
+        },
+        {
+          "bytes": 2208960,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region025/BULLET_primary8000_region025_src.rmf",
+          "role": "source_rmf",
+          "sha256": "74f19ef300ff3a30f871bfc41344eddbfef93641a41284f29323a21363a693c4"
+        }
+      ],
+      "root_bin_id": 159
+    },
+    {
+      "cells": 63,
+      "combined_full_pha_source_counts": 12733,
+      "expected_full_pha_source_counts": 12733,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 26,
+      "label": "BULLET_primary8000_region026",
+      "links_exact": true,
+      "member_bins": 7,
+      "obsid_cell_counts": {
+        "3184": 7,
+        "4984": 7,
+        "4985": 7,
+        "4986": 7,
+        "5355": 7,
+        "5356": 7,
+        "5357": 7,
+        "5358": 7,
+        "5361": 7
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region026/BULLET_primary8000_region026_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "df7eae4edd990dc25f86463c82133de8ea28d39fb8a1205305dc3475e0e9d715"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region026/BULLET_primary8000_region026_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "aa8cb949030e08c4b0c60c86783c09eb48cf2fc1d4f96c580cb481aeb512e9bf"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region026/BULLET_primary8000_region026_src.arf",
+          "role": "source_arf",
+          "sha256": "3aacb745fe7cf6aca3ca6d72429c49c15f8624f6c92a3780448912521742df43"
+        },
+        {
+          "bytes": 2214720,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region026/BULLET_primary8000_region026_src.rmf",
+          "role": "source_rmf",
+          "sha256": "013ec335b1a4ef1898454582b085c58f3ddf8bdce329f6d5e14e3830216828ab"
+        }
+      ],
+      "root_bin_id": 166
+    },
+    {
+      "cells": 72,
+      "combined_full_pha_source_counts": 13550,
+      "expected_full_pha_source_counts": 13550,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 27,
+      "label": "BULLET_primary8000_region027",
+      "links_exact": true,
+      "member_bins": 8,
+      "obsid_cell_counts": {
+        "3184": 8,
+        "4984": 8,
+        "4985": 8,
+        "4986": 8,
+        "5355": 8,
+        "5356": 8,
+        "5357": 8,
+        "5358": 8,
+        "5361": 8
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region027/BULLET_primary8000_region027_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "5bb058253f710cfc61357ce46ad381976d09cee7d9d00d2bdedd2f1582b937bf"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region027/BULLET_primary8000_region027_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "6dd5158688ce370e2a40ad6df75efc6c8946071c837f75942ec1569b53f80658"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region027/BULLET_primary8000_region027_src.arf",
+          "role": "source_arf",
+          "sha256": "ac0bb3825223cde822db360fe44a221c368a5afad4f203d3964a29e945d4f0af"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region027/BULLET_primary8000_region027_src.rmf",
+          "role": "source_rmf",
+          "sha256": "7a8f02dcd155fb526579f0c40328b0616d53e785310f26f714bd3ee78bec82be"
+        }
+      ],
+      "root_bin_id": 173
+    },
+    {
+      "cells": 105,
+      "combined_full_pha_source_counts": 19609,
+      "expected_full_pha_source_counts": 19609,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 28,
+      "label": "BULLET_primary8000_region028",
+      "links_exact": true,
+      "member_bins": 10,
+      "obsid_cell_counts": {
+        "3184": 10,
+        "4984": 10,
+        "4985": 10,
+        "4986": 16,
+        "5355": 10,
+        "5356": 10,
+        "5357": 15,
+        "5358": 14,
+        "5361": 10
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region028/BULLET_primary8000_region028_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "784a0c2a4acec730924f1657db9146d167d432a6dc0c714809daa5652b831de9"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region028/BULLET_primary8000_region028_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "41964197056f86169f8f034b654bfd500027216a9e40f12f98d298d208da364d"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region028/BULLET_primary8000_region028_src.arf",
+          "role": "source_arf",
+          "sha256": "876331b56aab0a712a950a2086b3ab8672163f20854975018bcf0ad2fffa3775"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region028/BULLET_primary8000_region028_src.rmf",
+          "role": "source_rmf",
+          "sha256": "a978b7b042f52adf3af200162f729dca5e30cb5a6ab61823dc125d3b0a27e427"
+        }
+      ],
+      "root_bin_id": 176
+    },
+    {
+      "cells": 54,
+      "combined_full_pha_source_counts": 8342,
+      "expected_full_pha_source_counts": 8342,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 29,
+      "label": "BULLET_primary8000_region029",
+      "links_exact": true,
+      "member_bins": 5,
+      "obsid_cell_counts": {
+        "3184": 5,
+        "4984": 5,
+        "4985": 5,
+        "4986": 8,
+        "5355": 5,
+        "5356": 5,
+        "5357": 9,
+        "5358": 7,
+        "5361": 5
+      },
+      "products": [
+        {
+          "bytes": 63360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region029/BULLET_primary8000_region029_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "e5e96408f802fd695204ec0fe954feb0ee45c49174bcfd797c9f72cb9d740bdb"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region029/BULLET_primary8000_region029_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "88262bf574c8acfe70249d0d3b2c363e758b9017ef43fd025628ec8f72ec3668"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region029/BULLET_primary8000_region029_src.arf",
+          "role": "source_arf",
+          "sha256": "4f58d1c17f8e664f6d3df91bad20e96b160eff58a2af17cbf7d9d6ef842d8dda"
+        },
+        {
+          "bytes": 2217600,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region029/BULLET_primary8000_region029_src.rmf",
+          "role": "source_rmf",
+          "sha256": "76cc88199a2649ed32647e2115adea9c767f42ea483e89ee11e687da6cc0818a"
+        }
+      ],
+      "root_bin_id": 188
+    },
+    {
+      "cells": 90,
+      "combined_full_pha_source_counts": 17116,
+      "expected_full_pha_source_counts": 17116,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 30,
+      "label": "BULLET_primary8000_region030",
+      "links_exact": true,
+      "member_bins": 10,
+      "obsid_cell_counts": {
+        "3184": 10,
+        "4984": 10,
+        "4985": 10,
+        "4986": 10,
+        "5355": 10,
+        "5356": 10,
+        "5357": 10,
+        "5358": 10,
+        "5361": 10
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region030/BULLET_primary8000_region030_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "29cded9f6fbfb552393e38de182affb9a5beb7ef60e62c165e62a4d9755b5004"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region030/BULLET_primary8000_region030_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "5385754fce2bfe434674e440a933c225f840a077cf5cd56c6ff979faf93a8488"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region030/BULLET_primary8000_region030_src.arf",
+          "role": "source_arf",
+          "sha256": "aea720df959b745fac0781c4ef12c6acc64a77aa1cf78d43f3eab3273760cfd6"
+        },
+        {
+          "bytes": 2214720,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region030/BULLET_primary8000_region030_src.rmf",
+          "role": "source_rmf",
+          "sha256": "5ea0e82ca60757a9a42357c1fd455a1cf9e0074160c16ed57ee53e8e76147774"
+        }
+      ],
+      "root_bin_id": 191
+    },
+    {
+      "cells": 108,
+      "combined_full_pha_source_counts": 22928,
+      "expected_full_pha_source_counts": 22928,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 31,
+      "label": "BULLET_primary8000_region031",
+      "links_exact": true,
+      "member_bins": 12,
+      "obsid_cell_counts": {
+        "3184": 12,
+        "4984": 12,
+        "4985": 12,
+        "4986": 12,
+        "5355": 12,
+        "5356": 12,
+        "5357": 12,
+        "5358": 12,
+        "5361": 12
+      },
+      "products": [
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region031/BULLET_primary8000_region031_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "607a33fbe0084f3cc20a6f5f24013aa463abd6cc612e9c7c20f60b3b467073ed"
+        },
+        {
+          "bytes": 72000,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region031/BULLET_primary8000_region031_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "e1c45f7b205b41b90fc53daafcb23467835860097039114302d2216cf7270a11"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region031/BULLET_primary8000_region031_src.arf",
+          "role": "source_arf",
+          "sha256": "ccf5801f8c86b32ef6ccd2e7414a8d4057db37bcaa983f0242cc5726539d3d0f"
+        },
+        {
+          "bytes": 2214720,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region031/BULLET_primary8000_region031_src.rmf",
+          "role": "source_rmf",
+          "sha256": "c2026db2a786d1afb5fa2bb82fc4f520a6b208735fc332efdb8c69d8caebd845"
+        }
+      ],
+      "root_bin_id": 204
+    },
+    {
+      "cells": 96,
+      "combined_full_pha_source_counts": 17150,
+      "expected_full_pha_source_counts": 17150,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 32,
+      "label": "BULLET_primary8000_region032",
+      "links_exact": true,
+      "member_bins": 10,
+      "obsid_cell_counts": {
+        "3184": 10,
+        "4984": 10,
+        "4985": 10,
+        "4986": 12,
+        "5355": 10,
+        "5356": 10,
+        "5357": 13,
+        "5358": 11,
+        "5361": 10
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region032/BULLET_primary8000_region032_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "c1cad4dc89a7d030a6d1c6e92adc3234c1394069decf857afb8ddf8267c1de34"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region032/BULLET_primary8000_region032_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "611d268244d7e116de19ec6a4f613e7e5f85143ed63b09e8c7e04ac68352d63b"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region032/BULLET_primary8000_region032_src.arf",
+          "role": "source_arf",
+          "sha256": "4b80f6966d2f62e5c892326c7d85602c1ed6d2f179ad219481bb1e04547ba64f"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region032/BULLET_primary8000_region032_src.rmf",
+          "role": "source_rmf",
+          "sha256": "caa6c5b4edd315e634f6db8fa5ed7addff0ac1157ce55bb5748b289c144d628d"
+        }
+      ],
+      "root_bin_id": 211
+    },
+    {
+      "cells": 45,
+      "combined_full_pha_source_counts": 9003,
+      "expected_full_pha_source_counts": 9003,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 33,
+      "label": "BULLET_primary8000_region033",
+      "links_exact": true,
+      "member_bins": 5,
+      "obsid_cell_counts": {
+        "3184": 5,
+        "4984": 5,
+        "4985": 5,
+        "4986": 5,
+        "5355": 5,
+        "5356": 5,
+        "5357": 5,
+        "5358": 5,
+        "5361": 5
+      },
+      "products": [
+        {
+          "bytes": 63360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region033/BULLET_primary8000_region033_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "7bf30336187f8753865b70771b7ddea8994ba203e85d790ecd2cc1f2b926309d"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region033/BULLET_primary8000_region033_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "1ed031147ec2f18551069a74d3d71a2ff2e19cd576aa906eaddc632715e2842c"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region033/BULLET_primary8000_region033_src.arf",
+          "role": "source_arf",
+          "sha256": "93091c946e8dacf513fac2aee91a9e22835190090bcc38278d67cb87e3848b9f"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region033/BULLET_primary8000_region033_src.rmf",
+          "role": "source_rmf",
+          "sha256": "4a82e69393617f71b7b59031f59f03cf1d00c469aecaead58dbe7e8a56e6e6bc"
+        }
+      ],
+      "root_bin_id": 224
+    },
+    {
+      "cells": 114,
+      "combined_full_pha_source_counts": 20204,
+      "expected_full_pha_source_counts": 20204,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 34,
+      "label": "BULLET_primary8000_region034",
+      "links_exact": true,
+      "member_bins": 11,
+      "obsid_cell_counts": {
+        "3184": 11,
+        "4984": 11,
+        "4985": 16,
+        "4986": 11,
+        "5355": 16,
+        "5356": 16,
+        "5357": 11,
+        "5358": 11,
+        "5361": 11
+      },
+      "products": [
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region034/BULLET_primary8000_region034_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "b85e2881609544303c6b00b736ce22b22a37a779878bd3e5c652047b26ba0eae"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region034/BULLET_primary8000_region034_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "1835a99f90087187a8a3f7367cb7d4b6756ebbeef11eb27d3aa3a1ba9319bdab"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region034/BULLET_primary8000_region034_src.arf",
+          "role": "source_arf",
+          "sha256": "a1cdd860e20ac2267174c2fe7d155e713e1c11cd111aabcffbd1fc6b19bfa985"
+        },
+        {
+          "bytes": 2217600,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region034/BULLET_primary8000_region034_src.rmf",
+          "role": "source_rmf",
+          "sha256": "c43dcff83396bd53fef21e0c8062797f3a55b181eeba00c7c0926f70182ee911"
+        }
+      ],
+      "root_bin_id": 225
+    },
+    {
+      "cells": 99,
+      "combined_full_pha_source_counts": 19975,
+      "expected_full_pha_source_counts": 19975,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 35,
+      "label": "BULLET_primary8000_region035",
+      "links_exact": true,
+      "member_bins": 11,
+      "obsid_cell_counts": {
+        "3184": 11,
+        "4984": 11,
+        "4985": 11,
+        "4986": 11,
+        "5355": 11,
+        "5356": 11,
+        "5357": 11,
+        "5358": 11,
+        "5361": 11
+      },
+      "products": [
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region035/BULLET_primary8000_region035_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "366a5bca204c3ad03606446e8f230a631b00b6023c24a94c7d88d8a3e1e1c21f"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region035/BULLET_primary8000_region035_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "132f3dc658b00a0d72fd86e65961c4aa1948994b96873d6b1cf90d66e39f442b"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region035/BULLET_primary8000_region035_src.arf",
+          "role": "source_arf",
+          "sha256": "bccf88166f8aa90fc4d4c16bbbcabc591f321558ea2f78e170e5694d53d89567"
+        },
+        {
+          "bytes": 2211840,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region035/BULLET_primary8000_region035_src.rmf",
+          "role": "source_rmf",
+          "sha256": "5b264a4668950036d4fcabcf60ca064d727bc41546cbe8be67e7581e56b433d3"
+        }
+      ],
+      "root_bin_id": 232
+    },
+    {
+      "cells": 65,
+      "combined_full_pha_source_counts": 13132,
+      "expected_full_pha_source_counts": 13132,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 36,
+      "label": "BULLET_primary8000_region036",
+      "links_exact": true,
+      "member_bins": 7,
+      "obsid_cell_counts": {
+        "3184": 7,
+        "4984": 7,
+        "4985": 9,
+        "4986": 7,
+        "5355": 7,
+        "5356": 7,
+        "5357": 7,
+        "5358": 7,
+        "5361": 7
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region036/BULLET_primary8000_region036_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "b2de24b22f723e659022a91fc798d752beae408469fbb1a85a63a044677ad695"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region036/BULLET_primary8000_region036_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "1b9944890209fed85c926515c669a6507c54e81f8245ec2f9f2699e257667d1c"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region036/BULLET_primary8000_region036_src.arf",
+          "role": "source_arf",
+          "sha256": "bf5e43788f34a56db57304e92eaae53035376745192332c9c9d051c32e0f1687"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region036/BULLET_primary8000_region036_src.rmf",
+          "role": "source_rmf",
+          "sha256": "98daa9739b190b451950657a2f2848210d763725ac031f183984f0375bcefe6c"
+        }
+      ],
+      "root_bin_id": 238
+    },
+    {
+      "cells": 45,
+      "combined_full_pha_source_counts": 10478,
+      "expected_full_pha_source_counts": 10478,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 37,
+      "label": "BULLET_primary8000_region037",
+      "links_exact": true,
+      "member_bins": 5,
+      "obsid_cell_counts": {
+        "3184": 5,
+        "4984": 5,
+        "4985": 5,
+        "4986": 5,
+        "5355": 5,
+        "5356": 5,
+        "5357": 5,
+        "5358": 5,
+        "5361": 5
+      },
+      "products": [
+        {
+          "bytes": 63360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region037/BULLET_primary8000_region037_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "350588ad04261735a685d98c4352c7d37c752af2085664ffd055a39d84ca016d"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region037/BULLET_primary8000_region037_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "0ce49ea033e3acb27172dc6c543301e68e3c7632785810b40f88862ee50e8999"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region037/BULLET_primary8000_region037_src.arf",
+          "role": "source_arf",
+          "sha256": "26e652ed7053ff4676392948e5ac31fb4564084df5e8c849975060aa557f367e"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region037/BULLET_primary8000_region037_src.rmf",
+          "role": "source_rmf",
+          "sha256": "79cc233fb1a973360c8f907f7090de35bc09b4328466185dd8a04a9686412222"
+        }
+      ],
+      "root_bin_id": 250
+    },
+    {
+      "cells": 81,
+      "combined_full_pha_source_counts": 16253,
+      "expected_full_pha_source_counts": 16253,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 38,
+      "label": "BULLET_primary8000_region038",
+      "links_exact": true,
+      "member_bins": 9,
+      "obsid_cell_counts": {
+        "3184": 9,
+        "4984": 9,
+        "4985": 9,
+        "4986": 9,
+        "5355": 9,
+        "5356": 9,
+        "5357": 9,
+        "5358": 9,
+        "5361": 9
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region038/BULLET_primary8000_region038_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "7a0dd3788a7ca3d5e96b6609718371ba78be35067bf64fd8c098f806b8ddbaf9"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region038/BULLET_primary8000_region038_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "df710832354ceb7807d5881c06ef0635ad46861397041fe64f87d82ee56eba51"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region038/BULLET_primary8000_region038_src.arf",
+          "role": "source_arf",
+          "sha256": "3b7af4f620d17f697540fa25f4ccb44f150fec36a7fdd8e8684721ebea80c4a1"
+        },
+        {
+          "bytes": 2220480,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region038/BULLET_primary8000_region038_src.rmf",
+          "role": "source_rmf",
+          "sha256": "046085c97932fb79900a990c5682f2ac18aedd4e85f09d86eebc7ae34fed946c"
+        }
+      ],
+      "root_bin_id": 258
+    },
+    {
+      "cells": 54,
+      "combined_full_pha_source_counts": 10312,
+      "expected_full_pha_source_counts": 10312,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 39,
+      "label": "BULLET_primary8000_region039",
+      "links_exact": true,
+      "member_bins": 6,
+      "obsid_cell_counts": {
+        "3184": 6,
+        "4984": 6,
+        "4985": 6,
+        "4986": 6,
+        "5355": 6,
+        "5356": 6,
+        "5357": 6,
+        "5358": 6,
+        "5361": 6
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region039/BULLET_primary8000_region039_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "3b75ed1da81cb5b3e130b51b39ae2ce159b654f8e165a7c05e2f833bc574d0de"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region039/BULLET_primary8000_region039_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "5544e3c1944da652a29d4ecadfdfa809555e986926ade24c89543ff03d89d448"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region039/BULLET_primary8000_region039_src.arf",
+          "role": "source_arf",
+          "sha256": "8d078a778a437231f4e89bd8d9484795a45afeccaa636c51c6bc5a902feb355d"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region039/BULLET_primary8000_region039_src.rmf",
+          "role": "source_rmf",
+          "sha256": "e6307a09dd65f4b249bb1a5d2f7c205234c276e927b21f1b27c34e11e2a4e7df"
+        }
+      ],
+      "root_bin_id": 263
+    },
+    {
+      "cells": 55,
+      "combined_full_pha_source_counts": 8640,
+      "expected_full_pha_source_counts": 8640,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 40,
+      "label": "BULLET_primary8000_region040",
+      "links_exact": true,
+      "member_bins": 5,
+      "obsid_cell_counts": {
+        "3184": 5,
+        "4984": 5,
+        "4985": 5,
+        "4986": 9,
+        "5355": 5,
+        "5356": 5,
+        "5357": 8,
+        "5358": 8,
+        "5361": 5
+      },
+      "products": [
+        {
+          "bytes": 63360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region040/BULLET_primary8000_region040_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "ece3bd87541e115d5ba4633f012492a3d0f2979cc8d26869b2f75717b1c326f5"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region040/BULLET_primary8000_region040_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "4e582f4e7526d3c108ef06c7ce92800951c8cd0c190abf64a24a68ee6d2d7c95"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region040/BULLET_primary8000_region040_src.arf",
+          "role": "source_arf",
+          "sha256": "30c6c883956917966525c7d86597d102e6d506d14b101a4b2c595c2cdd7dfd95"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region040/BULLET_primary8000_region040_src.rmf",
+          "role": "source_rmf",
+          "sha256": "80da0b0db8907991908da6c844b547cd9d48e87b62033f64bdd8ed66c71bd548"
+        }
+      ],
+      "root_bin_id": 293
+    },
+    {
+      "cells": 65,
+      "combined_full_pha_source_counts": 12948,
+      "expected_full_pha_source_counts": 12948,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 41,
+      "label": "BULLET_primary8000_region041",
+      "links_exact": true,
+      "member_bins": 7,
+      "obsid_cell_counts": {
+        "3184": 7,
+        "4984": 7,
+        "4985": 7,
+        "4986": 9,
+        "5355": 7,
+        "5356": 7,
+        "5357": 7,
+        "5358": 7,
+        "5361": 7
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region041/BULLET_primary8000_region041_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "2cf2735e40d18c05bd025fc1a728a2b670d951faf113c35ba6b30b3dd169df7e"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region041/BULLET_primary8000_region041_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "e9b8a0cd600d395d327875d798f897dee22e1b828654d6d0c151603385840df2"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region041/BULLET_primary8000_region041_src.arf",
+          "role": "source_arf",
+          "sha256": "0224b05be77445679bd33d9e3afbf0a6d77d1fa97cd78a97604395ef9f5d6a43"
+        },
+        {
+          "bytes": 2217600,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region041/BULLET_primary8000_region041_src.rmf",
+          "role": "source_rmf",
+          "sha256": "c9ea8faed71209822663f3f8325f3668af7912c2238025a964ce2ed8b0404eb1"
+        }
+      ],
+      "root_bin_id": 294
+    },
+    {
+      "cells": 87,
+      "combined_full_pha_source_counts": 14215,
+      "expected_full_pha_source_counts": 14215,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 42,
+      "label": "BULLET_primary8000_region042",
+      "links_exact": true,
+      "member_bins": 8,
+      "obsid_cell_counts": {
+        "3184": 8,
+        "4984": 8,
+        "4985": 13,
+        "4986": 8,
+        "5355": 13,
+        "5356": 13,
+        "5357": 8,
+        "5358": 8,
+        "5361": 8
+      },
+      "products": [
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region042/BULLET_primary8000_region042_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "75c479e0cbf9b9086507d083f0885003ab2216e966b81b7dadd87a2b3047a55a"
+        },
+        {
+          "bytes": 69120,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region042/BULLET_primary8000_region042_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "601b720982f5960d2a4d1cca3745b582f6d38ce6a87f78698adb6145a64cca01"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region042/BULLET_primary8000_region042_src.arf",
+          "role": "source_arf",
+          "sha256": "b5dd569af4a2a1e042bfa2d31a484af75b94402f61890c192f9922c69a46158d"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region042/BULLET_primary8000_region042_src.rmf",
+          "role": "source_rmf",
+          "sha256": "8269a8bb784037058c8490df8315619cd01847e0125e280449036cfcfec569fb"
+        }
+      ],
+      "root_bin_id": 295
+    },
+    {
+      "cells": 54,
+      "combined_full_pha_source_counts": 8525,
+      "expected_full_pha_source_counts": 8525,
+      "full_pha_count_conservation_exact": true,
+      "group_id": 43,
+      "label": "BULLET_primary8000_region043",
+      "links_exact": true,
+      "member_bins": 5,
+      "obsid_cell_counts": {
+        "3184": 5,
+        "4984": 5,
+        "4985": 7,
+        "4986": 5,
+        "5355": 9,
+        "5356": 8,
+        "5357": 5,
+        "5358": 5,
+        "5361": 5
+      },
+      "products": [
+        {
+          "bytes": 63360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region043/BULLET_primary8000_region043_src.pi",
+          "role": "ungrouped_source_spectrum",
+          "sha256": "f68f0f963c3708010e53ec1d540d7e9604785beb0e686e38ff22ba9368995d8f"
+        },
+        {
+          "bytes": 66240,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region043/BULLET_primary8000_region043_bkg.pi",
+          "role": "background_spectrum",
+          "sha256": "87e63de469f0483beb8fd2bf5b103a97b84a67ef7d4011c31c122dd85b2b949a"
+        },
+        {
+          "bytes": 43200,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region043/BULLET_primary8000_region043_src.arf",
+          "role": "source_arf",
+          "sha256": "ca02bce01569d4527d3db4ef59c2aae69fde3530a7f8f10b3c54fbb3bba6b4fe"
+        },
+        {
+          "bytes": 2223360,
+          "path": "results/sigma_v19db_bullet_velocity_combination/frozen_products/BULLET_primary8000_region043/BULLET_primary8000_region043_src.rmf",
+          "role": "source_rmf",
+          "sha256": "e2c50c7fde33ca23b721522424865f339fbfa51331a30187dd6cb2e7732c7fb0"
+        }
+      ],
+      "root_bin_id": 315
+    }
+  ],
+  "runner_sha256": "aeb92be4afd2e399c5a474b5fa5c5fcc930ba3e9917e1e13e7b0ec3e8e455149",
+  "status": "bullet_primary_velocity_region_combination_passed",
+  "temperature_abundance_redshift_or_velocity_fitted": false
+}

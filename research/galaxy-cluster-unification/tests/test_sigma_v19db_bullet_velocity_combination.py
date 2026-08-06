@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -7,6 +8,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "sigma_v19db_bullet_velocity_combination.json"
 RUNNER = ROOT / "scripts" / "run_sigma_v19db_bullet_velocity_combination.py"
+OUTPUT = ROOT / "results" / "sigma_v19db_bullet_velocity_combination"
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def load_runner():
@@ -60,3 +66,25 @@ def test_runner_contains_no_spectral_fit_engine() -> None:
     source = RUNNER.read_text(encoding="utf-8").lower()
     for forbidden in ("sherpa", "xspec", "xsapec", "xsapec", "fit_spectrum("):
         assert forbidden not in source
+
+
+def test_terminal_combination_is_current_and_exact() -> None:
+    report = json.loads((OUTPUT / "report.json").read_text(encoding="utf-8"))
+    assert report["status"] == "bullet_primary_velocity_region_combination_passed"
+    assert report["runner_sha256"] == sha256(RUNNER)
+    assert report["config_sha256"] == sha256(CONFIG)
+    assert all(report["gates"].values())
+    assert all(report["equivalence_pilot"]["gates"].values())
+    assert max(
+        item["relative_l1_difference"]
+        for item in report["equivalence_pilot"]["forward_folds"].values()
+    ) <= 1e-8
+    assert len(report["regions"]) == 43
+    assert sum(item["expected_full_pha_source_counts"] for item in report["regions"]) == 674283
+    assert sum(item["combined_full_pha_source_counts"] for item in report["regions"]) == 674283
+    products = [product for region in report["regions"] for product in region["products"]]
+    assert len(products) == 172
+    for product in products:
+        path = ROOT / product["path"]
+        assert path.stat().st_size == product["bytes"]
+        assert sha256(path) == product["sha256"]

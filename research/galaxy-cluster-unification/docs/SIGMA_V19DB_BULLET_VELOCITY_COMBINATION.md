@@ -1,5 +1,33 @@
 # Sigma V19DB Bullet velocity-region combination
 
+## Outcome
+
+The frozen Bullet primary combination passes every registered gate. All 43
+regions now have an ungrouped source PHA, associated blank-sky background, ARF
+and RMF suitable for the already-frozen two-temperature reproduction.
+
+| Audit | Result |
+|---|---:|
+| Regions combined | 43 / 43 |
+| Source-only bins used exactly once | 366 / 366 |
+| Primary response cells used exactly once | 3,483 / 3,483 |
+| Full-PHA source counts, expected / combined | 674,283 / 674,283 |
+| Regions with exact source-count conservation | 43 / 43 |
+| Regions with exact PHA response links | 43 / 43 |
+| Frozen response-aware products | 172 |
+| Frozen product bytes | 103,066,560 |
+
+The direct-versus-hierarchical pilot passed. Its largest relative L1
+forward-fold difference was `5.645841956611248e-9`, below the frozen `1e-8`
+gate. The Fe-line proxy difference was `3.966974953036414e-9`. Source counts,
+the source exposure, and the ARF/RMF grids also passed their exact or frozen
+tolerance gates.
+
+The terminal report SHA-256 is
+`25104d0a4f7840e3c25b7b2eda99ff6186c9ef3b668af8695289d422a984e4aa`.
+This pass authorizes the Bullet spectral reproduction; it is not a velocity or
+gravity result.
+
 ## Payload-blind freeze
 
 V19DB is frozen after the committed V19DA source-only preflight and before any
@@ -44,8 +72,8 @@ L1 difference must be at most `1e-8`.
 
 ## Claim boundary
 
-This stage verifies deterministic response-aware spectral assembly. It does
+This stage verified deterministic response-aware spectral assembly. It did
 not fit or inspect a temperature, abundance, redshift or velocity. It cannot
 admit signed gas current, select a Sigma source, change a gravity equation or
-authorize Abell 2146 access. Only a complete combination pass authorizes the
+authorize Abell 2146 access. The complete combination pass authorizes only the
 already-frozen Bullet spectral reproduction.
