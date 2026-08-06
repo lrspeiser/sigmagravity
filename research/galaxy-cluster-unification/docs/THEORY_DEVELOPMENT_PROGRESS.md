@@ -1,5 +1,21 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DB Bullet combination freeze
+
+The Bullet-only response-combination runner is now hash-frozen after the
+committed V19DA preflight and before opening any new PHA channel or response
+array. Its payload-blind execution plan passes: the 43 frozen primary regions
+partition all 366 Bullet source bins and all 3,483 response cells exactly once
+across the nine primary VFAINT observations. ObsID 554, every Abell 2146
+product, every spectral outcome and all lensing/gravity/action payloads remain
+sealed.
+
+V19DB will first require a direct-versus-observation-hierarchical response
+forward-fold agreement of `1e-8` on the lowest deterministic group ID. A pass
+then authorizes the remaining response-aware regional combinations, with exact
+full-PHA source-count conservation, but still no spectral fit. See
+[`SIGMA_V19DB_BULLET_VELOCITY_COMBINATION.md`](SIGMA_V19DB_BULLET_VELOCITY_COMBINATION.md).
+
 ## 2026-08-06 Sigma V19DA Chandra velocity preregistration
 
 The post-Resolve direct-velocity route is now frozen and its source-only

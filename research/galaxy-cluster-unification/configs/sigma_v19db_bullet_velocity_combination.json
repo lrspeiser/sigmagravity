@@ -1,0 +1,94 @@
+{
+  "protocol_version": "SIGMA-V19DB-BULLET-VELOCITY-COMBINATION-1.0.0",
+  "freeze_state": "frozen_after_committed_v19da_preflight_before_any_v19db_pha_payload_access",
+  "purpose": "Build response-aware ungrouped Chandra spectra for the 43 source-only Bullet primary regions without fitting a temperature, abundance, redshift, velocity, source invariant, gravity formula or action.",
+  "claim_boundary": "This stage verifies deterministic spectral combination and response transport only. It cannot establish an ICM velocity field or validate Sigma Gravity.",
+  "parents": {
+    "v19da_commit": "e710714ddaa4803398a835f47238200268d9d1f6",
+    "v19da_config": {
+      "path": "configs/sigma_v19da_chandra_icm_velocity_preregistration.json",
+      "sha256": "0a489feb3a1609f89711c83fc31ff4798fde6bb0558a531fe4bc634e644cfe64"
+    },
+    "v19da_preflight_report": {
+      "path": "results/sigma_v19da_chandra_icm_velocity_preflight/report.json",
+      "sha256": "7d0417b4af630d00ab0bbee1573b707fcafc6bc1882c6630c1050e39a3ba3c0a",
+      "required_decision": "passed_target_sealed_chandra_velocity_preflight"
+    },
+    "frozen_region_groups": {
+      "path": "results/sigma_v19da_chandra_icm_velocity_preflight/frozen_region_groups.csv",
+      "sha256": "335c650e58658745212c5340c1f74c8c72356286cff37171fb16b497b2b47ff2"
+    },
+    "validated_cell_index": {
+      "path": "results/sigma_v19cx_bullet_hierarchical_recovery/validated_cell_index.csv",
+      "sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+    },
+    "unified_product_index": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+      "sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4"
+    },
+    "v19cw_config": {
+      "path": "configs/sigma_v19cw_observation_hierarchy_equivalence.json",
+      "sha256": "044a9332a845490a67f6bbb5487085428d9babfa156aed476a1a8f799da21365"
+    },
+    "v19cw_runner": {
+      "path": "scripts/run_sigma_v19cw_observation_hierarchy_equivalence.py",
+      "sha256": "ad0c91414e1b59fb908c5b252fbb322e83459899bff29c8e50fd1e3b6a3f64e2"
+    },
+    "v19cw_report": {
+      "path": "results/sigma_v19cw_observation_hierarchy_equivalence/report.json",
+      "sha256": "d96e5aeaf9ff09522f97942b2cce0186d2dbab55d4cfedad025d04c62f4bff54",
+      "required_status": "observation_hierarchy_equivalent_and_bullet_recovery_may_be_frozen"
+    }
+  },
+  "workload": {
+    "cluster": "BULLET",
+    "branch": "primary_8000",
+    "regions": 43,
+    "source_bins": 366,
+    "response_cells": 3483,
+    "obsids": [3184, 4984, 4985, 4986, 5355, 5356, 5357, 5358, 5361],
+    "excluded_primary_obsids": [554],
+    "region_equivalence_pilot_group_id": 1,
+    "pilot_selection_rule": "lowest deterministic group_id in the already-frozen source-only primary manifest"
+  },
+  "hierarchy": {
+    "partition_key": "obsid",
+    "first_level_method": "sum",
+    "final_method": "sum",
+    "bscale_method": "asca",
+    "exp_origin": "pha",
+    "intermediate_rmf_threshold": 0.0,
+    "final_rmf_threshold": 1e-06,
+    "reason": "Preserve the V19CW direct-equivalent observation hierarchy: source/background sufficient statistics and responses combine within ObsID, only the final RMF is sparsified."
+  },
+  "gates": {
+    "all_366_bins_partitioned_exactly_once": true,
+    "all_3483_primary_cells_partitioned_exactly_once": true,
+    "every_input_product_matches_frozen_size_and_sha256": true,
+    "full_pha_source_counts_conserved_exactly_per_region": true,
+    "source_background_arf_rmf_exist_and_links_are_exact": true,
+    "direct_hierarchical_pilot_source_counts_exact": true,
+    "direct_hierarchical_pilot_forward_fold_relative_l1_at_most": 1e-08,
+    "no_temperature_abundance_redshift_or_velocity_fit": true
+  },
+  "authorization": {
+    "open_bullet_primary_pha_and_response_after_this_combiner_is_hash_frozen": true,
+    "combine_bullet_primary_8000_regions": true,
+    "combine_bullet_robustness_or_obsid554": false,
+    "open_abell2146": false,
+    "fit_temperature_abundance_redshift_or_velocity": false,
+    "open_lensing_halo_or_gravity_payload": false,
+    "derive_or_change_action_or_gravity_constants": false
+  },
+  "runtime": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "ciao_environment": "/home/henry/miniforge3/envs/sigma-ciao-4.18",
+    "parallel_regions": 8,
+    "scratch_root": "/home/henry/sigma-v19db-bullet-velocity-combination/v100",
+    "result_root": "results/sigma_v19db_bullet_velocity_combination"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19db_bullet_velocity_combination.py",
+    "runner_sha256": "aeb92be4afd2e399c5a474b5fa5c5fcc930ba3e9917e1e13e7b0ec3e8e455149"
+  }
+}

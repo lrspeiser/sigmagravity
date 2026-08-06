@@ -1,0 +1,14 @@
+{
+  "abell2146_payload_opened": false,
+  "config_sha256": "71372344af5d8249d59961aa9f86b94f8c976594b2f37cf1bcada156fffd7d27",
+  "generated_utc": "2026-08-06T18:07:40.301646+00:00",
+  "lensing_halo_gravity_or_action_payload_opened": false,
+  "pha_or_response_payload_opened": false,
+  "protocol_version": "SIGMA-V19DB-BULLET-VELOCITY-COMBINATION-1.0.0",
+  "regions": 43,
+  "response_cells": 3483,
+  "runner_sha256": "aeb92be4afd2e399c5a474b5fa5c5fcc930ba3e9917e1e13e7b0ec3e8e455149",
+  "source_bins": 366,
+  "status": "v19db_payload_blind_execution_plan_passed",
+  "temperature_abundance_redshift_or_velocity_fitted": false
+}
