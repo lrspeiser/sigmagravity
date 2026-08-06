@@ -7707,7 +7707,7 @@
         "RAR-EMPIRICAL",
         "MOND-ALGEBRAIC"
       ],
-      "sha256": "bda34a4228e9c22af3d17dfd8080610e5b22cee0765022007efce203634a4f32"
+      "sha256": "5c319d66670c8b67e274c37c46ea4ef398ea85a7d606a55ff417375f3b4f532b"
     },
     {
       "config": "configs/sigma_v19d_member_catalog_extraction.json",

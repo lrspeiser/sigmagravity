@@ -115,7 +115,7 @@
     "freezer": "scripts/freeze_sigma_v19cx_bullet_hierarchical_recovery.py",
     "freezer_sha256": "b5f7b3cd8b80ea5eac586d83caa76d8cde756acd5fbf863e2f567bd63bf3dfc2",
     "runner": "scripts/run_sigma_v19cx_bullet_hierarchical_recovery.py",
-    "runner_sha256": "59a86c69c778dbd1e88944c0db513ee8493e9b2daccfb837f67d6f103b4c6ae7"
+    "runner_sha256": "2f3a8d6eb999dd38d90692ba0a4a186e96cd2ca0ff3c3493c945a5901cd4f0ee"
   },
   "inherited_section_sha256": {
     "combination": "a556ed47c000d5529e26be9ca5200aa2405238091ddf5286df72383c0601500c",

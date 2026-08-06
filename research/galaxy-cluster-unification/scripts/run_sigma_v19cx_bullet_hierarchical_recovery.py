@@ -157,7 +157,7 @@ def reuse_direct(label: str, cells: list[dict[str, Any]], output: Path, config: 
         links=links,
         remediation={
             "mode": "hash_frozen_direct_reference",
-            "source_stack_sha256": v19x2.adapter.sha256(ROOT / config["parents"]["validated_cell_index"]),
+            "source_stack_sha256": spec["source_grouped"]["sha256"],
             "cell_threshold": int(config["runtime_remediation"]["maximum_direct_stack_cells"]),
         },
     )

@@ -1,0 +1,18 @@
+{
+  "action_derived": false,
+  "config_sha256": "bda34a4228e9c22af3d17dfd8080610e5b22cee0765022007efce203634a4f32",
+  "execution_exception": "KeyError: 'validated_cell_index'",
+  "full_494_region_combination_and_fit_authorized": false,
+  "gates": {
+    "execution_completed": false
+  },
+  "generated_utc": "2026-08-06T00:49:14.739661+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "protocol_version": "SIGMA-V19CX-BULLET-HIERARCHICAL-RECOVERY-1.0.0",
+  "replacement_cluster_lensing_target_opened": false,
+  "runner_sha256": "59a86c69c778dbd1e88944c0db513ee8493e9b2daccfb837f67d6f103b4c6ae7",
+  "scientific_temperature_map_claimed": false,
+  "status": "bullet_hierarchical_recovery_execution_failed_closed",
+  "thermal_stress_constructed": false,
+  "v19bq_or_v19bs_run": false
+}
