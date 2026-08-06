@@ -1,0 +1,87 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-RELATIVE-FE-LINE-SHIFT-1.0.0",
+  "status": "frozen after the count-only region gate passed but before reading, histogramming, plotting, or fitting any A2319 science energy value",
+  "purpose": "Run a response-independent, leave-one-region-out Fe-K relative-shift diagnostic on the seven frozen detector regions before committing to expensive response and background production.",
+  "claim_boundary": "This is a calibration and sign-topology diagnostic, not a response-aware plasma measurement, not an SSM sky-region result, and not evidence sufficient to admit a Sigma source term.",
+  "parents": {
+    "readiness_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_region_readiness.json",
+    "readiness_report_sha256": "84452380c22ba22f415464875cd0278bf61c67382c43eca0f5cbc12a31087fc1"
+  },
+  "paths": {
+    "readiness_scratch_root": "tmp/sigma_v19cy_a2319_region_readiness",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_relative_fe_line_shift.json",
+    "plot": "results/sigma_v19cy_direct_icm_velocity_evidence/development_relative_fe_line_shift.png"
+  },
+  "regions": [
+    {"pointing": "P1", "name": "a", "branches": ["000101_open_0_cross_obsid", "000101_open_1_cross_obsid"]},
+    {"pointing": "P1", "name": "b", "branches": ["000101_open_0_cross_obsid", "000101_open_1_cross_obsid"]},
+    {"pointing": "P1", "name": "d", "branches": ["000101_open_0_cross_obsid", "000101_open_1_cross_obsid"]},
+    {"pointing": "P2", "name": "b_prime", "branches": ["000102_open_0_cross_obsid"]},
+    {"pointing": "P2", "name": "c_prime", "branches": ["000102_open_0_cross_obsid"]},
+    {"pointing": "P2", "name": "d_prime", "branches": ["000102_open_0_cross_obsid"]},
+    {"pointing": "P2", "name": "e_prime", "branches": ["000102_open_0_cross_obsid"]}
+  ],
+  "energy_column": "EPI2",
+  "windows": {
+    "primary_fe_k": {"minimum_eV": 6200.0, "maximum_eV": 6700.0, "bin_width_eV": 1.0, "reference_energy_eV": 6450.0},
+    "he_like": {"minimum_eV": 6220.0, "maximum_eV": 6400.0, "bin_width_eV": 1.0, "reference_energy_eV": 6350.0},
+    "h_like": {"minimum_eV": 6500.0, "maximum_eV": 6680.0, "bin_width_eV": 1.0, "reference_energy_eV": 6590.0}
+  },
+  "empirical_model": {
+    "template": "for each target region, sum only the other six histograms; subtract a broad Gaussian-smoothed continuum from a narrow Gaussian-smoothed spectrum; clip the residual at zero and normalize it",
+    "narrow_smoothing_sigma_eV": 1.5,
+    "broad_continuum_sigma_eV": 30.0,
+    "target_model": "positive shifted leave-one-out line template plus a positive exponential continuum",
+    "fit_statistic": "Poisson deviance",
+    "shift_bounds_eV": [-12.0, 12.0],
+    "initial_shifts_eV": [-5.0, 0.0, 5.0],
+    "continuum_log_slope_bounds": [-2.0, 2.0],
+    "velocity_sign": "positive fitted energy shift is a blueshift and therefore negative line-of-sight velocity",
+    "systemic_reference": "subtract the unweighted mean fitted velocity of the seven detector regions separately in every window",
+    "published_values_enter_optimizer": false
+  },
+  "uncertainty": {
+    "method": "Poisson parametric bootstrap of all seven histograms with leave-one-region-out templates rebuilt on every draw",
+    "draws": 150,
+    "seed": 1902319,
+    "minimum_success_fraction": 0.9,
+    "reported_interval": "16th to 84th percentile",
+    "pointing_energy_systematic_eV": {"P1": 0.51, "P2": 0.33},
+    "combine_statistical_and_systematic": "quadrature for conservative per-region diagnostic errors; pointing correlations are retained as a limitation"
+  },
+  "published_no_ssm_benchmark_kms": {
+    "source": "A2319 paper Appendix A detector-region table; benchmark is read only after candidate fits are complete and never enters optimization",
+    "a": -60.0,
+    "b": -76.3,
+    "d": 13.8,
+    "b_prime": -140.0,
+    "c_prime": 20.1,
+    "d_prime": -46.0,
+    "e_prime": 58.6
+  },
+  "terminal_gate": {
+    "minimum_primary_window_events_per_region": 100,
+    "require_all_primary_and_robustness_fits_converged_inside_shift_bounds": true,
+    "minimum_bootstrap_success_fraction": 0.9,
+    "maximum_centered_rmse_vs_published_kms": 100.0,
+    "minimum_spearman_vs_published": 0.6,
+    "minimum_centered_sign_agreement_fraction": 0.7142857142857143,
+    "required_most_blueshifted_region": "b_prime",
+    "required_most_redshifted_region": "e_prime",
+    "minimum_constant_velocity_rejection_sigma": 3.0,
+    "maximum_total_uncertainty_kms": 200.0,
+    "pass_rule": "Authorize full response-aware detector-region spectral production only if every primary gate passes. He-like and H-like results are mandatory diagnostics but do not have to agree because the published data already suggest phase-dependent motion in e_prime."
+  },
+  "authorization": {
+    "read_and_histogram_development_epi2": true,
+    "fit_frozen_empirical_relative_shift_model": true,
+    "compare_only_after_fit_to_published_detector_velocities": true,
+    "generate_response_or_background": false,
+    "fit_bapec_or_claim_absolute_velocity": false,
+    "construct_ssm_sky_region_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  }
+}
