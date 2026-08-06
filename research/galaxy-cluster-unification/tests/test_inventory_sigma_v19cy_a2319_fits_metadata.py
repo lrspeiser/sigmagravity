@@ -1,4 +1,5 @@
 import inspect
+import json
 import sys
 from pathlib import Path
 
@@ -33,3 +34,24 @@ def test_scalar_preserves_json_scalars_and_stringifies_other_values() -> None:
     assert metadata.scalar(3) == 3
     assert metadata.scalar("gain") == "gain"
     assert metadata.scalar(Path("sigma")) == "sigma"
+
+
+def test_terminal_metadata_inventory_passes_without_loading_data() -> None:
+    report_path = (
+        ROOT
+        / "results"
+        / "sigma_v19cy_direct_icm_velocity_evidence"
+        / "development_fits_metadata_inventory.json"
+    )
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["status"] == (
+        "a2319_development_fits_metadata_and_schemas_inventoried_without_loading_data"
+    )
+    assert report["files"] == 87
+    assert report["compressed_bytes"] == 7_661_862_987
+    assert report["hdus"] == 452
+    assert report["every_hdu_data_object_remained_unloaded"]
+    assert not report["table_or_image_value_read"]
+    assert not report["scientific_fit_performed"]
+    assert not report["validation_or_holdout_accessed"]
+    assert report["authorization"]["freeze_gain_reconstruction_protocol"]

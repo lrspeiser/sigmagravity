@@ -132,6 +132,29 @@ protocol. It does not authorize inspecting gain/event arrays, fitting a
 spectrum or velocity, opening A3667/A754, or using lensing, halo, gravity, or
 action targets.
 
+### FITS metadata-only closure
+
+Before authorizing row-level gain work, a frozen structural inventory opened
+only FITS headers and column schemas. It covered 87 development files totaling
+7,661,862,987 compressed bytes and 452 HDUs. Astropy reported that every HDU
+data object remained unloaded; the runner never accessed an HDU `.data`
+property. The terminal inventory SHA-256 is
+`90f9e075cc80536bc0c104c25533cd6dc9a3570312f3cd7c58abdaa4c6524c1e`.
+
+The metadata establishes that each Fe-55 and calibration-pixel gain history
+has a `Drift_energy` table with the required `TIME`, `PIXEL`, fitted/average
+correction, temperature, width, exposure, event-count, and fit-quality fields.
+The raw table sizes exceed the 2,294 Fe-55 and 471 calibration-pixel solutions
+summarized in the official combined gain report, so raw row count cannot be
+used as an acceptance result; the later protocol must apply the exact time,
+pixel, ADR, SAA, fit-quality, and science-interval rules.
+
+Each science cleaned event file contains roughly 1.25 million event rows and
+33 general GTIs. Each science open-filter file has zero `GTIOPEN1` intervals
+and two `GTIOPEN2` intervals. The ADR files also expose separate on/off GTI
+extensions. These are schemas and row counts only: no time boundary, gain
+value, event energy, spectrum, or velocity has yet been read.
+
 ## The new observable source terms
 
 The signed projected gas current is
