@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.1",
-  "status": "corrected and refrozen after version 1.0.0 prepared exact development GTIs and region files but logged that punlearn could not see the system parameter directory because PFILES used a colon instead of the HEASoft user/system semicolon; no spectrum, NXB, response, energy distribution, velocity, validation, or holdout target was generated or opened",
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.2",
+  "status": "corrected and refrozen before response generation after the installed rslmkrmf interface audit exposed a hidden 2019 CALDB-selection time default; version 1.0.2 explicitly uses each branch event DATE-OBS, records the transitive ARF executables, and retains the already-passed exact GTIs, detector regions, and Chandra image without opening or generating any XRISM spectrum, NXB, response, velocity, validation, or holdout result",
   "purpose": "Reproduce the seven published A2319 detector-region velocities on the three strictly bracketed commissioning fragments using current official response and NXB tools, then decide whether the signed ICM velocity field is sufficiently identified to become a development-only Sigma source diagnostic.",
   "parents": {
     "calibration_report": {
@@ -18,6 +18,10 @@
     "environment_report": {
       "path": "results/sigma_v19cy_direct_icm_velocity_evidence/development_environment_report.json",
       "sha256": "b9ded07723d38b7444f5bfb1abbd54337533b8c8c11fe0da043d9583d1cbd394"
+    },
+    "chandra_image_report": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_chandra_image.json",
+      "sha256": "41952d132764903e327e7c243f454a57f930176281aa1cf111b243eb59b760d2"
     }
   },
   "runtime": {
@@ -40,7 +44,11 @@
       "xspec": "9df7e051d71255fc0542571a4d66e3146cbbb72768d64b1099c844161469440c",
       "dmcopy": "fa29429d35eeead096792841373cade277202f4ce9a2e131c1511cb388fe8b14",
       "merge_obs": "799afe54687d5328a7a16d584dfb844979a9c384d9f5ee63e8be758eda0f0488",
-      "reproject_obs": "af5ff74919d36944c63b0b640d502f3a58185ee16695ed0c751a11e2a5ca74ab"
+      "reproject_obs": "af5ff74919d36944c63b0b640d502f3a58185ee16695ed0c751a11e2a5ca74ab",
+      "xrtraytrace": "8cd5e27c2855f1976ac6942cadfbc5dc35366f4ff84c8d5c61d82a80e4a6999e",
+      "heasim": "9f79fdf39624b69fc7383f8eeb50a41cfe34d7f6b72e7aadf138ea3a7a8c6145",
+      "xaxmaarfgen": "960ca47ff3776feb63da88610b641bf9eac44fa53463ffd64176b9e5de5afb59",
+      "aharfgen": "7efc9cb3a8d3f1722b10b3902c72b9d996c5f767484eb061faa68d1e18846ad6"
     }
   },
   "paths": {
@@ -56,6 +64,19 @@
     "root_cause": "PFILES used a colon between the writable user directory and read-only system directory; HEASoft requires a semicolon for that boundary",
     "correction": "replace only the separator, rerun from an empty response-product root, and require punlearn stderr to be clean",
     "science_energy_distribution_summarized_or_fit": false,
+    "response_or_background_generated": false,
+    "velocity_fit_performed": false,
+    "validation_or_holdout_accessed": false
+  },
+  "pre_response_interface_amendment": {
+    "previous_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.1",
+    "discovered_by": "installed HEASoft 6.36 rslmkrmf.par and xaarfgen.html audit after the Chandra image gate and before any XRISM response or spectrum generation",
+    "problem": "rslmkrmf exposes a hidden time parameter whose static default is 2019-01-01T00:00:00; leaving it implicit would make CALDB response selection depend on an unrelated software default",
+    "correction": "set rslmkrmf time to the DATE-OBS string already recorded in each corrected branch event header; record every transitive executable invoked internally by xaarfgen",
+    "scientific_inputs_changed": false,
+    "prepared_gti_or_region_bytes_changed": false,
+    "chandra_image_changed": false,
+    "xrism_energy_distribution_read_or_fit": false,
     "response_or_background_generated": false,
     "velocity_fit_performed": false,
     "validation_or_holdout_accessed": false
@@ -171,11 +192,12 @@
     "regionfile": "NONE",
     "pixlist": "comma-separated runs using hyphens, never colons",
     "input": "branch-specific final-GTI rmf_grade_weight event file",
+    "caldb_time": "exact DATE-OBS string from the branch corrected event header, passed explicitly to rslmkrmf time",
     "required_products": 10
   },
   "attitude_and_arf_protocol": {
     "xaexpmap": {"instrume": "RESOLVE", "badimgfile": "NONE", "outmaptype": "EXPOSURE", "delta_arcmin": 0.25, "numphi": 4, "maskcalsrc": true, "pixel_gti": "observation px1000 exposure GTI"},
-    "xaarfgen": {"telescop": "XRISM", "instrume": "RESOLVE", "regmode": "DET", "sourcetype": "IMAGE", "erange": "2.0 10.5 0.5 7.0", "numphoton": 600000, "minphoton": 100, "seed": 7, "rslgapreg": false, "calibration_files": "CALDB", "required_products": 10},
+    "xaarfgen": {"telescop": "XRISM", "instrume": "RESOLVE", "regmode": "DET", "sourcetype": "IMAGE", "erange": "2.0 10.5 0.5 7.0", "numphoton": 600000, "minphoton": 100, "seed": 7, "rslgapreg": false, "source_ra_deg": 290.299, "source_dec_deg": 43.9345, "xrtevtfile": "one branch-specific raytrace file created internally when absent and reused only across detector regions of that same branch", "calibration_files": "CALDB", "required_products": 10},
     "detector_region_representation": "one DS9 physical box of width and height 1 centered on each selected integer DETX,DETY pixel; validate the selected PIXEL set against the branch event before raytracing",
     "raytrace_reuse": "A branch-specific IMAGE raytrace may be reused for all detector regions of that branch only when the exact Chandra image, exposure map, energy range, source coordinates, photon count, and seed match."
   },

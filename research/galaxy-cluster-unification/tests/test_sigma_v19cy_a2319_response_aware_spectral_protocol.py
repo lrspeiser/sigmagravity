@@ -23,10 +23,13 @@ def sha256(path: Path) -> str:
 
 def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     config = load()
-    assert config["protocol_version"].endswith("1.0.1")
+    assert config["protocol_version"].endswith("1.0.2")
     assert "corrected and refrozen" in config["status"]
     assert ";" in config["runtime"]["pfiles"]
     assert config["closed_failure_history"]["response_or_background_generated"] is False
+    amendment = config["pre_response_interface_amendment"]
+    assert amendment["response_or_background_generated"] is False
+    assert amendment["validation_or_holdout_accessed"] is False
     authorization = config["authorization"]
     assert authorization["read_A2319_development_energy_columns"] is True
     assert authorization["access_A3667_validation"] is False
@@ -74,6 +77,7 @@ def test_response_and_background_settings_match_frozen_science_scope():
     config = load()
     assert config["rmf_protocol"]["whichrmf"] == "L"
     assert config["rmf_protocol"]["resolist"] == "0"
+    assert "DATE-OBS" in config["rmf_protocol"]["caldb_time"]
     assert config["nxb_protocol"]["sortcol"] == "CORTIME"
     assert config["nxb_protocol"]["sortbin"] == "6,8,10,12,99"
     assert config["nxb_protocol"]["timefirst_days"] == 300
@@ -89,6 +93,10 @@ def test_response_and_background_settings_match_frozen_science_scope():
     }
     assert config["attitude_and_arf_protocol"]["xaarfgen"]["seed"] == 7
     assert config["attitude_and_arf_protocol"]["xaarfgen"]["numphoton"] == 600000
+    assert config["attitude_and_arf_protocol"]["xaarfgen"]["source_ra_deg"] == pytest.approx(290.299)
+    assert config["attitude_and_arf_protocol"]["xaarfgen"]["source_dec_deg"] == pytest.approx(43.9345)
+    for executable in ("xrtraytrace", "heasim", "xaxmaarfgen", "aharfgen"):
+        assert len(config["runtime"]["executables_sha256"][executable]) == 64
 
 
 def test_fit_is_one_response_aware_physical_model_with_two_robustness_checks():
