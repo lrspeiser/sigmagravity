@@ -1,0 +1,102 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-CALIBRATION-FAILURE-DIAGNOSIS-1.0.0",
+  "status": "frozen after the calibration line-shape gate rejected all three candidates, but before any time-resolved candidate spectrum or continuous-calibration control spectrum was inspected",
+  "purpose": "Use calibration-pixel data only to distinguish reference-offset, temporal-slope, within-branch-curvature, branch-discontinuity, and line-fitter/control failures before freezing any replacement gain reconstruction.",
+  "parents": {
+    "line_shape_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_calibration_line_shape.json",
+    "line_shape_report_sha256": "868ed6bbe284b936312470b1bae7474c32881ade1bf94f9c935f6913269a1307",
+    "application_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_calibration_application_candidates.json",
+    "application_report_sha256": "2fe0daffdf6f6eac722d375f9420ba7f14ba6a28d04bf40a974eceb3f6b173e7",
+    "topology_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_reconstruction_topology.json",
+    "topology_report_sha256": "f5fcdfe793681d228fa78ab84ecb29d5e823bfdc7de48f98a340594ccbe4624e",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f"
+  },
+  "paths": {
+    "raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "application_scratch_root": "tmp/sigma_v19cy_a2319_calibration_application",
+    "line_template_scratch": "tmp/sigma_v19cy_a2319_calibration_line_shape/xa_gen_linefit_20190101vx001.fits",
+    "scratch_root": "tmp/sigma_v19cy_a2319_calibration_failure_diagnosis",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_calibration_failure_diagnosis.json"
+  },
+  "diagnosed_candidate": "branch_linear_common_mode",
+  "time_resolved_test": {
+    "bins_per_branch": 4,
+    "bin_rule": "four equal elapsed-time intervals between each frozen branch start and stop; first three are left-closed/right-open and the last is closed at both ends",
+    "minimum_events_in_fit_window_per_bin": 1000,
+    "fit_branch_total_also": true
+  },
+  "continuous_control": {
+    "history_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_pxcal.ghf.gz",
+    "calibration_event_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_a0pxcal000_uf.evt.gz",
+    "event_selection": "reselect each frozen branch from the hash-verified raw event file with TIME in the branch, PIXEL==12, and ITYPE==0",
+    "output_template": "{branch}/continuous_pxcal.evt",
+    "apply_separately_to_all_seven_frozen_branches": true,
+    "combine_control_branches_by_obsid_for_final_fit": true,
+    "maximum_absolute_centroid_shift_ev": 0.2,
+    "maximum_absolute_fwhm_difference_from_published_ev": 0.2
+  },
+  "fit": {
+    "inherit_exact_line_template_bins_statistic_bounds_and_optimizer_from": "configs/sigma_v19cy_a2319_calibration_line_shape_gate.json",
+    "energy_column": "EPI2"
+  },
+  "diagnostic_thresholds": {
+    "material_centroid_change_ev": 0.1,
+    "slope_flag": "absolute difference between fourth- and first-quartile fitted centroid is at least 0.1 eV",
+    "curvature_flag": "maximum absolute deviation of quartile centroids from the line joining the first and fourth quartile midpoints is at least 0.1 eV",
+    "branch_discontinuity_flag": "range of total fitted branch centroids within the same ObsID is at least 0.1 eV",
+    "reference_offset_flag": "the combined candidate centroid differs from its published target by at least 0.1 eV while no slope, curvature, or branch-discontinuity flag is present for that ObsID"
+  },
+  "runtime": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "heasoft_prefix": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "caldb_root": "/home/henry/.local/share/sigmagravity-xrism/caldb",
+    "rslpha2pi": {
+      "calcpi": "yes",
+      "calcupi": "no",
+      "gainfile": "CALDB",
+      "tempidx": -1,
+      "pxphaoffset": 0,
+      "secphacol": "PHA2",
+      "addepicol": "EPI2",
+      "method": "FIT",
+      "itypecol": "ITYPE",
+      "binwidth": 0.5,
+      "offset": 0.5,
+      "tlmax": 59999,
+      "gapdt": -1,
+      "ntemp": 3,
+      "writetemp": "yes",
+      "extrap": "no",
+      "randomize": "yes",
+      "seed": 7,
+      "clobber": "yes",
+      "chatter": 2,
+      "history": "yes"
+    }
+  },
+  "decision_rules": {
+    "control_failure": "If any continuous-control ObsID violates either control tolerance, stop and audit the line fitter or official continuous gain application before proposing another sparse-gain reconstruction.",
+    "control_pass": "If all controls pass, report every diagnostic flag and authorize freezing exactly one calibration-only replacement reconstruction targeted to the observed failure mode; do not choose or execute that reconstruction in this protocol.",
+    "no_cluster_access": "No outcome authorizes reading or recalibrating a cluster sky event."
+  },
+  "authorization": {
+    "read_existing_candidate_calibration_times_and_epi2": true,
+    "fit_time_resolved_calibration_pixel_line_shapes": true,
+    "read_and_apply_continuous_calibration_pixel_gain_history_to_calibration_pixel_events": true,
+    "fit_continuous_control_calibration_pixel_line_shapes": true,
+    "freeze_one_replacement_calibration_protocol_after_control_pass": true,
+    "read_cluster_sky_event_rows": false,
+    "apply_gain_to_cluster_sky_events": false,
+    "fit_cluster_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "This protocol diagnoses an X-ray energy-calibration nuisance only.",
+    "It cannot select evidence for a dynamic Sigma source, change the gravity theory, or use a cluster spectrum.",
+    "The calibration control and time-resolved fits remain development-only."
+  ]
+}
