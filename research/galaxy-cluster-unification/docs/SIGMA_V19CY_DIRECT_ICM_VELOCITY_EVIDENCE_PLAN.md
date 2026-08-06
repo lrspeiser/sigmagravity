@@ -177,11 +177,18 @@ Visual and text inspection of the official `000100000` Resolve energy-scale
 report then supplied the missing accounting scope. The report-specific table
 contains 2,294 Fe-55 and 471 calibration-pixel solutions with zero failures,
 and its methodology requires gain-history solutions to exclude ADR-recycle
-and SAA intervals. The earlier pooled comparison combined four ObsIDs and did
-not apply that documented report rule. A separate closure protocol must now be
-frozen to test the exact 000100000-per-report, outside-ADR/SAA accounting. No
-gain interpolation, event correction, spectrum, or velocity is authorized
-until that independently frozen closure is executed.
+and SAA intervals. The earlier pooled comparison combined four ObsIDs and
+treated the continuous calibration-pixel history as part of the same
+denominator. The separately frozen closure instead tested the report's exact
+intermittent `000100000` history and passed: its 2,765 rows split into 2,294
+non-pixel-12 Fe-55 solutions and 471 pixel-12 solutions, every per-pixel count
+matched Table 1, and zero solution times overlapped any of the 45 SAA or four
+ADR intervals. The terminal report SHA-256 is
+`22b3022320d99f8b2617b0a2228da2976e62756aaeeb6cc8edb88f0b858ddb14`.
+
+This closes the official solution accounting and authorizes freezing a
+separate gain-reconstruction protocol. It still does not authorize gain
+interpolation, event correction, spectral fitting, or a velocity claim.
 
 ## The new observable source terms
 
