@@ -1,0 +1,131 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-OFFICIAL-GAIN-COUNT-CLOSURE-1.0.0",
+  "status": "frozen after the terminal pooled timeline audit and visual inspection of the official report, but before any corrected row-level selection was executed",
+  "purpose": "Test the official 000100000 report accounting as an exact split of the intermittent Fe-55 gain-history rows into pixel 12 and non-pixel-12 populations, and independently verify that no solution time falls inside any report-listed SAA or ADR interval.",
+  "parents": {
+    "timeline_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_timeline_evidence.json",
+    "timeline_report_sha256": "36e4b6d4ad2c18cce43e2452063f8ac16505acb8c1ad1217faa82083682b4cce",
+    "metadata_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_fits_metadata_inventory.json",
+    "metadata_report_sha256": "90f9e075cc80536bc0c104c25533cd6dc9a3570312f3cd7c58abdaa4c6524c1e",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f"
+  },
+  "paths": {
+    "raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "official_report": "documentation/000100000_resolve_energy_scale_report.pdf",
+    "intermittent_gain_history": "xrism/000100000/resolve/event_uf/xa000100000rsl_000_fe55.ghf.gz",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_official_gain_count_closure.json"
+  },
+  "official_report": {
+    "sha256": "3e1a60f49304b494b4d2b55ad0bc4eb6a2e5061f87030785b112967fe85e4cf1",
+    "visually_inspected_pages": [2, 3, 7, 14, 15, 16],
+    "accounting_page": 7,
+    "interval_pages": [14, 15],
+    "method_evidence": [
+      "The report is the official 000100000 energy-scale report.",
+      "Its Table 1 assigns 471 solutions to pixel 12 and 2294 solutions to the remaining pixels.",
+      "The report distinguishes pixel-12 entries in the intermittent FW Fe-55 history from the full continuous calibration-pixel history.",
+      "The report says no gain-history solution should fall inside an ADR or SAA GTI."
+    ]
+  },
+  "source": {
+    "obsid": "000100000",
+    "extension": "Drift_energy",
+    "allowed_scalar_columns": ["TIME", "PIXEL"],
+    "forbidden_second_history": "xrism/000100000/resolve/event_uf/xa000100000rsl_000_pxcal.ghf.gz",
+    "expected_tstart": 150782866.042249,
+    "expected_raw_rows": 2765
+  },
+  "expected_counts": {
+    "fe55_non_pixel_12": 2294,
+    "intermittent_calibration_pixel_12": 471,
+    "failed_solutions": 0,
+    "per_pixel": {
+      "0": 57,
+      "1": 55,
+      "2": 46,
+      "3": 80,
+      "4": 67,
+      "5": 58,
+      "6": 55,
+      "7": 69,
+      "8": 52,
+      "9": 47,
+      "10": 52,
+      "11": 70,
+      "12": 471,
+      "13": 80,
+      "14": 59,
+      "15": 68,
+      "16": 54,
+      "17": 44,
+      "18": 72,
+      "19": 73,
+      "20": 81,
+      "21": 64,
+      "22": 68,
+      "23": 70,
+      "24": 80,
+      "25": 62,
+      "26": 69,
+      "27": 81,
+      "28": 72,
+      "29": 65,
+      "30": 73,
+      "31": 63,
+      "32": 72,
+      "33": 64,
+      "34": 72,
+      "35": 80
+    }
+  },
+  "relative_exclusion_intervals_seconds": {
+    "saa": [
+      [-263157.04, -261663.04], [-257195.04, -255537.04],
+      [-251147.04, -249548.04], [-244935.04, -243611.04],
+      [-238768.04, -237622.04], [-232670.04, -231637.04],
+      [-226585.04, -225776.04], [-187612.04, -187457.04],
+      [-182600.04, -181325.04], [-176749.04, -175211.04],
+      [-170787.04, -169074.04], [-164670.04, -163186.04],
+      [-158455.04, -157196.04], [-152317.04, -151208.04],
+      [-146228.04, -145223.04], [-140116.04, -139428.04],
+      [-101941.04, -100997.04], [-96253.04, -94874.04],
+      [-90343.04, -88758.04], [-84380.04, -82609.04],
+      [-78200.04, -76773.04], [-71988.04, -70782.04],
+      [-65872.04, -64795.04], [-59788.04, -58838.04],
+      [-53642.04, -53082.04], [-15664.04, -14541.04],
+      [-9899.04, -8424.04], [-3937.04, -2303.04],
+      [2077.96, 3736.96], [8284.96, 9641.96],
+      [14468.96, 15630.96], [20570.96, 21616.96],
+      [26650.96, 27506.96], [32836.96, 33035.96],
+      [65669.96, 65772.96], [70681.96, 71910.96],
+      [76505.96, 78024.96], [82467.96, 84154.96],
+      [88553.96, 90082.96], [94769.96, 96054.96],
+      [100918.96, 102042.96], [107010.96, 108027.96],
+      [113109.96, 113852.96], [152014.96, 152232.96],
+      [157026.96, 157333.96]
+    ],
+    "adr": [
+      [-259415.56, -254976.56], [-148686.56, -144386.56],
+      [746.44, 5046.44], [125547.44, 129847.44]
+    ]
+  },
+  "decision_rule": "Authorize freezing a separate gain-reconstruction protocol only if the source has exactly 2765 rows, every per-pixel count matches Table 1, pixel 12 totals 471, all other pixels total 2294, and zero row times overlap the 45 SAA or four ADR intervals. Otherwise stop without opening another gain history or applying gain.",
+  "authorization": {
+    "read_time_and_pixel_from_exact_intermittent_history": true,
+    "read_continuous_calibration_pixel_history": false,
+    "read_gain_history_array_columns": false,
+    "read_event_rows_or_energies": false,
+    "apply_or_interpolate_gain": false,
+    "fit_spectrum_or_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "This test can close only the official report's gain-solution accounting and interval exclusion.",
+    "It does not validate an energy scale, choose cross-ObsID interpolation, apply gain, or authorize a velocity claim.",
+    "The continuous calibration-pixel history is deliberately sealed because it is not the denominator of Table 1."
+  ]
+}
