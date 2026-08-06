@@ -43,12 +43,16 @@ def validate_inputs(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     config = load_json(config_path)
     if config.get("protocol_version") != (
-        "SIGMA-V19CY-A2319-RELATIVE-FE-LINE-SHIFT-1.0.0"
+        "SIGMA-V19CY-A2319-RELATIVE-FE-LINE-SHIFT-1.0.1"
     ):
         raise RuntimeError("unexpected relative-line protocol")
     if config.get("status") != (
-        "frozen after the count-only region gate passed but before reading, "
-        "histogramming, plotting, or fitting any A2319 science energy value"
+        "gate-only correction frozen after version 1.0.0 completed with a false "
+        "terminal gate: the implementation checked every fit was inside the shift "
+        "bounds but omitted the already-frozen optimizer-convergence requirement; "
+        "version 1.0.1 requires both without changing any energy selection, model, "
+        "starting value, bound, uncertainty, benchmark, threshold, fitted result, "
+        "or failed scientific decision"
     ):
         raise RuntimeError("relative-line protocol is not frozen")
     parent_path = ROOT / config["parents"]["readiness_report"]
@@ -389,8 +393,8 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
             count >= int(gate_config["minimum_primary_window_events_per_region"])
             for count in primary["event_counts"].values()
         ),
-        "all_window_fits_inside_shift_bounds": all(
-            fit["inside_shift_bounds"]
+        "all_window_fits_converged_inside_shift_bounds": all(
+            fit["optimizer_success"] and fit["inside_shift_bounds"]
             for record in window_records.values()
             for fit in record["fits"].values()
         ),

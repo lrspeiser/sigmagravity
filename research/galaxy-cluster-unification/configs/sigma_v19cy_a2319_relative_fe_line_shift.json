@@ -1,6 +1,7 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-RELATIVE-FE-LINE-SHIFT-1.0.0",
-  "status": "frozen after the count-only region gate passed but before reading, histogramming, plotting, or fitting any A2319 science energy value",
+  "protocol_version": "SIGMA-V19CY-A2319-RELATIVE-FE-LINE-SHIFT-1.0.1",
+  "status": "gate-only correction frozen after version 1.0.0 completed with a false terminal gate: the implementation checked every fit was inside the shift bounds but omitted the already-frozen optimizer-convergence requirement; version 1.0.1 requires both without changing any energy selection, model, starting value, bound, uncertainty, benchmark, threshold, fitted result, or failed scientific decision",
+  "post_execution_gate_correction": "Version 1.0.0 already failed centered RMSE, Spearman ordering, sign agreement, and constant-velocity rejection. Three H-like fits also reported optimizer_success=false while remaining inside their shift bounds. The corrected gate records those convergence failures exactly as preregistered; it cannot convert the failed result into a pass.",
   "purpose": "Run a response-independent, leave-one-region-out Fe-K relative-shift diagnostic on the seven frozen detector regions before committing to expensive response and background production.",
   "claim_boundary": "This is a calibration and sign-topology diagnostic, not a response-aware plasma measurement, not an SSM sky-region result, and not evidence sufficient to admit a Sigma source term.",
   "parents": {

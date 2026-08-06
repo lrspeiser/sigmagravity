@@ -14,6 +14,10 @@ import fit_sigma_v19cy_a2319_relative_fe_line_shift as line_shift
 
 def test_frozen_relative_line_scope_and_seals() -> None:
     config, parent = line_shift.validate_inputs()
+    assert config["protocol_version"].endswith("1.0.1")
+    assert "cannot convert the failed result into a pass" in config[
+        "post_execution_gate_correction"
+    ]
     assert parent["terminal_gate_passed"]
     assert [item["name"] for item in config["regions"]] == [
         "a",
