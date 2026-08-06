@@ -57,8 +57,27 @@ def validate_inputs() -> tuple[dict[str, Any], dict[str, Any]]:
         raise RuntimeError("component report crossed its frozen boundary")
     if report.get("validation_or_holdout_accessed"):
         raise RuntimeError("sealed validation or holdout data were accessed")
-    if report.get("config_sha256") != preparation.sha256(CONFIG):
-        raise RuntimeError("response-component config hash does not match")
+    amendment = config.get("pre_fit_statistical_amendment", {})
+    if report.get("config_sha256") != amendment.get(
+        "component_generation_config_sha256"
+    ):
+        raise RuntimeError("response-component generation config hash does not match")
+    if preparation.sha256(COMPONENT_REPORT) != amendment.get(
+        "component_report_sha256"
+    ):
+        raise RuntimeError("response-component report hash does not match")
+    if any(
+        amendment.get(key)
+        for key in (
+            "source_model_or_energy_band_changed",
+            "gravity_formula_or_parameters_changed",
+            "source_energy_distribution_summarized_or_fit",
+            "arf_generated",
+            "velocity_fit_performed",
+            "validation_or_holdout_accessed",
+        )
+    ):
+        raise RuntimeError("pre-fit statistical amendment crossed a frozen boundary")
 
     product_root = (ROOT / config["paths"]["product_root"]).resolve()
     image = product_root / "chandra/a2319_chandra_0p5_7p0keV_12arcmin.img"

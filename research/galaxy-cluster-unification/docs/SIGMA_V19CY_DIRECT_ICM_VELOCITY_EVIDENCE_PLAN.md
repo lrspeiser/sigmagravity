@@ -559,9 +559,12 @@ and four azimuthal subdivisions because the final P2 interval contains a brief
 offset reaching 1.50 arcmin; the typical offset remains about 0.04 arcmin.
 
 The primary fit is unbinned 3--9.5 keV `tbabs*bapec` with AtomDB 3.0.9,
-Lodders abundances, fixed `NH=1.12e21 cm^-2`, C-stat, and a jointly fitted
-additive NXB model through the official diagonal response. Frozen robustness
-checks are a 6.2--6.7 keV fit and a two-temperature, shared-velocity fit. The
+Lodders abundances and fixed `NH=1.12e21 cm^-2`. Source COUNTS use C-stat
+through the regional RMF and ARF. The generated NXB RATE spectrum, which has
+supplied statistical errors and is not Poisson counts, constrains the additive
+empirical NXB model with standard chi-square through the official diagonal
+response and no ARF. Frozen robustness checks are a 6.2--6.7 keV fit and a
+two-temperature, shared-velocity fit. The
 published no-SSM detector velocities are diagnostics, not sealed validation
 truth: the paper includes the unavailable strictly bracketed 000103 exposure
 and used older HEASoft/XSPEC versions. A3667 and A754 remain sealed.
@@ -630,6 +633,29 @@ already-frozen detector-region file and redundantly passes the exact pixel
 list. A source-only probe conserved 4,941 selected events into 4,941 PHA counts
 across 60,000 channels and the exact 49,982.354-s GTI; it did not summarize an
 energy distribution or generate an NXB, RMF, ARF, or velocity.
+
+### Response-component result and pre-fit statistical amendment
+
+All ten source, NXB and large-response RMF components and all three
+branch-specific exposure maps completed successfully. Every one of the 46
+captured commands returned zero; the 46 published component files total
+3,344,123,520 bytes. The source spectra conserve their selected counts. The
+ten 60,000-channel RMFs are finite and nonnegative, and each exposure map is
+finite and nonnegative. The component gate passed without generating an ARF,
+performing a velocity fit, or opening validation or holdout data. The
+machine-readable component-report SHA-256 is
+`69dbed4d1ac2db21d8c22b6ace09414462632f77a75270b994f80afea88adc74`.
+
+Header inspection before ARF generation exposed a statistical contract that
+must be honored. Source PHAs contain integer COUNTS with Poisson errors, but
+`rslnxbgen` produces exposure-normalized RATE spectra with `STAT_ERR` and
+`POISSERR=false`. Protocol 1.0.4 therefore refreezes only the likelihood: the
+source groups use C-stat, while simultaneous NXB constraint groups use
+standard chi-square over 1--17 keV. The empirical NXB model is first fitted in
+that constraint band; afterward only its recommended normalization parameters
+remain free in the source fit. No subtraction is used. This correction changed
+no source model, source energy band, data product, gravity formula, or target,
+and was made before any source-energy fit or velocity estimate.
 
 ## The new observable source terms
 

@@ -24,7 +24,6 @@ if str(SCRIPT_DIR) not in sys.path:
 import apply_sigma_v19cy_a2319_calibration_candidates as application
 import prepare_sigma_v19cy_a2319_response_inputs as preparation
 
-
 CONFIG = ROOT / "configs/sigma_v19cy_a2319_response_aware_spectral.json"
 PREPARATION_REPORT = (
     ROOT
@@ -50,7 +49,7 @@ def load_json(path: Path) -> dict[str, Any]:
 def validate_inputs() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     config = load_json(CONFIG)
     if config.get("protocol_version") != (
-        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.3"
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.4"
     ):
         raise RuntimeError("unexpected response-aware protocol")
     authorization = config["authorization"]
@@ -285,7 +284,7 @@ def inspect_event(path: Path) -> dict[str, Any]:
         "bytes": path.stat().st_size,
         "sha256": preparation.sha256(path),
         "rows": int(rows),
-        "gti_rows": int(len(gti)),
+        "gti_rows": len(gti),
         "gti_exposure_seconds": exposure,
     }
 
@@ -311,7 +310,7 @@ def inspect_rmf(path: Path) -> dict[str, Any]:
     return {
         "bytes": path.stat().st_size,
         "sha256": preparation.sha256(path),
-        "matrix_rows": int(len(matrix)),
+        "matrix_rows": len(matrix),
         "matrix_elements": elements,
         "channels": int(channels),
         "minimum_matrix_value": minimum,

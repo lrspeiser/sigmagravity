@@ -4,7 +4,6 @@ from pathlib import Path
 
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/sigma_v19cy_a2319_response_aware_spectral.json"
 
@@ -23,8 +22,8 @@ def sha256(path: Path) -> str:
 
 def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     config = load()
-    assert config["protocol_version"].endswith("1.0.3")
-    assert "corrected and refrozen" in config["status"]
+    assert config["protocol_version"].endswith("1.0.4")
+    assert "fit likelihood refrozen" in config["status"]
     assert ";" in config["runtime"]["pfiles"]
     assert config["closed_failure_history"]["response_or_background_generated"] is False
     amendment = config["pre_response_interface_amendment"]
@@ -34,6 +33,11 @@ def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     assert nxb_amendment["nxb_or_rmf_or_arf_generated"] is False
     assert nxb_amendment["source_count_probe"]["selected_events"] == 4941
     assert nxb_amendment["source_count_probe"]["pha_counts"] == 4941
+    fit_amendment = config["pre_fit_statistical_amendment"]
+    assert fit_amendment["source_spectrum_contract"]["statistic"] == "cstat"
+    assert fit_amendment["nxb_spectrum_contract"]["statistic"] == "chi standard"
+    assert fit_amendment["source_energy_distribution_summarized_or_fit"] is False
+    assert fit_amendment["validation_or_holdout_accessed"] is False
     authorization = config["authorization"]
     assert authorization["read_A2319_development_energy_columns"] is True
     assert authorization["access_A3667_validation"] is False
@@ -111,6 +115,10 @@ def test_fit_is_one_response_aware_physical_model_with_two_robustness_checks():
     fit = config["fit_protocol"]
     assert fit["primary_model"].startswith("tbabs*bapec")
     assert fit["primary_band_keV"] == [3.0, 9.5]
+    assert fit["statistic"] == "mixed simultaneous likelihood; no background subtraction"
+    assert fit["source_statistic"] == "cstat"
+    assert fit["nxb_statistic"] == "chi standard"
+    assert fit["nxb_constraint_band_keV"] == [1.0, 17.0]
     assert fit["atomdb"]["version"] == "3.0.9"
     assert fit["abundance_table"] == "lodd"
     assert fit["nh_1e22_cm2_fixed"] == pytest.approx(0.112)
