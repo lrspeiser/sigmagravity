@@ -1,0 +1,483 @@
+{
+  "bapec_or_absolute_velocity_fit": false,
+  "claim_boundary": "This is a calibration and sign-topology diagnostic, not a response-aware plasma measurement, not an SSM sky-region result, and not evidence sufficient to admit a Sigma source term.",
+  "config_sha256": "c714a71c3721da49ae19261d136362235f1af3fac55ece7a3e296ab5cc440316",
+  "decision": "do_not_authorize_response_production_until_relative_shift_failure_is_diagnosed",
+  "energy_distribution_read_and_fit": true,
+  "gates": {
+    "all_window_fits_converged_inside_shift_bounds": false,
+    "bootstrap_success_fraction": true,
+    "centered_rmse": false,
+    "constant_velocity_rejection": false,
+    "maximum_total_uncertainty": true,
+    "minimum_primary_window_events": true,
+    "most_blueshifted": true,
+    "most_redshifted": true,
+    "sign_agreement": false,
+    "spearman": false
+  },
+  "generated_utc": "2026-08-06T06:52:29.997453+00:00",
+  "parent_readiness_report_sha256": "84452380c22ba22f415464875cd0278bf61c67382c43eca0f5cbc12a31087fc1",
+  "plot": {
+    "bytes": 145886,
+    "path": "results/sigma_v19cy_direct_icm_velocity_evidence/development_relative_fe_line_shift.png",
+    "sha256": "cbe7b28f848674129f1bfe2818d9f2bf10fc7bf465ad287eb508d7eab8d0fe4d"
+  },
+  "primary_bootstrap": {
+    "regions": {
+      "a": {
+        "lower_kms": -45.963520072709954,
+        "pointing_energy_systematic_kms": 23.70451993488372,
+        "sigma_kms": 99.15494411104322,
+        "total_uncertainty_kms": 101.94904220740578,
+        "upper_kms": 176.56589498797416
+      },
+      "b": {
+        "lower_kms": -35.8289125443847,
+        "pointing_energy_systematic_kms": 23.70451993488372,
+        "sigma_kms": 75.79951397084677,
+        "total_uncertainty_kms": 79.41958564208136,
+        "upper_kms": 88.44350478656091
+      },
+      "b_prime": {
+        "lower_kms": -311.7755347106252,
+        "pointing_energy_systematic_kms": 15.33821878139535,
+        "sigma_kms": 79.16961537758003,
+        "total_uncertainty_kms": 80.64173208965632,
+        "upper_kms": -134.0511109327419
+      },
+      "c_prime": {
+        "lower_kms": -128.17964965179794,
+        "pointing_energy_systematic_kms": 15.33821878139535,
+        "sigma_kms": 85.46173038337514,
+        "total_uncertainty_kms": 86.82723256851305,
+        "upper_kms": 50.53816085214293
+      },
+      "d": {
+        "lower_kms": -14.363294250261925,
+        "pointing_energy_systematic_kms": 23.70451993488372,
+        "sigma_kms": 73.5345691199096,
+        "total_uncertainty_kms": 77.2608382105324,
+        "upper_kms": 127.19489974377875
+      },
+      "d_prime": {
+        "lower_kms": -95.70690849979904,
+        "pointing_energy_systematic_kms": 15.33821878139535,
+        "sigma_kms": 153.78060120121074,
+        "total_uncertainty_kms": 154.5436322246626,
+        "upper_kms": 240.55542695038662
+      },
+      "e_prime": {
+        "lower_kms": -63.712890704242426,
+        "pointing_energy_systematic_kms": 15.33821878139535,
+        "sigma_kms": 120.45212296632546,
+        "total_uncertainty_kms": 121.42477046501155,
+        "upper_kms": 201.2632221096755
+      }
+    },
+    "requested_draws": 150,
+    "success_fraction": 1.0,
+    "successful_draws": 150
+  },
+  "primary_comparison": {
+    "centered_rmse_vs_published_kms": 108.19307387282579,
+    "centered_sign_agreement_fraction": 0.42857142857142855,
+    "constant_velocity_chi2": 16.028019683407056,
+    "constant_velocity_dof": 6,
+    "constant_velocity_p_value": 0.013604362348045924,
+    "constant_velocity_rejection_sigma": 2.4675436767112613,
+    "most_blueshifted_region": "b_prime",
+    "most_redshifted_region": "e_prime",
+    "published_centered_kms": {
+      "a": -27.17142857142857,
+      "b": -43.47142857142857,
+      "b_prime": -107.17142857142858,
+      "c_prime": 52.92857142857143,
+      "d": 46.62857142857143,
+      "d_prime": -13.17142857142857,
+      "e_prime": 91.42857142857143
+    },
+    "region_order": [
+      "a",
+      "b",
+      "d",
+      "b_prime",
+      "c_prime",
+      "d_prime",
+      "e_prime"
+    ],
+    "spearman_vs_published": 0.4642857142857144,
+    "velocity_range_kms": 441.29873130959425
+  },
+  "protocol_version": "SIGMA-V19CY-A2319-RELATIVE-FE-LINE-SHIFT-1.0.1",
+  "response_or_background_generated": false,
+  "sources": [
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "pointing": "P1",
+      "region": "a",
+      "rows": 5281,
+      "sha256": "eb2233b8a054d2ca75f5e58dc4b1661d2c3d65171355b2156584aa77dd6740a2"
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "pointing": "P1",
+      "region": "a",
+      "rows": 276,
+      "sha256": "2af7f7b30abab4203c9e5f645d4db915ab75ed8fa1a963db559f54bfd161bdd3"
+    },
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "pointing": "P1",
+      "region": "b",
+      "rows": 4315,
+      "sha256": "dd1a7bf56643904b274d1f9b63585e4bbb8512f113800b7215b0dc651311551d"
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "pointing": "P1",
+      "region": "b",
+      "rows": 185,
+      "sha256": "966548a0fe2c5d348bb3f0b2b0835c22b139652a6597d13029a105f83f18faf6"
+    },
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "pointing": "P1",
+      "region": "d",
+      "rows": 3612,
+      "sha256": "39fbea082b24d7af9323d8048a39a1617da4872ee560186122f5da4195bd80e5"
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "pointing": "P1",
+      "region": "d",
+      "rows": 162,
+      "sha256": "8539b5c33d006144b0c9de68890ef51a87a97d44844d64e40d10eb27e48cff63"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "pointing": "P2",
+      "region": "b_prime",
+      "rows": 3979,
+      "sha256": "7a7ed597e286451ea8d4609085fcfffb20921567cabb7952e8470767e6f6e64e"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "pointing": "P2",
+      "region": "c_prime",
+      "rows": 3643,
+      "sha256": "b6f5d3750f30cfa33880fc0ff4602a25539f2f021d9ef7a8a20352ca4a2769d2"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "pointing": "P2",
+      "region": "d_prime",
+      "rows": 3022,
+      "sha256": "567dde587d4ee3c94d0e0f1bc01648a457a450ceaf953fed010243462cd6cf5c"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "pointing": "P2",
+      "region": "e_prime",
+      "rows": 3594,
+      "sha256": "d127a9d8aa4ff51405123f3dcc255959d2f9a6129976bc30ef4204ecc21a2f80"
+    }
+  ],
+  "ssm_sky_region_velocity_fit": false,
+  "status": "a2319_relative_fe_line_shift_diagnostic_completed",
+  "terminal_gate_passed": false,
+  "validation_or_holdout_accessed": false,
+  "windows": {
+    "h_like": {
+      "event_counts": {
+        "a": 146,
+        "b": 133,
+        "b_prime": 126,
+        "c_prime": 94,
+        "d": 117,
+        "d_prime": 90,
+        "e_prime": 114
+      },
+      "fits": {
+        "a": {
+          "amplitude": 37.53661749681016,
+          "continuum_at_center": 0.6028023108713616,
+          "continuum_log_slope": -0.02044149471246827,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_success": true,
+          "poisson_deviance": 181.9541802474171,
+          "shift_eV": -0.5331902606543005,
+          "velocity_raw_kms": 24.255905739486106,
+          "velocity_relative_unweighted_mean_kms": 86.45402033138944
+        },
+        "b": {
+          "amplitude": 44.6997235038284,
+          "continuum_at_center": 0.49226285453855445,
+          "continuum_log_slope": 0.043897293992262935,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_success": true,
+          "poisson_deviance": 200.3129145015687,
+          "shift_eV": -1.3100074750900195,
+          "velocity_raw_kms": 59.59489544091209,
+          "velocity_relative_unweighted_mean_kms": 121.79301003281543
+        },
+        "b_prime": {
+          "amplitude": 50.4,
+          "continuum_at_center": 0.42,
+          "continuum_log_slope": 0.0,
+          "inside_shift_bounds": true,
+          "message": "ABNORMAL: ",
+          "optimizer_success": false,
+          "poisson_deviance": 204.31202053754373,
+          "shift_eV": 5.0,
+          "velocity_raw_kms": -227.46013505311078,
+          "velocity_relative_unweighted_mean_kms": -165.26202046120744
+        },
+        "c_prime": {
+          "amplitude": 22.29160121313135,
+          "continuum_at_center": 0.39122022193698036,
+          "continuum_log_slope": 0.29787611856508245,
+          "inside_shift_bounds": true,
+          "message": "ABNORMAL: ",
+          "optimizer_success": false,
+          "poisson_deviance": 168.58266217872094,
+          "shift_eV": 1.0016157815123958,
+          "velocity_raw_kms": -45.565532186827326,
+          "velocity_relative_unweighted_mean_kms": 16.632582405076015
+        },
+        "d": {
+          "amplitude": 27.956119119887546,
+          "continuum_at_center": 0.4945862396596451,
+          "continuum_log_slope": -0.06869802764861274,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 174.37716652161785,
+          "shift_eV": -0.3665089310997478,
+          "velocity_raw_kms": 16.67323419322398,
+          "velocity_relative_unweighted_mean_kms": 78.87134878512732
+        },
+        "d_prime": {
+          "amplitude": 15.842003658668132,
+          "continuum_at_center": 0.41039863335344484,
+          "continuum_log_slope": 0.1052801252496616,
+          "inside_shift_bounds": true,
+          "message": "ABNORMAL: ",
+          "optimizer_success": false,
+          "poisson_deviance": 170.60824060999207,
+          "shift_eV": 5.000028217108787,
+          "velocity_raw_kms": -227.4614187065859,
+          "velocity_relative_unweighted_mean_kms": -165.26330411468257
+        },
+        "e_prime": {
+          "amplitude": 42.45690072524186,
+          "continuum_at_center": 0.3965237828547061,
+          "continuum_log_slope": 0.12097631015048406,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_success": true,
+          "poisson_deviance": 188.2965724766283,
+          "shift_eV": 0.7786804391492671,
+          "velocity_raw_kms": -35.42375157042158,
+          "velocity_relative_unweighted_mean_kms": 26.77436302148176
+        }
+      }
+    },
+    "he_like": {
+      "event_counts": {
+        "a": 219,
+        "b": 172,
+        "b_prime": 168,
+        "c_prime": 131,
+        "d": 140,
+        "d_prime": 105,
+        "e_prime": 122
+      },
+      "fits": {
+        "a": {
+          "amplitude": 45.70186724433593,
+          "continuum_at_center": 0.9392418940123819,
+          "continuum_log_slope": 0.3857458905484482,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 232.91723889175233,
+          "shift_eV": -2.2714492273087696,
+          "velocity_raw_kms": 107.23832237434594,
+          "velocity_relative_unweighted_mean_kms": 58.262721663986355
+        },
+        "b": {
+          "amplitude": 65.8397071195624,
+          "continuum_at_center": 0.5743387792979533,
+          "continuum_log_slope": 0.3978086951150801,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 203.27129023595916,
+          "shift_eV": -1.2528246641887797,
+          "velocity_raw_kms": 59.1476197669573,
+          "velocity_relative_unweighted_mean_kms": 10.172019056597712
+        },
+        "b_prime": {
+          "amplitude": 46.37414561536686,
+          "continuum_at_center": 0.6734665630442475,
+          "continuum_log_slope": 0.14018268540730822,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 222.21611837641575,
+          "shift_eV": 5.5598346913537835,
+          "velocity_raw_kms": -262.4876390857673,
+          "velocity_relative_unweighted_mean_kms": -311.46323979612686
+        },
+        "c_prime": {
+          "amplitude": 35.31693729640829,
+          "continuum_at_center": 0.5315119840607143,
+          "continuum_log_slope": -0.025999813364451254,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 174.09546336147412,
+          "shift_eV": 2.64327538601974,
+          "velocity_raw_kms": -124.79275986547349,
+          "velocity_relative_unweighted_mean_kms": -173.76836057583307
+        },
+        "d": {
+          "amplitude": 41.391939712747494,
+          "continuum_at_center": 0.5376432017696505,
+          "continuum_log_slope": 0.33753582629398765,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 190.3940476486178,
+          "shift_eV": -2.3059638601579997,
+          "velocity_raw_kms": 108.8678068812496,
+          "velocity_relative_unweighted_mean_kms": 59.89220617089002
+        },
+        "d_prime": {
+          "amplitude": 21.82997804562035,
+          "continuum_at_center": 0.4600294684193538,
+          "continuum_log_slope": 0.2396188527839158,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 160.14537604497295,
+          "shift_eV": -6.000000009221731,
+          "velocity_raw_kms": 283.2684646873394,
+          "velocity_relative_unweighted_mean_kms": 234.29286397697985
+        },
+        "e_prime": {
+          "amplitude": 27.820501813679584,
+          "continuum_at_center": 0.523870984552904,
+          "continuum_log_slope": 0.029956815577874916,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_success": true,
+          "poisson_deviance": 188.72247058562633,
+          "shift_eV": -3.634447427820373,
+          "velocity_raw_kms": 171.5873902138657,
+          "velocity_relative_unweighted_mean_kms": 122.6117895035061
+        }
+      }
+    },
+    "primary_fe_k": {
+      "event_counts": {
+        "a": 442,
+        "b": 366,
+        "b_prime": 350,
+        "c_prime": 277,
+        "d": 321,
+        "d_prime": 249,
+        "e_prime": 292
+      },
+      "fits": {
+        "a": {
+          "amplitude": 97.79059587996261,
+          "continuum_at_center": 0.6751310517140255,
+          "continuum_log_slope": -0.3422299861157787,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 597.9645693662497,
+          "shift_eV": -2.557718690616016,
+          "velocity_raw_kms": 118.881360175553,
+          "velocity_relative_unweighted_mean_kms": 103.01552266331511
+        },
+        "b": {
+          "amplitude": 128.183232702636,
+          "continuum_at_center": 0.4746685674489726,
+          "continuum_log_slope": -0.11018754292069516,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 549.4484893536915,
+          "shift_eV": -1.2789099005097588,
+          "velocity_raw_kms": 59.44302986579163,
+          "velocity_relative_unweighted_mean_kms": 43.577192353553734
+        },
+        "b_prime": {
+          "amplitude": 93.66021733676953,
+          "continuum_at_center": 0.5111529867813507,
+          "continuum_log_slope": -0.22145987097343847,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 567.6588779348702,
+          "shift_eV": 5.363227715724746,
+          "velocity_raw_kms": -249.27987902493751,
+          "velocity_relative_unweighted_mean_kms": -265.1457165371754
+        },
+        "c_prime": {
+          "amplitude": 65.22443471093345,
+          "continuum_at_center": 0.4193749347641776,
+          "continuum_log_slope": -0.24730230707149314,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 491.1744804961003,
+          "shift_eV": 1.9210780968868666,
+          "velocity_raw_kms": -89.29065498847687,
+          "velocity_relative_unweighted_mean_kms": -105.15649250071476
+        },
+        "d": {
+          "amplitude": 77.25470531703255,
+          "continuum_at_center": 0.4870225114333802,
+          "continuum_log_slope": -0.08128455204506733,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 500.81765708352305,
+          "shift_eV": -1.2867005866039058,
+          "velocity_raw_kms": 59.805136677213454,
+          "velocity_relative_unweighted_mean_kms": 43.93929916497556
+        },
+        "d_prime": {
+          "amplitude": 36.97509489257706,
+          "continuum_at_center": 0.42311320281495846,
+          "continuum_log_slope": -0.11549834684177476,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 476.37062558118083,
+          "shift_eV": -0.41917486627808354,
+          "velocity_raw_kms": 19.4830175958648,
+          "velocity_relative_unweighted_mean_kms": 3.6171800836269075
+        },
+        "e_prime": {
+          "amplitude": 70.54200894942927,
+          "continuum_at_center": 0.4425854853012228,
+          "continuum_log_slope": -0.06876932477236829,
+          "inside_shift_bounds": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_success": true,
+          "poisson_deviance": 535.3327881192129,
+          "shift_eV": -4.131263359654085,
+          "velocity_raw_kms": 192.01885228465676,
+          "velocity_relative_unweighted_mean_kms": 176.15301477241886
+        }
+      }
+    }
+  }
+}

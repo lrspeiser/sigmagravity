@@ -448,6 +448,41 @@ The readiness scratch tree contains 13 files totaling 10,154,880 bytes. Its
 terminal report SHA-256 is
 `84452380c22ba22f415464875cd0278bf61c67382c43eca0f5cbc12a31087fc1`.
 
+### Raw Fe-K relative-shift diagnostic
+
+A response-independent diagnostic was frozen before opening any science
+energy. It built each region's line template from only the other six regions,
+fit a positive shift plus smooth continuum with Poisson deviance, and compared
+the centered seven-region result with the paper's detector-region table only
+after fitting. This is a calibration/topology check, not a plasma or absolute
+velocity measurement.
+
+| Frozen gate | Result | Pass? |
+|---|---:|---|
+| Centered RMSE versus published detector velocities | 108.19 km/s (limit 100) | No |
+| Spearman ordering | 0.464 (minimum 0.6) | No |
+| Centered sign agreement | 3/7 (minimum 5/7) | No |
+| Constant-velocity rejection | 2.47 sigma (minimum 3) | No |
+| Most blueshifted region | b' (required b') | Yes |
+| Most redshifted region | e' (required e') | Yes |
+| Bootstrap completion | 150/150 | Yes |
+| Maximum regional uncertainty | 154.54 km/s (limit 200) | Yes |
+
+The result is mixed rather than empty: it recovers both extrema and a
+441 km/s full range, but not the intermediate ordering. The He-like and
+H-like sub-bands also diverge, and three low-count H-like fits report optimizer
+non-convergence. That pattern is compatible with the empirical template
+confusing temperature-dependent Fe line ratios with energy shifts. The paper
+independently reports detector temperatures spanning about 7.7–9.8 keV and a
+different He-like/H-like velocity in `e'`. This specific failure must be
+diagnosed before authorizing response production; no template smoothing,
+window, region, bound, or threshold may be retuned to the observed values.
+
+The terminal report SHA-256 is
+`df73f2bdb944c2d0349b0e64c997ffc64163110468f4a094f438e7baf2b9b941`;
+the diagnostic plot SHA-256 is
+`cbe7b28f848674129f1bfe2818d9f2bf10fc7bf465ad287eb508d7eab8d0fe4d`.
+
 ## The new observable source terms
 
 The signed projected gas current is
