@@ -1,0 +1,123 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-GAIN-RECONSTRUCTION-TOPOLOGY-1.0.0",
+  "status": "frozen after official gain-count closure and paper-method review, but before branch-specific scalar reconstruction or any event-row access",
+  "purpose": "Recover the cross-ObsID fiducial segments, preregister every paper-required interpolation/extrapolation branch, and measure the calibration-pixel common-mode residual without applying gain or reading an event.",
+  "parents": {
+    "official_count_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_official_gain_count_closure.json",
+    "official_count_report_sha256": "22b3022320d99f8b2617b0a2228da2976e62756aaeeb6cc8edb88f0b858ddb14",
+    "timeline_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_timeline_evidence.json",
+    "timeline_report_sha256": "36e4b6d4ad2c18cce43e2452063f8ac16505acb8c1ad1217faa82083682b4cce",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f"
+  },
+  "paths": {
+    "raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_reconstruction_topology.json"
+  },
+  "gain_histories": {
+    "obsids": ["000100000", "000101000", "000102000", "000103000"],
+    "science_obsids": ["000101000", "000102000", "000103000"],
+    "fe55_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_fe55.ghf.gz",
+    "continuous_calpixel_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_pxcal.ghf.gz",
+    "extension": "Drift_energy",
+    "allowed_scalar_columns": ["TIME", "PIXEL", "TEMP_FIT", "NEVENT", "CHISQ"],
+    "minimum_events": 200,
+    "calibration_pixel": 12,
+    "main_array_pixels": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+  },
+  "segment_detection": {
+    "primary_gap_seconds": 10800,
+    "robustness_gap_seconds": [7200, 10800, 14400],
+    "minimum_rows_per_pixel_in_anchor_segment": 3,
+    "decision_rule": "The ordered Fe-55 segment count and segment membership must be identical at all three frozen gap thresholds. No threshold may be selected after seeing a preferred calibration residual."
+  },
+  "branches": [
+    {
+      "name": "000101_open_0_cross_obsid",
+      "obsid": "000101000",
+      "start": 150940372.98380262,
+      "stop": 151036810.97876486,
+      "method": "cross_segment_linear_fit",
+      "anchor_rule": "nearest_complete_fe55_segment_before_start_and_after_stop"
+    },
+    {
+      "name": "000101_open_1_cross_obsid",
+      "obsid": "000101000",
+      "start": 151201971.01443896,
+      "stop": 151205310.66687408,
+      "method": "cross_segment_linear_fit",
+      "anchor_rule": "nearest_complete_fe55_segment_before_start_and_after_stop"
+    },
+    {
+      "name": "000102_open_0_cross_obsid",
+      "obsid": "000102000",
+      "start": 151205299.1500231,
+      "stop": 151289711.01796663,
+      "method": "cross_segment_linear_fit",
+      "anchor_rule": "nearest_complete_fe55_segment_before_start_and_after_stop"
+    },
+    {
+      "name": "000102_open_1_cross_obsid",
+      "obsid": "000102000",
+      "start": 151455171.08057764,
+      "stop": 151458597.50644177,
+      "method": "cross_segment_linear_fit",
+      "anchor_rule": "nearest_complete_fe55_segment_before_start_and_after_stop"
+    },
+    {
+      "name": "000103_pre_adr_forward",
+      "obsid": "000103000",
+      "start": 151458589.36004242,
+      "stop": 151513975.484375,
+      "method": "preceding_segment_linear_extrapolation",
+      "anchor_rule": "nearest_complete_fe55_segment_before_start"
+    },
+    {
+      "name": "000103_post_adr_backward",
+      "obsid": "000103000",
+      "start": 151535575.484375,
+      "stop": 151548911.03069407,
+      "method": "following_segment_linear_extrapolation",
+      "anchor_rule": "nearest_complete_fe55_segment_after_stop"
+    },
+    {
+      "name": "000103_final_forward",
+      "obsid": "000103000",
+      "start": 151708370.65972292,
+      "stop": 151792197.58064914,
+      "method": "preceding_segment_linear_extrapolation",
+      "anchor_rule": "nearest_complete_fe55_segment_before_start"
+    }
+  ],
+  "excluded_science_interval": {
+    "obsid": "000103000",
+    "start": 151513975.484375,
+    "stop": 151535575.484375,
+    "reason": "ADR recycle through six hours after recycle start; the paper states that the linear post-recycle history begins only after this boundary"
+  },
+  "calibration_pixel_residual": {
+    "definition": "continuous pixel-12 TEMP_FIT minus the branch prediction from intermittent Fe-55 pixel-12 TEMP_FIT",
+    "interpretation": "A nonzero residual is a measured common-mode temperature correction candidate for the main array; it is not selected or applied in this protocol.",
+    "minimum_continuous_rows_per_branch": 3,
+    "summaries": ["median", "median_absolute_deviation", "p05", "p95", "linear_slope_per_hour"]
+  },
+  "decision_rule": "Authorize freezing calibration-application candidates only if segment topology is stable across all thresholds, every branch has its preregistered anchor type for all 35 main-array pixels and pixel 12, every branch has at least three continuous calibration-pixel rows, and every fit/residual summary is finite.",
+  "authorization": {
+    "read_declared_gain_history_scalar_columns": true,
+    "read_gain_history_array_columns": false,
+    "read_event_rows_or_energies": false,
+    "write_or_modify_gain_history": false,
+    "apply_or_interpolate_gain_to_events": false,
+    "fit_calibration_or_science_spectrum": false,
+    "fit_cluster_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "This audit recovers only scalar fiducial topology and calibration-pixel residual evidence.",
+    "The seven branch equations are calibration nuisances fixed from the published observing history, not gravity parameters.",
+    "No candidate correction is selected until a separately frozen calibration-pixel spectral gate is run."
+  ]
+}
