@@ -1,5 +1,14 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DE2 APEC-binding remediation freeze
+
+The V19DE environment remediation is frozen and its payload-blind preflight
+passes. The exact AtomDB 3.0.9 continuum and line files match their hashes, and
+both APEC and MEKAL return finite positive probe flux before source access. It
+reuses the exact frozen V19DE scientific method; the invalid V19DE report is a
+required parent. No regional or transfer data are authorized. See
+[`SIGMA_V19DE2_BULLET_APEC_BINDING_REMEDIATION.md`](SIGMA_V19DE2_BULLET_APEC_BINDING_REMEDIATION.md).
+
 ## 2026-08-06 Sigma V19DE integrated-profile freeze
 
 The payload-blind preflight passed, but the first source execution is invalid.

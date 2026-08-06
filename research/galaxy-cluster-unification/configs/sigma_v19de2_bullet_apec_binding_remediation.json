@@ -1,0 +1,55 @@
+{
+  "protocol_version": "SIGMA-V19DE2-BULLET-APEC-BINDING-REMEDIATION-1.0.0",
+  "freeze_state": "frozen_after_v19de_invalid_apec_execution_before_source_rerun",
+  "purpose": "Rerun the unchanged V19DE scientific profile only after binding XSPEC to the active installation's exact AtomDB files and positively probing APEC and MEKAL.",
+  "claim_boundary": "This remediation changes no fit band, model, profile grid, start, gate, source product or scientific parameter. It cannot authorize regional velocity or gravity evidence unless the unchanged V19DE gates pass.",
+  "parents": {
+    "v19de_config": {
+      "path": "configs/sigma_v19de_bullet_integrated_redshift_profile.json",
+      "sha256": "e5f49f693f466d6ada9ec08a38956bd4043839d5404f32599e747771afae74ec"
+    },
+    "v19de_invalid_report": {
+      "path": "results/sigma_v19de_bullet_integrated_redshift_profile/report.json",
+      "sha256": "1ca069bb4bd8d62721a8650eb1d181a57094652b41f935faf601b3e0f7df3b87",
+      "required_status": "bullet_integrated_redshift_profile_gate_failed"
+    }
+  },
+  "xspec_model_data": {
+    "headas": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral",
+    "xspec_init": {
+      "path": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+      "bytes": 4299,
+      "sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146"
+    },
+    "atomdb_version": "3.0.9",
+    "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+    "apec_continuum": {
+      "path": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9_coco.fits",
+      "bytes": 204059520,
+      "sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74"
+    },
+    "apec_lines": {
+      "path": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9_line.fits",
+      "bytes": 209629440,
+      "sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+    },
+    "probe_bins_keV": [[2.0, 2.25], [2.25, 2.5]],
+    "probe_parameters": {"kT_keV": 10.0, "abundance_solar": 0.3, "redshift": 0.296, "normalization": 0.01},
+    "required_models": ["xsapec", "xsmekal"]
+  },
+  "authorization": {
+    "bind_and_probe_xspec_model_data_without_source": true,
+    "rerun_unchanged_v19de_integrated_profile_after_committed_preflight": true,
+    "change_v19de_scientific_method_or_gate": false,
+    "open_any_regional_source_line_or_velocity": false,
+    "open_obsid554_or_abell2146": false,
+    "open_lensing_halo_gravity_or_action": false
+  },
+  "runtime": {
+    "output": "results/sigma_v19de2_bullet_apec_binding_remediation"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19de2_bullet_apec_binding_remediation.py",
+    "runner_sha256": "57b76be67f1d7325ec2eda78a3f86dee461a49917d5747a5d1ed214944216c1d"
+  }
+}

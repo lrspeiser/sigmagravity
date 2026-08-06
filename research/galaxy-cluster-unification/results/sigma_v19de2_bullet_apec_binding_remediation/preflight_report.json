@@ -1,0 +1,63 @@
+{
+  "branches": [
+    "apec",
+    "mekal"
+  ],
+  "coarse_points_per_branch": 101,
+  "config_sha256": "eb9ba22888f0dff3b696834613caa890b2958820fd664876b13f8df13fbd1dcc",
+  "fine_points_per_branch": 101,
+  "generated_utc": "2026-08-06T20:42:50.877526+00:00",
+  "integrated_product_sizes_verified": {
+    "arf": 43200,
+    "background": 296640,
+    "rmf": 2217600,
+    "source": 296640
+  },
+  "lensing_halo_gravity_or_action_opened": false,
+  "model_data_binding": {
+    "apec_continuum": {
+      "bytes": 204059520,
+      "sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74"
+    },
+    "apec_lines": {
+      "bytes": 209629440,
+      "sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+    },
+    "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+    "atomdb_version": "3.0.9",
+    "headas": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral",
+    "positive_model_probes": [
+      {
+        "integrated_flux": 0.00024938751803892,
+        "model": "xsapec",
+        "values": [
+          0.00013671896329856242,
+          0.00011266855474035754
+        ]
+      },
+      {
+        "integrated_flux": 0.0002490728168811107,
+        "model": "xsmekal",
+        "values": [
+          0.00013621280347740953,
+          0.00011286001340370116
+        ]
+      }
+    ],
+    "xspec_init": {
+      "bytes": 4299,
+      "path": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+      "sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146"
+    }
+  },
+  "multistarts_per_point": 2,
+  "obsid554_or_abell2146_opened": false,
+  "posterior_predictive_or_thermal_sobol_run": false,
+  "protocol_version": "SIGMA-V19DE2-BULLET-APEC-BINDING-REMEDIATION-1.0.0",
+  "regional_source_line_or_velocity_opened": false,
+  "runner_sha256": "57b76be67f1d7325ec2eda78a3f86dee461a49917d5747a5d1ed214944216c1d",
+  "source_line_temperature_abundance_redshift_or_velocity_fitted": false,
+  "source_pha_response_scientific_arrays_opened": false,
+  "status": "v19de2_payload_blind_atomdb_binding_passed",
+  "unchanged_v19de_config_sha256": "e5f49f693f466d6ada9ec08a38956bd4043839d5404f32599e747771afae74ec"
+}
