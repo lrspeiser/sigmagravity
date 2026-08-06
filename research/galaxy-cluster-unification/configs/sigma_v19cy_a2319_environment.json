@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-ENVIRONMENT-1.0.0",
-  "status": "frozen after the complete A2319 acquisition passed and after official setup-file HEAD metadata were inspected, but before either setup-file body was downloaded or any CALDB archive was extracted",
+  "protocol_version": "SIGMA-V19CY-A2319-ENVIRONMENT-1.0.1",
+  "status": "corrected and refrozen after version 1.0.0 downloaded and hash-verified both official setup files but failed closed before archive listing or extraction because wslpath did not preserve Windows backslashes; the empty staging directory was removed, the final CALDB target remains absent, and no event, gain, spectral, velocity, validation, holdout, lensing, halo, gravity, or action target was opened",
   "purpose": "Install and audit the exact HEASoft/XRISM calibration environment required for the A2319 development reproduction without opening a scientific velocity outcome or any validation, holdout, lensing, halo, gravity, or action target.",
   "parent": {
     "acquisition_config": "configs/sigma_v19cy_a2319_development_acquisition.json",
@@ -55,14 +55,16 @@
       "url": "https://heasarc.gsfc.nasa.gov/FTP/caldb/software/tools/caldb.config",
       "bytes": 14602,
       "last_modified": "Thu, 12 Feb 2026 20:54:23 GMT",
-      "etag": "\"390a-64aa6b1844b97\""
+      "etag": "\"390a-64aa6b1844b97\"",
+      "sha256": "d6cc818a8f20aa744dd272497b281f18b71925123e9528f65253ffeb194e9cfa"
     },
     {
       "name": "alias_config.fits",
       "url": "https://heasarc.gsfc.nasa.gov/FTP/caldb/software/tools/alias_config.fits",
       "bytes": 14400,
       "last_modified": "Fri, 15 Dec 2000 01:58:58 GMT",
-      "etag": "\"3840-3786f934afc80\""
+      "etag": "\"3840-3786f934afc80\"",
+      "sha256": "808414ef6db1a8e6b7e361021499f55e3f39fb3cc2e3446530f83294de243e87"
     }
   ],
   "installation": {
@@ -84,6 +86,17 @@
       "XRISM",
       "RESOLVE"
     ]
+  },
+  "closed_failure_history": {
+    "version": "SIGMA-V19CY-A2319-ENVIRONMENT-1.0.0",
+    "failure": "wslpath -a received a native Windows path whose backslashes were not preserved by this Windows-to-WSL invocation",
+    "staging_directory": "/home/henry/.local/share/sigmagravity-xrism/caldb.installing.mfimOv",
+    "staging_directory_was_empty_and_removed_with_rmdir": true,
+    "caldb_archive_listed_or_extracted": false,
+    "final_target_created": false,
+    "official_setup_files_downloaded_and_hash_frozen": true,
+    "science_or_sealed_outcome_opened": false,
+    "correction": "replace the external wslpath call with a deterministic local-drive mapping from C:\\... to /mnt/c/... and reuse only the exact hash-frozen setup bodies"
   },
   "acceptance": {
     "caldbinfo_mission": "XRISM",

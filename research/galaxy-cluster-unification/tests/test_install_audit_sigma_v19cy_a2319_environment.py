@@ -16,6 +16,16 @@ def test_frozen_environment_inputs_match_terminal_acquisition() -> None:
     assert sum(item["bytes"] for item in archives) == 1_780_998_985
     assert config["runtime"]["heasoft_version_token"] == "V6.36"
     assert config["runtime"]["xspec_version_token"] == "12.15.1"
+    assert config["closed_failure_history"]["caldb_archive_listed_or_extracted"] is False
+    assert config["closed_failure_history"]["final_target_created"] is False
+
+
+def test_windows_drive_path_maps_deterministically_into_wsl(tmp_path: Path) -> None:
+    path = tmp_path / "sigma" / "archive.tar.gz"
+    mapped = environment.to_wsl_path(path, "Ubuntu-24.04")
+    resolved = path.resolve()
+    expected_suffix = "/".join(resolved.relative_to(resolved.anchor).parts)
+    assert mapped == f"/mnt/{resolved.drive[0].lower()}/{expected_suffix}"
 
 
 def test_archive_member_validation_accepts_only_frozen_data_root() -> None:

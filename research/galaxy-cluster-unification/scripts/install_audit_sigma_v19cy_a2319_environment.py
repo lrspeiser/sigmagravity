@@ -50,13 +50,14 @@ def run_wsl(distribution: str, command: str, timeout: int = 120) -> dict[str, An
 
 
 def to_wsl_path(path: Path, distribution: str) -> str:
-    result = subprocess.run(
-        ["wsl.exe", "-d", distribution, "--", "wslpath", "-a", str(path.resolve())],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    return result.stdout.strip()
+    del distribution
+    resolved = path.resolve()
+    drive = resolved.drive
+    if len(drive) != 2 or drive[1] != ":":
+        raise RuntimeError(f"cannot map non-drive Windows path into WSL: {resolved}")
+    relative = resolved.relative_to(resolved.anchor)
+    suffix = "/".join(relative.parts)
+    return f"/mnt/{drive[0].lower()}/{suffix}"
 
 
 def validate_member_names(names: list[str], required_prefix: str) -> None:
@@ -72,9 +73,9 @@ def validate_member_names(names: list[str], required_prefix: str) -> None:
 
 def validate_inputs(config_path: Path) -> tuple[dict[str, Any], dict[str, Any]]:
     config = load_json(config_path)
-    if config.get("protocol_version") != "SIGMA-V19CY-A2319-ENVIRONMENT-1.0.0":
+    if config.get("protocol_version") != "SIGMA-V19CY-A2319-ENVIRONMENT-1.0.1":
         raise RuntimeError("unexpected A2319 environment protocol")
-    if not config.get("status", "").startswith("frozen after the complete A2319 acquisition"):
+    if not config.get("status", "").startswith("corrected and refrozen after version 1.0.0"):
         raise RuntimeError("A2319 environment protocol is not frozen")
     parent = config["parent"]
     acquisition_config = ROOT / parent["acquisition_config"]
@@ -131,6 +132,11 @@ def acquire_setup_files(config: dict[str, Any]) -> list[dict[str, Any]]:
         destination = (raw_root / item["name"]).resolve()
         if not destination.is_relative_to(raw_root):
             raise RuntimeError(f"setup destination escapes raw root: {item['name']}")
+        if destination.is_file():
+            if destination.stat().st_size != item["bytes"] or sha256(destination) != item["sha256"]:
+                raise RuntimeError(f"existing setup file disagrees with corrected freeze: {item['name']}")
+            records.append({**item, "path": destination, "reused": True})
+            continue
         with requests.get(
             item["url"],
             headers={"User-Agent": USER_AGENT, "Accept-Encoding": "identity"},
@@ -151,11 +157,13 @@ def acquire_setup_files(config: dict[str, Any]) -> list[dict[str, Any]]:
             if partial.stat().st_size != item["bytes"]:
                 raise RuntimeError(f"setup-file body has wrong size: {item['name']}")
             os.replace(partial, destination)
+        if sha256(destination) != item["sha256"]:
+            raise RuntimeError(f"setup-file hash changed: {item['name']}")
         records.append(
             {
                 **item,
                 "path": destination,
-                "sha256": sha256(destination),
+                "reused": False,
             }
         )
     return records
@@ -327,7 +335,7 @@ def audit_installed_environment(
         "setup_files": [
             {
                 key: item[key]
-                for key in ("name", "url", "bytes", "last_modified", "etag", "sha256")
+                for key in ("name", "url", "bytes", "last_modified", "etag", "sha256", "reused")
             }
             for item in setup_files
         ],
