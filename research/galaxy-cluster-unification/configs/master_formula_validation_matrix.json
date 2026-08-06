@@ -1,0 +1,69 @@
+{
+  "protocol_version": "MASTER-FORMULA-VALIDATION-MATRIX-1.0.0",
+  "assembled_date": "2026-08-05",
+  "authoritative_checklist": "docs/MASTER_FORMULA_VALIDATION_MATRIX.md",
+  "changes_formula_or_constants": false,
+  "opens_validation_or_holdout": false,
+  "test_count": 147,
+  "category_counts": {
+    "P": 10,
+    "M": 20,
+    "N": 14,
+    "G": 17,
+    "L": 17,
+    "C": 10,
+    "S": 12,
+    "R": 8,
+    "D": 9,
+    "K": 15,
+    "A": 15
+  },
+  "claim_levels": {
+    "A_useful_low_redshift_law": {
+      "required_categories": ["P", "M", "N", "G", "L", "C", "A"],
+      "boundary": "Mathematical weak-field consistency, numerical verification, galaxies, raw lensing, and joint cluster evidence only; not yet a complete relativistic or cosmological theory."
+    },
+    "B_viable_relativistic_gravity": {
+      "requires_level": "A_useful_low_redshift_law",
+      "additional_required_categories": ["M", "S", "R"]
+    },
+    "C_credible_dark_matter_alternative": {
+      "requires_level": "B_viable_relativistic_gravity",
+      "additional_required_categories": ["D", "K"]
+    }
+  },
+  "frozen_core_thresholds": {
+    "maximum_universal_physical_constants": 5,
+    "maximum_per_object_gravity_parameters": 0,
+    "maximum_lensing_only_parameters": 0,
+    "galaxy_overall_rmse_maximum_relative_to_fixed_mond_rar": 1.05,
+    "galaxy_stratum_rmse_maximum_relative_to_fixed_mond_rar": 1.25,
+    "strong_lens_root_recovery_fraction_minimum": 1.0,
+    "strong_lens_image_rms_maximum_relative_to_halo": 1.25,
+    "baryon_to_halo_gap_closure_fraction_minimum": 0.75,
+    "normalized_solver_residual_maximum": 1e-6,
+    "resolution_change_maximum_fraction": 0.02,
+    "absolute_ppn_gamma_minus_one_maximum": 2.3e-5,
+    "absolute_tensor_wave_speed_fractional_difference_maximum": 1e-15
+  },
+  "failure_policy": {
+    "single_failed_stratum": "retain the candidate, complete independent gates, record the failure, and return to a physically diagnosed repair",
+    "three_materially_distinct_closures_same_gate": "reconsider the mechanism rather than add a convenience parameter",
+    "aggregate_pass_can_hide_stratum_failure": false,
+    "failed_raw_lensing_can_be_repaired_by_derived_halo_map": false
+  },
+  "current_priority": [
+    "finish response-aware A2319 development ICM velocity analysis",
+    "freeze and run the broad galaxy morphology/observation-space gate for a canonical candidate",
+    "run one frozen candidate on complete-baryon raw multi-cluster strong lensing",
+    "only then promote to weak-lensing and joint matter-light tests"
+  ],
+  "parents": [
+    "configs/theory_stage_gates.json",
+    "configs/sigma_v19cc_cross_scale_prediction_gates.json",
+    "docs/THEORY_DEVELOPMENT_STAGE_GATES.md",
+    "docs/SIGMA_V19CC_CROSS_SCALE_PREDICTION_GATES.md",
+    "docs/FORMULA_AND_PRIOR_ART_REGISTRY.md",
+    "docs/SIGMA_V19CY_DIRECT_ICM_VELOCITY_EVIDENCE_PLAN.md"
+  ]
+}
