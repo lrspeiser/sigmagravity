@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.0",
-  "status": "frozen before generating any corrected branch GTI, Chandra source image, source or NXB spectrum, RMF, exposure map, ARF, or response-aware A2319 spectral result; A3667 validation and A754 holdout remain sealed",
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.1",
+  "status": "corrected and refrozen after version 1.0.0 prepared exact development GTIs and region files but logged that punlearn could not see the system parameter directory because PFILES used a colon instead of the HEASoft user/system semicolon; no spectrum, NXB, response, energy distribution, velocity, validation, or holdout target was generated or opened",
   "purpose": "Reproduce the seven published A2319 detector-region velocities on the three strictly bracketed commissioning fragments using current official response and NXB tools, then decide whether the signed ICM velocity field is sufficiently identified to become a development-only Sigma source diagnostic.",
   "parents": {
     "calibration_report": {
@@ -26,7 +26,7 @@
     "heasoft_version": "6.36",
     "xspec_version": "12.15.1",
     "caldb_root": "/home/henry/.local/share/sigmagravity-xrism/caldb",
-    "pfiles": "/home/henry/pfiles:/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles",
+    "pfiles": "/home/henry/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles",
     "ciao_prefix": "/home/henry/ciao-4.18",
     "ciao_version": "4.18",
     "ciao_caldb_version": "4.12.4",
@@ -48,6 +48,17 @@
     "product_root": "data/processed/sigma_v19cy_a2319_response_aware_spectral",
     "preparation_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_input_preparation.json",
     "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_aware_spectral.json"
+  },
+  "closed_failure_history": {
+    "version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.0",
+    "completed": "all three exact branch/environment GTI intersections and all seven detector-region files",
+    "failed_at": "runtime hygiene audit of the captured maketime stderr before spectrum or response generation",
+    "root_cause": "PFILES used a colon between the writable user directory and read-only system directory; HEASoft requires a semicolon for that boundary",
+    "correction": "replace only the separator, rerun from an empty response-product root, and require punlearn stderr to be clean",
+    "science_energy_distribution_summarized_or_fit": false,
+    "response_or_background_generated": false,
+    "velocity_fit_performed": false,
+    "validation_or_holdout_accessed": false
   },
   "branches": [
     {

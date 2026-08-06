@@ -541,7 +541,7 @@ weight both the geomagnetic background and exposure.
 
 ### Frozen response-aware spectral protocol
 
-Protocol `SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.0` was frozen before
+Protocol `SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.1` was frozen before
 generating any corrected GTI, spectrum, NXB, RMF, exposure map, ARF, or
 response-aware velocity. It retains exactly the three strictly bracketed
 fragments and ten branch-region products. Each final GTI is the intersection
@@ -565,6 +565,22 @@ checks are a 6.2--6.7 keV fit and a two-temperature, shared-velocity fit. The
 published no-SSM detector velocities are diagnostics, not sealed validation
 truth: the paper includes the unavailable strictly bracketed 000103 exposure
 and used older HEASoft/XSPEC versions. A3667 and A754 remain sealed.
+
+Version 1.0.0 completed its GTI and region preparation but stopped at the
+captured runtime-hygiene audit: `PFILES` used a colon where HEASoft requires a
+semicolon between writable user parameters and read-only system parameters.
+No spectrum or response had been generated. Version 1.0.1 changes only that
+separator, requires clean `punlearn` execution, and reruns from an empty
+product root.
+
+The corrected preparation passed. The final compatible exposure is
+52,509.377 s for P1 across its two branches and 42,072.955 s for the retained
+P2 branch. All three corrected event files have positive rows, their GTIs and
+headers agree exactly, all seven detector regions reproduce their frozen pixel
+sets, and the runtime log contains no missing-system-parameter warning. No
+energy distribution was summarized and no NXB, response, or velocity was
+generated. The preparation-report SHA-256 is
+`67638b4ad8eaa440c1dc7eca80f72007eeaf27028461152f1e905b6260feabc8`.
 
 ## The new observable source terms
 

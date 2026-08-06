@@ -25,7 +25,7 @@ import apply_sigma_v19cy_a2319_calibration_candidates as application
 
 
 DEFAULT_CONFIG = ROOT / "configs/sigma_v19cy_a2319_response_aware_spectral.json"
-EXPECTED_PROTOCOL = "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.0"
+EXPECTED_PROTOCOL = "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.1"
 BLOCK_BYTES = 4 * 1024 * 1024
 
 
@@ -45,7 +45,7 @@ def validate_config(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
     config = load_json(config_path)
     if config.get("protocol_version") != EXPECTED_PROTOCOL:
         raise RuntimeError("unexpected response-aware spectral protocol")
-    if "frozen before generating" not in config.get("status", ""):
+    if "corrected and refrozen" not in config.get("status", ""):
         raise RuntimeError("response-aware spectral protocol is not frozen")
     for parent in config["parents"].values():
         path = ROOT / parent["path"]
@@ -276,7 +276,11 @@ def prepare(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
             command = maketime_command(config, ROOT / support["ehk"]["path"], output)
             result = application.run_wsl(config["runtime"]["wsl_distribution"], command, timeout=1200)
             commands.append({"stage": "maketime", "obsid": obsid, **result})
-            if result["exit_code"] != 0 or not output.is_file():
+            if (
+                result["exit_code"] != 0
+                or "could not load system parameter file" in result["stderr"]
+                or not output.is_file()
+            ):
                 raise RuntimeError(f"source-environment maketime failed for {obsid}")
             intervals, header = read_intervals(output)
             environment_gtis[obsid] = (intervals, header, output)
@@ -327,7 +331,7 @@ def prepare(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
         raise
 
     report = {
-        "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-INPUT-PREPARATION-RESULT-1.0.0",
+        "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-INPUT-PREPARATION-RESULT-1.0.1",
         "status": "exact_branch_gti_and_detector_region_inputs_prepared",
         "generated_utc": datetime.now(UTC).isoformat(),
         "config_sha256": sha256(config_path),
@@ -339,6 +343,7 @@ def prepare(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
             and len(region_records) == 7
             and all(item["final"]["rows"] > 0 for item in branch_records)
             and all(item["exit_code"] == 0 for item in commands)
+            and all("could not load system parameter file" not in item["stderr"] for item in commands)
         ),
         "science_energy_distribution_summarized_or_fit": False,
         "response_or_background_generated": False,

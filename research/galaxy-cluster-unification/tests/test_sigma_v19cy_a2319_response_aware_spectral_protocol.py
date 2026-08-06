@@ -23,8 +23,10 @@ def sha256(path: Path) -> str:
 
 def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     config = load()
-    assert config["protocol_version"].endswith("1.0.0")
-    assert "frozen before generating" in config["status"]
+    assert config["protocol_version"].endswith("1.0.1")
+    assert "corrected and refrozen" in config["status"]
+    assert ";" in config["runtime"]["pfiles"]
+    assert config["closed_failure_history"]["response_or_background_generated"] is False
     authorization = config["authorization"]
     assert authorization["read_A2319_development_energy_columns"] is True
     assert authorization["access_A3667_validation"] is False

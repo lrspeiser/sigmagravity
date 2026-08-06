@@ -1,0 +1,211 @@
+{
+  "branches": [
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "final": {
+        "bytes": 2761920,
+        "exposure_seconds": 49982.35376486182,
+        "gti_rows": 22,
+        "rows": 16896,
+        "sha256": "c71deebd42eb287a6c6eaa97713c1f68bb4a3c2bc058871a6baa3f6615ea0f3b"
+      },
+      "final_gti_sha256": "a880a998db466b17f4069ebf4a2bbf1277f43f5d82b82c26994441bfef884a92",
+      "obsid": "000101000",
+      "parent_clipped": {
+        "exposure_seconds": 53187.85376486182,
+        "rows": 18,
+        "sha256": "b7761f5bacf34a97bf29d6f17ff87d7bc8300af2e61c59cd7eb150f445fe1895"
+      },
+      "retained_exposure_fraction": 0.9397324807620328
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "final": {
+        "bytes": 230400,
+        "exposure_seconds": 2527.0229526758194,
+        "gti_rows": 1,
+        "rows": 857,
+        "sha256": "5145df8119613d7aa63e7cfeb42cba48d34bda49184eadcfbffdc19ac2108cc2"
+      },
+      "final_gti_sha256": "aebc23276c35e1f68039e615e93b8d9c2445b91797bc23d541da769a6c72ac96",
+      "obsid": "000101000",
+      "parent_clipped": {
+        "exposure_seconds": 2527.0229526758194,
+        "rows": 1,
+        "sha256": "aebc23276c35e1f68039e615e93b8d9c2445b91797bc23d541da769a6c72ac96"
+      },
+      "retained_exposure_fraction": 1.0
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "final": {
+        "bytes": 2744640,
+        "exposure_seconds": 42072.955466628075,
+        "gti_rows": 23,
+        "rows": 16782,
+        "sha256": "3e90e55e1785a07d9d4baa75155ad4c07d7e3c73c19d1a1d43a76f8de1c8d5ce"
+      },
+      "final_gti_sha256": "2759e37c3e75d108038262d4030bbb1c283815d55e165953e9cc8f6658dc49c0",
+      "obsid": "000102000",
+      "parent_clipped": {
+        "exposure_seconds": 46672.955466628075,
+        "rows": 20,
+        "sha256": "181120bab0a25a5d320ceed665cacba63aa45401b987467e28d94a8cfe55a103"
+      },
+      "retained_exposure_fraction": 0.9014418531243629
+    }
+  ],
+  "commands": [
+    {
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; export PFILES='/home/henry/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn maketime; maketime infile='/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000101000/auxil/xa000101000.ehk.gz[EHK]' outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral.installing.y15t40pi/000101000_source_environment.gti expr='T_SAA_SXS>0 && DYE_ELV>5 && CORTIME>6' compact=no time=TIME copykw=no clobber=yes",
+      "exit_code": 0,
+      "obsid": "000101000",
+      "stage": "maketime",
+      "stderr": "PREFR keyword not found, using prefr = 0.5\nPOSTFR keyword not found, using postfr = 0.5\n",
+      "stdout": ""
+    },
+    {
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; export PFILES='/home/henry/pfiles;/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles'; punlearn maketime; maketime infile='/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000102000/auxil/xa000102000.ehk.gz[EHK]' outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral.installing.y15t40pi/000102000_source_environment.gti expr='T_SAA_SXS>0 && DYE_ELV>5 && CORTIME>6' compact=no time=TIME copykw=no clobber=yes",
+      "exit_code": 0,
+      "obsid": "000102000",
+      "stage": "maketime",
+      "stderr": "PREFR keyword not found, using prefr = 0.5\nPOSTFR keyword not found, using postfr = 0.5\n",
+      "stdout": ""
+    }
+  ],
+  "config_sha256": "af6b2127e912dc393eb636a73616564aedc5eccf3fc687ea5d92d1e03e321103",
+  "generated_utc": "2026-08-06T07:58:56.058356+00:00",
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-INPUT-PREPARATION-RESULT-1.0.1",
+  "regions": [
+    {
+      "path": "detector_a.reg",
+      "pixels": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "pixlist": "0-8,28-35",
+      "region": "a",
+      "sha256": "7870bfe224caf6cd045ba768a112df4e355cc565e407236682888f14a0355e08"
+    },
+    {
+      "path": "detector_b.reg",
+      "pixels": [
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pixlist": "9-11,13-17",
+      "region": "b",
+      "sha256": "0b9ae517b48f47b43ef43323cf699607904fcec1785434517eab58f87baffb93"
+    },
+    {
+      "path": "detector_d.reg",
+      "pixels": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "pixlist": "18-26",
+      "region": "d",
+      "sha256": "4b4e715972874e15db37ae32b071277d4f2852cb558a5880abb09d37874a715b"
+    },
+    {
+      "path": "detector_b_prime.reg",
+      "pixels": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "pixlist": "0-8",
+      "region": "b_prime",
+      "sha256": "77338440de52ceee4e6e6158417eb784f3984944411171320d1c3e4804599408"
+    },
+    {
+      "path": "detector_c_prime.reg",
+      "pixels": [
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pixlist": "9-11,13-17",
+      "region": "c_prime",
+      "sha256": "0b9ae517b48f47b43ef43323cf699607904fcec1785434517eab58f87baffb93"
+    },
+    {
+      "path": "detector_d_prime.reg",
+      "pixels": [
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "pixlist": "28-35",
+      "region": "d_prime",
+      "sha256": "cb066ad76409e70d70e5db97a7956e496a0f497c9ad3036b4f11c2d84b6429a8"
+    },
+    {
+      "path": "detector_e_prime.reg",
+      "pixels": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "pixlist": "18-26",
+      "region": "e_prime",
+      "sha256": "4b4e715972874e15db37ae32b071277d4f2852cb558a5880abb09d37874a715b"
+    }
+  ],
+  "response_or_background_generated": false,
+  "science_energy_distribution_summarized_or_fit": false,
+  "status": "exact_branch_gti_and_detector_region_inputs_prepared",
+  "terminal_gate_passed": true,
+  "validation_or_holdout_accessed": false,
+  "velocity_fit_performed": false
+}
