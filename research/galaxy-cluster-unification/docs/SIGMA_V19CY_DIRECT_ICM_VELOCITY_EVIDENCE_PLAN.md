@@ -28,6 +28,28 @@ prominent cold front. Abell 754 has two pointings totaling 320.097 ks and was
 proposed specifically to measure hydrodynamic motion relative to its merger
 axis. Their scientific velocity outcomes remain sealed.
 
+## Archive inventory result
+
+The metadata-only inventory found 568 files totaling 30,602,430,184 bytes:
+
+| Role | Files | Remote bytes | Approx. GiB |
+|---|---:|---:|---:|
+| Development | 209 | 11,323,323,935 | 10.545 |
+| Validation | 191 | 9,416,570,852 | 8.770 |
+| Holdout | 168 | 9,862,535,397 | 9.185 |
+
+No file body or scientific outcome was read. The exact 568-row manifest is
+`results/sigma_v19cy_direct_icm_velocity_evidence/archive_manifest.csv`.
+
+For development, cleaned Resolve events, auxiliary files, Resolve housekeeping,
+pipeline products, and processing logs total 4,145,263,140 bytes (3.861 GiB).
+The Resolve unfiltered events add 5,191,117,778 bytes (4.835 GiB), and cleaned
+Xtend events/products add 325,847,859 bytes (0.303 GiB). The A2319 commissioning
+gain treatment must be checked against the published method and current XRISM
+calibration guidance before freezing which of those additional files are
+scientifically required. This prevents both an incomplete reduction and an
+unnecessary 11.3-GB download.
+
 Abell 2319 is development-only because its result is already known. The
 published analysis measured five sky regions and found a roughly 300 km/s
 velocity range across the core, including a region blueshifted by about

@@ -1,0 +1,79 @@
+{
+  "config": "configs/sigma_v19cy_direct_icm_velocity_evidence.json",
+  "config_sha256": "65a0d59302e97f28c6773d73835d7fb218eb253b9f2ae2fb8895d561585712fe",
+  "file_bodies_downloaded": false,
+  "generated_utc": "2026-08-06T02:28:52.268070+00:00",
+  "lensing_halo_or_gravity_payload_opened": false,
+  "manifest": {
+    "bytes": 150592,
+    "path": "results/sigma_v19cy_direct_icm_velocity_evidence/archive_manifest.csv",
+    "rows": 568,
+    "sha256": "8ead31a33c419e63a7541c82199add9712d78d7e6d3071432731371b658e88b5"
+  },
+  "protocol_version": "SIGMA-V19CY-XRISM-ARCHIVE-INVENTORY-1.0.0",
+  "remote_totals": {
+    "by_observation": [
+      {
+        "bytes": 3113627505,
+        "cluster": "ABELL2319",
+        "files": 69,
+        "obsid": "000101000"
+      },
+      {
+        "bytes": 3064538861,
+        "cluster": "ABELL2319",
+        "files": 68,
+        "obsid": "000102000"
+      },
+      {
+        "bytes": 5145157569,
+        "cluster": "ABELL2319",
+        "files": 72,
+        "obsid": "000103000"
+      },
+      {
+        "bytes": 6591701281,
+        "cluster": "ABELL3667",
+        "files": 91,
+        "obsid": "201050010"
+      },
+      {
+        "bytes": 2824869571,
+        "cluster": "ABELL3667",
+        "files": 100,
+        "obsid": "201051010"
+      },
+      {
+        "bytes": 2578139859,
+        "cluster": "ABELL754",
+        "files": 77,
+        "obsid": "201015010"
+      },
+      {
+        "bytes": 7284395538,
+        "cluster": "ABELL754",
+        "files": 91,
+        "obsid": "201016010"
+      }
+    ],
+    "by_role": {
+      "development": {
+        "bytes": 11323323935,
+        "files": 209
+      },
+      "holdout": {
+        "bytes": 9862535397,
+        "files": 168
+      },
+      "validation": {
+        "bytes": 9416570852,
+        "files": 191
+      }
+    },
+    "bytes": 30602430184,
+    "files": 568
+  },
+  "scientific_velocity_outcomes_opened": false,
+  "status": "named_public_xrism_archives_inventoried_without_scientific_outcome_access",
+  "validation_and_holdout_outcome_seals_preserved": true
+}
