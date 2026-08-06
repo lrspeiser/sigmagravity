@@ -48,9 +48,10 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def validate_inputs() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     config = load_json(CONFIG)
-    if config.get("protocol_version") != (
-        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.4"
-    ):
+    if config.get("protocol_version") not in {
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.4",
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.5",
+    }:
         raise RuntimeError("unexpected response-aware protocol")
     authorization = config["authorization"]
     if authorization["access_A3667_validation"] or authorization["access_A754_holdout"]:

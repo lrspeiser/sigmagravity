@@ -326,3 +326,13 @@ data/derived/r1_rxj2129_chandra_reduction/**/*.reg
 .toolchains/
 .venv-*/
 tmp/
+
+# Mission-tool transient photon products are regenerated from the frozen image,
+# exposure map, seed, and response protocol. Retain the audited raytrace, ARFs,
+# and logs, but do not spend Git LFS storage on these pre-raytrace intermediates.
+data/processed/sigma_v19cy_a2319_response_aware_spectral/response_arfs/**/heasim_photonlist.fits
+data/processed/sigma_v19cy_a2319_response_aware_spectral/response_arfs/**/heasim_events.fits
+
+# The exact P2 raytrace is retained losslessly as image_raytrace.fits.gz because
+# the uncompressed FITS is 8,567,872 bytes above GitHub LFS's 2 GiB limit.
+data/processed/sigma_v19cy_a2319_response_aware_spectral/response_arfs/000102_open_0_cross_obsid/image_raytrace.fits

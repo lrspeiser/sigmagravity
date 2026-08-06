@@ -23,9 +23,11 @@ if str(SCRIPT_DIR) not in sys.path:
 
 import apply_sigma_v19cy_a2319_calibration_candidates as application
 
-
 DEFAULT_CONFIG = ROOT / "configs/sigma_v19cy_a2319_response_aware_spectral.json"
-EXPECTED_PROTOCOL = "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.1"
+ACCEPTED_PROTOCOLS = {
+    f"SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.{minor}"
+    for minor in range(1, 6)
+}
 BLOCK_BYTES = 4 * 1024 * 1024
 
 
@@ -43,9 +45,9 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def validate_config(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
     config = load_json(config_path)
-    if config.get("protocol_version") != EXPECTED_PROTOCOL:
+    if config.get("protocol_version") not in ACCEPTED_PROTOCOLS:
         raise RuntimeError("unexpected response-aware spectral protocol")
-    if "corrected and refrozen" not in config.get("status", ""):
+    if "refrozen" not in config.get("status", ""):
         raise RuntimeError("response-aware spectral protocol is not frozen")
     for parent in config["parents"].values():
         path = ROOT / parent["path"]
@@ -182,7 +184,7 @@ def write_corrected_event(source: Path, output: Path, intervals: np.ndarray) -> 
                 hdu.header["LIVETIME"] = exposure * float(hdu.header["DEADC"])
         new_hdus.writeto(output, checksum=True)
     with fits.open(output, memmap=True, mode="readonly") as hdus:
-        event_rows = int(len(hdus["EVENTS"].data))
+        event_rows = len(hdus["EVENTS"].data)
         output_intervals = normalize_intervals(hdus["GTI"].data["START"], hdus["GTI"].data["STOP"])
     if not np.array_equal(output_intervals, intervals):
         raise RuntimeError(f"corrected GTI changed while writing {output}")
@@ -327,7 +329,7 @@ def prepare(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
             )
 
         os.replace(staging, product_root)
-    except Exception:
+    except Exception:  # noqa: TRY203 - preserve the frozen fail-closed stage boundary
         raise
 
     report = {

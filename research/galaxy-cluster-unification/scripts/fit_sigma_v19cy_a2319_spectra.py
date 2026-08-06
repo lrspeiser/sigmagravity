@@ -15,6 +15,9 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+import numpy as np
+from astropy.io import fits
+
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_DIR = ROOT / "scripts"
 if str(SCRIPT_DIR) not in sys.path:
@@ -40,9 +43,18 @@ REPORT = (
     / "results/sigma_v19cy_direct_icm_velocity_evidence/"
     "development_response_aware_spectral.json"
 )
-EXPECTED_PROTOCOL = "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.4"
+CHECKPOINT = (
+    ROOT
+    / "results/sigma_v19cy_direct_icm_velocity_evidence/"
+    "development_response_aware_spectral.checkpoint.json"
+)
+EXPECTED_PROTOCOL = "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.5"
+EXPECTED_COMPONENT_RESULT = "SIGMA-V19CY-A2319-RESPONSE-COMPONENTS-RESULT-1.0.0"
+EXPECTED_ARF_RESULT = "SIGMA-V19CY-A2319-ARF-RESULT-1.0.0"
 NXB_PARAMETER_COUNT = 56
 NXB_THAWED_NORMALIZATIONS = (3, 7, 14, 20, 23, 29, 35, 41, 47, 50, 53, 56)
+NXB_GROUPING_TYPE = "optsnmin"
+NXB_GROUPING_SCALE = 3.0
 LIGHT_SPEED_KM_S = 299_792.458
 XSPEC_TIMEOUT_SECONDS = 7_200
 MARKER = "__SIGMA_XSPEC__"
@@ -50,6 +62,249 @@ MARKER = "__SIGMA_XSPEC__"
 
 def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
+    temporary = path.with_name(path.name + ".writing")
+    temporary.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    os.replace(temporary, path)
+
+
+def write_checkpoint(
+    staging: Path,
+    nxb_grouping: list[dict[str, Any]],
+    fits: list[dict[str, Any]],
+    status: str,
+) -> None:
+    write_json_atomic(
+        CHECKPOINT,
+        {
+            "protocol_version": (
+                "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-CHECKPOINT-1.0.0"
+            ),
+            "status": status,
+            "updated_utc": datetime.now(UTC).isoformat(),
+            "config_sha256": preparation.sha256(CONFIG),
+            "component_report_sha256": preparation.sha256(COMPONENT_REPORT),
+            "arf_report_sha256": preparation.sha256(ARF_REPORT),
+            "staging_path": str(staging),
+            "nxb_grouping": nxb_grouping,
+            "completed_fits": fits,
+            "terminal_gate_passed": False,
+            "signed_gas_current_constructed": False,
+            "validation_or_holdout_accessed": False,
+        },
+    )
+
+
+def nxb_grouping_command(
+    config: dict[str, Any], original: Path, scratch: Path, grouped: Path, work: Path
+) -> str:
+    """Build the preregistered weighted-NXB grouping command.
+
+    ``ftgrouppha`` accepts background-class spectra, while ``rslnxbgen`` marks
+    its weighted RATE products as DERIVED.  The class is therefore changed
+    only on a staging copy for tool compatibility and restored on the grouped
+    product.  The immutable response-component input is never edited.
+    """
+    system_pfiles = config["runtime"]["pfiles"].split(";", 1)[1]
+    local_pfiles = xspec_path(config, work / "pfiles")
+    diagonal = ROOT / config["nxb_protocol"]["diagonal_response_path"]
+    spectrum_scratch = xspec_path(config, scratch) + "[SPECTRUM]"
+    spectrum_grouped = xspec_path(config, grouped) + "[SPECTRUM]"
+    return (
+        application.runtime_environment(config)
+        + "mkdir -p "
+        + shlex.quote(local_pfiles)
+        + "; export PFILES="
+        + shlex.quote(local_pfiles + ";" + system_pfiles)
+        + "; punlearn ftcopy && ftcopy infile="
+        + shlex.quote(xspec_path(config, original))
+        + " outfile="
+        + shlex.quote(xspec_path(config, scratch))
+        + " copyall=yes clobber=no history=yes"
+        + " && punlearn fthedit && fthedit infile="
+        + shlex.quote(spectrum_scratch)
+        + " keyword=HDUCLAS2 operation=add value=BKG"
+        + " comment='temporary ftgrouppha compatibility class'"
+        + " && punlearn ftgrouppha && ftgrouppha infile="
+        + shlex.quote(xspec_path(config, scratch))
+        + " outfile="
+        + shlex.quote(xspec_path(config, grouped))
+        + f" grouptype={NXB_GROUPING_TYPE} groupscale={NXB_GROUPING_SCALE}"
+        + " respfile="
+        + shlex.quote(xspec_path(config, diagonal))
+        + " && punlearn fthedit && fthedit infile="
+        + shlex.quote(spectrum_grouped)
+        + " keyword=HDUCLAS2 operation=add value=DERIVED"
+        + " comment='XRISM weighted NXB derived spectrum'"
+        + " && punlearn fthedit && fthedit infile="
+        + shlex.quote(spectrum_grouped)
+        + " keyword=RESPFILE operation=add value=NONE"
+        + " comment='response assigned explicitly by frozen XSPEC deck'"
+    )
+
+
+def summarize_nxb_groups(
+    rate: np.ndarray,
+    stat_err: np.ndarray,
+    grouping: np.ndarray,
+    energy_min: np.ndarray,
+    energy_max: np.ndarray,
+    band_keV: list[float],
+) -> dict[str, Any]:
+    """Audit the actual grouped constraints that overlap the fit band."""
+    arrays = (rate, stat_err, grouping, energy_min, energy_max)
+    if len({np.asarray(value).size for value in arrays}) != 1:
+        raise RuntimeError("NXB grouping arrays have inconsistent lengths")
+    if rate.size == 0:
+        raise RuntimeError("NXB grouping arrays are empty")
+    if (
+        not np.all(np.isfinite(rate))
+        or not np.all(np.isfinite(stat_err))
+        or not np.all(np.isfinite(energy_min))
+        or not np.all(np.isfinite(energy_max))
+        or np.any(rate < 0)
+        or np.any(stat_err < 0)
+        or np.any(energy_max <= energy_min)
+    ):
+        raise RuntimeError("NXB grouping arrays contain invalid values")
+    grouping = np.asarray(grouping, dtype=int)
+    if not np.all(np.isin(grouping, (-1, 0, 1))):
+        raise RuntimeError("NXB GROUPING contains an invalid flag")
+
+    group_ids = np.empty(grouping.size, dtype=np.int64)
+    current = -1
+    previous = 1
+    for index, flag in enumerate(grouping):
+        if flag in (0, 1):
+            current += 1
+        elif index == 0 or previous == 0:
+            raise RuntimeError("NXB GROUPING starts or continues after zero with -1")
+        group_ids[index] = current
+        previous = int(flag)
+
+    low, high = map(float, band_keV)
+    overlaps_band = (energy_max > low) & (energy_min < high)
+    if not np.any(overlaps_band):
+        raise RuntimeError("NXB grouping has no channels in its constraint band")
+    overlapping_groups = np.unique(group_ids[overlaps_band])
+    selected_groups: list[int] = []
+    for group_id in overlapping_groups:
+        selected = group_ids == group_id
+        if np.min(energy_min[selected]) >= low and np.max(energy_max[selected]) <= high:
+            selected_groups.append(int(group_id))
+    if not selected_groups:
+        raise RuntimeError("NXB grouping has no complete groups in its constraint band")
+    effective_counts: list[float] = []
+    widths: list[int] = []
+    energy_widths: list[float] = []
+    zero_variance = 0
+    for group_id in selected_groups:
+        selected = group_ids == group_id
+        variance = float(np.sum(np.square(stat_err[selected]), dtype=np.float64))
+        if not math.isfinite(variance) or variance <= 0:
+            zero_variance += 1
+            continue
+        total_rate = float(np.sum(rate[selected], dtype=np.float64))
+        effective_counts.append(total_rate * total_rate / variance)
+        widths.append(int(np.count_nonzero(selected)))
+        energy_widths.append(
+            float(np.max(energy_max[selected]) - np.min(energy_min[selected]))
+        )
+    if zero_variance:
+        raise RuntimeError(
+            f"grouped NXB has {zero_variance} zero-variance groups in the fit band"
+        )
+    minimum_effective_counts = float(min(effective_counts))
+    minimum_signal_to_noise = math.sqrt(minimum_effective_counts)
+    if minimum_signal_to_noise < NXB_GROUPING_SCALE - 1e-6:
+        raise RuntimeError(
+            "grouped NXB does not meet the frozen minimum signal-to-noise"
+        )
+    return {
+        "constraint_band_keV": [low, high],
+        "groups_in_band": len(selected_groups),
+        "boundary_groups_excluded_by_xspec": int(
+            overlapping_groups.size - len(selected_groups)
+        ),
+        "zero_variance_groups_in_band": zero_variance,
+        "minimum_effective_counts_in_band": minimum_effective_counts,
+        "minimum_signal_to_noise_in_band": minimum_signal_to_noise,
+        "median_effective_counts_in_band": float(np.median(effective_counts)),
+        "maximum_channels_per_group_in_band": int(max(widths)),
+        "maximum_group_width_keV_in_band": float(max(energy_widths)),
+    }
+
+
+def inspect_grouped_nxb(
+    original: Path, grouped: Path, diagonal: Path, band_keV: list[float]
+) -> dict[str, Any]:
+    """Verify grouping changes only grouping metadata and removes zero variance."""
+    with fits.open(original, memmap=True, mode="readonly") as hdus:
+        hdus.verify("exception")
+        source = hdus["SPECTRUM"]
+        original_channel = np.asarray(source.data["CHANNEL"], dtype=int).copy()
+        original_rate = np.asarray(source.data["RATE"], dtype=float).copy()
+        original_error = np.asarray(source.data["STAT_ERR"], dtype=float).copy()
+    with fits.open(grouped, memmap=True, mode="readonly") as hdus:
+        hdus.verify("exception")
+        spectrum = hdus["SPECTRUM"]
+        names = set(spectrum.columns.names)
+        if "GROUPING" not in names:
+            raise RuntimeError("grouped NXB is missing GROUPING")
+        header_class = str(spectrum.header.get("HDUCLAS2", "")).strip().upper()
+        poiserr = bool(spectrum.header.get("POISSERR", True))
+        respfile = str(spectrum.header.get("RESPFILE", "")).strip().upper()
+        channel = np.asarray(spectrum.data["CHANNEL"], dtype=int).copy()
+        rate = np.asarray(spectrum.data["RATE"], dtype=float).copy()
+        stat_err = np.asarray(spectrum.data["STAT_ERR"], dtype=float).copy()
+        grouping = np.asarray(spectrum.data["GROUPING"], dtype=int).copy()
+    if header_class != "DERIVED" or poiserr or respfile != "NONE":
+        raise RuntimeError(
+            "grouped NXB did not retain the DERIVED, non-Poisson, explicit-response contract"
+        )
+    if not (
+        np.array_equal(channel, original_channel)
+        and np.array_equal(rate, original_rate)
+        and np.array_equal(stat_err, original_error)
+    ):
+        raise RuntimeError("NXB grouping altered channels, rates, or statistical errors")
+    with fits.open(diagonal, memmap=True, mode="readonly") as hdus:
+        hdus.verify("exception")
+        bounds = hdus["EBOUNDS"].data
+        bound_channel = np.asarray(bounds["CHANNEL"], dtype=int)
+        if not np.array_equal(bound_channel, channel):
+            raise RuntimeError("NXB and diagonal-response channel grids differ")
+        energy_min = np.asarray(bounds["E_MIN"], dtype=float)
+        energy_max = np.asarray(bounds["E_MAX"], dtype=float)
+    summary = summarize_nxb_groups(
+        rate, stat_err, grouping, energy_min, energy_max, band_keV
+    )
+    return {
+        "original": {
+            "path": str(original.relative_to(ROOT)).replace("\\", "/"),
+            "bytes": original.stat().st_size,
+            "sha256": preparation.sha256(original),
+            "channels": int(channel.size),
+            "total_rate": float(np.sum(original_rate, dtype=np.float64)),
+        },
+        "grouped": {
+            "bytes": grouped.stat().st_size,
+            "sha256": preparation.sha256(grouped),
+            "channels": int(channel.size),
+            "total_rate": float(np.sum(rate, dtype=np.float64)),
+            "hduclas2": header_class,
+            "poiserr": poiserr,
+            "respfile": respfile,
+            "grouping_type": NXB_GROUPING_TYPE,
+            "grouping_scale": NXB_GROUPING_SCALE,
+        },
+        "rate_and_stat_err_preserved_exactly": True,
+        **summary,
+    }
 
 
 def parse_nxb_model(text: str) -> tuple[str, list[str]]:
@@ -246,6 +501,13 @@ def marker_commands(
         "tclout varpar",
         f'puts "{MARKER} variable_parameters $xspec_tclout"',
     ]
+    for index in range(1, 2 * source_group_count + 1):
+        commands.extend(
+            [
+                f"tclout stat {index}",
+                f'puts "{MARKER} statistic_spectrum_{index} $xspec_tclout"',
+            ]
+        )
     for index in range(1, source_parameter_count * source_group_count * 2 + 1):
         commands.extend(
             [
@@ -459,7 +721,19 @@ def inspect_fit(
     metadata: dict[str, Any],
     nxb_specs: list[str],
 ) -> dict[str, Any]:
-    required = {"statistic", "dof", "covariance", "variable_parameters", "redshift", "redshift_error", "redshift_sigma"}
+    required = {
+        "statistic",
+        "dof",
+        "covariance",
+        "variable_parameters",
+        "redshift",
+        "redshift_error",
+        "redshift_sigma",
+        *(
+            f"statistic_spectrum_{index}"
+            for index in range(1, 2 * metadata["source_group_count"] + 1)
+        ),
+    }
     missing = sorted(required - set(markers))
     if missing:
         raise RuntimeError(f"missing XSPEC result markers: {missing}")
@@ -495,9 +769,34 @@ def inspect_fit(
             nxb_bound_hits.append(global_index)
     halfwidth = max(abs(velocity - low_velocity), abs(high_velocity - velocity))
     statistic = first_float(markers["statistic"])
+    statistic_by_spectrum = {
+        str(index): first_float(markers[f"statistic_spectrum_{index}"])
+        for index in range(1, 2 * metadata["source_group_count"] + 1)
+    }
+    contribution_sum = float(sum(statistic_by_spectrum.values()))
+    if not math.isclose(statistic, contribution_sum, rel_tol=1e-5, abs_tol=1e-3):
+        raise RuntimeError(
+            "per-spectrum XSPEC statistic contributions do not sum to the total"
+        )
     dof = round(first_float(markers["dof"]))
     return {
         "statistic": statistic,
+        "statistic_by_spectrum": statistic_by_spectrum,
+        "source_cstat_contribution": float(
+            sum(
+                statistic_by_spectrum[str(index)]
+                for index in range(1, metadata["source_group_count"] + 1)
+            )
+        ),
+        "nxb_chi_square_contribution": float(
+            sum(
+                statistic_by_spectrum[str(index)]
+                for index in range(
+                    metadata["source_group_count"] + 1,
+                    2 * metadata["source_group_count"] + 1,
+                )
+            )
+        ),
         "dof": dof,
         "redshift": redshift,
         "redshift_profile_interval": [low_z, high_z],
@@ -520,6 +819,32 @@ def validate_inputs() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     config = load_json(CONFIG)
     if config.get("protocol_version") != EXPECTED_PROTOCOL:
         raise RuntimeError("unexpected response-aware spectral protocol")
+    grouping_amendment = config.get("pre_fit_grouping_amendment", {})
+    if grouping_amendment.get("previous_version") != (
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.4"
+    ):
+        raise RuntimeError("unexpected pre-fit grouping amendment ancestry")
+    grouping = grouping_amendment.get("nxb_grouping", {})
+    if (
+        grouping.get("tool") != "ftgrouppha"
+        or grouping.get("grouptype") != NXB_GROUPING_TYPE
+        or grouping.get("groupscale") != NXB_GROUPING_SCALE
+        or grouping.get("grid_channels") != 60000
+        or grouping.get("constraint_band_keV") != [1.0, 17.0]
+        or grouping_amendment.get("source_grouping") != "none"
+    ):
+        raise RuntimeError("pre-fit NXB grouping rule is not the frozen contract")
+    if any(
+        grouping_amendment.get(key)
+        for key in (
+            "source_model_or_energy_band_changed",
+            "gravity_formula_or_parameters_changed",
+            "source_energy_distribution_summarized_or_fit",
+            "velocity_fit_performed",
+            "validation_or_holdout_accessed",
+        )
+    ) or grouping_amendment.get("arf_generated") is not True:
+        raise RuntimeError("pre-fit grouping amendment crossed a sealed boundary")
     authorization = config["authorization"]
     if not authorization["fit_A2319_development_spectra_and_velocities"]:
         raise RuntimeError("A2319 spectral fitting is not authorized")
@@ -529,14 +854,69 @@ def validate_inputs() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
         raise RuntimeError("lensing or gravity targets are not sealed")
     components_report = load_json(COMPONENT_REPORT)
     arf_report = load_json(ARF_REPORT)
+    if components_report.get("protocol_version") != EXPECTED_COMPONENT_RESULT:
+        raise RuntimeError("unexpected response-component result protocol")
+    if arf_report.get("protocol_version") != EXPECTED_ARF_RESULT:
+        raise RuntimeError("unexpected ARF result protocol")
     if not components_report.get("component_gate_passed"):
         raise RuntimeError("response-component gate did not pass")
     if not arf_report.get("arf_gate_passed"):
         raise RuntimeError("ARF gate did not pass")
+    for label, report in (
+        ("response-component", components_report),
+        ("ARF", arf_report),
+    ):
+        if any(
+            report.get(key)
+            for key in (
+                "xrism_energy_distribution_summarized_or_fit",
+                "velocity_fit_performed",
+                "validation_or_holdout_accessed",
+            )
+        ):
+            raise RuntimeError(f"{label} report crossed a sealed pre-fit boundary")
+    if len(components_report.get("branches", [])) != 3 or sum(
+        len(row.get("regions", [])) for row in components_report.get("branches", [])
+    ) != 10:
+        raise RuntimeError(
+            "response-component report does not contain three branches and ten regions"
+        )
+    if not components_report.get("commands") or any(
+        row.get("exit_code") != 0 for row in components_report["commands"]
+    ):
+        raise RuntimeError(
+            "response-component report contains a failed or missing mission-tool command"
+        )
+    if len(arf_report.get("branches", [])) != 3 or sum(
+        len(row.get("regions", [])) for row in arf_report.get("branches", [])
+    ) != 10:
+        raise RuntimeError("ARF report does not contain three branches and ten regions")
+    if not all(
+        row.get("one_raytrace_reused_within_branch") is True
+        for row in arf_report["branches"]
+    ):
+        raise RuntimeError("ARF report did not preserve branch-scoped raytrace reuse")
+    if not arf_report.get("commands") or any(
+        row.get("exit_code") != 0 for row in arf_report["commands"]
+    ):
+        raise RuntimeError("ARF report contains a failed or missing mission-tool command")
+    statistical_amendment = config.get("pre_fit_statistical_amendment", {})
+    if components_report.get("config_sha256") != statistical_amendment.get(
+        "component_generation_config_sha256"
+    ):
+        raise RuntimeError("response-component report belongs to a different protocol")
+    if preparation.sha256(COMPONENT_REPORT) != statistical_amendment.get(
+        "component_report_sha256"
+    ):
+        raise RuntimeError("response-component report hash does not match its amendment")
     if arf_report.get("component_report_sha256") != preparation.sha256(COMPONENT_REPORT):
         raise RuntimeError("ARF report belongs to different response components")
-    if arf_report.get("config_sha256") != preparation.sha256(CONFIG):
-        raise RuntimeError("ARF report belongs to a different fit protocol")
+    if arf_report.get("config_sha256") != grouping_amendment.get(
+        "arf_generation_config_sha256"
+    ):
+        raise RuntimeError("ARF report belongs to a different generation protocol")
+    if preparation.sha256(ARF_REPORT) != grouping_amendment.get("arf_report_sha256"):
+        raise RuntimeError("ARF report hash does not match its amendment")
     return config, components_report, arf_report
 
 
@@ -575,6 +955,68 @@ def assemble_bundles(
     if {key: len(value) for key, value in bundles.items()} != expected_counts:
         raise RuntimeError("unexpected A2319 branch-to-region fit topology")
     return bundles
+
+
+def prepare_grouped_nxb_spectra(
+    config: dict[str, Any],
+    bundles: dict[str, list[dict[str, Path]]],
+    staging: Path,
+    reports: list[dict[str, Any]],
+) -> dict[str, list[dict[str, Path]]]:
+    """Create one audited optimal-S/N NXB product per branch-region pair."""
+    grouped_bundles: dict[str, list[dict[str, Path]]] = {}
+    diagonal = ROOT / config["nxb_protocol"]["diagonal_response_path"]
+    band = config["fit_protocol"]["nxb_constraint_band_keV"]
+    for region, bundle in bundles.items():
+        grouped_rows: list[dict[str, Path]] = []
+        for row in bundle:
+            original = row["nxb_pha"]
+            branch = original.parent.parent.name
+            work = staging / "grouped_nxb" / branch / region
+            work.mkdir(parents=True)
+            scratch = work / "nxb_input_class_bkg.pha"
+            grouped = work / "nxb_optsnmin3.pha"
+            command = nxb_grouping_command(config, original, scratch, grouped, work)
+            record = application.run_wsl(
+                config["runtime"]["wsl_distribution"], command, timeout=600
+            )
+            if record["exit_code"] != 0:
+                raise RuntimeError(
+                    f"NXB grouping failed for {branch}/{region}: {record['stderr']}"
+                )
+            audit = inspect_grouped_nxb(original, grouped, diagonal, band)
+            audit["grouped"]["path"] = str(
+                Path("data/processed/sigma_v19cy_a2319_response_aware_spectral")
+                / "spectral_fits"
+                / grouped.relative_to(staging)
+            ).replace("\\", "/")
+            audit["branch"] = branch
+            audit["region"] = region
+            audit["command"] = record
+            reports.append(audit)
+            scratch.unlink()
+            grouped_row = dict(row)
+            grouped_row["nxb_pha"] = grouped
+            grouped_rows.append(grouped_row)
+        grouped_bundles[region] = grouped_rows
+    if len(reports) != 10:
+        raise RuntimeError(f"expected ten grouped NXB products, found {len(reports)}")
+    return grouped_bundles
+
+
+def nxb_grouping_gate_passed(reports: list[dict[str, Any]]) -> bool:
+    return len(reports) == 10 and all(
+        row.get("rate_and_stat_err_preserved_exactly") is True
+        and row.get("zero_variance_groups_in_band") == 0
+        and float(row.get("minimum_signal_to_noise_in_band", -math.inf))
+        >= NXB_GROUPING_SCALE - 1e-6
+        and row.get("grouped", {}).get("hduclas2") == "DERIVED"
+        and row.get("grouped", {}).get("poiserr") is False
+        and row.get("grouped", {}).get("respfile") == "NONE"
+        and row.get("grouped", {}).get("grouping_type") == NXB_GROUPING_TYPE
+        and row.get("grouped", {}).get("grouping_scale") == NXB_GROUPING_SCALE
+        for row in reports
+    )
 
 
 def xspec_command(config: dict[str, Any], work: Path, deck: Path) -> str:
@@ -632,10 +1074,21 @@ def run_fit(
     fit["region"] = region
     fit["variant"] = variant["name"]
     fit["metadata"] = metadata
+
+    def report_path(path: Path) -> str:
+        try:
+            return str(path.relative_to(ROOT)).replace("\\", "/")
+        except ValueError:
+            return str(
+                Path("data/processed/sigma_v19cy_a2319_response_aware_spectral")
+                / "spectral_fits"
+                / path.relative_to(staging)
+            ).replace("\\", "/")
+
     fit["inputs"] = [
         {
             role: {
-                "path": str(path.relative_to(ROOT)).replace("\\", "/"),
+                "path": report_path(path),
                 "bytes": path.stat().st_size,
                 "sha256": preparation.sha256(path),
             }
@@ -687,13 +1140,17 @@ def published_comparison(
 
 def generate() -> dict[str, Any]:
     config, component_report, arf_report = validate_inputs()
-    bundles = assemble_bundles(config, component_report, arf_report)
+    raw_bundles = assemble_bundles(config, component_report, arf_report)
     nxb_path = ROOT / config["nxb_protocol"]["empirical_model_path"]
     nxb_expression, nxb_specs = parse_nxb_model(nxb_path.read_text(encoding="utf-8"))
     product_root = (ROOT / config["paths"]["product_root"]).resolve()
     output_root = product_root / "spectral_fits"
     if output_root.exists():
         raise RuntimeError(f"refusing to overwrite spectral fits: {output_root}")
+    if CHECKPOINT.exists():
+        raise RuntimeError(
+            f"refusing to overwrite an incomplete spectral checkpoint: {CHECKPOINT}"
+        )
     distribution = config["runtime"]["wsl_distribution"]
     native_temp = Path(f"//wsl.localhost/{distribution}/tmp")
     staging = Path(tempfile.mkdtemp(prefix="sigma_v19cy_spectral_fits_", dir=native_temp))
@@ -703,19 +1160,29 @@ def generate() -> dict[str, Any]:
         *config["fit_protocol"]["robustness_models"],
     ]
     fits: list[dict[str, Any]] = []
+    nxb_grouping: list[dict[str, Any]] = []
     try:
+        bundles = prepare_grouped_nxb_spectra(
+            config, raw_bundles, staging, nxb_grouping
+        )
+        write_checkpoint(staging, nxb_grouping, fits, "nxb_grouping_completed")
         for region, bundle in bundles.items():
             for variant in variants:
-                fits.append(
-                    run_fit(
-                        config,
-                        region,
-                        bundle,
-                        variant,
-                        nxb_expression,
-                        nxb_specs,
-                        staging,
-                    )
+                fit = run_fit(
+                    config,
+                    region,
+                    bundle,
+                    variant,
+                    nxb_expression,
+                    nxb_specs,
+                    staging,
+                )
+                fits.append(fit)
+                write_checkpoint(
+                    staging,
+                    nxb_grouping,
+                    fits,
+                    f"fit_completed:{region}:{variant['name']}",
                 )
         publish = Path(tempfile.mkdtemp(prefix="spectral_fits.installing.", dir=product_root))
         try:
@@ -727,12 +1194,13 @@ def generate() -> dict[str, Any]:
         shutil.rmtree(staging)
     except Exception as exc:
         failure = {
-            "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-RESULT-1.0.0",
+            "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-RESULT-1.0.1",
             "status": "response_aware_spectral_fit_failed_closed",
             "generated_utc": datetime.now(UTC).isoformat(),
             "config_sha256": preparation.sha256(CONFIG),
             "component_report_sha256": preparation.sha256(COMPONENT_REPORT),
             "arf_report_sha256": preparation.sha256(ARF_REPORT),
+            "nxb_grouping": nxb_grouping,
             "error": str(exc),
             "completed_fits": fits,
             "staging_path": str(staging),
@@ -740,7 +1208,7 @@ def generate() -> dict[str, Any]:
             "signed_gas_current_constructed": False,
             "validation_or_holdout_accessed": False,
         }
-        REPORT.write_text(json.dumps(failure, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        write_json_atomic(REPORT, failure)
         raise
     by_region_variant = {(row["region"], row["variant"]): row for row in fits}
     primary = [by_region_variant[(region, "primary")] for region in bundles]
@@ -767,6 +1235,7 @@ def generate() -> dict[str, Any]:
     gates = {
         "response_component_gate_passed": component_report["component_gate_passed"] is True,
         "arf_gate_passed": arf_report["arf_gate_passed"] is True,
+        "all_ten_nxb_grouping_gates_passed": nxb_grouping_gate_passed(nxb_grouping),
         "all_seven_primary_fits_converged": len(primary) == 7 and all(row["converged"] for row in primary),
         "no_free_parameter_at_hard_bound_in_any_fit": all(
             row["no_free_parameter_at_hard_bound"] for row in fits
@@ -781,13 +1250,14 @@ def generate() -> dict[str, Any]:
         >= gate["minimum_robust_regions"],
     }
     report = {
-        "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-RESULT-1.0.0",
+        "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-RESULT-1.0.1",
         "status": "response_aware_spectral_terminal_gate_passed" if all(gates.values()) else "response_aware_spectral_terminal_gate_failed",
         "generated_utc": datetime.now(UTC).isoformat(),
         "config_sha256": preparation.sha256(CONFIG),
         "component_report_sha256": preparation.sha256(COMPONENT_REPORT),
         "arf_report_sha256": preparation.sha256(ARF_REPORT),
         "nxb_model_sha256": preparation.sha256(nxb_path),
+        "nxb_grouping": nxb_grouping,
         "fits": fits,
         "robustness": robustness,
         "robust_regions": robust_regions,
@@ -800,7 +1270,8 @@ def generate() -> dict[str, Any]:
         "missing_000103_exposure_limitation": "P2 uses only 000102000 because 000103000 has no strictly bracketed gain interval.",
         "validation_or_holdout_accessed": False,
     }
-    REPORT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    write_json_atomic(REPORT, report)
+    CHECKPOINT.unlink()
     return report
 
 

@@ -22,8 +22,8 @@ def sha256(path: Path) -> str:
 
 def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     config = load()
-    assert config["protocol_version"].endswith("1.0.4")
-    assert "fit likelihood refrozen" in config["status"]
+    assert config["protocol_version"].endswith("1.0.5")
+    assert "NXB constraints were refrozen" in config["status"]
     assert ";" in config["runtime"]["pfiles"]
     assert config["closed_failure_history"]["response_or_background_generated"] is False
     amendment = config["pre_response_interface_amendment"]
@@ -38,6 +38,22 @@ def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     assert fit_amendment["nxb_spectrum_contract"]["statistic"] == "chi standard"
     assert fit_amendment["source_energy_distribution_summarized_or_fit"] is False
     assert fit_amendment["validation_or_holdout_accessed"] is False
+    grouping_amendment = config["pre_fit_grouping_amendment"]
+    assert grouping_amendment["previous_version"].endswith("1.0.4")
+    assert grouping_amendment["arf_generation_config_sha256"] == (
+        "fb164dc7eb0b9fecedc0dfddf3f6c4e625d08e9470893a5c34f635811a9a9c27"
+    )
+    arf_report = ROOT / (
+        "results/sigma_v19cy_direct_icm_velocity_evidence/"
+        "development_response_arfs.json"
+    )
+    assert sha256(arf_report) == grouping_amendment["arf_report_sha256"]
+    assert grouping_amendment["nxb_grouping"]["grouptype"] == "optsnmin"
+    assert grouping_amendment["nxb_grouping"]["groupscale"] == pytest.approx(3.0)
+    assert grouping_amendment["ten_product_preflight"]["products_checked"] == 10
+    assert grouping_amendment["source_energy_distribution_summarized_or_fit"] is False
+    assert grouping_amendment["velocity_fit_performed"] is False
+    assert grouping_amendment["validation_or_holdout_accessed"] is False
     authorization = config["authorization"]
     assert authorization["read_A2319_development_energy_columns"] is True
     assert authorization["access_A3667_validation"] is False
@@ -119,6 +135,15 @@ def test_fit_is_one_response_aware_physical_model_with_two_robustness_checks():
     assert fit["source_statistic"] == "cstat"
     assert fit["nxb_statistic"] == "chi standard"
     assert fit["nxb_constraint_band_keV"] == [1.0, 17.0]
+    assert fit["data_group_protocol"].startswith(
+        "For every branch-region product, load ungrouped source COUNTS"
+    )
+    assert config["nxb_protocol"]["grouping"] == {
+        "source": "none",
+        "nxb_grouptype": "optsnmin",
+        "nxb_groupscale": 3.0,
+        "nxb_grid_channels": 60000,
+    }
     assert fit["atomdb"]["version"] == "3.0.9"
     assert fit["abundance_table"] == "lodd"
     assert fit["nh_1e22_cm2_fixed"] == pytest.approx(0.112)
@@ -132,6 +157,9 @@ def test_terminal_gate_requires_all_regions_but_does_not_claim_gravity_validatio
     config = load()
     gate = config["terminal_gate"]
     assert gate["required_branch_region_products"] == 10
+    assert gate["require_all_ten_nxb_grouping_commands_exit_zero"] is True
+    assert gate["require_nxb_grouping_zero_variance_groups_in_band"] == 0
+    assert gate["minimum_nxb_group_signal_to_noise_in_band"] == pytest.approx(3.0)
     assert gate["require_all_seven_primary_fits_converged"] is True
     assert gate["minimum_regions_meeting_velocity_interval_gate"] == 5
     assert gate["minimum_robust_regions"] == 5
