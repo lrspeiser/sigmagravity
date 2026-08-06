@@ -1,0 +1,1088 @@
+{
+  "action_derived": false,
+  "combinations": {
+    "ABELL2146": {
+      "integrated": {
+        "cells": 1270,
+        "combine_step": {
+          "reused_hash_frozen_direct_reference": true
+        },
+        "combined_full_pha_source_counts": 259688,
+        "event_energy_background_counts_0p5_7_keV": 81581,
+        "event_energy_source_counts_0p5_7_keV": 227561,
+        "expected_full_pha_source_counts": 259688,
+        "expected_grouped_pha_links": {
+          "ANCRFILE": "ABELL2146_integrated_src.arf",
+          "BACKFILE": "ABELL2146_integrated_bkg.pi",
+          "RESPFILE": "ABELL2146_integrated_src.rmf"
+        },
+        "frozen_snapshot": {
+          "bytes": 6428160,
+          "files": 4,
+          "products": [
+            {
+              "bytes": 895680,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+              "reused": false,
+              "role": "grouped_source_spectrum",
+              "sha256": "8cb57aa778336370ac275ad5c0f89def10cd2b7bc8d5edcb18db58772643acd0"
+            },
+            {
+              "bytes": 864000,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_integrated/ABELL2146_integrated_bkg.pi",
+              "reused": false,
+              "role": "background_spectrum",
+              "sha256": "d6f75867b8aba60d550d1437727ec62b43293ba293cc8e42c686d38dd6a48e46"
+            },
+            {
+              "bytes": 1255680,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.arf",
+              "reused": false,
+              "role": "source_arf",
+              "sha256": "742843ee51f9cb8a4b28812a05b94fb9c82e6dfd08cea3800081e5c952d317d0"
+            },
+            {
+              "bytes": 3412800,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.rmf",
+              "reused": false,
+              "role": "source_rmf",
+              "sha256": "d0a613f58280fd0dd21641c1d1336eb988dc2db9565a718feb6972935fcee0bf"
+            }
+          ]
+        },
+        "full_pha_count_conservation_exact": true,
+        "group_step": {
+          "reused_hash_frozen_direct_reference": true
+        },
+        "grouped_pha_links": {
+          "ANCRFILE": "ABELL2146_integrated_src.arf",
+          "BACKFILE": "ABELL2146_integrated_bkg.pi",
+          "RESPFILE": "ABELL2146_integrated_src.rmf"
+        },
+        "label": "ABELL2146_integrated",
+        "runtime_remediation": {
+          "cell_threshold": 1270,
+          "mode": "hash_frozen_direct_reference",
+          "source_stack_sha256": "8cb57aa778336370ac275ad5c0f89def10cd2b7bc8d5edcb18db58772643acd0"
+        },
+        "source_stack_sha256": "8cb57aa778336370ac275ad5c0f89def10cd2b7bc8d5edcb18db58772643acd0"
+      },
+      "regional": {
+        "cells": 10,
+        "combine_step": {
+          "reused_hash_frozen_direct_reference": true
+        },
+        "combined_full_pha_source_counts": 3886,
+        "event_energy_background_counts_0p5_7_keV": 4204,
+        "event_energy_source_counts_0p5_7_keV": 2503,
+        "expected_full_pha_source_counts": 3886,
+        "expected_grouped_pha_links": {
+          "ANCRFILE": "ABELL2146_bin62_src.arf",
+          "BACKFILE": "ABELL2146_bin62_bkg.pi",
+          "RESPFILE": "ABELL2146_bin62_src.rmf"
+        },
+        "frozen_snapshot": {
+          "bytes": 2401920,
+          "files": 4,
+          "products": [
+            {
+              "bytes": 89280,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src_grp.pi",
+              "reused": false,
+              "role": "grouped_source_spectrum",
+              "sha256": "4b3f76b6fc531b9d61c127a3628d457ab3e7f24044d1778f285b8bd8388801ed"
+            },
+            {
+              "bytes": 57600,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_bin62/ABELL2146_bin62_bkg.pi",
+              "reused": false,
+              "role": "background_spectrum",
+              "sha256": "8f8c2ca6c74ba69f45bedac990f881a023a2a9411a7401d66a0d028fee050260"
+            },
+            {
+              "bytes": 46080,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src.arf",
+              "reused": false,
+              "role": "source_arf",
+              "sha256": "39ae36f33893cc8ac8d20b99cea72e12c091bb7e7e152c8b7bd8e1ac00ae5dfb"
+            },
+            {
+              "bytes": 2208960,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src.rmf",
+              "reused": false,
+              "role": "source_rmf",
+              "sha256": "564e09c0f684e9bdfe74a4e63f09fd19b927ef6a0325c899568bd245d99c9e43"
+            }
+          ]
+        },
+        "full_pha_count_conservation_exact": true,
+        "group_step": {
+          "reused_hash_frozen_direct_reference": true
+        },
+        "grouped_pha_links": {
+          "ANCRFILE": "ABELL2146_bin62_src.arf",
+          "BACKFILE": "ABELL2146_bin62_bkg.pi",
+          "RESPFILE": "ABELL2146_bin62_src.rmf"
+        },
+        "label": "ABELL2146_bin62",
+        "runtime_remediation": {
+          "cell_threshold": 1270,
+          "mode": "hash_frozen_direct_reference",
+          "source_stack_sha256": "4b3f76b6fc531b9d61c127a3628d457ab3e7f24044d1778f285b8bd8388801ed"
+        },
+        "source_stack_sha256": "4b3f76b6fc531b9d61c127a3628d457ab3e7f24044d1778f285b8bd8388801ed"
+      }
+    },
+    "BULLET": {
+      "integrated": {
+        "cells": 3812,
+        "combine_step": {
+          "final": {
+            "command": [
+              "combine_spectra",
+              "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/final/BULLET_integrated_source.lis",
+              "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/final/BULLET_integrated",
+              "src_arfs=NONE",
+              "src_rmfs=NONE",
+              "bkg_arfs=NONE",
+              "bkg_rmfs=NONE",
+              "method=sum",
+              "bscale_method=asca",
+              "exp_origin=pha",
+              "clobber=no",
+              "verbose=1",
+              "mode=h"
+            ],
+            "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/final/logs/BULLET_integrated_pha.log",
+            "reused": false
+          },
+          "first_level": [
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs554/BULLET_integrated_obs554_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs554/BULLET_integrated_obs554",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs554/logs/BULLET_integrated_obs554_pha.log",
+              "reused": false
+            },
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs3184/BULLET_integrated_obs3184_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs3184/BULLET_integrated_obs3184",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs3184/logs/BULLET_integrated_obs3184_pha.log",
+              "reused": false
+            },
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs4984/BULLET_integrated_obs4984_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs4984/BULLET_integrated_obs4984",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs4984/logs/BULLET_integrated_obs4984_pha.log",
+              "reused": false
+            },
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs4985/BULLET_integrated_obs4985_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs4985/BULLET_integrated_obs4985",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs4985/logs/BULLET_integrated_obs4985_pha.log",
+              "reused": false
+            },
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs4986/BULLET_integrated_obs4986_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs4986/BULLET_integrated_obs4986",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs4986/logs/BULLET_integrated_obs4986_pha.log",
+              "reused": false
+            },
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5355/BULLET_integrated_obs5355_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5355/BULLET_integrated_obs5355",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5355/logs/BULLET_integrated_obs5355_pha.log",
+              "reused": false
+            },
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5356/BULLET_integrated_obs5356_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5356/BULLET_integrated_obs5356",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5356/logs/BULLET_integrated_obs5356_pha.log",
+              "reused": false
+            },
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5357/BULLET_integrated_obs5357_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5357/BULLET_integrated_obs5357",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5357/logs/BULLET_integrated_obs5357_pha.log",
+              "reused": false
+            },
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5358/BULLET_integrated_obs5358_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5358/BULLET_integrated_obs5358",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5358/logs/BULLET_integrated_obs5358_pha.log",
+              "reused": false
+            },
+            {
+              "command": [
+                "combine_spectra",
+                "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5361/BULLET_integrated_obs5361_source.lis",
+                "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5361/BULLET_integrated_obs5361",
+                "src_arfs=NONE",
+                "src_rmfs=NONE",
+                "bkg_arfs=NONE",
+                "bkg_rmfs=NONE",
+                "method=sum",
+                "bscale_method=asca",
+                "exp_origin=pha",
+                "clobber=no",
+                "verbose=1",
+                "mode=h"
+              ],
+              "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/obs5361/logs/BULLET_integrated_obs5361_pha.log",
+              "reused": false
+            }
+          ]
+        },
+        "combined_full_pha_source_counts": 707569,
+        "event_energy_background_counts_0p5_7_keV": 634253,
+        "event_energy_source_counts_0p5_7_keV": 660535,
+        "expected_full_pha_source_counts": 707569,
+        "expected_grouped_pha_links": {
+          "ANCRFILE": "BULLET_integrated_src.arf",
+          "BACKFILE": "BULLET_integrated_bkg.pi",
+          "RESPFILE": "BULLET_integrated_src.rmf"
+        },
+        "frozen_snapshot": {
+          "bytes": 2836800,
+          "files": 4,
+          "products": [
+            {
+              "bytes": 302400,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_integrated/BULLET_integrated_src_grp.pi",
+              "reused": false,
+              "role": "grouped_source_spectrum",
+              "sha256": "78d8a37bfb23188fa7e1f68fd5be0b4e33a22276f1d9c4479fef75765e51f65c"
+            },
+            {
+              "bytes": 273600,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_integrated/BULLET_integrated_bkg.pi",
+              "reused": false,
+              "role": "background_spectrum",
+              "sha256": "ceea237b069336a25343ba3653fd7a0ffa7a98156655aeef7646148aaea288c3"
+            },
+            {
+              "bytes": 43200,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_integrated/BULLET_integrated_src.arf",
+              "reused": false,
+              "role": "source_arf",
+              "sha256": "9277aabc2efa123f53e06ce035be4b92fd75daa98ea654e1cba475957e7fa1ef"
+            },
+            {
+              "bytes": 2217600,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_integrated/BULLET_integrated_src.rmf",
+              "reused": false,
+              "role": "source_rmf",
+              "sha256": "8345dd49641e51a3388e898456e45f56fa3361685dc37280b75a72f569569986"
+            }
+          ]
+        },
+        "full_pha_count_conservation_exact": true,
+        "group_step": {
+          "command": [
+            "dmgroup",
+            "infile=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/final/BULLET_integrated_src.pi",
+            "outfile=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/final/BULLET_integrated_src_grp.pi",
+            "grouptype=NUM_CTS",
+            "grouptypeval=25",
+            "binspec=",
+            "xcolumn=CHANNEL",
+            "ycolumn=COUNTS",
+            "tabspec=",
+            "tabcolumn=",
+            "stopspec=",
+            "stopcolumn=",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_integrated/final/logs/final_dmgroup.log",
+          "reused": false
+        },
+        "grouped_pha_links": {
+          "ANCRFILE": "BULLET_integrated_src.arf",
+          "BACKFILE": "BULLET_integrated_bkg.pi",
+          "RESPFILE": "BULLET_integrated_src.rmf"
+        },
+        "label": "BULLET_integrated",
+        "runtime_remediation": {
+          "final_rmf_threshold": 1e-06,
+          "groups": [
+            {
+              "cells": 329,
+              "obsid": 554
+            },
+            {
+              "cells": 366,
+              "obsid": 3184
+            },
+            {
+              "cells": 370,
+              "obsid": 4984
+            },
+            {
+              "cells": 388,
+              "obsid": 4985
+            },
+            {
+              "cells": 404,
+              "obsid": 4986
+            },
+            {
+              "cells": 387,
+              "obsid": 5355
+            },
+            {
+              "cells": 387,
+              "obsid": 5356
+            },
+            {
+              "cells": 409,
+              "obsid": 5357
+            },
+            {
+              "cells": 401,
+              "obsid": 5358
+            },
+            {
+              "cells": 371,
+              "obsid": 5361
+            }
+          ],
+          "intermediate_rmf_threshold": 0.0,
+          "mode": "v19cw_equivalent_observation_hierarchy",
+          "partition_key": "obsid",
+          "source_stack_sha256": "23c915080df755614d40a7017d02975cb151c0c71d28c9f6b63db04ff6dfa191",
+          "v19cw_report_sha256": "d96e5aeaf9ff09522f97942b2cce0186d2dbab55d4cfedad025d04c62f4bff54"
+        },
+        "source_stack_sha256": "23c915080df755614d40a7017d02975cb151c0c71d28c9f6b63db04ff6dfa191"
+      },
+      "regional": {
+        "cells": 9,
+        "combine_step": {
+          "command": [
+            "combine_spectra",
+            "src_spectra=@/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_bin169/source_spectra.lis",
+            "outroot=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_bin169/BULLET_bin169",
+            "method=sum",
+            "bscale_method=asca",
+            "exp_origin=pha",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_bin169/logs/combine_spectra.log",
+          "reused": false
+        },
+        "combined_full_pha_source_counts": 2787,
+        "event_energy_background_counts_0p5_7_keV": 1123,
+        "event_energy_source_counts_0p5_7_keV": 2675,
+        "expected_full_pha_source_counts": 2787,
+        "expected_grouped_pha_links": {
+          "ANCRFILE": "BULLET_bin169_src.arf",
+          "BACKFILE": "BULLET_bin169_bkg.pi",
+          "RESPFILE": "BULLET_bin169_src.rmf"
+        },
+        "frozen_snapshot": {
+          "bytes": 2419200,
+          "files": 4,
+          "products": [
+            {
+              "bytes": 89280,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_bin169/BULLET_bin169_src_grp.pi",
+              "reused": false,
+              "role": "grouped_source_spectrum",
+              "sha256": "6d598fe78c9c74fa7425a4235ec81ea3453cb54bf666f2c9f7004f51ea105b9f"
+            },
+            {
+              "bytes": 60480,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_bin169/BULLET_bin169_bkg.pi",
+              "reused": false,
+              "role": "background_spectrum",
+              "sha256": "19eb1a00b531c6cf14002e0a17185af631c8b292c629c60c2fd7b734da4a319d"
+            },
+            {
+              "bytes": 46080,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_bin169/BULLET_bin169_src.arf",
+              "reused": false,
+              "role": "source_arf",
+              "sha256": "db80d76607a6b7436d2d557858af85fd745997c9397063620ddee4bf03d53b30"
+            },
+            {
+              "bytes": 2223360,
+              "relative_path": "results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_bin169/BULLET_bin169_src.rmf",
+              "reused": false,
+              "role": "source_rmf",
+              "sha256": "41ad01f89ccce9a6d7ff17eaed3b02c86b7c9a4ba95a9c58b5a39c1432eb7676"
+            }
+          ]
+        },
+        "full_pha_count_conservation_exact": true,
+        "group_step": {
+          "command": [
+            "dmgroup",
+            "infile=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_bin169/BULLET_bin169_src.pi",
+            "outfile=/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_bin169/BULLET_bin169_src_grp.pi",
+            "grouptype=NUM_CTS",
+            "grouptypeval=25",
+            "binspec=",
+            "xcolumn=CHANNEL",
+            "ycolumn=COUNTS",
+            "tabspec=",
+            "tabcolumn=",
+            "stopspec=",
+            "stopcolumn=",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "log": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100/BULLET_bin169/logs/dmgroup.log",
+          "reused": false
+        },
+        "grouped_pha_links": {
+          "ANCRFILE": "BULLET_bin169_src.arf",
+          "BACKFILE": "BULLET_bin169_bkg.pi",
+          "RESPFILE": "BULLET_bin169_src.rmf"
+        },
+        "label": "BULLET_bin169",
+        "runtime_remediation": {
+          "cell_threshold": 1270,
+          "cells": 9,
+          "mode": "frozen_direct_below_threshold"
+        },
+        "source_stack_sha256": "e46691fa028ff6e7f087d9ad47129580f050091ad4e04c0ea92c56394bd863d3"
+      }
+    }
+  },
+  "config_sha256": "5c319d66670c8b67e274c37c46ea4ef398ea85a7d606a55ff417375f3b4f532b",
+  "full_494_region_combination_and_fit_authorized": false,
+  "gates": {
+    "base_and_recovery_archive_labels_are_preserved": true,
+    "both_integrated_fits_pass": false,
+    "both_regional_fits_pass": true,
+    "combination_uses_every_registered_cell_exactly_once": true,
+    "combined_full_pha_source_counts_conserved_exactly": true,
+    "combined_source_background_arf_and_rmf_exist_and_links_are_exact": true,
+    "every_cell_event_energy_counts_equal_manifest": true,
+    "hierarchy_applied_only_above_frozen_cell_threshold": true,
+    "v19cw_equivalence_parent_exact": true,
+    "v19w5_unified_archive_and_every_product_hash_exact": true
+  },
+  "generated_utc": "2026-08-06T02:06:44.320326+00:00",
+  "gravity_formula_or_parameter_changed": false,
+  "integrated_fits": [
+    {
+      "abundance_mode": "free_integrated",
+      "abundance_table": "aspl (Asplund et al. 2009)",
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 5.894677558486781e-06
+      },
+      "arf_sha256": "742843ee51f9cb8a4b28812a05b94fb9c82e6dfd08cea3800081e5c952d317d0",
+      "background_spectrum_sha256": "d6f75867b8aba60d550d1437727ec62b43293ba293cc8e42c686d38dd6a48e46",
+      "cluster": "ABELL2146",
+      "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+      "fit": {
+        "dof": 443,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "dof": 443,
+          "dstatval": 1245.5726039016079,
+          "istatval": 1787.4386866283428,
+          "message": "successful termination",
+          "methodname": "levmar",
+          "nfev": 17,
+          "numpoints": 446,
+          "parnames": [
+            "apec_abell2146_integrated.kT",
+            "apec_abell2146_integrated.Abundanc",
+            "apec_abell2146_integrated.norm"
+          ],
+          "parvals": [
+            8.125548514018245,
+            0.49763499757654484,
+            4.5118524573491596e-05
+          ],
+          "statname": "chi2xspecvar",
+          "statval": 541.8660827267349,
+          "succeeded": true
+        },
+        "reduced_statistic": 1.223174001640485,
+        "statval": 541.8660827267349
+      },
+      "fit_band_keV": [
+        0.5,
+        7.0
+      ],
+      "fit_completed": true,
+      "gates": {
+        "all_free_parameters_strictly_inside_bounds": true,
+        "all_passed": true,
+        "finite_parameters_and_ordered_temperature_interval": true,
+        "reduced_statistic_at_most_1_5": true
+      },
+      "label": "ABELL2146_integrated",
+      "model": "xstbabs * xsapec",
+      "normalization_initial": 4.2948433023583905e-05,
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "parameters": {
+        "abundance_solar": 0.49763499757654484,
+        "nH_1e22_cm2_fixed": 0.0262,
+        "normalization": 4.5118524573491596e-05,
+        "redshift_fixed": 0.2323,
+        "temperature_keV": 8.125548514018245
+      },
+      "rmf_sha256": "d0a613f58280fd0dd21641c1d1336eb988dc2db9565a718feb6972935fcee0bf",
+      "sherpa_response_energy_fit_band_grouped_bins": 446,
+      "sherpa_response_energy_fit_band_source_counts": 227710.0,
+      "source_exposure_s": 53019396.510918,
+      "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+      "source_spectrum_sha256": "8cb57aa778336370ac275ad5c0f89def10cd2b7bc8d5edcb18db58772643acd0",
+      "statistic": "chi2xspecvar",
+      "temperature_confidence_68_percent": {
+        "error": "",
+        "fractional_half_width": 0.010673660253506724,
+        "lower_keV": 8.04123738485959,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "fitname": "levmar",
+          "methodname": "confidence",
+          "nfits": 14,
+          "parmaxes": [
+            0.08914755926537943
+          ],
+          "parmins": [
+            -0.08431112915865491
+          ],
+          "parnames": [
+            "apec_abell2146_integrated.kT"
+          ],
+          "parvals": [
+            8.125548514018245
+          ],
+          "percent": 68.26894921370858,
+          "sigma": 1.0,
+          "statname": "chi2xspecvar"
+        },
+        "upper_keV": 8.214696073283625
+      },
+      "xspec_atomic_data": {
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "atomdb_version": "3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146"
+      }
+    },
+    {
+      "abundance_mode": "free_integrated",
+      "abundance_table": "aspl (Asplund et al. 2009)",
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 3.957959877421555e-06
+      },
+      "arf_sha256": "9277aabc2efa123f53e06ce035be4b92fd75daa98ea654e1cba475957e7fa1ef",
+      "background_spectrum_sha256": "ceea237b069336a25343ba3653fd7a0ffa7a98156655aeef7646148aaea288c3",
+      "cluster": "BULLET",
+      "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+      "fit": {
+        "dof": 443,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "dof": 443,
+          "dstatval": 30743.683268623383,
+          "istatval": 31981.278621738216,
+          "message": "successful termination",
+          "methodname": "levmar",
+          "nfev": 27,
+          "numpoints": 446,
+          "parnames": [
+            "apec_bullet_integrated.kT",
+            "apec_bullet_integrated.Abundanc",
+            "apec_bullet_integrated.norm"
+          ],
+          "parvals": [
+            16.063587142341245,
+            0.3836110295472712,
+            3.959558770800188e-05
+          ],
+          "statname": "chi2xspecvar",
+          "statval": 1237.595353114835,
+          "succeeded": true
+        },
+        "reduced_statistic": 2.7936689686565126,
+        "statval": 1237.595353114835
+      },
+      "fit_band_keV": [
+        0.5,
+        7.0
+      ],
+      "fit_completed": true,
+      "gates": {
+        "all_free_parameters_strictly_inside_bounds": true,
+        "all_passed": false,
+        "finite_parameters_and_ordered_temperature_interval": true,
+        "reduced_statistic_at_most_1_5": false
+      },
+      "label": "BULLET_integrated",
+      "model": "xstbabs * xsapec",
+      "normalization_initial": 3.084732346834819e-05,
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "parameters": {
+        "abundance_solar": 0.3836110295472712,
+        "nH_1e22_cm2_fixed": 0.0438,
+        "normalization": 3.959558770800188e-05,
+        "redshift_fixed": 0.296,
+        "temperature_keV": 16.063587142341245
+      },
+      "rmf_sha256": "8345dd49641e51a3388e898456e45f56fa3361685dc37280b75a72f569569986",
+      "sherpa_response_energy_fit_band_grouped_bins": 446,
+      "sherpa_response_energy_fit_band_source_counts": 660872.0,
+      "source_exposure_s": 214239657.02506,
+      "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_integrated/BULLET_integrated_src_grp.pi",
+      "source_spectrum_sha256": "78d8a37bfb23188fa7e1f68fd5be0b4e33a22276f1d9c4479fef75765e51f65c",
+      "statistic": "chi2xspecvar",
+      "temperature_confidence_68_percent": {
+        "error": "",
+        "fractional_half_width": 0.01062662409461495,
+        "lower_keV": 15.892885440168493,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "fitname": "levmar",
+          "methodname": "confidence",
+          "nfits": 2,
+          "parmaxes": [
+            0.1707017021727495
+          ],
+          "parmins": [
+            -0.17070170217275127
+          ],
+          "parnames": [
+            "apec_bullet_integrated.kT"
+          ],
+          "parvals": [
+            16.063587142341245
+          ],
+          "percent": 68.26894921370858,
+          "sigma": 1.0,
+          "statname": "chi2xspecvar"
+        },
+        "upper_keV": 16.234288844513994
+      },
+      "xspec_atomic_data": {
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "atomdb_version": "3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146"
+      }
+    }
+  ],
+  "obsolete_v19x2_direct_large_stack_retried": false,
+  "protocol_version": "SIGMA-V19CX-BULLET-HIERARCHICAL-RECOVERY-1.0.0",
+  "regional_fits": [
+    {
+      "abundance_mode": "fixed_to_integrated",
+      "abundance_table": "aspl (Asplund et al. 2009)",
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 8.444724587902282e-06
+      },
+      "arf_sha256": "39ae36f33893cc8ac8d20b99cea72e12c091bb7e7e152c8b7bd8e1ac00ae5dfb",
+      "background_spectrum_sha256": "8f8c2ca6c74ba69f45bedac990f881a023a2a9411a7401d66a0d028fee050260",
+      "cluster": "ABELL2146",
+      "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+      "fit": {
+        "dof": 83,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "dof": 83,
+          "dstatval": 19.851004784929096,
+          "istatval": 82.16678528559915,
+          "message": "successful termination",
+          "methodname": "levmar",
+          "nfev": 13,
+          "numpoints": 85,
+          "parnames": [
+            "apec_abell2146_bin62.kT",
+            "apec_abell2146_bin62.norm"
+          ],
+          "parvals": [
+            10.20861101884569,
+            5.468214973841842e-05
+          ],
+          "statname": "chi2xspecvar",
+          "statval": 62.31578050067005,
+          "succeeded": true
+        },
+        "reduced_statistic": 0.7507925361526512,
+        "statval": 62.31578050067005
+      },
+      "fit_band_keV": [
+        0.5,
+        7.0
+      ],
+      "fit_completed": true,
+      "gates": {
+        "all_free_parameters_strictly_inside_bounds": true,
+        "all_passed": true,
+        "finite_parameters_and_ordered_temperature_interval": true,
+        "fractional_68_percent_temperature_half_width_at_most_0_5": true,
+        "reduced_statistic_at_most_1_5": true
+      },
+      "label": "ABELL2146_bin62",
+      "model": "xstbabs * xsapec",
+      "normalization_initial": 6.0117800756507096e-05,
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "parameters": {
+        "abundance_solar": 0.49763499757654484,
+        "nH_1e22_cm2_fixed": 0.0262,
+        "normalization": 5.468214973841842e-05,
+        "redshift_fixed": 0.2323,
+        "temperature_keV": 10.20861101884569
+      },
+      "rmf_sha256": "564e09c0f684e9bdfe74a4e63f09fd19b927ef6a0325c899568bd245d99c9e43",
+      "sherpa_response_energy_fit_band_grouped_bins": 85,
+      "sherpa_response_energy_fit_band_source_counts": 2513.0,
+      "source_exposure_s": 418012.62993274,
+      "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src_grp.pi",
+      "source_spectrum_sha256": "4b3f76b6fc531b9d61c127a3628d457ab3e7f24044d1778f285b8bd8388801ed",
+      "statistic": "chi2xspecvar",
+      "temperature_confidence_68_percent": {
+        "error": "",
+        "fractional_half_width": 0.19459409510202988,
+        "lower_keV": 8.634389229626073,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "fitname": "levmar",
+          "methodname": "confidence",
+          "nfits": 8,
+          "parmaxes": [
+            2.3988490577021597
+          ],
+          "parmins": [
+            -1.5742217892196173
+          ],
+          "parnames": [
+            "apec_abell2146_bin62.kT"
+          ],
+          "parvals": [
+            10.20861101884569
+          ],
+          "percent": 68.26894921370858,
+          "sigma": 1.0,
+          "statname": "chi2xspecvar"
+        },
+        "upper_keV": 12.60746007654785
+      },
+      "xspec_atomic_data": {
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "atomdb_version": "3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146"
+      }
+    },
+    {
+      "abundance_mode": "fixed_to_integrated",
+      "abundance_table": "aspl (Asplund et al. 2009)",
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 6.588920275824186e-06
+      },
+      "arf_sha256": "db80d76607a6b7436d2d557858af85fd745997c9397063620ddee4bf03d53b30",
+      "background_spectrum_sha256": "19eb1a00b531c6cf14002e0a17185af631c8b292c629c60c2fd7b734da4a319d",
+      "cluster": "BULLET",
+      "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+      "fit": {
+        "dof": 85,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "dof": 85,
+          "dstatval": 45.79753808986324,
+          "istatval": 131.67610483689214,
+          "message": "successful termination",
+          "methodname": "levmar",
+          "nfev": 16,
+          "numpoints": 87,
+          "parnames": [
+            "apec_bullet_bin169.kT",
+            "apec_bullet_bin169.norm"
+          ],
+          "parvals": [
+            15.206779509678894,
+            5.7353561089320376e-05
+          ],
+          "statname": "chi2xspecvar",
+          "statval": 85.8785667470289,
+          "succeeded": true
+        },
+        "reduced_statistic": 1.0103360793768106,
+        "statval": 85.8785667470289
+      },
+      "fit_band_keV": [
+        0.5,
+        7.0
+      ],
+      "fit_completed": true,
+      "gates": {
+        "all_free_parameters_strictly_inside_bounds": true,
+        "all_passed": true,
+        "finite_parameters_and_ordered_temperature_interval": true,
+        "fractional_68_percent_temperature_half_width_at_most_0_5": true,
+        "reduced_statistic_at_most_1_5": true
+      },
+      "label": "BULLET_bin169",
+      "model": "xstbabs * xsapec",
+      "normalization_initial": 5.083223876402108e-05,
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "parameters": {
+        "abundance_solar": 0.3836110295472712,
+        "nH_1e22_cm2_fixed": 0.0438,
+        "normalization": 5.7353561089320376e-05,
+        "redshift_fixed": 0.296,
+        "temperature_keV": 15.206779509678894
+      },
+      "rmf_sha256": "41ad01f89ccce9a6d7ff17eaed3b02c86b7c9a4ba95a9c58b5a39c1432eb7676",
+      "sherpa_response_energy_fit_band_grouped_bins": 87,
+      "sherpa_response_energy_fit_band_source_counts": 2725.0,
+      "source_exposure_s": 536077.11685694,
+      "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19cx_bullet_hierarchical_recovery/frozen_products/BULLET_bin169/BULLET_bin169_src_grp.pi",
+      "source_spectrum_sha256": "6d598fe78c9c74fa7425a4235ec81ea3453cb54bf666f2c9f7004f51ea105b9f",
+      "statistic": "chi2xspecvar",
+      "temperature_confidence_68_percent": {
+        "error": "",
+        "fractional_half_width": 0.1865435150481546,
+        "lower_keV": 12.688291251240953,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "fitname": "levmar",
+          "methodname": "confidence",
+          "nfits": 13,
+          "parmaxes": [
+            3.154963946157567
+          ],
+          "parmins": [
+            -2.518488258437941
+          ],
+          "parnames": [
+            "apec_bullet_bin169.kT"
+          ],
+          "parvals": [
+            15.206779509678894
+          ],
+          "percent": 68.26894921370858,
+          "sigma": 1.0,
+          "statname": "chi2xspecvar"
+        },
+        "upper_keV": 18.36174345583646
+      },
+      "xspec_atomic_data": {
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "atomdb_version": "3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146"
+      }
+    }
+  ],
+  "replacement_cluster_lensing_target_opened": false,
+  "response_report_sha256": "9e90fcb397c80010562b8fbd441fff91a716ced4bb0ef895704ca449dca7c85f",
+  "response_unified_index_sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4",
+  "runner_sha256": "2f3a8d6eb999dd38d90692ba0a4a186e96cd2ca0ff3c3493c945a5901cd4f0ee",
+  "scientific_temperature_map_claimed": false,
+  "status": "unified_spectral_combination_commissioning_gate_failed",
+  "thermal_stress_constructed": false,
+  "v19bq_or_v19bs_run": false,
+  "v19cw_report_sha256": "d96e5aeaf9ff09522f97942b2cce0186d2dbab55d4cfedad025d04c62f4bff54",
+  "validated_cell_index": {
+    "bytes": 1751741,
+    "path": "results/sigma_v19cx_bullet_hierarchical_recovery/validated_cell_index.csv",
+    "rows": 5082,
+    "sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+  },
+  "validated_response_archive_counts": {
+    "base_v19w": 4698,
+    "v19w5_recovery": 384
+  },
+  "validated_response_cells": 5082
+}

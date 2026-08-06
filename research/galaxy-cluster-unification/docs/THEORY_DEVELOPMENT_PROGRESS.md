@@ -1,5 +1,20 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-05 Sigma V19CX terminal source-reconstruction result
+
+The observation-hierarchical Bullet recovery succeeded mechanically: all 3,812
+Bullet integrated cells were combined exactly once, full-PHA source counts were
+conserved at 707,569, all response links passed, and the ten-group hierarchy
+avoided the direct-stack CIAO failure. Both selected-region fits also passed.
+
+The unchanged scientific commissioning nevertheless failed. The Bullet
+integrated one-temperature absorbed-plasma fit had reduced statistic 2.7937,
+above the frozen 1.5 limit; Abell 2146 integrated passed at 1.2232. V19CX is
+therefore a terminal scientific gate failure, not an execution failure. Full
+494-region production, V19X4B/V19BMB, V19BQ/V19BS and action derivation are not
+authorized, and no fit rule may be changed to rescue this closure. See
+[`SIGMA_V19CX_BULLET_HIERARCHICAL_RECOVERY_RESULTS.md`](SIGMA_V19CX_BULLET_HIERARCHICAL_RECOVERY_RESULTS.md).
+
 ## 2026-08-05 Sigma V19BS source disposition
 
 The post-source decision is now frozen before terminal I4/I5 evidence exists.
