@@ -1,4 +1,5 @@
 import inspect
+import json
 import sys
 from pathlib import Path
 
@@ -78,3 +79,44 @@ def test_anchor_selection_matches_each_paper_branch_type() -> None:
     assert [item["segment"] for item in cross] == [0, 1]
     assert [item["segment"] for item in forward] == [0]
     assert [item["segment"] for item in backward] == [1]
+
+
+def test_terminal_topology_gate_passes_without_event_access() -> None:
+    report_path = (
+        ROOT
+        / "results"
+        / "sigma_v19cy_direct_icm_velocity_evidence"
+        / "development_gain_reconstruction_topology.json"
+    )
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+
+    assert report["status"] == "a2319_gain_reconstruction_scalar_topology_audited"
+    assert report["raw_rows"] == {"calpixel": 2836, "fe55": 11405}
+    assert report["valid_rows"] == {"calpixel": 2791, "fe55": 11405}
+    assert report["segment_topology_stable"]
+    assert {gap: len(segments) for gap, segments in report["segment_sets"].items()} == {
+        "7200": 4,
+        "10800": 4,
+        "14400": 4,
+    }
+    assert len(report["branches"]) == 7
+    assert all(branch["anchor_segments_complete"] for branch in report["branches"])
+    assert all(branch["all_pixel_fits_finite"] for branch in report["branches"])
+    assert all(
+        branch["continuous_calpixel_rows_sufficient"] for branch in report["branches"]
+    )
+    assert all(
+        branch["calibration_pixel_residual"]["finite"]
+        for branch in report["branches"]
+    )
+    assert report["branch_gate_passed"]
+    assert report["topology_gate_passed"]
+    assert report["decision"] == "authorize_calibration_application_candidate_freeze"
+
+    assert not report["gain_history_array_column_read"]
+    assert not report["event_row_or_energy_read"]
+    assert not report["gain_history_written_or_modified"]
+    assert not report["gain_applied_or_interpolated_to_events"]
+    assert not report["calibration_or_science_spectrum_fit"]
+    assert not report["cluster_velocity_fit"]
+    assert not report["validation_or_holdout_accessed"]

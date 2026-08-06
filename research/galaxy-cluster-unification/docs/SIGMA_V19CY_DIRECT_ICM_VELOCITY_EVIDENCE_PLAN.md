@@ -190,6 +190,38 @@ This closes the official solution accounting and authorizes freezing a
 separate gain-reconstruction protocol. It still does not authorize gain
 interpolation, event correction, spectral fitting, or a velocity claim.
 
+### Gain-reconstruction scalar topology result
+
+The paper-specific reconstruction topology passed before any gain-history
+array or event row was opened. A frozen 10,800-second segmentation recovered
+four complete Fe-55 fiducial blocks, one from each of 000100000 through
+000103000. The same four blocks, row membership, and boundaries were recovered
+with independent 7,200- and 14,400-second thresholds, so the result is not an
+artifact of choosing a convenient gap size after inspecting the residuals.
+
+All seven preregistered branches have the required preceding, following, or
+two-sided anchors for every main-array pixel and pixel 12. These branches are:
+
+1. two cross-ObsID intervals for 000101000;
+2. two cross-ObsID intervals for 000102000;
+3. forward extrapolation before the 000103000 ADR recycle;
+4. back-extrapolation beginning six hours after that recycle starts; and
+5. final forward extrapolation where no ending fiducial exists.
+
+The continuous calibration-pixel histories supplied 1,111 usable rows across
+the seven science branches. Their residual relative to the intermittent
+pixel-12 prediction is finite in every branch. The median residual is small in
+the long first 000101000 interval (`4.20e-6` in equivalent-temperature units)
+and substantially larger around the 000103000 ADR branches (`1.85e-5` before
+and `-1.09e-5` after), showing why a single per-ObsID pipeline interpolation is
+not an adequate reproduction of the published analysis.
+
+The terminal topology report SHA-256 is
+`f5fcdfe793681d228fa78ab84ecb29d5e823bfdc7de48f98a340594ccbe4624e`.
+This authorizes freezing calibration-application candidates only. It does not
+select the common-mode correction, calculate an event energy, fit a line, or
+measure a cluster velocity.
+
 ## The new observable source terms
 
 The signed projected gas current is
