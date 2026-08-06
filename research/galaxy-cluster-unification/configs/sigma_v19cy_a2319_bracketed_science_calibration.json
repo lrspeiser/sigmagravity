@@ -1,0 +1,131 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-BRACKETED-SCIENCE-CALIBRATION-1.0.0",
+  "status": "frozen after endpoint extrapolation was parked and before any cleaned A2319 sky-event row or recalibrated cluster energy was read",
+  "purpose": "Apply the held-out-validated common/differential interpolation only to the three A2319 science fragments genuinely bracketed by undisturbed Fe-55 fiducials, while excluding every one-sided or ADR-crossing fragment.",
+  "parents": {
+    "endpoint_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_endpoint_gain_candidates.json",
+    "endpoint_report_sha256": "9616b6774e38f4a253dede22b02783afec6e9e30d8fa186d0f4701c00aecb2ed",
+    "closure_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_common_differential_gain_closure.json",
+    "closure_report_sha256": "fa3bd67b4e81c84e11812d6724fe36a56744eda5da6a82e37b5ecdd40885c13e",
+    "topology_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_reconstruction_topology.json",
+    "topology_report_sha256": "f5fcdfe793681d228fa78ab84ecb29d5e823bfdc7de48f98a340594ccbe4624e",
+    "download_provenance": "results/sigma_v19cy_direct_icm_velocity_evidence/development_download_provenance.json",
+    "download_provenance_sha256": "4df72dea94daf51bd0c0d6d1fbb1567651561357ebd06de93aa5f2edb82f386f"
+  },
+  "paths": {
+    "raw_root": "data/raw/sigma_v19cy_a2319_development",
+    "scratch_root": "tmp/sigma_v19cy_a2319_bracketed_science_calibration",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_bracketed_science_calibration.json"
+  },
+  "model": {
+    "equation": "T_i(t)=C_12(t)+D_i(t)",
+    "common_mode": "exact linear interpolation of valid native calibration-pixel TEMP_FIT rows in the target observation",
+    "differential_mode": "one time-linear D_i=T_i^FW-C_12 fit per main-array pixel using both complete adjacent Fe-55 anchor segments",
+    "free_per_observation_performance_parameters": 0,
+    "free_per_pixel_performance_parameters": 0
+  },
+  "included_branches": [
+    {
+      "name": "000101_open_0_cross_obsid",
+      "obsid": "000101000",
+      "anchor_segments": [0, 1]
+    },
+    {
+      "name": "000101_open_1_cross_obsid",
+      "obsid": "000101000",
+      "anchor_segments": [1, 2]
+    },
+    {
+      "name": "000102_open_0_cross_obsid",
+      "obsid": "000102000",
+      "anchor_segments": [1, 2]
+    }
+  ],
+  "excluded_branches": [
+    {
+      "name": "000102_open_1_cross_obsid",
+      "reason": "although the original topology paired segments 2 and 3, the science fragment lies before the ADR and segment 3 lies after it, so this is not an undisturbed bracket"
+    },
+    {
+      "name": "000103_pre_adr_forward",
+      "reason": "one-sided forward extrapolation"
+    },
+    {
+      "name": "000103_post_adr_backward",
+      "reason": "one-sided backward extrapolation after the ADR"
+    },
+    {
+      "name": "000103_final_forward",
+      "reason": "one-sided final forward extrapolation"
+    }
+  ],
+  "inputs": {
+    "fe55_history_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_fe55.ghf.gz",
+    "calibration_pixel_history_template": "xrism/{obsid}/resolve/event_uf/xa{obsid}rsl_000_pxcal.ghf.gz",
+    "cleaned_sky_event_template": "xrism/{obsid}/resolve/event_cl/xa{obsid}rsl_p0px1000_cl.evt.gz",
+    "gain_history_extension": "Drift_energy",
+    "minimum_gain_events": 200,
+    "event_selection": "exact frozen branch TIME interval AND PIXEL != 12",
+    "required_input_header": {
+      "FILTER": "OPEN",
+      "DETNAM": "PIXEL",
+      "OBJECT": "Abell2319"
+    }
+  },
+  "terminal_gate": {
+    "required_branch_outputs": 3,
+    "require_all_ftcopy_and_rslpha2pi_exit_zero": true,
+    "require_positive_selected_rows": true,
+    "require_output_rows_equal_selected_rows": true,
+    "require_zero_null_epi2_and_temp": true,
+    "require_every_null_pi_exactly_explained_by_negative_epi2": true,
+    "require_every_negative_epi2_has_null_pi": true,
+    "do_not_inspect_energy_distribution_or_fit_cluster_spectrum": true,
+    "pass_rule": "Authorize freezing a three-fragment A2319 spectral-region protocol only if every application audit passes."
+  },
+  "runtime": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "heasoft_prefix": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "caldb_root": "/home/henry/.local/share/sigmagravity-xrism/caldb",
+    "rslpha2pi": {
+      "calcpi": "yes",
+      "calcupi": "no",
+      "gainfile": "CALDB",
+      "tempidx": -1,
+      "pxphaoffset": 0,
+      "secphacol": "PHA2",
+      "addepicol": "EPI2",
+      "method": "FIT",
+      "itypecol": "ITYPE",
+      "binwidth": 0.5,
+      "offset": 0.5,
+      "tlmax": 59999,
+      "gapdt": -1,
+      "ntemp": 3,
+      "writetemp": "yes",
+      "extrap": "no",
+      "randomize": "yes",
+      "seed": 7,
+      "clobber": "yes",
+      "chatter": 2,
+      "history": "yes"
+    }
+  },
+  "authorization": {
+    "read_cleaned_development_cluster_sky_event_rows": true,
+    "recalculate_development_cluster_sky_event_energies": true,
+    "audit_counts_nulls_and_hashes": true,
+    "inspect_or_fit_cluster_energy_distribution": false,
+    "define_or_fit_spatial_velocity_regions": false,
+    "fit_cluster_velocity": false,
+    "access_validation_or_holdout_assets": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "This stage proves only that the held-out-validated bracketed calibration is executable and complete on the declared development sky rows.",
+    "No cluster energy distribution, line centroid, velocity, Sigma source term, lensing target, or gravity score may be inspected.",
+    "The excluded branches remain unresolved and cannot be silently restored downstream."
+  ]
+}
