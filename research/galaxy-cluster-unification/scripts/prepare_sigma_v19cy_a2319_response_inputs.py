@@ -26,7 +26,7 @@ import apply_sigma_v19cy_a2319_calibration_candidates as application
 DEFAULT_CONFIG = ROOT / "configs/sigma_v19cy_a2319_response_aware_spectral.json"
 ACCEPTED_PROTOCOLS = {
     f"SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.{minor}"
-    for minor in range(1, 6)
+    for minor in range(1, 7)
 }
 BLOCK_BYTES = 4 * 1024 * 1024
 

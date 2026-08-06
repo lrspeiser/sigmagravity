@@ -40,6 +40,14 @@ def test_json_checkpoint_writer_replaces_atomically(tmp_path: Path):
     assert not (tmp_path / "checkpoint.json.writing").exists()
 
 
+def test_xspec_deck_writer_is_lf_only_even_on_windows(tmp_path: Path):
+    path = tmp_path / "fit.xcm"
+    fitter.write_xspec_deck(path, "model tbabs*bapec\n1\n")
+    assert path.read_bytes() == b"model tbabs*bapec\n1\n"
+    with pytest.raises(RuntimeError, match="carriage return"):
+        fitter.write_xspec_deck(path, "model tbabs*bapec\r\n")
+
+
 def test_public_nxb_model_is_parsed_without_changing_its_56_parameters():
     config = future_config()
     path = fitter.ROOT / config["nxb_protocol"]["empirical_model_path"]
@@ -127,6 +135,55 @@ def test_nxb_grouping_gate_requires_all_ten_complete_contracts():
     failed = [copy.deepcopy(row) for _ in range(10)]
     failed[4]["minimum_signal_to_noise_in_band"] = 2.99
     assert not fitter.nxb_grouping_gate_passed(failed)
+
+
+def test_grouping_resume_requires_every_exact_checkpoint_hash(tmp_path: Path):
+    reports = []
+    bundles = {}
+    for index in range(10):
+        region = f"r{index}"
+        branch = f"b{index}"
+        original = tmp_path / "raw" / branch / region / "nxb.pha"
+        original.parent.mkdir(parents=True)
+        original.write_bytes(b"original")
+        grouped = (
+            tmp_path / "staging" / "grouped_nxb" / branch / region / "nxb_optsnmin3.pha"
+        )
+        grouped.parent.mkdir(parents=True)
+        grouped.write_bytes(f"grouped-{index}".encode())
+        bundles[region] = [
+            {
+                "source_pha": original,
+                "nxb_pha": original,
+                "rmf": original,
+                "arf": original,
+            }
+        ]
+        reports.append(
+            {
+                "branch": branch,
+                "region": region,
+                "rate_and_stat_err_preserved_exactly": True,
+                "zero_variance_groups_in_band": 0,
+                "minimum_signal_to_noise_in_band": 3.01,
+                "grouped": {
+                    "sha256": fitter.preparation.sha256(grouped),
+                    "hduclas2": "DERIVED",
+                    "poiserr": False,
+                    "respfile": "NONE",
+                    "grouping_type": "optsnmin",
+                    "grouping_scale": 3.0,
+                },
+            }
+        )
+    resumed = fitter.resume_grouped_nxb_bundles(
+        bundles, tmp_path / "staging", reports
+    )
+    assert len(resumed) == 10
+    assert all(row[0]["nxb_pha"].name == "nxb_optsnmin3.pha" for row in resumed.values())
+    next(iter((tmp_path / "staging").rglob("nxb_optsnmin3.pha"))).write_bytes(b"changed")
+    with pytest.raises(RuntimeError, match="changed"):
+        fitter.resume_grouped_nxb_bundles(bundles, tmp_path / "staging", reports)
 
 
 def test_second_branch_nxb_internal_links_shift_and_background_copies_tie():

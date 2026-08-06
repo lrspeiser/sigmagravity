@@ -22,8 +22,8 @@ def sha256(path: Path) -> str:
 
 def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     config = load()
-    assert config["protocol_version"].endswith("1.0.5")
-    assert "NXB constraints were refrozen" in config["status"]
+    assert config["protocol_version"].endswith("1.0.6")
+    assert "execution interface was refrozen" in config["status"]
     assert ";" in config["runtime"]["pfiles"]
     assert config["closed_failure_history"]["response_or_background_generated"] is False
     amendment = config["pre_response_interface_amendment"]
@@ -54,6 +54,22 @@ def test_protocol_is_frozen_and_sealed_targets_remain_forbidden():
     assert grouping_amendment["source_energy_distribution_summarized_or_fit"] is False
     assert grouping_amendment["velocity_fit_performed"] is False
     assert grouping_amendment["validation_or_holdout_accessed"] is False
+    execution_amendment = config["pre_fit_execution_amendment"]
+    assert execution_amendment["previous_version"].endswith("1.0.5")
+    assert execution_amendment["failed_deck"]["line_endings"] == "CRLF"
+    for key in (
+        "archived_failure_report",
+        "checkpoint",
+        "failed_deck",
+        "failed_xspec_log",
+    ):
+        artifact = execution_amendment[key]
+        path = ROOT / artifact["path"]
+        assert path.stat().st_size == artifact["bytes"]
+        assert sha256(path) == artifact["sha256"]
+    assert execution_amendment["valid_model_optimization_or_velocity_fit_completed"] is False
+    assert execution_amendment["source_result_used_to_change_model_band_or_parameters"] is False
+    assert execution_amendment["validation_or_holdout_accessed"] is False
     authorization = config["authorization"]
     assert authorization["read_A2319_development_energy_columns"] is True
     assert authorization["access_A3667_validation"] is False
@@ -135,6 +151,9 @@ def test_fit_is_one_response_aware_physical_model_with_two_robustness_checks():
     assert fit["source_statistic"] == "cstat"
     assert fit["nxb_statistic"] == "chi standard"
     assert fit["nxb_constraint_band_keV"] == [1.0, 17.0]
+    assert fit["xspec_stdin_deck_encoding"] == (
+        "UTF-8 with LF-only line endings written as bytes"
+    )
     assert fit["data_group_protocol"].startswith(
         "For every branch-region product, load ungrouped source COUNTS"
     )
@@ -160,6 +179,7 @@ def test_terminal_gate_requires_all_regions_but_does_not_claim_gravity_validatio
     assert gate["require_all_ten_nxb_grouping_commands_exit_zero"] is True
     assert gate["require_nxb_grouping_zero_variance_groups_in_band"] == 0
     assert gate["minimum_nxb_group_signal_to_noise_in_band"] == pytest.approx(3.0)
+    assert gate["require_lf_only_xspec_stdin_decks"] is True
     assert gate["require_all_seven_primary_fits_converged"] is True
     assert gate["minimum_regions_meeting_velocity_interval_gate"] == 5
     assert gate["minimum_robust_regions"] == 5

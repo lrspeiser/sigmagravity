@@ -51,6 +51,7 @@ def validate_inputs() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     if config.get("protocol_version") not in {
         "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.4",
         "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.5",
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.6",
     }:
         raise RuntimeError("unexpected response-aware protocol")
     authorization = config["authorization"]

@@ -1,0 +1,1356 @@
+#XSPEC version: 12.15.1
+#Build Date/Time: Wed May 20 11:50:35 2026
+#
+!XSPEC12> 
+#
+!XSPEC12> data none
+#
+!XSPEC12> 
+#
+!XSPEC12> data 1:1 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_0_cross_obsid/a/source.pha 2:2 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_1_cross_obsid/a/source.pha 3:3 /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/nxb_optsnmin3.pha 4:4 /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/nxb_optsnmin3.pha
+#
+#4 spectra  in use
+# 
+#Spectral Data File: /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_0_cross_obsid/a/source.pha  Spectrum 1
+#Net count rate (cts/s) for Spectrum:1  9.885e-02 +/- 1.406e-03
+# Assigned to Data Group 1 and Plot Group 1
+#  Noticed Channels:  1-60000
+#  Telescope: XRISM Instrument: RESOLVE  Channel Type: PI
+#  Exposure Time: 4.998e+04 sec
+# Using fit statistic: chi
+# No response loaded.
+#
+#Spectral Data File: /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_1_cross_obsid/a/source.pha  Spectrum 2
+#Net count rate (cts/s) for Spectrum:2  1.092e-01 +/- 6.574e-03
+# Assigned to Data Group 2 and Plot Group 2
+#  Noticed Channels:  1-60000
+#  Telescope: XRISM Instrument: RESOLVE  Channel Type: PI
+#  Exposure Time: 2527 sec
+# Using fit statistic: chi
+# No response loaded.
+#
+#Spectral Data File: /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_0_cross_obsid/a/nxb_optsnmin3.pha  Spectrum 3
+#Net count rate (cts/s) for Spectrum:3  8.632e-03 +/- 8.884e-05
+# Assigned to Data Group 3 and Plot Group 3
+#  Noticed Channels:  1-856
+#  Telescope: XRISM Instrument: RESOLVE  Channel Type: PI
+#  Exposure Time: 1.131e+06 sec
+# Using fit statistic: chi
+# No response loaded.
+#
+#Spectral Data File: /tmp/sigma_v19cy_spectral_fits_84rjd0np/grouped_nxb/000101_open_1_cross_obsid/a/nxb_optsnmin3.pha  Spectrum 4
+#Net count rate (cts/s) for Spectrum:4  8.483e-03 +/- 1.057e-04
+# Assigned to Data Group 4 and Plot Group 4
+#  Noticed Channels:  1-618
+#  Telescope: XRISM Instrument: RESOLVE  Channel Type: PI
+#  Exposure Time: 9.953e+05 sec
+# Using fit statistic: chi
+# No response loaded.
+#
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12> 
+#
+!XSPEC12> response 1:1 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_0_cross_obsid/a/response.rmf
+#***Warning: Detected response matrix energy = 0 for the lower edge of bin 0
+#     XSPEC will instead use 5e-07 (response file will not be altered)
+#Response successfully loaded.
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12> 
+#
+!XSPEC12> arf 1:1 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_arfs/000101_open_0_cross_obsid/a/response.arf
+#Arf successfully loaded.
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12> 
+#
+!XSPEC12> response 2:1 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf
+#***Warning: Detected response matrix energy = 0 for the lower edge of bin 0
+#     XSPEC will instead use 5e-07 (response file will not be altered)
+#Response successfully loaded.
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12> 
+#
+!XSPEC12> response 1:2 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_components/000101_open_1_cross_obsid/a/response.rmf
+#***Warning: Detected response matrix energy = 0 for the lower edge of bin 0
+#     XSPEC will instead use 5e-07 (response file will not be altered)
+#Response successfully loaded.
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12> 
+#
+!XSPEC12> arf 1:2 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/processed/sigma_v19cy_a2319_response_aware_spectral/response_arfs/000101_open_1_cross_obsid/a/response.arf
+#Arf successfully loaded.
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12> 
+#
+!XSPEC12> response 2:2 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf
+#Response successfully loaded.
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12> 
+#
+!XSPEC12> response 1:3 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf
+#***Warning: Detected response matrix energy = 0 for the lower edge of bin 0
+#     XSPEC will instead use 5e-07 (response file will not be altered)
+#Response successfully loaded.
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12> 
+#
+!XSPEC12> response 2:3 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf
+#Response successfully loaded.
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12> 
+#
+!XSPEC12> response 1:4 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf
+#***Warning: Detected response matrix energy = 0 for the lower edge of bin 0
+#     XSPEC will instead use 5e-07 (response file will not be altered)
+#Response successfully loaded.
+#
+!XSPEC12> 
+#
+!XSPEC12> response 2:4 /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf
+#Response successfully loaded.
+#
+!XSPEC12> 
+#
+!XSPEC12> abund lodd
+# Solar Abundance Vector set to lodd:  Lodders, K. ApJ 591, 1220 (2003)
+#
+!XSPEC12> 
+#
+!XSPEC12> xsect vern
+# Cross Section Table set to vern:  Verner, Ferland, Korista, and Yakovlev 1996
+#
+!XSPEC12> 
+#
+!XSPEC12> xset APECROOT /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/spectral/modelData/apec_v3.0.9
+#
+!XSPEC12> 
+#
+!XSPEC12> statistic cstat 1-2
+#The C-Statistic fit statistic will be applied to the specified spectra.
+#   The default fit statistic is: Chi-Squared
+#
+!XSPEC12> 
+#
+!XSPEC12> statistic chi standard 3-4
+#The Chi-Squared fit statistic will be applied to the specified spectra.
+#   The default fit statistic is: Chi-Squared
+#
+!XSPEC12> 
+#
+!XSPEC12> method leven 1000 0.0001
+#
+!XSPEC12> 
+#
+!XSPEC12> model tbabs*bapec
+#
+#Input parameter value, delta, min, bot, top, and max values for ...
+#              1      0.001(      0.01)          0          0     100000      1e+06
+#              1       0.01(      0.01)      0.008      0.008         64         64
+#              1     -0.001(      0.01)          0          0          5          5
+#              0      -0.01(      0.01)     -0.999     -0.999         10         10
+#              0        -10(        10)          0          0      10000      10000
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#
+#Input parameter value, delta, min, bot, top, and max values for ...
+#              1      0.001(      0.01)          0          0     100000      1e+06
+#          0.112         -1(   0.00112)          0          0         10         10
+#              1     -0.001(      0.01)          0          0          5          5
+#              8       0.01(      0.08)          2          2         20         20
+#              0        -10(        10)          0          0      10000      10000
+#            0.3       0.01(     0.003)          0          0          2          2
+#
+#Input parameter value, delta, min, bot, top, and max values for ...
+#              1      0.001(      0.01)          0          0     100000      1e+06
+#          0.112         -1(   0.00112)          0          0         10         10
+#              1     -0.001(      0.01)          0          0          5          5
+#              8       0.01(      0.08)          2          2         20         20
+#              0        -10(        10)          0          0      10000      10000
+#            0.3       0.01(     0.003)          0          0          2          2
+#
+#Input parameter value, delta, min, bot, top, and max values for ...
+#              1      0.001(      0.01)          0          0     100000      1e+06
+#          0.112         -1(   0.00112)          0          0         10         10
+#              1     -0.001(      0.01)          0          0          5          5
+#              8       0.01(      0.08)          2          2         20         20
+#              0        -10(        10)          0          0      10000      10000
+#            0.3       0.01(     0.003)          0          0          2          2
+#
+#========================================================================
+#Model TBabs<1>*bapec<2> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#                           Data group: 1
+#   1    1   TBabs      nH         10^22    1.00000      +/-  0.0          
+#   2    2   bapec      kT         keV      0.112000     frozen
+#   3    2   bapec      Abundanc            1.00000      frozen
+#   4    2   bapec      Redshift            8.00000      +/-  0.0          
+#   5    2   bapec      Velocity   km/s     0.0          frozen
+#   6    2   bapec      norm                0.300000     +/-  0.0          
+#                           Data group: 2
+#   7    1   TBabs      nH         10^22    1.00000      = p1
+#   8    2   bapec      kT         keV      5.45800E-02  +/-  0.0          
+#   9    2   bapec      Abundanc            1.00000      = p3
+#  10    2   bapec      Redshift            200.000      +/-  0.0          
+#  11    2   bapec      Velocity   km/s     0.0          = p5
+#  12    2   bapec      norm                1.00000E-02  +/-  0.0          
+#                           Data group: 3
+#  13    1   TBabs      nH         10^22    1.00000      = p1
+#  14    2   bapec      kT         keV      1.00000      = p1
+#  15    2   bapec      Abundanc            1.00000      = p3
+#  16    2   bapec      Redshift            0.112000     = p2
+#  17    2   bapec      Velocity   km/s     0.0          = p5
+#  18    2   bapec      norm                1.00000      = p3
+#                           Data group: 4
+#  19    1   TBabs      nH         10^22    1.00000      = p1
+#  20    2   bapec      kT         keV      8.00000      = p4
+#  21    2   bapec      Abundanc            1.00000      = p3
+#  22    2   bapec      Redshift            0.0          = p5
+#  23    2   bapec      Velocity   km/s     0.0          = p5
+#  24    2   bapec      norm                1.00000E-02  +/-  0.0          
+#________________________________________________________________________
+#
+#Warning: the equilibrium ionization balance file:  does not exist.
+#Reading APEC data from /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/spectral/modelData/apec_v3.0.9
+#
+#
+#Fit statistic  : C-Statistic                106265.8     using 60000 bins, spectrum 1, group 1.
+#                 C-Statistic                5826.516     using 60000 bins, spectrum 2, group 2.
+#                 Chi-Squared              9.074089e+11     using 856 bins, spectrum 3, group 3.
+#                 Chi-Squared              9.362335e+06     using 618 bins, spectrum 4, group 4.
+#Total fit statistic                       9.074184e+11     with 121467 d.o.f.
+#
+#Test statistic : Chi-Squared              9.074183e+11     using 121474 bins.
+#
+#***Warning: Chi-square may not be valid due to bins with zero variance
+#            in spectrum number(s): 1 2 
+#
+# Null hypothesis probability of 0.000000e+00 with 121467 degrees of freedom
+# Current data and model not fit yet.
+#
+!XSPEC12> 
+#
+!XSPEC12> = p1
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = p2
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = p3
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = p4
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = p5
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> 0 -1 0 0 1000000 1000000
+#invalid command name "0"
+#
+!XSPEC12> 
+#
+!XSPEC12> = p7
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = p8
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = p9
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = p10
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = p11
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> 0 -1 0 0 1000000 1000000
+#invalid command name "0"
+#
+!XSPEC12> 
+#
+!XSPEC12> model 2:nxb1 constant*powerlaw + constant(gaussian + gaussian) + constant(gaussian + gaussian + gaussian + gaussian + gaussian + gaussian + gaussian + gaussian + gaussian + gaussian + gaussian + gaussian + gaussian + gaussian + gaussian)
+#
+#Input parameter value, delta, min, bot, top, and max values for ...
+#              1       0.01(      0.01)          0          0      1e+10      1e+10
+#              1       0.01(      0.01)         -3         -2          9         10
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#              1       0.01(      0.01)          0          0      1e+10      1e+10
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#              1       0.01(      0.01)          0          0      1e+10      1e+10
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#
+#Input parameter value, delta, min, bot, top, and max values for ...
+#              1       0.01(      0.01)          0          0      1e+10      1e+10
+#              1       0.01(      0.01)        0.5        0.5        1.5        1.5
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#       0.160726       0.01(0.00160726)   0.144168   0.144168    0.17723    0.17723
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#     0.00079416      -0.01(7.9416e-06) 0.000767476 0.000767476 0.000821591 0.000821591
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#              1      -0.01(      0.01)        0.5        0.5          1          1
+#            0.1       0.05(     0.001)          0          0         10         20
+#          5.898         -1(   0.05898)          0          0      1e+06      1e+06
+#              1       0.01(      0.01)          0          0      1e+10      1e+10
+#        0.00275     -0.001(  2.75e-05) 0.00222313 0.00222313 0.00308652 0.00308652
+#            0.1       0.05(     0.001)          0          0         10         20
+#      4.261e-05      -0.01( 4.261e-07) 3.62698e-05 3.62698e-05 4.95324e-05 4.95324e-05
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p5/5.8980*5.8876
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#= nxb1:p6
+#            0.1       0.05(     0.001)          0          0         10         20
+#= nxb1:p7*0.5
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p1
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         1.4867         -1(  0.014867)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#         0.0023     -0.001(   2.3e-05) 0.00192288 0.00192288 0.00272384 0.00272384
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#    2.58279e-05      -0.01(2.58279e-07) 2.0959e-05 2.0959e-05 3.12806e-05 3.12806e-05
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#= nxb1:p12/1.4867*1.4863
+#            0.1       0.05(     0.001)          0          0         10         20
+#= nxb1:p13
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p14*0.5
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         2.1229         -1(  0.021229)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#      0.0117828      0.001(0.000117828) 0.00945593 0.00945593  0.0148989  0.0148989
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#    4.58077e-05      -0.01(4.58077e-07) 3.57084e-05 3.57084e-05 5.69755e-05 5.69755e-05
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         5.4147         -1(  0.054147)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#         0.0025     -0.001(   2.5e-05) 0.00138441 0.00138441 0.00288286 0.00288286
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#    1.49939e-05      -0.01(1.49939e-07) 1.09625e-05 1.09625e-05 1.9624e-05 1.9624e-05
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#= nxb1:p21/5.4147*5.4055
+#            0.1       0.05(     0.001)          0          0         10         20
+#= nxb1:p22
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p23*0.5
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         6.4038         -1(  0.064038)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#        0.00285     -0.001(  2.85e-05)      0.002      0.002  0.0129959  0.0129959
+#
+#Input parameter value, delta, min, bot, top, and max values for ...
+#              1       0.01(      0.01)          0          0      1e+10      1e+10
+#              1       0.01(      0.01)        0.5        0.5        1.5        1.5
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#       0.160726       0.01(0.00160726)   0.144168   0.144168    0.17723    0.17723
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#     0.00079416      -0.01(7.9416e-06) 0.000767476 0.000767476 0.000821591 0.000821591
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#              1      -0.01(      0.01)        0.5        0.5          1          1
+#            0.1       0.05(     0.001)          0          0         10         20
+#          5.898         -1(   0.05898)          0          0      1e+06      1e+06
+#              1       0.01(      0.01)          0          0      1e+10      1e+10
+#        0.00275     -0.001(  2.75e-05) 0.00222313 0.00222313 0.00308652 0.00308652
+#            0.1       0.05(     0.001)          0          0         10         20
+#      4.261e-05      -0.01( 4.261e-07) 3.62698e-05 3.62698e-05 4.95324e-05 4.95324e-05
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p5/5.8980*5.8876
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#= nxb1:p6
+#            0.1       0.05(     0.001)          0          0         10         20
+#= nxb1:p7*0.5
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p1
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         1.4867         -1(  0.014867)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#         0.0023     -0.001(   2.3e-05) 0.00192288 0.00192288 0.00272384 0.00272384
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#    2.58279e-05      -0.01(2.58279e-07) 2.0959e-05 2.0959e-05 3.12806e-05 3.12806e-05
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#= nxb1:p12/1.4867*1.4863
+#            0.1       0.05(     0.001)          0          0         10         20
+#= nxb1:p13
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p14*0.5
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         2.1229         -1(  0.021229)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#      0.0117828      0.001(0.000117828) 0.00945593 0.00945593  0.0148989  0.0148989
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#    4.58077e-05      -0.01(4.58077e-07) 3.57084e-05 3.57084e-05 5.69755e-05 5.69755e-05
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         5.4147         -1(  0.054147)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#         0.0025     -0.001(   2.5e-05) 0.00138441 0.00138441 0.00288286 0.00288286
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#    1.49939e-05      -0.01(1.49939e-07) 1.09625e-05 1.09625e-05 1.9624e-05 1.9624e-05
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#= nxb1:p21/5.4147*5.4055
+#            0.1       0.05(     0.001)          0          0         10         20
+#= nxb1:p22
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p23*0.5
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         6.4038         -1(  0.064038)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#        0.00285     -0.001(  2.85e-05)      0.002      0.002  0.0129959  0.0129959
+#
+#Input parameter value, delta, min, bot, top, and max values for ...
+#              1       0.01(      0.01)          0          0      1e+10      1e+10
+#              1       0.01(      0.01)        0.5        0.5        1.5        1.5
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#       0.160726       0.01(0.00160726)   0.144168   0.144168    0.17723    0.17723
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#     0.00079416      -0.01(7.9416e-06) 0.000767476 0.000767476 0.000821591 0.000821591
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#              1      -0.01(      0.01)        0.5        0.5          1          1
+#            0.1       0.05(     0.001)          0          0         10         20
+#          5.898         -1(   0.05898)          0          0      1e+06      1e+06
+#              1       0.01(      0.01)          0          0      1e+10      1e+10
+#        0.00275     -0.001(  2.75e-05) 0.00222313 0.00222313 0.00308652 0.00308652
+#            0.1       0.05(     0.001)          0          0         10         20
+#      4.261e-05      -0.01( 4.261e-07) 3.62698e-05 3.62698e-05 4.95324e-05 4.95324e-05
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p5/5.8980*5.8876
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#= nxb1:p6
+#            0.1       0.05(     0.001)          0          0         10         20
+#= nxb1:p7*0.5
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p1
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         1.4867         -1(  0.014867)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#         0.0023     -0.001(   2.3e-05) 0.00192288 0.00192288 0.00272384 0.00272384
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#    2.58279e-05      -0.01(2.58279e-07) 2.0959e-05 2.0959e-05 3.12806e-05 3.12806e-05
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#= nxb1:p12/1.4867*1.4863
+#            0.1       0.05(     0.001)          0          0         10         20
+#= nxb1:p13
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p14*0.5
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         2.1229         -1(  0.021229)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#      0.0117828      0.001(0.000117828) 0.00945593 0.00945593  0.0148989  0.0148989
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#    4.58077e-05      -0.01(4.58077e-07) 3.57084e-05 3.57084e-05 5.69755e-05 5.69755e-05
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         5.4147         -1(  0.054147)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#         0.0025     -0.001(   2.5e-05) 0.00138441 0.00138441 0.00288286 0.00288286
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#    1.49939e-05      -0.01(1.49939e-07) 1.09625e-05 1.09625e-05 1.9624e-05 1.9624e-05
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#= nxb1:p21/5.4147*5.4055
+#            0.1       0.05(     0.001)          0          0         10         20
+#= nxb1:p22
+#            6.5       0.05(     0.065)          0          0      1e+06      1e+06
+#= nxb1:p23*0.5
+#              1       0.01(      0.01)          0          0      1e+20      1e+24
+#         6.4038         -1(  0.064038)          0          0      1e+06      1e+06
+#            0.1       0.05(     0.001)          0          0         10         20
+#        0.00285     -0.001(  2.85e-05)      0.002      0.002  0.0129959  0.0129959
+#
+#========================================================================
+#Model nxb1:constant<1>*powerlaw<2> + constant<3>(gaussian<4> + gaussian<5>) + constant<6>(gaussian<7> + gaussian<8> + gaussian<9> + gaussian<10> + gaussian<11> + gaussian<12> + gaussian<13> + gaussian<14> + gaussian<15> + gaussian<16> + gaussian<17> + gaussian<18> + gaussian<19> + gaussian<20> + gaussian<21>) Source No.: 2   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#                           Data group: 1
+#   1    1   constant   factor              1.00000      +/-  0.0          
+#   2    2   powerlaw   PhoIndex            1.00000      +/-  0.0          
+#   3    2   powerlaw   norm                1.00000      +/-  0.0          
+#   4    3   constant   factor              0.160726     +/-  0.0          
+#   5    4   gaussian   LineE      keV      6.50000      +/-  0.0          
+#   6    4   gaussian   Sigma      keV      7.94160E-04  frozen
+#   7    4   gaussian   norm                1.00000      +/-  0.0          
+#   8    5   gaussian   LineE      keV      1.00000      frozen
+#   9    5   gaussian   Sigma      keV      0.100000     +/-  0.0          
+#  10    5   gaussian   norm                5.89800      frozen
+#  11    6   constant   factor              1.00000      +/-  0.0          
+#  12    7   gaussian   LineE      keV      2.75000E-03  frozen
+#  13    7   gaussian   Sigma      keV      0.100000     +/-  0.0          
+#  14    7   gaussian   norm                4.26100E-05  frozen
+#  15    8   gaussian   LineE      keV      6.50000      +/-  0.0          
+#  16    8   gaussian   Sigma      keV      6.48854      = nxb1:p5/5.8980*5.8876
+#  17    8   gaussian   norm                1.00000      +/-  0.0          
+#  18    9   gaussian   LineE      keV      7.94160E-04  = nxb1:p6
+#  19    9   gaussian   Sigma      keV      0.100000     +/-  0.0          
+#  20    9   gaussian   norm                0.500000     = nxb1:p7*0.5
+#  21   10   gaussian   LineE      keV      6.50000      +/-  0.0          
+#  22   10   gaussian   Sigma      keV      1.00000      = nxb1:p1
+#  23   10   gaussian   norm                1.00000      +/-  0.0          
+#  24   11   gaussian   LineE      keV      1.48670      frozen
+#  25   11   gaussian   Sigma      keV      0.100000     +/-  0.0          
+#  26   11   gaussian   norm                2.30000E-03  frozen
+#  27   12   gaussian   LineE      keV      6.50000      +/-  0.0          
+#  28   12   gaussian   Sigma      keV      2.58279E-05  frozen
+#  29   12   gaussian   norm                1.00000      +/-  0.0          
+#  30   13   gaussian   LineE      keV      2.74926E-03  = nxb1:p12/1.4867*1.4863
+#  31   13   gaussian   Sigma      keV      0.100000     +/-  0.0          
+#  32   13   gaussian   norm                0.100000     = nxb1:p13
+#  33   14   gaussian   LineE      keV      6.50000      +/-  0.0          
+#  34   14   gaussian   Sigma      keV      2.13050E-05  = nxb1:p14*0.5
+#  35   14   gaussian   norm                1.00000      +/-  0.0          
+#  36   15   gaussian   LineE      keV      2.12290      frozen
+#  37   15   gaussian   Sigma      keV      0.100000     +/-  0.0          
+#  38   15   gaussian   norm                1.17828E-02  +/-  0.0          
+#  39   16   gaussian   LineE      keV      6.50000      +/-  0.0          
+#  40   16   gaussian   Sigma      keV      4.58077E-05  frozen
+#  41   16   gaussian   norm                1.00000      +/-  0.0          
+#  42   17   gaussian   LineE      keV      5.41470      frozen
+#  43   17   gaussian   Sigma      keV      0.100000     +/-  0.0          
+#  44   17   gaussian   norm                2.50000E-03  frozen
+#  45   18   gaussian   LineE      keV      6.50000      +/-  0.0          
+#  46   18   gaussian   Sigma      keV      1.49939E-05  frozen
+#  47   18   gaussian   norm                1.00000      +/-  0.0          
+#  48   19   gaussian   LineE      keV      6.48896      = nxb1:p21/5.4147*5.4055
+#  49   19   gaussian   Sigma      keV      0.100000     +/-  0.0          
+#  50   19   gaussian   norm                1.00000      = nxb1:p22
+#  51   20   gaussian   LineE      keV      6.50000      +/-  0.0          
+#  52   20   gaussian   Sigma      keV      0.500000     = nxb1:p23*0.5
+#  53   20   gaussian   norm                1.00000      +/-  0.0          
+#  54   21   gaussian   LineE      keV      6.40380      frozen
+#  55   21   gaussian   Sigma      keV      0.100000     +/-  0.0          
+#  56   21   gaussian   norm                2.85000E-03  frozen
+#                           Data group: 2
+#  57    1   constant   factor              1.00000      = nxb1:p1
+#  58    2   powerlaw   PhoIndex            8.16822E-06  frozen
+#  59    2   powerlaw   norm                1.00000      = nxb1:p3
+#  60    3   constant   factor              6.48680      = nxb1:p27/6.4038*6.3908
+#  61    4   gaussian   LineE      keV      6.50000      = nxb1:p5
+#  62    4   gaussian   Sigma      keV      2.58279E-05  = nxb1:p28
+#  63    4   gaussian   norm                1.00000      = nxb1:p7
+#  64    5   gaussian   LineE      keV      0.500000     = nxb1:p29*0.5
+#  65    5   gaussian   Sigma      keV      0.100000     = nxb1:p9
+#  66    5   gaussian   norm                7.47820      frozen
+#  67    6   constant   factor              1.00000      = nxb1:p11
+#  68    7   gaussian   LineE      keV      2.90000E-03  frozen
+#  69    7   gaussian   Sigma      keV      0.100000     = nxb1:p13
+#  70    7   gaussian   norm                3.82875E-05  frozen
+#  71    8   gaussian   LineE      keV      6.50000      = nxb1:p15
+#  72    8   gaussian   Sigma      keV      6.48496      = nxb1:p33/7.4782*7.4609
+#  73    8   gaussian   norm                1.00000      = nxb1:p17
+#  74    9   gaussian   LineE      keV      2.13050E-05  = nxb1:p34
+#  75    9   gaussian   Sigma      keV      0.100000     = nxb1:p19
+#  76    9   gaussian   norm                0.500000     = nxb1:p35*0.5
+#  77   10   gaussian   LineE      keV      6.50000      = nxb1:p21
+#  78   10   gaussian   Sigma      keV      8.04780      frozen
+#  79   10   gaussian   norm                1.00000      = nxb1:p23
+#  80   11   gaussian   LineE      keV      3.10000E-03  frozen
+#  81   11   gaussian   Sigma      keV      0.100000     = nxb1:p25
+#  82   11   gaussian   norm                1.86342E-05  frozen
+#  83   12   gaussian   LineE      keV      6.50000      = nxb1:p27
+#  84   12   gaussian   Sigma      keV      6.48385      = nxb1:p39/8.0478*8.0278
+#  85   12   gaussian   norm                1.00000      = nxb1:p29
+#  86   13   gaussian   LineE      keV      4.58077E-05  = nxb1:p40
+#  87   13   gaussian   Sigma      keV      0.100000     = nxb1:p31
+#  88   13   gaussian   norm                0.500000     = nxb1:p41*0.5
+#  89   14   gaussian   LineE      keV      6.50000      = nxb1:p33
+#  90   14   gaussian   Sigma      keV      9.62800      frozen
+#  91   14   gaussian   norm                1.00000      = nxb1:p35
+#  92   15   gaussian   LineE      keV      6.66356E-03  +/-  0.0          
+#  93   15   gaussian   Sigma      keV      0.100000     = nxb1:p37
+#  94   15   gaussian   norm                1.98147E-05  frozen
+#  95   16   gaussian   LineE      keV      6.50000      = nxb1:p39
+#  96   16   gaussian   Sigma      keV      9.71330      frozen
+#  97   16   gaussian   norm                1.00000      = nxb1:p41
+#  98   17   gaussian   LineE      keV      6.72883E-03  +/-  0.0          
+#  99   17   gaussian   Sigma      keV      0.100000     = nxb1:p43
+# 100   17   gaussian   norm                1.54266E-04  frozen
+# 101   18   gaussian   LineE      keV      6.50000      = nxb1:p45
+# 102   18   gaussian   Sigma      keV      11.4423      frozen
+# 103   18   gaussian   norm                1.00000      = nxb1:p47
+# 104   19   gaussian   LineE      keV      8.09335E-03  +/-  0.0          
+# 105   19   gaussian   Sigma      keV      0.100000     = nxb1:p49
+# 106   19   gaussian   norm                1.27778E-04  frozen
+# 107   20   gaussian   LineE      keV      6.50000      = nxb1:p51
+# 108   20   gaussian   Sigma      keV      11.5847      frozen
+# 109   20   gaussian   norm                1.00000      = nxb1:p53
+# 110   21   gaussian   LineE      keV      1.60051E-02  +/-  0.0          
+# 111   21   gaussian   Sigma      keV      0.100000     = nxb1:p55
+# 112   21   gaussian   norm                4.85000E-05  frozen
+#                           Data group: 3
+# 113    1   constant   factor              1.00000      = nxb1:p1
+# 114    2   powerlaw   PhoIndex            1.00000      +/-  0.0          
+# 115    2   powerlaw   norm                1.00000      = nxb1:p3
+# 116    3   constant   factor              0.160726     +/-  0.0          
+# 117    4   gaussian   LineE      keV      6.50000      = nxb1:p5
+# 118    4   gaussian   Sigma      keV      7.94160E-04  frozen
+# 119    4   gaussian   norm                1.00000      = nxb1:p7
+# 120    5   gaussian   LineE      keV      1.00000      frozen
+# 121    5   gaussian   Sigma      keV      0.100000     = nxb1:p9
+# 122    5   gaussian   norm                5.89800      frozen
+# 123    6   constant   factor              1.00000      = nxb1:p11
+# 124    7   gaussian   LineE      keV      2.75000E-03  frozen
+# 125    7   gaussian   Sigma      keV      0.100000     = nxb1:p13
+# 126    7   gaussian   norm                4.26100E-05  frozen
+# 127    8   gaussian   LineE      keV      6.50000      = nxb1:p15
+# 128    8   gaussian   Sigma      keV      6.48854      = nxb1:p61/5.8980*5.8876
+# 129    8   gaussian   norm                1.00000      = nxb1:p17
+# 130    9   gaussian   LineE      keV      2.58279E-05  = nxb1:p62
+# 131    9   gaussian   Sigma      keV      0.100000     = nxb1:p19
+# 132    9   gaussian   norm                0.500000     = nxb1:p63*0.5
+# 133   10   gaussian   LineE      keV      6.50000      = nxb1:p21
+# 134   10   gaussian   Sigma      keV      1.00000      = nxb1:p57
+# 135   10   gaussian   norm                1.00000      = nxb1:p23
+# 136   11   gaussian   LineE      keV      1.48670      frozen
+# 137   11   gaussian   Sigma      keV      0.100000     = nxb1:p25
+# 138   11   gaussian   norm                2.30000E-03  frozen
+# 139   12   gaussian   LineE      keV      6.50000      = nxb1:p27
+# 140   12   gaussian   Sigma      keV      2.58279E-05  frozen
+# 141   12   gaussian   norm                1.00000      = nxb1:p29
+# 142   13   gaussian   LineE      keV      2.89922E-03  = nxb1:p68/1.4867*1.4863
+# 143   13   gaussian   Sigma      keV      0.100000     = nxb1:p31
+# 144   13   gaussian   norm                0.100000     = nxb1:p69
+# 145   14   gaussian   LineE      keV      6.50000      = nxb1:p33
+# 146   14   gaussian   Sigma      keV      1.91438E-05  = nxb1:p70*0.5
+# 147   14   gaussian   norm                1.00000      = nxb1:p35
+# 148   15   gaussian   LineE      keV      2.12290      frozen
+# 149   15   gaussian   Sigma      keV      0.100000     = nxb1:p37
+# 150   15   gaussian   norm                1.17828E-02  +/-  0.0          
+# 151   16   gaussian   LineE      keV      6.50000      = nxb1:p39
+# 152   16   gaussian   Sigma      keV      4.58077E-05  frozen
+# 153   16   gaussian   norm                1.00000      = nxb1:p41
+# 154   17   gaussian   LineE      keV      5.41470      frozen
+# 155   17   gaussian   Sigma      keV      0.100000     = nxb1:p43
+# 156   17   gaussian   norm                2.50000E-03  frozen
+# 157   18   gaussian   LineE      keV      6.50000      = nxb1:p45
+# 158   18   gaussian   Sigma      keV      1.49939E-05  frozen
+# 159   18   gaussian   norm                1.00000      = nxb1:p47
+# 160   19   gaussian   LineE      keV      6.48896      = nxb1:p77/5.4147*5.4055
+# 161   19   gaussian   Sigma      keV      0.100000     = nxb1:p49
+# 162   19   gaussian   norm                8.04780      = nxb1:p78
+# 163   20   gaussian   LineE      keV      6.50000      = nxb1:p51
+# 164   20   gaussian   Sigma      keV      0.500000     = nxb1:p79*0.5
+# 165   20   gaussian   norm                1.00000      = nxb1:p53
+# 166   21   gaussian   LineE      keV      6.40380      frozen
+# 167   21   gaussian   Sigma      keV      0.100000     = nxb1:p55
+# 168   21   gaussian   norm                2.85000E-03  frozen
+#                           Data group: 4
+# 169    1   constant   factor              1.00000      = nxb1:p1
+# 170    2   powerlaw   PhoIndex            8.16822E-06  frozen
+# 171    2   powerlaw   norm                1.00000      = nxb1:p3
+# 172    3   constant   factor              6.48680      = nxb1:p83/6.4038*6.3908
+# 173    4   gaussian   LineE      keV      6.50000      = nxb1:p5
+# 174    4   gaussian   Sigma      keV      6.48385      = nxb1:p84
+# 175    4   gaussian   norm                1.00000      = nxb1:p7
+# 176    5   gaussian   LineE      keV      0.500000     = nxb1:p85*0.5
+# 177    5   gaussian   Sigma      keV      0.100000     = nxb1:p9
+# 178    5   gaussian   norm                7.47820      frozen
+# 179    6   constant   factor              1.00000      = nxb1:p11
+# 180    7   gaussian   LineE      keV      2.90000E-03  frozen
+# 181    7   gaussian   Sigma      keV      0.100000     = nxb1:p13
+# 182    7   gaussian   norm                3.82875E-05  frozen
+# 183    8   gaussian   LineE      keV      6.50000      = nxb1:p15
+# 184    8   gaussian   Sigma      keV      6.48496      = nxb1:p89/7.4782*7.4609
+# 185    8   gaussian   norm                1.00000      = nxb1:p17
+# 186    9   gaussian   LineE      keV      9.62800      = nxb1:p90
+# 187    9   gaussian   Sigma      keV      0.100000     = nxb1:p19
+# 188    9   gaussian   norm                0.500000     = nxb1:p91*0.5
+# 189   10   gaussian   LineE      keV      6.50000      = nxb1:p21
+# 190   10   gaussian   Sigma      keV      8.04780      frozen
+# 191   10   gaussian   norm                1.00000      = nxb1:p23
+# 192   11   gaussian   LineE      keV      3.10000E-03  frozen
+# 193   11   gaussian   Sigma      keV      0.100000     = nxb1:p25
+# 194   11   gaussian   norm                1.86342E-05  frozen
+# 195   12   gaussian   LineE      keV      6.50000      = nxb1:p27
+# 196   12   gaussian   Sigma      keV      6.48385      = nxb1:p95/8.0478*8.0278
+# 197   12   gaussian   norm                1.00000      = nxb1:p29
+# 198   13   gaussian   LineE      keV      9.71330      = nxb1:p96
+# 199   13   gaussian   Sigma      keV      0.100000     = nxb1:p31
+# 200   13   gaussian   norm                0.500000     = nxb1:p97*0.5
+# 201   14   gaussian   LineE      keV      6.50000      = nxb1:p33
+# 202   14   gaussian   Sigma      keV      9.62800      frozen
+# 203   14   gaussian   norm                1.00000      = nxb1:p35
+# 204   15   gaussian   LineE      keV      6.66356E-03  +/-  0.0          
+# 205   15   gaussian   Sigma      keV      0.100000     = nxb1:p37
+# 206   15   gaussian   norm                1.98147E-05  frozen
+# 207   16   gaussian   LineE      keV      6.50000      = nxb1:p39
+# 208   16   gaussian   Sigma      keV      9.71330      frozen
+# 209   16   gaussian   norm                1.00000      = nxb1:p41
+# 210   17   gaussian   LineE      keV      6.72883E-03  +/-  0.0          
+# 211   17   gaussian   Sigma      keV      0.100000     = nxb1:p43
+# 212   17   gaussian   norm                1.54266E-04  frozen
+# 213   18   gaussian   LineE      keV      6.50000      = nxb1:p45
+# 214   18   gaussian   Sigma      keV      11.4423      frozen
+# 215   18   gaussian   norm                1.00000      = nxb1:p47
+# 216   19   gaussian   LineE      keV      8.09335E-03  +/-  0.0          
+# 217   19   gaussian   Sigma      keV      0.100000     = nxb1:p49
+# 218   19   gaussian   norm                1.27778E-04  frozen
+# 219   20   gaussian   LineE      keV      6.50000      = nxb1:p51
+# 220   20   gaussian   Sigma      keV      11.5847      frozen
+# 221   20   gaussian   norm                1.00000      = nxb1:p53
+# 222   21   gaussian   LineE      keV      1.60051E-02  +/-  0.0          
+# 223   21   gaussian   Sigma      keV      0.100000     = nxb1:p55
+# 224   21   gaussian   norm                4.85000E-05  frozen
+#________________________________________________________________________
+#
+#
+#Fit statistic  : C-Statistic              2.730767e+06     using 60000 bins, spectrum 1, group 1.
+#                 C-Statistic                468744.0     using 60000 bins, spectrum 2, group 2.
+#                 Chi-Squared              4.082744e+13     using 856 bins, spectrum 3, group 3.
+#                 Chi-Squared              1.114192e+13     using 618 bins, spectrum 4, group 4.
+#Total fit statistic                       5.196937e+13     with 121425 d.o.f.
+#
+#Test statistic : Chi-Squared              5.211214e+13     using 121474 bins.
+#
+#***Warning: Chi-square may not be valid due to bins with zero variance
+#            in spectrum number(s): 1 2 
+#
+# Null hypothesis probability of 0.000000e+00 with 121425 degrees of freedom
+# Current data and model not fit yet.
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p1
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p2
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p3
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p4
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p5
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p6
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p7
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p8
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p9
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p10
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p11
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p12
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p13
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p14
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p15
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p16
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p17
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p18
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p19
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p20
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p21
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p22
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p23
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p24
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p25
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p26
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p27
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p28
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p29
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p30
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p31
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p32
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p33
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p34
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p35
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p36
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p37
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p38
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p39
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p40
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p41
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p42
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p43
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p44
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p45
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p46
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p47
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p48
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p49
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p50
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p51
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p52
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p53
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p54
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p55
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p56
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p57
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p58
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p59
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p60
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p61
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p62
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p63
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p64
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p65
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p66
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p67
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p68
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p69
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p70
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p71
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p72
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p73
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p74
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p75
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p76
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p77
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p78
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p79
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p80
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p81
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p82
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p83
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p84
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p85
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p86
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p87
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p88
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p89
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p90
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p91
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p92
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p93
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p94
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p95
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p96
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p97
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p98
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p99
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p100
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p101
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p102
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p103
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p104
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p105
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p106
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p107
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p108
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p109
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p110
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p111
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> = nxb1:p112
+#invalid command name "="
+#
+!XSPEC12> 
+#
+!XSPEC12> ignore 1:**
+# 60000 channels (1,60000) ignored in spectrum #     1
+#

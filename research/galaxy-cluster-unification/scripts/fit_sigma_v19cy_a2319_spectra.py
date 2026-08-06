@@ -38,6 +38,11 @@ ARF_REPORT = (
     / "results/sigma_v19cy_direct_icm_velocity_evidence/"
     "development_response_arfs.json"
 )
+INTERFACE_FAILURE_REPORT = (
+    ROOT
+    / "results/sigma_v19cy_direct_icm_velocity_evidence/"
+    "development_response_aware_spectral_interface_failure.json"
+)
 REPORT = (
     ROOT
     / "results/sigma_v19cy_direct_icm_velocity_evidence/"
@@ -48,7 +53,7 @@ CHECKPOINT = (
     / "results/sigma_v19cy_direct_icm_velocity_evidence/"
     "development_response_aware_spectral.checkpoint.json"
 )
-EXPECTED_PROTOCOL = "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.5"
+EXPECTED_PROTOCOL = "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.6"
 EXPECTED_COMPONENT_RESULT = "SIGMA-V19CY-A2319-RESPONSE-COMPONENTS-RESULT-1.0.0"
 EXPECTED_ARF_RESULT = "SIGMA-V19CY-A2319-ARF-RESULT-1.0.0"
 NXB_PARAMETER_COUNT = 56
@@ -62,6 +67,14 @@ MARKER = "__SIGMA_XSPEC__"
 
 def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_xspec_deck(path: Path, deck: str) -> None:
+    """Write a WSL-stdin deck without Windows newline translation."""
+    payload = deck.encode("utf-8")
+    if b"\r" in payload:
+        raise RuntimeError("XSPEC stdin deck contains a carriage return")
+    path.write_bytes(payload)
 
 
 def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
@@ -845,6 +858,34 @@ def validate_inputs() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
         )
     ) or grouping_amendment.get("arf_generated") is not True:
         raise RuntimeError("pre-fit grouping amendment crossed a sealed boundary")
+    execution_amendment = config.get("pre_fit_execution_amendment", {})
+    if execution_amendment.get("previous_version") != (
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.5"
+    ):
+        raise RuntimeError("unexpected pre-fit execution amendment ancestry")
+    if preparation.sha256(INTERFACE_FAILURE_REPORT) != execution_amendment.get(
+        "archived_failure_report", {}
+    ).get("sha256"):
+        raise RuntimeError("archived XSPEC interface failure report changed")
+    for key in ("checkpoint", "failed_deck", "failed_xspec_log"):
+        artifact = execution_amendment.get(key, {})
+        path = ROOT / artifact.get("path", "missing")
+        if (
+            not path.is_file()
+            or path.stat().st_size != artifact.get("bytes")
+            or preparation.sha256(path) != artifact.get("sha256")
+        ):
+            raise RuntimeError(f"archived XSPEC interface artifact changed: {key}")
+    if (
+        execution_amendment.get("valid_model_optimization_or_velocity_fit_completed")
+        is not False
+        or execution_amendment.get("source_result_used_to_change_model_band_or_parameters")
+        is not False
+        or execution_amendment.get("nxb_grouping_or_response_changed") is not False
+        or execution_amendment.get("gravity_formula_or_parameters_changed") is not False
+        or execution_amendment.get("validation_or_holdout_accessed") is not False
+    ):
+        raise RuntimeError("pre-fit execution amendment crossed a frozen boundary")
     authorization = config["authorization"]
     if not authorization["fit_A2319_development_spectra_and_velocities"]:
         raise RuntimeError("A2319 spectral fitting is not authorized")
@@ -1019,6 +1060,43 @@ def nxb_grouping_gate_passed(reports: list[dict[str, Any]]) -> bool:
     )
 
 
+def resume_grouped_nxb_bundles(
+    bundles: dict[str, list[dict[str, Path]]],
+    staging: Path,
+    reports: list[dict[str, Any]],
+) -> dict[str, list[dict[str, Path]]]:
+    """Reattach only the exact grouped products recorded by a frozen checkpoint."""
+    if not nxb_grouping_gate_passed(reports):
+        raise RuntimeError("checkpoint NXB grouping gate did not pass")
+    index = {(row["branch"], row["region"]): row for row in reports}
+    if len(index) != 10:
+        raise RuntimeError("checkpoint NXB grouping identities are not unique")
+    resumed: dict[str, list[dict[str, Path]]] = {}
+    used: set[tuple[str, str]] = set()
+    for region, rows in bundles.items():
+        resumed_rows: list[dict[str, Path]] = []
+        for row in rows:
+            branch = row["nxb_pha"].parent.parent.name
+            key = (branch, region)
+            report = index.get(key)
+            if report is None:
+                raise RuntimeError(f"checkpoint lacks grouped NXB product: {key}")
+            grouped = staging / "grouped_nxb" / branch / region / "nxb_optsnmin3.pha"
+            if (
+                not grouped.is_file()
+                or preparation.sha256(grouped) != report["grouped"]["sha256"]
+            ):
+                raise RuntimeError(f"checkpoint grouped NXB product changed: {grouped}")
+            resumed_row = dict(row)
+            resumed_row["nxb_pha"] = grouped
+            resumed_rows.append(resumed_row)
+            used.add(key)
+        resumed[region] = resumed_rows
+    if used != set(index):
+        raise RuntimeError("checkpoint contains unused grouped NXB products")
+    return resumed
+
+
 def xspec_command(config: dict[str, Any], work: Path, deck: Path) -> str:
     system_pfiles = config["runtime"]["pfiles"].split(";", 1)[1]
     local_pfiles = xspec_path(config, work / "pfiles")
@@ -1058,7 +1136,7 @@ def run_fit(
         log_path=log,
         session_path=session,
     )
-    deck.write_text(deck_text, encoding="utf-8")
+    write_xspec_deck(deck, deck_text)
     command = xspec_command(config, work, deck)
     record = application.run_wsl(
         config["runtime"]["wsl_distribution"], command, timeout=XSPEC_TIMEOUT_SECONDS
@@ -1147,13 +1225,8 @@ def generate() -> dict[str, Any]:
     output_root = product_root / "spectral_fits"
     if output_root.exists():
         raise RuntimeError(f"refusing to overwrite spectral fits: {output_root}")
-    if CHECKPOINT.exists():
-        raise RuntimeError(
-            f"refusing to overwrite an incomplete spectral checkpoint: {CHECKPOINT}"
-        )
     distribution = config["runtime"]["wsl_distribution"]
     native_temp = Path(f"//wsl.localhost/{distribution}/tmp")
-    staging = Path(tempfile.mkdtemp(prefix="sigma_v19cy_spectral_fits_", dir=native_temp))
     primary_band = config["fit_protocol"]["primary_band_keV"]
     variants = [
         {"name": "primary", "band_keV": primary_band},
@@ -1161,11 +1234,50 @@ def generate() -> dict[str, Any]:
     ]
     fits: list[dict[str, Any]] = []
     nxb_grouping: list[dict[str, Any]] = []
-    try:
-        bundles = prepare_grouped_nxb_spectra(
-            config, raw_bundles, staging, nxb_grouping
+    resume_from_grouping = False
+    if CHECKPOINT.exists():
+        checkpoint = load_json(CHECKPOINT)
+        amendment = config["pre_fit_execution_amendment"]
+        checkpoint_contract = amendment["checkpoint"]
+        if (
+            preparation.sha256(CHECKPOINT) != checkpoint_contract["sha256"]
+            or CHECKPOINT.stat().st_size != checkpoint_contract["bytes"]
+            or checkpoint.get("protocol_version")
+            != "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-CHECKPOINT-1.0.0"
+            or checkpoint.get("status") != checkpoint_contract["status"]
+            or checkpoint.get("config_sha256") != amendment["failed_run_config_sha256"]
+            or checkpoint.get("component_report_sha256")
+            != preparation.sha256(COMPONENT_REPORT)
+            or checkpoint.get("arf_report_sha256") != preparation.sha256(ARF_REPORT)
+            or checkpoint.get("completed_fits") != []
+            or checkpoint.get("validation_or_holdout_accessed") is not False
+        ):
+            raise RuntimeError("incomplete spectral checkpoint is not the frozen resume point")
+        staging = Path(checkpoint["staging_path"])
+        if not staging.is_dir():
+            raise RuntimeError("frozen resume staging directory is unavailable")
+        nxb_grouping = checkpoint["nxb_grouping"]
+        resume_from_grouping = True
+    else:
+        staging = Path(
+            tempfile.mkdtemp(prefix="sigma_v19cy_spectral_fits_", dir=native_temp)
         )
-        write_checkpoint(staging, nxb_grouping, fits, "nxb_grouping_completed")
+    try:
+        if resume_from_grouping:
+            bundles = resume_grouped_nxb_bundles(
+                raw_bundles, staging, nxb_grouping
+            )
+            write_checkpoint(
+                staging,
+                nxb_grouping,
+                fits,
+                "nxb_grouping_resumed_after_lf_deck_fix",
+            )
+        else:
+            bundles = prepare_grouped_nxb_spectra(
+                config, raw_bundles, staging, nxb_grouping
+            )
+            write_checkpoint(staging, nxb_grouping, fits, "nxb_grouping_completed")
         for region, bundle in bundles.items():
             for variant in variants:
                 fit = run_fit(

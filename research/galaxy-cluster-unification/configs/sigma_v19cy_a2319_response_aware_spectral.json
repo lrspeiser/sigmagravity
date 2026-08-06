@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.5",
-  "status": "all ten ARFs completed and passed their frozen response gate; before any source-energy fit, the weighted RATE NXB constraints were refrozen to use optimal grouping with a minimum signal-to-noise of 3 on the full response grid, while source COUNTS remain ungrouped and use C-stat; no source model, fit band, gravity parameter, validation target, or holdout target changed",
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.6",
+  "status": "all ten ARFs and NXB grouping gates passed; the first XSPEC invocation failed before valid optimization because a Windows CRLF deck was consumed through WSL stdin as alternating parameter answers, so the exact failed deck, log, report, and checkpoint were hashed and the execution interface was refrozen to write LF-only bytes; no source model, fit band, parameter, gravity target, validation target, or holdout target changed",
   "purpose": "Reproduce the seven published A2319 detector-region velocities on the three strictly bracketed commissioning fragments using current official response and NXB tools, then decide whether the signed ICM velocity field is sufficiently identified to become a development-only Sigma source diagnostic.",
   "parents": {
     "calibration_report": {
@@ -145,6 +145,42 @@
     "source_energy_distribution_summarized_or_fit": false,
     "arf_generated": true,
     "velocity_fit_performed": false,
+    "validation_or_holdout_accessed": false
+  },
+  "pre_fit_execution_amendment": {
+    "previous_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.5",
+    "discovered_by": "the first development-only XSPEC invocation for region a primary after all ten NXB grouping gates passed",
+    "failed_run_config_sha256": "0273d7d217b6ca474b1f2dde9b2141f9eeeb1d1f76bc27f79db8688a79810280",
+    "archived_failure_report": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_aware_spectral_interface_failure.json",
+      "bytes": 43957,
+      "sha256": "8a87ded09d78236ceae0bc965437b84455dbde1f7760ce8f96e94c0c684e8a68"
+    },
+    "checkpoint": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary/grouping_checkpoint.json",
+      "bytes": 40296,
+      "sha256": "870434674dfc4dfef0f4d3cd14fdf2faa5bfc250101305a220f9d016923937e3",
+      "status": "nxb_grouping_completed",
+      "completed_valid_fits": 0
+    },
+    "failed_deck": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary/fit_crlf.xcm",
+      "bytes": 16679,
+      "sha256": "f88998626292d4b2be1fa51ba4e804377dee537ca7cca28c7403401df93e51e7",
+      "line_endings": "CRLF"
+    },
+    "failed_xspec_log": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/interface_failure_a_primary/xspec.log",
+      "bytes": 55247,
+      "sha256": "799c93da58a93bc3e99fd1d0eab3b96b5e2e7978b28018bab36cbe6c230ab434"
+    },
+    "root_cause": "Path.write_text on Windows translated LF to CRLF; when XSPEC read the deck through WSL stdin, carriage returns acted as extra empty parameter answers, leaving alternating parameters at defaults and turning the remaining parameter lines into invalid Tcl commands",
+    "correction": "write the generated XSPEC deck as explicit UTF-8 bytes containing LF only; fail if a carriage return is present; resume only from the exact hashed grouping checkpoint and revalidate all ten grouped NXB hashes",
+    "source_energy_distribution_loaded": true,
+    "valid_model_optimization_or_velocity_fit_completed": false,
+    "source_result_used_to_change_model_band_or_parameters": false,
+    "nxb_grouping_or_response_changed": false,
+    "gravity_formula_or_parameters_changed": false,
     "validation_or_holdout_accessed": false
   },
   "branches": [
@@ -295,6 +331,7 @@
     "nxb_constraint_band_keV": [1.0, 17.0],
     "data_group_protocol": "For every branch-region product, load ungrouped source COUNTS and the optsnmin-3 grouped NXB RATE as separate data groups. Apply the regional RMF and ARF only to the source plasma channel; apply the frozen diagonal response and no ARF to the empirical NXB channel in both groups.",
     "nxb_prefit_sequence": "Without consulting source line centroids or velocities, optimally group the weighted NXB RATE spectrum to minimum signal-to-noise 3 over the full 60000-channel response grid, then fit the public 56-parameter empirical NXB model over 1-17 keV with standard chi-square, starting from the delivered state. Freeze all parameters except the model's recommended normalization parameters before the source fit; retain those normalizations as nuisance parameters.",
+    "xspec_stdin_deck_encoding": "UTF-8 with LF-only line endings written as bytes",
     "atomdb": {"version": "3.0.9", "xspec_apecroot": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/spectral/modelData/apec_v3.0.9"},
     "abundance_table": "lodd",
     "absorption_model": "tbabs",
@@ -334,6 +371,7 @@
     "require_nxb_grouping_rate_and_stat_err_preserved_exactly": true,
     "require_nxb_grouping_zero_variance_groups_in_band": 0,
     "minimum_nxb_group_signal_to_noise_in_band": 3.0,
+    "require_lf_only_xspec_stdin_decks": true,
     "require_all_seven_primary_fits_converged": true,
     "require_no_parameter_at_hard_bound": true,
     "maximum_primary_velocity_interval_halfwidth_km_s_for_at_least_five_regions": 200.0,

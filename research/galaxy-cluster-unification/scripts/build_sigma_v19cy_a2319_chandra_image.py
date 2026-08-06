@@ -63,6 +63,7 @@ def validate_inputs(config_path: Path = DEFAULT_CONFIG) -> tuple[dict[str, Any],
         "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.3",
         "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.4",
         "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.5",
+        "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.6",
     }
     if config.get("protocol_version") not in accepted_protocols:
         raise RuntimeError("unexpected response-aware spectral protocol")
