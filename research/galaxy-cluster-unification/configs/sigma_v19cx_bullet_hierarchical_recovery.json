@@ -1,0 +1,307 @@
+{
+  "advance": {
+    "if_all_gates_pass": "freeze V19X3B with V19CX passed report/config/runner supplied as the commissioning authority",
+    "if_any_gate_fails": "retain the terminal failure; do not relax hierarchy equivalence, spectral, fit or source gates",
+    "gravity_theory_tested_here": false
+  },
+  "authorization": {
+    "change_gravity_formula_or_parameter": false,
+    "combine_integrated_and_two_selected_regions": true,
+    "fit_integrated_abundances_and_two_selected_region_temperatures": true,
+    "open_lensing_or_halo_payload": false,
+    "run_all_494_regional_fits_before_commissioning_passes": false,
+    "run_v19cw_equivalent_hierarchy_only_above_frozen_cell_threshold": true,
+    "overwrite_v19x2_failure_report": false,
+    "run_v19bq_or_v19bs": false,
+    "derive_action": false,
+    "change_gravity_formula_parameter_source_state_or_lensing_target": false
+  },
+  "claim_boundary": [
+    "V19CX changes only the numerically commissioned response-reduction topology for stacks larger than the largest successful direct stack.",
+    "Registered cells, source and background PHA rules, ASCA scaling, exposure origin, RMF threshold, grouping, spectral model, fit order and gates are inherited unchanged from V19X2.",
+    "A pass authorizes full regional spectral production; it is not evidence for Sigma Gravity.",
+    "No source state, lensing, halo, gravity parameter, V19BQ, V19BS or action is opened here."
+  ],
+  "combination": {
+    "bscale_method": "asca",
+    "exp_origin": "pha",
+    "failure_rule": "retain the failed command and products; do not drop cells, change grouping, alter background scaling, or introduce an observation hierarchy after seeing a spectral or fit outcome",
+    "group_after_combination": {
+      "grouptype": "NUM_CTS",
+      "minimum_counts": 25,
+      "tool": "CIAO dmgroup 4.18",
+      "xcolumn": "CHANNEL",
+      "ycolumn": "COUNTS"
+    },
+    "integrated_aperture": "the union of every accepted V19M region, represented by all V19W cells for that cluster without overlap or exclusion",
+    "method": "sum",
+    "primary_combination": "directly combine the complete deterministic source-PHA list for the aperture; do not use fitted temperature or response shape to select or weight cells",
+    "regional_aperture": "the exact selected V19M region represented by every V19W cell for that cluster and bin_id",
+    "tool": "CIAO combine_spectra 4.18.2"
+  },
+  "exact_legacy_sections": [
+    "registered_workload",
+    "combination",
+    "fit_sequence",
+    "gates"
+  ],
+  "execution": {
+    "adapter": "scripts/sigma_v19x2_unified_response_adapter.py",
+    "combination_concurrency": 1,
+    "reason_for_serial_combination": "V19CW commissioned serial observation groups; V19CX preserves that exact execution topology.",
+    "response_archives": {
+      "base_v19w": "/home/henry/sigma-v19w-response-production/v100",
+      "v19w5_recovery": "/home/henry/sigma-v19cd-v19w5-response-recovery/v100"
+    },
+    "result_root": "results/sigma_v19cx_bullet_hierarchical_recovery",
+    "runner": "scripts/run_sigma_v19cx_bullet_hierarchical_recovery.py",
+    "scratch_root": "/home/henry/sigma-v19cx-bullet-hierarchical-recovery/v100",
+    "validated_cell_index": "results/sigma_v19x2_unified_spectral_combination_commissioning/validated_cell_index.csv"
+  },
+  "fit_sequence": {
+    "abundance_table": "aspl (Asplund et al. 2009)",
+    "fit_energy_keV": [
+      0.5,
+      7.0
+    ],
+    "integrated_abundance_solar": {
+      "initial": 0.3,
+      "maximum": 2.0,
+      "minimum": 0.0
+    },
+    "model": "xstbabs * xsapec",
+    "normalization": {
+      "initial_rule": "max(1e-8, 0.01 times the background-unsubtracted 0.5-7.0 count rate in counts per second)",
+      "maximum": 1.0,
+      "minimum": 1e-10
+    },
+    "optimization": "levmar; if it fails or returns a non-finite statistic, run neldermead and then one levmar polish",
+    "order": [
+      "combine and group the full integrated spectrum for both clusters",
+      "fit each integrated spectrum with abundance free",
+      "freeze each cluster's integrated best-fit abundance",
+      "combine and group the preregistered commissioning region for both clusters",
+      "fit each commissioning region with its own cluster's integrated abundance fixed"
+    ],
+    "published_temperature_used_as_gate": false,
+    "regional_abundance_rule": "fixed to the same cluster's integrated best-fit value",
+    "statistic": "chi2xspecvar",
+    "temperature_keV": {
+      "initial": 8.0,
+      "maximum": 30.0,
+      "minimum": 1.0
+    },
+    "uncertainty": "Sherpa conf 68-percent profile-likelihood interval for temperature with every other free parameter profiled"
+  },
+  "freeze_state": "frozen_after_terminal_v19w5_pass",
+  "gates": {
+    "all_free_parameters_strictly_inside_bounds": true,
+    "both_integrated_fits_have_finite_temperature_abundance_normalization_and_ordered_interval": true,
+    "both_integrated_reduced_statistics_at_most": 1.5,
+    "both_regional_fits_have_finite_temperature_normalization_and_ordered_interval": true,
+    "both_regional_fractional_68_percent_temperature_half_widths_at_most": 0.5,
+    "both_regional_reduced_statistics_at_most": 1.5,
+    "combination_uses_every_registered_cell_exactly_once": true,
+    "combined_full_pha_source_counts_equal_the_sum_of_contributing_cell_pha_counts": true,
+    "combined_source_background_arf_and_rmf_exist_and_links_are_exact": true,
+    "every_cell_event_energy_source_and_background_count_equals_the_frozen_manifest": true,
+    "failure_rule": "do not start the 494-region production fit; report the failed cluster and stage without changing grouping, energy band, nH, redshift, abundance rule, statistic, optimizer sequence, parameter bounds or cell membership",
+    "sherpa_response_energy_fit_band_counts_reported_but_not_equated_to_event_energy_rows": true,
+    "v19w_complete_and_every_product_hash_exact": true
+  },
+  "implementation": {
+    "adapter": "scripts/sigma_v19x2_unified_response_adapter.py",
+    "adapter_sha256": "10c4cc60a9e17ad0569f421ccc5c530403647d763fda7de7c2eaca6f5d4dcdf1",
+    "freezer": "scripts/freeze_sigma_v19cx_bullet_hierarchical_recovery.py",
+    "freezer_sha256": "b5f7b3cd8b80ea5eac586d83caa76d8cde756acd5fbf863e2f567bd63bf3dfc2",
+    "runner": "scripts/run_sigma_v19cx_bullet_hierarchical_recovery.py",
+    "runner_sha256": "59a86c69c778dbd1e88944c0db513ee8493e9b2daccfb837f67d6f103b4c6ae7"
+  },
+  "inherited_section_sha256": {
+    "combination": "a556ed47c000d5529e26be9ca5200aa2405238091ddf5286df72383c0601500c",
+    "fit_sequence": "6e0ab25cbf18e87dce3c1e07e6dd708c1bcdf82cbde82682773dbecd77cad8f5",
+    "gates": "b8c7ca2f8d8f168fab3e95db4b638ad2d4b6c66bc8e83460980a4ff893c60b95",
+    "registered_workload": "ab0e5a9b99875cac1c739bb181b04d32d46e0ce262342142acbf236be16c09da"
+  },
+  "integrity": {
+    "base_archive_modified_by_v19w5": false,
+    "lensing_halo_or_gravity_payload_opened_at_freeze": false,
+    "obsolete_v19x_authorized": false,
+    "spectrum_or_temperature_known_at_freeze": false,
+    "unified_index_rows_at_freeze": 5082,
+    "unified_product_files_at_freeze": 20328,
+    "v19w5_terminal_report_existed_at_freeze": true,
+    "v19w5_terminal_report_passed_at_freeze": true
+  },
+  "parents": {
+    "inherited_integrated_combiner": "scripts/run_sigma_v17c_integrated_spectra.py",
+    "inherited_integrated_combiner_sha256": "1116dff3c8da44c54a0402d20dbcf7094945579abdbcf89e9278a3017685dd21",
+    "inherited_integrated_fitter": "scripts/fit_sigma_v17c_integrated_temperatures.py",
+    "inherited_integrated_fitter_sha256": "aff18b05f20eaa41db1a7be5535a7be96380c938af0f036392b3d6a4d56a390f",
+    "inherited_regional_combiner": "scripts/run_sigma_v17c_regional_spectra.py",
+    "inherited_regional_combiner_sha256": "505c17797b28ced3f5202e908b3407ecfc8e82ea2d1157016cc38f18f511c19a",
+    "inherited_regional_fitter": "scripts/fit_sigma_v17c_regional_temperatures.py",
+    "inherited_regional_fitter_sha256": "2cfdb2248f2cebcda75206ac3bb50d8ad040deb5c4fe3505b97b1f4505a6d78b",
+    "inherited_spectral_config": "configs/sigma_v17c_spectral_temperature.json",
+    "inherited_spectral_config_sha256": "2fba4a7ed55751055b09e4385e6b5b0961e8a742a1687a64c400eb2389b7ec86",
+    "legacy_v19x_config": "configs/sigma_v19x_spectral_combination_commissioning.json",
+    "legacy_v19x_config_sha256": "e915f5d5be9d8dea5a2ecb1b8e00aeffd9fb10ed5b9aafccc258b040e8ad9afb",
+    "v19h_config": "configs/sigma_v19h_causal_observable_protocol.json",
+    "v19h_config_sha256": "b3acb909c377c0fc49229765886c76d429d98028ea1dd52c4a1aece7b6778479",
+    "v19s_config": "configs/sigma_v19s_hi4pi_acquisition.json",
+    "v19s_config_sha256": "93dcd0a9690dbff7e23fa946c894ac6816f38c13396d77e4dfe1917c81a5eadf",
+    "v19s_provenance": "results/sigma_v19s_hi4pi_acquisition/provenance.json",
+    "v19s_provenance_sha256": "ff37ee2ed99aa3df88815b7564cb72b6881f232175f22d5abbfe045d8919db4e",
+    "v19t_config": "configs/sigma_v19t_temperature_fit_commissioning.json",
+    "v19t_config_sha256": "844d8bd8f3bdbbb9292ffd0e1df44c55fec5868310b0b552083e711fc1fd6f26",
+    "v19t_report": "results/sigma_v19t_temperature_fit_commissioning/report.json",
+    "v19t_report_sha256": "9073cc96bbfa87fd4264ea6c2ddf893c3f8f6fa34257381fcf757757cf6ad363",
+    "v19u_manifest": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+    "v19u_manifest_sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd",
+    "v19w5_config": "configs/sigma_v19w5_ccd7_hardened_response_recovery.json",
+    "v19w5_config_sha256": "a97c9bf33dde0ae528406c220bd8228c7fce61b658abd3a639790bfff0925f7a",
+    "v19w5_report": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+    "v19w5_report_sha256": "9e90fcb397c80010562b8fbd441fff91a716ced4bb0ef895704ca449dca7c85f",
+    "v19w5_runner": "scripts/run_sigma_v19w5_ccd7_hardened_response_recovery.py",
+    "v19w5_runner_sha256": "0a489855a765e1438af29b65355ccfbc4431f92d96f7ba35f393a4620f54ed72",
+    "v19w5_unified_index": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+    "v19w5_unified_index_sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4",
+    "v19w_config": "configs/sigma_v19w_full_response_production.json",
+    "v19w_config_sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197",
+    "v19w_runner": "scripts/run_sigma_v19w_full_response_production.py",
+    "v19w_runner_sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1",
+    "v19x2_failed_report": "results/sigma_v19x2_unified_spectral_combination_commissioning/report.json",
+    "v19x2_failed_report_sha256": "f753c6c4cd4e6c24f797425cea3dff332c40246ddc8269a28892e5303eebbd7b",
+    "v19cw_config": "configs/sigma_v19cw_observation_hierarchy_equivalence.json",
+    "v19cw_config_sha256": "044a9332a845490a67f6bbb5487085428d9babfa156aed476a1a8f799da21365",
+    "v19cw_runner": "scripts/run_sigma_v19cw_observation_hierarchy_equivalence.py",
+    "v19cw_runner_sha256": "ad0c91414e1b59fb908c5b252fbb322e83459899bff29c8e50fd1e3b6a3f64e2",
+    "v19cw_report": "results/sigma_v19cw_observation_hierarchy_equivalence/report.json",
+    "v19cw_report_sha256": "d96e5aeaf9ff09522f97942b2cce0186d2dbab55d4cfedad025d04c62f4bff54"
+  },
+  "protocol_version": "SIGMA-V19CX-BULLET-HIERARCHICAL-RECOVERY-1.0.0",
+  "purpose": "Recover the mechanically failed large Bullet integrated response with the V19CW-equivalent observation hierarchy, then run the otherwise unchanged V19X2 commissioning fits and gates.",
+  "registered_workload": {
+    "clusters": {
+      "ABELL2146": {
+        "commissioning_region": {
+          "background_events_0p5_7_keV": 4204,
+          "bin_id": 62,
+          "cells": 10,
+          "scaled_background_events_0p5_7_keV": 472.81041972599996,
+          "source_events_0p5_7_keV": 2503
+        },
+        "galactic_nh_cm2": 2.62e+20,
+        "redshift": 0.2323,
+        "total_background_events_0p5_7_keV": 81581,
+        "total_cells": 1270,
+        "total_regions": 128,
+        "total_scaled_background_events_0p5_7_keV": 9188.855528998003,
+        "total_source_events_0p5_7_keV": 227561
+      },
+      "BULLET": {
+        "commissioning_region": {
+          "background_events_0p5_7_keV": 1123,
+          "bin_id": 169,
+          "cells": 9,
+          "scaled_background_events_0p5_7_keV": 46.40029947,
+          "source_events_0p5_7_keV": 2675
+        },
+        "galactic_nh_cm2": 4.38e+20,
+        "redshift": 0.296,
+        "total_background_events_0p5_7_keV": 634253,
+        "total_cells": 3812,
+        "total_regions": 366,
+        "total_scaled_background_events_0p5_7_keV": 26452.357326816054,
+        "total_source_events_0p5_7_keV": 660535
+      }
+    },
+    "commissioning_region_selection_rule": "within each cluster, the unique accepted region with the greatest sum of frozen V19U source_band_events; no spectrum, response shape, temperature, fit statistic, front, lensing coordinate or published temperature enters selection",
+    "same_rules_for_both_clusters": true
+  },
+  "runtime_authorization": {
+    "may_start_before_authorization": false,
+    "recovery_archive": "v19w5_recovery",
+    "required_completed_cells": 5082,
+    "required_response_report": "results/sigma_v19w5_ccd7_hardened_response_recovery/report.json",
+    "required_status": "ccd7_hardened_unified_5082_response_archive_passed",
+    "required_unified_cells": 5082,
+    "required_unified_index": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+    "required_unified_index_sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4",
+    "required_unified_products": 20328,
+    "response_authority": "V19W5"
+  },
+  "status": "frozen after V19CW passed every Abell direct-versus-hierarchical product and forward-fold gate; before hierarchical Bullet execution or any temperature fit, source-state construction, lensing, gravity, V19BQ, V19BS or action access",
+  "hierarchy": {
+    "partition_key": "obsid",
+    "partition_uses_scientific_outcome": false,
+    "first_level_method": "sum",
+    "final_method": "sum",
+    "bscale_method": "asca",
+    "exp_origin": "pha",
+    "intermediate_rmf_threshold": 0.0,
+    "final_rmf_threshold": 1e-06,
+    "reason_for_zero_intermediate_threshold": "Prevent a second round of RMF sparsification; only the final response applies the same 1e-6 threshold as the frozen direct CIAO addresp path.",
+    "concurrency": 1,
+    "associativity": {
+      "arf": "A=sum_i(A_i t_i)/sum_i(t_i); replacing cells by observation sums leaves A unchanged.",
+      "rmf": "R is weighted by A_i t_i; observation-level numerators and denominators sum to the direct numerator and denominator.",
+      "source": "Counts and exposure are sums and therefore associative.",
+      "background_asca": "The ASCA denominator and weighted-count numerator are additive sufficient statistics; regrouping by observation leaves the final values unchanged before floating-point rounding."
+    }
+  },
+  "runtime_remediation": {
+    "maximum_direct_stack_cells": 1270,
+    "rule": "Use the already hash-frozen direct product when available; otherwise apply the V19CW observation hierarchy iff aperture cells exceed 1270; retain the frozen direct V19X2 path at or below 1270.",
+    "threshold_uses_cluster_or_scientific_outcome": false,
+    "abell_direct_reference_cells": 1270,
+    "bullet_failed_direct_cells": 3812,
+    "v19cw_equivalence_report_sha256": "d96e5aeaf9ff09522f97942b2cce0186d2dbab55d4cfedad025d04c62f4bff54",
+    "direct_references": {
+      "ABELL2146_integrated": {
+        "source_grouped": {
+          "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+          "bytes": 895680,
+          "sha256": "8cb57aa778336370ac275ad5c0f89def10cd2b7bc8d5edcb18db58772643acd0"
+        },
+        "background": {
+          "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_bkg.pi",
+          "bytes": 864000,
+          "sha256": "d6f75867b8aba60d550d1437727ec62b43293ba293cc8e42c686d38dd6a48e46"
+        },
+        "arf": {
+          "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.arf",
+          "bytes": 1255680,
+          "sha256": "742843ee51f9cb8a4b28812a05b94fb9c82e6dfd08cea3800081e5c952d317d0"
+        },
+        "rmf": {
+          "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.rmf",
+          "bytes": 3412800,
+          "sha256": "d0a613f58280fd0dd21641c1d1336eb988dc2db9565a718feb6972935fcee0bf"
+        }
+      },
+      "ABELL2146_bin62": {
+        "source_grouped": {
+          "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src_grp.pi",
+          "bytes": 89280,
+          "sha256": "4b3f76b6fc531b9d61c127a3628d457ab3e7f24044d1778f285b8bd8388801ed"
+        },
+        "background": {
+          "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_bkg.pi",
+          "bytes": 57600,
+          "sha256": "8f8c2ca6c74ba69f45bedac990f881a023a2a9411a7401d66a0d028fee050260"
+        },
+        "arf": {
+          "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src.arf",
+          "bytes": 46080,
+          "sha256": "39ae36f33893cc8ac8d20b99cea72e12c091bb7e7e152c8b7bd8e1ac00ae5dfb"
+        },
+        "rmf": {
+          "path": "results/sigma_v19x2_unified_spectral_combination_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src.rmf",
+          "bytes": 2208960,
+          "sha256": "564e09c0f684e9bdfe74a4e63f09fd19b927ef6a0325c899568bd245d99c9e43"
+        }
+      }
+    }
+  }
+}
