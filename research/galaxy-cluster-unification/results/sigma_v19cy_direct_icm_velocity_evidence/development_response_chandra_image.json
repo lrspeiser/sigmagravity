@@ -1,0 +1,139 @@
+{
+  "closed_failure_history": [
+    {
+      "attempt": 1,
+      "chandra_image_generated": false,
+      "correction": "export the isolated writable CIAO parameter directory and installed system parameter directory explicitly before punlearn",
+      "failed_at": "CIAO merge_obs startup before opening either Chandra event table",
+      "response_or_background_generated": false,
+      "root_cause": "the non-interactive CIAO initialization left PFILES unset",
+      "validation_or_holdout_accessed": false,
+      "velocity_fit_performed": false,
+      "xrism_energy_distribution_read_or_fit": false
+    },
+    {
+      "attempt": 2,
+      "correction": "rerun under a long-lived host runner using WSL-native temporary storage and preserve the direct process exit code",
+      "detached_temporary_products_survived": false,
+      "failed_at": "the Windows host command window ended after 120 seconds while CIAO remained active",
+      "response_or_background_generated": false,
+      "root_cause": "the outer runner timeout was shorter than the full-resolution CIAO projection runtime",
+      "scientific_products_recovered": false,
+      "validation_or_holdout_accessed": false,
+      "velocity_fit_performed": false,
+      "xrism_energy_distribution_read_or_fit": false
+    }
+  ],
+  "command": {
+    "command": "source /home/henry/ciao-4.18/init/ciao.sh >/dev/null 2>&1; export PFILES='/home/henry/cxcds_param4;/home/henry/ciao-4.18/param'; punlearn merge_obs; merge_obs infiles=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/chandra/3231/primary/acisf03231N004_evt2.fits.gz,/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/chandra/15187/primary/acisf15187N003_evt2.fits.gz outroot=/tmp/sigma_v19cy_chandra_merge_800qymzl/merged/ bands=0.5:7.0:2.3 binsize=1 units=default random=7 parallel=no nproc=1 cleanup=yes clobber=no verbose=1",
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "Running merge_obs\nVersion: 05 November 2021\n\nVerifying 2 observations.\nUsing energy range 0.5 to 7.0 keV and exposure-map energy of 2.3 keV.\nCalculating new tangent point.\nNew tangent point: RA=19h 21m 18.381s Dec=43d 56' 9.11\"\n\nObservations to be reprojected:\n\n  Obsid  Obs Date   Exp    DETNAM     SIM_Z    FP   Sepn   PA  \n                   (ks)                (mm)    (K)   (')  (deg)\n---------------------------------------------------------------\n1 3231  2002-03-15  14.4 ACIS-01236  -233.587 153.4   1.8   -81\n2 15187 2014-02-11  75.2 ACIS-01236  -227.593 153.4   1.8   +99\n\nRunning tasks in serial.\nReprojecting 2 event files to a common tangent point.\nMerging reprojected events files to /tmp/sigma_v19cy_chandra_merge_800qymzl/merged/merged_evt.fits\n\nCalculating the output grid\n\nThe merged images will have 4191 by 4144 pixels, a pixel size of 0.492 arcsec,\n    and cover x=2258.5:6449.5:1, y=2384.5:6528.5:1.\n\nCreating the fluxed images for 2 observations.\nCreating 5 aspect histograms for obsid 3231\nCreating 5 instrument maps for obsid 3231\nCreating 5 exposure maps for obsid 3231\nCombining 5 exposure maps for obsid 3231\nThresholding data for obsid 3231\nExposure-correcting image for obsid 3231\nCreating 5 aspect histograms for obsid 15187\nCreating 5 instrument maps for obsid 15187\nCreating 5 exposure maps for obsid 15187\nCombining 5 exposure maps for obsid 15187\nThresholding data for obsid 15187\nExposure-correcting image for obsid 15187\n\nCombining 2 observations.\n\nThe following files were created:\n\nThe co-added clipped counts image is:\n     /tmp/sigma_v19cy_chandra_merge_800qymzl/merged/0.5-7.0_thresh.img\n\nThe co-added clipped exposure map is:\n     /tmp/sigma_v19cy_chandra_merge_800qymzl/merged/0.5-7.0_thresh.expmap\n\nThe combined FOV is:\n     /tmp/sigma_v19cy_chandra_merge_800qymzl/merged/merged.fov\n\nThe co-added exposure-corrected image is:\n     /tmp/sigma_v19cy_chandra_merge_800qymzl/merged/0.5-7.0_flux.img\n\nWarning: the merged event file /tmp/sigma_v19cy_chandra_merge_800qymzl/merged/merged_evt.fits\n   should not be used to create ARF/RMF/exposure maps because\n      the RA_NOM keyword varies by 0.0803 (limit is 0.0003)\n      the DEC_NOM keyword varies by 0.0094 (limit is 0.0003)\n      the ROLL_NOM keyword varies by 39.4 (limit is 1.0)\n      the SIM_Z keyword varies by 6.0 (limit is 0.1)\n      the aim points fall on CCDs: 0 3\n        which means that the ONTIME/LIVETIME/EXPOSURE keywords\n        do not reflect the full observation length.\n\n"
+  },
+  "config_sha256": "af6b2127e912dc393eb636a73616564aedc5eccf3fc687ea5d92d1e03e321103",
+  "detached_process_recovery": null,
+  "generated_utc": "2026-08-06T08:51:59.261685+00:00",
+  "image": {
+    "bytes": 8582400,
+    "center_dec_deg": 43.93456092049788,
+    "center_ra_deg": 290.2989763723206,
+    "pixel_scale_arcsec": 0.492000000000012,
+    "positive_pixels": 486683,
+    "replaced_negative_pixels": 0,
+    "replaced_nonfinite_pixels": 0,
+    "sha256": "4db29ad4f17fb05cbf264865709ed604a2e3c9976fac9bd749923210c2c99bc9",
+    "shape": [
+      1463,
+      1463
+    ],
+    "sum_positive_brightness": 0.03557520263537839,
+    "width_arcmin": 11.996600000000292,
+    "zero_pixels": 1653686
+  },
+  "merge_manifest": [
+    {
+      "bytes": 69491520,
+      "name": "0.5-7.0_flux.img",
+      "sha256": "d1723e7ba37692050414b96099b5d89733f047950bd1e8f0928c2dc4fc9d0bba"
+    },
+    {
+      "bytes": 69494400,
+      "name": "0.5-7.0_thresh.expmap",
+      "sha256": "c6442fcc7f025d1a0b2c56b6860818474b918b19ac200f29d3f6f5f7dc0bd2dc"
+    },
+    {
+      "bytes": 69546240,
+      "name": "0.5-7.0_thresh.img",
+      "sha256": "e873df5db5d17ad67d07dae29cff05f3f2f65ff271c671171110804a32f05913"
+    },
+    {
+      "bytes": 25920,
+      "name": "15187.fov",
+      "sha256": "1ba9840e6950add93296b91f6d4011db8a1e095205cba8aa48bfbb9e45581f72"
+    },
+    {
+      "bytes": 69488640,
+      "name": "15187_0.5-7.0_flux.img",
+      "sha256": "b9ee362119bf18a2e86fabc847ab874b6519b88c6e12a6ee675b7205130aa4ba"
+    },
+    {
+      "bytes": 69491520,
+      "name": "15187_0.5-7.0_thresh.expmap",
+      "sha256": "dd6e8c1a1d7203737c4912e7782dde096321a5802d7ee76a69ce9c368fd87a18"
+    },
+    {
+      "bytes": 69543360,
+      "name": "15187_0.5-7.0_thresh.img",
+      "sha256": "16005ad75d412de8e0df8504f88a60dd6b182ec0d63be2bc2d0d1b8750936eee"
+    },
+    {
+      "bytes": 51595200,
+      "name": "15187_reproj_evt.fits",
+      "sha256": "b1bd8d3234b2e69704eb81e1120aafe0d518950f07de2488a53b1a2817da4e14"
+    },
+    {
+      "bytes": 25920,
+      "name": "3231.fov",
+      "sha256": "fdc562ed6fe583dff62f32dcd6078dde72fb93da4d59bec5cbe1c4c9c42e1937"
+    },
+    {
+      "bytes": 69488640,
+      "name": "3231_0.5-7.0_flux.img",
+      "sha256": "ab0396dac0670feaa22fa5310c688bd0c8536fc32ae416d4565bf06cf07b5e44"
+    },
+    {
+      "bytes": 69491520,
+      "name": "3231_0.5-7.0_thresh.expmap",
+      "sha256": "fa4f29d107a6aaa02575b8a858fbfc81fd849378d27909d7f8c8e7160e743a68"
+    },
+    {
+      "bytes": 69543360,
+      "name": "3231_0.5-7.0_thresh.img",
+      "sha256": "177fed064f8e5d3ead5ab909f22df22c57bcf7368a3cc79d677fc831cbfcaaf8"
+    },
+    {
+      "bytes": 12810240,
+      "name": "3231_reproj_evt.fits",
+      "sha256": "bc5827d67a07d3964fbce2fce54427461dab059de693896ad45c34cac8bfb12e"
+    },
+    {
+      "bytes": 20160,
+      "name": "merged.fov",
+      "sha256": "165283752ebb8eb9403ff7929da22624c2eceeb1352b904b6d87fc174197223f"
+    },
+    {
+      "bytes": 64298880,
+      "name": "merged_evt.fits",
+      "sha256": "f0d150503692d5788311c77e888d33d4c429246ec8a08ddf3445f081a0659b65"
+    }
+  ],
+  "preparation_report_sha256": "67638b4ad8eaa440c1dc7eca80f72007eeaf27028461152f1e905b6260feabc8",
+  "preparation_status": "exact_branch_gti_and_detector_region_inputs_prepared",
+  "protocol_version": "SIGMA-V19CY-A2319-CHANDRA-RESPONSE-IMAGE-RESULT-1.0.1",
+  "response_or_background_generated": false,
+  "status": "frozen_chandra_response_image_completed",
+  "terminal_gate_passed": true,
+  "validation_or_holdout_accessed": false,
+  "velocity_fit_performed": false,
+  "xrism_energy_distribution_read_or_fit": false
+}

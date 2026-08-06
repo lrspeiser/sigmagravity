@@ -1,5 +1,23 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19CY Chandra response-image gate
+
+The frozen A2319 extended-source image needed for response-aware XRISM ARFs is
+now complete. CIAO combined Chandra ObsIDs 3231 and 15187 over 0.5--7.0 keV and
+returned exit code zero. The 1463 by 1463, 11.9966-arcmin crop contains 486,683
+positive pixels and passed its celestial-center, finite-pixel, positivity,
+width, and SHA-256 gates. Its SHA-256 is
+`4db29ad4f17fb05cbf264865709ed604a2e3c9976fac9bd749923210c2c99bc9`.
+
+Two infrastructure attempts are recorded rather than hidden: an unset CIAO
+`PFILES` startup and a too-short outer host timeout. Neither generated or read
+an XRISM spectrum, response, background, velocity, validation result, or
+holdout result. The clean run moved temporary projection work to WSL-native
+storage without changing any scientific input or frozen setting. Response and
+background generation is the next active development step; A3667 validation
+and A754 holdout remain sealed. See
+[`SIGMA_V19CY_DIRECT_ICM_VELOCITY_EVIDENCE_PLAN.md`](SIGMA_V19CY_DIRECT_ICM_VELOCITY_EVIDENCE_PLAN.md).
+
 ## 2026-08-05 Sigma V19CY direct-velocity evidence plan
 
 The post-V19CX observational pivot is now frozen before validation or holdout

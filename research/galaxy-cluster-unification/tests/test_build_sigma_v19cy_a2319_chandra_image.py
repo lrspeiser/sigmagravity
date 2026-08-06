@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -54,3 +55,41 @@ def test_merge_command_uses_both_frozen_obsids_and_is_deterministic(tmp_path: Pa
     assert "binsize=1" in command
     assert "parallel=no" in command
     assert "random=7" in command
+    assert "cxcds_param4;" in command
+
+
+def test_detached_merge_inspection_requires_all_terminal_products(tmp_path: Path):
+    try:
+        builder.inspect_completed_merge(tmp_path)
+    except RuntimeError as exc:
+        assert "detached merge is incomplete" in str(exc)
+    else:
+        raise AssertionError("an empty detached merge directory must not pass")
+
+
+def test_merged_flux_filename_is_unambiguous():
+    assert builder.MERGED_FLUX_IMAGE == "0.5-7.0_flux.img"
+
+
+def test_wsl_native_work_path_does_not_round_trip_through_windows_mount():
+    path = Path("//wsl.localhost/Ubuntu-24.04/tmp/frozen/merged")
+    assert builder.work_to_wsl_path(path, "Ubuntu-24.04") == "/tmp/frozen/merged"
+
+
+def test_completed_chandra_product_passes_frozen_terminal_gate():
+    report = json.loads(builder.REPORT.read_text(encoding="utf-8"))
+    image_path = (
+        builder.ROOT
+        / "data/processed/sigma_v19cy_a2319_response_aware_spectral/chandra/"
+        "a2319_chandra_0p5_7p0keV_12arcmin.img"
+    )
+    assert report["terminal_gate_passed"] is True
+    assert report["command"]["exit_code"] == 0
+    assert report["detached_process_recovery"] is None
+    assert report["image"]["sha256"] == builder.preparation.sha256(image_path)
+    assert report["image"]["positive_pixels"] == 486683
+    assert report["image"]["shape"] == [1463, 1463]
+    assert report["validation_or_holdout_accessed"] is False
+    with fits.open(image_path, memmap=True, mode="readonly") as hdus:
+        hdus.verify("exception")
+        assert hdus[0].data.shape == (1463, 1463)

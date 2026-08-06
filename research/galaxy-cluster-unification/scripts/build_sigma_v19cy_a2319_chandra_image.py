@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import os
+import argparse
 import shlex
 import shutil
 import sys
@@ -40,6 +41,8 @@ REPORT = (
     "development_response_chandra_image.json"
 )
 
+MERGED_FLUX_IMAGE = "0.5-7.0_flux.img"
+
 
 def validate_inputs(config_path: Path = DEFAULT_CONFIG) -> tuple[dict[str, Any], dict[str, Any]]:
     config = preparation.validate_config(config_path)
@@ -69,17 +72,31 @@ def validate_inputs(config_path: Path = DEFAULT_CONFIG) -> tuple[dict[str, Any],
     return config, report
 
 
+def work_to_wsl_path(path: Path, distribution: str) -> str:
+    text = str(path.resolve())
+    prefix = f"\\\\wsl.localhost\\{distribution}\\"
+    if text.lower().startswith(prefix.lower()):
+        return "/" + text[len(prefix) :].replace("\\", "/")
+    return application.to_wsl_path(path)
+
+
 def merge_obs_command(config: dict[str, Any], work: Path) -> str:
     protocol = config["chandra_image_protocol"]
     events = [ROOT / item["path"] for item in protocol["inputs"] if "evt2" in item["path"]]
     infiles = ",".join(application.to_wsl_path(path) for path in events)
-    outroot = application.to_wsl_path(work / "merged") + "/"
+    outroot = work_to_wsl_path(
+        work / "merged", config["runtime"]["wsl_distribution"]
+    ) + "/"
     ciao = config["runtime"]["ciao_prefix"] + "/init/ciao.sh"
     band = f"{protocol['energy_band_keV'][0]}:{protocol['energy_band_keV'][1]}:2.3"
     return (
         "source "
         + shlex.quote(ciao)
-        + " >/dev/null 2>&1; punlearn merge_obs; merge_obs infiles="
+        + " >/dev/null 2>&1; export PFILES="
+        + shlex.quote(
+            "/home/henry/cxcds_param4;" + config["runtime"]["ciao_prefix"] + "/param"
+        )
+        + "; punlearn merge_obs; merge_obs infiles="
         + shlex.quote(infiles)
         + " outroot="
         + shlex.quote(outroot)
@@ -146,7 +163,41 @@ def crop_positive_image(source: Path, output: Path, protocol: dict[str, Any]) ->
     }
 
 
-def build(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
+def inspect_completed_merge(merge_root: Path) -> dict[str, Any]:
+    """Verify the terminal products needed to recover a detached merge_obs run."""
+    expected = (
+        "merged_evt.fits",
+        "merged.fov",
+        "3231_0.5-7.0_flux.img",
+        "15187_0.5-7.0_flux.img",
+        MERGED_FLUX_IMAGE,
+    )
+    products: list[dict[str, Any]] = []
+    for name in expected:
+        path = merge_root / name
+        if not path.is_file() or path.stat().st_size <= 0:
+            raise RuntimeError(f"detached merge is incomplete: {path}")
+        with fits.open(path, memmap=True, mode="readonly") as hdus:
+            hdus.verify("exception")
+            if name.endswith("_flux.img"):
+                image_hdu = next(
+                    (hdu for hdu in hdus if hdu.data is not None and np.ndim(hdu.data) == 2),
+                    None,
+                )
+                if image_hdu is None or not WCS(image_hdu.header).celestial.has_celestial:
+                    raise RuntimeError(f"recovered flux image lacks a celestial image: {path}")
+        products.append(
+            {"name": name, "bytes": path.stat().st_size, "sha256": preparation.sha256(path)}
+        )
+    return {"terminal_products_verified": True, "products": products}
+
+
+def finalize_merge(
+    config_path: Path,
+    merge_root: Path,
+    command_record: dict[str, Any],
+    recovery: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     config, preparation_report = validate_inputs(config_path)
     product_root = (ROOT / config["paths"]["product_root"]).resolve()
     output_root = product_root / "chandra"
@@ -154,48 +205,45 @@ def build(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
         raise RuntimeError(f"refusing to overwrite Chandra response image: {output_root}")
     output_root.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix="chandra.installing.", dir=output_root.parent))
-    command_record: dict[str, Any] | None = None
     try:
-        with tempfile.TemporaryDirectory(prefix="sigma_v19cy_chandra_merge_") as temporary:
-            work = Path(temporary)
-            command = merge_obs_command(config, work)
-            command_record = application.run_wsl(
-                config["runtime"]["wsl_distribution"], command, timeout=7200
-            )
-            if command_record["exit_code"] != 0:
-                raise RuntimeError("CIAO merge_obs failed")
-            candidates = sorted((work / "merged").glob("*flux.img"))
-            if len(candidates) != 1:
-                raise RuntimeError(f"expected one merged Chandra flux image, found {candidates}")
-            source = candidates[0]
-            output = staging / "a2319_chandra_0p5_7p0keV_12arcmin.img"
-            image = crop_positive_image(source, output, config["chandra_image_protocol"])
-            merge_manifest = [
-                {
-                    "name": path.name,
-                    "bytes": path.stat().st_size,
-                    "sha256": preparation.sha256(path),
-                }
-                for path in sorted((work / "merged").glob("*"))
-                if path.is_file()
-            ]
+        source = merge_root / MERGED_FLUX_IMAGE
+        if not source.is_file():
+            raise RuntimeError(f"expected merged Chandra flux image is absent: {source}")
+        output = staging / "a2319_chandra_0p5_7p0keV_12arcmin.img"
+        image = crop_positive_image(source, output, config["chandra_image_protocol"])
+        merge_manifest = [
+            {
+                "name": path.name,
+                "bytes": path.stat().st_size,
+                "sha256": preparation.sha256(path),
+            }
+            for path in sorted(merge_root.glob("*"))
+            if path.is_file()
+        ]
         os.replace(staging, output_root)
     except Exception:
+        shutil.rmtree(staging, ignore_errors=True)
         raise
+    command_completed = command_record.get("exit_code") == 0 or bool(
+        recovery and recovery.get("terminal_products_verified")
+    )
     report = {
-        "protocol_version": "SIGMA-V19CY-A2319-CHANDRA-RESPONSE-IMAGE-RESULT-1.0.0",
+        "protocol_version": "SIGMA-V19CY-A2319-CHANDRA-RESPONSE-IMAGE-RESULT-1.0.1",
         "status": "frozen_chandra_response_image_completed",
         "generated_utc": datetime.now(UTC).isoformat(),
         "config_sha256": preparation.sha256(config_path),
         "preparation_report_sha256": preparation.sha256(PREPARATION_REPORT),
         "command": command_record,
+        "detached_process_recovery": recovery,
         "merge_manifest": merge_manifest,
         "image": image,
         "terminal_gate_passed": (
-            command_record is not None
-            and command_record["exit_code"] == 0
+            command_completed
             and image["positive_pixels"] > 0
-            and abs(image["width_arcmin"] - config["chandra_image_protocol"]["crop_width_arcmin"])
+            and abs(
+                image["width_arcmin"]
+                - config["chandra_image_protocol"]["crop_width_arcmin"]
+            )
             <= image["pixel_scale_arcsec"] / 60.0
         ),
         "xrism_energy_distribution_read_or_fit": False,
@@ -203,10 +251,75 @@ def build(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
         "velocity_fit_performed": False,
         "validation_or_holdout_accessed": False,
         "preparation_status": preparation_report["status"],
+        "closed_failure_history": [
+            {
+                "attempt": 1,
+                "failed_at": "CIAO merge_obs startup before opening either Chandra event table",
+                "root_cause": "the non-interactive CIAO initialization left PFILES unset",
+                "correction": "export the isolated writable CIAO parameter directory and installed system parameter directory explicitly before punlearn",
+                "chandra_image_generated": False,
+                "xrism_energy_distribution_read_or_fit": False,
+                "response_or_background_generated": False,
+                "velocity_fit_performed": False,
+                "validation_or_holdout_accessed": False,
+            },
+            {
+                "attempt": 2,
+                "failed_at": "the Windows host command window ended after 120 seconds while CIAO remained active",
+                "root_cause": "the outer runner timeout was shorter than the full-resolution CIAO projection runtime",
+                "correction": "rerun under a long-lived host runner using WSL-native temporary storage and preserve the direct process exit code",
+                "scientific_products_recovered": bool(recovery),
+                "detached_temporary_products_survived": bool(recovery),
+                "xrism_energy_distribution_read_or_fit": False,
+                "response_or_background_generated": False,
+                "velocity_fit_performed": False,
+                "validation_or_holdout_accessed": False,
+            },
+        ],
     }
     REPORT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report
 
 
+def recover_detached_merge(
+    merge_root: Path, config_path: Path = DEFAULT_CONFIG
+) -> dict[str, Any]:
+    recovery = inspect_completed_merge(merge_root)
+    command_record = {
+        "exit_code": None,
+        "stdout": "host wrapper ended before CIAO; terminal files recovered after WSL process completion",
+        "stderr": "",
+        "exit_code_note": "not exposed by the detached Windows WSL process handle",
+    }
+    return finalize_merge(config_path, merge_root, command_record, recovery)
+
+
+def build(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
+    config, _ = validate_inputs(config_path)
+    distribution = config["runtime"]["wsl_distribution"]
+    native_temp = Path(f"//wsl.localhost/{distribution}/tmp")
+    if not native_temp.is_dir():
+        raise RuntimeError(f"WSL-native temporary directory is unavailable: {native_temp}")
+    with tempfile.TemporaryDirectory(
+        prefix="sigma_v19cy_chandra_merge_", dir=native_temp
+    ) as temporary:
+        work = Path(temporary)
+        command = merge_obs_command(config, work)
+        command_record = application.run_wsl(
+            distribution, command, timeout=7200
+        )
+        if command_record["exit_code"] != 0:
+            raise RuntimeError(f"CIAO merge_obs failed: {command_record['stderr']}")
+        return finalize_merge(config_path, work / "merged", command_record)
+
+
 if __name__ == "__main__":
-    print(json.dumps(build(), indent=2, sort_keys=True))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--recover-merge-root", type=Path)
+    args = parser.parse_args()
+    result = (
+        recover_detached_merge(args.recover_merge_root.resolve())
+        if args.recover_merge_root
+        else build()
+    )
+    print(json.dumps(result, indent=2, sort_keys=True))
