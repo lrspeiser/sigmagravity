@@ -67,6 +67,9 @@ def test_output_audit_counts_nulls_without_summarizing_energy_values() -> None:
     assert 'data["PI"]' in source
     assert 'data["EPI2"]' in source
     assert 'data["TEMP"]' in source
+    assert "negative_epi2" in source
+    assert "null_pi_not_explained_by_negative_epi2" in source
+    assert "negative_epi2_without_null_pi" in source
     assert "mean(" not in source
     assert "median(" not in source
     assert "quantile(" not in source

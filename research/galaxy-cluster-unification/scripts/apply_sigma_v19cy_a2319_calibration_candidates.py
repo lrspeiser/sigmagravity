@@ -67,11 +67,11 @@ def validate_inputs(
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     config = load_json(config_path)
     if config.get("protocol_version") != (
-        "SIGMA-V19CY-A2319-CALIBRATION-APPLICATION-CANDIDATES-1.0.1"
+        "SIGMA-V19CY-A2319-CALIBRATION-APPLICATION-CANDIDATES-1.0.2"
     ):
         raise RuntimeError("unexpected calibration-application protocol")
     if config.get("status") != (
-        "corrected and refrozen after version 1.0.0 completed the first baseline branch application but failed closed before the second candidate because a cached copied FITS HDU name was normalized to uppercase; no energy distribution, cluster event, validation, holdout, lensing, halo, gravity, or action target was inspected"
+        "corrected and refrozen after version 1.0.1 completed all 21 applications but failed its zero-null-PI gate; the official rslpha2pi rule and a count-only audit show every null PI is exactly explained by a finite negative EPI2, with zero null EPI2 or TEMP values and no energy distribution, cluster event, validation, holdout, lensing, halo, gravity, or action target inspected"
     ):
         raise RuntimeError("calibration-application protocol is not frozen")
     for name in ("topology_report", "environment_report", "download_provenance"):
@@ -271,11 +271,18 @@ def audit_output(path: Path) -> dict[str, Any]:
         null_pi = int(np.sum(pi == pi_null)) if pi_null is not None else 0
         null_epi2 = int(np.sum(~np.isfinite(epi2)))
         null_temp = int(np.sum(~np.isfinite(temp)))
+        negative_epi2 = np.isfinite(epi2) & (epi2 < 0)
+        pi_is_null = pi == pi_null if pi_null is not None else np.zeros(rows, dtype=bool)
+        null_pi_not_explained_by_negative_epi2 = int(np.sum(pi_is_null & ~negative_epi2))
+        negative_epi2_without_null_pi = int(np.sum(negative_epi2 & ~pi_is_null))
     return {
         "rows": rows,
         "null_pi": null_pi,
         "null_epi2": null_epi2,
         "null_temp": null_temp,
+        "negative_epi2": int(np.sum(negative_epi2)),
+        "null_pi_not_explained_by_negative_epi2": null_pi_not_explained_by_negative_epi2,
+        "negative_epi2_without_null_pi": negative_epi2_without_null_pi,
         "bytes": path.stat().st_size,
         "sha256": sha256(path),
     }
@@ -374,9 +381,10 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
                 and all(value == 2 for value in drift_audit["per_pixel_rows"].values())
                 and drift_audit["temp_fit_finite"]
                 and output_audit["rows"] == selected_rows
-                and output_audit["null_pi"] == 0
                 and output_audit["null_epi2"] == 0
                 and output_audit["null_temp"] == 0
+                and output_audit["null_pi_not_explained_by_negative_epi2"] == 0
+                and output_audit["negative_epi2_without_null_pi"] == 0
             )
             applications.append(
                 {
@@ -390,10 +398,22 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
                 }
             )
     expected_outputs = config["terminal_gate"]["required_candidate_branch_outputs"]
+    negative_counts_stable = all(
+        len(
+            {
+                item["output"]["negative_epi2"]
+                for item in applications
+                if item["branch"] == branch["name"]
+            }
+        )
+        == 1
+        for branch in topology["branches"]
+    )
     gate = (
         len(applications) == expected_outputs
         and all(command["exit_code"] == 0 for command in commands)
         and all(item["passed"] for item in applications)
+        and negative_counts_stable
     )
     if not gate:
         raise RuntimeError("frozen calibration-application terminal gate failed")
@@ -408,6 +428,7 @@ def build_report(config_path: Path = DEFAULT_CONFIG) -> dict[str, Any]:
         "applications": applications,
         "commands": commands,
         "terminal_gate_passed": gate,
+        "negative_epi2_counts_stable_across_candidates_within_branch": negative_counts_stable,
         "gain_history_array_fields_copied_without_inspection": True,
         "calibration_event_energies_recalculated": True,
         "energy_distribution_inspected_or_fit": False,

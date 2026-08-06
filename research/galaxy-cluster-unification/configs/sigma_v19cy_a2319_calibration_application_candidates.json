@@ -1,6 +1,6 @@
 {
-  "protocol_version": "SIGMA-V19CY-A2319-CALIBRATION-APPLICATION-CANDIDATES-1.0.1",
-  "status": "corrected and refrozen after version 1.0.0 completed the first baseline branch application but failed closed before the second candidate because a cached copied FITS HDU name was normalized to uppercase; no energy distribution, cluster event, validation, holdout, lensing, halo, gravity, or action target was inspected",
+  "protocol_version": "SIGMA-V19CY-A2319-CALIBRATION-APPLICATION-CANDIDATES-1.0.2",
+  "status": "corrected and refrozen after version 1.0.1 completed all 21 applications but failed its zero-null-PI gate; the official rslpha2pi rule and a count-only audit show every null PI is exactly explained by a finite negative EPI2, with zero null EPI2 or TEMP values and no energy distribution, cluster event, validation, holdout, lensing, halo, gravity, or action target inspected",
   "purpose": "Apply three preregistered branch-level gain candidates to high-resolution pixel-12 calibration events with the audited HEASoft rslpha2pi runtime, preserving outputs for a separately frozen spectral gate without inspecting any cluster event.",
   "parents": {
     "topology_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_gain_reconstruction_topology.json",
@@ -82,22 +82,40 @@
     "require_every_ftcopy_and_rslpha2pi_exit_zero": true,
     "require_selected_rows_positive": true,
     "require_output_rows_equal_selected_rows": true,
-    "require_zero_null_pi_epi2_and_temp": true,
+    "require_zero_null_epi2_and_temp": true,
+    "require_every_null_pi_exactly_explained_by_negative_epi2": true,
+    "require_every_negative_epi2_has_null_pi": true,
+    "require_negative_epi2_count_identical_across_candidates_within_branch": true,
     "require_every_synthetic_drift_has_72_rows_and_two_rows_per_pixel": true,
     "decision_rule": "Authorize freezing a calibration-pixel line-shape gate only if all 21 candidate-branch applications pass. Do not inspect centroids, widths, or any energy distribution in this protocol."
   },
-  "recorded_failure": {
-    "version": "1.0.0",
-    "staging_root": "tmp/sigma_v19cy_a2319_calibration_application.installing.qcgn0krs",
-    "completed_before_failure": "first-branch fe55_branch_only drift and calibration-event output",
-    "failed_before": "second candidate drift publication",
-    "root_cause": "the first drift build replaced the cached copied Drift_energy HDU with a new BinTableHDU whose name was normalized to DRIFT_ENERGY; the second build used a case-sensitive name lookup and raised StopIteration",
-    "correction": "copy the cached template HDUs inside every drift build and locate the copied extension case-insensitively, leaving the cached source immutable",
-    "final_scratch_root_exists": false,
-    "partial_staging_preserved": true,
-    "energy_distribution_inspected_or_fit": false,
-    "cluster_sky_event_accessed": false
-  },
+  "recorded_failures": [
+    {
+      "version": "1.0.0",
+      "staging_root": "tmp/sigma_v19cy_a2319_calibration_application.installing.qcgn0krs",
+      "completed_before_failure": "first-branch fe55_branch_only drift and calibration-event output",
+      "failed_before": "second candidate drift publication",
+      "root_cause": "the first drift build replaced the cached copied Drift_energy HDU with a new BinTableHDU whose name was normalized to DRIFT_ENERGY; the second build used a case-sensitive name lookup and raised StopIteration",
+      "correction": "copy the cached template HDUs inside every drift build and locate the copied extension case-insensitively, leaving the cached source immutable",
+      "final_scratch_root_exists": false,
+      "partial_staging_preserved": true,
+      "energy_distribution_inspected_or_fit": false,
+      "cluster_sky_event_accessed": false
+    },
+    {
+      "version": "1.0.1",
+      "staging_root": "tmp/sigma_v19cy_a2319_calibration_application.installing.2s64wq8e",
+      "completed_before_failure": "all seven selections, all 21 synthetic drift files, and all 21 rslpha2pi outputs",
+      "failed_at": "terminal zero-null-PI gate",
+      "root_cause": "the frozen gate incorrectly prohibited the documented rslpha2pi behavior that sets PI to NULL whenever finite EPI2 is negative",
+      "evidence": "for every branch and candidate, null PI count equals negative finite EPI2 count exactly; null EPI2 and null TEMP counts are zero",
+      "correction": "require a one-to-one match between null PI and finite negative EPI2, with no unexplained null PI and no negative EPI2 retaining non-null PI",
+      "final_scratch_root_exists": false,
+      "partial_staging_preserved": true,
+      "energy_distribution_inspected_or_fit": false,
+      "cluster_sky_event_accessed": false
+    }
+  ],
   "authorization": {
     "read_and_copy_full_fe55_gain_history_rows": true,
     "modify_only_synthetic_time_and_temp_fit": true,
