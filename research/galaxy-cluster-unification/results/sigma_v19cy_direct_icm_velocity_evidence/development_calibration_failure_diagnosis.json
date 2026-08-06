@@ -1,0 +1,1085 @@
+{
+  "authorization": {
+    "access_validation_or_holdout_assets": false,
+    "apply_gain_to_cluster_sky_events": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false,
+    "fit_cluster_velocity": false,
+    "freeze_one_replacement_calibration_protocol": true,
+    "open_lensing_halo_or_gravity_targets": false,
+    "read_cluster_sky_event_rows": false
+  },
+  "candidate_sources": [
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "bytes": 32918400,
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000101_open_0_cross_obsid\\branch_linear_common_mode.evt",
+      "rows": 207785,
+      "sha256": "5a0b10c9645a090c2bdbb44be435519928b416fb4b58c5d73ee05c68ca5db1b8"
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "bytes": 1249920,
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000101_open_1_cross_obsid\\branch_linear_common_mode.evt",
+      "rows": 7363,
+      "sha256": "02115c71eb6053fbb423bd5929e95b3e5b41d1b79d8d483625590c9a4a62d5dd"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "bytes": 28869120,
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000102_open_0_cross_obsid\\branch_linear_common_mode.evt",
+      "rows": 182155,
+      "sha256": "264fd5cde0ed43190014f5a70b0d5483f2e20eb8127afdea5ae175a1320f6a4d"
+    },
+    {
+      "branch": "000102_open_1_cross_obsid",
+      "bytes": 1287360,
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000102_open_1_cross_obsid\\branch_linear_common_mode.evt",
+      "rows": 7589,
+      "sha256": "2f7b1ae6f1cbb4953436814b991b0fc11add0c47f07b753d4c8aa21a271efaea"
+    },
+    {
+      "branch": "000103_pre_adr_forward",
+      "bytes": 18728640,
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_pre_adr_forward\\branch_linear_common_mode.evt",
+      "rows": 117986,
+      "sha256": "daf2c11f2fd14762b1cad71d33c8a47e1dae2e462de59b162d8126025e01ba56"
+    },
+    {
+      "branch": "000103_post_adr_backward",
+      "bytes": 4354560,
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_post_adr_backward\\branch_linear_common_mode.evt",
+      "rows": 27006,
+      "sha256": "07f2f3b8f8e3745dd10911bca8bbb76c9e10f99b6d401e0d059bce505bfe2e5d"
+    },
+    {
+      "branch": "000103_final_forward",
+      "bytes": 26602560,
+      "path": "tmp\\sigma_v19cy_a2319_calibration_application\\000103_final_forward\\branch_linear_common_mode.evt",
+      "rows": 167818,
+      "sha256": "8ed0ccbc5f3310dbb010e96e2e3d80a5e5bf5144d0128fdf9e780d2d555e215e"
+    }
+  ],
+  "cluster_sky_event_accessed": false,
+  "cluster_velocity_fit": false,
+  "commands": [
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; ftcopy '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000101000/resolve/event_uf/xa000101000rsl_a0pxcal000_uf.evt.gz[EVENTS][TIME>=150940372.98380262&&TIME<=151036810.97876486&&PIXEL==12&&ITYPE==0]' /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_0_cross_obsid/selected_pixel12_hp.evt copyall=yes clobber=yes history=yes",
+      "exit_code": 0,
+      "stage": "ftcopy",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_0_cross_obsid/selected_pixel12_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_0_cross_obsid/continuous_pxcal.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000101000rsl_000_pxcal.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-13\nrslpha2pi: INFO:    START TIME: 23:50:04\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  CAL-PIX\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_0_cross_obsid/selected_pixel12_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_0_cross_obsid/continuous_pxcal.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000101000rsl_000_pxcal.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         207785\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       207785\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       99\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      0\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; ftcopy '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000101000/resolve/event_uf/xa000101000rsl_a0pxcal000_uf.evt.gz[EVENTS][TIME>=151201971.01443896&&TIME<=151205310.66687408&&PIXEL==12&&ITYPE==0]' /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_1_cross_obsid/selected_pixel12_hp.evt copyall=yes clobber=yes history=yes",
+      "exit_code": 0,
+      "stage": "ftcopy",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_1_cross_obsid/selected_pixel12_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_1_cross_obsid/continuous_pxcal.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000101000rsl_000_pxcal.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-13\nrslpha2pi: INFO:    START TIME: 23:50:04\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  CAL-PIX\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_1_cross_obsid/selected_pixel12_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000101_open_1_cross_obsid/continuous_pxcal.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000101000rsl_000_pxcal.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         7363\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       7363\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       3\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      0\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; ftcopy '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000102000/resolve/event_uf/xa000102000rsl_a0pxcal000_uf.evt.gz[EVENTS][TIME>=151205299.1500231&&TIME<=151289711.01796663&&PIXEL==12&&ITYPE==0]' /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_0_cross_obsid/selected_pixel12_hp.evt copyall=yes clobber=yes history=yes",
+      "exit_code": 0,
+      "stage": "ftcopy",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_0_cross_obsid/selected_pixel12_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_0_cross_obsid/continuous_pxcal.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000102000rsl_000_pxcal.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-17\nrslpha2pi: INFO:    START TIME: 01:28:33\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  CAL-PIX\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_0_cross_obsid/selected_pixel12_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_0_cross_obsid/continuous_pxcal.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000102000rsl_000_pxcal.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         182155\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       182155\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       97\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      0\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    },
+    {
+      "branch": "000102_open_1_cross_obsid",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; ftcopy '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000102000/resolve/event_uf/xa000102000rsl_a0pxcal000_uf.evt.gz[EVENTS][TIME>=151455171.08057764&&TIME<=151458597.50644177&&PIXEL==12&&ITYPE==0]' /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_1_cross_obsid/selected_pixel12_hp.evt copyall=yes clobber=yes history=yes",
+      "exit_code": 0,
+      "stage": "ftcopy",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "branch": "000102_open_1_cross_obsid",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_1_cross_obsid/selected_pixel12_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_1_cross_obsid/continuous_pxcal.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000102000rsl_000_pxcal.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-17\nrslpha2pi: INFO:    START TIME: 01:28:33\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  CAL-PIX\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_1_cross_obsid/selected_pixel12_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000102_open_1_cross_obsid/continuous_pxcal.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000102000rsl_000_pxcal.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         7589\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       7589\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       3\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      0\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    },
+    {
+      "branch": "000103_pre_adr_forward",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; ftcopy '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000103000/resolve/event_uf/xa000103000rsl_a0pxcal000_uf.evt.gz[EVENTS][TIME>=151458589.36004242&&TIME<=151513975.484375&&PIXEL==12&&ITYPE==0]' /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_pre_adr_forward/selected_pixel12_hp.evt copyall=yes clobber=yes history=yes",
+      "exit_code": 0,
+      "stage": "ftcopy",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "branch": "000103_pre_adr_forward",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_pre_adr_forward/selected_pixel12_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_pre_adr_forward/continuous_pxcal.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000103000rsl_000_pxcal.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-19\nrslpha2pi: INFO:    START TIME: 23:50:00\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  CAL-PIX\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_pre_adr_forward/selected_pixel12_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_pre_adr_forward/continuous_pxcal.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000103000rsl_000_pxcal.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         117986\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       117986\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       59\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      0\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    },
+    {
+      "branch": "000103_post_adr_backward",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; ftcopy '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000103000/resolve/event_uf/xa000103000rsl_a0pxcal000_uf.evt.gz[EVENTS][TIME>=151535575.484375&&TIME<=151548911.03069407&&PIXEL==12&&ITYPE==0]' /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_post_adr_backward/selected_pixel12_hp.evt copyall=yes clobber=yes history=yes",
+      "exit_code": 0,
+      "stage": "ftcopy",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "branch": "000103_post_adr_backward",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_post_adr_backward/selected_pixel12_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_post_adr_backward/continuous_pxcal.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000103000rsl_000_pxcal.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-19\nrslpha2pi: INFO:    START TIME: 23:50:00\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  CAL-PIX\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_post_adr_backward/selected_pixel12_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_post_adr_backward/continuous_pxcal.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000103000rsl_000_pxcal.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         27006\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       27006\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       22\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      0\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    },
+    {
+      "branch": "000103_final_forward",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; ftcopy '/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/data/raw/sigma_v19cy_a2319_development/xrism/000103000/resolve/event_uf/xa000103000rsl_a0pxcal000_uf.evt.gz[EVENTS][TIME>=151708370.65972292&&TIME<=151792197.58064914&&PIXEL==12&&ITYPE==0]' /mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_final_forward/selected_pixel12_hp.evt copyall=yes clobber=yes history=yes",
+      "exit_code": 0,
+      "stage": "ftcopy",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "branch": "000103_final_forward",
+      "command": "export CONDA_PREFIX=/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36; source /home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/bin/heainit.sh >/dev/null 2>&1; export CALDB=/home/henry/.local/share/sigmagravity-xrism/caldb; export CALDBCONFIG=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/caldb.config; export CALDBALIAS=/home/henry/.local/share/sigmagravity-xrism/caldb/software/tools/alias_config.fits; rslpha2pi infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_final_forward/selected_pixel12_hp.evt outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_final_forward/continuous_pxcal.evt driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000103000rsl_000_pxcal.ghf calcpi=yes calcupi=no gainfile=CALDB tempidx=-1 pxphaoffset=0 secphacol=PHA2 addepicol=EPI2 method=FIT itypecol=ITYPE binwidth=0.5 offset=0.5 tlmax=59999 gapdt=-1 ntemp=3 writetemp=yes extrap=no randomize=yes seed=7 clobber=yes chatter=2 history=yes",
+      "exit_code": 0,
+      "stage": "rslpha2pi",
+      "stderr": "",
+      "stdout": "rslpha2pi: INFO: Output channel limits (PI): \nrslpha2pi: INFO:   TLMIN: -59999\nrslpha2pi: INFO:   TLMAX: 59999\nrslpha2pi: INFO:   TNULL: 2147483647\nrslpha2pi: INFO: Inserting TEMP column\nrslpha2pi: INFO: Searching CALDB for gain_coefficients file\nrslpha2pi: INFO: Querying CALDB with these parameters: \nrslpha2pi: INFO:    TELESCOPE:  XRISM\nrslpha2pi: INFO:    INSTRUMENT: RESOLVE\nrslpha2pi: INFO:    DETNAM:     -\nrslpha2pi: INFO:    FILTER:     -\nrslpha2pi: INFO:    CODENAME:   GAINPIX\nrslpha2pi: INFO:    START DATE: 2023-10-19\nrslpha2pi: INFO:    START TIME: 23:50:00\nrslpha2pi: INFO:    STOP DATE:  -\nrslpha2pi: INFO:    STOP TIME:  -\nrslpha2pi: INFO:    EXPRESSION: -\nrslpha2pi: INFO: CALDB gain_coefficients file: /home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]\nrslpha2pi: INFO: Number of temperatures loaded from gain file: 3\nrslpha2pi: INFO: Loaded driftfile\nrslpha2pi: INFO:   Calibration type (CALTYPE):  CAL-PIX\nrslpha2pi: INFO: START PARAMETER LIST:\nrslpha2pi: INFO: rslpha2pi 'infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_final_forward/selected_pixel12_hp.evt' 'outfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/000103_final_forward/continuous_pxcal.evt' 'calcpi=yes' 'calcupi=no' 'driftfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/tmp/sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we/histories/xa000103000rsl_000_pxcal.ghf' 'gainfile=/home/henry/.local/share/sigmagravity-xrism/caldb/data/xrism/resolve/bcf/gain/xa_rsl_gainpix_20190101v006.fits[1]' 'tempidx=-1' 'pxphaoffset=0' 'secphacol=PHA2' 'addepicol=EPI2' 'method=FIT' 'itypecol=ITYPE' 'binwidth=0.5' 'offset=0.5' 'tlmax=59999' 'gapdt=-1' 'ntemp=3' 'writetemp=yes' 'extrap=no' 'randomize=yes' 'seed=7' 'buffer=-1' 'clobber=yes' 'chatter=2' 'logfile=!DEFAULT' 'debug=no' 'history=yes' 'mode=ql'\nrslpha2pi: INFO: END PARAMETER LIST\n\nrslpha2pi: INFO: \nrslpha2pi: INFO: Counters: \nrslpha2pi: INFO:   Number of events read:                         167818\nrslpha2pi: INFO:   Number skipped b/c bad PROC_STATUS:            0\nrslpha2pi: INFO:   Number skipped b/c PIXEL=NULL:                 0\nrslpha2pi: INFO:   Number skipped b/c PIXEL not in drift file:    0\nrslpha2pi: INFO:   Number skipped b/c TIME=NULL:                  0\nrslpha2pi: INFO:   Number skipped b/c PHA=NULL:                   0\nrslpha2pi: INFO:   Number skipped b/c TIME gap of drift file:     0\nrslpha2pi: INFO:   Number skipped b/c secphacol=NULL:             0\nrslpha2pi: INFO: \nrslpha2pi: INFO:   Number with PI computed:                       167818\nrslpha2pi: INFO:   Number of baseline with PI out-of-range*:      0\nrslpha2pi: INFO:   Number of pixel events with PI < TLMIN*:       91\nrslpha2pi: INFO:   Number of pixel events with PI > TLMAX**:      0\nrslpha2pi: INFO:  *PI set to NULL\nrslpha2pi: INFO: **PI set to TLMAX\nrslpha2pi: INFO: \n"
+    }
+  ],
+  "config_sha256": "56ecc0942ee64aecfb04ef25cc0d733fddb9ffb875fd093257c27b1d527b9c94",
+  "continuous_control_fits": {
+    "000101000": {
+      "cash_statistic": -2382760.119445453,
+      "centroid_control_passed": true,
+      "centroid_shift_ev": -0.0027943483740754923,
+      "constant_background_per_ev": 21.594865944290085,
+      "converged": true,
+      "events_in_fit_window": 170000,
+      "fwhm_control_passed": true,
+      "fwhm_minus_published_ev": 0.09683011034478817,
+      "instrument_fwhm_ev": 4.546830110344788,
+      "iterations": 12,
+      "line_normalization": 153000.1649065605,
+      "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "passed": true
+    },
+    "000102000": {
+      "cash_statistic": -2074456.1592123008,
+      "centroid_control_passed": true,
+      "centroid_shift_ev": 0.0028406907499948387,
+      "constant_background_per_ev": 16.553069537848483,
+      "converged": true,
+      "events_in_fit_window": 150469,
+      "fwhm_control_passed": true,
+      "fwhm_minus_published_ev": 0.05474418216389676,
+      "instrument_fwhm_ev": 4.504744182163897,
+      "iterations": 10,
+      "line_normalization": 135422.26327473836,
+      "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "passed": true
+    },
+    "000103000": {
+      "cash_statistic": -3649510.7427309854,
+      "centroid_control_passed": true,
+      "centroid_shift_ev": 0.01372881839820921,
+      "constant_background_per_ev": 35.99976002392596,
+      "converged": true,
+      "events_in_fit_window": 247325,
+      "fwhm_control_passed": true,
+      "fwhm_minus_published_ev": 0.07429497739019908,
+      "instrument_fwhm_ev": 4.534294977390199,
+      "iterations": 13,
+      "line_normalization": 222592.7472725043,
+      "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "passed": true
+    }
+  },
+  "continuous_control_outputs": [
+    {
+      "branch": "000101_open_0_cross_obsid",
+      "bytes": 32918400,
+      "negative_epi2": 99,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 99,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000101000",
+      "rows": 207785,
+      "sha256": "7074b3743d0a8520a06009998d7e2c54522671f3ab0c3f293cc1ac12fb242518"
+    },
+    {
+      "branch": "000101_open_1_cross_obsid",
+      "bytes": 1249920,
+      "negative_epi2": 3,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 3,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000101000",
+      "rows": 7363,
+      "sha256": "44288c39334adeed6f8b11cc447eeaf2f6465de4f27eda51f29b51938978006b"
+    },
+    {
+      "branch": "000102_open_0_cross_obsid",
+      "bytes": 28869120,
+      "negative_epi2": 97,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 97,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000102000",
+      "rows": 182155,
+      "sha256": "b8fc1ed070e569dbb5c12b41d98e97607db459e99b7819a37a92e5fe3dbd98d3"
+    },
+    {
+      "branch": "000102_open_1_cross_obsid",
+      "bytes": 1287360,
+      "negative_epi2": 3,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 3,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000102000",
+      "rows": 7589,
+      "sha256": "b52dd73e7ff0e1510be95353e916608b07d3f836f03dd787e8b67cd7e938b736"
+    },
+    {
+      "branch": "000103_pre_adr_forward",
+      "bytes": 18728640,
+      "negative_epi2": 59,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 59,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "rows": 117986,
+      "sha256": "afff540b541b923a8c7bf2904b480854ee88ad37a6c14c4d49c9c70b271a87c1"
+    },
+    {
+      "branch": "000103_post_adr_backward",
+      "bytes": 4354560,
+      "negative_epi2": 22,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 22,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "rows": 27006,
+      "sha256": "e272bdfb1d2d7743a8577293c2bcc7e56c9b090008b70ea850f9cc593fe3d485"
+    },
+    {
+      "branch": "000103_final_forward",
+      "bytes": 26602560,
+      "negative_epi2": 91,
+      "negative_epi2_without_null_pi": 0,
+      "null_epi2": 0,
+      "null_pi": 91,
+      "null_pi_not_explained_by_negative_epi2": 0,
+      "null_temp": 0,
+      "obsid": "000103000",
+      "rows": 167818,
+      "sha256": "3ddc5f404d1c23341f682ab3660d899b9548685e0e79708bb3eadf6942d59a91"
+    }
+  ],
+  "continuous_control_passed": true,
+  "continuous_control_sources": [
+    {
+      "decompressed": {
+        "bytes": 12130560,
+        "path": "tmp\\sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we\\histories\\xa000101000rsl_000_pxcal.ghf",
+        "sha256": "bf7bd661507de819880b0b2d779251d88d92bbb2fe0e651ca5583f4af7ed9832"
+      },
+      "kind": "continuous_calibration_history",
+      "obsid": "000101000",
+      "raw_bytes": 6114504,
+      "raw_path": "xrism/000101000/resolve/event_uf/xa000101000rsl_000_pxcal.ghf.gz",
+      "raw_sha256": "1febbe26a631fbafab4d3dc640566b5064cf5d816979f3d7dc3233ca5136e6df"
+    },
+    {
+      "kind": "calibration_events",
+      "obsid": "000101000",
+      "raw_bytes": 61487268,
+      "raw_path": "xrism/000101000/resolve/event_uf/xa000101000rsl_a0pxcal000_uf.evt.gz",
+      "raw_sha256": "26d1350b2b18fc9fb5f9094139149c05ce28fb9737f2bcd8b1114eaaa21c9f2a"
+    },
+    {
+      "decompressed": {
+        "bytes": 11782080,
+        "path": "tmp\\sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we\\histories\\xa000102000rsl_000_pxcal.ghf",
+        "sha256": "28e50b6020247fc7663c8fb637a502ca9ed900276ec71887edb98bc6a67c6f7d"
+      },
+      "kind": "continuous_calibration_history",
+      "obsid": "000102000",
+      "raw_bytes": 5948051,
+      "raw_path": "xrism/000102000/resolve/event_uf/xa000102000rsl_000_pxcal.ghf.gz",
+      "raw_sha256": "7ccc79b6a8fb0c4a2b8183cde6898aec8b0c2855c93a96235160cc7dfd5fdaa9"
+    },
+    {
+      "kind": "calibration_events",
+      "obsid": "000102000",
+      "raw_bytes": 59032204,
+      "raw_path": "xrism/000102000/resolve/event_uf/xa000102000rsl_a0pxcal000_uf.evt.gz",
+      "raw_sha256": "0b44d5b82bc86b02bb91da96698062a93b7fd17e73e26303dbcd4d5ef62c39a4"
+    },
+    {
+      "decompressed": {
+        "bytes": 14639040,
+        "path": "tmp\\sigma_v19cy_a2319_calibration_failure_diagnosis.installing.15kno5we\\histories\\xa000103000rsl_000_pxcal.ghf",
+        "sha256": "5fa67986d8c2d5687f8605746db64f9ac311f28175d53b7d178d1e61a7a2547b"
+      },
+      "kind": "continuous_calibration_history",
+      "obsid": "000103000",
+      "raw_bytes": 7578928,
+      "raw_path": "xrism/000103000/resolve/event_uf/xa000103000rsl_000_pxcal.ghf.gz",
+      "raw_sha256": "851eab1ab56e327a2af2d82af721a38deebab863aa0ba2ef88258cb2401f0bde"
+    },
+    {
+      "kind": "calibration_events",
+      "obsid": "000103000",
+      "raw_bytes": 76364078,
+      "raw_path": "xrism/000103000/resolve/event_uf/xa000103000rsl_a0pxcal000_uf.evt.gz",
+      "raw_sha256": "00a1847f6237b2e5ada90aad7f67b0c41b731e2982670bae1e525088902462dc"
+    }
+  ],
+  "decision": "authorize_freeze_of_one_calibration_only_replacement_reconstruction_protocol",
+  "diagnosed_candidate": "branch_linear_common_mode",
+  "diagnostic_flags": {
+    "000101000": {
+      "branch_discontinuity_flag": true,
+      "branch_total_centroid_range_ev": 0.37013386927959,
+      "branches": [
+        {
+          "branch": "000101_open_0_cross_obsid",
+          "curvature_flag": true,
+          "endpoint_change_ev": -0.08467434983504418,
+          "maximum_curvature_ev": 0.7593834780662168,
+          "slope_flag": false,
+          "total_centroid_shift_ev": 0.33394405794143245
+        },
+        {
+          "branch": "000101_open_1_cross_obsid",
+          "curvature_flag": true,
+          "endpoint_change_ev": 0.18297168075829345,
+          "maximum_curvature_ev": 0.17191593663692972,
+          "slope_flag": true,
+          "total_centroid_shift_ev": -0.03618981133815758
+        }
+      ],
+      "combined_candidate_minus_published_centroid_ev": 0.7307926100138947,
+      "curvature_flag": true,
+      "reference_offset_flag": false,
+      "slope_flag": true
+    },
+    "000102000": {
+      "branch_discontinuity_flag": true,
+      "branch_total_centroid_range_ev": 0.19645559837492016,
+      "branches": [
+        {
+          "branch": "000102_open_0_cross_obsid",
+          "curvature_flag": true,
+          "endpoint_change_ev": 0.011500230198567912,
+          "maximum_curvature_ev": 0.20384313018376654,
+          "slope_flag": false,
+          "total_centroid_shift_ev": 0.16508608720502344
+        },
+        {
+          "branch": "000102_open_1_cross_obsid",
+          "curvature_flag": true,
+          "endpoint_change_ev": 0.21178825194859385,
+          "maximum_curvature_ev": 0.3436389878656599,
+          "slope_flag": true,
+          "total_centroid_shift_ev": -0.03136951116989673
+        }
+      ],
+      "combined_candidate_minus_published_centroid_ev": 0.01713701047640276,
+      "curvature_flag": true,
+      "reference_offset_flag": false,
+      "slope_flag": true
+    },
+    "000103000": {
+      "branch_discontinuity_flag": true,
+      "branch_total_centroid_range_ev": 0.2731911672844834,
+      "branches": [
+        {
+          "branch": "000103_pre_adr_forward",
+          "curvature_flag": true,
+          "endpoint_change_ev": -0.0810284241563888,
+          "maximum_curvature_ev": 0.15460237110109354,
+          "slope_flag": false,
+          "total_centroid_shift_ev": 0.09962337326543624
+        },
+        {
+          "branch": "000103_post_adr_backward",
+          "curvature_flag": true,
+          "endpoint_change_ev": -0.005187643160350343,
+          "maximum_curvature_ev": 0.1991426522088749,
+          "slope_flag": false,
+          "total_centroid_shift_ev": 0.02567484136883031
+        },
+        {
+          "branch": "000103_final_forward",
+          "curvature_flag": true,
+          "endpoint_change_ev": 0.012680096831247434,
+          "maximum_curvature_ev": 0.11578972810543904,
+          "slope_flag": false,
+          "total_centroid_shift_ev": -0.17356779401904715
+        }
+      ],
+      "combined_candidate_minus_published_centroid_ev": -0.09391332232601177,
+      "curvature_flag": true,
+      "reference_offset_flag": false,
+      "slope_flag": false
+    }
+  },
+  "generated_utc": "2026-08-06T04:52:00.907618+00:00",
+  "protocol_version": "SIGMA-V19CY-A2319-CALIBRATION-FAILURE-DIAGNOSIS-1.0.0",
+  "status": "a2319_calibration_failure_diagnosed",
+  "time_resolved_results": {
+    "000101_open_0_cross_obsid": {
+      "quartiles": [
+        {
+          "fit": {
+            "cash_statistic": -414447.3613820794,
+            "centroid_shift_ev": 0.7459984506498082,
+            "constant_background_per_ev": 11.230278199948305,
+            "converged": true,
+            "events_in_fit_window": 38059,
+            "instrument_fwhm_ev": 4.7145202590887365,
+            "iterations": 11,
+            "line_normalization": 34253.13194613908,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 150952427.7331729,
+          "quartile": 1,
+          "selected_rows": 49660,
+          "start": 150940372.98380262,
+          "stop": 150964482.48254317
+        },
+        {
+          "fit": {
+            "cash_statistic": -452831.44743993,
+            "centroid_shift_ev": 0.10785091344858151,
+            "constant_background_per_ev": 5.82985768516926,
+            "converged": true,
+            "events_in_fit_window": 40680,
+            "instrument_fwhm_ev": 4.7022258081196675,
+            "iterations": 12,
+            "line_normalization": 36612.07046690553,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 150976537.23191345,
+          "quartile": 2,
+          "selected_rows": 51364,
+          "start": 150964482.48254317,
+          "stop": 150988591.98128372
+        },
+        {
+          "fit": {
+            "cash_statistic": -508685.8488866222,
+            "centroid_shift_ev": -0.06983459397308141,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 44413,
+            "instrument_fwhm_ev": 4.4267071649602014,
+            "iterations": 10,
+            "line_normalization": 39971.942245378596,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151000646.730654,
+          "quartile": 3,
+          "selected_rows": 54663,
+          "start": 150988591.98128372,
+          "stop": 151012701.4800243
+        },
+        {
+          "fit": {
+            "cash_statistic": -455572.16001115844,
+            "centroid_shift_ev": 0.661324100814764,
+            "constant_background_per_ev": 5.282352092179882,
+            "converged": true,
+            "events_in_fit_window": 41013,
+            "instrument_fwhm_ev": 5.114759188884834,
+            "iterations": 10,
+            "line_normalization": 36911.78843395329,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151024756.22939458,
+          "quartile": 4,
+          "selected_rows": 52098,
+          "start": 151012701.4800243,
+          "stop": 151036810.97876486
+        }
+      ],
+      "total_fit": {
+        "cash_statistic": -2284580.506163891,
+        "centroid_shift_ev": 0.33394405794143245,
+        "constant_background_per_ev": 21.381888074850984,
+        "converged": true,
+        "events_in_fit_window": 164165,
+        "instrument_fwhm_ev": 4.786517169511937,
+        "iterations": 15,
+        "line_normalization": 147748.72610001135,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    },
+    "000101_open_1_cross_obsid": {
+      "quartiles": [
+        {
+          "fit": {
+            "cash_statistic": -7108.145157932538,
+            "centroid_shift_ev": -0.09423807438539486,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 1493,
+            "instrument_fwhm_ev": 4.1493430728714555,
+            "iterations": 24,
+            "line_normalization": 1517.9406768743197,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151202388.47099334,
+          "quartile": 1,
+          "selected_rows": 1847,
+          "start": 151201971.01443896,
+          "stop": 151202805.92754775
+        },
+        {
+          "fit": {
+            "cash_statistic": -7330.725386192281,
+            "centroid_shift_ev": 0.03985702034196237,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 1538,
+            "instrument_fwhm_ev": 4.415840481847129,
+            "iterations": 18,
+            "line_normalization": 1563.7650090283228,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151203223.38410214,
+          "quartile": 2,
+          "selected_rows": 1912,
+          "start": 151202805.92754775,
+          "stop": 151203640.84065652
+        },
+        {
+          "fit": {
+            "cash_statistic": -7130.007180912451,
+            "centroid_shift_ev": -0.1441728905175213,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 1529,
+            "instrument_fwhm_ev": 4.668757407143435,
+            "iterations": 20,
+            "line_normalization": 1554.5231992817714,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151204058.2972109,
+          "quartile": 3,
+          "selected_rows": 1860,
+          "start": 151203640.84065652,
+          "stop": 151204475.75376529
+        },
+        {
+          "fit": {
+            "cash_statistic": -4944.85982532663,
+            "centroid_shift_ev": 0.0887336063728986,
+            "constant_background_per_ev": 0.47141267041860546,
+            "converged": true,
+            "events_in_fit_window": 1249,
+            "instrument_fwhm_ev": 5.024110744875674,
+            "iterations": 25,
+            "line_normalization": 1223.5827871341012,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151204893.2103197,
+          "quartile": 4,
+          "selected_rows": 1744,
+          "start": 151204475.75376529,
+          "stop": 151205310.66687408
+        }
+      ],
+      "total_fit": {
+        "cash_statistic": -42549.917909923606,
+        "centroid_shift_ev": -0.03618981133815758,
+        "constant_background_per_ev": 0.00693548851993324,
+        "converged": true,
+        "events_in_fit_window": 5809,
+        "instrument_fwhm_ev": 4.543413365382195,
+        "iterations": 26,
+        "line_normalization": 5904.8211196741395,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    },
+    "000102_open_0_cross_obsid": {
+      "quartiles": [
+        {
+          "fit": {
+            "cash_statistic": -343087.3360012338,
+            "centroid_shift_ev": 0.22825988454867288,
+            "constant_background_per_ev": 7.624027018104495,
+            "converged": true,
+            "events_in_fit_window": 32400,
+            "instrument_fwhm_ev": 4.869736726302726,
+            "iterations": 12,
+            "line_normalization": 29160.056703385293,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151215850.63351604,
+          "quartile": 1,
+          "selected_rows": 41929,
+          "start": 151205299.1500231,
+          "stop": 151226402.11700898
+        },
+        {
+          "fit": {
+            "cash_statistic": -415179.4358420974,
+            "centroid_shift_ev": 0.18616757146486215,
+            "constant_background_per_ev": 3.9411194469577238,
+            "converged": true,
+            "events_in_fit_window": 37694,
+            "instrument_fwhm_ev": 4.5530146162292215,
+            "iterations": 10,
+            "line_normalization": 33924.69757530791,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151236953.60050192,
+          "quartile": 2,
+          "selected_rows": 47109,
+          "start": 151226402.11700898,
+          "stop": 151247505.08399487
+        },
+        {
+          "fit": {
+            "cash_statistic": -432918.17801122006,
+            "centroid_shift_ev": 0.03208357449728493,
+            "constant_background_per_ev": 0.18214075017633233,
+            "converged": true,
+            "events_in_fit_window": 38748,
+            "instrument_fwhm_ev": 4.341651083170664,
+            "iterations": 10,
+            "line_normalization": 34873.39702580185,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151258056.5674878,
+          "quartile": 3,
+          "selected_rows": 47614,
+          "start": 151247505.08399487,
+          "stop": 151268608.05098075
+        },
+        {
+          "fit": {
+            "cash_statistic": -388423.6683097114,
+            "centroid_shift_ev": 0.2397601147472408,
+            "constant_background_per_ev": 4.3491178615337995,
+            "converged": true,
+            "events_in_fit_window": 35624,
+            "instrument_fwhm_ev": 4.49184623258272,
+            "iterations": 8,
+            "line_normalization": 32061.67470689236,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151279159.5344737,
+          "quartile": 4,
+          "selected_rows": 45503,
+          "start": 151268608.05098075,
+          "stop": 151289711.01796663
+        }
+      ],
+      "total_fit": {
+        "cash_statistic": -1979234.4151531674,
+        "centroid_shift_ev": 0.16508608720502344,
+        "constant_background_per_ev": 15.828257410922665,
+        "converged": true,
+        "events_in_fit_window": 144466,
+        "instrument_fwhm_ev": 4.547908580213465,
+        "iterations": 11,
+        "line_normalization": 130019.55493818352,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    },
+    "000102_open_1_cross_obsid": {
+      "quartiles": [
+        {
+          "fit": {
+            "cash_statistic": -7541.071316205606,
+            "centroid_shift_ev": -0.010065209083515866,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 1554,
+            "instrument_fwhm_ev": 4.179521805609526,
+            "iterations": 21,
+            "line_normalization": 1579.918242235449,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151455599.38381064,
+          "quartile": 1,
+          "selected_rows": 1915,
+          "start": 151455171.08057764,
+          "stop": 151456027.68704367
+        },
+        {
+          "fit": {
+            "cash_statistic": -7723.38265873221,
+            "centroid_shift_ev": -0.017554155936443116,
+            "constant_background_per_ev": 0.04731522630895314,
+            "converged": true,
+            "events_in_fit_window": 1620,
+            "instrument_fwhm_ev": 4.522638367185066,
+            "iterations": 18,
+            "line_normalization": 1642.2961636255234,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151456455.9902767,
+          "quartile": 2,
+          "selected_rows": 1990,
+          "start": 151456027.68704367,
+          "stop": 151456884.29350972
+        },
+        {
+          "fit": {
+            "cash_statistic": -7714.1020734241465,
+            "centroid_shift_ev": -0.21251202898017169,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 1596,
+            "instrument_fwhm_ev": 4.305075528947587,
+            "iterations": 19,
+            "line_normalization": 1622.6039152782423,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151457312.59674275,
+          "quartile": 3,
+          "selected_rows": 1946,
+          "start": 151456884.29350972,
+          "stop": 151457740.89997575
+        },
+        {
+          "fit": {
+            "cash_statistic": -4596.129307748483,
+            "centroid_shift_ev": 0.20172304286507797,
+            "constant_background_per_ev": 0.9174739293181869,
+            "converged": true,
+            "events_in_fit_window": 1236,
+            "instrument_fwhm_ev": 5.066060451696416,
+            "iterations": 25,
+            "line_normalization": 1166.6210680464203,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151458169.20320874,
+          "quartile": 4,
+          "selected_rows": 1738,
+          "start": 151457740.89997575,
+          "stop": 151458597.50644177
+        }
+      ],
+      "total_fit": {
+        "cash_statistic": -44089.09849150371,
+        "centroid_shift_ev": -0.03136951116989673,
+        "constant_background_per_ev": 0.4630898708764739,
+        "converged": true,
+        "events_in_fit_window": 6006,
+        "instrument_fwhm_ev": 4.464472226970358,
+        "iterations": 25,
+        "line_normalization": 6056.721632752056,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    },
+    "000103_final_forward": {
+      "quartiles": [
+        {
+          "fit": {
+            "cash_statistic": -358502.93970054097,
+            "centroid_shift_ev": -0.21938341811831263,
+            "constant_background_per_ev": 4.728962563942482,
+            "converged": true,
+            "events_in_fit_window": 33407,
+            "instrument_fwhm_ev": 4.65399136546324,
+            "iterations": 10,
+            "line_normalization": 30066.380964168846,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151718849.0248387,
+          "quartile": 1,
+          "selected_rows": 42719,
+          "start": 151708370.65972292,
+          "stop": 151729327.38995448
+        },
+        {
+          "fit": {
+            "cash_statistic": -373832.1162589871,
+            "centroid_shift_ev": -0.16022201861910107,
+            "constant_background_per_ev": 6.763167789794638,
+            "converged": true,
+            "events_in_fit_window": 34660,
+            "instrument_fwhm_ev": 4.679914737778483,
+            "iterations": 10,
+            "line_normalization": 31194.06588295484,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151739805.75507027,
+          "quartile": 2,
+          "selected_rows": 43903,
+          "start": 151729327.38995448,
+          "stop": 151750284.12018603
+        },
+        {
+          "fit": {
+            "cash_statistic": -285614.5952359155,
+            "centroid_shift_ev": -0.09514029212537932,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 27264,
+            "instrument_fwhm_ev": 4.403477173199361,
+            "iterations": 10,
+            "line_normalization": 24537.791412202525,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151760762.4853018,
+          "quartile": 3,
+          "selected_rows": 33576,
+          "start": 151750284.12018603,
+          "stop": 151771240.85041758
+        },
+        {
+          "fit": {
+            "cash_statistic": -409818.0762575598,
+            "centroid_shift_ev": -0.2067033212870652,
+            "constant_background_per_ev": 9.178730914641138,
+            "converged": true,
+            "events_in_fit_window": 37485,
+            "instrument_fwhm_ev": 4.464818755070085,
+            "iterations": 12,
+            "line_normalization": 33736.54620845753,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151781719.21553338,
+          "quartile": 4,
+          "selected_rows": 47620,
+          "start": 151771240.85041758,
+          "stop": 151792197.58064914
+        }
+      ],
+      "total_fit": {
+        "cash_statistic": -1794111.7951499848,
+        "centroid_shift_ev": -0.17356779401904715,
+        "constant_background_per_ev": 20.241729370632683,
+        "converged": true,
+        "events_in_fit_window": 132816,
+        "instrument_fwhm_ev": 4.556571344704952,
+        "iterations": 10,
+        "line_normalization": 119534.56203252244,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    },
+    "000103_post_adr_backward": {
+      "quartiles": [
+        {
+          "fit": {
+            "cash_statistic": -43759.09933593002,
+            "centroid_shift_ev": -0.05053766430986317,
+            "constant_background_per_ev": 0.19446590123973548,
+            "converged": true,
+            "events_in_fit_window": 5943,
+            "instrument_fwhm_ev": 4.519660799394969,
+            "iterations": 22,
+            "line_normalization": 6020.907343186013,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151537242.42766488,
+          "quartile": 1,
+          "selected_rows": 7438,
+          "start": 151535575.484375,
+          "stop": 151538909.37095475
+        },
+        {
+          "fit": {
+            "cash_statistic": -29679.88089019304,
+            "centroid_shift_ev": 0.11223868349047258,
+            "constant_background_per_ev": 0.7096116101404353,
+            "converged": true,
+            "events_in_fit_window": 4470,
+            "instrument_fwhm_ev": 4.867037064039703,
+            "iterations": 26,
+            "line_normalization": 4474.725409214453,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151540576.31424463,
+          "quartile": 2,
+          "selected_rows": 6003,
+          "start": 151538909.37095475,
+          "stop": 151542243.25753453
+        },
+        {
+          "fit": {
+            "cash_statistic": -32461.27446722953,
+            "centroid_shift_ev": 0.1451465591254345,
+            "constant_background_per_ev": 0.5181295447266158,
+            "converged": true,
+            "events_in_fit_window": 4741,
+            "instrument_fwhm_ev": 4.718469467369734,
+            "iterations": 24,
+            "line_normalization": 4769.142602400211,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151543910.20082444,
+          "quartile": 3,
+          "selected_rows": 5981,
+          "start": 151542243.25753453,
+          "stop": 151545577.14411432
+        },
+        {
+          "fit": {
+            "cash_statistic": -41672.82035017146,
+            "centroid_shift_ev": -0.055725307470213516,
+            "constant_background_per_ev": 0.3679224821457049,
+            "converged": true,
+            "events_in_fit_window": 5785,
+            "instrument_fwhm_ev": 4.853278251389997,
+            "iterations": 27,
+            "line_normalization": 5845.316574006691,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151547244.0874042,
+          "quartile": 4,
+          "selected_rows": 7584,
+          "start": 151545577.14411432,
+          "stop": 151548911.03069407
+        }
+      ],
+      "total_fit": {
+        "cash_statistic": -205051.2667256923,
+        "centroid_shift_ev": 0.02567484136883031,
+        "constant_background_per_ev": 3.3390377540675558,
+        "converged": true,
+        "events_in_fit_window": 20939,
+        "instrument_fwhm_ev": 4.7053314050609965,
+        "iterations": 9,
+        "line_normalization": 18845.140616843222,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    },
+    "000103_pre_adr_forward": {
+      "quartiles": [
+        {
+          "fit": {
+            "cash_statistic": -197901.5354009855,
+            "centroid_shift_ev": 0.17220918066312008,
+            "constant_background_per_ev": 4.986800411529378,
+            "converged": true,
+            "events_in_fit_window": 20493,
+            "instrument_fwhm_ev": 4.927780642849109,
+            "iterations": 10,
+            "line_normalization": 18443.747108118983,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151465512.625584,
+          "quartile": 1,
+          "selected_rows": 26823,
+          "start": 151458589.36004242,
+          "stop": 151472435.89112556
+        },
+        {
+          "fit": {
+            "cash_statistic": -226665.10603774036,
+            "centroid_shift_ev": -0.00940266515675036,
+            "constant_background_per_ev": 3.11756691208188,
+            "converged": true,
+            "events_in_fit_window": 22730,
+            "instrument_fwhm_ev": 4.732936300720202,
+            "iterations": 10,
+            "line_normalization": 20457.08200442915,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151479359.15666714,
+          "quartile": 2,
+          "selected_rows": 28780,
+          "start": 151472435.89112556,
+          "stop": 151486282.42220873
+        },
+        {
+          "fit": {
+            "cash_statistic": -255805.79687547087,
+            "centroid_shift_ev": 0.149318226980494,
+            "constant_background_per_ev": 4.596670817450984,
+            "converged": true,
+            "events_in_fit_window": 25161,
+            "instrument_fwhm_ev": 4.489072779012886,
+            "iterations": 10,
+            "line_normalization": 22644.92777768105,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151493205.68775028,
+          "quartile": 3,
+          "selected_rows": 31433,
+          "start": 151486282.42220873,
+          "stop": 151500128.95329186
+        },
+        {
+          "fit": {
+            "cash_statistic": -259833.2041388207,
+            "centroid_shift_ev": 0.09118075650673127,
+            "constant_background_per_ev": 0.0,
+            "converged": true,
+            "events_in_fit_window": 25181,
+            "instrument_fwhm_ev": 4.365444381502861,
+            "iterations": 26,
+            "line_normalization": 25607.408915718068,
+            "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+          },
+          "midpoint": 151507052.21883345,
+          "quartile": 4,
+          "selected_rows": 30950,
+          "start": 151500128.95329186,
+          "stop": 151513975.484375
+        }
+      ],
+      "total_fit": {
+        "cash_statistic": -1198433.7098525716,
+        "centroid_shift_ev": 0.09962337326543624,
+        "constant_background_per_ev": 12.584965080244368,
+        "converged": true,
+        "events_in_fit_window": 93565,
+        "instrument_fwhm_ev": 4.604371652435901,
+        "iterations": 11,
+        "line_normalization": 84208.60570044264,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    }
+  },
+  "validation_or_holdout_accessed": false
+}

@@ -287,6 +287,43 @@ sealed until a separately frozen reconstruction passes its calibration gate.
 The terminal line-shape report SHA-256 is
 `868ed6bbe284b936312470b1bae7474c32881ade1bf94f9c935f6913269a1307`.
 
+### Calibration failure diagnosis result
+
+The frozen calibration-only diagnosis separates an analysis failure from a
+gain-reconstruction failure. Reapplying each observation's original
+continuous pixel-12 gain history produced the following controls:
+
+| ObsID | Control shift (eV) | Control FWHM (eV) | Published FWHM (eV) | Result |
+|---|---:|---:|---:|---|
+| 000101000 | -0.0028 | 4.5468 | 4.45 | Pass |
+| 000102000 | +0.0028 | 4.5047 | 4.45 | Pass |
+| 000103000 | +0.0137 | 4.5343 | 4.46 | Pass |
+
+All controls meet the preregistered absolute-centroid and FWHM tolerances.
+All fourteen `ftcopy` and `rslpha2pi` commands exited zero. This validates the
+line template, fitter, event selection, mission executable, and continuous
+gain application at the precision needed for the diagnosis.
+
+The four equal-time fits show that the branch-linear candidate is not failing
+through one removable global offset. Every one of the seven branches has at
+least 0.1 eV of within-branch curvature relative to its endpoint line. Every
+ObsID also has at least 0.1 eV separation among its branch-total centroids.
+The largest curvature is 0.759 eV in the long first 000101000 interval;
+000101000 and 000102000 additionally contain material endpoint slopes.
+
+This authorizes freezing one replacement calibration-only reconstruction
+protocol that preserves local time structure instead of compressing a full
+anchor or science branch to one straight line. It does not authorize choosing
+that reconstruction after seeing its calibration performance, applying gain
+to a cluster sky event, or fitting a cluster velocity. The seven continuous
+controls are a validation reference, not a proposed science calibration,
+because the continuously illuminated pixel behaves differently from the main
+array that observes the cluster.
+
+The diagnosis retained 17 scratch files totaling 260,815,680 bytes. Its
+terminal report SHA-256 is
+`a418ad26fe170408cd19a1483aa1b543bd13076409484ac3bf2046b7bd4c2a1a`.
+
 ## The new observable source terms
 
 The signed projected gas current is
