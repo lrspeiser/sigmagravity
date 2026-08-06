@@ -1,5 +1,28 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DF public component-current result
+
+The materially independent MACS J0018.5+1626 public-data audit is complete.
+The exact arXiv source reproduces the paper's 156 member galaxies after the
+disclosed development-only one-arcsecond cross-table match: 98 literature and
+58 Keck rows. The all-member OLS and Huber positive-velocity directions agree
+within 3.32 degrees, but the directional source fails the other frozen
+identifiability gates. Its velocity-shuffle null is `p=0.1313`, the
+literature-only and Keck-only axes differ by 54.58 degrees, and the bootstrap
+95% direction displacement spans -74.25 to +66.93 degrees.
+
+The analysis-grade 140/270-GHz maps, transfer functions and 1,000 correlated
+kSZ noise realizations described by the paper are not included in the arXiv
+source or the journal-repository attachments. Figure digitization is
+forbidden. The public galaxy branch is therefore not a stable directional
+source under the frozen reconstruction, the raw gas branch cannot run, and no
+component-resolved current is admitted. No lensing, halo, gravity formula,
+constant, validation/holdout system or action was opened. The published
+gas/galaxy misalignment remains an architectural warning against collapsing
+their motion into one scalar coherence/current before nonlinear response, not
+a coupling calibration. See
+[`SIGMA_V19DF_MACSJ0018_COMPONENT_CURRENT.md`](SIGMA_V19DF_MACSJ0018_COMPONENT_CURRENT.md).
+
 ## 2026-08-06 Sigma V19DE2 terminal scientific result
 
 The exact AtomDB-bound rerun completes all 404 frozen APEC/MEKAL profile

@@ -1,0 +1,118 @@
+{
+  "protocol_version": "SIGMA-V19DF-MACSJ0018-COMPONENT-CURRENT-1.0.0",
+  "freeze_state": "frozen_after_public_availability_audit_and_development_payload_exposure_before_any_v19df_map_or_source_decision",
+  "status": "frozen after verifying the public archives and inspecting the development-only paper TeX tables, but before constructing a machine-readable member catalog, fitting any velocity gradient, running any bootstrap or permutation, opening any kSZ map or covariance pixel, or accessing any lensing, halo, gravity-formula or action payload",
+  "purpose": "Determine whether the public MACS J0018.5+1626 data can independently support a component-resolved time-odd Sigma source. This is a source observability and identifiability test only, not a gravity test.",
+  "disclosure": "The paper's stated 156-member count and the TeX rows were visible during the availability audit. The one-arcsecond cross-table match rule was selected to make the two public tables reproduce that stated count and is therefore development-only, not prospective validation.",
+  "primary_sources": [
+    "https://arxiv.org/abs/2309.12533",
+    "https://doi.org/10.3847/1538-4357/ad3fb5",
+    "https://arxiv.org/abs/1812.06926",
+    "https://doi.org/10.3847/1538-4357/ab29ef",
+    "https://github.com/XtraAstronomy/Pumpkin"
+  ],
+  "paper_source": {
+    "url": "https://export.arxiv.org/e-print/2309.12533v2",
+    "output": "data/raw/sigma_v19df_macsj0018_component_current/arxiv_2309.12533v2_source.tar",
+    "bytes": 8225624,
+    "sha256": "2bc3e3ea14d013c9fcc9fd6c8e8941e4ae6c45b78e4c1a25b17f7c2ed37834a7",
+    "tex_member": "main.tex",
+    "tex_sha256": "63bdc325738399cb93763ffa5fda2679eaf472d4d778fed396afbf1e81675241"
+  },
+  "member_catalog": {
+    "cluster": "MACS_J0018.5+1626",
+    "role": "known_outcome_development_only",
+    "center_ra_hms": "00:18:33.4",
+    "center_dec_dms": "+16:26:13",
+    "box_half_width_arcsec": 201.0,
+    "literature_table_label": "tab:lit_specz",
+    "keck_table_label": "tab:cl_members",
+    "remove_rows_marked_duplicate": true,
+    "cross_table_match_arcsec": 1.0,
+    "cross_table_preference": "retain_keck_remove_literature",
+    "expected_table_rows": {
+      "literature_all": 168,
+      "keck_all": 117,
+      "inside_box_after_internal_duplicate_removal": 161,
+      "cross_table_matches": 5,
+      "final_rows": 156
+    },
+    "output": "data/derived/sigma_v19df_macsj0018_component_current/member_catalog.csv"
+  },
+  "velocity_definition": {
+    "cluster_reference_redshift": 0.546,
+    "bulk_offset_km_s": -100.0,
+    "speed_of_light_km_s": 299792.458,
+    "formula": "v_los = c*(z-0.546)/(1+0.546) - 100 km/s",
+    "note": "The constant bulk offset does not change a spatial-gradient direction. No redshift uncertainties are supplied in the public tables, so none are invented."
+  },
+  "registered_diagnostics": {
+    "primary": "ordinary least-squares plane v=a+b*x_east+c*y_north over all 156 retained rows",
+    "robust_plane": "Huber IRLS with tuning constant 1.345 and MAD scale",
+    "source_splits": ["literature_only", "keck_only"],
+    "bootstrap_draws": 4096,
+    "bootstrap_seed": 190046,
+    "permutation_draws": 4096,
+    "permutation_seed": 190047,
+    "permutation_statistic": "sqrt(b^2+c^2) from the same OLS plane after shuffling velocities over fixed positions",
+    "reported_peak_to_peak": "difference between plane extrema over the frozen 6.7 by 6.7 arcmin square",
+    "no_mass_weighting": "The public table has no stellar masses or luminosities. This is a number-sampled velocity tracer, not a physical mass-current map."
+  },
+  "member_gradient_gates": {
+    "catalog_reproduces_156_rows": true,
+    "permutation_p_max": 0.05,
+    "ols_huber_direction_difference_deg_max": 15.0,
+    "literature_keck_axial_difference_deg_max": 30.0,
+    "bootstrap_95_direction_half_width_deg_max": 45.0,
+    "all_must_pass": true
+  },
+  "ksz_gas_branch": {
+    "public_availability_finding": "The arXiv source contains figure PDFs and the paper describes 140/270 GHz maps plus 1000 correlated noise realizations, but the source archive and CaltechAUTHORS attachments do not provide analysis-grade FITS maps, transfer functions, or those realizations.",
+    "required_before_execution": [
+      "140 GHz calibrated map",
+      "270 GHz calibrated map",
+      "both map transfer functions and beams",
+      "X-ray temperature map used in the SZ separation",
+      "absolute-normalization information",
+      "1000 correlated noise realizations or an equivalent full covariance",
+      "units, WCS, masks and provenance"
+    ],
+    "figure_digitization_forbidden": true,
+    "published_summary_use": "diagnostic_only",
+    "published_diagnostics_not_scored": {
+      "gas_velocity_pattern": "approximately east-west",
+      "galaxy_velocity_pattern": "approximately northwest-southeast",
+      "reported_signed_direction_difference_deg": 135.0,
+      "gas_peak_to_peak_km_s": "approximately 4000-5000",
+      "galaxy_peak_to_peak_km_s": "approximately 3100 plus or minus 940"
+    },
+    "raw_branch_authorized": false
+  },
+  "decision_rule": {
+    "if_member_gradient_passes_but_gas_branch_unavailable": "retain the galaxy-velocity tracer as development evidence only; do not admit a component-resolved source",
+    "if_member_gradient_fails": "do not use the public galaxy catalog as a stable directional source under this registered reconstruction; retain the failure and seek independent velocities or measurement-level likelihoods",
+    "if_future_gas_products_become_available": "freeze a successor using the untouched maps and covariance before access; compare gas and galaxy components separately without lensing",
+    "scalar_current_constraint": "The published component misalignment is enough to reject collapsing gas and galaxy motion into one scalar coherence/current before nonlinear response as a faithful representation of this system, but not enough to calibrate a new coupling."
+  },
+  "authorization": {
+    "download_exact_arxiv_source": true,
+    "parse_named_member_tables": true,
+    "construct_registered_member_velocity_diagnostics": true,
+    "open_or_digitize_figure_pixels": false,
+    "open_unreleased_ksz_or_noise_pixels": false,
+    "use_lensing_halo_or_dark_matter_map": false,
+    "fit_or_change_gravity_formula_or_constants": false,
+    "derive_or_select_covariant_action": false,
+    "open_validation_or_holdout_system": false
+  },
+  "outputs": {
+    "directory": "results/sigma_v19df_macsj0018_component_current",
+    "report": "results/sigma_v19df_macsj0018_component_current/report.json",
+    "cross_matches": "results/sigma_v19df_macsj0018_component_current/cross_table_matches.csv",
+    "plot": "results/sigma_v19df_macsj0018_component_current/member_velocity_diagnostic.png"
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19df_macsj0018_component_current.py",
+    "runner_sha256": "0f4d15605f3bcee0505b3a5f8cbc25b611977affbd06f8fb4e00b4ee9e5d6215"
+  }
+}

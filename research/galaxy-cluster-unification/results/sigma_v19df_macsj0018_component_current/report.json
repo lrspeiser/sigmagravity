@@ -1,0 +1,118 @@
+{
+  "analysis_grade_ksz_gas_products_publicly_available": false,
+  "catalog": {
+    "counts": {
+      "cross_table_matches": 5,
+      "final_rows": 156,
+      "inside_box_after_internal_duplicate_removal": 161,
+      "keck_all": 117,
+      "literature_all": 168
+    },
+    "cross_matches": "results/sigma_v19df_macsj0018_component_current/cross_table_matches.csv",
+    "cross_matches_sha256": "ea7fba993a4e8d0be09ebeb8f209ca515036d2263973ac1ad83d40a6d4a6b99f",
+    "output": "data/derived/sigma_v19df_macsj0018_component_current/member_catalog.csv",
+    "output_sha256": "8d1cc887c9535ca5623fc008380d328ea294af77190e3e9b4d74250f173eba2d",
+    "redshift_uncertainties_invented": false,
+    "source_group_counts": {
+      "keck": 58,
+      "literature": 98
+    },
+    "stellar_mass_or_luminosity_weights_used": false
+  },
+  "component_resolved_current_source_admitted": false,
+  "config_sha256": "c2ac4e7d2df890ef9b562c8f1ed946da98c8237431602c5960845e4a21781dec",
+  "covariant_action_selected_or_derived": false,
+  "diagnostics": {
+    "bootstrap_direction_difference_deg_quantiles": {
+      "q16": -30.476337922445715,
+      "q2p5": -74.24774305096803,
+      "q50": 0.9839599933482077,
+      "q84": 30.195477533596552,
+      "q97p5": 66.93470056354167
+    },
+    "bootstrap_peak_to_peak_km_s_quantiles": {
+      "q16": 978.6321482547208,
+      "q2p5": 417.2539696141032,
+      "q50": 1678.6950881317493,
+      "q84": 2490.8467316213932,
+      "q97p5": 3374.527200436505
+    },
+    "huber": {
+      "east_gradient_km_s_per_arcsec": 0.7187328710545143,
+      "gradient_magnitude_km_s_per_arcsec": 2.630735239466203,
+      "intercept_km_s": -86.79584061741735,
+      "iterations": 14,
+      "north_gradient_km_s_per_arcsec": -2.5306503038221293,
+      "peak_to_peak_over_frozen_square_km_s": 1306.2520363004105,
+      "positive_velocity_direction_deg_east_ccw": 285.85513692739346,
+      "residual_rmse_km_s": 1563.8216124658748
+    },
+    "keck_only_ols": {
+      "east_gradient_km_s_per_arcsec": 1.2635330712345505,
+      "gradient_magnitude_km_s_per_arcsec": 2.7487730216059623,
+      "intercept_km_s": -426.22594819424,
+      "north_gradient_km_s_per_arcsec": -2.441154911554233,
+      "peak_to_peak_over_frozen_square_km_s": 1489.2845690810911,
+      "positive_velocity_direction_deg_east_ccw": 297.3659226682808,
+      "residual_rmse_km_s": 1478.8584629861964
+    },
+    "literature_keck_axial_difference_deg": 54.58217879039984,
+    "literature_only_ols": {
+      "east_gradient_km_s_per_arcsec": -1.3138065838540327,
+      "gradient_magnitude_km_s_per_arcsec": 2.8726486220156753,
+      "intercept_km_s": 133.3196011411258,
+      "north_gradient_km_s_per_arcsec": -2.5546080650053455,
+      "peak_to_peak_over_frozen_square_km_s": 1555.10268884147,
+      "positive_velocity_direction_deg_east_ccw": 242.78374387788097,
+      "residual_rmse_km_s": 1562.7168712227408
+    },
+    "ols": {
+      "east_gradient_km_s_per_arcsec": 0.9665243624242341,
+      "gradient_magnitude_km_s_per_arcsec": 2.942613133621975,
+      "intercept_km_s": -98.8100359389372,
+      "north_gradient_km_s_per_arcsec": -2.7793529302708153,
+      "peak_to_peak_over_frozen_square_km_s": 1505.8426716634099,
+      "positive_velocity_direction_deg_east_ccw": 289.17519953948226,
+      "residual_rmse_km_s": 1563.5262157787176
+    },
+    "ols_huber_axial_difference_deg": 3.3200626120888046,
+    "permutation_exceedances": 537,
+    "permutation_p": 0.13131559677813034
+  },
+  "figure_pixels_digitized": false,
+  "gates": {
+    "bootstrap_95_direction_half_width_at_most_45_deg": false,
+    "catalog_reproduces_156_rows": true,
+    "literature_keck_axial_difference_at_most_30_deg": false,
+    "ols_huber_direction_difference_at_most_15_deg": true,
+    "permutation_p_at_most_0p05": false
+  },
+  "generated_utc": "2026-08-06T22:49:42.183244+00:00",
+  "gravity_formula_or_constant_fit": false,
+  "input": {
+    "archive": "data/raw/sigma_v19df_macsj0018_component_current/arxiv_2309.12533v2_source.tar",
+    "archive_bytes": 8225624,
+    "archive_sha256": "2bc3e3ea14d013c9fcc9fd6c8e8941e4ae6c45b78e4c1a25b17f7c2ed37834a7",
+    "tex_member": "main.tex",
+    "tex_sha256": "63bdc325738399cb93763ffa5fda2679eaf472d4d778fed396afbf1e81675241"
+  },
+  "ksz_or_noise_pixels_opened": false,
+  "lensing_halo_or_dark_matter_map_opened": false,
+  "member_velocity_gradient_admitted": false,
+  "next_gate": "obtain untouched analysis-grade multi-frequency kSZ maps plus covariance, or select a genuinely public independent direct-velocity system and freeze its source protocol before pixel access",
+  "plot": "results/sigma_v19df_macsj0018_component_current/member_velocity_diagnostic.png",
+  "plot_sha256": "1d30c2ae6fe740de61d3c5c995c512ffe5e5dae4e96a8789dd1b97bbae6017fd",
+  "protocol_version": "SIGMA-V19DF-MACSJ0018-COMPONENT-CURRENT-1.0.0",
+  "published_gas_galaxy_misalignment_used_as_primary_score": false,
+  "published_summary_diagnostic": {
+    "galaxy_peak_to_peak_km_s": "approximately 3100 plus or minus 940",
+    "galaxy_velocity_pattern": "approximately northwest-southeast",
+    "gas_peak_to_peak_km_s": "approximately 4000-5000",
+    "gas_velocity_pattern": "approximately east-west",
+    "reported_signed_direction_difference_deg": 135.0
+  },
+  "runner_sha256": "0f4d15605f3bcee0505b3a5f8cbc25b611977affbd06f8fb4e00b4ee9e5d6215",
+  "scientific_disposition": "The public member catalog alone does not identify a stable global directional source under the registered reconstruction, and the analysis-grade gas kSZ maps/covariance are not public. Keep gas and galaxy stress-energy components separate in future actions, but do not calibrate a current coupling from this system.",
+  "status": "macsj0018_public_component_current_not_admitted",
+  "validation_or_holdout_opened": false
+}
