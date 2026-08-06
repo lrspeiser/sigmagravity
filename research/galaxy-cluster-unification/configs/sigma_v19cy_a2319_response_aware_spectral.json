@@ -1,0 +1,258 @@
+{
+  "protocol_version": "SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.0",
+  "status": "frozen before generating any corrected branch GTI, Chandra source image, source or NXB spectrum, RMF, exposure map, ARF, or response-aware A2319 spectral result; A3667 validation and A754 holdout remain sealed",
+  "purpose": "Reproduce the seven published A2319 detector-region velocities on the three strictly bracketed commissioning fragments using current official response and NXB tools, then decide whether the signed ICM velocity field is sufficiently identified to become a development-only Sigma source diagnostic.",
+  "parents": {
+    "calibration_report": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/development_bracketed_science_calibration.json",
+      "sha256": "6f474938d674e353d2339cf150d5eef1f41b0231b5e8e2f31688c7bec548136e"
+    },
+    "region_readiness_report": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/development_region_readiness.json",
+      "sha256": "84452380c22ba22f415464875cd0278bf61c67382c43eca0f5cbc12a31087fc1"
+    },
+    "response_support_report": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_support_acquisition.json",
+      "sha256": "83022aba9fb834e1a17bfec91063def56ba88d133eb8b986181e8e6957863a58"
+    },
+    "environment_report": {
+      "path": "results/sigma_v19cy_direct_icm_velocity_evidence/development_environment_report.json",
+      "sha256": "b9ded07723d38b7444f5bfb1abbd54337533b8c8c11fe0da043d9583d1cbd394"
+    }
+  },
+  "runtime": {
+    "wsl_distribution": "Ubuntu-24.04",
+    "heasoft_prefix": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36",
+    "heasoft_version": "6.36",
+    "xspec_version": "12.15.1",
+    "caldb_root": "/home/henry/.local/share/sigmagravity-xrism/caldb",
+    "pfiles": "/home/henry/pfiles:/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/syspfiles",
+    "ciao_prefix": "/home/henry/ciao-4.18",
+    "ciao_version": "4.18",
+    "ciao_caldb_version": "4.12.4",
+    "executables_sha256": {
+      "rslmkrmf": "b561a37df8cdcbfe029fbab857ee08540c0469eb6b678f0df16e37fc57fbf753",
+      "rslnxbgen": "710a66dc90f2cf2cb4a4034551d34325652a2eb21df2c6c9cb0fa1f5f1f58324",
+      "xaexpmap": "b26569e35fbc9666b20646bb3ea0c3b510359e2aca533bd0b469726ca19f5334",
+      "xaarfgen": "2f9b8a90ba8a7024c4d27b54e5c564b4e77a259370dd5790e93b650f03279bee",
+      "extractor": "30264ddb7b55f2252b4fc34b0c3e27ca9090cae7078622baea6a841543cb1302",
+      "ftcopy": "9ac5316d1f5f3386918ac8a668445043484af93b5467670d8e79fa491a97760f",
+      "xspec": "9df7e051d71255fc0542571a4d66e3146cbbb72768d64b1099c844161469440c",
+      "dmcopy": "fa29429d35eeead096792841373cade277202f4ce9a2e131c1511cb388fe8b14",
+      "merge_obs": "799afe54687d5328a7a16d584dfb844979a9c384d9f5ee63e8be758eda0f0488",
+      "reproject_obs": "af5ff74919d36944c63b0b640d502f3a58185ee16695ed0c751a11e2a5ca74ab"
+    }
+  },
+  "paths": {
+    "scratch_root": "tmp/sigma_v19cy_a2319_response_aware_spectral",
+    "product_root": "data/processed/sigma_v19cy_a2319_response_aware_spectral",
+    "preparation_report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_input_preparation.json",
+    "report": "results/sigma_v19cy_direct_icm_velocity_evidence/development_response_aware_spectral.json"
+  },
+  "branches": [
+    {
+      "name": "000101_open_0_cross_obsid",
+      "pointing": "P1",
+      "obsid": "000101000",
+      "event_path": "tmp/sigma_v19cy_a2319_bracketed_science_calibration/000101_open_0_cross_obsid/calibrated_cleaned_sky.evt",
+      "event_sha256": "e9499e4cb2f5eb96d7f22bf8c5cea167960af598f90d9369b3dbabf7a11da889",
+      "branch_start": 150943122.0,
+      "branch_stop": 151036810.97876486,
+      "clipped_parent_gti_rows": 18,
+      "clipped_parent_gti_exposure_seconds": 53187.85376486182,
+      "attitude_ang_dist_arcmin": {"median": 0.02965117897838354, "p95": 0.08294063284993171, "maximum": 0.19444505870342255},
+      "regions": ["a", "b", "d"]
+    },
+    {
+      "name": "000101_open_1_cross_obsid",
+      "pointing": "P1",
+      "obsid": "000101000",
+      "event_path": "tmp/sigma_v19cy_a2319_bracketed_science_calibration/000101_open_1_cross_obsid/calibrated_cleaned_sky.evt",
+      "event_sha256": "afef12eaed48ebd99b9a922ca6be614d1756c559cc8e70503a419f92b7e8fed1",
+      "branch_start": 151201971.01443896,
+      "branch_stop": 151204864.02295268,
+      "clipped_parent_gti_rows": 1,
+      "clipped_parent_gti_exposure_seconds": 2527.0229526758194,
+      "attitude_ang_dist_arcmin": {"median": 0.03137165866792202, "p95": 0.042783841490745544, "maximum": 0.048370059579610825},
+      "regions": ["a", "b", "d"]
+    },
+    {
+      "name": "000102_open_0_cross_obsid",
+      "pointing": "P2",
+      "obsid": "000102000",
+      "event_path": "tmp/sigma_v19cy_a2319_bracketed_science_calibration/000102_open_0_cross_obsid/calibrated_cleaned_sky.evt",
+      "event_sha256": "965e988a1132bcdfe2c3dc3ef60464d6ac5608c514190711040319654f22c144",
+      "branch_start": 151208096.0,
+      "branch_stop": 151289711.01796663,
+      "clipped_parent_gti_rows": 20,
+      "clipped_parent_gti_exposure_seconds": 46672.955466628075,
+      "attitude_ang_dist_arcmin": {"median": 0.043370570987463, "p95": 0.10072449967265129, "maximum": 1.5003421306610107},
+      "regions": ["b_prime", "c_prime", "d_prime", "e_prime"]
+    }
+  ],
+  "observation_support": {
+    "000101000": {
+      "ehk": {"path": "data/raw/sigma_v19cy_a2319_development/xrism/000101000/auxil/xa000101000.ehk.gz", "bytes": 42951133, "sha256": "ffe31d3be2e0f9fbf890a92d732fefe5fd8ae846ef43d6ec1250a44d83a99eb8"},
+      "pixel_gti": {"path": "data/raw/sigma_v19cy_a2319_development/xrism/000101000/resolve/event_uf/xa000101000rsl_px1000_exp.gti.gz", "bytes": 11687, "sha256": "f7a66e7ced2d28f0664ac336249d6d9551a453fbdc07be540b0db0323b83404a"}
+    },
+    "000102000": {
+      "ehk": {"path": "data/raw/sigma_v19cy_a2319_development/xrism/000102000/auxil/xa000102000.ehk.gz", "bytes": 40900793, "sha256": "be50cb47ee766621eae661242f76bd2e7a5abef7d148a24ec661be3c53747cff"},
+      "pixel_gti": {"path": "data/raw/sigma_v19cy_a2319_development/xrism/000102000/resolve/event_uf/xa000102000rsl_px1000_exp.gti.gz", "bytes": 12090, "sha256": "cb5ba841bc67cf018b1d844a2d119d278de0408949c2582e03fc6c7dcfb0bbe0"}
+    }
+  },
+  "region_pixels": {
+    "a": [0, 1, 2, 3, 4, 5, 6, 7, 8, 28, 29, 30, 31, 32, 33, 34, 35],
+    "b": [9, 10, 11, 13, 14, 15, 16, 17],
+    "d": [18, 19, 20, 21, 22, 23, 24, 25, 26],
+    "b_prime": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    "c_prime": [9, 10, 11, 13, 14, 15, 16, 17],
+    "d_prime": [28, 29, 30, 31, 32, 33, 34, 35],
+    "e_prime": [18, 19, 20, 21, 22, 23, 24, 25, 26]
+  },
+  "detector_pixel_centers": {
+    "0": [4, 3], "1": [6, 3], "2": [5, 3], "3": [6, 2], "4": [5, 2], "5": [6, 1], "6": [5, 1], "7": [4, 2], "8": [4, 1],
+    "9": [1, 3], "10": [2, 3], "11": [1, 2], "13": [2, 2], "14": [2, 1], "15": [3, 2], "16": [3, 1], "17": [3, 3],
+    "18": [3, 4], "19": [1, 4], "20": [2, 4], "21": [1, 5], "22": [2, 5], "23": [1, 6], "24": [2, 6], "25": [3, 5], "26": [3, 6],
+    "28": [5, 4], "29": [6, 5], "30": [6, 6], "31": [5, 5], "32": [5, 6], "33": [4, 5], "34": [4, 6], "35": [4, 4]
+  },
+  "gti_protocol": {
+    "step_1": "Intersect every parent GTI row with the closed branch interval and discard zero-width intersections.",
+    "step_2": "Construct the observation source-environment GTI from the EHK expression T_SAA_SXS>0 && DYE_ELV>5 && CORTIME>6.",
+    "step_3": "Intersect steps 1 and 2 and use that exact final GTI for the event file, source spectrum, grade-weight event, rslnxbgen input, and xaexpmap.",
+    "required_header_updates": ["TSTART", "TSTOP", "EXPOSURE", "ONTIME"],
+    "conditional_header_updates": ["Update LIVETIME using the preserved DEADC only when both keywords already exist; do not invent missing dead-time metadata."],
+    "exposure_definition": "sum(STOP-START) over the final GTI",
+    "forbidden": "Do not use the copied broad parent GTI or infer exposure from the first and last event times."
+  },
+  "event_selections": {
+    "source_hp": "ITYPE==0 && (RISE_TIME+0.00075*DERIV_MAX)>46 && (RISE_TIME+0.00075*DERIV_MAX)<58 && STATUS[4]==b0 && PIXEL!=27",
+    "rmf_grade_weight": "ITYPE<4 && (PI>=6000) && (PI<=20000) && (RISE_TIME+0.00075*DERIV_MAX)>46 && (RISE_TIME+0.00075*DERIV_MAX)<58 && STATUS[4]==b0 && PIXEL!=27",
+    "nxb_event_expression": "(PI>=600) && ((RISE_TIME+0.00075*DERIV_MAX)>46) && ((RISE_TIME+0.00075*DERIV_MAX)<58) && (ITYPE==0) && (STATUS[4]==b0) && (PIXEL!=27)",
+    "spectrum_energy_filter": "none during extraction; ignore outside the frozen fit band in XSPEC",
+    "source_channels_per_keV": 2000
+  },
+  "nxb_protocol": {
+    "database": "LOCAL",
+    "database_path": "data/raw/sigma_v19cy_a2319_response_support",
+    "nxb_base_gti_expression": "T_SAA_SXS>0 && ELV<-5 && DYE_ELV>5",
+    "base_event_path": "data/raw/sigma_v19cy_a2319_response_support/merged_nxb_resolve_gtifix.evt",
+    "base_event_sha256": "4c1611170b7b666ef183a224dc727c594a7988b820357d55978d77f6d02ac8e9",
+    "base_ehk_path": "data/raw/sigma_v19cy_a2319_response_support/merged_reduced_rev3_fix2.ehk",
+    "base_ehk_sha256": "fa91c6e543c2979b2afd9a4cfdca768524767dd3cb9b71ac3c66647b8db81a23",
+    "timefirst_days": 300,
+    "timelast_days": 300,
+    "sortcol": "CORTIME",
+    "sortbin": "6,8,10,12,99",
+    "pixels": "exact detector-region pixel list",
+    "regfile": "NONE",
+    "diagonal_response_path": "data/raw/sigma_v19cy_a2319_response_support/newdiag60000.rmf",
+    "diagonal_response_sha256": "a21a12cf1a1c87f148178a0a6a01e1a7e16341ea2f887e9b8344984560dfd9ac",
+    "empirical_model_path": "data/raw/sigma_v19cy_a2319_response_support/rsl_nxb_model_v1.mo",
+    "empirical_model_sha256": "4521d7249196f8da18191f5fb98837063f01d95db305de90cff0d72826a8f6de",
+    "fit_treatment": "joint Poisson additive model through the diagonal response, with NXB shape constrained by the generated NXB spectrum and normalization transfer determined only by recorded exposure and BACKSCAL metadata",
+    "public_db_limitation": "The public provisional database spans 2023-12-25 through 2024-05-24 and is not proven byte-identical to the collaboration-internal NXB v2 used in the paper."
+  },
+  "rmf_protocol": {
+    "tool": "rslmkrmf",
+    "whichrmf": "L",
+    "resolist": "0",
+    "regmode": "DET",
+    "regionfile": "NONE",
+    "pixlist": "comma-separated runs using hyphens, never colons",
+    "input": "branch-specific final-GTI rmf_grade_weight event file",
+    "required_products": 10
+  },
+  "attitude_and_arf_protocol": {
+    "xaexpmap": {"instrume": "RESOLVE", "badimgfile": "NONE", "outmaptype": "EXPOSURE", "delta_arcmin": 0.25, "numphi": 4, "maskcalsrc": true, "pixel_gti": "observation px1000 exposure GTI"},
+    "xaarfgen": {"telescop": "XRISM", "instrume": "RESOLVE", "regmode": "DET", "sourcetype": "IMAGE", "erange": "2.0 10.5 0.5 7.0", "numphoton": 600000, "minphoton": 100, "seed": 7, "rslgapreg": false, "calibration_files": "CALDB", "required_products": 10},
+    "detector_region_representation": "one DS9 physical box of width and height 1 centered on each selected integer DETX,DETY pixel; validate the selected PIXEL set against the branch event before raytracing",
+    "raytrace_reuse": "A branch-specific IMAGE raytrace may be reused for all detector regions of that branch only when the exact Chandra image, exposure map, energy range, source coordinates, photon count, and seed match."
+  },
+  "chandra_image_protocol": {
+    "obsids": [3231, 15187],
+    "inputs": [
+      {"path": "data/raw/sigma_v19cy_a2319_development/chandra/3231/primary/acisf03231N004_evt2.fits.gz", "bytes": 7296527, "sha256": "bc3b0a48aacea62e98f0710fa87f335ff7181d5e93de5f31052d1b48b9241b33"},
+      {"path": "data/raw/sigma_v19cy_a2319_development/chandra/3231/primary/pcadf03231_002N001_asol1.fits.gz", "bytes": 3362980, "sha256": "386defde3e5bd2cc3578ca09f27e775f0ec501c16b7c2890e6f148fc73102990"},
+      {"path": "data/raw/sigma_v19cy_a2319_development/chandra/15187/primary/acisf15187N003_evt2.fits.gz", "bytes": 29871145, "sha256": "0aa90d83468dd936a02fc6f38c0f19a61a6aa915d7d73547cb83a59f87528043"},
+      {"path": "data/raw/sigma_v19cy_a2319_development/chandra/15187/primary/pcadf15187_000N001_asol1.fits.gz", "bytes": 17209438, "sha256": "ff255a87842dbed88ffc629f7c3c48296ae576a2163bb6b7dd785e3c2fe1d820"}
+    ],
+    "energy_band_keV": [0.5, 7.0],
+    "merge_method": "CIAO merge_obs exposure-corrected broad-band image on the native 0.492 arcsec sky grid",
+    "crop_center_ra_deg": 290.299,
+    "crop_center_dec_deg": 43.9345,
+    "crop_width_arcmin": 12.0,
+    "pixel_policy": "replace non-finite and negative values with zero; retain positive surface-brightness pixels without background subtraction or smoothing",
+    "acceptance": "celestial WCS present, both ObsIDs contribute positive exposure, dimensions cover exactly the frozen crop to pixel-rounding tolerance, and at least one positive finite source pixel"
+  },
+  "fit_protocol": {
+    "primary_model": "tbabs*bapec plus the separately responded additive empirical NXB model",
+    "primary_band_keV": [3.0, 9.5],
+    "statistic": "cstat joint Poisson likelihood; no background subtraction",
+    "atomdb": {"version": "3.0.9", "xspec_apecroot": "/home/henry/.local/share/sigmagravity-xmm/heasoft-6.36/heasoft/spectral/modelData/apec_v3.0.9"},
+    "abundance_table": "lodd",
+    "absorption_model": "tbabs",
+    "nh_1e22_cm2_fixed": 0.112,
+    "plasma_model": "bapec",
+    "parameter_bounds": {"kT_keV": [2.0, 20.0], "abundance_solar": [0.0, 2.0], "redshift": [0.045, 0.065], "velocity_dispersion_km_s": [0.0, 1000.0], "normalization": [0.0, 1000000.0]},
+    "pointing_linkage": "Tie kT, abundance, redshift, and velocity dispersion for the same P1 detector region across its two branches; keep branch source normalizations and NXB normalizations separate. P2 contains only 000102000 because 000103000 has no strictly bracketed gain interval.",
+    "bcg_redshift": 0.05458,
+    "heliocentric_correction_km_s": -12.42,
+    "reported_velocity_formula": "c*(z_fit-z_BCG)/(1+z_BCG) - 12.42 km/s; also report fitted redshift so comparison does not depend on this convention",
+    "uncertainty": "one-parameter delta-C=1 profile interval for redshift/velocity; record covariance and optimizer bounds",
+    "robustness_models": [
+      {"name": "narrow_fe_k", "model": "tbabs*bapec plus additive NXB", "band_keV": [6.2, 6.7], "linkage": "same as primary"},
+      {"name": "two_temperature_shared_velocity", "model": "tbabs*(bapec+bapec) plus additive NXB", "band_keV": [3.0, 9.5], "linkage": "two temperatures and normalizations; shared abundance, redshift, and velocity dispersion within detector region"}
+    ]
+  },
+  "published_no_ssm_benchmark": {
+    "claim": "diagnostic comparator rather than sealed validation truth because the paper combines 000102000 and excluded 000103000 and used HEASoft 6.34/XSPEC 12.12.0",
+    "regions": {
+      "a": {"velocity_km_s": -60.0, "minus_1sigma": 54.6, "plus_1sigma": 55.6},
+      "b": {"velocity_km_s": -76.3, "minus_1sigma": 39.6, "plus_1sigma": 40.5},
+      "d": {"velocity_km_s": 13.8, "minus_1sigma": 31.6, "plus_1sigma": 39.0},
+      "b_prime": {"velocity_km_s": -140.0, "minus_1sigma": 30.6, "plus_1sigma": 33.5},
+      "c_prime": {"velocity_km_s": 20.1, "minus_1sigma": 28.0, "plus_1sigma": 25.2},
+      "d_prime": {"velocity_km_s": -46.0, "minus_1sigma": 33.7, "plus_1sigma": 31.4},
+      "e_prime": {"velocity_km_s": 58.6, "minus_1sigma": 24.5, "plus_1sigma": 30.0}
+    },
+    "required_diagnostics": ["per-region signed residual", "combined-uncertainty z score", "weighted RMS", "Pearson and Spearman correlation", "sign agreement", "velocity-rank agreement"]
+  },
+  "terminal_gate": {
+    "required_branch_region_products": 10,
+    "require_exact_corrected_gti": true,
+    "require_exact_region_pixel_recovery": true,
+    "require_all_source_nxb_rmf_expmap_arf_commands_exit_zero": true,
+    "require_all_response_matrices_finite_nonnegative": true,
+    "require_all_seven_primary_fits_converged": true,
+    "require_no_parameter_at_hard_bound": true,
+    "maximum_primary_velocity_interval_halfwidth_km_s_for_at_least_five_regions": 200.0,
+    "minimum_regions_meeting_velocity_interval_gate": 5,
+    "robust_velocity_rule": "A region is robust when narrow-band and two-temperature velocities each lie within 150 km/s or the combined 2-sigma interval of the primary velocity.",
+    "minimum_robust_regions": 5,
+    "required_reports_even_on_failure": ["every spectrum and response hash", "every fit and uncertainty", "published-comparison diagnostics", "all failed commands or fit gates", "missing 000103 exposure limitation"],
+    "decision": "Only a pass authorizes constructing the signed A2319 gas-current development source. It does not validate Sigma gravity and does not authorize A3667 or A754 access."
+  },
+  "authorization": {
+    "read_A2319_development_energy_columns": true,
+    "generate_A2319_development_gti_spectra_nxb_and_responses": true,
+    "fit_A2319_development_spectra_and_velocities": true,
+    "construct_A2319_signed_gas_current_after_terminal_pass": true,
+    "access_A3667_validation": false,
+    "access_A754_holdout": false,
+    "open_lensing_halo_or_gravity_targets": false,
+    "change_gravity_formula_or_parameters": false,
+    "derive_or_select_action": false
+  },
+  "claim_boundary": [
+    "This is a development-only response and identifiability test for one time-odd baryonic observable, not a gravity-theory score.",
+    "The public NXB database, missing 000103 bracketed exposure, newer software/calibration, and absence of the paper's full five-by-seven SSM model limit exact reproduction.",
+    "No validation or holdout cluster, lensing target, halo target, gravity parameter, or action candidate may be opened or changed in this stage."
+  ],
+  "official_sources": {
+    "paper": "https://arxiv.org/html/2508.05067v3",
+    "resolve_analysis": "https://heasarc.gsfc.nasa.gov/docs/xrism/analysis/abc_guide/Resolve_Data_Analysis.html",
+    "resolve_nxb": "https://heasarc.gsfc.nasa.gov/docs/xrism/analysis/nxb/resolve_nxb_db.html",
+    "xaarfgen": "https://heasarc.gsfc.nasa.gov/lheasoft/help/xaarfgen.html",
+    "xaexpmap": "https://heasarc.gsfc.nasa.gov/docs/software/lheasoft/help/xaexpmap.html"
+  }
+}

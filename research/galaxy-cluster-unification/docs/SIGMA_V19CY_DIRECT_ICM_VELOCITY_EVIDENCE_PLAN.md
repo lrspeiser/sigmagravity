@@ -539,6 +539,33 @@ extension. For example, the second short `000101000` branch has event times
 GTIs before `rslnxbgen` or `xaexpmap`; using the copied GTI would incorrectly
 weight both the geomagnetic background and exposure.
 
+### Frozen response-aware spectral protocol
+
+Protocol `SIGMA-V19CY-A2319-RESPONSE-AWARE-SPECTRAL-1.0.0` was frozen before
+generating any corrected GTI, spectrum, NXB, RMF, exposure map, ARF, or
+response-aware velocity. It retains exactly the three strictly bracketed
+fragments and ten branch-region products. Each final GTI is the intersection
+of the parent GTI, the already-frozen branch interval, and the official source
+environment screen `T_SAA_SXS>0 && DYE_ELV>5 && CORTIME>6`.
+
+The source uses Hp events with the published rise-time, status, and pixel-27
+screens. RMF grade weights use all grades except Ls over 3--10 keV; the fitted
+RMF uses `whichrmf=L`, `resolist=0`, and the exact detector pixel list. The
+public NXB recipe uses `CORTIME` bins `6,8,10,12,99` and a 300-day window so
+the full pre-observation provisional database is available. A 0.5--7 keV,
+12-arcmin Chandra image from ObsIDs 3231 and 15187 supplies the extended-source
+brightness distribution. Exposure maps use 0.25-arcmin radial attitude bins
+and four azimuthal subdivisions because the final P2 interval contains a brief
+offset reaching 1.50 arcmin; the typical offset remains about 0.04 arcmin.
+
+The primary fit is unbinned 3--9.5 keV `tbabs*bapec` with AtomDB 3.0.9,
+Lodders abundances, fixed `NH=1.12e21 cm^-2`, C-stat, and a jointly fitted
+additive NXB model through the official diagonal response. Frozen robustness
+checks are a 6.2--6.7 keV fit and a two-temperature, shared-velocity fit. The
+published no-SSM detector velocities are diagnostics, not sealed validation
+truth: the paper includes the unavailable strictly bracketed 000103 exposure
+and used older HEASoft/XSPEC versions. A3667 and A754 remain sealed.
+
 ## The new observable source terms
 
 The signed projected gas current is
