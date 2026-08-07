@@ -1,0 +1,66 @@
+{
+  "protocol_version": "SIGMA-V19DT-UNMERGED-LIKELIHOOD-LOCALIZATION-1.0.0",
+  "status": "post_outcome_diagnostic_frozen_after_v19ds_failed_closed",
+  "purpose": "Localize every V19DS uncertainty failure in the frozen thermodynamic bin maps and test whether failure adjacency exceeds random placement before changing the measurement model. This is explicitly post-outcome diagnosis, not validation.",
+  "parents": {
+    "v19ds_report": {
+      "path": "results/sigma_v19ds_full_unmerged_regional_joint_likelihood/report.json",
+      "sha256": "0c60ea83892217fadb9a10548e36f57e83055a2b6127403f5c9687a20be1b874"
+    },
+    "bullet_binmap": {
+      "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/images/binmap.fits",
+      "sha256": "69a308cdc2a81f433d5f60fb66f78c1a91204ad95024886eaad541081821a0a3"
+    },
+    "abell_binmap": {
+      "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/images/binmap.fits",
+      "sha256": "2589a141ddfbd407494b14e0bbc0e6775b64260579988475a250f156a1821452"
+    },
+    "bullet_region_statistics": {
+      "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/region_statistics.csv",
+      "sha256": "3d42e5a544d915a5fb89c1a706a57fd9f5de726a8795fde8fde205ffaa88f1bc"
+    },
+    "abell_region_statistics": {
+      "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/region_statistics.csv",
+      "sha256": "8ceb7f7668a980daea08e7ba62967fc598ad627d286ab739bcfb12fe04c985c2"
+    }
+  },
+  "cluster_inputs": {
+    "BULLET": {
+      "binmap": {
+        "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/images/binmap.fits"
+      },
+      "region_statistics": {
+        "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/BULLET/regions/region_statistics.csv"
+      }
+    },
+    "ABELL2146": {
+      "binmap": {
+        "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/images/binmap.fits"
+      },
+      "region_statistics": {
+        "path": "results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/regions/region_statistics.csv"
+      }
+    }
+  },
+  "classification": {
+    "sherpa_confidence_maximum_reduced_statistic": 3.0,
+    "unresolved_definition": "V19DS uncertainty_state equals unresolved; do not redraw, omit or relabel a region"
+  },
+  "spatial_test": {
+    "adjacency": "shared horizontal or vertical binmap pixel edge",
+    "statistic": "fraction of adjacent region pairs having the same resolved/unresolved class",
+    "permutation_draws": 10000,
+    "seed": 190419,
+    "maximum_p_value_for_clustering": 0.01
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dt_unmerged_likelihood_localization.py",
+    "runner_sha256": "fbd2cf81378fd1af3ad3f6657ed26fa0f0a95f1d930735b8bc94d3a3379cb433",
+    "output": "results/sigma_v19dt_unmerged_likelihood_localization"
+  },
+  "claim_boundary": [
+    "V19DT is a post-outcome localization of a known measurement-model failure and cannot validate a thermodynamic source.",
+    "No spectrum is refit and no uncertainty safeguard, plasma model, threshold or region is changed.",
+    "No I4/I5, lensing, halo, action, galaxy, gravity, validation or holdout payload is opened."
+  ]
+}
