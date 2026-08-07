@@ -16,13 +16,14 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest source-measurement checkpoint is
+[`docs/SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md`](docs/SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md),
+following the response and band-localization result in
 [`docs/SIGMA_V19DI_V19DN_DIRECT_RESPONSE_AND_SOFT_SPECTRUM.md`](docs/SIGMA_V19DI_V19DN_DIRECT_RESPONSE_AND_SOFT_SPECTRUM.md).
-The direct response and deterministic FITS path now passes, but a frozen
-minimal two-temperature repair does not make the integrated Bullet spectrum
-adequate. A band-localization test finds the failure below roughly 2 keV while
-the 2--7 keV fit passes. Full regional thermodynamic production and the I4/I5
-source candidates remain sealed pending an observation-resolved soft-band
-audit; this is observation-model evidence, not a gravity-formula result.
+The Bullet soft-band failure is source dominated: scaled blank sky contributes
+only 2.037% of 0.5--2 keV counts, and its observation-level variation fails the
+frozen heterogeneity threshold. The next source stage is an unmerged-response
+joint-likelihood preflight, not another integrated plasma component. Full
+regional thermodynamic production and I4/I5 remain sealed.
 
 The current causal-assembly checkpoint is
 [`docs/SIGMA_V19H_SOURCE_MAP_GATE.md`](docs/SIGMA_V19H_SOURCE_MAP_GATE.md),

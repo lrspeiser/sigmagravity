@@ -1,0 +1,14 @@
+{
+  "protocol_version": "SIGMA-V19DO-OBSERVATION-SOFT-BACKGROUND-1.0.0",
+  "generated_utc": "2026-08-07T03:41:39.917340+00:00",
+  "config_sha256": "8362b430e5b7bf218d921f5b4a3cc47e6fdea656c3a7384e88aff3c82f140045",
+  "runner_sha256": "8db12ff74ac7128b8853ae7c3c1ffb59207fd4de7e2e804826cb86679f530976",
+  "status": "observation_resolved_soft_background_audit_execution_failed",
+  "execution_exception": "RuntimeError: V19DO BACKSCAL mismatch: BULLET_bin25_obs3184_ccd3",
+  "aggregate_pass": false,
+  "joint_likelihood_or_full_regional_successor_authorized": false,
+  "additional_plasma_component_admitted": false,
+  "thermal_stress_or_baroclinicity_constructed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

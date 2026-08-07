@@ -1,0 +1,35 @@
+{
+  "protocol_version": "SIGMA-V19DO2-BACKSCAL-RATIO-1.0.0",
+  "freeze_state": "frozen_before_execution",
+  "purpose": "Repeat V19DO after removing only its invalid assertion that source and blank-sky BACKSCAL must be equal; retain the physically correct full scaling ratio and every frozen scientific choice.",
+  "parents": {
+    "v19do_config": {
+      "path": "configs/sigma_v19do_observation_resolved_soft_background_audit.json",
+      "sha256": "8362b430e5b7bf218d921f5b4a3cc47e6fdea656c3a7384e88aff3c82f140045"
+    },
+    "v19do_runner": {
+      "path": "scripts/run_sigma_v19do_observation_resolved_soft_background_audit.py",
+      "sha256": "8db12ff74ac7128b8853ae7c3c1ffb59207fd4de7e2e804826cb86679f530976"
+    },
+    "v19do_report": {
+      "path": "results/sigma_v19do_observation_resolved_soft_background_audit/report.json",
+      "sha256": "efb1e4083e607895e02cd395c8416cb5351abae35e475add352d55a8bfea00db"
+    }
+  },
+  "remediation": {
+    "invalid_assertion": "source_BACKSCAL/background_BACKSCAL must equal one within 1e-12",
+    "retained_scale": "source_EXPOSURE/background_EXPOSURE * source_BACKSCAL/background_BACKSCAL * source_AREASCAL/background_AREASCAL",
+    "only_allowed_change": "Disable the invalid equality assertion; preserve every V19DO input, band, threshold, count, grouping, interpretation and authorization boundary.",
+    "scientific_interpretation_of_v19do": "discarded_before_terminal_scientific_output"
+  },
+  "claim_boundary": [
+    "V19DO2 is an implementation remediation, not a new background model or plasma model.",
+    "Differing source and blank-sky BACKSCAL values are retained in the effective scale rather than forced equal.",
+    "No additional plasma component, calibration systematic, source invariant or gravity parameter is admitted.",
+    "No I4, I5, lensing, halo, action, gravity or holdout payload is opened."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19do2_backscal_ratio_remediation.py",
+    "runner_sha256": "8324ef314b10951b17e0fb52cdfd1a827b97866bf9dd524d67fecc0d83bd664e"
+  }
+}

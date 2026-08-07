@@ -1,0 +1,62 @@
+{
+  "protocol_version": "SIGMA-V19DO-OBSERVATION-SOFT-BACKGROUND-1.0.0",
+  "freeze_state": "frozen_before_execution",
+  "purpose": "Determine whether the V19DN Bullet soft-spectrum failure is background dominated or heterogeneous across observation, detector and epoch before fitting another plasma model or constructing a source invariant.",
+  "parents": {
+    "v19dn_config": {
+      "path": "configs/sigma_v19dn_integrated_residual_localization.json",
+      "sha256": "9d5a78a0d659ce620f683bee4ebe0a6aaa896843f5381c9a93a2a8a08593c5c7"
+    },
+    "v19dn_runner": {
+      "path": "scripts/run_sigma_v19dn_integrated_residual_localization.py",
+      "sha256": "2f50be8f488afc25de68d299586759e061e5cf089c7b0651c55952d87513eb07"
+    },
+    "v19dn_report": {
+      "path": "results/sigma_v19dn_integrated_residual_localization/report.json",
+      "sha256": "6253cd1f8297af58c96827344ca430884bf5cb30a1db446bbe50e367ba7d74c5"
+    }
+  },
+  "inputs": {
+    "validated_cell_index": {
+      "path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/validated_cell_index.csv",
+      "sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+    },
+    "unified_product_index": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+      "sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4"
+    }
+  },
+  "bands": [
+    {"id": "full_0p5_7", "minimum_keV": 0.5, "maximum_keV": 7.0},
+    {"id": "soft_0p5_2", "minimum_keV": 0.5, "maximum_keV": 2.0},
+    {"id": "transition_1_2", "minimum_keV": 1.0, "maximum_keV": 2.0},
+    {"id": "hard_2_7", "minimum_keV": 2.0, "maximum_keV": 7.0}
+  ],
+  "interpretation_thresholds": {
+    "background_dominated_fraction": 0.5,
+    "source_dominated_fraction": 0.25,
+    "strong_observation_fraction_span": 0.25
+  },
+  "gates": {
+    "expected_cells": 5082,
+    "scaling_relative_tolerance": 1e-12,
+    "require_identical_ebounds_across_every_observation_ccd_control": true,
+    "require_exact_reconstruction_of_v19dl_integrated_source_counts": true
+  },
+  "decision": {
+    "background_dominated": "Freeze an observation-resolved blank-sky and soft-calibration likelihood before any regional temperature production.",
+    "heterogeneous": "Freeze a joint likelihood retaining detector and observation/epoch controls with no per-observation gravity parameter.",
+    "source_dominated_and_stable": "Test spatially resolved plasma variation with unmerged responses; do not add a global component to the integrated spectrum.",
+    "no_authorization": "V19DO is diagnostic and cannot authorize a plasma model, full regional run, I4, I5, lensing or action."
+  },
+  "claim_boundary": [
+    "Counts and scaling metadata are already-opened source-only products; no lensing or halo outcome enters the audit.",
+    "The energy bands and interpretation thresholds are frozen before per-observation results are opened.",
+    "Observation, detector and epoch are instrumental coordinates, not galaxy/cluster gravity labels.",
+    "No extra plasma component, calibration systematic, source invariant or gravity parameter is admitted."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19do_observation_resolved_soft_background_audit.py",
+    "runner_sha256": "8db12ff74ac7128b8853ae7c3c1ffb59207fd4de7e2e804826cb86679f530976"
+  }
+}

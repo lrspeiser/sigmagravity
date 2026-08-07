@@ -1,5 +1,23 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DO--V19DO2 soft-background result
+
+The observation-resolved audit covers all 5,082 source/background cells and
+reconstructs the integrated Sherpa-band counts exactly. V19DO is discarded
+because it incorrectly required source and blank-sky `BACKSCAL` equality.
+V19DO2 removes only that assertion while retaining the correct exposure,
+`BACKSCAL`, and `AREASCAL` ratio and all frozen scientific choices.
+
+The Bullet 0.5--2 keV scaled background is only 8,274.88 of 406,157 source
+counts, or 2.037%; Abell 2146 is 1.892%. Bullet's observation/CCD soft fraction
+spans 1.560--11.096%, below the frozen 25-point heterogeneity gate, with the
+largest values confined to tiny edge samples. The failing Bullet soft band is
+therefore source dominated, while its passing hard band has a larger 7.119%
+background fraction. Blank-sky amplitude is not the explanation. The next
+authorized design task is an unmerged-response joint-likelihood preflight on
+the two registered regions. See
+[`SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md`](SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md).
+
 ## 2026-08-06 Sigma V19DI--V19DN direct-response and soft-spectrum result
 
 The direct OGIP writer and deterministic FITS canonicalizer now pass their

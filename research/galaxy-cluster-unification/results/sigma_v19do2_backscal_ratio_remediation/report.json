@@ -1,0 +1,1491 @@
+{
+  "protocol_version": "SIGMA-V19DO2-BACKSCAL-RATIO-1.0.0",
+  "generated_utc": "2026-08-07T03:44:12.113951+00:00",
+  "config_sha256": "0f8900644c4e4397c2a46dae9df825d8e1f5d055ce9ccb9627ea178c327eb440",
+  "runner_sha256": "8324ef314b10951b17e0fb52cdfd1a827b97866bf9dd524d67fecc0d83bd664e",
+  "status": "backscal_ratio_observation_soft_background_audit_completed",
+  "aggregate_pass": true,
+  "cell_audit": {
+    "path": "results/sigma_v19do2_backscal_ratio_remediation/cell_soft_background_audit.csv",
+    "rows": 5082,
+    "bytes": 1730771,
+    "sha256": "67caf88aa7cf613db1bccc5ab6c4fa3858d7e8760e7aba38b4a21a1efe277c90"
+  },
+  "response_ebounds_controls": [
+    {
+      "obsid": "10464",
+      "ccd_id": "7",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "10888",
+      "ccd_id": "7",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "12245",
+      "ccd_id": "2",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "12246",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "12247",
+      "ccd_id": "1",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "13020",
+      "ccd_id": "0",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "13021",
+      "ccd_id": "0",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "13023",
+      "ccd_id": "1",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "13120",
+      "ccd_id": "2",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "13138",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "3184",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "4984",
+      "ccd_id": "1",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "4984",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "4985",
+      "ccd_id": "2",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "4985",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "4986",
+      "ccd_id": "0",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "4986",
+      "ccd_id": "1",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5355",
+      "ccd_id": "2",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5355",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5356",
+      "ccd_id": "2",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5356",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5357",
+      "ccd_id": "0",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5357",
+      "ccd_id": "1",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5357",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5358",
+      "ccd_id": "0",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5358",
+      "ccd_id": "1",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5358",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5361",
+      "ccd_id": "1",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "5361",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    },
+    {
+      "obsid": "554",
+      "ccd_id": "3",
+      "sha256": "67c06b81b1995edfd1def8f3e0622b6d753923b619ca5468180d3b19f12fd70b"
+    }
+  ],
+  "observation_ccd_summary": [
+    {
+      "cluster": "ABELL2146",
+      "obsid": 10464,
+      "ccd_id": 7,
+      "cells": 128,
+      "date_obs_min": "2009-04-30T16:10:10",
+      "date_obs_max": "2009-04-30T16:10:10",
+      "detnam": [
+        "ACIS-35678"
+      ],
+      "full_0p5_7": {
+        "source_counts": 30352.0,
+        "scaled_background_counts": 0.0,
+        "net_counts": 30352.0,
+        "background_fraction_of_source": 0.0,
+        "net_signal_to_noise": 174.21825392306056
+      },
+      "soft_0p5_2": {
+        "source_counts": 21394.0,
+        "scaled_background_counts": 0.0,
+        "net_counts": 21394.0,
+        "background_fraction_of_source": 0.0,
+        "net_signal_to_noise": 146.2668793678186
+      },
+      "transition_1_2": {
+        "source_counts": 13737.0,
+        "scaled_background_counts": 0.0,
+        "net_counts": 13737.0,
+        "background_fraction_of_source": 0.0,
+        "net_signal_to_noise": 117.20494870098277
+      },
+      "hard_2_7": {
+        "source_counts": 9062.0,
+        "scaled_background_counts": 0.0,
+        "net_counts": 9062.0,
+        "background_fraction_of_source": 0.0,
+        "net_signal_to_noise": 95.1945376584182
+      },
+      "net_soft_to_hard_ratio": 2.360847495034209
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 10888,
+      "ccd_id": 7,
+      "cells": 128,
+      "date_obs_min": "2009-04-29T04:56:24",
+      "date_obs_max": "2009-04-29T04:56:24",
+      "detnam": [
+        "ACIS-35678"
+      ],
+      "full_0p5_7": {
+        "source_counts": 5843.0,
+        "scaled_background_counts": 0.0,
+        "net_counts": 5843.0,
+        "background_fraction_of_source": 0.0,
+        "net_signal_to_noise": 76.4395185751454
+      },
+      "soft_0p5_2": {
+        "source_counts": 4107.0,
+        "scaled_background_counts": 0.0,
+        "net_counts": 4107.0,
+        "background_fraction_of_source": 0.0,
+        "net_signal_to_noise": 64.08587988004845
+      },
+      "transition_1_2": {
+        "source_counts": 2627.0,
+        "scaled_background_counts": 0.0,
+        "net_counts": 2627.0,
+        "background_fraction_of_source": 0.0,
+        "net_signal_to_noise": 51.254268114958
+      },
+      "hard_2_7": {
+        "source_counts": 1753.0,
+        "scaled_background_counts": 0.0,
+        "net_counts": 1753.0,
+        "background_fraction_of_source": 0.0,
+        "net_signal_to_noise": 41.86884283091665
+      },
+      "net_soft_to_hard_ratio": 2.342840844266971
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 12245,
+      "ccd_id": 2,
+      "cells": 128,
+      "date_obs_min": "2010-09-08T12:51:15",
+      "date_obs_max": "2010-09-08T12:51:15",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 24945.0,
+        "scaled_background_counts": 1178.3928785999972,
+        "net_counts": 23766.607121400004,
+        "background_fraction_of_source": 0.047239642357185696,
+        "net_signal_to_noise": 150.0706877718649
+      },
+      "soft_0p5_2": {
+        "source_counts": 15852.0,
+        "scaled_background_counts": 351.7883241299991,
+        "net_counts": 15500.211675870001,
+        "background_fraction_of_source": 0.022192046690007516,
+        "net_signal_to_noise": 122.95343612052524
+      },
+      "transition_1_2": {
+        "source_counts": 12353.0,
+        "scaled_background_counts": 235.5632730899994,
+        "net_counts": 12117.43672691,
+        "background_fraction_of_source": 0.019069317015299878,
+        "net_signal_to_noise": 108.90494831233781
+      },
+      "hard_2_7": {
+        "source_counts": 9185.0,
+        "scaled_background_counts": 828.9106070699979,
+        "net_counts": 8356.089392930002,
+        "background_fraction_of_source": 0.09024611944148045,
+        "net_signal_to_noise": 86.73924179670394
+      },
+      "net_soft_to_hard_ratio": 1.8549600114360392
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 12246,
+      "ccd_id": 3,
+      "cells": 128,
+      "date_obs_min": "2010-10-04T16:28:37",
+      "date_obs_max": "2010-10-04T16:28:37",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 25641.0,
+        "scaled_background_counts": 1198.9701208800047,
+        "net_counts": 24442.029879119997,
+        "background_fraction_of_source": 0.04675988147420166,
+        "net_signal_to_noise": 152.2280513331825
+      },
+      "soft_0p5_2": {
+        "source_counts": 16445.0,
+        "scaled_background_counts": 380.8575238800015,
+        "net_counts": 16064.142476119998,
+        "background_fraction_of_source": 0.023159472415931987,
+        "net_signal_to_noise": 125.10014193507301
+      },
+      "transition_1_2": {
+        "source_counts": 12715.0,
+        "scaled_background_counts": 255.529636680001,
+        "net_counts": 12459.470363319999,
+        "background_fraction_of_source": 0.02009670756429422,
+        "net_signal_to_noise": 110.36606987801525
+      },
+      "hard_2_7": {
+        "source_counts": 9284.0,
+        "scaled_background_counts": 821.2457941800033,
+        "net_counts": 8462.754205819996,
+        "background_fraction_of_source": 0.08845818549978493,
+        "net_signal_to_noise": 87.3829077743668
+      },
+      "net_soft_to_hard_ratio": 1.898216831710932
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 12247,
+      "ccd_id": 1,
+      "cells": 128,
+      "date_obs_min": "2010-08-20T18:42:06",
+      "date_obs_max": "2010-08-20T18:42:06",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 32436.0,
+        "scaled_background_counts": 1566.6731613999943,
+        "net_counts": 30869.326838600005,
+        "background_fraction_of_source": 0.048300442761129436,
+        "net_signal_to_noise": 170.76325645648762
+      },
+      "soft_0p5_2": {
+        "source_counts": 20658.0,
+        "scaled_background_counts": 474.91378099999827,
+        "net_counts": 20183.086219,
+        "background_fraction_of_source": 0.022989339771517004,
+        "net_signal_to_noise": 140.17523885029462
+      },
+      "transition_1_2": {
+        "source_counts": 15871.0,
+        "scaled_background_counts": 319.1916439999988,
+        "net_counts": 15551.808356000001,
+        "background_fraction_of_source": 0.020111627748724013,
+        "net_signal_to_noise": 123.25459480348162
+      },
+      "hard_2_7": {
+        "source_counts": 11896.0,
+        "scaled_background_counts": 1096.097907599996,
+        "net_counts": 10799.902092400003,
+        "background_fraction_of_source": 0.09214003930732986,
+        "net_signal_to_noise": 98.31982162507956
+      },
+      "net_soft_to_hard_ratio": 1.8688212213704267
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13020,
+      "ccd_id": 0,
+      "cells": 128,
+      "date_obs_min": "2010-08-10T04:52:42",
+      "date_obs_max": "2010-08-10T04:52:42",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 20750.0,
+        "scaled_background_counts": 992.6171955000026,
+        "net_counts": 19757.382804499997,
+        "background_fraction_of_source": 0.047836973277108556,
+        "net_signal_to_noise": 136.84115712993088
+      },
+      "soft_0p5_2": {
+        "source_counts": 13138.0,
+        "scaled_background_counts": 290.42526529800074,
+        "net_counts": 12847.574734701999,
+        "background_fraction_of_source": 0.0221057440476481,
+        "net_signal_to_noise": 111.96754755713441
+      },
+      "transition_1_2": {
+        "source_counts": 10124.0,
+        "scaled_background_counts": 199.5886868220005,
+        "net_counts": 9924.411313178,
+        "background_fraction_of_source": 0.019714409998222097,
+        "net_signal_to_noise": 98.5404437980274
+      },
+      "hard_2_7": {
+        "source_counts": 7684.0,
+        "scaled_background_counts": 704.4192663480018,
+        "net_counts": 6979.580733651998,
+        "background_fraction_of_source": 0.09167351201821991,
+        "net_signal_to_noise": 79.27137474270526
+      },
+      "net_soft_to_hard_ratio": 1.8407373200452442
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13021,
+      "ccd_id": 0,
+      "cells": 123,
+      "date_obs_min": "2010-08-12T20:10:46",
+      "date_obs_max": "2010-08-12T20:10:46",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 22678.0,
+        "scaled_background_counts": 1141.3697773800018,
+        "net_counts": 21536.63022262,
+        "background_fraction_of_source": 0.05032938430990395,
+        "net_signal_to_noise": 142.60885872361305
+      },
+      "soft_0p5_2": {
+        "source_counts": 14503.0,
+        "scaled_background_counts": 342.23051515000054,
+        "net_counts": 14160.76948485,
+        "background_fraction_of_source": 0.02359722230917745,
+        "net_signal_to_noise": 117.43049732319746
+      },
+      "transition_1_2": {
+        "source_counts": 11204.0,
+        "scaled_background_counts": 233.07758643000037,
+        "net_counts": 10970.922413569999,
+        "background_fraction_of_source": 0.02080306912084973,
+        "net_signal_to_noise": 103.52561289923834
+      },
+      "hard_2_7": {
+        "source_counts": 8257.0,
+        "scaled_background_counts": 802.0710557700013,
+        "net_counts": 7454.928944229999,
+        "background_fraction_of_source": 0.09713831364539195,
+        "net_signal_to_noise": 81.59560906974906
+      },
+      "net_soft_to_hard_ratio": 1.89951770040816
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13023,
+      "ccd_id": 1,
+      "cells": 128,
+      "date_obs_min": "2010-08-19T12:27:07",
+      "date_obs_max": "2010-08-19T12:27:07",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 15107.0,
+        "scaled_background_counts": 670.2931739939999,
+        "net_counts": 14436.706826006,
+        "background_fraction_of_source": 0.04436970768478188,
+        "net_signal_to_noise": 117.2875107831605
+      },
+      "soft_0p5_2": {
+        "source_counts": 9807.0,
+        "scaled_background_counts": 202.63312759199997,
+        "net_counts": 9604.366872408,
+        "background_fraction_of_source": 0.020662091117773014,
+        "net_signal_to_noise": 96.91886703013068
+      },
+      "transition_1_2": {
+        "source_counts": 7472.0,
+        "scaled_background_counts": 136.26230265999996,
+        "net_counts": 7335.73769734,
+        "background_fraction_of_source": 0.018236389542291214,
+        "net_signal_to_noise": 84.81395894788874
+      },
+      "hard_2_7": {
+        "source_counts": 5352.0,
+        "scaled_background_counts": 469.3551755259999,
+        "net_counts": 4882.644824474,
+        "background_fraction_of_source": 0.0876971553673393,
+        "net_signal_to_noise": 66.55168457117358
+      },
+      "net_soft_to_hard_ratio": 1.967041883584613
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13120,
+      "ccd_id": 2,
+      "cells": 123,
+      "date_obs_min": "2010-09-10T22:11:02",
+      "date_obs_max": "2010-09-10T22:11:02",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 23165.0,
+        "scaled_background_counts": 1163.8447046399951,
+        "net_counts": 22001.155295360004,
+        "background_fraction_of_source": 0.050241515417224054,
+        "net_signal_to_noise": 144.1335438537545
+      },
+      "soft_0p5_2": {
+        "source_counts": 14730.0,
+        "scaled_background_counts": 341.45953087999857,
+        "net_counts": 14388.540469120002,
+        "background_fraction_of_source": 0.023181230881194743,
+        "net_signal_to_noise": 118.3943903957419
+      },
+      "transition_1_2": {
+        "source_counts": 11349.0,
+        "scaled_background_counts": 228.84064543999904,
+        "net_counts": 11120.15935456,
+        "background_fraction_of_source": 0.02016394796369716,
+        "net_signal_to_noise": 104.26148970269696
+      },
+      "hard_2_7": {
+        "source_counts": 8519.0,
+        "scaled_background_counts": 824.9420524799965,
+        "net_counts": 7694.057947520004,
+        "background_fraction_of_source": 0.09683555023829046,
+        "net_signal_to_noise": 82.89549553332486
+      },
+      "net_soft_to_hard_ratio": 1.8700847546589905
+    },
+    {
+      "cluster": "ABELL2146",
+      "obsid": 13138,
+      "ccd_id": 3,
+      "cells": 128,
+      "date_obs_min": "2010-10-10T12:41:54",
+      "date_obs_max": "2010-10-10T12:41:54",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 26793.0,
+        "scaled_background_counts": 1292.385086000006,
+        "net_counts": 25500.614913999994,
+        "background_fraction_of_source": 0.048235923039600115,
+        "net_signal_to_noise": 155.32487161822795
+      },
+      "soft_0p5_2": {
+        "source_counts": 17111.0,
+        "scaled_background_counts": 410.8515822000019,
+        "net_counts": 16700.1484178,
+        "background_fraction_of_source": 0.02401096266729016,
+        "net_signal_to_noise": 127.47794578353545
+      },
+      "transition_1_2": {
+        "source_counts": 13306.0,
+        "scaled_background_counts": 277.5082894000013,
+        "net_counts": 13028.4917106,
+        "background_fraction_of_source": 0.02085587625131529,
+        "net_signal_to_noise": 112.79965872791531
+      },
+      "hard_2_7": {
+        "source_counts": 9791.0,
+        "scaled_background_counts": 884.6431888000042,
+        "net_counts": 8906.356811199996,
+        "background_fraction_of_source": 0.09035269010315639,
+        "net_signal_to_noise": 89.50755956415672
+      },
+      "net_soft_to_hard_ratio": 1.8750818962023945
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 554,
+      "ccd_id": 3,
+      "cells": 329,
+      "date_obs_min": "2000-10-16T10:34:32",
+      "date_obs_max": "2000-10-16T10:34:32",
+      "detnam": [
+        "ACIS-012367"
+      ],
+      "full_0p5_7": {
+        "source_counts": 28259.0,
+        "scaled_background_counts": 1355.3898485679981,
+        "net_counts": 26903.610151432003,
+        "background_fraction_of_source": 0.04796312143274702,
+        "net_signal_to_noise": 159.807952636191
+      },
+      "soft_0p5_2": {
+        "source_counts": 17738.0,
+        "scaled_background_counts": 506.4201088799993,
+        "net_counts": 17231.57989112,
+        "background_fraction_of_source": 0.02855001177584842,
+        "net_signal_to_noise": 129.26926915428723
+      },
+      "transition_1_2": {
+        "source_counts": 13259.0,
+        "scaled_background_counts": 268.0796701519996,
+        "net_counts": 12990.920329848,
+        "background_fraction_of_source": 0.020218694483143496,
+        "net_signal_to_noise": 112.75015332187012
+      },
+      "hard_2_7": {
+        "source_counts": 10616.0,
+        "scaled_background_counts": 852.8090257119989,
+        "net_counts": 9763.190974288002,
+        "background_fraction_of_source": 0.08033242518010539,
+        "net_signal_to_noise": 94.52591059085196
+      },
+      "net_soft_to_hard_ratio": 1.7649536853781194
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 3184,
+      "ccd_id": 3,
+      "cells": 366,
+      "date_obs_min": "2002-07-12T05:06:40",
+      "date_obs_max": "2002-07-12T05:06:40",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 102083.0,
+        "scaled_background_counts": 3545.195484029887,
+        "net_counts": 98537.80451597011,
+        "background_fraction_of_source": 0.03472855895721998,
+        "net_signal_to_noise": 308.13209882302635
+      },
+      "soft_0p5_2": {
+        "source_counts": 63545.0,
+        "scaled_background_counts": 1092.9116611799652,
+        "net_counts": 62452.08833882004,
+        "background_fraction_of_source": 0.01719901898150862,
+        "net_signal_to_noise": 247.6357971897511
+      },
+      "transition_1_2": {
+        "source_counts": 48213.0,
+        "scaled_background_counts": 696.1138511249778,
+        "net_counts": 47516.88614887502,
+        "background_fraction_of_source": 0.014438301933606658,
+        "net_signal_to_noise": 216.32364403240683
+      },
+      "hard_2_7": {
+        "source_counts": 38894.0,
+        "scaled_background_counts": 2461.2726028199218,
+        "net_counts": 36432.727397180075,
+        "background_fraction_of_source": 0.06328154992595057,
+        "net_signal_to_noise": 184.434286700095
+      },
+      "net_soft_to_hard_ratio": 1.7141754900198298
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 4984,
+      "ccd_id": 1,
+      "cells": 5,
+      "date_obs_min": "2004-08-19T17:27:25",
+      "date_obs_max": "2004-08-19T17:27:25",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 538.0,
+        "scaled_background_counts": 104.83034399999995,
+        "net_counts": 433.16965600000003,
+        "background_fraction_of_source": 0.19485194052044602,
+        "net_signal_to_noise": 18.57986977247982
+      },
+      "soft_0p5_2": {
+        "source_counts": 313.0,
+        "scaled_background_counts": 34.450294499999984,
+        "net_counts": 278.5497055,
+        "background_fraction_of_source": 0.11006483865814691,
+        "net_signal_to_noise": 15.698976991916412
+      },
+      "transition_1_2": {
+        "source_counts": 250.0,
+        "scaled_background_counts": 21.240825749999992,
+        "net_counts": 228.75917425,
+        "background_fraction_of_source": 0.08496330299999996,
+        "net_signal_to_noise": 14.43563400642003
+      },
+      "hard_2_7": {
+        "source_counts": 225.0,
+        "scaled_background_counts": 70.80275249999997,
+        "net_counts": 154.19724750000003,
+        "background_fraction_of_source": 0.3146788999999999,
+        "net_signal_to_noise": 10.195406592511855
+      },
+      "net_soft_to_hard_ratio": 1.8064505690998145
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 4984,
+      "ccd_id": 3,
+      "cells": 365,
+      "date_obs_min": "2004-08-19T17:27:25",
+      "date_obs_max": "2004-08-19T17:27:25",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 92754.0,
+        "scaled_background_counts": 3605.9933545919835,
+        "net_counts": 89148.00664540802,
+        "background_fraction_of_source": 0.03887695791655329,
+        "net_signal_to_noise": 292.4058912527431
+      },
+      "soft_0p5_2": {
+        "source_counts": 56778.0,
+        "scaled_background_counts": 1113.260058809995,
+        "net_counts": 55664.739941190004,
+        "background_fraction_of_source": 0.01960724327750176,
+        "net_signal_to_noise": 233.4847000846808
+      },
+      "transition_1_2": {
+        "source_counts": 43822.0,
+        "scaled_background_counts": 704.2751577719968,
+        "net_counts": 43117.724842228,
+        "background_fraction_of_source": 0.016071269174661056,
+        "net_signal_to_noise": 205.88267206061263
+      },
+      "hard_2_7": {
+        "source_counts": 36317.0,
+        "scaled_background_counts": 2501.7722378099884,
+        "net_counts": 33815.227762190014,
+        "background_fraction_of_source": 0.06888708422529362,
+        "net_signal_to_noise": 177.1105117793499
+      },
+      "net_soft_to_hard_ratio": 1.6461441671385308
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 4985,
+      "ccd_id": 2,
+      "cells": 332,
+      "date_obs_min": "2004-08-23T23:51:21",
+      "date_obs_max": "2004-08-23T23:51:21",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 24598.0,
+        "scaled_background_counts": 807.2375591700016,
+        "net_counts": 23790.76244083,
+        "background_fraction_of_source": 0.032817202990893635,
+        "net_signal_to_noise": 151.64892920597813
+      },
+      "soft_0p5_2": {
+        "source_counts": 15240.0,
+        "scaled_background_counts": 250.8269891400005,
+        "net_counts": 14989.173010859999,
+        "background_fraction_of_source": 0.01645846385433074,
+        "net_signal_to_noise": 121.40188859177941
+      },
+      "transition_1_2": {
+        "source_counts": 11741.0,
+        "scaled_background_counts": 156.8797253100003,
+        "net_counts": 11584.12027469,
+        "background_fraction_of_source": 0.01336170047781282,
+        "net_signal_to_noise": 106.89613633891025
+      },
+      "hard_2_7": {
+        "source_counts": 9441.0,
+        "scaled_background_counts": 558.5673945600012,
+        "net_counts": 8882.432605439999,
+        "background_fraction_of_source": 0.05916400747378468,
+        "net_signal_to_noise": 91.37096822856446
+      },
+      "net_soft_to_hard_ratio": 1.687507654342343
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 4985,
+      "ccd_id": 3,
+      "cells": 56,
+      "date_obs_min": "2004-08-23T23:51:21",
+      "date_obs_max": "2004-08-23T23:51:21",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 3367.0,
+        "scaled_background_counts": 341.01286212299874,
+        "net_counts": 3025.9871378770013,
+        "background_fraction_of_source": 0.10128092133145196,
+        "net_signal_to_noise": 52.10488290892041
+      },
+      "soft_0p5_2": {
+        "source_counts": 2009.0,
+        "scaled_background_counts": 105.94736548199961,
+        "net_counts": 1903.0526345180003,
+        "background_fraction_of_source": 0.05273636908013918,
+        "net_signal_to_noise": 42.439436620194115
+      },
+      "transition_1_2": {
+        "source_counts": 1560.0,
+        "scaled_background_counts": 66.52198192199975,
+        "net_counts": 1493.4780180780003,
+        "background_fraction_of_source": 0.042642296103846,
+        "net_signal_to_noise": 37.799138514867714
+      },
+      "hard_2_7": {
+        "source_counts": 1365.0,
+        "scaled_background_counts": 235.85066317799914,
+        "net_counts": 1129.1493368220008,
+        "background_fraction_of_source": 0.1727843686285708,
+        "net_signal_to_noise": 30.51821793565632
+      },
+      "net_soft_to_hard_ratio": 1.6853861331346622
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 4986,
+      "ccd_id": 0,
+      "cells": 246,
+      "date_obs_min": "2004-08-25T00:53:27",
+      "date_obs_max": "2004-08-25T00:53:27",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 29050.0,
+        "scaled_background_counts": 934.6798609979988,
+        "net_counts": 28115.320139002,
+        "background_fraction_of_source": 0.032174866127297724,
+        "net_signal_to_noise": 164.88084098919722
+      },
+      "soft_0p5_2": {
+        "source_counts": 18038.0,
+        "scaled_background_counts": 283.08722239199966,
+        "net_counts": 17754.912777608,
+        "background_fraction_of_source": 0.015693936267435395,
+        "net_signal_to_noise": 132.1681730134734
+      },
+      "transition_1_2": {
+        "source_counts": 14007.0,
+        "scaled_background_counts": 179.44686197099978,
+        "net_counts": 13827.553138029,
+        "background_fraction_of_source": 0.012811227384236437,
+        "net_signal_to_noise": 116.81354557928653
+      },
+      "hard_2_7": {
+        "source_counts": 11113.0,
+        "scaled_background_counts": 653.9097429929992,
+        "net_counts": 10459.090257007001,
+        "background_fraction_of_source": 0.05884187375083229,
+        "net_signal_to_noise": 99.1318130265907
+      },
+      "net_soft_to_hard_ratio": 1.6975580419829734
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 4986,
+      "ccd_id": 1,
+      "cells": 158,
+      "date_obs_min": "2004-08-25T00:53:27",
+      "date_obs_max": "2004-08-25T00:53:27",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 17444.0,
+        "scaled_background_counts": 973.4749219580025,
+        "net_counts": 16470.525078042,
+        "background_fraction_of_source": 0.05580571669101138,
+        "net_signal_to_noise": 124.61017500796673
+      },
+      "soft_0p5_2": {
+        "source_counts": 10494.0,
+        "scaled_background_counts": 303.1127034320008,
+        "net_counts": 10190.887296567998,
+        "background_fraction_of_source": 0.028884381878406782,
+        "net_signal_to_noise": 99.44206540466101
+      },
+      "transition_1_2": {
+        "source_counts": 8099.0,
+        "scaled_background_counts": 189.5410846560005,
+        "net_counts": 7909.458915343999,
+        "background_fraction_of_source": 0.023403023170267996,
+        "net_signal_to_noise": 87.8602117343403
+      },
+      "hard_2_7": {
+        "source_counts": 7003.0,
+        "scaled_background_counts": 673.3135502940017,
+        "net_counts": 6329.686449705998,
+        "background_fraction_of_source": 0.09614644442296184,
+        "net_signal_to_noise": 75.53884633372606
+      },
+      "net_soft_to_hard_ratio": 1.6100145524651297
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5355,
+      "ccd_id": 2,
+      "cells": 326,
+      "date_obs_min": "2004-08-10T16:16:40",
+      "date_obs_max": "2004-08-10T16:16:40",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 23201.0,
+        "scaled_background_counts": 758.590519085998,
+        "net_counts": 22442.409480914,
+        "background_fraction_of_source": 0.032696457871901986,
+        "net_signal_to_noise": 147.29920783145724
+      },
+      "soft_0p5_2": {
+        "source_counts": 14435.0,
+        "scaled_background_counts": 234.2564563139994,
+        "net_counts": 14200.743543686001,
+        "background_fraction_of_source": 0.016228365522272213,
+        "net_signal_to_noise": 118.1803433395414
+      },
+      "transition_1_2": {
+        "source_counts": 11083.0,
+        "scaled_background_counts": 147.0685150259996,
+        "net_counts": 10935.931484974,
+        "background_fraction_of_source": 0.013269738791482414,
+        "net_signal_to_noise": 103.86761093572181
+      },
+      "hard_2_7": {
+        "source_counts": 8853.0,
+        "scaled_background_counts": 526.4208347399987,
+        "net_counts": 8326.579165260002,
+        "background_fraction_of_source": 0.059462423442900564,
+        "net_signal_to_noise": 88.45267685651464
+      },
+      "net_soft_to_hard_ratio": 1.7054715101892117
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5355,
+      "ccd_id": 3,
+      "cells": 61,
+      "date_obs_min": "2004-08-10T16:16:40",
+      "date_obs_max": "2004-08-10T16:16:40",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 3922.0,
+        "scaled_background_counts": 371.8427707369987,
+        "net_counts": 3550.157229263001,
+        "background_fraction_of_source": 0.09480947749541017,
+        "net_signal_to_noise": 56.642801014185
+      },
+      "soft_0p5_2": {
+        "source_counts": 2342.0,
+        "scaled_background_counts": 116.22101660099959,
+        "net_counts": 2225.7789833990005,
+        "background_fraction_of_source": 0.04962468684927395,
+        "net_signal_to_noise": 45.97331417191247
+      },
+      "transition_1_2": {
+        "source_counts": 1797.0,
+        "scaled_background_counts": 73.08569404299975,
+        "net_counts": 1723.9143059570004,
+        "background_fraction_of_source": 0.0406709482710071,
+        "net_signal_to_noise": 40.65292728934214
+      },
+      "hard_2_7": {
+        "source_counts": 1591.0,
+        "scaled_background_counts": 256.4702065859991,
+        "net_counts": 1334.5297934140008,
+        "background_fraction_of_source": 0.16120063267504658,
+        "net_signal_to_noise": 33.411810205992204
+      },
+      "net_soft_to_hard_ratio": 1.6678376117066682
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5356,
+      "ccd_id": 2,
+      "cells": 325,
+      "date_obs_min": "2004-08-11T19:17:29",
+      "date_obs_max": "2004-08-11T19:17:29",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 94033.0,
+        "scaled_background_counts": 3015.2244667680043,
+        "net_counts": 91017.775533232,
+        "background_fraction_of_source": 0.03206559895747242,
+        "net_signal_to_noise": 296.5029769015229
+      },
+      "soft_0p5_2": {
+        "source_counts": 57936.0,
+        "scaled_background_counts": 933.6545220800014,
+        "net_counts": 57002.34547792,
+        "background_fraction_of_source": 0.016115274131455422,
+        "net_signal_to_noise": 236.69477440752976
+      },
+      "transition_1_2": {
+        "source_counts": 44518.0,
+        "scaled_background_counts": 588.3140457920009,
+        "net_counts": 43929.685954208,
+        "background_fraction_of_source": 0.013215194882789005,
+        "net_signal_to_noise": 208.1142463614732
+      },
+      "hard_2_7": {
+        "source_counts": 36430.0,
+        "scaled_background_counts": 2089.717246640003,
+        "net_counts": 34340.28275336,
+        "background_fraction_of_source": 0.057362537651386304,
+        "net_signal_to_noise": 179.57976639276285
+      },
+      "net_soft_to_hard_ratio": 1.659926503439831
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5356,
+      "ccd_id": 3,
+      "cells": 62,
+      "date_obs_min": "2004-08-11T19:17:29",
+      "date_obs_max": "2004-08-11T19:17:29",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 15977.0,
+        "scaled_background_counts": 1466.0012640839975,
+        "net_counts": 14510.998735916002,
+        "background_fraction_of_source": 0.09175697966351615,
+        "net_signal_to_noise": 114.45081705617194
+      },
+      "soft_0p5_2": {
+        "source_counts": 9501.0,
+        "scaled_background_counts": 456.37513074399925,
+        "net_counts": 9044.624869256,
+        "background_fraction_of_source": 0.04803443119082194,
+        "net_signal_to_noise": 92.6420634458336
+      },
+      "transition_1_2": {
+        "source_counts": 7380.0,
+        "scaled_background_counts": 285.2679545959995,
+        "net_counts": 7094.732045404,
+        "background_fraction_of_source": 0.038654194389701836,
+        "net_signal_to_noise": 82.47953512721327
+      },
+      "hard_2_7": {
+        "source_counts": 6518.0,
+        "scaled_background_counts": 1012.7749341539983,
+        "net_counts": 5505.225065846002,
+        "background_fraction_of_source": 0.15538124181558735,
+        "net_signal_to_noise": 67.83738641629228
+      },
+      "net_soft_to_hard_ratio": 1.6429164586509217
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5357,
+      "ccd_id": 0,
+      "cells": 239,
+      "date_obs_min": "2004-08-14T11:29:06",
+      "date_obs_max": "2004-08-14T11:29:06",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 51518.0,
+        "scaled_background_counts": 1655.3728736160049,
+        "net_counts": 49862.627126383995,
+        "background_fraction_of_source": 0.03213193201630508,
+        "net_signal_to_noise": 219.4873022354973
+      },
+      "soft_0p5_2": {
+        "source_counts": 31669.0,
+        "scaled_background_counts": 501.8867147280015,
+        "net_counts": 31167.113285272,
+        "background_fraction_of_source": 0.015847886410306655,
+        "net_signal_to_noise": 175.06076053120816
+      },
+      "transition_1_2": {
+        "source_counts": 24427.0,
+        "scaled_background_counts": 318.37503453600095,
+        "net_counts": 24108.624965463998,
+        "background_fraction_of_source": 0.013033734577967042,
+        "net_signal_to_noise": 154.19866482721068
+      },
+      "hard_2_7": {
+        "source_counts": 20016.0,
+        "scaled_background_counts": 1157.3647270080035,
+        "net_counts": 18858.635272991996,
+        "background_fraction_of_source": 0.05782197876738626,
+        "net_signal_to_noise": 133.08436274214358
+      },
+      "net_soft_to_hard_ratio": 1.6526706643458626
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5357,
+      "ccd_id": 1,
+      "cells": 169,
+      "date_obs_min": "2004-08-14T11:29:06",
+      "date_obs_max": "2004-08-14T11:29:06",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 36421.0,
+        "scaled_background_counts": 2037.890963691009,
+        "net_counts": 34383.10903630899,
+        "background_fraction_of_source": 0.055953734485352104,
+        "net_signal_to_noise": 179.89071487632145
+      },
+      "soft_0p5_2": {
+        "source_counts": 21808.0,
+        "scaled_background_counts": 633.6391132530027,
+        "net_counts": 21174.360886746996,
+        "background_fraction_of_source": 0.02905535185496161,
+        "net_signal_to_noise": 143.27129244683792
+      },
+      "transition_1_2": {
+        "source_counts": 16767.0,
+        "scaled_background_counts": 395.40517910100175,
+        "net_counts": 16371.594820898998,
+        "background_fraction_of_source": 0.02358234502898561,
+        "net_signal_to_noise": 126.3527505910103
+      },
+      "hard_2_7": {
+        "source_counts": 14758.0,
+        "scaled_background_counts": 1410.2948044350062,
+        "net_counts": 13347.705195564993,
+        "background_fraction_of_source": 0.09556137718085149,
+        "net_signal_to_noise": 109.58877737330567
+      },
+      "net_soft_to_hard_ratio": 1.5863671377595712
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5357,
+      "ccd_id": 3,
+      "cells": 1,
+      "date_obs_min": "2004-08-14T11:29:06",
+      "date_obs_max": "2004-08-14T11:29:06",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 4.0,
+        "scaled_background_counts": 0.7439667430000028,
+        "net_counts": 3.2560332569999972,
+        "background_fraction_of_source": 0.1859916857500007,
+        "net_signal_to_noise": 1.6194209061778082
+      },
+      "soft_0p5_2": {
+        "source_counts": 4.0,
+        "scaled_background_counts": 0.17168463300000064,
+        "net_counts": 3.828315366999999,
+        "background_fraction_of_source": 0.04292115825000016,
+        "net_signal_to_noise": 1.9118111316821438
+      },
+      "transition_1_2": {
+        "source_counts": 1.0,
+        "scaled_background_counts": 0.17168463300000064,
+        "net_counts": 0.8283153669999994,
+        "background_fraction_of_source": 0.17168463300000064,
+        "net_signal_to_noise": 0.8242759251086891
+      },
+      "hard_2_7": {
+        "source_counts": 0.0,
+        "scaled_background_counts": 0.5722821100000022,
+        "net_counts": -0.5722821100000022,
+        "background_fraction_of_source": NaN,
+        "net_signal_to_noise": -3.1622776601683795
+      },
+      "net_soft_to_hard_ratio": NaN
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5358,
+      "ccd_id": 0,
+      "cells": 235,
+      "date_obs_min": "2004-08-15T22:07:30",
+      "date_obs_max": "2004-08-15T22:07:30",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 21461.0,
+        "scaled_background_counts": 681.7436959329997,
+        "net_counts": 20779.256304067,
+        "background_fraction_of_source": 0.03176663230664926,
+        "net_signal_to_noise": 141.79154279082428
+      },
+      "soft_0p5_2": {
+        "source_counts": 13276.0,
+        "scaled_background_counts": 207.06486930999992,
+        "net_counts": 13068.93513069,
+        "background_fraction_of_source": 0.015596932005875258,
+        "net_signal_to_noise": 113.4045850686507
+      },
+      "transition_1_2": {
+        "source_counts": 10294.0,
+        "scaled_background_counts": 131.03639237699994,
+        "net_counts": 10162.963607623,
+        "background_fraction_of_source": 0.012729395023994554,
+        "net_signal_to_noise": 100.15353590412658
+      },
+      "hard_2_7": {
+        "source_counts": 8267.0,
+        "scaled_background_counts": 476.2940672069998,
+        "net_counts": 7790.705932793,
+        "background_fraction_of_source": 0.05761389466638439,
+        "net_signal_to_noise": 85.62929344167031
+      },
+      "net_soft_to_hard_ratio": 1.677503328123275
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5358,
+      "ccd_id": 1,
+      "cells": 165,
+      "date_obs_min": "2004-08-15T22:07:30",
+      "date_obs_max": "2004-08-15T22:07:30",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 15002.0,
+        "scaled_background_counts": 851.7315085179957,
+        "net_counts": 14150.268491482004,
+        "background_fraction_of_source": 0.05677453063044899,
+        "net_signal_to_noise": 115.45442608483096
+      },
+      "soft_0p5_2": {
+        "source_counts": 9004.0,
+        "scaled_background_counts": 266.68363962999865,
+        "net_counts": 8737.316360370001,
+        "background_fraction_of_source": 0.02961835180253206,
+        "net_signal_to_noise": 92.04802093230327
+      },
+      "transition_1_2": {
+        "source_counts": 6934.0,
+        "scaled_background_counts": 166.65742379599916,
+        "net_counts": 6767.342576204001,
+        "background_fraction_of_source": 0.02403481739198142,
+        "net_signal_to_noise": 81.24710044997792
+      },
+      "hard_2_7": {
+        "source_counts": 6052.0,
+        "scaled_background_counts": 587.588793399997,
+        "net_counts": 5464.411206600003,
+        "background_fraction_of_source": 0.0970900187376069,
+        "net_signal_to_noise": 70.16429036641394
+      },
+      "net_soft_to_hard_ratio": 1.5989492792593887
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5358,
+      "ccd_id": 3,
+      "cells": 1,
+      "date_obs_min": "2004-08-15T22:07:30",
+      "date_obs_max": "2004-08-15T22:07:30",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 3.0,
+        "scaled_background_counts": 0.18999315999999922,
+        "net_counts": 2.8100068400000007,
+        "background_fraction_of_source": 0.06333105333333307,
+        "net_signal_to_noise": 1.6211395193399134
+      },
+      "soft_0p5_2": {
+        "source_counts": 1.0,
+        "scaled_background_counts": 0.09499657999999961,
+        "net_counts": 0.9050034200000003,
+        "background_fraction_of_source": 0.09499657999999961,
+        "net_signal_to_noise": 0.9039842606850258
+      },
+      "transition_1_2": {
+        "source_counts": 0.0,
+        "scaled_background_counts": 0.023749144999999902,
+        "net_counts": -0.023749144999999902,
+        "background_fraction_of_source": NaN,
+        "net_signal_to_noise": -1.0
+      },
+      "hard_2_7": {
+        "source_counts": 2.0,
+        "scaled_background_counts": 0.09499657999999961,
+        "net_counts": 1.9050034200000003,
+        "background_fraction_of_source": 0.047498289999999804,
+        "net_signal_to_noise": 1.3462817181281557
+      },
+      "net_soft_to_hard_ratio": 0.47506655919809326
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5361,
+      "ccd_id": 1,
+      "cells": 5,
+      "date_obs_min": "2004-08-17T10:30:31",
+      "date_obs_max": "2004-08-17T10:30:31",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 536.0,
+        "scaled_background_counts": 102.92217755999981,
+        "net_counts": 433.0778224400002,
+        "background_fraction_of_source": 0.19201898798507427,
+        "net_signal_to_noise": 18.60709651250566
+      },
+      "soft_0p5_2": {
+        "source_counts": 298.0,
+        "scaled_background_counts": 33.06625034999994,
+        "net_counts": 264.93374965000004,
+        "background_fraction_of_source": 0.1109605716442951,
+        "net_signal_to_noise": 15.300098744527459
+      },
+      "transition_1_2": {
+        "source_counts": 225.0,
+        "scaled_background_counts": 20.506632569999965,
+        "net_counts": 204.49336743000003,
+        "background_fraction_of_source": 0.09114058919999984,
+        "net_signal_to_noise": 13.598496438097335
+      },
+      "hard_2_7": {
+        "source_counts": 239.0,
+        "scaled_background_counts": 70.18936838999987,
+        "net_counts": 168.81063161000014,
+        "background_fraction_of_source": 0.29367936564853503,
+        "net_signal_to_noise": 10.831421026800998
+      },
+      "net_soft_to_hard_ratio": 1.569413887758392
+    },
+    {
+      "cluster": "BULLET",
+      "obsid": 5361,
+      "ccd_id": 3,
+      "cells": 366,
+      "date_obs_min": "2004-08-17T10:30:31",
+      "date_obs_max": "2004-08-17T10:30:31",
+      "detnam": [
+        "ACIS-01236"
+      ],
+      "full_0p5_7": {
+        "source_counts": 100701.0,
+        "scaled_background_counts": 3892.126707861,
+        "net_counts": 96808.873292139,
+        "background_fraction_of_source": 0.03865032827738553,
+        "net_signal_to_noise": 304.7222253797656
+      },
+      "soft_0p5_2": {
+        "source_counts": 61728.0,
+        "scaled_background_counts": 1201.7488652279999,
+        "net_counts": 60526.251134772,
+        "background_fraction_of_source": 0.019468456214813374,
+        "net_signal_to_noise": 243.4745818464104
+      },
+      "transition_1_2": {
+        "source_counts": 47491.0,
+        "scaled_background_counts": 759.964102383,
+        "net_counts": 46731.035897617,
+        "background_fraction_of_source": 0.016002276270935544,
+        "net_signal_to_noise": 214.3359529651241
+      },
+      "hard_2_7": {
+        "source_counts": 39295.0,
+        "scaled_background_counts": 2700.1035912479997,
+        "net_counts": 36594.896408752,
+        "background_fraction_of_source": 0.06871366818292403,
+        "net_signal_to_noise": 184.23585342341235
+      },
+      "net_soft_to_hard_ratio": 1.6539533397967647
+    }
+  ],
+  "cluster_summary": {
+    "BULLET": {
+      "cells": 3812,
+      "date_obs_min": "2000-10-16T10:34:32",
+      "date_obs_max": "2004-08-25T00:53:27",
+      "detnam": [
+        "ACIS-01236",
+        "ACIS-012367"
+      ],
+      "full_0p5_7": {
+        "source_counts": 660872.0,
+        "scaled_background_counts": 26502.195143195877,
+        "net_counts": 634369.8048568041,
+        "background_fraction_of_source": 0.04010185806509563,
+        "net_signal_to_noise": 779.5572826195593
+      },
+      "soft_0p5_2": {
+        "source_counts": 406157.0,
+        "scaled_background_counts": 8274.879663266962,
+        "net_counts": 397882.12033673306,
+        "background_fraction_of_source": 0.020373598542600426,
+        "net_signal_to_noise": 624.0011966796327
+      },
+      "transition_1_2": {
+        "source_counts": 311868.0,
+        "scaled_background_counts": 5167.975566655976,
+        "net_counts": 306700.024433344,
+        "background_fraction_of_source": 0.016571035074634064,
+        "net_signal_to_noise": 548.9693586009686
+      },
+      "hard_2_7": {
+        "source_counts": 256995.0,
+        "scaled_background_counts": 18296.183822364917,
+        "net_counts": 238698.81617763508,
+        "background_fraction_of_source": 0.07119276181390656,
+        "net_signal_to_noise": 470.0193028735483
+      },
+      "net_soft_to_hard_ratio": 1.6668793197559757
+    },
+    "ABELL2146": {
+      "cells": 1270,
+      "date_obs_min": "2009-04-29T04:56:24",
+      "date_obs_max": "2010-10-10T12:41:54",
+      "detnam": [
+        "ACIS-01236",
+        "ACIS-35678"
+      ],
+      "full_0p5_7": {
+        "source_counts": 227710.0,
+        "scaled_background_counts": 9204.546098394001,
+        "net_counts": 218505.453901606,
+        "background_fraction_of_source": 0.04042223046152563,
+        "net_signal_to_noise": 456.8162795196626
+      },
+      "soft_0p5_2": {
+        "source_counts": 147745.0,
+        "scaled_background_counts": 2795.1596501300005,
+        "net_counts": 144949.84034987,
+        "background_fraction_of_source": 0.018918810451318154,
+        "net_signal_to_noise": 376.6849311880575
+      },
+      "transition_1_2": {
+        "source_counts": 110758.0,
+        "scaled_background_counts": 1885.5620645220004,
+        "net_counts": 108872.437935478,
+        "background_fraction_of_source": 0.01702416136551762,
+        "net_signal_to_noise": 326.8103640730467
+      },
+      "hard_2_7": {
+        "source_counts": 80783.0,
+        "scaled_background_counts": 6431.685047774001,
+        "net_counts": 74351.314952226,
+        "background_fraction_of_source": 0.0796168135347041,
+        "net_signal_to_noise": 260.37918328164534
+      },
+      "net_soft_to_hard_ratio": 1.9495262517281189
+    }
+  },
+  "integrated_count_checks": {
+    "BULLET": {
+      "cell_sum": 660872.0,
+      "v19dl_sherpa_integrated": 660872.0,
+      "exact": true
+    },
+    "ABELL2146": {
+      "cell_sum": 227710.0,
+      "v19dl_sherpa_integrated": 227710.0,
+      "exact": true
+    }
+  },
+  "interpretations": {
+    "BULLET": {
+      "aggregate_soft_background_regime": "source_dominated",
+      "aggregate_soft_background_fraction": 0.020373598542600426,
+      "observation_soft_background_fraction_min": 0.015596932005875258,
+      "observation_soft_background_fraction_max": 0.1109605716442951,
+      "observation_soft_background_fraction_span": 0.09536363963841984,
+      "strong_observation_heterogeneity": false
+    },
+    "ABELL2146": {
+      "aggregate_soft_background_regime": "source_dominated",
+      "aggregate_soft_background_fraction": 0.018918810451318154,
+      "observation_soft_background_fraction_min": 0.0,
+      "observation_soft_background_fraction_max": 0.02401096266729016,
+      "observation_soft_background_fraction_span": 0.02401096266729016,
+      "strong_observation_heterogeneity": false
+    }
+  },
+  "next_test": "spatially_resolved_joint_plasma_likelihood_with_unmerged_responses",
+  "gates": {
+    "all_expected_cells_audited": true,
+    "every_observation_ccd_ebounds_exact": true,
+    "cell_sums_reproduce_v19dl_integrated_source_counts_exactly": true
+  },
+  "joint_likelihood_or_full_regional_successor_authorized": false,
+  "v19do_execution_result_scientifically_discarded": true,
+  "remediation_scope": "Removed only the invalid source/background BACKSCAL equality assertion; effective scaling still uses the frozen exposure, BACKSCAL and AREASCAL ratio.",
+  "discarded_v19do_report_sha256": "efb1e4083e607895e02cd395c8416cb5351abae35e475add352d55a8bfea00db",
+  "v19dn_status": "integrated_residual_localization_completed",
+  "additional_plasma_component_admitted": false,
+  "thermal_stress_or_baroclinicity_constructed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

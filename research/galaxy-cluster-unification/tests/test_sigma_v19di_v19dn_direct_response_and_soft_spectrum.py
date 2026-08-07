@@ -34,6 +34,8 @@ def test_all_frozen_runner_hashes_are_exact() -> None:
         "sigma_v19dm_minimal_thermal_mixture_diagnostic",
         "sigma_v19dm2_statistic_parity_remediation",
         "sigma_v19dn_integrated_residual_localization",
+        "sigma_v19do_observation_resolved_soft_background_audit",
+        "sigma_v19do2_backscal_ratio_remediation",
     )
     for stem in stems:
         config = load(f"configs/{stem}.json")
@@ -172,6 +174,70 @@ def test_residual_localization_is_soft_dominated_and_remains_diagnostic() -> Non
     ] is False
     assert report["full_regional_successor_authorized"] is False
     assert report["all_494_regions_run"] is False
+    assert report["thermal_stress_or_baroclinicity_constructed"] is False
+    assert report["lensing_halo_action_gravity_or_holdout_payload_opened"] is False
+    assert report["gravity_formula_or_parameter_changed"] is False
+
+
+def test_invalid_backscal_equality_run_is_retained_and_discarded() -> None:
+    report = load(
+        "results/sigma_v19do_observation_resolved_soft_background_audit/report.json"
+    )
+    assert report["status"] == (
+        "observation_resolved_soft_background_audit_execution_failed"
+    )
+    assert report["execution_exception"].startswith(
+        "RuntimeError: V19DO BACKSCAL mismatch:"
+    )
+    remediation = load("configs/sigma_v19do2_backscal_ratio_remediation.json")
+    assert remediation["remediation"]["retained_scale"] == (
+        "source_EXPOSURE/background_EXPOSURE * "
+        "source_BACKSCAL/background_BACKSCAL * "
+        "source_AREASCAL/background_AREASCAL"
+    )
+
+
+def test_backscal_ratio_audit_covers_every_cell_and_reconstructs_counts() -> None:
+    report = load("results/sigma_v19do2_backscal_ratio_remediation/report.json")
+    assert report["status"] == (
+        "backscal_ratio_observation_soft_background_audit_completed"
+    )
+    assert report["aggregate_pass"] is True
+    assert all(report["gates"].values())
+    assert report["cell_audit"]["rows"] == 5082
+    cell_audit = ROOT / report["cell_audit"]["path"]
+    assert sha256(cell_audit) == report["cell_audit"]["sha256"]
+    assert report["integrated_count_checks"]["BULLET"]["exact"] is True
+    assert report["integrated_count_checks"]["ABELL2146"]["exact"] is True
+    assert len({row["sha256"] for row in report["response_ebounds_controls"]}) == 1
+
+
+def test_soft_background_is_small_and_not_the_frozen_heterogeneity_case() -> None:
+    report = load("results/sigma_v19do2_backscal_ratio_remediation/report.json")
+    bullet = report["cluster_summary"]["BULLET"]
+    abell = report["cluster_summary"]["ABELL2146"]
+    assert np.isclose(
+        bullet["soft_0p5_2"]["background_fraction_of_source"],
+        0.020373598542600426,
+    )
+    assert np.isclose(
+        abell["soft_0p5_2"]["background_fraction_of_source"],
+        0.018918810451318154,
+    )
+    assert bullet["hard_2_7"]["background_fraction_of_source"] > bullet[
+        "soft_0p5_2"
+    ]["background_fraction_of_source"]
+    for cluster in ("BULLET", "ABELL2146"):
+        interpretation = report["interpretations"][cluster]
+        assert interpretation["aggregate_soft_background_regime"] == (
+            "source_dominated"
+        )
+        assert interpretation["strong_observation_heterogeneity"] is False
+    assert report["next_test"] == (
+        "spatially_resolved_joint_plasma_likelihood_with_unmerged_responses"
+    )
+    assert report["joint_likelihood_or_full_regional_successor_authorized"] is False
+    assert report["additional_plasma_component_admitted"] is False
     assert report["thermal_stress_or_baroclinicity_constructed"] is False
     assert report["lensing_halo_action_gravity_or_holdout_payload_opened"] is False
     assert report["gravity_formula_or_parameter_changed"] is False
