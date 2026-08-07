@@ -2,17 +2,21 @@
 
 Date: 2026-08-06
 
-Status: deliberate stopping point after the complete CCD7 background archive
-repair and before the 494-region thermodynamic likelihood, I4/I5 source test, a
-new gravity equation, or any untouched lensing/galaxy holdout is opened.
+Status: deliberate stopping point after the complete 494-region thermodynamic
+likelihood and its measurement-model diagnosis, but before any I4/I5 source
+test, new gravity equation, or untouched lensing/galaxy holdout is opened.
 
 ## Executive conclusion
 
 We have not discovered a replacement for dark matter or MOND. We have built a
 rigorous research program, identified one unusually strong empirical
 galaxy--cluster bridge, ruled out many simpler mechanisms, isolated the main
-raw-lensing failure, and prepared a target-blind cluster source-data pipeline
-capable of testing the next physical idea.
+raw-lensing failure, and built a target-blind cluster source-data pipeline for
+testing the next physical idea. We also ran the complete 494-region unmerged
+Chandra likelihood. That run exposed a specific measurement-model error before
+it could contaminate a gravity claim: a single full-region thermal
+normalization was applied independently to CCD fragments that cover only part
+of a sky region.
 
 The strongest empirical bridge remains RAR plus a squared coherence-gated
 refracted-gravity response. It is only 1.94% worse than fixed MOND on 131 SPARC
@@ -42,10 +46,13 @@ and many member galaxies. It can create more lensing structure without an
 object label, but it still needs a continuum-safe field equation and a measured
 baryonic source.
 
-The next measurement-first candidates are I4 thermodynamic-gradient stress,
+The next measurement-first candidates remain I4 thermodynamic-gradient stress,
 which can supply a direction, and I5 baroclinicity, which can supply scalar
-activation. The source pipeline is now ready to test them, but neither has been
-constructed or scored. That is the recommended next research chapter.
+activation. Neither has been constructed or scored. Before opening either one,
+the spectral model must distribute one region's emission measure across its
+actual observation/CCD footprints using fixed geometry fractions and rerun all
+494 regions. That is a measurement correction with zero new fitted parameters,
+not a change to the gravity hypothesis.
 
 ## The non-negotiable theory goal
 
@@ -269,7 +276,7 @@ component.
 | Cluster radial amplitude | promising diagnostic | 0.1387 dex on NFW-derived CLASH fields |
 | Raw multi-cluster image topology | failed so far | no universal candidate passes roots, topology and halo-relative positions |
 | Halo size/shape derived from baryons | incomplete | component-wise nonlinearity is a clue, not a derived mapping |
-| Independent baryonic source variable | ready to test | I4/I5 inputs now have a corrected response archive |
+| Independent baryonic source variable | measurement correction required | archive is complete, but CCD-fragment geometry must be included before I4/I5 |
 | One metric for matter and light | missing | no surviving derivation of both potentials from one action |
 | Healthy covariant action | missing | explored candidates retired or incomplete |
 | At most five universal constants | empirical bridge passes counting | three bridge constants plus fixed RAR scale; coherence definition remains noncovariant |
@@ -299,7 +306,7 @@ It is not yet a generative physical universe that can infer a fundamental law
 from dark-matter maps, and synthetic agreement cannot replace held-out raw
 observations.
 
-## Latest source-data chapter: V19DP--V19DR
+## Latest source-data chapter: V19DP--V19DU
 
 V19DP jointly fitted one registered region per cluster while retaining every
 observation's PHA, background, ARF and RMF. It used one shared temperature,
@@ -338,35 +345,138 @@ response gate passed. This closes the CCD7 calibration problem and authorizes
 the 494-region unmerged likelihood. It does not make any claim about I4, I5 or
 gravity.
 
+### V19DS: complete 494-region likelihood
+
+The preregistered likelihood was then run over all 494 thermodynamic regions
+and all 5,082 observation/CCD cells. Every region produced a finite best fit and
+every cell was used exactly once. The run retained one shared temperature,
+abundance and emission normalization per sky region, with three free parameters
+and no per-observation fit constant.
+
+| Outcome | Bullet Cluster | Abell 2146 | Total |
+|---|---:|---:|---:|
+| Regions attempted | 366 | 128 | 494 |
+| Strict full-quality regions | 111 | 64 | 175 |
+| Ordered two-sided temperature interval | 250 | 112 | 362 |
+| Explicit temperature-bound censoring | 10 | 0 | 10 |
+| Unresolved confidence state | 106 | 16 | 122 |
+
+The aggregate run failed closed because 122 regions did not have a usable
+uncertainty state. All 122 confidence failures were Sherpa's safeguard that the
+reduced statistic exceeded 3. No I4/I5 map, lensing target or gravity parameter
+was opened in response.
+
+### V19DT: the failures are spatially coherent
+
+The unresolved regions were not randomly scattered. Neighboring regions shared
+failure status much more often than random relabeling predicts:
+
+| Cluster | Same-class edge fraction | Permutation mean | z-score | p-value |
+|---|---:|---:|---:|---:|
+| Bullet | 0.71684 | 0.58717 | 9.91 | 0.00009999 |
+| Abell 2146 | 0.87432 | 0.77949 | 7.25 | 0.00009999 |
+
+In the Bullet Cluster, reduced statistic also correlates strongly with the
+number of observation/CCD cells in a region (Spearman rho 0.54665,
+`p=6.62e-30`). This indicated a structured observation/coverage problem rather
+than random optimizer failures. Abell's smaller unresolved patch did not show
+the same simple cell-count dependence.
+
+### V19DU: no globally bad observation
+
+A frozen leave-one-entire-observation-out audit ran 1,250 fits over all 127
+regions whose primary reduced statistic exceeded 3. All fits completed.
+
+- 37 of 127 regions improved to reduced statistic at most 1.5.
+- 58 of 127 had at least a 50% reduction in reduced statistic.
+- Bullet: 37 of 111 regions were rescued; median best omission ratio was
+  0.5065.
+- Abell 2146: 0 of 16 were rescued; median best omission ratio was 0.725.
+- No ObsID met the preregistered definition of a consistent global culprit.
+
+This says observation geometry materially affects many Bullet fits, while the
+remaining Abell failures are more consistent with local spectral complexity or
+another model inadequacy. It does not justify deleting an observation.
+
+### Measurement-model defect localized
+
+The key implementation issue is now specific. A sky region can cross a CCD
+boundary within one observation and therefore produce multiple dataset cells.
+The current likelihood gives every cell the same full shared APEC
+normalization. A small CCD fragment is consequently modeled as though the
+entire sky region fell on that CCD.
+
+For example, Bullet region 253 contains 106 registered sky pixels. In ObsID
+5357, CCD0 intersects only 2 of those pixels while CCD1 intersects all 106. The
+respective spectra contain 1 and 175 source counts, yet the current model gives
+both cells the same full thermal emission measure. PHA `BACKSCAL` and the ARF do
+not encode enough of this partial-region area difference to fix the mismatch.
+
+The physically consistent correction is
+
+\[
+N_{r,o,c}=f_{r,o,c}^{\rm geom}\,N_r,
+\]
+
+where `N_r` is the one total emission measure of region `r` and
+`f_geom` is the fixed fraction of that region's registered footprint
+intersecting observation `o`, CCD `c`. Temperature, abundance and total region
+normalization remain shared. The correction adds zero fitted parameters and is
+defined only from instrument footprint geometry, never from lensing, halo
+residuals or the desired gravity outcome.
+
 ## Why this is a good stopping point
 
-The current chapter had a concrete question: can the observed baryonic gas
-state be measured reliably enough to test a directional or thermodynamic Sigma
-source? The response/background archive is now complete and its registered
-joint-spectrum boundary passes.
+The complete likelihood did exactly what a rigorous measurement stage should
+do: it revealed a concrete forward-model defect before the derived gas maps
+were used to support new physics. We know what needs to change, and the change
+is fixed by detector geometry rather than fitted to the outcome.
 
-Starting the 494-region likelihood would begin a new, substantially larger
-scientific chapter. Stopping here preserves a clean decision point:
+Stopping here preserves a clean decision point:
 
 - the best empirical formula and its limitations are recorded;
 - failed mechanisms are catalogued;
 - raw-lensing topology is identified as the decisive observational problem;
-- the next source candidates are preregistered conceptually;
-- the source archive is repaired and audited;
+- the next source candidates remain preregistered conceptually and unopened;
+- the source archive is repaired and all 494 regions have been exercised;
+- the remaining Bullet likelihood failure has a concrete zero-new-parameter
+  geometry correction;
+- the Abell residuals are kept visible as a likely separate spectral-complexity
+  problem;
 - no I4/I5 or new gravity result has been previewed.
 
 ## Recommended next steps
 
-### Stage 1: complete the source-only thermodynamic test
+### Stage 1: correct and close the thermodynamic measurement model
 
-1. Run the 494-region unmerged joint spectral likelihood using the V19DR
-   5,082-cell product index.
-2. Propagate response, background, temperature, abundance, gas-density,
+1. Hash the exact registered FOV polygon for every observation and calculate
+   all 5,082 fixed region--observation--CCD intersection fractions.
+2. Require every retained cell to have positive geometric support; report
+   summed coverage, overlaps, gaps and boundary sensitivity without using
+   source counts to define the fractions.
+3. Freeze the geometry-scaled likelihood with
+   `normalization_cell = fraction_geometry * normalization_region`; retain
+   exactly three free spectral parameters.
+4. Rerun all 494 regions and compare quality, uncertainty and spatial failure
+   maps to V19DS. Do not omit observations or introduce fitted cross-calibration
+   constants to force a pass.
+5. If coherent residual failures remain, test one-temperature versus a
+   preregistered minimal multi-temperature plasma model under a complexity
+   penalty. Keep this separate from gravity.
+
+This stage is complete when every region has an explicit usable uncertainty
+state or a physically documented censoring/failure state, numerical results are
+stable to footprint rasterization choices, and no unexplained observation/CCD
+normalization mismatch remains.
+
+### Stage 2: run the source-only I4/I5 test
+
+1. Propagate response, background, temperature, abundance, gas-density,
    projection and smoothing uncertainty into registered draws.
-3. Construct I4 thermodynamic-gradient stress and I5 baroclinicity using only
+2. Construct I4 thermodynamic-gradient stress and I5 baroclinicity using only
    baryonic observations. Do not use lensing maps, halo residuals or galaxy
    velocities in their definition or selection.
-4. Score both candidates across the Bullet Cluster and Abell 2146 under every
+3. Score both candidates across the Bullet Cluster and Abell 2146 under every
    frozen smoothing, aperture and gas-correlation branch.
 
 Advance only if I4 supplies a stable transferable direction and either I4 or I5
@@ -374,7 +484,7 @@ supplies independently measurable amplitude/activation without an object
 label. If both fail, issue a source-mechanism falsification rather than tuning a
 new threshold.
 
-### Stage 2: choose one root field equation
+### Stage 3: choose one root field equation
 
 If a source survives, derive one continuum-safe tensor/nonlocal field equation
 with:
@@ -389,7 +499,7 @@ with:
 The equation must be invariant to arbitrary splitting or merging of the same
 continuous baryonic density.
 
-### Stage 3: freeze and test cross-domain transfer
+### Stage 4: freeze and test cross-domain transfer
 
 Before opening new outcomes, freeze the equation, constants, source maps,
 solver, target split, masks, covariance, nuisance priors and success thresholds.
@@ -411,7 +521,9 @@ three-materially-distinct-closures stopping rule before changing mechanism.
 
 | Next result | Decision |
 |---|---|
-| 494-region likelihood fails because of response/background inconsistency | repair measurement model only; do not judge I4/I5 or gravity |
+| Geometry-scaled 494-region likelihood resolves the Bullet failures | proceed to I4/I5; retain remaining Abell spectral-complexity flags |
+| Geometry-scaled likelihood still fails along CCD/coverage boundaries | continue measurement-model diagnosis; do not judge I4/I5 or gravity |
+| Residual failures remain but are localized to demonstrably multiphase gas | preregister the smallest physical plasma extension and penalize its complexity |
 | Likelihood passes, but I4 has no stable cross-cluster direction and I5 no transferable activation | retire thermodynamic-source route and return to a different independently measured baryonic source |
 | I4/I5 survives source-only gates but cannot improve raw lens topology under one equation | retain source result; reject or redesign the propagator/action |
 | New equation passes galaxies but repeatedly fails raw cluster topology | stop scalar/radial closure changes; require a different tensor/nonlocal mechanism |
@@ -426,10 +538,14 @@ three-materially-distinct-closures stopping rule before changing mechanism.
 4. `docs/FORMULA_AND_PRIOR_ART_REGISTRY.md` -- published versus project ideas.
 5. `docs/SIGMA_V19DP_V19DQ_UNMERGED_JOINT_AND_CCD7_RECOVERY.md` -- registered
    spectral diagnosis.
-6. `results/sigma_v19dr_full_ccd7_background_archive_recovery/report.json` --
-   terminal archive audit.
-7. `results/sigma_v19dr_full_ccd7_background_archive_recovery/unified_product_index.csv`
-   -- required parent for the next 494-region likelihood.
+6. `results/sigma_v19ds_full_unmerged_regional_joint_likelihood/report.json` --
+   complete 494-region likelihood.
+7. `results/sigma_v19dt_unmerged_likelihood_localization/report.json` and
+   `likelihood_failure_maps.png` -- spatial failure audit.
+8. `results/sigma_v19du_high_residual_observation_leverage/report.json` --
+   leave-one-observation-out diagnosis.
+9. `results/sigma_v19dr_full_ccd7_background_archive_recovery/unified_product_index.csv`
+   -- frozen 5,082-cell parent archive.
 
 ## Final assessment
 
@@ -437,6 +553,11 @@ The project has produced a serious falsification framework and a useful
 empirical bridge, not a completed theory. The bridge says that low acceleration,
 diffuse baryonic state and dynamical organization matter. Raw lensing says the
 missing physics must also carry spatial direction and multi-center curvature.
-The cleanest next experiment is to determine whether measured thermodynamic
-structure supplies that missing directional source. If it does not, the project
-should change source mechanism rather than add another interpolation term.
+The full regional likelihood has not disproved the thermodynamic-source idea;
+it has not tested it yet. It found that the present spectral forward model
+misallocates one region's emission across partial CCD footprints. The cleanest
+next experiment is therefore to correct that geometry with zero new fit
+parameters, freeze the source reconstruction, and only then determine whether
+measured thermodynamic structure supplies the missing directional source. If it
+does not, the project should change source mechanism rather than add another
+interpolation term.
