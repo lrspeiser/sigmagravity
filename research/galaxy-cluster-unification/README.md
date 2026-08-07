@@ -16,14 +16,18 @@ source Git commit, size, and SHA-256 hash in
 placement and origin record.
 
 The latest source-measurement checkpoint is
-[`docs/SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md`](docs/SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md),
-following the response and band-localization result in
-[`docs/SIGMA_V19DI_V19DN_DIRECT_RESPONSE_AND_SOFT_SPECTRUM.md`](docs/SIGMA_V19DI_V19DN_DIRECT_RESPONSE_AND_SOFT_SPECTRUM.md).
-The Bullet soft-band failure is source dominated: scaled blank sky contributes
-only 2.037% of 0.5--2 keV counts, and its observation-level variation fails the
-frozen heterogeneity threshold. The next source stage is an unmerged-response
-joint-likelihood preflight, not another integrated plasma component. Full
-regional thermodynamic production and I4/I5 remain sealed.
+[`docs/SIGMA_V19DP_V19DQ_UNMERGED_JOINT_AND_CCD7_RECOVERY.md`](docs/SIGMA_V19DP_V19DQ_UNMERGED_JOINT_AND_CCD7_RECOVERY.md),
+following the soft-background audit in
+[`docs/SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md`](docs/SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md).
+The unmerged Bullet preflight passes at reduced statistic 0.7631. Abell 2146
+initially failed at 1.9497, but leave-one-observation-out fits localized the
+failure to two CCD7 spectra. The astrometry-corrected blank sky contained more
+than 1.35 million CCD7 events per observation before the common-grid
+reprojection discarded all of them. Restoring the real background lowered the
+Abell statistic to 1.0312 with no new fit parameter; every registered gate now
+passes. The next source stage is recovery and audit of all 254 affected CCD7
+background products. The 494-region likelihood and I4/I5 remain sealed until
+that archive passes.
 
 The current causal-assembly checkpoint is
 [`docs/SIGMA_V19H_SOURCE_MAP_GATE.md`](docs/SIGMA_V19H_SOURCE_MAP_GATE.md),

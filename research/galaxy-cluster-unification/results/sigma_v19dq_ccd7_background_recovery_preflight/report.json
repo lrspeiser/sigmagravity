@@ -1,0 +1,1733 @@
+{
+  "protocol_version": "SIGMA-V19DQ-CCD7-BACKGROUND-RECOVERY-1.0.0",
+  "generated_utc": "2026-08-07T04:11:05.083202+00:00",
+  "config_sha256": "5d3fcb5c87577a6bd5dd02e76e5673a59f8eb97ae9a375f2e9dd5a3bac43dd10",
+  "runner_sha256": "b37576bae1565399911b7494fcf283b14526a077e3cdc4598d356d33d0db3f14",
+  "status": "ccd7_real_background_recovery_preflight_passed",
+  "parent_v19dp_status": "unmerged_regional_joint_likelihood_preflight_failed",
+  "background_boundary": [
+    {
+      "obsid": 10464,
+      "pre_reprojection_ccd7_rows": 1354493,
+      "post_reprojection_ccd7_rows": 0,
+      "expected_pre_reprojection_ccd7_rows": 1354493,
+      "expected_post_reprojection_ccd7_rows": 0,
+      "pre_reprojection_background": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_blanksky_nosrc_evt.fits",
+      "passed": true
+    },
+    {
+      "obsid": 10888,
+      "pre_reprojection_ccd7_rows": 1390824,
+      "post_reprojection_ccd7_rows": 0,
+      "expected_pre_reprojection_ccd7_rows": 1390824,
+      "expected_post_reprojection_ccd7_rows": 0,
+      "pre_reprojection_background": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_blanksky_nosrc_evt.fits",
+      "passed": true
+    }
+  ],
+  "remediated_cells": [
+    {
+      "cell_name": "ABELL2146_bin62_obs10464_ccd7",
+      "cluster": "ABELL2146",
+      "bin_id": 62,
+      "obsid": 10464,
+      "ccd_id": 7,
+      "production_index": 3865,
+      "attempt": 1,
+      "start_utc": "2026-08-07T04:06:57.369093+00:00",
+      "elapsed_seconds": 12.154704522807151,
+      "preflight": {
+        "source_band_events": 345,
+        "background_band_events": 1219
+      },
+      "exact_bin_mask": {
+        "path": "/home/henry/sigma-v19dq-ccd7-background/v100/masks/ABELL2146/bin62.fits",
+        "sha256": "b72047249030012f695a3d5739f499a7dee07aebc2998f80134544199496e0b0",
+        "bytes": 2329920,
+        "selected_pixels": 1701,
+        "definition": "frozen V19M binmap == 62",
+        "writer": "CIAO dmimgcalc constant-one image plus dmimgthresh exact-bin threshold",
+        "step": {
+          "constant_one_image": {
+            "command": [
+              "dmimgcalc",
+              "infile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/images/binmap.fits",
+              "infile2=none",
+              "outfile=/home/henry/sigma-v19dq-ccd7-background/v100/masks/ABELL2146/bin62.ones.fits",
+              "operation=imgout=(img1*0)+1",
+              "clobber=no",
+              "verbose=1",
+              "mode=h"
+            ],
+            "reused": false,
+            "log": "/home/henry/sigma-v19dq-ccd7-background/v100/mask_logs/c3865/dmimgcalc_ones.log"
+          },
+          "exact_threshold": {
+            "command": [
+              "dmimgthresh",
+              "infile=/home/henry/sigma-v19dq-ccd7-background/v100/masks/ABELL2146/bin62.ones.fits",
+              "outfile=/home/henry/sigma-v19dq-ccd7-background/v100/masks/ABELL2146/bin62.tmp.fits",
+              "expfile=/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19m_adaptive_thermodynamic_regions/frozen_region_products/ABELL2146/images/binmap.fits",
+              "cut=62:62",
+              "value=0",
+              "clobber=no",
+              "verbose=1",
+              "mode=h"
+            ],
+            "reused": false,
+            "log": "/home/henry/sigma-v19dq-ccd7-background/v100/mask_logs/c3865/dmimgthresh_exact_bin.log"
+          }
+        },
+        "reused": false
+      },
+      "materialized_event_subsets": {
+        "source": {
+          "path": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/e/s.fits",
+          "bytes": 789120,
+          "sha256": "251315fd6ba56cf314f764e1e17e39fd5e585274be29479211549a063e645763",
+          "all_energy_rows": 1024,
+          "band_500_7000_rows": 345,
+          "step": {
+            "command": [
+              "dmcopy",
+              "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_science_nosrc_reproj_evt.fits[ccd_id=7][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/10464.fov)][sky=mask(/home/henry/sigma-v19dq-ccd7-background/v100/masks/ABELL2146/bin62.fits)]",
+              "outfile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/e/s.fits",
+              "opt=all",
+              "clobber=no",
+              "verbose=1",
+              "mode=h"
+            ],
+            "reused": false,
+            "log": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/logs/dmcopy_source_exact.log"
+          }
+        },
+        "background": {
+          "path": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/e/b.fits",
+          "bytes": 1036800,
+          "sha256": "860b31e1da6e73e615525dfaba68d69118a01b715d10a6c753c7abb516d4d359",
+          "all_energy_rows": 9498,
+          "band_500_7000_rows": 1219,
+          "step": {
+            "command": [
+              "dmcopy",
+              "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_blanksky_nosrc_evt.fits[ccd_id=7][sky=mask(/home/henry/sigma-v19dq-ccd7-background/v100/masks/ABELL2146/bin62.fits)]",
+              "outfile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/e/b.fits",
+              "opt=all",
+              "clobber=no",
+              "verbose=1",
+              "mode=h"
+            ],
+            "reused": false,
+            "log": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/logs/dmcopy_background_exact.log"
+          }
+        }
+      },
+      "response_position": {
+        "refcoord": [
+          239.1003448527372,
+          66.36861557589773
+        ],
+        "resp_pos": "CENTROID",
+        "reason": "outcome-blind detector medoid from an exact selected event; no fitted sky coordinate",
+        "detector_medoid": {
+          "rule": "0.5-7 keV selected event nearest the detector-coordinate centroid",
+          "selection": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/e/s.fits[energy=500:7000][cols detx,dety,ccd_id]",
+          "events": 345,
+          "mean_detx": 4299.598372395833,
+          "mean_dety": 3934.2038319463313,
+          "medoid_index": 244,
+          "reference_detx": 4298.98681640625,
+          "reference_dety": 3933.290771484375,
+          "ra_deg": 239.1003448527372,
+          "dec_deg": 66.36861557589773,
+          "mapped_ccd_id": 7,
+          "detector_science": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_science_nosrc_evt.fits",
+          "detector_science_sha256": "7ac515585595a16b2c954e77936556d848c69f235f68a1ca6d0741ce69d5c198",
+          "command": [
+            "dmcoords",
+            "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_science_nosrc_evt.fits",
+            "asolfile=@/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/10464/corrected_asol1.lis",
+            "option=det",
+            "detx=4298.98681640625000",
+            "dety=3933.29077148437500",
+            "celfmt=deg",
+            "verbose=0",
+            "mode=h"
+          ]
+        }
+      },
+      "short_path_token": "c3865",
+      "step": {
+        "command": [
+          "specextract",
+          "infile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/e/s.fits[sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/10464.fov)]",
+          "outroot=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/products/ABELL2146_bin62_obs10464_ccd7",
+          "bkgfile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/e/b.fits[sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/10464.fov)]",
+          "asp=@/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/10464/corrected_asol1.lis",
+          "mskfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/10464/acisf10464_000N003_msk1.fits",
+          "badpixfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/10464/acisf10464_repro_bpix1.fits",
+          "dafile=CALDB",
+          "bkgresp=no",
+          "weight=yes",
+          "weight_rmf=yes",
+          "resp_pos=CENTROID",
+          "refcoord=239.10034485273721,66.36861557589773",
+          "correctpsf=no",
+          "combine=no",
+          "grouptype=NONE",
+          "binspec=NONE",
+          "bkg_grouptype=NONE",
+          "bkg_binspec=NONE",
+          "energy=0.3:11.0:0.01",
+          "energy_wmap=500:7000",
+          "binwmap=det=8",
+          "binarfwmap=1",
+          "parallel=no",
+          "nproc=1",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "reused": false,
+        "log": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/logs/specextract.log"
+      },
+      "zero_background_steps": null,
+      "blanksky_scaling": {
+        "BKGSCALn": 0.086949646,
+        "source_exposure": 35529.633497186,
+        "background_exposure": 450000.0,
+        "source_BACKSCAL": 0.00010354687273502,
+        "background_BACKSCAL": 0.00010354687273502,
+        "source_AREASCAL": 1.0,
+        "initial_background_AREASCAL": 11.500909388406,
+        "background_AREASCAL": 0.90805132323204,
+        "expected_background_AREASCAL": 0.9080513232320436,
+        "areascal_relative_error": 3.9968028886505635e-15,
+        "effective_background_scale": 0.08694964600000035,
+        "effective_scale_relative_error_from_BKGSCALn": 3.9968028886505635e-15,
+        "correction_command": [
+          "dmhedit",
+          "infile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/products/ABELL2146_bin62_obs10464_ccd7_bkg.pi",
+          "filelist=",
+          "operation=add",
+          "key=AREASCAL",
+          "value=0.9080513232320436",
+          "comment=Sigma v17C: enforce effective scale equal to BKGSCALn",
+          "verbose=0",
+          "mode=h"
+        ],
+        "correction_log": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3865/products/ABELL2146_bin62_obs10464_ccd7_bkg.areascal.log",
+        "correction_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source_pha_channel_audit": {
+        "event_rows": 1024,
+        "pha_total_counts": 1024,
+        "nonzero_event_channels": 551,
+        "nonzero_pha_channels": 551,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "background_pha_channel_audit": {
+        "event_rows": 9498,
+        "pha_total_counts": 9498,
+        "nonzero_event_channels": 952,
+        "nonzero_pha_channels": 952,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "response_audit": {
+        "arf_rows": 1070,
+        "arf_finite": true,
+        "arf_positive_bins": 1070,
+        "arf_maximum_cm2": 640.144287109375,
+        "rmf_matrix_elements": 383080,
+        "rmf_finite": true,
+        "rmf_nonzero_elements": 383080,
+        "rmf_maximum": 0.16624729335308075
+      },
+      "source_pha_links": {
+        "BACKFILE": "ABELL2146_bin62_obs10464_ccd7_bkg.pi",
+        "ANCRFILE": "ABELL2146_bin62_obs10464_ccd7.arf",
+        "RESPFILE": "ABELL2146_bin62_obs10464_ccd7.rmf"
+      },
+      "four_product_bytes": 7122240,
+      "products": {
+        "source_pha": {
+          "name": "ABELL2146_bin62_obs10464_ccd7.pi",
+          "bytes": 2744640,
+          "sha256": "1cb4645f213bfdb82a81b88a5896157ed6c7cd8a91ab515efbe909638629309a"
+        },
+        "background_pha": {
+          "name": "ABELL2146_bin62_obs10464_ccd7_bkg.pi",
+          "bytes": 2724480,
+          "sha256": "53e984d56c069bce8bc709785e275e96b1e731153ebbdf2bec2496cc341f91c4"
+        },
+        "arf": {
+          "name": "ABELL2146_bin62_obs10464_ccd7.arf",
+          "bytes": 37440,
+          "sha256": "057bd0e2926d7d92dca4b9d5967e0a15e740802951bf6654ebe944945cc7f74b"
+        },
+        "rmf": {
+          "name": "ABELL2146_bin62_obs10464_ccd7.rmf",
+          "bytes": 1615680,
+          "sha256": "abb345bf5b0bcb2b9ba4bea498e09340aeb826711396dfe174d59a79ac7383d1"
+        }
+      },
+      "gates": {
+        "exact_bin_mask_counts_match_frozen_manifest": true,
+        "materialized_event_subsets_match_frozen_manifest": true,
+        "source_and_background_pha_channel_histograms_match_events": true,
+        "arf_is_finite_positive": true,
+        "rmf_is_finite_nonzero": true,
+        "pha_links_present": true,
+        "blanksky_scale_exact": true,
+        "detector_medoid_reference_maps_to_declared_ccd": true
+      },
+      "reused": true
+    },
+    {
+      "cell_name": "ABELL2146_bin62_obs10888_ccd7",
+      "cluster": "ABELL2146",
+      "bin_id": 62,
+      "obsid": 10888,
+      "ccd_id": 7,
+      "production_index": 3993,
+      "attempt": 1,
+      "start_utc": "2026-08-07T04:07:10.385306+00:00",
+      "elapsed_seconds": 10.7655700489413,
+      "preflight": {
+        "source_band_events": 84,
+        "background_band_events": 1204
+      },
+      "exact_bin_mask": {
+        "path": "/home/henry/sigma-v19dq-ccd7-background/v100/masks/ABELL2146/bin62.fits",
+        "sha256": "b72047249030012f695a3d5739f499a7dee07aebc2998f80134544199496e0b0",
+        "bytes": 2329920,
+        "selected_pixels": 1701,
+        "definition": "frozen V19M binmap == 62",
+        "writer": "CIAO dmimgcalc constant-one image plus dmimgthresh exact-bin threshold",
+        "step": null,
+        "reused": true
+      },
+      "materialized_event_subsets": {
+        "source": {
+          "path": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/e/s.fits",
+          "bytes": 696960,
+          "sha256": "ab3006f026291f948a3681b7880dc60d5f00b8d88be8a1b736c539028dcce759",
+          "all_energy_rows": 208,
+          "band_500_7000_rows": 84,
+          "step": {
+            "command": [
+              "dmcopy",
+              "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_science_nosrc_reproj_evt.fits[ccd_id=7][sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/10888.fov)][sky=mask(/home/henry/sigma-v19dq-ccd7-background/v100/masks/ABELL2146/bin62.fits)]",
+              "outfile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/e/s.fits",
+              "opt=all",
+              "clobber=no",
+              "verbose=1",
+              "mode=h"
+            ],
+            "reused": false,
+            "log": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/logs/dmcopy_source_exact.log"
+          }
+        },
+        "background": {
+          "path": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/e/b.fits",
+          "bytes": 1033920,
+          "sha256": "9f50bb8ce26815a6aca02cf4aad0bd7a2971e9db6612b8a4f5fa875ce5ec35bc",
+          "all_energy_rows": 9509,
+          "band_500_7000_rows": 1204,
+          "step": {
+            "command": [
+              "dmcopy",
+              "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_blanksky_nosrc_evt.fits[ccd_id=7][sky=mask(/home/henry/sigma-v19dq-ccd7-background/v100/masks/ABELL2146/bin62.fits)]",
+              "outfile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/e/b.fits",
+              "opt=all",
+              "clobber=no",
+              "verbose=1",
+              "mode=h"
+            ],
+            "reused": false,
+            "log": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/logs/dmcopy_background_exact.log"
+          }
+        }
+      },
+      "response_position": {
+        "refcoord": [
+          239.0994352166917,
+          66.3678228815023
+        ],
+        "resp_pos": "CENTROID",
+        "reason": "outcome-blind detector medoid from an exact selected event; no fitted sky coordinate",
+        "detector_medoid": {
+          "rule": "0.5-7 keV selected event nearest the detector-coordinate centroid",
+          "selection": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/e/s.fits[energy=500:7000][cols detx,dety,ccd_id]",
+          "events": 84,
+          "mean_detx": 4298.710821242559,
+          "mean_dety": 3940.183907645089,
+          "medoid_index": 18,
+          "reference_detx": 4296.41015625,
+          "reference_dety": 3941.08349609375,
+          "ra_deg": 239.0994352166917,
+          "dec_deg": 66.3678228815023,
+          "mapped_ccd_id": 7,
+          "detector_science": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_science_nosrc_evt.fits",
+          "detector_science_sha256": "2cb333e9929f71600e1f7abc6c66da67c9d2baed28676b3f2760140b8ed57b0e",
+          "command": [
+            "dmcoords",
+            "infile=/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_science_nosrc_evt.fits",
+            "asolfile=@/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/10888/corrected_asol1.lis",
+            "option=det",
+            "detx=4296.41015625000000",
+            "dety=3941.08349609375000",
+            "celfmt=deg",
+            "verbose=0",
+            "mode=h"
+          ]
+        }
+      },
+      "short_path_token": "c3993",
+      "step": {
+        "command": [
+          "specextract",
+          "infile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/e/s.fits[sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/10888.fov)]",
+          "outroot=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/products/ABELL2146_bin62_obs10888_ccd7",
+          "bkgfile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/e/b.fits[sky=region(/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/images/broad_flux/10888.fov)]",
+          "asp=@/home/henry/sigma-v19f-chandra/astrometry_v102/ABELL2146/10888/corrected_asol1.lis",
+          "mskfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/10888/acisf10888_000N003_msk1.fits",
+          "badpixfile=/home/henry/sigma-v19f-chandra/repro/ABELL2146/10888/acisf10888_repro_bpix1.fits",
+          "dafile=CALDB",
+          "bkgresp=no",
+          "weight=yes",
+          "weight_rmf=yes",
+          "resp_pos=CENTROID",
+          "refcoord=239.09943521669169,66.36782288150231",
+          "correctpsf=no",
+          "combine=no",
+          "grouptype=NONE",
+          "binspec=NONE",
+          "bkg_grouptype=NONE",
+          "bkg_binspec=NONE",
+          "energy=0.3:11.0:0.01",
+          "energy_wmap=500:7000",
+          "binwmap=det=8",
+          "binarfwmap=1",
+          "parallel=no",
+          "nproc=1",
+          "clobber=no",
+          "verbose=1",
+          "mode=h"
+        ],
+        "reused": false,
+        "log": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/logs/specextract.log"
+      },
+      "zero_background_steps": null,
+      "blanksky_scaling": {
+        "BKGSCALn": 0.015882602,
+        "source_exposure": 6447.9508614685,
+        "background_exposure": 450000.0,
+        "source_BACKSCAL": 0.00010354687273502,
+        "background_BACKSCAL": 0.00010354687273502,
+        "source_AREASCAL": 1.0,
+        "initial_background_AREASCAL": 62.961975625908,
+        "background_AREASCAL": 0.9021682777263,
+        "expected_background_AREASCAL": 0.9021682777262959,
+        "areascal_relative_error": 4.6629367034256575e-15,
+        "effective_background_scale": 0.015882601999999926,
+        "effective_scale_relative_error_from_BKGSCALn": 4.551914400963142e-15,
+        "correction_command": [
+          "dmhedit",
+          "infile=/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/products/ABELL2146_bin62_obs10888_ccd7_bkg.pi",
+          "filelist=",
+          "operation=add",
+          "key=AREASCAL",
+          "value=0.9021682777262959",
+          "comment=Sigma v17C: enforce effective scale equal to BKGSCALn",
+          "verbose=0",
+          "mode=h"
+        ],
+        "correction_log": "/home/henry/sigma-v19dq-ccd7-background/v100/partial/c3993/products/ABELL2146_bin62_obs10888_ccd7_bkg.areascal.log",
+        "correction_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source_pha_channel_audit": {
+        "event_rows": 208,
+        "pha_total_counts": 208,
+        "nonzero_event_channels": 175,
+        "nonzero_pha_channels": 175,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "background_pha_channel_audit": {
+        "event_rows": 9509,
+        "pha_total_counts": 9509,
+        "nonzero_event_channels": 959,
+        "nonzero_pha_channels": 959,
+        "mismatched_channel_count": 0,
+        "maximum_absolute_channel_delta": 0,
+        "exact": true
+      },
+      "response_audit": {
+        "arf_rows": 1070,
+        "arf_finite": true,
+        "arf_positive_bins": 1070,
+        "arf_maximum_cm2": 640.4696044921875,
+        "rmf_matrix_elements": 383060,
+        "rmf_finite": true,
+        "rmf_nonzero_elements": 383060,
+        "rmf_maximum": 0.16626527905464172
+      },
+      "source_pha_links": {
+        "BACKFILE": "ABELL2146_bin62_obs10888_ccd7_bkg.pi",
+        "ANCRFILE": "ABELL2146_bin62_obs10888_ccd7.arf",
+        "RESPFILE": "ABELL2146_bin62_obs10888_ccd7.rmf"
+      },
+      "four_product_bytes": 7119360,
+      "products": {
+        "source_pha": {
+          "name": "ABELL2146_bin62_obs10888_ccd7.pi",
+          "bytes": 2741760,
+          "sha256": "3f0642cca830fd3819d3a030f9b94f64f2bcdf84807bd23ab3bbfa9de175639c"
+        },
+        "background_pha": {
+          "name": "ABELL2146_bin62_obs10888_ccd7_bkg.pi",
+          "bytes": 2724480,
+          "sha256": "13a1ec40d1fd1989960c50d2d98309f86fb35ebd579db5a9f060c44ac6fc00ac"
+        },
+        "arf": {
+          "name": "ABELL2146_bin62_obs10888_ccd7.arf",
+          "bytes": 37440,
+          "sha256": "e3c672f20a9a24abb415bbdd46b978c83e92452e5acd10671413114943d895dc"
+        },
+        "rmf": {
+          "name": "ABELL2146_bin62_obs10888_ccd7.rmf",
+          "bytes": 1615680,
+          "sha256": "945b8ab2a878ce60223195fbad8c71cf296b0e8ef7c5fdb0a3b426b3775112af"
+        }
+      },
+      "gates": {
+        "exact_bin_mask_counts_match_frozen_manifest": true,
+        "materialized_event_subsets_match_frozen_manifest": true,
+        "source_and_background_pha_channel_histograms_match_events": true,
+        "arf_is_finite_positive": true,
+        "rmf_is_finite_nonzero": true,
+        "pha_links_present": true,
+        "blanksky_scale_exact": true,
+        "detector_medoid_reference_maps_to_declared_ccd": true
+      },
+      "reused": true
+    }
+  ],
+  "joint_preflight": {
+    "status": "unmerged_regional_joint_likelihood_preflight_passed",
+    "aggregate_pass": true,
+    "regions": [
+      {
+        "cluster": "BULLET",
+        "primary": {
+          "cluster": "BULLET",
+          "cells": 9,
+          "cell_names": [
+            "BULLET_bin169_obs3184_ccd3",
+            "BULLET_bin169_obs4984_ccd3",
+            "BULLET_bin169_obs4985_ccd2",
+            "BULLET_bin169_obs4986_ccd0",
+            "BULLET_bin169_obs5355_ccd2",
+            "BULLET_bin169_obs5356_ccd2",
+            "BULLET_bin169_obs5357_ccd0",
+            "BULLET_bin169_obs5358_ccd0",
+            "BULLET_bin169_obs5361_ccd3"
+          ],
+          "datasets": [
+            {
+              "dataset_id": 1,
+              "cell_name": "BULLET_bin169_obs3184_ccd3",
+              "obsid": 3184,
+              "ccd_id": 3,
+              "grouped_bins": 16,
+              "source_counts_in_fit_band": 426.0,
+              "source_exposure_s": 82805.374290097,
+              "background_scale": 0.051659654999998264
+            },
+            {
+              "dataset_id": 2,
+              "cell_name": "BULLET_bin169_obs4984_ccd3",
+              "obsid": 4984,
+              "ccd_id": 3,
+              "grouped_bins": 15,
+              "source_counts_in_fit_band": 383.0,
+              "source_exposure_s": 76119.595640067,
+              "background_scale": 0.054451457999999744
+            },
+            {
+              "dataset_id": 3,
+              "cell_name": "BULLET_bin169_obs4985_ccd2",
+              "obsid": 4985,
+              "ccd_id": 2,
+              "grouped_bins": 5,
+              "source_counts_in_fit_band": 113.0,
+              "source_exposure_s": 23793.532196114,
+              "background_scale": 0.01671957000000004
+            },
+            {
+              "dataset_id": 4,
+              "cell_name": "BULLET_bin169_obs4986_ccd0",
+              "obsid": 4986,
+              "ccd_id": 0,
+              "grouped_bins": 8,
+              "source_counts_in_fit_band": 202.0,
+              "source_exposure_s": 40538.340712595,
+              "background_scale": 0.028606226999999967
+            },
+            {
+              "dataset_id": 5,
+              "cell_name": "BULLET_bin169_obs5355_ccd2",
+              "obsid": 5355,
+              "ccd_id": 2,
+              "grouped_bins": 6,
+              "source_counts_in_fit_band": 133.0,
+              "source_exposure_s": 23465.234365219,
+              "background_scale": 0.016302905999999954
+            },
+            {
+              "dataset_id": 6,
+              "cell_name": "BULLET_bin169_obs5356_ccd2",
+              "obsid": 5356,
+              "ccd_id": 2,
+              "grouped_bins": 18,
+              "source_counts_in_fit_band": 470.0,
+              "source_exposure_s": 96212.411017543,
+              "background_scale": 0.0657040480000001
+            },
+            {
+              "dataset_id": 7,
+              "cell_name": "BULLET_bin169_obs5357_ccd0",
+              "obsid": 5357,
+              "ccd_id": 0,
+              "grouped_bins": 16,
+              "source_counts_in_fit_band": 412.0,
+              "source_exposure_s": 78564.897617592,
+              "background_scale": 0.055408116000000174
+            },
+            {
+              "dataset_id": 8,
+              "cell_name": "BULLET_bin169_obs5358_ccd0",
+              "obsid": 5358,
+              "ccd_id": 0,
+              "grouped_bins": 7,
+              "source_counts_in_fit_band": 170.0,
+              "source_exposure_s": 31957.532836021,
+              "background_scale": 0.022433896999999987
+            },
+            {
+              "dataset_id": 9,
+              "cell_name": "BULLET_bin169_obs5361_ccd3",
+              "obsid": 5361,
+              "ccd_id": 3,
+              "grouped_bins": 17,
+              "source_counts_in_fit_band": 451.0,
+              "source_exposure_s": 82620.198181689,
+              "background_scale": 0.058943931
+            }
+          ],
+          "atomic_data": {
+            "atomdb_version": "3.0.9",
+            "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+            "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+            "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+            "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+            "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+          },
+          "model": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+          "statistic_name": "chi2xspecvar",
+          "minimum_grouped_source_counts": 25,
+          "free_parameter_count": 3,
+          "shared_parameters": [
+            "temperature_keV",
+            "abundance_solar",
+            "normalization"
+          ],
+          "starts": [
+            {
+              "index": 0,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 80.12376473493684,
+              "dof": 105,
+              "temperature_keV": 15.141738656376075,
+              "abundance_solar": 0.01113933181445681,
+              "normalization": 5.9852376230219256e-05
+            },
+            {
+              "index": 1,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 80.12376454360808,
+              "dof": 105,
+              "temperature_keV": 15.141121509930882,
+              "abundance_solar": 0.01128307654593556,
+              "normalization": 5.985133665834689e-05
+            },
+            {
+              "index": 2,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 80.12376447447858,
+              "dof": 105,
+              "temperature_keV": 15.14001236949039,
+              "abundance_solar": 0.011535752813667656,
+              "normalization": 5.984950645005145e-05
+            }
+          ],
+          "best_start_index": 2,
+          "final_optimization_attempts": [
+            "levmar"
+          ],
+          "fit": {
+            "statistic": 80.12376445943057,
+            "dof": 105,
+            "reduced_statistic": 0.763083471042196
+          },
+          "parameters": {
+            "temperature_keV": 15.140411818146363,
+            "abundance_solar": 0.011444934792453586,
+            "normalization": 5.9850164318120625e-05
+          },
+          "temperature_confidence_68_percent": {
+            "lower_keV": 12.104097865354701,
+            "upper_keV": 17.687289333690877,
+            "fractional_half_width": 0.18438043612672766,
+            "ordered": true,
+            "error": ""
+          },
+          "all_free_parameters_strictly_inside_bounds": true
+        },
+        "repeat": {
+          "cluster": "BULLET",
+          "cells": 9,
+          "cell_names": [
+            "BULLET_bin169_obs3184_ccd3",
+            "BULLET_bin169_obs4984_ccd3",
+            "BULLET_bin169_obs4985_ccd2",
+            "BULLET_bin169_obs4986_ccd0",
+            "BULLET_bin169_obs5355_ccd2",
+            "BULLET_bin169_obs5356_ccd2",
+            "BULLET_bin169_obs5357_ccd0",
+            "BULLET_bin169_obs5358_ccd0",
+            "BULLET_bin169_obs5361_ccd3"
+          ],
+          "datasets": [
+            {
+              "dataset_id": 1,
+              "cell_name": "BULLET_bin169_obs3184_ccd3",
+              "obsid": 3184,
+              "ccd_id": 3,
+              "grouped_bins": 16,
+              "source_counts_in_fit_band": 426.0,
+              "source_exposure_s": 82805.374290097,
+              "background_scale": 0.051659654999998264
+            },
+            {
+              "dataset_id": 2,
+              "cell_name": "BULLET_bin169_obs4984_ccd3",
+              "obsid": 4984,
+              "ccd_id": 3,
+              "grouped_bins": 15,
+              "source_counts_in_fit_band": 383.0,
+              "source_exposure_s": 76119.595640067,
+              "background_scale": 0.054451457999999744
+            },
+            {
+              "dataset_id": 3,
+              "cell_name": "BULLET_bin169_obs4985_ccd2",
+              "obsid": 4985,
+              "ccd_id": 2,
+              "grouped_bins": 5,
+              "source_counts_in_fit_band": 113.0,
+              "source_exposure_s": 23793.532196114,
+              "background_scale": 0.01671957000000004
+            },
+            {
+              "dataset_id": 4,
+              "cell_name": "BULLET_bin169_obs4986_ccd0",
+              "obsid": 4986,
+              "ccd_id": 0,
+              "grouped_bins": 8,
+              "source_counts_in_fit_band": 202.0,
+              "source_exposure_s": 40538.340712595,
+              "background_scale": 0.028606226999999967
+            },
+            {
+              "dataset_id": 5,
+              "cell_name": "BULLET_bin169_obs5355_ccd2",
+              "obsid": 5355,
+              "ccd_id": 2,
+              "grouped_bins": 6,
+              "source_counts_in_fit_band": 133.0,
+              "source_exposure_s": 23465.234365219,
+              "background_scale": 0.016302905999999954
+            },
+            {
+              "dataset_id": 6,
+              "cell_name": "BULLET_bin169_obs5356_ccd2",
+              "obsid": 5356,
+              "ccd_id": 2,
+              "grouped_bins": 18,
+              "source_counts_in_fit_band": 470.0,
+              "source_exposure_s": 96212.411017543,
+              "background_scale": 0.0657040480000001
+            },
+            {
+              "dataset_id": 7,
+              "cell_name": "BULLET_bin169_obs5357_ccd0",
+              "obsid": 5357,
+              "ccd_id": 0,
+              "grouped_bins": 16,
+              "source_counts_in_fit_band": 412.0,
+              "source_exposure_s": 78564.897617592,
+              "background_scale": 0.055408116000000174
+            },
+            {
+              "dataset_id": 8,
+              "cell_name": "BULLET_bin169_obs5358_ccd0",
+              "obsid": 5358,
+              "ccd_id": 0,
+              "grouped_bins": 7,
+              "source_counts_in_fit_band": 170.0,
+              "source_exposure_s": 31957.532836021,
+              "background_scale": 0.022433896999999987
+            },
+            {
+              "dataset_id": 9,
+              "cell_name": "BULLET_bin169_obs5361_ccd3",
+              "obsid": 5361,
+              "ccd_id": 3,
+              "grouped_bins": 17,
+              "source_counts_in_fit_band": 451.0,
+              "source_exposure_s": 82620.198181689,
+              "background_scale": 0.058943931
+            }
+          ],
+          "atomic_data": {
+            "atomdb_version": "3.0.9",
+            "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+            "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+            "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+            "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+            "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+          },
+          "model": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+          "statistic_name": "chi2xspecvar",
+          "minimum_grouped_source_counts": 25,
+          "free_parameter_count": 3,
+          "shared_parameters": [
+            "temperature_keV",
+            "abundance_solar",
+            "normalization"
+          ],
+          "starts": [
+            {
+              "index": 0,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 80.12376473493684,
+              "dof": 105,
+              "temperature_keV": 15.141738656376075,
+              "abundance_solar": 0.01113933181445681,
+              "normalization": 5.9852376230219256e-05
+            },
+            {
+              "index": 1,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 80.12376454360808,
+              "dof": 105,
+              "temperature_keV": 15.141121509930882,
+              "abundance_solar": 0.01128307654593556,
+              "normalization": 5.985133665834689e-05
+            },
+            {
+              "index": 2,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 80.12376447447858,
+              "dof": 105,
+              "temperature_keV": 15.14001236949039,
+              "abundance_solar": 0.011535752813667656,
+              "normalization": 5.984950645005145e-05
+            }
+          ],
+          "best_start_index": 2,
+          "final_optimization_attempts": [
+            "levmar"
+          ],
+          "fit": {
+            "statistic": 80.12376445943057,
+            "dof": 105,
+            "reduced_statistic": 0.763083471042196
+          },
+          "parameters": {
+            "temperature_keV": 15.140411818146363,
+            "abundance_solar": 0.011444934792453586,
+            "normalization": 5.9850164318120625e-05
+          },
+          "temperature_confidence_68_percent": {
+            "lower_keV": 12.104097865354701,
+            "upper_keV": 17.687289333690877,
+            "fractional_half_width": 0.18438043612672766,
+            "ordered": true,
+            "error": ""
+          },
+          "all_free_parameters_strictly_inside_bounds": true
+        },
+        "parent_merged_region_fit": {
+          "cluster": "BULLET",
+          "label": "BULLET_bin169",
+          "fit_completed": true,
+          "abundance_mode": "fixed_to_integrated",
+          "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_bin169/BULLET_bin169_src_grp.pi",
+          "source_spectrum_sha256": "7239889ebd31d300a3c6b82b7c66c5fb4494da43cb314781e3f6b05f6c48823e",
+          "background_spectrum_sha256": "d59db93567c1a9550a6e29f1948a8fcc894116099de26a5d3605b0a2231c8fbf",
+          "arf_sha256": "7fce9868613861a9b2ccbdceec68f7849c9482f4e7ad08c2d4f7abc616398fb5",
+          "rmf_sha256": "3027db25cc9738388bf79c1a1874866f678059b4f5b6d87e8af9660f9b2c255f",
+          "fit_band_keV": [
+            0.5,
+            7.0
+          ],
+          "sherpa_response_energy_fit_band_source_counts": 2725.0,
+          "sherpa_response_energy_fit_band_grouped_bins": 87,
+          "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+          "source_exposure_s": 536077.11685694,
+          "normalization_initial": 5.083223876402108e-05,
+          "model": "xstbabs * xsapec",
+          "statistic": "chi2xspecvar",
+          "abundance_table": "aspl (Asplund et al. 2009)",
+          "xspec_atomic_data": {
+            "atomdb_version": "3.0.9",
+            "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+            "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+            "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+            "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+            "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+          },
+          "apec_model_probe": {
+            "energy_bins_keV": [
+              [
+                0.5,
+                0.75
+              ],
+              [
+                0.75,
+                1.0
+              ]
+            ],
+            "integrated_flux": 6.588920270871928e-06
+          },
+          "optimization_attempts": [
+            "levmar"
+          ],
+          "parameters": {
+            "nH_1e22_cm2_fixed": 0.0438,
+            "redshift_fixed": 0.296,
+            "temperature_keV": 15.206779513760727,
+            "abundance_solar": 0.38361102334267344,
+            "normalization": 5.7353561128815435e-05
+          },
+          "temperature_confidence_68_percent": {
+            "lower_keV": 12.688291253291316,
+            "upper_keV": 18.361743461147224,
+            "fractional_half_width": 0.1865435151052844,
+            "error": "",
+            "raw": {
+              "datasets": [
+                1
+              ],
+              "methodname": "confidence",
+              "fitname": "levmar",
+              "statname": "chi2xspecvar",
+              "sigma": 1.0,
+              "percent": 68.26894921370858,
+              "parnames": [
+                "apec_bullet_bin169.kT"
+              ],
+              "parvals": [
+                15.206779513760727
+              ],
+              "parmins": [
+                -2.518488260469411
+              ],
+              "parmaxes": [
+                3.1549639473864968
+              ],
+              "nfits": 13
+            }
+          },
+          "fit": {
+            "statval": 85.87856671582186,
+            "dof": 85,
+            "reduced_statistic": 1.010336079009669,
+            "raw": {
+              "datasets": [
+                1
+              ],
+              "methodname": "levmar",
+              "statname": "chi2xspecvar",
+              "succeeded": true,
+              "message": "successful termination",
+              "nfev": 16,
+              "istatval": 131.67610517898981,
+              "statval": 85.87856671582186,
+              "dstatval": 45.79753846316795,
+              "numpoints": 87,
+              "dof": 85,
+              "parnames": [
+                "apec_bullet_bin169.kT",
+                "apec_bullet_bin169.norm"
+              ],
+              "parvals": [
+                15.206779513760727,
+                5.7353561128815435e-05
+              ]
+            }
+          },
+          "gates": {
+            "finite_parameters_and_ordered_temperature_interval": true,
+            "reduced_statistic_at_most_1_5": true,
+            "all_free_parameters_strictly_inside_bounds": true,
+            "fractional_68_percent_temperature_half_width_at_most_0_5": true,
+            "all_passed": true
+          }
+        },
+        "leave_one_observation_out": [
+          {
+            "omitted_cell": "BULLET_bin169_obs3184_ccd3",
+            "omitted_obsid": 3184,
+            "temperature_keV": 15.038823630943916,
+            "abundance_solar": 0.0,
+            "normalization": 5.9835494105326186e-05,
+            "reduced_statistic": 0.812682115682018
+          },
+          {
+            "omitted_cell": "BULLET_bin169_obs4984_ccd3",
+            "omitted_obsid": 4984,
+            "temperature_keV": 14.297416570927288,
+            "abundance_solar": 0.14706099024957972,
+            "normalization": 5.906217937640353e-05,
+            "reduced_statistic": 0.739822366976642
+          },
+          {
+            "omitted_cell": "BULLET_bin169_obs4985_ccd2",
+            "omitted_obsid": 4985,
+            "temperature_keV": 15.275239745294687,
+            "abundance_solar": 0.0,
+            "normalization": 6.029930321860447e-05,
+            "reduced_statistic": 0.7478188719691978
+          },
+          {
+            "omitted_cell": "BULLET_bin169_obs4986_ccd0",
+            "omitted_obsid": 4986,
+            "temperature_keV": 14.734616960212033,
+            "abundance_solar": 0.0,
+            "normalization": 5.989693625515706e-05,
+            "reduced_statistic": 0.7946585824042957
+          },
+          {
+            "omitted_cell": "BULLET_bin169_obs5355_ccd2",
+            "omitted_obsid": 5355,
+            "temperature_keV": 14.934229521069854,
+            "abundance_solar": 0.0,
+            "normalization": 5.966858590947233e-05,
+            "reduced_statistic": 0.7625245177529433
+          },
+          {
+            "omitted_cell": "BULLET_bin169_obs5356_ccd2",
+            "omitted_obsid": 5356,
+            "temperature_keV": 15.6431121583331,
+            "abundance_solar": 0.26061915621569676,
+            "normalization": 5.8891536500603426e-05,
+            "reduced_statistic": 0.7742055606545932
+          },
+          {
+            "omitted_cell": "BULLET_bin169_obs5357_ccd0",
+            "omitted_obsid": 5357,
+            "temperature_keV": 14.600984295908553,
+            "abundance_solar": 0.055158711547042334,
+            "normalization": 5.9423325149571794e-05,
+            "reduced_statistic": 0.7561997878616584
+          },
+          {
+            "omitted_cell": "BULLET_bin169_obs5358_ccd0",
+            "omitted_obsid": 5358,
+            "temperature_keV": 15.032831645399957,
+            "abundance_solar": 0.0,
+            "normalization": 5.974246147895588e-05,
+            "reduced_statistic": 0.7974922268805811
+          },
+          {
+            "omitted_cell": "BULLET_bin169_obs5361_ccd3",
+            "omitted_obsid": 5361,
+            "temperature_keV": 16.089061977045834,
+            "abundance_solar": 0.0,
+            "normalization": 5.9541793038889106e-05,
+            "reduced_statistic": 0.6899085441916837
+          }
+        ],
+        "maximum_leave_one_out_temperature_relative_shift": 0.06265682666322703,
+        "gates": {
+          "both_independent_builds_exact_within_tolerance": true,
+          "reduced_statistic_at_most_1_5": true,
+          "temperature_interval_ordered_and_precise": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "merged_and_unmerged_temperature_intervals_overlap": true,
+          "merged_and_unmerged_best_temperatures_within_25_percent": true,
+          "leave_one_observation_out_temperature_shift_at_most_25_percent": true,
+          "no_dataset_exceeds_30_percent_of_source_counts": true
+        },
+        "passed": true
+      },
+      {
+        "cluster": "ABELL2146",
+        "primary": {
+          "cluster": "ABELL2146",
+          "cells": 10,
+          "cell_names": [
+            "ABELL2146_bin62_obs10464_ccd7",
+            "ABELL2146_bin62_obs10888_ccd7",
+            "ABELL2146_bin62_obs12245_ccd2",
+            "ABELL2146_bin62_obs12246_ccd3",
+            "ABELL2146_bin62_obs12247_ccd1",
+            "ABELL2146_bin62_obs13020_ccd0",
+            "ABELL2146_bin62_obs13021_ccd0",
+            "ABELL2146_bin62_obs13023_ccd1",
+            "ABELL2146_bin62_obs13120_ccd2",
+            "ABELL2146_bin62_obs13138_ccd3"
+          ],
+          "datasets": [
+            {
+              "dataset_id": 1,
+              "cell_name": "ABELL2146_bin62_obs10464_ccd7",
+              "obsid": 10464,
+              "ccd_id": 7,
+              "grouped_bins": 15,
+              "source_counts_in_fit_band": 392.0,
+              "source_exposure_s": 35529.633497186,
+              "background_scale": 0.08694964600000037
+            },
+            {
+              "dataset_id": 2,
+              "cell_name": "ABELL2146_bin62_obs10888_ccd7",
+              "obsid": 10888,
+              "ccd_id": 7,
+              "grouped_bins": 4,
+              "source_counts_in_fit_band": 100.0,
+              "source_exposure_s": 6447.9508614685,
+              "background_scale": 0.015882601999999926
+            },
+            {
+              "dataset_id": 3,
+              "cell_name": "ABELL2146_bin62_obs12245_ccd2",
+              "obsid": 12245,
+              "ccd_id": 2,
+              "grouped_bins": 9,
+              "source_counts_in_fit_band": 226.0,
+              "source_exposure_s": 48343.97180545,
+              "background_scale": 0.11530262999999971
+            },
+            {
+              "dataset_id": 4,
+              "cell_name": "ABELL2146_bin62_obs12246_ccd3",
+              "obsid": 12246,
+              "ccd_id": 3,
+              "grouped_bins": 11,
+              "source_counts_in_fit_band": 280.0,
+              "source_exposure_s": 47177.694676127,
+              "background_scale": 0.11604434000000047
+            },
+            {
+              "dataset_id": 5,
+              "cell_name": "ABELL2146_bin62_obs12247_ccd1",
+              "obsid": 12247,
+              "ccd_id": 1,
+              "grouped_bins": 14,
+              "source_counts_in_fit_band": 361.0,
+              "source_exposure_s": 64942.42168339,
+              "background_scale": 0.15494739999999943
+            },
+            {
+              "dataset_id": 6,
+              "cell_name": "ABELL2146_bin62_obs13020_ccd0",
+              "obsid": 13020,
+              "ccd_id": 0,
+              "grouped_bins": 11,
+              "source_counts_in_fit_band": 282.0,
+              "source_exposure_s": 41252.500716718,
+              "background_scale": 0.09684070200000024
+            },
+            {
+              "dataset_id": 7,
+              "cell_name": "ABELL2146_bin62_obs13021_ccd0",
+              "obsid": 13021,
+              "ccd_id": 0,
+              "grouped_bins": 12,
+              "source_counts_in_fit_band": 304.0,
+              "source_exposure_s": 48159.195828701,
+              "background_scale": 0.11276129000000018
+            },
+            {
+              "dataset_id": 8,
+              "cell_name": "ABELL2146_bin62_obs13023_ccd1",
+              "obsid": 13023,
+              "ccd_id": 1,
+              "grouped_bins": 6,
+              "source_counts_in_fit_band": 153.0,
+              "source_exposure_s": 27682.673830123,
+              "background_scale": 0.065197274
+            },
+            {
+              "dataset_id": 9,
+              "cell_name": "ABELL2146_bin62_obs13120_ccd2",
+              "obsid": 13120,
+              "ccd_id": 2,
+              "grouped_bins": 11,
+              "source_counts_in_fit_band": 283.0,
+              "source_exposure_s": 49084.828265945,
+              "background_scale": 0.11622175999999941
+            },
+            {
+              "dataset_id": 10,
+              "cell_name": "ABELL2146_bin62_obs13138_ccd3",
+              "obsid": 13138,
+              "ccd_id": 3,
+              "grouped_bins": 12,
+              "source_counts_in_fit_band": 309.0,
+              "source_exposure_s": 49391.758767632,
+              "background_scale": 0.12438740000000058
+            }
+          ],
+          "atomic_data": {
+            "atomdb_version": "3.0.9",
+            "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+            "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+            "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+            "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+            "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+          },
+          "model": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+          "statistic_name": "chi2xspecvar",
+          "minimum_grouped_source_counts": 25,
+          "free_parameter_count": 3,
+          "shared_parameters": [
+            "temperature_keV",
+            "abundance_solar",
+            "normalization"
+          ],
+          "starts": [
+            {
+              "index": 0,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 105.18352068762249,
+              "dof": 102,
+              "temperature_keV": 10.172555343904811,
+              "abundance_solar": 0.13711222261900421,
+              "normalization": 5.328901785660501e-05
+            },
+            {
+              "index": 1,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 105.1835206670035,
+              "dof": 102,
+              "temperature_keV": 10.172940473188453,
+              "abundance_solar": 0.1369873508984723,
+              "normalization": 5.3289849972363445e-05
+            },
+            {
+              "index": 2,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 105.1835206702574,
+              "dof": 102,
+              "temperature_keV": 10.172711199992946,
+              "abundance_solar": 0.13705925912836883,
+              "normalization": 5.328936997545333e-05
+            }
+          ],
+          "best_start_index": 1,
+          "final_optimization_attempts": [
+            "levmar"
+          ],
+          "fit": {
+            "statistic": 105.18352066528783,
+            "dof": 102,
+            "reduced_statistic": 1.0312109869145865
+          },
+          "parameters": {
+            "temperature_keV": 10.172862448781858,
+            "abundance_solar": 0.13701238892184248,
+            "normalization": 5.328968297460391e-05
+          },
+          "temperature_confidence_68_percent": {
+            "lower_keV": 8.313081451745715,
+            "upper_keV": 12.570659180297556,
+            "fractional_half_width": 0.20926154020010665,
+            "ordered": true,
+            "error": ""
+          },
+          "all_free_parameters_strictly_inside_bounds": true
+        },
+        "repeat": {
+          "cluster": "ABELL2146",
+          "cells": 10,
+          "cell_names": [
+            "ABELL2146_bin62_obs10464_ccd7",
+            "ABELL2146_bin62_obs10888_ccd7",
+            "ABELL2146_bin62_obs12245_ccd2",
+            "ABELL2146_bin62_obs12246_ccd3",
+            "ABELL2146_bin62_obs12247_ccd1",
+            "ABELL2146_bin62_obs13020_ccd0",
+            "ABELL2146_bin62_obs13021_ccd0",
+            "ABELL2146_bin62_obs13023_ccd1",
+            "ABELL2146_bin62_obs13120_ccd2",
+            "ABELL2146_bin62_obs13138_ccd3"
+          ],
+          "datasets": [
+            {
+              "dataset_id": 1,
+              "cell_name": "ABELL2146_bin62_obs10464_ccd7",
+              "obsid": 10464,
+              "ccd_id": 7,
+              "grouped_bins": 15,
+              "source_counts_in_fit_band": 392.0,
+              "source_exposure_s": 35529.633497186,
+              "background_scale": 0.08694964600000037
+            },
+            {
+              "dataset_id": 2,
+              "cell_name": "ABELL2146_bin62_obs10888_ccd7",
+              "obsid": 10888,
+              "ccd_id": 7,
+              "grouped_bins": 4,
+              "source_counts_in_fit_band": 100.0,
+              "source_exposure_s": 6447.9508614685,
+              "background_scale": 0.015882601999999926
+            },
+            {
+              "dataset_id": 3,
+              "cell_name": "ABELL2146_bin62_obs12245_ccd2",
+              "obsid": 12245,
+              "ccd_id": 2,
+              "grouped_bins": 9,
+              "source_counts_in_fit_band": 226.0,
+              "source_exposure_s": 48343.97180545,
+              "background_scale": 0.11530262999999971
+            },
+            {
+              "dataset_id": 4,
+              "cell_name": "ABELL2146_bin62_obs12246_ccd3",
+              "obsid": 12246,
+              "ccd_id": 3,
+              "grouped_bins": 11,
+              "source_counts_in_fit_band": 280.0,
+              "source_exposure_s": 47177.694676127,
+              "background_scale": 0.11604434000000047
+            },
+            {
+              "dataset_id": 5,
+              "cell_name": "ABELL2146_bin62_obs12247_ccd1",
+              "obsid": 12247,
+              "ccd_id": 1,
+              "grouped_bins": 14,
+              "source_counts_in_fit_band": 361.0,
+              "source_exposure_s": 64942.42168339,
+              "background_scale": 0.15494739999999943
+            },
+            {
+              "dataset_id": 6,
+              "cell_name": "ABELL2146_bin62_obs13020_ccd0",
+              "obsid": 13020,
+              "ccd_id": 0,
+              "grouped_bins": 11,
+              "source_counts_in_fit_band": 282.0,
+              "source_exposure_s": 41252.500716718,
+              "background_scale": 0.09684070200000024
+            },
+            {
+              "dataset_id": 7,
+              "cell_name": "ABELL2146_bin62_obs13021_ccd0",
+              "obsid": 13021,
+              "ccd_id": 0,
+              "grouped_bins": 12,
+              "source_counts_in_fit_band": 304.0,
+              "source_exposure_s": 48159.195828701,
+              "background_scale": 0.11276129000000018
+            },
+            {
+              "dataset_id": 8,
+              "cell_name": "ABELL2146_bin62_obs13023_ccd1",
+              "obsid": 13023,
+              "ccd_id": 1,
+              "grouped_bins": 6,
+              "source_counts_in_fit_band": 153.0,
+              "source_exposure_s": 27682.673830123,
+              "background_scale": 0.065197274
+            },
+            {
+              "dataset_id": 9,
+              "cell_name": "ABELL2146_bin62_obs13120_ccd2",
+              "obsid": 13120,
+              "ccd_id": 2,
+              "grouped_bins": 11,
+              "source_counts_in_fit_band": 283.0,
+              "source_exposure_s": 49084.828265945,
+              "background_scale": 0.11622175999999941
+            },
+            {
+              "dataset_id": 10,
+              "cell_name": "ABELL2146_bin62_obs13138_ccd3",
+              "obsid": 13138,
+              "ccd_id": 3,
+              "grouped_bins": 12,
+              "source_counts_in_fit_band": 309.0,
+              "source_exposure_s": 49391.758767632,
+              "background_scale": 0.12438740000000058
+            }
+          ],
+          "atomic_data": {
+            "atomdb_version": "3.0.9",
+            "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+            "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+            "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+            "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+            "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+          },
+          "model": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+          "statistic_name": "chi2xspecvar",
+          "minimum_grouped_source_counts": 25,
+          "free_parameter_count": 3,
+          "shared_parameters": [
+            "temperature_keV",
+            "abundance_solar",
+            "normalization"
+          ],
+          "starts": [
+            {
+              "index": 0,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 105.18352068762249,
+              "dof": 102,
+              "temperature_keV": 10.172555343904811,
+              "abundance_solar": 0.13711222261900421,
+              "normalization": 5.328901785660501e-05
+            },
+            {
+              "index": 1,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 105.1835206670035,
+              "dof": 102,
+              "temperature_keV": 10.172940473188453,
+              "abundance_solar": 0.1369873508984723,
+              "normalization": 5.3289849972363445e-05
+            },
+            {
+              "index": 2,
+              "fit_completed": true,
+              "attempts": [
+                "levmar"
+              ],
+              "statistic": 105.1835206702574,
+              "dof": 102,
+              "temperature_keV": 10.172711199992946,
+              "abundance_solar": 0.13705925912836883,
+              "normalization": 5.328936997545333e-05
+            }
+          ],
+          "best_start_index": 1,
+          "final_optimization_attempts": [
+            "levmar"
+          ],
+          "fit": {
+            "statistic": 105.18352066528783,
+            "dof": 102,
+            "reduced_statistic": 1.0312109869145865
+          },
+          "parameters": {
+            "temperature_keV": 10.172862448781858,
+            "abundance_solar": 0.13701238892184248,
+            "normalization": 5.328968297460391e-05
+          },
+          "temperature_confidence_68_percent": {
+            "lower_keV": 8.313081451745715,
+            "upper_keV": 12.570659180297556,
+            "fractional_half_width": 0.20926154020010665,
+            "ordered": true,
+            "error": ""
+          },
+          "all_free_parameters_strictly_inside_bounds": true
+        },
+        "parent_merged_region_fit": {
+          "cluster": "ABELL2146",
+          "label": "ABELL2146_bin62",
+          "fit_completed": true,
+          "abundance_mode": "fixed_to_integrated",
+          "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src_grp.pi",
+          "source_spectrum_sha256": "0537e63aee794b8c10c75ff81794e082357ddeaaffef7fbb77e70f9f5bd63b9c",
+          "background_spectrum_sha256": "1021c2ff2de57784d7b5bd3e1db98554de64474c5da231cfaddf559b6a488f3b",
+          "arf_sha256": "81b14f13fe7f6e72340e677209ebd88a8e57adf54c7e1d031f14d152be6c8ccc",
+          "rmf_sha256": "82399e573b908460e9b0ba2dd729a983547ee3047f1fa8edd02cfc8fec52c4ae",
+          "fit_band_keV": [
+            0.5,
+            7.0
+          ],
+          "sherpa_response_energy_fit_band_source_counts": 2513.0,
+          "sherpa_response_energy_fit_band_grouped_bins": 85,
+          "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+          "source_exposure_s": 418012.62993274,
+          "normalization_initial": 6.0117800756507096e-05,
+          "model": "xstbabs * xsapec",
+          "statistic": "chi2xspecvar",
+          "abundance_table": "aspl (Asplund et al. 2009)",
+          "xspec_atomic_data": {
+            "atomdb_version": "3.0.9",
+            "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+            "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+            "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+            "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+            "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+          },
+          "apec_model_probe": {
+            "energy_bins_keV": [
+              [
+                0.5,
+                0.75
+              ],
+              [
+                0.75,
+                1.0
+              ]
+            ],
+            "integrated_flux": 8.444724587902282e-06
+          },
+          "optimization_attempts": [
+            "levmar"
+          ],
+          "parameters": {
+            "nH_1e22_cm2_fixed": 0.0262,
+            "redshift_fixed": 0.2323,
+            "temperature_keV": 10.20861101884569,
+            "abundance_solar": 0.49763499757654484,
+            "normalization": 5.468214973841842e-05
+          },
+          "temperature_confidence_68_percent": {
+            "lower_keV": 8.634389229626073,
+            "upper_keV": 12.60746007654785,
+            "fractional_half_width": 0.19459409510202988,
+            "error": "",
+            "raw": {
+              "datasets": [
+                1
+              ],
+              "methodname": "confidence",
+              "fitname": "levmar",
+              "statname": "chi2xspecvar",
+              "sigma": 1.0,
+              "percent": 68.26894921370858,
+              "parnames": [
+                "apec_abell2146_bin62.kT"
+              ],
+              "parvals": [
+                10.20861101884569
+              ],
+              "parmins": [
+                -1.5742217892196173
+              ],
+              "parmaxes": [
+                2.3988490577021597
+              ],
+              "nfits": 8
+            }
+          },
+          "fit": {
+            "statval": 62.31578050067005,
+            "dof": 83,
+            "reduced_statistic": 0.7507925361526512,
+            "raw": {
+              "datasets": [
+                1
+              ],
+              "methodname": "levmar",
+              "statname": "chi2xspecvar",
+              "succeeded": true,
+              "message": "successful termination",
+              "nfev": 13,
+              "istatval": 82.16678528559915,
+              "statval": 62.31578050067005,
+              "dstatval": 19.851004784929096,
+              "numpoints": 85,
+              "dof": 83,
+              "parnames": [
+                "apec_abell2146_bin62.kT",
+                "apec_abell2146_bin62.norm"
+              ],
+              "parvals": [
+                10.20861101884569,
+                5.468214973841842e-05
+              ]
+            }
+          },
+          "gates": {
+            "finite_parameters_and_ordered_temperature_interval": true,
+            "reduced_statistic_at_most_1_5": true,
+            "all_free_parameters_strictly_inside_bounds": true,
+            "fractional_68_percent_temperature_half_width_at_most_0_5": true,
+            "all_passed": true
+          }
+        },
+        "leave_one_observation_out": [
+          {
+            "omitted_cell": "ABELL2146_bin62_obs10464_ccd7",
+            "omitted_obsid": 10464,
+            "temperature_keV": 10.951236319429169,
+            "abundance_solar": 0.021416317375196826,
+            "normalization": 5.404796769953191e-05,
+            "reduced_statistic": 0.999485765898966
+          },
+          {
+            "omitted_cell": "ABELL2146_bin62_obs10888_ccd7",
+            "omitted_obsid": 10888,
+            "temperature_keV": 9.683374064692453,
+            "abundance_solar": 0.2321330612812577,
+            "normalization": 5.245077096835587e-05,
+            "reduced_statistic": 0.9488564107786593
+          },
+          {
+            "omitted_cell": "ABELL2146_bin62_obs12245_ccd2",
+            "omitted_obsid": 12245,
+            "temperature_keV": 10.407031315763525,
+            "abundance_solar": 0.2769611327419301,
+            "normalization": 5.3339086201254e-05,
+            "reduced_statistic": 1.0161091340150683
+          },
+          {
+            "omitted_cell": "ABELL2146_bin62_obs12246_ccd3",
+            "omitted_obsid": 12246,
+            "temperature_keV": 10.071861769424517,
+            "abundance_solar": 0.19971039201433227,
+            "normalization": 5.2880288869171064e-05,
+            "reduced_statistic": 1.066538615599792
+          },
+          {
+            "omitted_cell": "ABELL2146_bin62_obs12247_ccd1",
+            "omitted_obsid": 12247,
+            "temperature_keV": 9.856260134178617,
+            "abundance_solar": 0.4235176812983014,
+            "normalization": 5.173898045052899e-05,
+            "reduced_statistic": 1.0664886408719114
+          },
+          {
+            "omitted_cell": "ABELL2146_bin62_obs13020_ccd0",
+            "omitted_obsid": 13020,
+            "temperature_keV": 9.563312319269686,
+            "abundance_solar": 0.1093827524816832,
+            "normalization": 5.29693254377227e-05,
+            "reduced_statistic": 1.059511006415821
+          },
+          {
+            "omitted_cell": "ABELL2146_bin62_obs13021_ccd0",
+            "omitted_obsid": 13021,
+            "temperature_keV": 9.158619767042646,
+            "abundance_solar": 0.0,
+            "normalization": 5.420677251727148e-05,
+            "reduced_statistic": 1.0329960527537856
+          },
+          {
+            "omitted_cell": "ABELL2146_bin62_obs13023_ccd1",
+            "omitted_obsid": 13023,
+            "temperature_keV": 10.21316893117228,
+            "abundance_solar": 0.01043435981810876,
+            "normalization": 5.4436287714351033e-05,
+            "reduced_statistic": 1.010023305229493
+          },
+          {
+            "omitted_cell": "ABELL2146_bin62_obs13120_ccd2",
+            "omitted_obsid": 13120,
+            "temperature_keV": 11.08488043290046,
+            "abundance_solar": 0.35932477978580285,
+            "normalization": 5.1715139008393414e-05,
+            "reduced_statistic": 1.0150363778989622
+          },
+          {
+            "omitted_cell": "ABELL2146_bin62_obs13138_ccd3",
+            "omitted_obsid": 13138,
+            "temperature_keV": 10.613126434438385,
+            "abundance_solar": 0.006958454114595615,
+            "normalization": 5.382747284930519e-05,
+            "reduced_statistic": 1.1135711079283295
+          }
+        ],
+        "maximum_leave_one_out_temperature_relative_shift": 0.09970081546326837,
+        "gates": {
+          "both_independent_builds_exact_within_tolerance": true,
+          "reduced_statistic_at_most_1_5": true,
+          "temperature_interval_ordered_and_precise": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "merged_and_unmerged_temperature_intervals_overlap": true,
+          "merged_and_unmerged_best_temperatures_within_25_percent": true,
+          "leave_one_observation_out_temperature_shift_at_most_25_percent": true,
+          "no_dataset_exceeds_30_percent_of_source_counts": true
+        },
+        "passed": true
+      }
+    ],
+    "full_regional_joint_likelihood_successor_authorized": true
+  },
+  "gates": {
+    "v19dp_failure_is_only_abell_joint_goodness": true,
+    "pre_reprojection_ccd7_background_is_present": true,
+    "common_grid_reprojection_loss_is_reproduced": true,
+    "both_registered_ccd7_background_subsets_are_nonzero_and_exact": true,
+    "both_remediated_response_archives_pass": true,
+    "bullet_joint_preflight_still_passes": true,
+    "abell_joint_preflight_passes_after_background_recovery": true,
+    "corrected_two_cluster_joint_preflight_passes": true
+  },
+  "aggregate_pass": true,
+  "full_ccd7_background_archive_recovery_successor_authorized": true,
+  "full_494_region_joint_likelihood_successor_authorized": false,
+  "next_required_stage": "rebuild_and_audit_all_254_affected_ccd7_background_products",
+  "all_494_regions_run": false,
+  "thermal_stress_or_baroclinicity_constructed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false,
+  "claim_boundary": [
+    "This is a two-region calibration and joint-likelihood preflight, not the 494-region production analysis.",
+    "A pass establishes that using the real pre-reprojection CCD7 blank sky repairs the registered spectral boundary and authorizes recovery of all 254 affected CCD7 background products; it does not directly authorize the 494-region likelihood or validate a thermodynamic Sigma source or gravity theory.",
+    "No I4 thermodynamic-gradient stress or I5 baroclinicity is constructed.",
+    "No lensing, halo, action, galaxy, gravity, validation or holdout payload is opened and no gravity formula or parameter is changed."
+  ]
+}

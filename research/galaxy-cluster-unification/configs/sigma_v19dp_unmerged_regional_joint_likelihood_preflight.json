@@ -1,0 +1,106 @@
+{
+  "protocol_version": "SIGMA-V19DP-UNMERGED-REGIONAL-JOINT-1.0.0",
+  "freeze_state": "frozen_before_execution",
+  "purpose": "Validate a spatial-region likelihood that retains every observation-specific PHA, background, ARF and RMF instead of fitting one merged plasma spectrum.",
+  "parents": {
+    "v19do2_config": {
+      "path": "configs/sigma_v19do2_backscal_ratio_remediation.json",
+      "sha256": "0f8900644c4e4397c2a46dae9df825d8e1f5d055ce9ccb9627ea178c327eb440"
+    },
+    "v19do2_runner": {
+      "path": "scripts/run_sigma_v19do2_backscal_ratio_remediation.py",
+      "sha256": "8324ef314b10951b17e0fb52cdfd1a827b97866bf9dd524d67fecc0d83bd664e"
+    },
+    "v19do2_report": {
+      "path": "results/sigma_v19do2_backscal_ratio_remediation/report.json",
+      "sha256": "e48ad30611358c1dffb3cfca09396f5d778c595396e7668e621a5257d1829ce8"
+    }
+  },
+  "registered_regions": {
+    "BULLET": {
+      "bin_id": 169,
+      "expected_cells": 9,
+      "cell_names": [
+        "BULLET_bin169_obs3184_ccd3",
+        "BULLET_bin169_obs4984_ccd3",
+        "BULLET_bin169_obs4985_ccd2",
+        "BULLET_bin169_obs4986_ccd0",
+        "BULLET_bin169_obs5355_ccd2",
+        "BULLET_bin169_obs5356_ccd2",
+        "BULLET_bin169_obs5357_ccd0",
+        "BULLET_bin169_obs5358_ccd0",
+        "BULLET_bin169_obs5361_ccd3"
+      ]
+    },
+    "ABELL2146": {
+      "bin_id": 62,
+      "expected_cells": 10,
+      "cell_names": [
+        "ABELL2146_bin62_obs10464_ccd7",
+        "ABELL2146_bin62_obs10888_ccd7",
+        "ABELL2146_bin62_obs12245_ccd2",
+        "ABELL2146_bin62_obs12246_ccd3",
+        "ABELL2146_bin62_obs12247_ccd1",
+        "ABELL2146_bin62_obs13020_ccd0",
+        "ABELL2146_bin62_obs13021_ccd0",
+        "ABELL2146_bin62_obs13023_ccd1",
+        "ABELL2146_bin62_obs13120_ccd2",
+        "ABELL2146_bin62_obs13138_ccd3"
+      ]
+    }
+  },
+  "clusters": {
+    "BULLET": {"redshift": 0.296, "galactic_nh_cm2": 4.38e20},
+    "ABELL2146": {"redshift": 0.2323, "galactic_nh_cm2": 2.62e20}
+  },
+  "model": {
+    "expression": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+    "fit_energy_keV": [0.5, 7.0],
+    "statistic": "chi2xspecvar",
+    "minimum_grouped_source_counts": 25,
+    "abundance_table": "aspl (Asplund et al. 2009)",
+    "temperature_keV": {"initial": 8.0, "minimum": 1.0, "maximum": 30.0},
+    "abundance_solar": {"initial": 0.3, "minimum": 0.0, "maximum": 2.0},
+    "normalization": {
+      "minimum": 1e-10,
+      "maximum": 1.0,
+      "initial_rule": "median over observations of max(1e-8, 0.01 times grouped 0.5-7 keV source count rate)"
+    },
+    "starts": [
+      {"temperature_keV": 5.0, "abundance_solar": 0.3, "norm_multiplier": 1.0},
+      {"temperature_keV": 10.0, "abundance_solar": 0.5, "norm_multiplier": 0.5},
+      {"temperature_keV": 18.0, "abundance_solar": 0.2, "norm_multiplier": 2.0}
+    ],
+    "shared_across_observations": ["temperature", "abundance", "normalization"],
+    "observation_specific_free_parameters": 0
+  },
+  "optimization": {
+    "sequence": "levmar with maxfev 10000; on failure or non-finite statistic use neldermead maxfev 30000 followed by levmar polish",
+    "independent_full_builds": 2,
+    "leave_one_observation_out_refits": true,
+    "temperature_uncertainty": "Sherpa conf 68-percent profile interval with abundance and normalization profiled"
+  },
+  "gates": {
+    "maximum_reduced_statistic": 1.5,
+    "maximum_fractional_temperature_half_width": 0.5,
+    "maximum_merged_temperature_relative_shift": 0.25,
+    "maximum_leave_one_out_temperature_shift": 0.25,
+    "maximum_single_dataset_count_fraction": 0.30,
+    "repeat_relative_tolerance": 1e-6
+  },
+  "decision": {
+    "pass": "Both registered regions pass every adequacy, precision, merged/unmerged agreement, repeatability, leverage and parameter-bound gate. A separately named full regional joint-likelihood successor may be frozen.",
+    "fail": "Retain the result and do not run all 494 regions. Diagnose the failed likelihood assumption without adding an observation-specific normalization after seeing the outcome.",
+    "no_retroactive_change": true
+  },
+  "claim_boundary": [
+    "V19DP validates an X-ray observation model, not a Sigma source or gravity equation.",
+    "Only the two already registered regional controls are opened; no other regional temperature is fitted.",
+    "The same three physical plasma parameters are shared across every observation and no per-observation free parameter is allowed.",
+    "No I4, I5, lensing, halo, action, gravity parameter, validation or holdout payload is opened."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dp_unmerged_regional_joint_likelihood_preflight.py",
+    "runner_sha256": "4a8d297a1aa51997f6e4d43fa15a4e238fba7aeed8d8aaca608c45da1ecd4b34"
+  }
+}

@@ -1,0 +1,1197 @@
+{
+  "protocol_version": "SIGMA-V19DP-UNMERGED-REGIONAL-JOINT-1.0.0",
+  "generated_utc": "2026-08-07T03:54:08.394434+00:00",
+  "config_sha256": "5f5798d3c7ec77578958a2469d291556ed251d1515c09c792d8e9e9705ce0f00",
+  "runner_sha256": "4a8d297a1aa51997f6e4d43fa15a4e238fba7aeed8d8aaca608c45da1ecd4b34",
+  "status": "unmerged_regional_joint_likelihood_preflight_failed",
+  "aggregate_pass": false,
+  "regions": [
+    {
+      "cluster": "BULLET",
+      "primary": {
+        "cluster": "BULLET",
+        "cells": 9,
+        "cell_names": [
+          "BULLET_bin169_obs3184_ccd3",
+          "BULLET_bin169_obs4984_ccd3",
+          "BULLET_bin169_obs4985_ccd2",
+          "BULLET_bin169_obs4986_ccd0",
+          "BULLET_bin169_obs5355_ccd2",
+          "BULLET_bin169_obs5356_ccd2",
+          "BULLET_bin169_obs5357_ccd0",
+          "BULLET_bin169_obs5358_ccd0",
+          "BULLET_bin169_obs5361_ccd3"
+        ],
+        "datasets": [
+          {
+            "dataset_id": 1,
+            "cell_name": "BULLET_bin169_obs3184_ccd3",
+            "obsid": 3184,
+            "ccd_id": 3,
+            "grouped_bins": 16,
+            "source_counts_in_fit_band": 426.0,
+            "source_exposure_s": 82805.374290097,
+            "background_scale": 0.051659654999998264
+          },
+          {
+            "dataset_id": 2,
+            "cell_name": "BULLET_bin169_obs4984_ccd3",
+            "obsid": 4984,
+            "ccd_id": 3,
+            "grouped_bins": 15,
+            "source_counts_in_fit_band": 383.0,
+            "source_exposure_s": 76119.595640067,
+            "background_scale": 0.054451457999999744
+          },
+          {
+            "dataset_id": 3,
+            "cell_name": "BULLET_bin169_obs4985_ccd2",
+            "obsid": 4985,
+            "ccd_id": 2,
+            "grouped_bins": 5,
+            "source_counts_in_fit_band": 113.0,
+            "source_exposure_s": 23793.532196114,
+            "background_scale": 0.01671957000000004
+          },
+          {
+            "dataset_id": 4,
+            "cell_name": "BULLET_bin169_obs4986_ccd0",
+            "obsid": 4986,
+            "ccd_id": 0,
+            "grouped_bins": 8,
+            "source_counts_in_fit_band": 202.0,
+            "source_exposure_s": 40538.340712595,
+            "background_scale": 0.028606226999999967
+          },
+          {
+            "dataset_id": 5,
+            "cell_name": "BULLET_bin169_obs5355_ccd2",
+            "obsid": 5355,
+            "ccd_id": 2,
+            "grouped_bins": 6,
+            "source_counts_in_fit_band": 133.0,
+            "source_exposure_s": 23465.234365219,
+            "background_scale": 0.016302905999999954
+          },
+          {
+            "dataset_id": 6,
+            "cell_name": "BULLET_bin169_obs5356_ccd2",
+            "obsid": 5356,
+            "ccd_id": 2,
+            "grouped_bins": 18,
+            "source_counts_in_fit_band": 470.0,
+            "source_exposure_s": 96212.411017543,
+            "background_scale": 0.0657040480000001
+          },
+          {
+            "dataset_id": 7,
+            "cell_name": "BULLET_bin169_obs5357_ccd0",
+            "obsid": 5357,
+            "ccd_id": 0,
+            "grouped_bins": 16,
+            "source_counts_in_fit_band": 412.0,
+            "source_exposure_s": 78564.897617592,
+            "background_scale": 0.055408116000000174
+          },
+          {
+            "dataset_id": 8,
+            "cell_name": "BULLET_bin169_obs5358_ccd0",
+            "obsid": 5358,
+            "ccd_id": 0,
+            "grouped_bins": 7,
+            "source_counts_in_fit_band": 170.0,
+            "source_exposure_s": 31957.532836021,
+            "background_scale": 0.022433896999999987
+          },
+          {
+            "dataset_id": 9,
+            "cell_name": "BULLET_bin169_obs5361_ccd3",
+            "obsid": 5361,
+            "ccd_id": 3,
+            "grouped_bins": 17,
+            "source_counts_in_fit_band": 451.0,
+            "source_exposure_s": 82620.198181689,
+            "background_scale": 0.058943931
+          }
+        ],
+        "atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "model": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+        "statistic_name": "chi2xspecvar",
+        "minimum_grouped_source_counts": 25,
+        "free_parameter_count": 3,
+        "shared_parameters": [
+          "temperature_keV",
+          "abundance_solar",
+          "normalization"
+        ],
+        "starts": [
+          {
+            "index": 0,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 80.12376473493684,
+            "dof": 105,
+            "temperature_keV": 15.141738656376075,
+            "abundance_solar": 0.01113933181445681,
+            "normalization": 5.9852376230219256e-05
+          },
+          {
+            "index": 1,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 80.12376454360808,
+            "dof": 105,
+            "temperature_keV": 15.141121509930882,
+            "abundance_solar": 0.01128307654593556,
+            "normalization": 5.985133665834689e-05
+          },
+          {
+            "index": 2,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 80.12376447447858,
+            "dof": 105,
+            "temperature_keV": 15.14001236949039,
+            "abundance_solar": 0.011535752813667656,
+            "normalization": 5.984950645005145e-05
+          }
+        ],
+        "best_start_index": 2,
+        "final_optimization_attempts": [
+          "levmar"
+        ],
+        "fit": {
+          "statistic": 80.12376445943057,
+          "dof": 105,
+          "reduced_statistic": 0.763083471042196
+        },
+        "parameters": {
+          "temperature_keV": 15.140411818146363,
+          "abundance_solar": 0.011444934792453586,
+          "normalization": 5.9850164318120625e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 12.104097865354701,
+          "upper_keV": 17.687289333690877,
+          "fractional_half_width": 0.18438043612672766,
+          "ordered": true,
+          "error": ""
+        },
+        "all_free_parameters_strictly_inside_bounds": true
+      },
+      "repeat": {
+        "cluster": "BULLET",
+        "cells": 9,
+        "cell_names": [
+          "BULLET_bin169_obs3184_ccd3",
+          "BULLET_bin169_obs4984_ccd3",
+          "BULLET_bin169_obs4985_ccd2",
+          "BULLET_bin169_obs4986_ccd0",
+          "BULLET_bin169_obs5355_ccd2",
+          "BULLET_bin169_obs5356_ccd2",
+          "BULLET_bin169_obs5357_ccd0",
+          "BULLET_bin169_obs5358_ccd0",
+          "BULLET_bin169_obs5361_ccd3"
+        ],
+        "datasets": [
+          {
+            "dataset_id": 1,
+            "cell_name": "BULLET_bin169_obs3184_ccd3",
+            "obsid": 3184,
+            "ccd_id": 3,
+            "grouped_bins": 16,
+            "source_counts_in_fit_band": 426.0,
+            "source_exposure_s": 82805.374290097,
+            "background_scale": 0.051659654999998264
+          },
+          {
+            "dataset_id": 2,
+            "cell_name": "BULLET_bin169_obs4984_ccd3",
+            "obsid": 4984,
+            "ccd_id": 3,
+            "grouped_bins": 15,
+            "source_counts_in_fit_band": 383.0,
+            "source_exposure_s": 76119.595640067,
+            "background_scale": 0.054451457999999744
+          },
+          {
+            "dataset_id": 3,
+            "cell_name": "BULLET_bin169_obs4985_ccd2",
+            "obsid": 4985,
+            "ccd_id": 2,
+            "grouped_bins": 5,
+            "source_counts_in_fit_band": 113.0,
+            "source_exposure_s": 23793.532196114,
+            "background_scale": 0.01671957000000004
+          },
+          {
+            "dataset_id": 4,
+            "cell_name": "BULLET_bin169_obs4986_ccd0",
+            "obsid": 4986,
+            "ccd_id": 0,
+            "grouped_bins": 8,
+            "source_counts_in_fit_band": 202.0,
+            "source_exposure_s": 40538.340712595,
+            "background_scale": 0.028606226999999967
+          },
+          {
+            "dataset_id": 5,
+            "cell_name": "BULLET_bin169_obs5355_ccd2",
+            "obsid": 5355,
+            "ccd_id": 2,
+            "grouped_bins": 6,
+            "source_counts_in_fit_band": 133.0,
+            "source_exposure_s": 23465.234365219,
+            "background_scale": 0.016302905999999954
+          },
+          {
+            "dataset_id": 6,
+            "cell_name": "BULLET_bin169_obs5356_ccd2",
+            "obsid": 5356,
+            "ccd_id": 2,
+            "grouped_bins": 18,
+            "source_counts_in_fit_band": 470.0,
+            "source_exposure_s": 96212.411017543,
+            "background_scale": 0.0657040480000001
+          },
+          {
+            "dataset_id": 7,
+            "cell_name": "BULLET_bin169_obs5357_ccd0",
+            "obsid": 5357,
+            "ccd_id": 0,
+            "grouped_bins": 16,
+            "source_counts_in_fit_band": 412.0,
+            "source_exposure_s": 78564.897617592,
+            "background_scale": 0.055408116000000174
+          },
+          {
+            "dataset_id": 8,
+            "cell_name": "BULLET_bin169_obs5358_ccd0",
+            "obsid": 5358,
+            "ccd_id": 0,
+            "grouped_bins": 7,
+            "source_counts_in_fit_band": 170.0,
+            "source_exposure_s": 31957.532836021,
+            "background_scale": 0.022433896999999987
+          },
+          {
+            "dataset_id": 9,
+            "cell_name": "BULLET_bin169_obs5361_ccd3",
+            "obsid": 5361,
+            "ccd_id": 3,
+            "grouped_bins": 17,
+            "source_counts_in_fit_band": 451.0,
+            "source_exposure_s": 82620.198181689,
+            "background_scale": 0.058943931
+          }
+        ],
+        "atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "model": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+        "statistic_name": "chi2xspecvar",
+        "minimum_grouped_source_counts": 25,
+        "free_parameter_count": 3,
+        "shared_parameters": [
+          "temperature_keV",
+          "abundance_solar",
+          "normalization"
+        ],
+        "starts": [
+          {
+            "index": 0,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 80.12376473493684,
+            "dof": 105,
+            "temperature_keV": 15.141738656376075,
+            "abundance_solar": 0.01113933181445681,
+            "normalization": 5.9852376230219256e-05
+          },
+          {
+            "index": 1,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 80.12376454360808,
+            "dof": 105,
+            "temperature_keV": 15.141121509930882,
+            "abundance_solar": 0.01128307654593556,
+            "normalization": 5.985133665834689e-05
+          },
+          {
+            "index": 2,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 80.12376447447858,
+            "dof": 105,
+            "temperature_keV": 15.14001236949039,
+            "abundance_solar": 0.011535752813667656,
+            "normalization": 5.984950645005145e-05
+          }
+        ],
+        "best_start_index": 2,
+        "final_optimization_attempts": [
+          "levmar"
+        ],
+        "fit": {
+          "statistic": 80.12376445943057,
+          "dof": 105,
+          "reduced_statistic": 0.763083471042196
+        },
+        "parameters": {
+          "temperature_keV": 15.140411818146363,
+          "abundance_solar": 0.011444934792453586,
+          "normalization": 5.9850164318120625e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 12.104097865354701,
+          "upper_keV": 17.687289333690877,
+          "fractional_half_width": 0.18438043612672766,
+          "ordered": true,
+          "error": ""
+        },
+        "all_free_parameters_strictly_inside_bounds": true
+      },
+      "parent_merged_region_fit": {
+        "cluster": "BULLET",
+        "label": "BULLET_bin169",
+        "fit_completed": true,
+        "abundance_mode": "fixed_to_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_bin169/BULLET_bin169_src_grp.pi",
+        "source_spectrum_sha256": "7239889ebd31d300a3c6b82b7c66c5fb4494da43cb314781e3f6b05f6c48823e",
+        "background_spectrum_sha256": "d59db93567c1a9550a6e29f1948a8fcc894116099de26a5d3605b0a2231c8fbf",
+        "arf_sha256": "7fce9868613861a9b2ccbdceec68f7849c9482f4e7ad08c2d4f7abc616398fb5",
+        "rmf_sha256": "3027db25cc9738388bf79c1a1874866f678059b4f5b6d87e8af9660f9b2c255f",
+        "fit_band_keV": [
+          0.5,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 2725.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 87,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 536077.11685694,
+        "normalization_initial": 5.083223876402108e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              0.5,
+              0.75
+            ],
+            [
+              0.75,
+              1.0
+            ]
+          ],
+          "integrated_flux": 6.588920270871928e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0438,
+          "redshift_fixed": 0.296,
+          "temperature_keV": 15.206779513760727,
+          "abundance_solar": 0.38361102334267344,
+          "normalization": 5.7353561128815435e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 12.688291253291316,
+          "upper_keV": 18.361743461147224,
+          "fractional_half_width": 0.1865435151052844,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_bullet_bin169.kT"
+            ],
+            "parvals": [
+              15.206779513760727
+            ],
+            "parmins": [
+              -2.518488260469411
+            ],
+            "parmaxes": [
+              3.1549639473864968
+            ],
+            "nfits": 13
+          }
+        },
+        "fit": {
+          "statval": 85.87856671582186,
+          "dof": 85,
+          "reduced_statistic": 1.010336079009669,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 16,
+            "istatval": 131.67610517898981,
+            "statval": 85.87856671582186,
+            "dstatval": 45.79753846316795,
+            "numpoints": 87,
+            "dof": 85,
+            "parnames": [
+              "apec_bullet_bin169.kT",
+              "apec_bullet_bin169.norm"
+            ],
+            "parvals": [
+              15.206779513760727,
+              5.7353561128815435e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "fractional_68_percent_temperature_half_width_at_most_0_5": true,
+          "all_passed": true
+        }
+      },
+      "leave_one_observation_out": [
+        {
+          "omitted_cell": "BULLET_bin169_obs3184_ccd3",
+          "omitted_obsid": 3184,
+          "temperature_keV": 15.038823630943916,
+          "abundance_solar": 0.0,
+          "normalization": 5.9835494105326186e-05,
+          "reduced_statistic": 0.812682115682018
+        },
+        {
+          "omitted_cell": "BULLET_bin169_obs4984_ccd3",
+          "omitted_obsid": 4984,
+          "temperature_keV": 14.297416570927288,
+          "abundance_solar": 0.14706099024957972,
+          "normalization": 5.906217937640353e-05,
+          "reduced_statistic": 0.739822366976642
+        },
+        {
+          "omitted_cell": "BULLET_bin169_obs4985_ccd2",
+          "omitted_obsid": 4985,
+          "temperature_keV": 15.275239745294687,
+          "abundance_solar": 0.0,
+          "normalization": 6.029930321860447e-05,
+          "reduced_statistic": 0.7478188719691978
+        },
+        {
+          "omitted_cell": "BULLET_bin169_obs4986_ccd0",
+          "omitted_obsid": 4986,
+          "temperature_keV": 14.734616960212033,
+          "abundance_solar": 0.0,
+          "normalization": 5.989693625515706e-05,
+          "reduced_statistic": 0.7946585824042957
+        },
+        {
+          "omitted_cell": "BULLET_bin169_obs5355_ccd2",
+          "omitted_obsid": 5355,
+          "temperature_keV": 14.934229521069854,
+          "abundance_solar": 0.0,
+          "normalization": 5.966858590947233e-05,
+          "reduced_statistic": 0.7625245177529433
+        },
+        {
+          "omitted_cell": "BULLET_bin169_obs5356_ccd2",
+          "omitted_obsid": 5356,
+          "temperature_keV": 15.6431121583331,
+          "abundance_solar": 0.26061915621569676,
+          "normalization": 5.8891536500603426e-05,
+          "reduced_statistic": 0.7742055606545932
+        },
+        {
+          "omitted_cell": "BULLET_bin169_obs5357_ccd0",
+          "omitted_obsid": 5357,
+          "temperature_keV": 14.600984295908553,
+          "abundance_solar": 0.055158711547042334,
+          "normalization": 5.9423325149571794e-05,
+          "reduced_statistic": 0.7561997878616584
+        },
+        {
+          "omitted_cell": "BULLET_bin169_obs5358_ccd0",
+          "omitted_obsid": 5358,
+          "temperature_keV": 15.032831645399957,
+          "abundance_solar": 0.0,
+          "normalization": 5.974246147895588e-05,
+          "reduced_statistic": 0.7974922268805811
+        },
+        {
+          "omitted_cell": "BULLET_bin169_obs5361_ccd3",
+          "omitted_obsid": 5361,
+          "temperature_keV": 16.089061977045834,
+          "abundance_solar": 0.0,
+          "normalization": 5.9541793038889106e-05,
+          "reduced_statistic": 0.6899085441916837
+        }
+      ],
+      "maximum_leave_one_out_temperature_relative_shift": 0.06265682666322703,
+      "gates": {
+        "both_independent_builds_exact_within_tolerance": true,
+        "reduced_statistic_at_most_1_5": true,
+        "temperature_interval_ordered_and_precise": true,
+        "all_free_parameters_strictly_inside_bounds": true,
+        "merged_and_unmerged_temperature_intervals_overlap": true,
+        "merged_and_unmerged_best_temperatures_within_25_percent": true,
+        "leave_one_observation_out_temperature_shift_at_most_25_percent": true,
+        "no_dataset_exceeds_30_percent_of_source_counts": true
+      },
+      "passed": true
+    },
+    {
+      "cluster": "ABELL2146",
+      "primary": {
+        "cluster": "ABELL2146",
+        "cells": 10,
+        "cell_names": [
+          "ABELL2146_bin62_obs10464_ccd7",
+          "ABELL2146_bin62_obs10888_ccd7",
+          "ABELL2146_bin62_obs12245_ccd2",
+          "ABELL2146_bin62_obs12246_ccd3",
+          "ABELL2146_bin62_obs12247_ccd1",
+          "ABELL2146_bin62_obs13020_ccd0",
+          "ABELL2146_bin62_obs13021_ccd0",
+          "ABELL2146_bin62_obs13023_ccd1",
+          "ABELL2146_bin62_obs13120_ccd2",
+          "ABELL2146_bin62_obs13138_ccd3"
+        ],
+        "datasets": [
+          {
+            "dataset_id": 1,
+            "cell_name": "ABELL2146_bin62_obs10464_ccd7",
+            "obsid": 10464,
+            "ccd_id": 7,
+            "grouped_bins": 15,
+            "source_counts_in_fit_band": 392.0,
+            "source_exposure_s": 35529.633497186,
+            "background_scale": 0.08694964600000037
+          },
+          {
+            "dataset_id": 2,
+            "cell_name": "ABELL2146_bin62_obs10888_ccd7",
+            "obsid": 10888,
+            "ccd_id": 7,
+            "grouped_bins": 4,
+            "source_counts_in_fit_band": 100.0,
+            "source_exposure_s": 6447.9508614685,
+            "background_scale": 0.015882601999999926
+          },
+          {
+            "dataset_id": 3,
+            "cell_name": "ABELL2146_bin62_obs12245_ccd2",
+            "obsid": 12245,
+            "ccd_id": 2,
+            "grouped_bins": 9,
+            "source_counts_in_fit_band": 226.0,
+            "source_exposure_s": 48343.97180545,
+            "background_scale": 0.11530262999999971
+          },
+          {
+            "dataset_id": 4,
+            "cell_name": "ABELL2146_bin62_obs12246_ccd3",
+            "obsid": 12246,
+            "ccd_id": 3,
+            "grouped_bins": 11,
+            "source_counts_in_fit_band": 280.0,
+            "source_exposure_s": 47177.694676127,
+            "background_scale": 0.11604434000000047
+          },
+          {
+            "dataset_id": 5,
+            "cell_name": "ABELL2146_bin62_obs12247_ccd1",
+            "obsid": 12247,
+            "ccd_id": 1,
+            "grouped_bins": 14,
+            "source_counts_in_fit_band": 361.0,
+            "source_exposure_s": 64942.42168339,
+            "background_scale": 0.15494739999999943
+          },
+          {
+            "dataset_id": 6,
+            "cell_name": "ABELL2146_bin62_obs13020_ccd0",
+            "obsid": 13020,
+            "ccd_id": 0,
+            "grouped_bins": 11,
+            "source_counts_in_fit_band": 282.0,
+            "source_exposure_s": 41252.500716718,
+            "background_scale": 0.09684070200000024
+          },
+          {
+            "dataset_id": 7,
+            "cell_name": "ABELL2146_bin62_obs13021_ccd0",
+            "obsid": 13021,
+            "ccd_id": 0,
+            "grouped_bins": 12,
+            "source_counts_in_fit_band": 304.0,
+            "source_exposure_s": 48159.195828701,
+            "background_scale": 0.11276129000000018
+          },
+          {
+            "dataset_id": 8,
+            "cell_name": "ABELL2146_bin62_obs13023_ccd1",
+            "obsid": 13023,
+            "ccd_id": 1,
+            "grouped_bins": 6,
+            "source_counts_in_fit_band": 153.0,
+            "source_exposure_s": 27682.673830123,
+            "background_scale": 0.065197274
+          },
+          {
+            "dataset_id": 9,
+            "cell_name": "ABELL2146_bin62_obs13120_ccd2",
+            "obsid": 13120,
+            "ccd_id": 2,
+            "grouped_bins": 11,
+            "source_counts_in_fit_band": 283.0,
+            "source_exposure_s": 49084.828265945,
+            "background_scale": 0.11622175999999941
+          },
+          {
+            "dataset_id": 10,
+            "cell_name": "ABELL2146_bin62_obs13138_ccd3",
+            "obsid": 13138,
+            "ccd_id": 3,
+            "grouped_bins": 12,
+            "source_counts_in_fit_band": 309.0,
+            "source_exposure_s": 49391.758767632,
+            "background_scale": 0.12438740000000058
+          }
+        ],
+        "atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "model": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+        "statistic_name": "chi2xspecvar",
+        "minimum_grouped_source_counts": 25,
+        "free_parameter_count": 3,
+        "shared_parameters": [
+          "temperature_keV",
+          "abundance_solar",
+          "normalization"
+        ],
+        "starts": [
+          {
+            "index": 0,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 198.8645335359602,
+            "dof": 102,
+            "temperature_keV": 11.134390881839842,
+            "abundance_solar": 0.5822958737643028,
+            "normalization": 5.361571399767056e-05
+          },
+          {
+            "index": 1,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 198.86453353596036,
+            "dof": 102,
+            "temperature_keV": 11.134390535825778,
+            "abundance_solar": 0.5822959524416502,
+            "normalization": 5.361571343356642e-05
+          },
+          {
+            "index": 2,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 198.86453353596008,
+            "dof": 102,
+            "temperature_keV": 11.134390928560808,
+            "abundance_solar": 0.5822958620777113,
+            "normalization": 5.3615714080030675e-05
+          }
+        ],
+        "best_start_index": 2,
+        "final_optimization_attempts": [
+          "levmar"
+        ],
+        "fit": {
+          "statistic": 198.86453353596008,
+          "dof": 102,
+          "reduced_statistic": 1.949652289568236
+        },
+        "parameters": {
+          "temperature_keV": 11.134390928560808,
+          "abundance_solar": 0.5822958620777113,
+          "normalization": 5.3615714080030675e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 9.139345706701857,
+          "upper_keV": 14.784904251935377,
+          "fractional_half_width": 0.2535189657636372,
+          "ordered": true,
+          "error": ""
+        },
+        "all_free_parameters_strictly_inside_bounds": true
+      },
+      "repeat": {
+        "cluster": "ABELL2146",
+        "cells": 10,
+        "cell_names": [
+          "ABELL2146_bin62_obs10464_ccd7",
+          "ABELL2146_bin62_obs10888_ccd7",
+          "ABELL2146_bin62_obs12245_ccd2",
+          "ABELL2146_bin62_obs12246_ccd3",
+          "ABELL2146_bin62_obs12247_ccd1",
+          "ABELL2146_bin62_obs13020_ccd0",
+          "ABELL2146_bin62_obs13021_ccd0",
+          "ABELL2146_bin62_obs13023_ccd1",
+          "ABELL2146_bin62_obs13120_ccd2",
+          "ABELL2146_bin62_obs13138_ccd3"
+        ],
+        "datasets": [
+          {
+            "dataset_id": 1,
+            "cell_name": "ABELL2146_bin62_obs10464_ccd7",
+            "obsid": 10464,
+            "ccd_id": 7,
+            "grouped_bins": 15,
+            "source_counts_in_fit_band": 392.0,
+            "source_exposure_s": 35529.633497186,
+            "background_scale": 0.08694964600000037
+          },
+          {
+            "dataset_id": 2,
+            "cell_name": "ABELL2146_bin62_obs10888_ccd7",
+            "obsid": 10888,
+            "ccd_id": 7,
+            "grouped_bins": 4,
+            "source_counts_in_fit_band": 100.0,
+            "source_exposure_s": 6447.9508614685,
+            "background_scale": 0.015882601999999926
+          },
+          {
+            "dataset_id": 3,
+            "cell_name": "ABELL2146_bin62_obs12245_ccd2",
+            "obsid": 12245,
+            "ccd_id": 2,
+            "grouped_bins": 9,
+            "source_counts_in_fit_band": 226.0,
+            "source_exposure_s": 48343.97180545,
+            "background_scale": 0.11530262999999971
+          },
+          {
+            "dataset_id": 4,
+            "cell_name": "ABELL2146_bin62_obs12246_ccd3",
+            "obsid": 12246,
+            "ccd_id": 3,
+            "grouped_bins": 11,
+            "source_counts_in_fit_band": 280.0,
+            "source_exposure_s": 47177.694676127,
+            "background_scale": 0.11604434000000047
+          },
+          {
+            "dataset_id": 5,
+            "cell_name": "ABELL2146_bin62_obs12247_ccd1",
+            "obsid": 12247,
+            "ccd_id": 1,
+            "grouped_bins": 14,
+            "source_counts_in_fit_band": 361.0,
+            "source_exposure_s": 64942.42168339,
+            "background_scale": 0.15494739999999943
+          },
+          {
+            "dataset_id": 6,
+            "cell_name": "ABELL2146_bin62_obs13020_ccd0",
+            "obsid": 13020,
+            "ccd_id": 0,
+            "grouped_bins": 11,
+            "source_counts_in_fit_band": 282.0,
+            "source_exposure_s": 41252.500716718,
+            "background_scale": 0.09684070200000024
+          },
+          {
+            "dataset_id": 7,
+            "cell_name": "ABELL2146_bin62_obs13021_ccd0",
+            "obsid": 13021,
+            "ccd_id": 0,
+            "grouped_bins": 12,
+            "source_counts_in_fit_band": 304.0,
+            "source_exposure_s": 48159.195828701,
+            "background_scale": 0.11276129000000018
+          },
+          {
+            "dataset_id": 8,
+            "cell_name": "ABELL2146_bin62_obs13023_ccd1",
+            "obsid": 13023,
+            "ccd_id": 1,
+            "grouped_bins": 6,
+            "source_counts_in_fit_band": 153.0,
+            "source_exposure_s": 27682.673830123,
+            "background_scale": 0.065197274
+          },
+          {
+            "dataset_id": 9,
+            "cell_name": "ABELL2146_bin62_obs13120_ccd2",
+            "obsid": 13120,
+            "ccd_id": 2,
+            "grouped_bins": 11,
+            "source_counts_in_fit_band": 283.0,
+            "source_exposure_s": 49084.828265945,
+            "background_scale": 0.11622175999999941
+          },
+          {
+            "dataset_id": 10,
+            "cell_name": "ABELL2146_bin62_obs13138_ccd3",
+            "obsid": 13138,
+            "ccd_id": 3,
+            "grouped_bins": 12,
+            "source_counts_in_fit_band": 309.0,
+            "source_exposure_s": 49391.758767632,
+            "background_scale": 0.12438740000000058
+          }
+        ],
+        "atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "model": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+        "statistic_name": "chi2xspecvar",
+        "minimum_grouped_source_counts": 25,
+        "free_parameter_count": 3,
+        "shared_parameters": [
+          "temperature_keV",
+          "abundance_solar",
+          "normalization"
+        ],
+        "starts": [
+          {
+            "index": 0,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 198.8645335359602,
+            "dof": 102,
+            "temperature_keV": 11.134390881839842,
+            "abundance_solar": 0.5822958737643028,
+            "normalization": 5.361571399767056e-05
+          },
+          {
+            "index": 1,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 198.86453353596036,
+            "dof": 102,
+            "temperature_keV": 11.134390535825778,
+            "abundance_solar": 0.5822959524416502,
+            "normalization": 5.361571343356642e-05
+          },
+          {
+            "index": 2,
+            "fit_completed": true,
+            "attempts": [
+              "levmar"
+            ],
+            "statistic": 198.86453353596008,
+            "dof": 102,
+            "temperature_keV": 11.134390928560808,
+            "abundance_solar": 0.5822958620777113,
+            "normalization": 5.3615714080030675e-05
+          }
+        ],
+        "best_start_index": 2,
+        "final_optimization_attempts": [
+          "levmar"
+        ],
+        "fit": {
+          "statistic": 198.86453353596008,
+          "dof": 102,
+          "reduced_statistic": 1.949652289568236
+        },
+        "parameters": {
+          "temperature_keV": 11.134390928560808,
+          "abundance_solar": 0.5822958620777113,
+          "normalization": 5.3615714080030675e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 9.139345706701857,
+          "upper_keV": 14.784904251935377,
+          "fractional_half_width": 0.2535189657636372,
+          "ordered": true,
+          "error": ""
+        },
+        "all_free_parameters_strictly_inside_bounds": true
+      },
+      "parent_merged_region_fit": {
+        "cluster": "ABELL2146",
+        "label": "ABELL2146_bin62",
+        "fit_completed": true,
+        "abundance_mode": "fixed_to_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src_grp.pi",
+        "source_spectrum_sha256": "0537e63aee794b8c10c75ff81794e082357ddeaaffef7fbb77e70f9f5bd63b9c",
+        "background_spectrum_sha256": "1021c2ff2de57784d7b5bd3e1db98554de64474c5da231cfaddf559b6a488f3b",
+        "arf_sha256": "81b14f13fe7f6e72340e677209ebd88a8e57adf54c7e1d031f14d152be6c8ccc",
+        "rmf_sha256": "82399e573b908460e9b0ba2dd729a983547ee3047f1fa8edd02cfc8fec52c4ae",
+        "fit_band_keV": [
+          0.5,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 2513.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 85,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 418012.62993274,
+        "normalization_initial": 6.0117800756507096e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              0.5,
+              0.75
+            ],
+            [
+              0.75,
+              1.0
+            ]
+          ],
+          "integrated_flux": 8.444724587902282e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0262,
+          "redshift_fixed": 0.2323,
+          "temperature_keV": 10.20861101884569,
+          "abundance_solar": 0.49763499757654484,
+          "normalization": 5.468214973841842e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 8.634389229626073,
+          "upper_keV": 12.60746007654785,
+          "fractional_half_width": 0.19459409510202988,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_abell2146_bin62.kT"
+            ],
+            "parvals": [
+              10.20861101884569
+            ],
+            "parmins": [
+              -1.5742217892196173
+            ],
+            "parmaxes": [
+              2.3988490577021597
+            ],
+            "nfits": 8
+          }
+        },
+        "fit": {
+          "statval": 62.31578050067005,
+          "dof": 83,
+          "reduced_statistic": 0.7507925361526512,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 13,
+            "istatval": 82.16678528559915,
+            "statval": 62.31578050067005,
+            "dstatval": 19.851004784929096,
+            "numpoints": 85,
+            "dof": 83,
+            "parnames": [
+              "apec_abell2146_bin62.kT",
+              "apec_abell2146_bin62.norm"
+            ],
+            "parvals": [
+              10.20861101884569,
+              5.468214973841842e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "fractional_68_percent_temperature_half_width_at_most_0_5": true,
+          "all_passed": true
+        }
+      },
+      "leave_one_observation_out": [
+        {
+          "omitted_cell": "ABELL2146_bin62_obs10464_ccd7",
+          "omitted_obsid": 10464,
+          "temperature_keV": 11.037297389419516,
+          "abundance_solar": 0.1247310016057087,
+          "normalization": 5.3905525196480326e-05,
+          "reduced_statistic": 1.3271405193503274
+        },
+        {
+          "omitted_cell": "ABELL2146_bin62_obs10888_ccd7",
+          "omitted_obsid": 10888,
+          "temperature_keV": 10.559255731933117,
+          "abundance_solar": 0.5575926828922424,
+          "normalization": 5.304932222652278e-05,
+          "reduced_statistic": 1.6337089866460544
+        },
+        {
+          "omitted_cell": "ABELL2146_bin62_obs12245_ccd2",
+          "omitted_obsid": 12245,
+          "temperature_keV": 11.529098547345958,
+          "abundance_solar": 0.8087486416999704,
+          "normalization": 5.3656785353975865e-05,
+          "reduced_statistic": 1.9801268623458392
+        },
+        {
+          "omitted_cell": "ABELL2146_bin62_obs12246_ccd3",
+          "omitted_obsid": 12246,
+          "temperature_keV": 11.264699420745435,
+          "abundance_solar": 0.6725323556552157,
+          "normalization": 5.3474485088877456e-05,
+          "reduced_statistic": 2.087596741004211
+        },
+        {
+          "omitted_cell": "ABELL2146_bin62_obs12247_ccd1",
+          "omitted_obsid": 12247,
+          "temperature_keV": 10.928433441827261,
+          "abundance_solar": 1.0384210500045914,
+          "normalization": 5.1750960059645225e-05,
+          "reduced_statistic": 2.1022692282732653
+        },
+        {
+          "omitted_cell": "ABELL2146_bin62_obs13020_ccd0",
+          "omitted_obsid": 13020,
+          "temperature_keV": 10.549553140834547,
+          "abundance_solar": 0.5870410717284122,
+          "normalization": 5.327918314518972e-05,
+          "reduced_statistic": 2.1054788459137246
+        },
+        {
+          "omitted_cell": "ABELL2146_bin62_obs13021_ccd0",
+          "omitted_obsid": 13021,
+          "temperature_keV": 10.479259084226488,
+          "abundance_solar": 0.2404706144074053,
+          "normalization": 5.5926353763218067e-05,
+          "reduced_statistic": 2.087587839375948
+        },
+        {
+          "omitted_cell": "ABELL2146_bin62_obs13023_ccd1",
+          "omitted_obsid": 13023,
+          "temperature_keV": 11.271766767641719,
+          "abundance_solar": 0.45242882789073335,
+          "normalization": 5.493115614253534e-05,
+          "reduced_statistic": 1.9766155106917103
+        },
+        {
+          "omitted_cell": "ABELL2146_bin62_obs13120_ccd2",
+          "omitted_obsid": 13120,
+          "temperature_keV": 12.315164288317588,
+          "abundance_solar": 0.9775263080490372,
+          "normalization": 5.181282325578606e-05,
+          "reduced_statistic": 2.0322340618965296
+        },
+        {
+          "omitted_cell": "ABELL2146_bin62_obs13138_ccd3",
+          "omitted_obsid": 13138,
+          "temperature_keV": 11.786388826292757,
+          "abundance_solar": 0.529449942905671,
+          "normalization": 5.415470488481628e-05,
+          "reduced_statistic": 2.157346744420581
+        }
+      ],
+      "maximum_leave_one_out_temperature_relative_shift": 0.10604741357948733,
+      "gates": {
+        "both_independent_builds_exact_within_tolerance": true,
+        "reduced_statistic_at_most_1_5": false,
+        "temperature_interval_ordered_and_precise": true,
+        "all_free_parameters_strictly_inside_bounds": true,
+        "merged_and_unmerged_temperature_intervals_overlap": true,
+        "merged_and_unmerged_best_temperatures_within_25_percent": true,
+        "leave_one_observation_out_temperature_shift_at_most_25_percent": true,
+        "no_dataset_exceeds_30_percent_of_source_counts": true
+      },
+      "passed": false
+    }
+  ],
+  "full_regional_joint_likelihood_successor_authorized": false,
+  "v19do2_report_sha256": "e48ad30611358c1dffb3cfca09396f5d778c595396e7668e621a5257d1829ce8",
+  "v19do2_status": "backscal_ratio_observation_soft_background_audit_completed",
+  "all_494_regions_run": false,
+  "thermal_stress_or_baroclinicity_constructed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

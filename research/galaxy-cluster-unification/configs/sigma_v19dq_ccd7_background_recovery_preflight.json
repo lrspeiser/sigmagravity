@@ -1,0 +1,109 @@
+{
+  "protocol_version": "SIGMA-V19DQ-CCD7-BACKGROUND-RECOVERY-1.0.0",
+  "status": "frozen after the terminal V19DP result localized the only joint-fit failure to Abell 2146 CCD7 and after a read-only provenance audit found real pre-reprojection CCD7 blank-sky events, but before extracting a corrected background spectrum, fitting the corrected spectrum, changing any threshold, constructing I4/I5, opening lensing or gravity payloads, or changing gravity physics",
+  "purpose": "Test the narrow calibration diagnosis that the common-grid reproject_events stage discarded real CCD7 blank-sky events for Abell 2146 ObsIDs 10464 and 10888. Reuse the astrometry-corrected, point-source-excluded blank sky immediately before that lossy reprojection, preserve the frozen exact bin-62 mask, source events, particle scale, response settings and shared joint model, then rerun the two-cluster V19DP preflight.",
+  "parents": {
+    "v19dp_config": {
+      "path": "configs/sigma_v19dp_unmerged_regional_joint_likelihood_preflight.json",
+      "sha256": "5f5798d3c7ec77578958a2469d291556ed251d1515c09c792d8e9e9705ce0f00"
+    },
+    "v19dp_runner": {
+      "path": "scripts/run_sigma_v19dp_unmerged_regional_joint_likelihood_preflight.py",
+      "sha256": "4a8d297a1aa51997f6e4d43fa15a4e238fba7aeed8d8aaca608c45da1ecd4b34"
+    },
+    "v19dp_report": {
+      "path": "results/sigma_v19dp_unmerged_regional_joint_likelihood_preflight/report.json",
+      "sha256": "c5815722880db438b6ca82717c969ae63d4d690941f0e67b573c886c299a5221"
+    },
+    "v19w_config": {
+      "path": "configs/sigma_v19w_full_response_production.json",
+      "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
+    },
+    "v19w_runner": {
+      "path": "scripts/run_sigma_v19w_full_response_production.py",
+      "sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
+    },
+    "v19w2_runner": {
+      "path": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
+      "sha256": "7bfa95bacc2d6904fb67262b1523cb58fab9cb492a0ccfcec15ae1ea41185810"
+    },
+    "v19w5_product_index": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+      "sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4"
+    },
+    "v19h_report": {
+      "path": "results/sigma_v19h_source_maps/report.json",
+      "sha256": "43e8a4f1883b67d74199c6d41925a18c5102035f5afe4c40ccd3bfdd19f794af"
+    },
+    "v19g_report": {
+      "path": "results/sigma_v19g_chandra_astrometry/report.json",
+      "sha256": "b6f77ad4dff16af66a1698f6d8e9310cadd98d1085c5d0965ec57cd2c58732a6"
+    },
+    "v19m_report": {
+      "path": "results/sigma_v19m_adaptive_thermodynamic_regions/report.json",
+      "sha256": "eebc55e0e236bd53045ce1f6b6fa197645ea5e8c95b13fd6571099c25a83e8ea"
+    }
+  },
+  "background_inputs": {
+    "10464": {
+      "pre_reprojection": {
+        "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_blanksky_nosrc_evt.fits",
+        "sha256": "b22c9ead471c58e4ab0af740c7a82d084c380867f4b366254d812152218bd0f5"
+      },
+      "post_reprojection": {
+        "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_blanksky_nosrc_reproj_evt.fits",
+        "sha256": "bf5d78bfbdc89ad635c45a15a0212e54c54fa0e69993a6a125c26715e66721cf"
+      },
+      "expected_pre_reprojection_ccd7_rows": 1354493,
+      "expected_post_reprojection_ccd7_rows": 0
+    },
+    "10888": {
+      "pre_reprojection": {
+        "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_blanksky_nosrc_evt.fits",
+        "sha256": "3a35e15e4432c476833b2d58b0ba42ce759a6401dcde4395ea70d0f518683047"
+      },
+      "post_reprojection": {
+        "path": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_blanksky_nosrc_reproj_evt.fits",
+        "sha256": "f8d3cc1f9f0c1dd818f611901f4ab0a0d8dc7e5a194c1fe68944d98d5e004082"
+      },
+      "expected_pre_reprojection_ccd7_rows": 1390824,
+      "expected_post_reprojection_ccd7_rows": 0
+    }
+  },
+  "registered_cells": [
+    {
+      "cell_name": "ABELL2146_bin62_obs10464_ccd7",
+      "expected_source_band_events": 345,
+      "expected_background_all_energy_events": 9498,
+      "expected_background_band_events": 1219,
+      "blanksky_scale": 0.086949646
+    },
+    {
+      "cell_name": "ABELL2146_bin62_obs10888_ccd7",
+      "expected_source_band_events": 84,
+      "expected_background_all_energy_events": 9509,
+      "expected_background_band_events": 1204,
+      "blanksky_scale": 0.015882602
+    }
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dq_ccd7_background_recovery_preflight.py",
+    "runner_sha256": "b37576bae1565399911b7494fcf283b14526a077e3cdc4598d356d33d0db3f14",
+    "scratch_root": "/home/henry/sigma-v19dq-ccd7-background/v100",
+    "output": "results/sigma_v19dq_ccd7_background_recovery_preflight"
+  },
+  "gates": {
+    "maximum_reduced_statistic": 1.5,
+    "inherit_every_other_v19dp_gate_without_change": true,
+    "both_registered_background_subsets_nonzero_and_exact": true,
+    "both_response_archives_pass": true,
+    "both_clusters_pass_the_corrected_joint_preflight": true
+  },
+  "failure_rule": "Retain and report the terminal result. Do not alter the exact bin mask, source event selection, BKGSCALn, response settings, shared spectral parameters, statistic, fit band, grouping, thresholds or parent products after seeing the corrected fit. Do not add a per-observation normalization. A failure does not authorize dropping CCD7; diagnose the registered event-coordinate transformation or adopt a separately preregistered local/stowed-background model.",
+  "claim_boundary": [
+    "This is a two-region calibration and joint-likelihood preflight, not the 494-region production analysis.",
+    "A pass establishes that using the real pre-reprojection CCD7 blank sky repairs the registered spectral boundary and authorizes recovery of all 254 affected CCD7 background products; it does not directly authorize the 494-region likelihood or validate a thermodynamic Sigma source or gravity theory.",
+    "No I4 thermodynamic-gradient stress or I5 baroclinicity is constructed.",
+    "No lensing, halo, action, galaxy, gravity, validation or holdout payload is opened and no gravity formula or parameter is changed."
+  ]
+}

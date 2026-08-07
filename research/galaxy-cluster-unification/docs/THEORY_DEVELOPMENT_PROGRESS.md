@@ -1,5 +1,27 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DP--V19DQ unmerged likelihood and CCD7 recovery
+
+V19DP fits one registered region in each development cluster with every
+observation response and background retained. Bullet passes at reduced
+statistic `0.763083`. Abell 2146 fails only goodness at `1.949652`; omitting
+ObsID 10464 CCD7 lowers the fit to `1.327141`, localizing the boundary.
+
+The original CIAO blank sky contains CCD7 and explicit particle scale factors.
+After astrometric correction and point-source exclusion, ObsIDs 10464 and 10888
+retain `1,354,493` and `1,390,824` CCD7 events, but the later common-grid
+reprojection contains zero. V19DQ restores only the real pre-reprojection
+background under the frozen exact mask. The registered cells contain
+`1,219`/`1,204` background-band events and pass exact PHA, scaling and response
+audits. Abell then passes at `1.031211`, with temperature `10.1729` keV and all
+leave-one-observation-out reduced statistics below `1.12`; Bullet is unchanged.
+No parameter or threshold changed.
+
+This authorizes rebuilding and auditing all 254 affected CCD7 background
+products. It does not yet authorize the 494-region likelihood, I4/I5, lensing,
+gravity, validation or holdout access. See
+[`SIGMA_V19DP_V19DQ_UNMERGED_JOINT_AND_CCD7_RECOVERY.md`](SIGMA_V19DP_V19DQ_UNMERGED_JOINT_AND_CCD7_RECOVERY.md).
+
 ## 2026-08-06 Sigma V19DO--V19DO2 soft-background result
 
 The observation-resolved audit covers all 5,082 source/background cells and
