@@ -1,0 +1,96 @@
+{
+  "protocol_version": "SIGMA-V19DS-FULL-UNMERGED-JOINT-1.0.0",
+  "freeze_state": "frozen_after_terminal_v19dr_pass_before_any_new_region_fit",
+  "purpose": "Fit all 494 frozen thermodynamic regions while retaining every observation-specific PHA, real background, ARF and RMF. Measure the baryonic gas state required for later I4/I5 source-only tests without constructing either source or opening a gravity/lensing target.",
+  "parents": {
+    "v19dr_config": {
+      "path": "configs/sigma_v19dr_full_ccd7_background_archive_recovery.json",
+      "sha256": "70189a98eff6a4315992b9cc75948b7252fb6def1c63cfa0059b51d54d155c7c"
+    },
+    "v19dr_runner": {
+      "path": "scripts/run_sigma_v19dr_full_ccd7_background_archive_recovery.py",
+      "sha256": "5582aeefc091c9fc05cc83fb9645c1dfd9cd2a194296a253915a7e52405af03e"
+    },
+    "v19dr_report": {
+      "path": "results/sigma_v19dr_full_ccd7_background_archive_recovery/report.json",
+      "sha256": "560bcefba3363c6d805bce75fd4e92a139d450c8169152c3733ef1765c365449"
+    },
+    "v19dr_unified_index": {
+      "path": "results/sigma_v19dr_full_ccd7_background_archive_recovery/unified_product_index.csv",
+      "sha256": "97faecdca6f8d72063d69bb3e777d2853f1897d81bf8a2a3f2c25888c6aabc78"
+    },
+    "v19dp_config": {
+      "path": "configs/sigma_v19dp_unmerged_regional_joint_likelihood_preflight.json",
+      "sha256": "5f5798d3c7ec77578958a2469d291556ed251d1515c09c792d8e9e9705ce0f00"
+    },
+    "v19dp_runner": {
+      "path": "scripts/run_sigma_v19dp_unmerged_regional_joint_likelihood_preflight.py",
+      "sha256": "4a8d297a1aa51997f6e4d43fa15a4e238fba7aeed8d8aaca608c45da1ecd4b34"
+    }
+  },
+  "registered_workload": {
+    "total_regions": 494,
+    "total_cells": 5082,
+    "clusters": {
+      "BULLET": {"regions": 366, "cells": 3812},
+      "ABELL2146": {"regions": 128, "cells": 1270}
+    }
+  },
+  "clusters": {
+    "BULLET": {"redshift": 0.296, "galactic_nh_cm2": 4.38e20},
+    "ABELL2146": {"redshift": 0.2323, "galactic_nh_cm2": 2.62e20}
+  },
+  "model": {
+    "expression": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+    "fit_energy_keV": [0.5, 7.0],
+    "statistic": "chi2xspecvar",
+    "minimum_grouped_source_counts": 25,
+    "abundance_table": "aspl (Asplund et al. 2009)",
+    "temperature_keV": {"initial": 8.0, "minimum": 1.0, "maximum": 30.0},
+    "abundance_solar": {"initial": 0.3, "minimum": 0.0, "maximum": 2.0},
+    "normalization": {
+      "minimum": 1e-10,
+      "maximum": 1.0,
+      "initial_rule": "median over observations of max(1e-8, 0.01 times grouped 0.5-7 keV source count rate)"
+    },
+    "starts": [
+      {"temperature_keV": 5.0, "abundance_solar": 0.3, "norm_multiplier": 1.0},
+      {"temperature_keV": 10.0, "abundance_solar": 0.5, "norm_multiplier": 0.5},
+      {"temperature_keV": 18.0, "abundance_solar": 0.2, "norm_multiplier": 2.0}
+    ],
+    "shared_across_observations": ["temperature", "abundance", "normalization"],
+    "observation_specific_free_parameters": 0
+  },
+  "production": {
+    "fit_each_region_once_after_the_two_build_preflight_passed": true,
+    "temperature_uncertainty": "Sherpa conf 68-percent profile interval with abundance and normalization profiled",
+    "retain_censored_best_fit_at_a_frozen_parameter_bound": true,
+    "parameter_bound_relative_tolerance": 1e-6,
+    "do_not_drop_or_retry_a_failed_region": true
+  },
+  "quality_gates": {
+    "maximum_reduced_statistic": 1.5,
+    "maximum_fractional_temperature_half_width": 0.5,
+    "maximum_single_dataset_count_fraction": 0.30
+  },
+  "production_gates": {
+    "all_494_regions_attempted": true,
+    "all_5082_cells_used_exactly_once": true,
+    "every_region_requires_a_finite_best_fit": true,
+    "every_region_requires_an_ordered_or_explicitly_censored_uncertainty_state": true,
+    "minimum_quality_regions_per_cluster": 12
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19ds_full_unmerged_regional_joint_likelihood.py",
+    "runner_sha256": "35299d510fe3efef4d12fb38023f0a457ece0ebe6beaa89098abda9b63ed82b4",
+    "maximum_concurrent_regions": 4,
+    "output": "results/sigma_v19ds_full_unmerged_regional_joint_likelihood"
+  },
+  "failure_rule": "Retain every completed checkpoint and terminal failure. Do not drop, merge, substitute or selectively refit a region; change a PHA, background, ARF, RMF, band, grouping, model, statistic, start, bound, threshold or free parameter; construct I4/I5; or open a lensing, halo, gravity, validation or holdout payload. A failed production gate requires a separately frozen measurement-model diagnosis.",
+  "claim_boundary": [
+    "V19DS measures the X-ray thermodynamic state; it does not test Sigma Gravity.",
+    "The same three plasma parameters are shared across each region's observations and no per-observation free parameter is allowed.",
+    "A pass authorizes a separately frozen I4/I5 source-only test; it does not authorize changing a gravity equation or opening a lensing target.",
+    "No lensing, halo, action, galaxy, gravity, validation or holdout payload is opened."
+  ]
+}
