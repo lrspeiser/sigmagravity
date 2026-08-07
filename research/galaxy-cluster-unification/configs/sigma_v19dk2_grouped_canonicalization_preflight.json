@@ -1,0 +1,78 @@
+{
+  "protocol_version": "SIGMA-V19DK2-GROUPED-CANONICALIZATION-PREFLIGHT-1.0.0",
+  "freeze_state": "frozen_after_v19dk_filename_assumption_failure_before_any_v19dk2_control_execution",
+  "purpose": "Repeat V19DK unchanged while presenting its grouped source PHA under the legacy comparator's required _src.pi alias. The alias is a copied view of the canonical grouped product and changes no scored product or science array.",
+  "parents": {
+    "v19dk_config": {
+      "path": "configs/sigma_v19dk_fits_canonicalization_preflight.json",
+      "sha256": "1a1c9b4dd821e4ae3d44d5d8fc82553dd10ad3c41847e1863753aabb977a13df"
+    },
+    "v19dk_runner": {
+      "path": "scripts/run_sigma_v19dk_fits_canonicalization_preflight.py",
+      "sha256": "566ac3dd845324f880941757a015e79c85cb30211744f1c2e840d4207f6f28a2"
+    },
+    "v19dk_report": {
+      "path": "results/sigma_v19dk_fits_canonicalization_preflight/report.json",
+      "sha256": "3200960491046e3f5e283eff4e2169b38ea32eabd267d9d0c7fd81f2cdffdfb0"
+    }
+  },
+  "input": {
+    "validated_cell_index": "results/sigma_v19x2_unified_spectral_combination_commissioning/validated_cell_index.csv",
+    "validated_cell_index_sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+  },
+  "controls": [
+    {
+      "id": "bullet_registered_region_169",
+      "cluster": "BULLET",
+      "bin_id": 169,
+      "expected_cells": 9
+    },
+    {
+      "id": "abell2146_registered_region_62",
+      "cluster": "ABELL2146",
+      "bin_id": 62,
+      "expected_cells": 10
+    }
+  ],
+  "writer": {
+    "rmf_threshold": 1e-06
+  },
+  "canonicalization": {
+    "independent_runs": 2,
+    "remove_cards": [
+      "CHECKSUM",
+      "DATASUM",
+      "DATE",
+      "HISTORY"
+    ],
+    "stable_history": "SIGMA V19DK deterministic science product",
+    "fixed_checksum_comments": true,
+    "grouped_source_comparator_alias": "copy canonical *_src_grp.pi to an unscored sibling *_src.pi only for the legacy exact-array comparator"
+  },
+  "expected_structure": {
+    "energy_rows": 1070,
+    "channels": 1024
+  },
+  "tolerances": {
+    "header_max_relative": 1e-12,
+    "all_scored_source_background_arf_rmf_arrays": "exact",
+    "canonical_file_sha256_across_runs": "exact"
+  },
+  "decision": {
+    "pass": "Both registered controls pass two independent combinations, groupings and direct-response writes; canonical products preserve every V19DI scored array exactly, have valid deterministic checksums, load in Sherpa, and are byte-identical across repetitions. A separately named canonicalized full commissioning successor may be frozen.",
+    "fail": "Do not run full commissioning or fit a spectrum. Record the terminal implementation result without changing inherited science.",
+    "no_retroactive_change": true
+  },
+  "claim_boundary": [
+    "V19DK2 repairs only V19DK's grouped-PHA comparator filename assumption.",
+    "No fit, temperature, thermodynamic stress, baroclinicity, lensing, halo, action, gravity parameter or holdout result is opened.",
+    "The comparator alias is not a scored or retained science product.",
+    "A pass authorizes only a separately frozen full commissioning successor with unchanged V19X2 science gates."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dk2_grouped_canonicalization_preflight.py",
+    "runner_sha256": "272d6f6627e7c1ccb0859f78a84b3537c4bca94e60b0e8523c016973a7062036",
+    "canonicalizer": "scripts/sigma_v19dk_fits_canonical.py",
+    "canonicalizer_sha256": "eca691e78a0227361db3b0af5cf3fe8c5420e60e47d9b093a0a8c7165ce09861"
+  }
+}

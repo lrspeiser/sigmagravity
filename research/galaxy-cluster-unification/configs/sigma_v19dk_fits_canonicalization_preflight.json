@@ -1,0 +1,85 @@
+{
+  "protocol_version": "SIGMA-V19DK-FITS-CANONICALIZATION-PREFLIGHT-1.0.0",
+  "freeze_state": "frozen_after_v19dj_execution_failure_before_any_repeat_control_execution",
+  "purpose": "Prove that V19DJ grouped source, background, ARF and RMF products become byte-identical across independent executions after removal of run-time-only FITS provenance, without changing any scored science array or consumer behavior.",
+  "parents": {
+    "v19dj_config": {
+      "path": "configs/sigma_v19dj_direct_response_commissioning.json",
+      "sha256": "4d6697f2181b33198c38dcca701b9849f38ac0e1ee22c567c86a2e6d0bcf2d7d"
+    },
+    "v19dj_runner": {
+      "path": "scripts/run_sigma_v19dj_direct_response_commissioning.py",
+      "sha256": "ab49edeb6ea28e3f4bf3fb727a779a268faa64e6362c53d5b147e16771b4309f"
+    },
+    "v19dj_report": {
+      "path": "results/sigma_v19dj_direct_response_commissioning/report.json",
+      "sha256": "29d2d7b0027c92407c6ddef89b4b7033d52fad6c6d83c0c354faa39c3d15a0bc"
+    },
+    "v19di_config": {
+      "path": "configs/sigma_v19di_direct_ogip_writer_preflight.json",
+      "sha256": "a6bbf1b98b49c9a2e130918fd7e0249cc0a90b831e663739f0ad451ce12f72ae"
+    },
+    "v19di_report": {
+      "path": "results/sigma_v19di_direct_ogip_writer_preflight/report.json",
+      "sha256": "33db6f8f72d5759d357c2bacfa6e5630de7f0e52f11f20adda06ea2257b9da95"
+    }
+  },
+  "input": {
+    "validated_cell_index": "results/sigma_v19x2_unified_spectral_combination_commissioning/validated_cell_index.csv",
+    "validated_cell_index_sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+  },
+  "controls": [
+    {
+      "id": "bullet_registered_region_169",
+      "cluster": "BULLET",
+      "bin_id": 169,
+      "expected_cells": 9
+    },
+    {
+      "id": "abell2146_registered_region_62",
+      "cluster": "ABELL2146",
+      "bin_id": 62,
+      "expected_cells": 10
+    }
+  ],
+  "writer": {
+    "rmf_threshold": 1e-06
+  },
+  "canonicalization": {
+    "independent_runs": 2,
+    "remove_cards": [
+      "CHECKSUM",
+      "DATASUM",
+      "DATE",
+      "HISTORY"
+    ],
+    "stable_history": "SIGMA V19DK deterministic science product",
+    "fixed_checksum_comments": true
+  },
+  "expected_structure": {
+    "energy_rows": 1070,
+    "channels": 1024
+  },
+  "tolerances": {
+    "header_max_relative": 1e-12,
+    "all_scored_source_background_arf_rmf_arrays": "exact",
+    "canonical_file_sha256_across_runs": "exact"
+  },
+  "decision": {
+    "pass": "Both registered cluster controls pass two independent full response-free PHA combinations, groupings and direct-response writes; canonical products preserve all scored arrays exactly, have valid deterministic FITS checksums, load and forward-fold in Sherpa, and are byte-identical across repetitions. A separately named canonicalized full commissioning successor may be frozen.",
+    "fail": "Do not rerun full commissioning, fit a spectrum, or open any source invariant. Retire this canonicalization implementation and diagnose the mismatch without changing the inherited science method.",
+    "no_retroactive_change": true
+  },
+  "claim_boundary": [
+    "V19DK is a deterministic-serialization preflight, not a spectral or source result.",
+    "The two controls were already used in V19DI and open no new target.",
+    "No fit, temperature, thermodynamic stress, baroclinicity, lensing, halo, action, gravity parameter or holdout result is opened.",
+    "A pass authorizes only a separately frozen full commissioning successor with unchanged V19X2 science gates."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dk_fits_canonicalization_preflight.py",
+    "runner_sha256": "566ac3dd845324f880941757a015e79c85cb30211744f1c2e840d4207f6f28a2",
+    "canonicalizer": "scripts/sigma_v19dk_fits_canonical.py",
+    "canonicalizer_sha256": "eca691e78a0227361db3b0af5cf3fe8c5420e60e47d9b093a0a8c7165ce09861"
+  }
+}

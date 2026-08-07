@@ -1,0 +1,1733 @@
+{
+  "protocol_version": "SIGMA-V19DK2-GROUPED-CANONICALIZATION-PREFLIGHT-1.0.0",
+  "generated_utc": "2026-08-07T00:21:14.656401+00:00",
+  "config_sha256": "09af4df91a6a86cdc0c1fb44f4252fa7aa544cf9110b05dfa37a9b7cbab84d36",
+  "runner_sha256": "272d6f6627e7c1ccb0859f78a84b3537c4bca94e60b0e8523c016973a7062036",
+  "status": "grouped_fits_canonicalization_preflight_passed_full_successor_may_be_frozen",
+  "aggregate_pass": true,
+  "controls": [
+    {
+      "id": "bullet_registered_region_169",
+      "cluster": "BULLET",
+      "runs": [
+        {
+          "run_id": "repeat_1",
+          "cells": 9,
+          "full_pha_count_conservation_exact": true,
+          "grouped_pha_links": {
+            "BACKFILE": "bullet_registered_region_169_bkg.pi",
+            "ANCRFILE": "bullet_registered_region_169_src.arf",
+            "RESPFILE": "bullet_registered_region_169_src.rmf"
+          },
+          "expected_grouped_pha_links": {
+            "BACKFILE": "bullet_registered_region_169_bkg.pi",
+            "ANCRFILE": "bullet_registered_region_169_src.arf",
+            "RESPFILE": "bullet_registered_region_169_src.rmf"
+          },
+          "canonical_products": {
+            "grouped_source_spectrum": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_1/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src_grp.pi",
+              "bytes": 74880,
+              "sha256": "913dedaa786a33eca3d80c9bdd50a1e81bef9cec8ef6df2e59aa46260a980674"
+            },
+            "background_spectrum": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_1/frozen_products/bullet_registered_region_169/bullet_registered_region_169_bkg.pi",
+              "bytes": 46080,
+              "sha256": "292de7fc58054963a12303ec8058b782ca2e0c5515b8f47f452a329de32d5e3f"
+            },
+            "source_arf": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_1/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.arf",
+              "bytes": 28800,
+              "sha256": "7fce9868613861a9b2ccbdceec68f7849c9482f4e7ad08c2d4f7abc616398fb5"
+            },
+            "source_rmf": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_1/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "bytes": 2208960,
+              "sha256": "3027db25cc9738388bf79c1a1874866f678059b4f5b6d87e8af9660f9b2c255f"
+            }
+          },
+          "semantic_comparisons": {
+            "source": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_1/bullet_registered_region_169/bullet_registered_region_169_src.pi",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_1/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.pi",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "COUNTS": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 536077.11685694,
+                  "hierarchical": 536077.11685694,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "BACKSCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "AREASCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "background": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_1/bullet_registered_region_169/bullet_registered_region_169_bkg.pi",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_1/frozen_products/bullet_registered_region_169/bullet_registered_region_169_bkg.pi",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "COUNTS": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 13500000.0,
+                  "hierarchical": 13500000.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "BACKSCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "AREASCAL": {
+                  "direct": 1.0686014620126,
+                  "hierarchical": 1.0686014620126,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "arf": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_1/bullet_registered_region_169/bullet_registered_region_169_src.arf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_1/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.arf",
+              "columns": {
+                "ENERG_LO": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "ENERG_HI": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "SPECRESP": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 536077.116856937,
+                  "hierarchical": 536077.116856937,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1070,
+                  "hierarchical": 1070,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "rmf_matrix": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_1/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_1/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "columns": {
+                "ENERG_LO": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "ENERG_HI": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "N_GRP": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "F_CHAN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1368
+                  ],
+                  "right_shape": [
+                    1368
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "N_CHAN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1368
+                  ],
+                  "right_shape": [
+                    1368
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "MATRIX": {
+                  "same_shape": true,
+                  "left_shape": [
+                    533729
+                  ],
+                  "right_shape": [
+                    533729
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 536077.116856937,
+                  "hierarchical": 536077.116856937,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "rmf_ebounds": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_1/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_1/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "E_MIN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "E_MAX": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            }
+          },
+          "response_structure": {
+            "arf_rows": 1070,
+            "rmf_rows": 1070,
+            "channels": 1024,
+            "ebounds_rows": 1024,
+            "gates": {
+              "arf_rows_exact": true,
+              "arf_finite": true,
+              "rmf_rows_exact": true,
+              "rmf_channels_exact": true,
+              "ebounds_rows_exact": true
+            },
+            "passed": true
+          },
+          "checksums": {
+            "grouped_source_spectrum": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "background_spectrum": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "source_arf": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "source_rmf": {
+              "hdu_count": 3,
+              "checksum_values": [
+                1,
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1,
+                1
+              ],
+              "passed": true
+            }
+          },
+          "sherpa": {
+            "noticed_bins": 87,
+            "arf_energy_bins": 1070,
+            "rmf_energy_bins": 1070,
+            "rmf_channels": 1024,
+            "model_finite": true,
+            "model_has_positive_prediction": true,
+            "model_sum": 3.4593723721600353,
+            "passed": true
+          },
+          "gates": {
+            "source_arrays_exact": true,
+            "background_arrays_exact": true,
+            "arf_arrays_exact": true,
+            "rmf_matrix_arrays_exact": true,
+            "rmf_ebounds_arrays_exact": true,
+            "source_exposure_close": true,
+            "arf_exposure_close": true,
+            "canonicalization_preserves_science_arrays_exactly": true,
+            "written_response_structure_passes": true,
+            "all_hdu_checksums_and_datasums_pass": true,
+            "sherpa_load_and_forward_fold_passes": true
+          },
+          "passed": true
+        },
+        {
+          "run_id": "repeat_2",
+          "cells": 9,
+          "full_pha_count_conservation_exact": true,
+          "grouped_pha_links": {
+            "BACKFILE": "bullet_registered_region_169_bkg.pi",
+            "ANCRFILE": "bullet_registered_region_169_src.arf",
+            "RESPFILE": "bullet_registered_region_169_src.rmf"
+          },
+          "expected_grouped_pha_links": {
+            "BACKFILE": "bullet_registered_region_169_bkg.pi",
+            "ANCRFILE": "bullet_registered_region_169_src.arf",
+            "RESPFILE": "bullet_registered_region_169_src.rmf"
+          },
+          "canonical_products": {
+            "grouped_source_spectrum": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_2/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src_grp.pi",
+              "bytes": 74880,
+              "sha256": "913dedaa786a33eca3d80c9bdd50a1e81bef9cec8ef6df2e59aa46260a980674"
+            },
+            "background_spectrum": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_2/frozen_products/bullet_registered_region_169/bullet_registered_region_169_bkg.pi",
+              "bytes": 46080,
+              "sha256": "292de7fc58054963a12303ec8058b782ca2e0c5515b8f47f452a329de32d5e3f"
+            },
+            "source_arf": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_2/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.arf",
+              "bytes": 28800,
+              "sha256": "7fce9868613861a9b2ccbdceec68f7849c9482f4e7ad08c2d4f7abc616398fb5"
+            },
+            "source_rmf": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_2/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "bytes": 2208960,
+              "sha256": "3027db25cc9738388bf79c1a1874866f678059b4f5b6d87e8af9660f9b2c255f"
+            }
+          },
+          "semantic_comparisons": {
+            "source": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_2/bullet_registered_region_169/bullet_registered_region_169_src.pi",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_2/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.pi",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "COUNTS": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 536077.11685694,
+                  "hierarchical": 536077.11685694,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "BACKSCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "AREASCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "background": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_2/bullet_registered_region_169/bullet_registered_region_169_bkg.pi",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_2/frozen_products/bullet_registered_region_169/bullet_registered_region_169_bkg.pi",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "COUNTS": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 13500000.0,
+                  "hierarchical": 13500000.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "BACKSCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "AREASCAL": {
+                  "direct": 1.0686014620126,
+                  "hierarchical": 1.0686014620126,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "arf": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_2/bullet_registered_region_169/bullet_registered_region_169_src.arf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_2/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.arf",
+              "columns": {
+                "ENERG_LO": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "ENERG_HI": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "SPECRESP": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 536077.116856937,
+                  "hierarchical": 536077.116856937,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1070,
+                  "hierarchical": 1070,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "rmf_matrix": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_2/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_2/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "columns": {
+                "ENERG_LO": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "ENERG_HI": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "N_GRP": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "F_CHAN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1368
+                  ],
+                  "right_shape": [
+                    1368
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "N_CHAN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1368
+                  ],
+                  "right_shape": [
+                    1368
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "MATRIX": {
+                  "same_shape": true,
+                  "left_shape": [
+                    533729
+                  ],
+                  "right_shape": [
+                    533729
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 536077.116856937,
+                  "hierarchical": 536077.116856937,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "rmf_ebounds": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/bullet_registered_region_169/repeat_2/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/bullet_registered_region_169/repeat_2/frozen_products/bullet_registered_region_169/bullet_registered_region_169_src.rmf",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "E_MIN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "E_MAX": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            }
+          },
+          "response_structure": {
+            "arf_rows": 1070,
+            "rmf_rows": 1070,
+            "channels": 1024,
+            "ebounds_rows": 1024,
+            "gates": {
+              "arf_rows_exact": true,
+              "arf_finite": true,
+              "rmf_rows_exact": true,
+              "rmf_channels_exact": true,
+              "ebounds_rows_exact": true
+            },
+            "passed": true
+          },
+          "checksums": {
+            "grouped_source_spectrum": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "background_spectrum": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "source_arf": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "source_rmf": {
+              "hdu_count": 3,
+              "checksum_values": [
+                1,
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1,
+                1
+              ],
+              "passed": true
+            }
+          },
+          "sherpa": {
+            "noticed_bins": 87,
+            "arf_energy_bins": 1070,
+            "rmf_energy_bins": 1070,
+            "rmf_channels": 1024,
+            "model_finite": true,
+            "model_has_positive_prediction": true,
+            "model_sum": 3.4593723721600353,
+            "passed": true
+          },
+          "gates": {
+            "source_arrays_exact": true,
+            "background_arrays_exact": true,
+            "arf_arrays_exact": true,
+            "rmf_matrix_arrays_exact": true,
+            "rmf_ebounds_arrays_exact": true,
+            "source_exposure_close": true,
+            "arf_exposure_close": true,
+            "canonicalization_preserves_science_arrays_exactly": true,
+            "written_response_structure_passes": true,
+            "all_hdu_checksums_and_datasums_pass": true,
+            "sherpa_load_and_forward_fold_passes": true
+          },
+          "passed": true
+        }
+      ],
+      "byte_identical_across_independent_runs": {
+        "grouped_source_spectrum": true,
+        "background_spectrum": true,
+        "source_arf": true,
+        "source_rmf": true
+      },
+      "passed": true
+    },
+    {
+      "id": "abell2146_registered_region_62",
+      "cluster": "ABELL2146",
+      "runs": [
+        {
+          "run_id": "repeat_1",
+          "cells": 10,
+          "full_pha_count_conservation_exact": true,
+          "grouped_pha_links": {
+            "BACKFILE": "abell2146_registered_region_62_bkg.pi",
+            "ANCRFILE": "abell2146_registered_region_62_src.arf",
+            "RESPFILE": "abell2146_registered_region_62_src.rmf"
+          },
+          "expected_grouped_pha_links": {
+            "BACKFILE": "abell2146_registered_region_62_bkg.pi",
+            "ANCRFILE": "abell2146_registered_region_62_src.arf",
+            "RESPFILE": "abell2146_registered_region_62_src.rmf"
+          },
+          "canonical_products": {
+            "grouped_source_spectrum": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_1/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src_grp.pi",
+              "bytes": 74880,
+              "sha256": "ea26b7ffa914022234cabc56d511d7c247ccefffdf223c6cb69c8f61c3266d98"
+            },
+            "background_spectrum": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_1/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_bkg.pi",
+              "bytes": 46080,
+              "sha256": "ea089fa808c33575abd99560d744ccbdcf79dac0950b25007f07aa54dbeb00f6"
+            },
+            "source_arf": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_1/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.arf",
+              "bytes": 28800,
+              "sha256": "81b14f13fe7f6e72340e677209ebd88a8e57adf54c7e1d031f14d152be6c8ccc"
+            },
+            "source_rmf": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_1/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "bytes": 2191680,
+              "sha256": "82399e573b908460e9b0ba2dd729a983547ee3047f1fa8edd02cfc8fec52c4ae"
+            }
+          },
+          "semantic_comparisons": {
+            "source": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_1/abell2146_registered_region_62/abell2146_registered_region_62_src.pi",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_1/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.pi",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "COUNTS": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 418012.62993274,
+                  "hierarchical": 418012.62993274,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "BACKSCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "AREASCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "background": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_1/abell2146_registered_region_62/abell2146_registered_region_62_bkg.pi",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_1/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_bkg.pi",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "COUNTS": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 4340000.0,
+                  "hierarchical": 4340000.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "BACKSCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "AREASCAL": {
+                  "direct": 0.90805132323204,
+                  "hierarchical": 0.90805132323204,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "arf": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_1/abell2146_registered_region_62/abell2146_registered_region_62_src.arf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_1/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.arf",
+              "columns": {
+                "ENERG_LO": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "ENERG_HI": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "SPECRESP": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 418012.62993274047,
+                  "hierarchical": 418012.62993274047,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1070,
+                  "hierarchical": 1070,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "rmf_matrix": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_1/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_1/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "columns": {
+                "ENERG_LO": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "ENERG_HI": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "N_GRP": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "F_CHAN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1372
+                  ],
+                  "right_shape": [
+                    1372
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "N_CHAN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1372
+                  ],
+                  "right_shape": [
+                    1372
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "MATRIX": {
+                  "same_shape": true,
+                  "left_shape": [
+                    529089
+                  ],
+                  "right_shape": [
+                    529089
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 418012.62993274047,
+                  "hierarchical": 418012.62993274047,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "rmf_ebounds": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_1/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_1/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "E_MIN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "E_MAX": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            }
+          },
+          "response_structure": {
+            "arf_rows": 1070,
+            "rmf_rows": 1070,
+            "channels": 1024,
+            "ebounds_rows": 1024,
+            "gates": {
+              "arf_rows_exact": true,
+              "arf_finite": true,
+              "rmf_rows_exact": true,
+              "rmf_channels_exact": true,
+              "ebounds_rows_exact": true
+            },
+            "passed": true
+          },
+          "checksums": {
+            "grouped_source_spectrum": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "background_spectrum": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "source_arf": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "source_rmf": {
+              "hdu_count": 3,
+              "checksum_values": [
+                1,
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1,
+                1
+              ],
+              "passed": true
+            }
+          },
+          "sherpa": {
+            "noticed_bins": 85,
+            "arf_energy_bins": 1070,
+            "rmf_energy_bins": 1070,
+            "rmf_channels": 1024,
+            "model_finite": true,
+            "model_has_positive_prediction": true,
+            "model_sum": 3.009200343633506,
+            "passed": true
+          },
+          "gates": {
+            "source_arrays_exact": true,
+            "background_arrays_exact": true,
+            "arf_arrays_exact": true,
+            "rmf_matrix_arrays_exact": true,
+            "rmf_ebounds_arrays_exact": true,
+            "source_exposure_close": true,
+            "arf_exposure_close": true,
+            "canonicalization_preserves_science_arrays_exactly": true,
+            "written_response_structure_passes": true,
+            "all_hdu_checksums_and_datasums_pass": true,
+            "sherpa_load_and_forward_fold_passes": true
+          },
+          "passed": true
+        },
+        {
+          "run_id": "repeat_2",
+          "cells": 10,
+          "full_pha_count_conservation_exact": true,
+          "grouped_pha_links": {
+            "BACKFILE": "abell2146_registered_region_62_bkg.pi",
+            "ANCRFILE": "abell2146_registered_region_62_src.arf",
+            "RESPFILE": "abell2146_registered_region_62_src.rmf"
+          },
+          "expected_grouped_pha_links": {
+            "BACKFILE": "abell2146_registered_region_62_bkg.pi",
+            "ANCRFILE": "abell2146_registered_region_62_src.arf",
+            "RESPFILE": "abell2146_registered_region_62_src.rmf"
+          },
+          "canonical_products": {
+            "grouped_source_spectrum": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_2/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src_grp.pi",
+              "bytes": 74880,
+              "sha256": "ea26b7ffa914022234cabc56d511d7c247ccefffdf223c6cb69c8f61c3266d98"
+            },
+            "background_spectrum": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_2/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_bkg.pi",
+              "bytes": 46080,
+              "sha256": "ea089fa808c33575abd99560d744ccbdcf79dac0950b25007f07aa54dbeb00f6"
+            },
+            "source_arf": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_2/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.arf",
+              "bytes": 28800,
+              "sha256": "81b14f13fe7f6e72340e677209ebd88a8e57adf54c7e1d031f14d152be6c8ccc"
+            },
+            "source_rmf": {
+              "relative_path": "results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_2/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "bytes": 2191680,
+              "sha256": "82399e573b908460e9b0ba2dd729a983547ee3047f1fa8edd02cfc8fec52c4ae"
+            }
+          },
+          "semantic_comparisons": {
+            "source": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_2/abell2146_registered_region_62/abell2146_registered_region_62_src.pi",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_2/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.pi",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "COUNTS": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 418012.62993274,
+                  "hierarchical": 418012.62993274,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "BACKSCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "AREASCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "background": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_2/abell2146_registered_region_62/abell2146_registered_region_62_bkg.pi",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_2/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_bkg.pi",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "COUNTS": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 4340000.0,
+                  "hierarchical": 4340000.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "BACKSCAL": {
+                  "direct": 1.0,
+                  "hierarchical": 1.0,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "AREASCAL": {
+                  "direct": 0.90805132323204,
+                  "hierarchical": 0.90805132323204,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "arf": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_2/abell2146_registered_region_62/abell2146_registered_region_62_src.arf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_2/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.arf",
+              "columns": {
+                "ENERG_LO": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "ENERG_HI": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "SPECRESP": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 418012.62993274047,
+                  "hierarchical": 418012.62993274047,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1070,
+                  "hierarchical": 1070,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "rmf_matrix": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_2/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_2/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "columns": {
+                "ENERG_LO": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "ENERG_HI": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "N_GRP": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1070
+                  ],
+                  "right_shape": [
+                    1070
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "F_CHAN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1372
+                  ],
+                  "right_shape": [
+                    1372
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "N_CHAN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1372
+                  ],
+                  "right_shape": [
+                    1372
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "MATRIX": {
+                  "same_shape": true,
+                  "left_shape": [
+                    529089
+                  ],
+                  "right_shape": [
+                    529089
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "EXPOSURE": {
+                  "direct": 418012.62993274047,
+                  "hierarchical": 418012.62993274047,
+                  "equal": true,
+                  "relative_difference": 0.0
+                },
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            },
+            "rmf_ebounds": {
+              "direct": "/home/henry/sigma-v19dk2-grouped-canonicalization-preflight/v100/abell2146_registered_region_62/repeat_2/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "hierarchical": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dk2_grouped_canonicalization_preflight/runs/abell2146_registered_region_62/repeat_2/frozen_products/abell2146_registered_region_62/abell2146_registered_region_62_src.rmf",
+              "columns": {
+                "CHANNEL": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "E_MIN": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                },
+                "E_MAX": {
+                  "same_shape": true,
+                  "left_shape": [
+                    1024
+                  ],
+                  "right_shape": [
+                    1024
+                  ],
+                  "max_absolute": 0.0,
+                  "max_relative": 0.0
+                }
+              },
+              "headers": {
+                "DETCHANS": {
+                  "direct": 1024,
+                  "hierarchical": 1024,
+                  "equal": true,
+                  "relative_difference": 0.0
+                }
+              }
+            }
+          },
+          "response_structure": {
+            "arf_rows": 1070,
+            "rmf_rows": 1070,
+            "channels": 1024,
+            "ebounds_rows": 1024,
+            "gates": {
+              "arf_rows_exact": true,
+              "arf_finite": true,
+              "rmf_rows_exact": true,
+              "rmf_channels_exact": true,
+              "ebounds_rows_exact": true
+            },
+            "passed": true
+          },
+          "checksums": {
+            "grouped_source_spectrum": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "background_spectrum": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "source_arf": {
+              "hdu_count": 2,
+              "checksum_values": [
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1
+              ],
+              "passed": true
+            },
+            "source_rmf": {
+              "hdu_count": 3,
+              "checksum_values": [
+                1,
+                1,
+                1
+              ],
+              "datasum_values": [
+                1,
+                1,
+                1
+              ],
+              "passed": true
+            }
+          },
+          "sherpa": {
+            "noticed_bins": 85,
+            "arf_energy_bins": 1070,
+            "rmf_energy_bins": 1070,
+            "rmf_channels": 1024,
+            "model_finite": true,
+            "model_has_positive_prediction": true,
+            "model_sum": 3.009200343633506,
+            "passed": true
+          },
+          "gates": {
+            "source_arrays_exact": true,
+            "background_arrays_exact": true,
+            "arf_arrays_exact": true,
+            "rmf_matrix_arrays_exact": true,
+            "rmf_ebounds_arrays_exact": true,
+            "source_exposure_close": true,
+            "arf_exposure_close": true,
+            "canonicalization_preserves_science_arrays_exactly": true,
+            "written_response_structure_passes": true,
+            "all_hdu_checksums_and_datasums_pass": true,
+            "sherpa_load_and_forward_fold_passes": true
+          },
+          "passed": true
+        }
+      ],
+      "byte_identical_across_independent_runs": {
+        "grouped_source_spectrum": true,
+        "background_spectrum": true,
+        "source_arf": true,
+        "source_rmf": true
+      },
+      "passed": true
+    }
+  ],
+  "full_response_commissioning_successor_authorized": true,
+  "spectrum_fitted": false,
+  "temperature_or_source_invariant_opened": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

@@ -15,6 +15,15 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
+The latest source-measurement checkpoint is
+[`docs/SIGMA_V19DI_V19DN_DIRECT_RESPONSE_AND_SOFT_SPECTRUM.md`](docs/SIGMA_V19DI_V19DN_DIRECT_RESPONSE_AND_SOFT_SPECTRUM.md).
+The direct response and deterministic FITS path now passes, but a frozen
+minimal two-temperature repair does not make the integrated Bullet spectrum
+adequate. A band-localization test finds the failure below roughly 2 keV while
+the 2--7 keV fit passes. Full regional thermodynamic production and the I4/I5
+source candidates remain sealed pending an observation-resolved soft-band
+audit; this is observation-model evidence, not a gravity-formula result.
+
 The current causal-assembly checkpoint is
 [`docs/SIGMA_V19H_SOURCE_MAP_GATE.md`](docs/SIGMA_V19H_SOURCE_MAP_GATE.md),
 following the astrometric result in

@@ -1,0 +1,68 @@
+{
+  "protocol_version": "SIGMA-V19DN-INTEGRATED-RESIDUAL-LOCALIZATION-1.0.0",
+  "freeze_state": "frozen_before_execution",
+  "purpose": "Localize the valid V19DM2 Bullet integrated-spectrum failure without changing the thermal model, statistic, parameter bounds, data, gravity formula, or any source/lensing outcome.",
+  "parents": {
+    "v19dm2_config": {
+      "path": "configs/sigma_v19dm2_statistic_parity_remediation.json",
+      "sha256": "61ca1423197803d04fa88b5133d17f8c4678083665e923e96c676b8d5edc03be"
+    },
+    "v19dm2_runner": {
+      "path": "scripts/run_sigma_v19dm2_statistic_parity_remediation.py",
+      "sha256": "6ec5e720c5b428516ad3e89e8892c3ed82ae6d175d9967cc019d9572adafac95"
+    },
+    "v19dm2_report": {
+      "path": "results/sigma_v19dm2_statistic_parity_remediation/report.json",
+      "sha256": "f26750814bbaad5bc6f589ea2687b4b41c0d856852b6944e19c79d321fafabf6"
+    }
+  },
+  "diagnostic_bands": [
+    {
+      "id": "full_0p5_7",
+      "minimum_keV": 0.5,
+      "maximum_keV": 7.0,
+      "interpretation": "parent-band reproducibility and broad goodness"
+    },
+    {
+      "id": "softest_removed_0p7_7",
+      "minimum_keV": 0.7,
+      "maximum_keV": 7.0,
+      "interpretation": "sensitivity to the softest response and background regime"
+    },
+    {
+      "id": "soft_edge_removed_1_7",
+      "minimum_keV": 1.0,
+      "maximum_keV": 7.0,
+      "interpretation": "source-dominated continuum and Fe-K behavior without the soft complex"
+    },
+    {
+      "id": "hard_only_2_7",
+      "minimum_keV": 2.0,
+      "maximum_keV": 7.0,
+      "interpretation": "hard continuum and Fe-K adequacy"
+    },
+    {
+      "id": "soft_only_0p5_2",
+      "minimum_keV": 0.5,
+      "maximum_keV": 2.0,
+      "interpretation": "soft-band background, calibration, absorption and line-complex adequacy"
+    }
+  ],
+  "interpretation_rules": {
+    "adequate_reduced_statistic": 1.5,
+    "broad_band_failure": "Both frozen soft-only and hard-only fits exceed 1.5.",
+    "soft_localized": "The 0.5-2 fit fails while the 1-7 fit passes.",
+    "hard_persistent": "The 2-7 fit fails whether or not the soft band does.",
+    "no_authorization": "Every result is diagnostic. No band-selected fit may authorize regional production or define the source."
+  },
+  "claim_boundary": [
+    "V19DN diagnoses spectral-model support only; it does not select a gravity formula or source invariant.",
+    "Energy bands and the 1.5 adequacy threshold are frozen before the band outcomes are opened.",
+    "No additional thermal component, systematic error, background scaling, or energy exclusion is admitted into production.",
+    "No I4, I5, lensing, halo, action, gravity parameter or holdout payload is opened."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dn_integrated_residual_localization.py",
+    "runner_sha256": "2f50be8f488afc25de68d299586759e061e5cf089c7b0651c55952d87513eb07"
+  }
+}

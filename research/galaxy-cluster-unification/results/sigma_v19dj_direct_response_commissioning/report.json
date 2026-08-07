@@ -1,0 +1,15 @@
+{
+  "protocol_version": "SIGMA-V19DJ-DIRECT-RESPONSE-COMMISSIONING-1.0.0",
+  "generated_utc": "2026-08-07T00:29:25.865661+00:00",
+  "config_sha256": "4d6697f2181b33198c38dcca701b9849f38ac0e1ee22c567c86a2e6d0bcf2d7d",
+  "runner_sha256": "ab49edeb6ea28e3f4bf3fb727a779a268faa64e6362c53d5b147e16771b4309f",
+  "status": "direct_response_commissioning_execution_failed",
+  "execution_exception": "RuntimeError: response-free combine_spectra exited -15; inspect /home/henry/sigma-v19dj-direct-response-commissioning/v100/BULLET_integrated/BULLET_integrated.log",
+  "gates": {
+    "execution_completed": false
+  },
+  "full_494_region_combination_and_fit_authorized": false,
+  "thermal_stress_constructed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

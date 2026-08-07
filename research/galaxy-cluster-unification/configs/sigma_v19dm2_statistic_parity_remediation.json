@@ -1,0 +1,55 @@
+{
+  "protocol_version": "SIGMA-V19DM2-STATISTIC-PARITY-1.0.0",
+  "freeze_state": "frozen_before_execution",
+  "purpose": "Repeat the frozen V19DM diagnostic after correcting only its failure to initialize the inherited chi2xspecvar statistic after Sherpa clean.",
+  "parents": {
+    "v19dm_config": {
+      "path": "configs/sigma_v19dm_minimal_thermal_mixture_diagnostic.json",
+      "sha256": "b3f8c1f1a0e78ecafec048f9903d524cd533a7b08bee715f11a6d56a7f44fbad"
+    },
+    "v19dm_runner": {
+      "path": "scripts/run_sigma_v19dm_minimal_thermal_mixture_diagnostic.py",
+      "sha256": "2fda236500b7a3f16a6a8c9dd3d1bfef77bd66a99fc3a794c1484ce4b4a57bbb"
+    },
+    "v19dm_report": {
+      "path": "results/sigma_v19dm_minimal_thermal_mixture_diagnostic/report.json",
+      "sha256": "b02872fa8e6cead83d7d9bd4ab6f774aa0d5a612f57f67e60442aa8ef2731206"
+    }
+  },
+  "mixture": {
+    "model": "xstbabs * (xsapec_cool + xsapec_hot)",
+    "same_model_bounds_starts_and_decision_as_v19dm": true,
+    "redshift_rule": "both components fixed to the same registered optical redshift",
+    "abundance_rule": "one free abundance tied exactly across both components",
+    "normalization_rule": "independent positive normalizations",
+    "starts": [
+      {"cool_keV": 3.0, "hot_keV": 15.0, "cool_norm_fraction": 0.5},
+      {"cool_keV": 7.0, "hot_keV": 22.0, "cool_norm_fraction": 0.7},
+      {"cool_keV": 1.5, "hot_keV": 10.0, "cool_norm_fraction": 0.3}
+    ],
+    "one_temperature_free_parameters": 3,
+    "two_temperature_free_parameters": 5,
+    "minimum_temperature_ratio": 1.2,
+    "minimum_normalization_fraction": 0.05,
+    "maximum_delta_bic_for_admission": -10.0
+  },
+  "decision": {
+    "maximum_reduced_statistic": 1.5,
+    "no_retroactive_change": true
+  },
+  "remediation": {
+    "expected_statistic": "chi2xspecvar",
+    "only_allowed_change": "Call ui.set_stat('chi2xspecvar') immediately after every ui.clean() before the frozen V19DM fit logic runs.",
+    "scientific_interpretation_of_v19dm": "discarded_due_to_statistic_mismatch"
+  },
+  "claim_boundary": [
+    "V19DM2 is an implementation-parity remediation, not a new observation model or gravity result.",
+    "No data, model component, start, bound, parameter count, threshold, or decision is changed from V19DM.",
+    "No I4, I5, lensing, halo, action, gravity parameter or holdout payload is opened.",
+    "A pass authorizes only a separately frozen full-regional spectral successor."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dm2_statistic_parity_remediation.py",
+    "runner_sha256": "6ec5e720c5b428516ad3e89e8892c3ed82ae6d175d9967cc019d9572adafac95"
+  }
+}

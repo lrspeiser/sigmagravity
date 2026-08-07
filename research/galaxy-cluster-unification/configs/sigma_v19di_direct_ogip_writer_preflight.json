@@ -1,0 +1,57 @@
+{
+  "protocol_version": "SIGMA-V19DI-DIRECT-OGIP-WRITER-PREFLIGHT-1.0.0",
+  "freeze_state": "frozen_after_v19dh_parity_pass_before_writer_control_execution",
+  "purpose": "Prove that the V19DH direct arrays can be serialized as valid OGIP products that reproduce official CIAO arrays and can be loaded and forward-folded by Sherpa.",
+  "parents": {
+    "v19dh_config": "configs/sigma_v19dh_direct_response_parity.json",
+    "v19dh_config_sha256": "f1abaaecfd51bc6925ba29175390db35c765d638cdab0573f0741ce24a7bc56d",
+    "v19dh_report": "results/sigma_v19dh_direct_response_parity/report.json",
+    "v19dh_report_sha256": "3c538f7ca7d55da6584bd47c1db02dfec2a78a3e4740665352320bd14080265c"
+  },
+  "input": {
+    "validated_cell_index": "results/sigma_v19x2_unified_spectral_combination_commissioning/validated_cell_index.csv",
+    "validated_cell_index_sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+  },
+  "controls": [
+    {
+      "id": "bullet_registered_region_169",
+      "cluster": "BULLET",
+      "bin_id": 169,
+      "expected_cells": 9
+    },
+    {
+      "id": "abell2146_registered_region_62",
+      "cluster": "ABELL2146",
+      "bin_id": 62,
+      "expected_cells": 10
+    }
+  ],
+  "writer": {
+    "source_background": "CIAO combine_spectra method=sum bscale_method=asca exp_origin=pha with every source/background response explicitly set to NONE",
+    "arf": "V19DH direct exposure-weighted array written as OGIP SPECRESP",
+    "rmf": "V19DH direct ARF-times-exposure-weighted dense array compressed once at the official addresp threshold",
+    "rmf_threshold": 1e-06,
+    "pha_links": "BACKFILE, ANCRFILE and RESPFILE rewritten to relative sibling product names before Sherpa loading"
+  },
+  "tolerances": {
+    "header_max_relative": 1e-12,
+    "all_scored_source_background_arf_rmf_arrays": "exact"
+  },
+  "decision": {
+    "pass": "Both controls reproduce official CIAO source, background, ARF, RMF and EBOUNDS arrays exactly; exposure headers agree within 1e-12; OGIP structure checks pass; and Sherpa loads and forward-folds a finite positive model. A separately named full integrated/region commissioning may be frozen.",
+    "fail": "Do not run a full integrated combination or any spectrum fit. Repair only through a separately named implementation if the failure occurs before any comparison; otherwise retire the writer.",
+    "no_retroactive_change": true
+  },
+  "claim_boundary": [
+    "V19DI is a writer and consumer-compatibility preflight, not a spectral or source result.",
+    "The two registered regions are development controls already used in V19DG/V19DH exploration; no new science target is opened.",
+    "No spectrum is fitted and no temperature, source invariant, lensing, halo, action, gravity parameter or holdout result is opened.",
+    "A pass authorizes a separately hash-frozen full commissioning runner; it does not authorize changing the V19X2 spectral model or gates."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19di_direct_ogip_writer_preflight.py",
+    "runner_sha256": "5a32b97614f65caa05bfaadf4d875c065b99f06a74633c7d86bdcbe1f614ed6e",
+    "writer_module": "scripts/sigma_v19di_direct_ogip.py",
+    "writer_module_sha256": "6e0b64447d5508a2bec9d8b60d8c9ba68be6892265d2d9985481bd20cc37fa7d"
+  }
+}

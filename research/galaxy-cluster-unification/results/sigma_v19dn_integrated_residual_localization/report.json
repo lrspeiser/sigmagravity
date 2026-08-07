@@ -1,0 +1,1242 @@
+{
+  "protocol_version": "SIGMA-V19DN-INTEGRATED-RESIDUAL-LOCALIZATION-1.0.0",
+  "generated_utc": "2026-08-07T03:29:50.265409+00:00",
+  "config_sha256": "9d5a78a0d659ce620f683bee4ebe0a6aaa896843f5381c9a93a2a8a08593c5c7",
+  "runner_sha256": "2f50be8f488afc25de68d299586759e061e5cf089c7b0651c55952d87513eb07",
+  "status": "integrated_residual_localization_completed",
+  "aggregate_pass": true,
+  "band_fits": [
+    {
+      "cluster": "ABELL2146",
+      "band_id": "full_0p5_7",
+      "interpretation": "parent-band reproducibility and broad goodness",
+      "fit": {
+        "cluster": "ABELL2146",
+        "label": "ABELL2146_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+        "source_spectrum_sha256": "a77f190a696742e1d8c8047152a5caf8753d7c6d7c93b4f1755cf88458ef0cd2",
+        "background_spectrum_sha256": "71a27eb5c34172d4f26ad183371ff07fce26768658d6045e11e389b86aa0ef1d",
+        "arf_sha256": "acd79482458433c261dbc6efcf50b97dbcef9c7284ac19be85a3755f91c748c7",
+        "rmf_sha256": "6dca062f05f709606a225fc3d26d40e5609f2412950c17b07309d87c217023b6",
+        "fit_band_keV": [
+          0.5,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 227710.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 446,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 53019396.510918,
+        "normalization_initial": 4.2948433023583905e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              0.5,
+              0.75
+            ],
+            [
+              0.75,
+              1.0
+            ]
+          ],
+          "integrated_flux": 5.894677558486781e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0262,
+          "redshift_fixed": 0.2323,
+          "temperature_keV": 8.125548514018245,
+          "abundance_solar": 0.49763499757654484,
+          "normalization": 4.5118524573491596e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 8.04123738485959,
+          "upper_keV": 8.214696073283625,
+          "fractional_half_width": 0.010673660253506724,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_abell2146_integrated.kT"
+            ],
+            "parvals": [
+              8.125548514018245
+            ],
+            "parmins": [
+              -0.08431112915865491
+            ],
+            "parmaxes": [
+              0.08914755926537943
+            ],
+            "nfits": 14
+          }
+        },
+        "fit": {
+          "statval": 541.8660827267349,
+          "dof": 443,
+          "reduced_statistic": 1.223174001640485,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 17,
+            "istatval": 1787.4386866283428,
+            "statval": 541.8660827267349,
+            "dstatval": 1245.5726039016079,
+            "numpoints": 446,
+            "dof": 443,
+            "parnames": [
+              "apec_abell2146_integrated.kT",
+              "apec_abell2146_integrated.Abundanc",
+              "apec_abell2146_integrated.norm"
+            ],
+            "parvals": [
+              8.125548514018245,
+              0.49763499757654484,
+              4.5118524573491596e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "all_passed": true
+        }
+      }
+    },
+    {
+      "cluster": "ABELL2146",
+      "band_id": "softest_removed_0p7_7",
+      "interpretation": "sensitivity to the softest response and background regime",
+      "fit": {
+        "cluster": "ABELL2146",
+        "label": "ABELL2146_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+        "source_spectrum_sha256": "a77f190a696742e1d8c8047152a5caf8753d7c6d7c93b4f1755cf88458ef0cd2",
+        "background_spectrum_sha256": "71a27eb5c34172d4f26ad183371ff07fce26768658d6045e11e389b86aa0ef1d",
+        "arf_sha256": "acd79482458433c261dbc6efcf50b97dbcef9c7284ac19be85a3755f91c748c7",
+        "rmf_sha256": "6dca062f05f709606a225fc3d26d40e5609f2412950c17b07309d87c217023b6",
+        "fit_band_keV": [
+          0.7,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 220192.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 433,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 53019396.510918,
+        "normalization_initial": 4.1530461395322946e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              0.7,
+              0.95
+            ],
+            [
+              0.95,
+              1.2
+            ]
+          ],
+          "integrated_flux": 4.032904495747111e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0262,
+          "redshift_fixed": 0.2323,
+          "temperature_keV": 8.069139713846585,
+          "abundance_solar": 0.4919447338894734,
+          "normalization": 4.5235282202777846e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 7.983846069053655,
+          "upper_keV": 8.156206956156439,
+          "fractional_half_width": 0.010680251750196709,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_abell2146_integrated.kT"
+            ],
+            "parvals": [
+              8.069139713846585
+            ],
+            "parmins": [
+              -0.08529364479293022
+            ],
+            "parmaxes": [
+              0.0870672423098533
+            ],
+            "nfits": 7
+          }
+        },
+        "fit": {
+          "statval": 514.8727261405844,
+          "dof": 430,
+          "reduced_statistic": 1.19737843288508,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 13,
+            "istatval": 2891.463449635764,
+            "statval": 514.8727261405844,
+            "dstatval": 2376.5907234951796,
+            "numpoints": 433,
+            "dof": 430,
+            "parnames": [
+              "apec_abell2146_integrated.kT",
+              "apec_abell2146_integrated.Abundanc",
+              "apec_abell2146_integrated.norm"
+            ],
+            "parvals": [
+              8.069139713846585,
+              0.4919447338894734,
+              4.5235282202777846e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "all_passed": true
+        }
+      }
+    },
+    {
+      "cluster": "ABELL2146",
+      "band_id": "soft_edge_removed_1_7",
+      "interpretation": "source-dominated continuum and Fe-K behavior without the soft complex",
+      "fit": {
+        "cluster": "ABELL2146",
+        "label": "ABELL2146_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+        "source_spectrum_sha256": "a77f190a696742e1d8c8047152a5caf8753d7c6d7c93b4f1755cf88458ef0cd2",
+        "background_spectrum_sha256": "71a27eb5c34172d4f26ad183371ff07fce26768658d6045e11e389b86aa0ef1d",
+        "arf_sha256": "acd79482458433c261dbc6efcf50b97dbcef9c7284ac19be85a3755f91c748c7",
+        "rmf_sha256": "6dca062f05f709606a225fc3d26d40e5609f2412950c17b07309d87c217023b6",
+        "fit_band_keV": [
+          1.0,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 190723.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 412,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 53019396.510918,
+        "normalization_initial": 3.5972306844481986e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              1.0,
+              1.25
+            ],
+            [
+              1.25,
+              1.5
+            ]
+          ],
+          "integrated_flux": 2.305295413801742e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0262,
+          "redshift_fixed": 0.2323,
+          "temperature_keV": 7.749675364425578,
+          "abundance_solar": 0.48519585748749594,
+          "normalization": 4.570661811396015e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 7.652519185627905,
+          "upper_keV": 7.847724986788954,
+          "fractional_half_width": 0.012594450217691035,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_abell2146_integrated.kT"
+            ],
+            "parvals": [
+              7.749675364425578
+            ],
+            "parmins": [
+              -0.09715617879767269
+            ],
+            "parmaxes": [
+              0.09804962236337644
+            ],
+            "nfits": 9
+          }
+        },
+        "fit": {
+          "statval": 422.0052405151988,
+          "dof": 409,
+          "reduced_statistic": 1.0317976540713907,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 17,
+            "istatval": 9751.166877201269,
+            "statval": 422.0052405151988,
+            "dstatval": 9329.16163668607,
+            "numpoints": 412,
+            "dof": 409,
+            "parnames": [
+              "apec_abell2146_integrated.kT",
+              "apec_abell2146_integrated.Abundanc",
+              "apec_abell2146_integrated.norm"
+            ],
+            "parvals": [
+              7.749675364425578,
+              0.48519585748749594,
+              4.570661811396015e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "all_passed": true
+        }
+      }
+    },
+    {
+      "cluster": "ABELL2146",
+      "band_id": "hard_only_2_7",
+      "interpretation": "hard continuum and Fe-K adequacy",
+      "fit": {
+        "cluster": "ABELL2146",
+        "label": "ABELL2146_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+        "source_spectrum_sha256": "a77f190a696742e1d8c8047152a5caf8753d7c6d7c93b4f1755cf88458ef0cd2",
+        "background_spectrum_sha256": "71a27eb5c34172d4f26ad183371ff07fce26768658d6045e11e389b86aa0ef1d",
+        "arf_sha256": "acd79482458433c261dbc6efcf50b97dbcef9c7284ac19be85a3755f91c748c7",
+        "rmf_sha256": "6dca062f05f709606a225fc3d26d40e5609f2412950c17b07309d87c217023b6",
+        "fit_band_keV": [
+          2.0,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 80783.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 344,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 53019396.510918,
+        "normalization_initial": 1.523649934102226e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              2.0,
+              2.25
+            ],
+            [
+              2.25,
+              2.5
+            ]
+          ],
+          "integrated_flux": 3.842729261700829e-07
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0262,
+          "redshift_fixed": 0.2323,
+          "temperature_keV": 7.808064678918234,
+          "abundance_solar": 0.4864847671980184,
+          "normalization": 4.550070526499471e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 7.636106169748753,
+          "upper_keV": 7.978772752992175,
+          "fractional_half_width": 0.021943118899144194,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_abell2146_integrated.kT"
+            ],
+            "parvals": [
+              7.808064678918234
+            ],
+            "parmins": [
+              -0.17195850916948174
+            ],
+            "parmaxes": [
+              0.17070807407394017
+            ],
+            "nfits": 11
+          }
+        },
+        "fit": {
+          "statval": 329.16917216958507,
+          "dof": 341,
+          "reduced_statistic": 0.9653054902333873,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 17,
+            "istatval": 30780.130048017993,
+            "statval": 329.16917216958507,
+            "dstatval": 30450.960875848406,
+            "numpoints": 344,
+            "dof": 341,
+            "parnames": [
+              "apec_abell2146_integrated.kT",
+              "apec_abell2146_integrated.Abundanc",
+              "apec_abell2146_integrated.norm"
+            ],
+            "parvals": [
+              7.808064678918234,
+              0.4864847671980184,
+              4.550070526499471e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "all_passed": true
+        }
+      }
+    },
+    {
+      "cluster": "ABELL2146",
+      "band_id": "soft_only_0p5_2",
+      "interpretation": "soft-band background, calibration, absorption and line-complex adequacy",
+      "fit": {
+        "cluster": "ABELL2146",
+        "label": "ABELL2146_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+        "source_spectrum_sha256": "a77f190a696742e1d8c8047152a5caf8753d7c6d7c93b4f1755cf88458ef0cd2",
+        "background_spectrum_sha256": "71a27eb5c34172d4f26ad183371ff07fce26768658d6045e11e389b86aa0ef1d",
+        "arf_sha256": "acd79482458433c261dbc6efcf50b97dbcef9c7284ac19be85a3755f91c748c7",
+        "rmf_sha256": "6dca062f05f709606a225fc3d26d40e5609f2412950c17b07309d87c217023b6",
+        "fit_band_keV": [
+          0.5,
+          2.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 147745.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 103,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 53019396.510918,
+        "normalization_initial": 2.7866216841901562e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              0.5,
+              0.75
+            ],
+            [
+              0.75,
+              1.0
+            ]
+          ],
+          "integrated_flux": 3.8246415874517125e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0262,
+          "redshift_fixed": 0.2323,
+          "temperature_keV": 10.279337491796179,
+          "abundance_solar": 1.8335473911049496,
+          "normalization": 4.064252770771644e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 9.951267467617164,
+          "upper_keV": 10.637948459820151,
+          "fractional_half_width": 0.033401033517530654,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_abell2146_integrated.kT"
+            ],
+            "parvals": [
+              10.279337491796179
+            ],
+            "parmins": [
+              -0.32807002417901465
+            ],
+            "parmaxes": [
+              0.35861096802397263
+            ],
+            "nfits": 8
+          }
+        },
+        "fit": {
+          "statval": 138.603625390918,
+          "dof": 100,
+          "reduced_statistic": 1.3860362539091802,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 21,
+            "istatval": 22605.37135295042,
+            "statval": 138.603625390918,
+            "dstatval": 22466.7677275595,
+            "numpoints": 103,
+            "dof": 100,
+            "parnames": [
+              "apec_abell2146_integrated.kT",
+              "apec_abell2146_integrated.Abundanc",
+              "apec_abell2146_integrated.norm"
+            ],
+            "parvals": [
+              10.279337491796179,
+              1.8335473911049496,
+              4.064252770771644e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "all_passed": true
+        }
+      }
+    },
+    {
+      "cluster": "BULLET",
+      "band_id": "full_0p5_7",
+      "interpretation": "parent-band reproducibility and broad goodness",
+      "fit": {
+        "cluster": "BULLET",
+        "label": "BULLET_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_src_grp.pi",
+        "source_spectrum_sha256": "7ed90a72a47d2d11e6cbd5f841858971539acefc42bc1614cda807f1ea2535d8",
+        "background_spectrum_sha256": "054a0b8f767d8a7567bac8f691cad7408535ec6f82d869f7f47f1bf32cd6d83b",
+        "arf_sha256": "0dbd321577b0a18f264d8d06ba090b166045329844d350b986f0b6e2bd41e4cc",
+        "rmf_sha256": "8b011dbf4a0d281627dc3e5dcaf7f8361e5d508bc0d2b8d77f38052df7583261",
+        "fit_band_keV": [
+          0.5,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 660872.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 446,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 214239657.02506,
+        "normalization_initial": 3.084732346834819e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              0.5,
+              0.75
+            ],
+            [
+              0.75,
+              1.0
+            ]
+          ],
+          "integrated_flux": 3.957959877421555e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0438,
+          "redshift_fixed": 0.296,
+          "temperature_keV": 16.06358739998054,
+          "abundance_solar": 0.38361102334267344,
+          "normalization": 3.959558769715604e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 15.892885697918397,
+          "upper_keV": 16.234289102042688,
+          "fractional_half_width": 0.010626623917292117,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_bullet_integrated.kT"
+            ],
+            "parvals": [
+              16.06358739998054
+            ],
+            "parmins": [
+              -0.17070170206214463
+            ],
+            "parmaxes": [
+              0.1707017020621464
+            ],
+            "nfits": 2
+          }
+        },
+        "fit": {
+          "statval": 1237.5954661102269,
+          "dof": 443,
+          "reduced_statistic": 2.793669223725117,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 27,
+            "istatval": 31981.27848729747,
+            "statval": 1237.5954661102269,
+            "dstatval": 30743.683021187244,
+            "numpoints": 446,
+            "dof": 443,
+            "parnames": [
+              "apec_bullet_integrated.kT",
+              "apec_bullet_integrated.Abundanc",
+              "apec_bullet_integrated.norm"
+            ],
+            "parvals": [
+              16.06358739998054,
+              0.38361102334267344,
+              3.959558769715604e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": false,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "all_passed": false
+        }
+      }
+    },
+    {
+      "cluster": "BULLET",
+      "band_id": "softest_removed_0p7_7",
+      "interpretation": "sensitivity to the softest response and background regime",
+      "fit": {
+        "cluster": "BULLET",
+        "label": "BULLET_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_src_grp.pi",
+        "source_spectrum_sha256": "7ed90a72a47d2d11e6cbd5f841858971539acefc42bc1614cda807f1ea2535d8",
+        "background_spectrum_sha256": "054a0b8f767d8a7567bac8f691cad7408535ec6f82d869f7f47f1bf32cd6d83b",
+        "arf_sha256": "0dbd321577b0a18f264d8d06ba090b166045329844d350b986f0b6e2bd41e4cc",
+        "rmf_sha256": "8b011dbf4a0d281627dc3e5dcaf7f8361e5d508bc0d2b8d77f38052df7583261",
+        "fit_band_keV": [
+          0.7,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 642881.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 433,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 214239657.02506,
+        "normalization_initial": 3.0007562975364598e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              0.7,
+              0.95
+            ],
+            [
+              0.95,
+              1.2
+            ]
+          ],
+          "integrated_flux": 2.7150550198185155e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0438,
+          "redshift_fixed": 0.296,
+          "temperature_keV": 15.781557541992935,
+          "abundance_solar": 0.38229049401377496,
+          "normalization": 3.962961002999904e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 15.607590897390859,
+          "upper_keV": 15.955524186595012,
+          "fractional_half_width": 0.011023414142689729,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_bullet_integrated.kT"
+            ],
+            "parvals": [
+              15.781557541992935
+            ],
+            "parmins": [
+              -0.17396664460207667
+            ],
+            "parmaxes": [
+              0.17396664460207667
+            ],
+            "nfits": 2
+          }
+        },
+        "fit": {
+          "statval": 1142.8582928228423,
+          "dof": 430,
+          "reduced_statistic": 2.6578099833089355,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 28,
+            "istatval": 37368.02208180873,
+            "statval": 1142.8582928228423,
+            "dstatval": 36225.16378898589,
+            "numpoints": 433,
+            "dof": 430,
+            "parnames": [
+              "apec_bullet_integrated.kT",
+              "apec_bullet_integrated.Abundanc",
+              "apec_bullet_integrated.norm"
+            ],
+            "parvals": [
+              15.781557541992935,
+              0.38229049401377496,
+              3.962961002999904e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": false,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "all_passed": false
+        }
+      }
+    },
+    {
+      "cluster": "BULLET",
+      "band_id": "soft_edge_removed_1_7",
+      "interpretation": "source-dominated continuum and Fe-K behavior without the soft complex",
+      "fit": {
+        "cluster": "BULLET",
+        "label": "BULLET_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_src_grp.pi",
+        "source_spectrum_sha256": "7ed90a72a47d2d11e6cbd5f841858971539acefc42bc1614cda807f1ea2535d8",
+        "background_spectrum_sha256": "054a0b8f767d8a7567bac8f691cad7408535ec6f82d869f7f47f1bf32cd6d83b",
+        "arf_sha256": "0dbd321577b0a18f264d8d06ba090b166045329844d350b986f0b6e2bd41e4cc",
+        "rmf_sha256": "8b011dbf4a0d281627dc3e5dcaf7f8361e5d508bc0d2b8d77f38052df7583261",
+        "fit_band_keV": [
+          1.0,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 566583.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 412,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 214239657.02506,
+        "normalization_initial": 2.6446224189657182e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              1.0,
+              1.25
+            ],
+            [
+              1.25,
+              1.5
+            ]
+          ],
+          "integrated_flux": 1.5717793034959085e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0438,
+          "redshift_fixed": 0.296,
+          "temperature_keV": 14.195485525099812,
+          "abundance_solar": 0.3951271745447794,
+          "normalization": 3.983158623605961e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 14.03736712012009,
+          "upper_keV": 14.353603930079535,
+          "fractional_half_width": 0.011138640147259835,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_bullet_integrated.kT"
+            ],
+            "parvals": [
+              14.195485525099812
+            ],
+            "parmins": [
+              -0.15811840497972263
+            ],
+            "parmaxes": [
+              0.15811840497972263
+            ],
+            "nfits": 2
+          }
+        },
+        "fit": {
+          "statval": 640.7243566349456,
+          "dof": 409,
+          "reduced_statistic": 1.566563219156346,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 21,
+            "istatval": 63671.674327260786,
+            "statval": 640.7243566349456,
+            "dstatval": 63030.94997062584,
+            "numpoints": 412,
+            "dof": 409,
+            "parnames": [
+              "apec_bullet_integrated.kT",
+              "apec_bullet_integrated.Abundanc",
+              "apec_bullet_integrated.norm"
+            ],
+            "parvals": [
+              14.195485525099812,
+              0.3951271745447794,
+              3.983158623605961e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": false,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "all_passed": false
+        }
+      }
+    },
+    {
+      "cluster": "BULLET",
+      "band_id": "hard_only_2_7",
+      "interpretation": "hard continuum and Fe-K adequacy",
+      "fit": {
+        "cluster": "BULLET",
+        "label": "BULLET_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_src_grp.pi",
+        "source_spectrum_sha256": "7ed90a72a47d2d11e6cbd5f841858971539acefc42bc1614cda807f1ea2535d8",
+        "background_spectrum_sha256": "054a0b8f767d8a7567bac8f691cad7408535ec6f82d869f7f47f1bf32cd6d83b",
+        "arf_sha256": "0dbd321577b0a18f264d8d06ba090b166045329844d350b986f0b6e2bd41e4cc",
+        "rmf_sha256": "8b011dbf4a0d281627dc3e5dcaf7f8361e5d508bc0d2b8d77f38052df7583261",
+        "fit_band_keV": [
+          2.0,
+          7.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 256995.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 344,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 214239657.02506,
+        "normalization_initial": 1.1995678277712089e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              2.0,
+              2.25
+            ],
+            [
+              2.25,
+              2.5
+            ]
+          ],
+          "integrated_flux": 2.786107304806058e-07
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0438,
+          "redshift_fixed": 0.296,
+          "temperature_keV": 13.913368144560486,
+          "abundance_solar": 0.3865047027001663,
+          "normalization": 3.9966291457626076e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": 13.511359525658515,
+          "upper_keV": 14.195969527378512,
+          "fractional_half_width": 0.02460259782559013,
+          "error": "",
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "confidence",
+            "fitname": "levmar",
+            "statname": "chi2xspecvar",
+            "sigma": 1.0,
+            "percent": 68.26894921370858,
+            "parnames": [
+              "apec_bullet_integrated.kT"
+            ],
+            "parvals": [
+              13.913368144560486
+            ],
+            "parmins": [
+              -0.4020086189019718
+            ],
+            "parmaxes": [
+              0.2826013828180258
+            ],
+            "nfits": 9
+          }
+        },
+        "fit": {
+          "statval": 416.03023061118705,
+          "dof": 341,
+          "reduced_statistic": 1.2200300017923373,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 32,
+            "istatval": 116746.7510853762,
+            "statval": 416.03023061118705,
+            "dstatval": 116330.72085476502,
+            "numpoints": 344,
+            "dof": 341,
+            "parnames": [
+              "apec_bullet_integrated.kT",
+              "apec_bullet_integrated.Abundanc",
+              "apec_bullet_integrated.norm"
+            ],
+            "parvals": [
+              13.913368144560486,
+              0.3865047027001663,
+              3.9966291457626076e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": true,
+          "reduced_statistic_at_most_1_5": true,
+          "all_free_parameters_strictly_inside_bounds": true,
+          "all_passed": true
+        }
+      }
+    },
+    {
+      "cluster": "BULLET",
+      "band_id": "soft_only_0p5_2",
+      "interpretation": "soft-band background, calibration, absorption and line-complex adequacy",
+      "fit": {
+        "cluster": "BULLET",
+        "label": "BULLET_integrated",
+        "fit_completed": true,
+        "abundance_mode": "free_integrated",
+        "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_src_grp.pi",
+        "source_spectrum_sha256": "7ed90a72a47d2d11e6cbd5f841858971539acefc42bc1614cda807f1ea2535d8",
+        "background_spectrum_sha256": "054a0b8f767d8a7567bac8f691cad7408535ec6f82d869f7f47f1bf32cd6d83b",
+        "arf_sha256": "0dbd321577b0a18f264d8d06ba090b166045329844d350b986f0b6e2bd41e4cc",
+        "rmf_sha256": "8b011dbf4a0d281627dc3e5dcaf7f8361e5d508bc0d2b8d77f38052df7583261",
+        "fit_band_keV": [
+          0.5,
+          2.0
+        ],
+        "sherpa_response_energy_fit_band_source_counts": 406157.0,
+        "sherpa_response_energy_fit_band_grouped_bins": 103,
+        "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+        "source_exposure_s": 214239657.02506,
+        "normalization_initial": 1.8958068064517632e-05,
+        "model": "xstbabs * xsapec",
+        "statistic": "chi2xspecvar",
+        "abundance_table": "aspl (Asplund et al. 2009)",
+        "xspec_atomic_data": {
+          "atomdb_version": "3.0.9",
+          "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+          "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+          "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+          "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+          "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+        },
+        "apec_model_probe": {
+          "energy_bins_keV": [
+            [
+              0.5,
+              0.75
+            ],
+            [
+              0.75,
+              1.0
+            ]
+          ],
+          "integrated_flux": 2.4324727177636616e-06
+        },
+        "optimization_attempts": [
+          "levmar"
+        ],
+        "parameters": {
+          "nH_1e22_cm2_fixed": 0.0438,
+          "redshift_fixed": 0.296,
+          "temperature_keV": 28.87725807722189,
+          "abundance_solar": 2.0,
+          "normalization": 3.9129835655137127e-05
+        },
+        "temperature_confidence_68_percent": {
+          "lower_keV": "nan",
+          "upper_keV": "nan",
+          "fractional_half_width": "nan",
+          "error": "EstErr: reduced statistic larger than 3",
+          "raw": null
+        },
+        "fit": {
+          "statval": 416.22643746640955,
+          "dof": 100,
+          "reduced_statistic": 4.162264374664096,
+          "raw": {
+            "datasets": [
+              1
+            ],
+            "methodname": "levmar",
+            "statname": "chi2xspecvar",
+            "succeeded": true,
+            "message": "successful termination",
+            "nfev": 230,
+            "istatval": 91109.74106776345,
+            "statval": 416.22643746640955,
+            "dstatval": 90693.51463029704,
+            "numpoints": 103,
+            "dof": 100,
+            "parnames": [
+              "apec_bullet_integrated.kT",
+              "apec_bullet_integrated.Abundanc",
+              "apec_bullet_integrated.norm"
+            ],
+            "parvals": [
+              28.87725807722189,
+              2.0,
+              3.9129835655137127e-05
+            ]
+          }
+        },
+        "gates": {
+          "finite_parameters_and_ordered_temperature_interval": false,
+          "reduced_statistic_at_most_1_5": false,
+          "all_free_parameters_strictly_inside_bounds": false,
+          "all_passed": false
+        }
+      }
+    }
+  ],
+  "bullet_classification": {
+    "soft_only_failure": true,
+    "hard_only_failure": false,
+    "soft_edge_removal_recovers_adequacy": false,
+    "broad_band_failure": false
+  },
+  "next_test": "inspect_bandwise_residual_pattern_without_authorizing_production",
+  "full_regional_successor_authorized": false,
+  "v19dm2_report_sha256": "f26750814bbaad5bc6f589ea2687b4b41c0d856852b6944e19c79d321fafabf6",
+  "v19dm2_status": "statistic_parity_minimal_thermal_mixture_failed_no_successor_authorized",
+  "all_494_regions_run": false,
+  "thermal_stress_or_baroclinicity_constructed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

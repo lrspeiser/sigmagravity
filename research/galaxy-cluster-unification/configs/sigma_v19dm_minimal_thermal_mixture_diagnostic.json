@@ -1,0 +1,73 @@
+{
+  "protocol_version": "SIGMA-V19DM-MINIMAL-THERMAL-MIXTURE-1.0.0",
+  "freeze_state": "frozen_before_execution",
+  "purpose": "Diagnose the V19DL Bullet one-temperature failure with one cluster-label-free minimal-adequate thermal-mixture rule before considering all-region production.",
+  "parents": {
+    "v19dl_config": {
+      "path": "configs/sigma_v19dl_canonicalized_direct_response_commissioning.json",
+      "sha256": "fb051e4b201eef7a78601b90f2ed996b1c3a4e3395883616c5d1e03727912626"
+    },
+    "v19dl_runner": {
+      "path": "scripts/run_sigma_v19dl_canonicalized_direct_response_commissioning.py",
+      "sha256": "fcd34f0e26fc30b91c39323dd29a6d8423e63c59e250da3e097465c67eaf965f"
+    },
+    "v19dl_report": {
+      "path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/report.json",
+      "sha256": "60d078429af04a32658d879f887bd9d09b796555975d5b466460980ac803a11d"
+    },
+    "v19dj_config": {
+      "path": "configs/sigma_v19dj_direct_response_commissioning.json",
+      "sha256": "4d6697f2181b33198c38dcca701b9849f38ac0e1ee22c567c86a2e6d0bcf2d7d"
+    },
+    "v19dj_runner": {
+      "path": "scripts/run_sigma_v19dj_direct_response_commissioning.py",
+      "sha256": "ab49edeb6ea28e3f4bf3fb727a779a268faa64e6362c53d5b147e16771b4309f"
+    }
+  },
+  "mixture": {
+    "model": "xstbabs * (xsapec_cool + xsapec_hot)",
+    "same_model_and_bounds_both_clusters": true,
+    "redshift_rule": "both components fixed to the same registered optical redshift",
+    "abundance_rule": "one free abundance tied exactly across both components",
+    "normalization_rule": "independent positive normalizations",
+    "starts": [
+      {
+        "cool_keV": 3.0,
+        "hot_keV": 15.0,
+        "cool_norm_fraction": 0.5
+      },
+      {
+        "cool_keV": 7.0,
+        "hot_keV": 22.0,
+        "cool_norm_fraction": 0.7
+      },
+      {
+        "cool_keV": 1.5,
+        "hot_keV": 10.0,
+        "cool_norm_fraction": 0.3
+      }
+    ],
+    "one_temperature_free_parameters": 3,
+    "two_temperature_free_parameters": 5,
+    "minimum_temperature_ratio": 1.2,
+    "minimum_normalization_fraction": 0.05,
+    "maximum_delta_bic_for_admission": -10.0
+  },
+  "decision": {
+    "rule": "For every cluster, retain the one-temperature model if its frozen reduced statistic is at most 1.5. Otherwise admit two temperatures only if the two-temperature reduced statistic is at most 1.5, delta BIC versus one temperature is at most -10, both components carry at least 5 percent of total normalization, temperatures differ by at least a factor 1.2, and every free parameter is strictly inside its inherited bound.",
+    "maximum_reduced_statistic": 1.5,
+    "pass": "Both clusters have a minimal adequate integrated model under the identical rule and both registered regions pass after refitting with the selected integrated abundance. A separately named all-region successor may be frozen.",
+    "fail": "Do not run all regions or alter the mixture after seeing the result. Retain the diagnostic and reconsider the temperature-distribution observation model.",
+    "no_retroactive_change": true
+  },
+  "claim_boundary": [
+    "V19DM is a post-failure X-ray observation-model diagnostic, not a Sigma source or gravity result.",
+    "The rule uses fit adequacy and complexity penalties, never cluster identity, lensing, halo maps, source invariants or gravity outcomes.",
+    "No I4, I5, lensing, halo, action, gravity parameter or holdout payload is opened.",
+    "A pass authorizes only a separately frozen full-regional spectral successor."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dm_minimal_thermal_mixture_diagnostic.py",
+    "runner_sha256": "2fda236500b7a3f16a6a8c9dd3d1bfef77bd66a99fc3a794c1484ce4b4a57bbb"
+  }
+}

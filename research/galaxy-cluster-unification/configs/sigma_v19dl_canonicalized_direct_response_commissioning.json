@@ -1,0 +1,73 @@
+{
+  "protocol_version": "SIGMA-V19DL-CANONICAL-DIRECT-COMMISSIONING-1.0.0",
+  "freeze_state": "frozen_after_v19dk2_pass_before_any_v19dl_combination_or_spectral_fit",
+  "purpose": "Run the unchanged V19X2 integrated and registered-region spectral commissioning with V19DI direct response arithmetic and V19DK2 deterministic FITS snapshots.",
+  "parents": {
+    "v19dj_config": {
+      "path": "configs/sigma_v19dj_direct_response_commissioning.json",
+      "sha256": "4d6697f2181b33198c38dcca701b9849f38ac0e1ee22c567c86a2e6d0bcf2d7d"
+    },
+    "v19dj_runner": {
+      "path": "scripts/run_sigma_v19dj_direct_response_commissioning.py",
+      "sha256": "ab49edeb6ea28e3f4bf3fb727a779a268faa64e6362c53d5b147e16771b4309f"
+    },
+    "v19dj_report": {
+      "path": "results/sigma_v19dj_direct_response_commissioning/report.json",
+      "sha256": "29d2d7b0027c92407c6ddef89b4b7033d52fad6c6d83c0c354faa39c3d15a0bc"
+    },
+    "v19dk2_config": {
+      "path": "configs/sigma_v19dk2_grouped_canonicalization_preflight.json",
+      "sha256": "09af4df91a6a86cdc0c1fb44f4252fa7aa544cf9110b05dfa37a9b7cbab84d36"
+    },
+    "v19dk2_runner": {
+      "path": "scripts/run_sigma_v19dk2_grouped_canonicalization_preflight.py",
+      "sha256": "272d6f6627e7c1ccb0859f78a84b3537c4bca94e60b0e8523c016973a7062036"
+    },
+    "v19dk2_report": {
+      "path": "results/sigma_v19dk2_grouped_canonicalization_preflight/report.json",
+      "sha256": "ec977b498000618aaa595aa54e7e0e4f93378638d81c5280b570554909ed2018"
+    }
+  },
+  "inherited_section_sha256": {
+    "registered_workload": "ab0e5a9b99875cac1c739bb181b04d32d46e0ce262342142acbf236be16c09da",
+    "combination": "a556ed47c000d5529e26be9ca5200aa2405238091ddf5286df72383c0601500c",
+    "fit_sequence": "6e0ab25cbf18e87dce3c1e07e6dd708c1bcdf82cbde82682773dbecd77cad8f5",
+    "gates": "b8c7ca2f8d8f168fab3e95db4b638ad2d4b6c66bc8e83460980a4ff893c60b95"
+  },
+  "writer": {
+    "rmf_threshold": 1e-06,
+    "source_background_rule": "unchanged CIAO method=sum, bscale_method=asca and exp_origin=pha with response combination disabled",
+    "response_rule": "V19DH direct exposure/ARF weighting serialized once by the V19DI exact OGIP writer"
+  },
+  "canonicalization": {
+    "stable_history": "SIGMA V19DK deterministic science product",
+    "timing": "after source/background/ARF/RMF construction and grouping, immediately before each frozen snapshot and before every spectral fit",
+    "science_arrays": "unchanged exactly"
+  },
+  "authorization": {
+    "combine_two_complete_integrated_apertures": true,
+    "combine_two_registered_commissioning_regions": true,
+    "fit_integrated_abundance_and_registered_region_temperature": true,
+    "run_all_494_regions_before_pass": false,
+    "open_temperature_only_after_response_products_exist_link_exactly_and_canonicalize": true,
+    "open_source_invariant_lensing_halo_action_gravity_or_holdout": false
+  },
+  "decision": {
+    "pass": "Every unchanged V19X2 archive, combination, count, link, canonical snapshot, checksum, integrated-fit and regional-fit gate passes. A separately named all-494-region successor may then be frozen.",
+    "scientific_fail": "Retain all fit results and stop. Do not alter grouping, band, absorption, redshift, abundance rule, statistic, optimizer, bounds, cell membership, response threshold or canonicalization.",
+    "execution_fail": "Record the implementation failure. A separately named remediation is permitted only if no spectral outcome was opened.",
+    "no_retroactive_change": true
+  },
+  "claim_boundary": [
+    "V19DL changes only FITS serialization after V19DK2 proved exact array preservation and consumer compatibility.",
+    "All V19X2 cell membership, grouping, spectral model, fit sequence, bounds, quality gates and registered regions are inherited exactly.",
+    "A pass commissions all-region gas reconstruction; it is not an I4/I5, lensing or gravity result.",
+    "No source invariant, lensing, halo, action, gravity parameter or holdout payload is opened."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dl_canonicalized_direct_response_commissioning.py",
+    "runner_sha256": "fcd34f0e26fc30b91c39323dd29a6d8423e63c59e250da3e097465c67eaf965f",
+    "canonicalizer": "scripts/sigma_v19dk_fits_canonical.py",
+    "canonicalizer_sha256": "eca691e78a0227361db3b0af5cf3fe8c5420e60e47d9b093a0a8c7165ce09861"
+  }
+}

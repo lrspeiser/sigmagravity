@@ -1,0 +1,1058 @@
+{
+  "protocol_version": "SIGMA-V19DL-CANONICAL-DIRECT-COMMISSIONING-1.0.0",
+  "generated_utc": "2026-08-07T03:16:00.303465+00:00",
+  "config_sha256": "fb051e4b201eef7a78601b90f2ed996b1c3a4e3395883616c5d1e03727912626",
+  "runner_sha256": "fcd34f0e26fc30b91c39323dd29a6d8423e63c59e250da3e097465c67eaf965f",
+  "status": "canonicalized_direct_response_commissioning_gate_failed",
+  "response_report_sha256": "9e90fcb397c80010562b8fbd441fff91a716ced4bb0ef895704ca449dca7c85f",
+  "response_unified_index_sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4",
+  "validated_cell_index": {
+    "path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/validated_cell_index.csv",
+    "rows": 5082,
+    "bytes": 1751741,
+    "sha256": "2f959371745c884eeeb120b525ecb90abe044c59f501efb5ffcf07e2082624bf"
+  },
+  "validated_response_cells": 5082,
+  "combinations": {
+    "ABELL2146": {
+      "integrated": {
+        "label": "ABELL2146_integrated",
+        "cells": 1270,
+        "event_energy_source_counts_0p5_7_keV": 227561,
+        "event_energy_background_counts_0p5_7_keV": 81581,
+        "expected_full_pha_source_counts": 259688,
+        "combined_full_pha_source_counts": 259688,
+        "full_pha_count_conservation_exact": true,
+        "writer": {
+          "energy_rows": 1070,
+          "channels": 1024,
+          "groups": 1370,
+          "retained_matrix_elements": 527682,
+          "threshold": 1e-06,
+          "first_channel": 1
+        },
+        "group_step": {
+          "command": [
+            "dmgroup",
+            "infile=/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/ABELL2146_integrated/ABELL2146_integrated_src.pi",
+            "outfile=/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+            "grouptype=NUM_CTS",
+            "grouptypeval=25",
+            "binspec=",
+            "xcolumn=CHANNEL",
+            "ycolumn=COUNTS",
+            "tabspec=",
+            "tabcolumn=",
+            "stopspec=",
+            "stopcolumn=",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "reused": false,
+          "log": "/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/ABELL2146_integrated/dmgroup.log"
+        },
+        "grouped_pha_links": {
+          "BACKFILE": "ABELL2146_integrated_bkg.pi",
+          "ANCRFILE": "ABELL2146_integrated_src.arf",
+          "RESPFILE": "ABELL2146_integrated_src.rmf"
+        },
+        "expected_grouped_pha_links": {
+          "BACKFILE": "ABELL2146_integrated_bkg.pi",
+          "ANCRFILE": "ABELL2146_integrated_src.arf",
+          "RESPFILE": "ABELL2146_integrated_src.rmf"
+        },
+        "frozen_snapshot": {
+          "files": 4,
+          "bytes": 2335680,
+          "products": [
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+              "bytes": 74880,
+              "sha256": "a77f190a696742e1d8c8047152a5caf8753d7c6d7c93b4f1755cf88458ef0cd2",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "grouped_source_spectrum"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_bkg.pi",
+              "bytes": 46080,
+              "sha256": "71a27eb5c34172d4f26ad183371ff07fce26768658d6045e11e389b86aa0ef1d",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "background_spectrum"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.arf",
+              "bytes": 28800,
+              "sha256": "acd79482458433c261dbc6efcf50b97dbcef9c7284ac19be85a3755f91c748c7",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "source_arf"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src.rmf",
+              "bytes": 2185920,
+              "sha256": "6dca062f05f709606a225fc3d26d40e5609f2412950c17b07309d87c217023b6",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 3,
+                "checksum_values": [
+                  1,
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "source_rmf"
+            }
+          ]
+        }
+      },
+      "regional": {
+        "label": "ABELL2146_bin62",
+        "cells": 10,
+        "event_energy_source_counts_0p5_7_keV": 2503,
+        "event_energy_background_counts_0p5_7_keV": 4204,
+        "expected_full_pha_source_counts": 3886,
+        "combined_full_pha_source_counts": 3886,
+        "full_pha_count_conservation_exact": true,
+        "writer": {
+          "energy_rows": 1070,
+          "channels": 1024,
+          "groups": 1372,
+          "retained_matrix_elements": 529089,
+          "threshold": 1e-06,
+          "first_channel": 1
+        },
+        "group_step": {
+          "command": [
+            "dmgroup",
+            "infile=/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/ABELL2146_bin62/ABELL2146_bin62_src.pi",
+            "outfile=/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/ABELL2146_bin62/ABELL2146_bin62_src_grp.pi",
+            "grouptype=NUM_CTS",
+            "grouptypeval=25",
+            "binspec=",
+            "xcolumn=CHANNEL",
+            "ycolumn=COUNTS",
+            "tabspec=",
+            "tabcolumn=",
+            "stopspec=",
+            "stopcolumn=",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "reused": false,
+          "log": "/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/ABELL2146_bin62/dmgroup.log"
+        },
+        "grouped_pha_links": {
+          "BACKFILE": "ABELL2146_bin62_bkg.pi",
+          "ANCRFILE": "ABELL2146_bin62_src.arf",
+          "RESPFILE": "ABELL2146_bin62_src.rmf"
+        },
+        "expected_grouped_pha_links": {
+          "BACKFILE": "ABELL2146_bin62_bkg.pi",
+          "ANCRFILE": "ABELL2146_bin62_src.arf",
+          "RESPFILE": "ABELL2146_bin62_src.rmf"
+        },
+        "frozen_snapshot": {
+          "files": 4,
+          "bytes": 2341440,
+          "products": [
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src_grp.pi",
+              "bytes": 74880,
+              "sha256": "0537e63aee794b8c10c75ff81794e082357ddeaaffef7fbb77e70f9f5bd63b9c",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "grouped_source_spectrum"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_bkg.pi",
+              "bytes": 46080,
+              "sha256": "1021c2ff2de57784d7b5bd3e1db98554de64474c5da231cfaddf559b6a488f3b",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "background_spectrum"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src.arf",
+              "bytes": 28800,
+              "sha256": "81b14f13fe7f6e72340e677209ebd88a8e57adf54c7e1d031f14d152be6c8ccc",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "source_arf"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src.rmf",
+              "bytes": 2191680,
+              "sha256": "82399e573b908460e9b0ba2dd729a983547ee3047f1fa8edd02cfc8fec52c4ae",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 3,
+                "checksum_values": [
+                  1,
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "source_rmf"
+            }
+          ]
+        }
+      }
+    },
+    "BULLET": {
+      "integrated": {
+        "label": "BULLET_integrated",
+        "cells": 3812,
+        "event_energy_source_counts_0p5_7_keV": 660535,
+        "event_energy_background_counts_0p5_7_keV": 634253,
+        "expected_full_pha_source_counts": 707569,
+        "combined_full_pha_source_counts": 707569,
+        "full_pha_count_conservation_exact": true,
+        "writer": {
+          "energy_rows": 1070,
+          "channels": 1024,
+          "groups": 1369,
+          "retained_matrix_elements": 532759,
+          "threshold": 1e-06,
+          "first_channel": 1
+        },
+        "group_step": {
+          "command": [
+            "dmgroup",
+            "infile=/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/BULLET_integrated/BULLET_integrated_src.pi",
+            "outfile=/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/BULLET_integrated/BULLET_integrated_src_grp.pi",
+            "grouptype=NUM_CTS",
+            "grouptypeval=25",
+            "binspec=",
+            "xcolumn=CHANNEL",
+            "ycolumn=COUNTS",
+            "tabspec=",
+            "tabcolumn=",
+            "stopspec=",
+            "stopcolumn=",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "reused": false,
+          "log": "/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/BULLET_integrated/dmgroup.log"
+        },
+        "grouped_pha_links": {
+          "BACKFILE": "BULLET_integrated_bkg.pi",
+          "ANCRFILE": "BULLET_integrated_src.arf",
+          "RESPFILE": "BULLET_integrated_src.rmf"
+        },
+        "expected_grouped_pha_links": {
+          "BACKFILE": "BULLET_integrated_bkg.pi",
+          "ANCRFILE": "BULLET_integrated_src.arf",
+          "RESPFILE": "BULLET_integrated_src.rmf"
+        },
+        "frozen_snapshot": {
+          "files": 4,
+          "bytes": 2355840,
+          "products": [
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_src_grp.pi",
+              "bytes": 74880,
+              "sha256": "7ed90a72a47d2d11e6cbd5f841858971539acefc42bc1614cda807f1ea2535d8",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "grouped_source_spectrum"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_bkg.pi",
+              "bytes": 46080,
+              "sha256": "054a0b8f767d8a7567bac8f691cad7408535ec6f82d869f7f47f1bf32cd6d83b",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "background_spectrum"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_src.arf",
+              "bytes": 28800,
+              "sha256": "0dbd321577b0a18f264d8d06ba090b166045329844d350b986f0b6e2bd41e4cc",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "source_arf"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_src.rmf",
+              "bytes": 2206080,
+              "sha256": "8b011dbf4a0d281627dc3e5dcaf7f8361e5d508bc0d2b8d77f38052df7583261",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 3,
+                "checksum_values": [
+                  1,
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "source_rmf"
+            }
+          ]
+        }
+      },
+      "regional": {
+        "label": "BULLET_bin169",
+        "cells": 9,
+        "event_energy_source_counts_0p5_7_keV": 2675,
+        "event_energy_background_counts_0p5_7_keV": 1123,
+        "expected_full_pha_source_counts": 2787,
+        "combined_full_pha_source_counts": 2787,
+        "full_pha_count_conservation_exact": true,
+        "writer": {
+          "energy_rows": 1070,
+          "channels": 1024,
+          "groups": 1368,
+          "retained_matrix_elements": 533729,
+          "threshold": 1e-06,
+          "first_channel": 1
+        },
+        "group_step": {
+          "command": [
+            "dmgroup",
+            "infile=/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/BULLET_bin169/BULLET_bin169_src.pi",
+            "outfile=/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/BULLET_bin169/BULLET_bin169_src_grp.pi",
+            "grouptype=NUM_CTS",
+            "grouptypeval=25",
+            "binspec=",
+            "xcolumn=CHANNEL",
+            "ycolumn=COUNTS",
+            "tabspec=",
+            "tabcolumn=",
+            "stopspec=",
+            "stopcolumn=",
+            "clobber=no",
+            "verbose=1",
+            "mode=h"
+          ],
+          "reused": false,
+          "log": "/home/henry/sigma-v19dl-canonicalized-direct-response-commissioning/v100/BULLET_bin169/dmgroup.log"
+        },
+        "grouped_pha_links": {
+          "BACKFILE": "BULLET_bin169_bkg.pi",
+          "ANCRFILE": "BULLET_bin169_src.arf",
+          "RESPFILE": "BULLET_bin169_src.rmf"
+        },
+        "expected_grouped_pha_links": {
+          "BACKFILE": "BULLET_bin169_bkg.pi",
+          "ANCRFILE": "BULLET_bin169_src.arf",
+          "RESPFILE": "BULLET_bin169_src.rmf"
+        },
+        "frozen_snapshot": {
+          "files": 4,
+          "bytes": 2358720,
+          "products": [
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_bin169/BULLET_bin169_src_grp.pi",
+              "bytes": 74880,
+              "sha256": "7239889ebd31d300a3c6b82b7c66c5fb4494da43cb314781e3f6b05f6c48823e",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "grouped_source_spectrum"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_bin169/BULLET_bin169_bkg.pi",
+              "bytes": 46080,
+              "sha256": "d59db93567c1a9550a6e29f1948a8fcc894116099de26a5d3605b0a2231c8fbf",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "background_spectrum"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_bin169/BULLET_bin169_src.arf",
+              "bytes": 28800,
+              "sha256": "7fce9868613861a9b2ccbdceec68f7849c9482f4e7ad08c2d4f7abc616398fb5",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 2,
+                "checksum_values": [
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "source_arf"
+            },
+            {
+              "relative_path": "results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_bin169/BULLET_bin169_src.rmf",
+              "bytes": 2208960,
+              "sha256": "3027db25cc9738388bf79c1a1874866f678059b4f5b6d87e8af9660f9b2c255f",
+              "reused": false,
+              "canonicalized_before_snapshot": true,
+              "checksum_gate": {
+                "hdu_count": 3,
+                "checksum_values": [
+                  1,
+                  1,
+                  1
+                ],
+                "datasum_values": [
+                  1,
+                  1,
+                  1
+                ],
+                "passed": true
+              },
+              "role": "source_rmf"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "integrated_fits": [
+    {
+      "cluster": "ABELL2146",
+      "label": "ABELL2146_integrated",
+      "fit_completed": true,
+      "abundance_mode": "free_integrated",
+      "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_integrated/ABELL2146_integrated_src_grp.pi",
+      "source_spectrum_sha256": "a77f190a696742e1d8c8047152a5caf8753d7c6d7c93b4f1755cf88458ef0cd2",
+      "background_spectrum_sha256": "71a27eb5c34172d4f26ad183371ff07fce26768658d6045e11e389b86aa0ef1d",
+      "arf_sha256": "acd79482458433c261dbc6efcf50b97dbcef9c7284ac19be85a3755f91c748c7",
+      "rmf_sha256": "6dca062f05f709606a225fc3d26d40e5609f2412950c17b07309d87c217023b6",
+      "fit_band_keV": [
+        0.5,
+        7.0
+      ],
+      "sherpa_response_energy_fit_band_source_counts": 227710.0,
+      "sherpa_response_energy_fit_band_grouped_bins": 446,
+      "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+      "source_exposure_s": 53019396.510918,
+      "normalization_initial": 4.2948433023583905e-05,
+      "model": "xstbabs * xsapec",
+      "statistic": "chi2xspecvar",
+      "abundance_table": "aspl (Asplund et al. 2009)",
+      "xspec_atomic_data": {
+        "atomdb_version": "3.0.9",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+      },
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 5.894677558486781e-06
+      },
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "parameters": {
+        "nH_1e22_cm2_fixed": 0.0262,
+        "redshift_fixed": 0.2323,
+        "temperature_keV": 8.125548514018245,
+        "abundance_solar": 0.49763499757654484,
+        "normalization": 4.5118524573491596e-05
+      },
+      "temperature_confidence_68_percent": {
+        "lower_keV": 8.04123738485959,
+        "upper_keV": 8.214696073283625,
+        "fractional_half_width": 0.010673660253506724,
+        "error": "",
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "methodname": "confidence",
+          "fitname": "levmar",
+          "statname": "chi2xspecvar",
+          "sigma": 1.0,
+          "percent": 68.26894921370858,
+          "parnames": [
+            "apec_abell2146_integrated.kT"
+          ],
+          "parvals": [
+            8.125548514018245
+          ],
+          "parmins": [
+            -0.08431112915865491
+          ],
+          "parmaxes": [
+            0.08914755926537943
+          ],
+          "nfits": 14
+        }
+      },
+      "fit": {
+        "statval": 541.8660827267349,
+        "dof": 443,
+        "reduced_statistic": 1.223174001640485,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "methodname": "levmar",
+          "statname": "chi2xspecvar",
+          "succeeded": true,
+          "message": "successful termination",
+          "nfev": 17,
+          "istatval": 1787.4386866283428,
+          "statval": 541.8660827267349,
+          "dstatval": 1245.5726039016079,
+          "numpoints": 446,
+          "dof": 443,
+          "parnames": [
+            "apec_abell2146_integrated.kT",
+            "apec_abell2146_integrated.Abundanc",
+            "apec_abell2146_integrated.norm"
+          ],
+          "parvals": [
+            8.125548514018245,
+            0.49763499757654484,
+            4.5118524573491596e-05
+          ]
+        }
+      },
+      "gates": {
+        "finite_parameters_and_ordered_temperature_interval": true,
+        "reduced_statistic_at_most_1_5": true,
+        "all_free_parameters_strictly_inside_bounds": true,
+        "all_passed": true
+      }
+    },
+    {
+      "cluster": "BULLET",
+      "label": "BULLET_integrated",
+      "fit_completed": true,
+      "abundance_mode": "free_integrated",
+      "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_integrated/BULLET_integrated_src_grp.pi",
+      "source_spectrum_sha256": "7ed90a72a47d2d11e6cbd5f841858971539acefc42bc1614cda807f1ea2535d8",
+      "background_spectrum_sha256": "054a0b8f767d8a7567bac8f691cad7408535ec6f82d869f7f47f1bf32cd6d83b",
+      "arf_sha256": "0dbd321577b0a18f264d8d06ba090b166045329844d350b986f0b6e2bd41e4cc",
+      "rmf_sha256": "8b011dbf4a0d281627dc3e5dcaf7f8361e5d508bc0d2b8d77f38052df7583261",
+      "fit_band_keV": [
+        0.5,
+        7.0
+      ],
+      "sherpa_response_energy_fit_band_source_counts": 660872.0,
+      "sherpa_response_energy_fit_band_grouped_bins": 446,
+      "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+      "source_exposure_s": 214239657.02506,
+      "normalization_initial": 3.084732346834819e-05,
+      "model": "xstbabs * xsapec",
+      "statistic": "chi2xspecvar",
+      "abundance_table": "aspl (Asplund et al. 2009)",
+      "xspec_atomic_data": {
+        "atomdb_version": "3.0.9",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+      },
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 3.957959877421555e-06
+      },
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "parameters": {
+        "nH_1e22_cm2_fixed": 0.0438,
+        "redshift_fixed": 0.296,
+        "temperature_keV": 16.06358739998054,
+        "abundance_solar": 0.38361102334267344,
+        "normalization": 3.959558769715604e-05
+      },
+      "temperature_confidence_68_percent": {
+        "lower_keV": 15.892885697918397,
+        "upper_keV": 16.234289102042688,
+        "fractional_half_width": 0.010626623917292117,
+        "error": "",
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "methodname": "confidence",
+          "fitname": "levmar",
+          "statname": "chi2xspecvar",
+          "sigma": 1.0,
+          "percent": 68.26894921370858,
+          "parnames": [
+            "apec_bullet_integrated.kT"
+          ],
+          "parvals": [
+            16.06358739998054
+          ],
+          "parmins": [
+            -0.17070170206214463
+          ],
+          "parmaxes": [
+            0.1707017020621464
+          ],
+          "nfits": 2
+        }
+      },
+      "fit": {
+        "statval": 1237.5954661102269,
+        "dof": 443,
+        "reduced_statistic": 2.793669223725117,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "methodname": "levmar",
+          "statname": "chi2xspecvar",
+          "succeeded": true,
+          "message": "successful termination",
+          "nfev": 27,
+          "istatval": 31981.27848729747,
+          "statval": 1237.5954661102269,
+          "dstatval": 30743.683021187244,
+          "numpoints": 446,
+          "dof": 443,
+          "parnames": [
+            "apec_bullet_integrated.kT",
+            "apec_bullet_integrated.Abundanc",
+            "apec_bullet_integrated.norm"
+          ],
+          "parvals": [
+            16.06358739998054,
+            0.38361102334267344,
+            3.959558769715604e-05
+          ]
+        }
+      },
+      "gates": {
+        "finite_parameters_and_ordered_temperature_interval": true,
+        "reduced_statistic_at_most_1_5": false,
+        "all_free_parameters_strictly_inside_bounds": true,
+        "all_passed": false
+      }
+    }
+  ],
+  "regional_fits": [
+    {
+      "cluster": "ABELL2146",
+      "label": "ABELL2146_bin62",
+      "fit_completed": true,
+      "abundance_mode": "fixed_to_integrated",
+      "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/ABELL2146_bin62/ABELL2146_bin62_src_grp.pi",
+      "source_spectrum_sha256": "0537e63aee794b8c10c75ff81794e082357ddeaaffef7fbb77e70f9f5bd63b9c",
+      "background_spectrum_sha256": "1021c2ff2de57784d7b5bd3e1db98554de64474c5da231cfaddf559b6a488f3b",
+      "arf_sha256": "81b14f13fe7f6e72340e677209ebd88a8e57adf54c7e1d031f14d152be6c8ccc",
+      "rmf_sha256": "82399e573b908460e9b0ba2dd729a983547ee3047f1fa8edd02cfc8fec52c4ae",
+      "fit_band_keV": [
+        0.5,
+        7.0
+      ],
+      "sherpa_response_energy_fit_band_source_counts": 2513.0,
+      "sherpa_response_energy_fit_band_grouped_bins": 85,
+      "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+      "source_exposure_s": 418012.62993274,
+      "normalization_initial": 6.0117800756507096e-05,
+      "model": "xstbabs * xsapec",
+      "statistic": "chi2xspecvar",
+      "abundance_table": "aspl (Asplund et al. 2009)",
+      "xspec_atomic_data": {
+        "atomdb_version": "3.0.9",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+      },
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 8.444724587902282e-06
+      },
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "parameters": {
+        "nH_1e22_cm2_fixed": 0.0262,
+        "redshift_fixed": 0.2323,
+        "temperature_keV": 10.20861101884569,
+        "abundance_solar": 0.49763499757654484,
+        "normalization": 5.468214973841842e-05
+      },
+      "temperature_confidence_68_percent": {
+        "lower_keV": 8.634389229626073,
+        "upper_keV": 12.60746007654785,
+        "fractional_half_width": 0.19459409510202988,
+        "error": "",
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "methodname": "confidence",
+          "fitname": "levmar",
+          "statname": "chi2xspecvar",
+          "sigma": 1.0,
+          "percent": 68.26894921370858,
+          "parnames": [
+            "apec_abell2146_bin62.kT"
+          ],
+          "parvals": [
+            10.20861101884569
+          ],
+          "parmins": [
+            -1.5742217892196173
+          ],
+          "parmaxes": [
+            2.3988490577021597
+          ],
+          "nfits": 8
+        }
+      },
+      "fit": {
+        "statval": 62.31578050067005,
+        "dof": 83,
+        "reduced_statistic": 0.7507925361526512,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "methodname": "levmar",
+          "statname": "chi2xspecvar",
+          "succeeded": true,
+          "message": "successful termination",
+          "nfev": 13,
+          "istatval": 82.16678528559915,
+          "statval": 62.31578050067005,
+          "dstatval": 19.851004784929096,
+          "numpoints": 85,
+          "dof": 83,
+          "parnames": [
+            "apec_abell2146_bin62.kT",
+            "apec_abell2146_bin62.norm"
+          ],
+          "parvals": [
+            10.20861101884569,
+            5.468214973841842e-05
+          ]
+        }
+      },
+      "gates": {
+        "finite_parameters_and_ordered_temperature_interval": true,
+        "reduced_statistic_at_most_1_5": true,
+        "all_free_parameters_strictly_inside_bounds": true,
+        "fractional_68_percent_temperature_half_width_at_most_0_5": true,
+        "all_passed": true
+      }
+    },
+    {
+      "cluster": "BULLET",
+      "label": "BULLET_bin169",
+      "fit_completed": true,
+      "abundance_mode": "fixed_to_integrated",
+      "source_spectrum": "/mnt/c/Users/henry/Documents/Codex/2026-07-18/sigmagravity-frontiers-main/research/galaxy-cluster-unification/results/sigma_v19dl_canonicalized_direct_response_commissioning/frozen_products/BULLET_bin169/BULLET_bin169_src_grp.pi",
+      "source_spectrum_sha256": "7239889ebd31d300a3c6b82b7c66c5fb4494da43cb314781e3f6b05f6c48823e",
+      "background_spectrum_sha256": "d59db93567c1a9550a6e29f1948a8fcc894116099de26a5d3605b0a2231c8fbf",
+      "arf_sha256": "7fce9868613861a9b2ccbdceec68f7849c9482f4e7ad08c2d4f7abc616398fb5",
+      "rmf_sha256": "3027db25cc9738388bf79c1a1874866f678059b4f5b6d87e8af9660f9b2c255f",
+      "fit_band_keV": [
+        0.5,
+        7.0
+      ],
+      "sherpa_response_energy_fit_band_source_counts": 2725.0,
+      "sherpa_response_energy_fit_band_grouped_bins": 87,
+      "event_energy_manifest_count_is_not_equated_to_sherpa_count": true,
+      "source_exposure_s": 536077.11685694,
+      "normalization_initial": 5.083223876402108e-05,
+      "model": "xstbabs * xsapec",
+      "statistic": "chi2xspecvar",
+      "abundance_table": "aspl (Asplund et al. 2009)",
+      "xspec_atomic_data": {
+        "atomdb_version": "3.0.9",
+        "xspec_init": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/manager/Xspec.init",
+        "xspec_init_sha256": "73def67e6f42d911aa2bfad238830306a04d735304a46e5505b9fea01c264146",
+        "apec_root": "/home/henry/miniforge3/envs/sigma-ciao-4.18/spectral/modelData/apec_v3.0.9",
+        "continuum_sha256": "4ee708642db82333c907ce743a14f0ffad9542172886887a226e50236b4a6f74",
+        "line_sha256": "b268e54de23836607c47e8282a892c2c992d9cfd7c2c99606f4a98d6df8af883"
+      },
+      "apec_model_probe": {
+        "energy_bins_keV": [
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.75,
+            1.0
+          ]
+        ],
+        "integrated_flux": 6.588920270871928e-06
+      },
+      "optimization_attempts": [
+        "levmar"
+      ],
+      "parameters": {
+        "nH_1e22_cm2_fixed": 0.0438,
+        "redshift_fixed": 0.296,
+        "temperature_keV": 15.206779513760727,
+        "abundance_solar": 0.38361102334267344,
+        "normalization": 5.7353561128815435e-05
+      },
+      "temperature_confidence_68_percent": {
+        "lower_keV": 12.688291253291316,
+        "upper_keV": 18.361743461147224,
+        "fractional_half_width": 0.1865435151052844,
+        "error": "",
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "methodname": "confidence",
+          "fitname": "levmar",
+          "statname": "chi2xspecvar",
+          "sigma": 1.0,
+          "percent": 68.26894921370858,
+          "parnames": [
+            "apec_bullet_bin169.kT"
+          ],
+          "parvals": [
+            15.206779513760727
+          ],
+          "parmins": [
+            -2.518488260469411
+          ],
+          "parmaxes": [
+            3.1549639473864968
+          ],
+          "nfits": 13
+        }
+      },
+      "fit": {
+        "statval": 85.87856671582186,
+        "dof": 85,
+        "reduced_statistic": 1.010336079009669,
+        "raw": {
+          "datasets": [
+            1
+          ],
+          "methodname": "levmar",
+          "statname": "chi2xspecvar",
+          "succeeded": true,
+          "message": "successful termination",
+          "nfev": 16,
+          "istatval": 131.67610517898981,
+          "statval": 85.87856671582186,
+          "dstatval": 45.79753846316795,
+          "numpoints": 87,
+          "dof": 85,
+          "parnames": [
+            "apec_bullet_bin169.kT",
+            "apec_bullet_bin169.norm"
+          ],
+          "parvals": [
+            15.206779513760727,
+            5.7353561128815435e-05
+          ]
+        }
+      },
+      "gates": {
+        "finite_parameters_and_ordered_temperature_interval": true,
+        "reduced_statistic_at_most_1_5": true,
+        "all_free_parameters_strictly_inside_bounds": true,
+        "fractional_68_percent_temperature_half_width_at_most_0_5": true,
+        "all_passed": true
+      }
+    }
+  ],
+  "gates": {
+    "v19w5_unified_archive_and_every_product_hash_exact": true,
+    "combination_uses_every_registered_cell_exactly_once": true,
+    "combined_source_background_arf_and_rmf_exist_and_links_are_exact": true,
+    "every_cell_event_energy_counts_equal_manifest": true,
+    "combined_full_pha_source_counts_conserved_exactly": true,
+    "both_integrated_fits_pass": false,
+    "both_regional_fits_pass": true,
+    "every_snapshot_canonicalized_with_valid_checksums": true
+  },
+  "full_494_region_combination_and_fit_authorized": false,
+  "thermal_stress_constructed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

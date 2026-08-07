@@ -1,5 +1,24 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DI--V19DN direct-response and soft-spectrum result
+
+The direct OGIP writer and deterministic FITS canonicalizer now pass their
+prospective controls. V19DL combines all 5,082 registered cells exactly, and
+both registered regional fits pass, but the Bullet integrated one-temperature
+fit fails (`reduced chi2=2.7937`). V19DM's first 2T execution is discarded
+because Sherpa used the wrong statistic after `clean`; V19DM2 restores the
+frozen `chi2xspecvar` statistic without changing any scientific choice and
+validly rejects the minimal 2T repair (`2.8023`, `Delta BIC=+10.4164`).
+
+V19DN localizes the mismatch. Bullet fails at 0.5--2 keV (`4.1623`) but passes
+at 2--7 keV (`1.2200`); Abell 2146 passes the corresponding bands. This points
+to a soft-background/calibration or merged-response/heterogeneous-plasma
+problem, not a general failure of the hard thermal continuum. No full 494-
+region run, I4/I5 construction, lensing, gravity, action, validation, or
+holdout payload is authorized. The next source-stage test is an observation-
+resolved joint fit and soft-band audit. See
+[`SIGMA_V19DI_V19DN_DIRECT_RESPONSE_AND_SOFT_SPECTRUM.md`](SIGMA_V19DI_V19DN_DIRECT_RESPONSE_AND_SOFT_SPECTRUM.md).
+
 ## 2026-08-06 Sigma V19DG--V19DH direct-response result
 
 The frozen V19X2 source-only chain was blocked before fitting because CIAO

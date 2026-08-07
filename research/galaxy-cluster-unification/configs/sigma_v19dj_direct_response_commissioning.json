@@ -1,0 +1,66 @@
+{
+  "protocol_version": "SIGMA-V19DJ-DIRECT-RESPONSE-COMMISSIONING-1.0.0",
+  "freeze_state": "frozen_after_v19di_writer_preflight_pass_before_full_combination_or_any_spectral_fit",
+  "purpose": "Run the unchanged V19X2 integrated and registered-region spectral commissioning using the V19DH/V19DI direct response arithmetic and exact OGIP writer.",
+  "parents": {
+    "v19x2_config": {
+      "path": "configs/sigma_v19x2_unified_spectral_combination_commissioning.json",
+      "sha256": "60543254acdfa979b2e0ab86e346ea291e1a8b1346a13f48669a44974a42c559"
+    },
+    "v19di_config": {
+      "path": "configs/sigma_v19di_direct_ogip_writer_preflight.json",
+      "sha256": "a6bbf1b98b49c9a2e130918fd7e0249cc0a90b831e663739f0ad451ce12f72ae"
+    },
+    "v19di_report": {
+      "path": "results/sigma_v19di_direct_ogip_writer_preflight/report.json",
+      "sha256": "33db6f8f72d5759d357c2bacfa6e5630de7f0e52f11f20adda06ea2257b9da95"
+    },
+    "v19di_runner": {
+      "path": "scripts/run_sigma_v19di_direct_ogip_writer_preflight.py",
+      "sha256": "5a32b97614f65caa05bfaadf4d875c065b99f06a74633c7d86bdcbe1f614ed6e"
+    },
+    "v19dh_runner": {
+      "path": "scripts/run_sigma_v19dh_direct_response_parity.py",
+      "sha256": "6df8885e7fb0cd896e593d75e8f72b932531713aa54f29cbb6559019c251a48c"
+    },
+    "writer_module": {
+      "path": "scripts/sigma_v19di_direct_ogip.py",
+      "sha256": "6e0b64447d5508a2bec9d8b60d8c9ba68be6892265d2d9985481bd20cc37fa7d"
+    }
+  },
+  "inherited_section_sha256": {
+    "registered_workload": "ab0e5a9b99875cac1c739bb181b04d32d46e0ce262342142acbf236be16c09da",
+    "combination": "a556ed47c000d5529e26be9ca5200aa2405238091ddf5286df72383c0601500c",
+    "fit_sequence": "6e0ab25cbf18e87dce3c1e07e6dd708c1bcdf82cbde82682773dbecd77cad8f5",
+    "gates": "b8c7ca2f8d8f168fab3e95db4b638ad2d4b6c66bc8e83460980a4ff893c60b95"
+  },
+  "writer": {
+    "rmf_threshold": 1e-06,
+    "source_background_rule": "unchanged CIAO method=sum, bscale_method=asca and exp_origin=pha with response combination disabled",
+    "response_rule": "V19DH direct exposure/ARF weighting serialized once by the V19DI exact OGIP writer"
+  },
+  "authorization": {
+    "combine_two_complete_integrated_apertures": true,
+    "combine_two_registered_commissioning_regions": true,
+    "fit_integrated_abundance_and_registered_region_temperature": true,
+    "run_all_494_regions_before_pass": false,
+    "open_temperature_only_after_response_products_exist_and_link_exactly": true,
+    "open_source_invariant_lensing_halo_action_gravity_or_holdout": false
+  },
+  "decision": {
+    "pass": "Every unchanged V19X2 archive, combination, count, link, integrated-fit and regional-fit gate passes. A separately named all-494-region successor may then be frozen.",
+    "scientific_fail": "Retain all fit results and stop. Do not alter grouping, band, absorption, redshift, abundance rule, statistic, optimizer, bounds, cell membership or response threshold.",
+    "execution_fail": "Record the implementation failure; a separately named remediation is permitted only if no spectral outcome was opened.",
+    "no_retroactive_change": true
+  },
+  "claim_boundary": [
+    "V19DJ changes only the response-combination implementation authorized by V19DH/V19DI.",
+    "All V19X2 cell membership, grouping, spectral model, fit sequence, bounds, quality gates and registered regions are inherited exactly.",
+    "A pass commissions all-region gas reconstruction; it is not a thermodynamic-source, lensing or gravity result.",
+    "No source invariant, lensing, halo, action, gravity parameter or holdout payload is opened."
+  ],
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dj_direct_response_commissioning.py",
+    "runner_sha256": "ab49edeb6ea28e3f4bf3fb727a779a268faa64e6362c53d5b147e16771b4309f"
+  }
+}

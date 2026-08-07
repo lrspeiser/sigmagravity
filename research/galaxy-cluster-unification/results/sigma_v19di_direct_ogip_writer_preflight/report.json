@@ -1,0 +1,711 @@
+{
+  "protocol_version": "SIGMA-V19DI-DIRECT-OGIP-WRITER-PREFLIGHT-1.0.0",
+  "generated_utc": "2026-08-06T23:26:39.640418+00:00",
+  "config_sha256": "a6bbf1b98b49c9a2e130918fd7e0249cc0a90b831e663739f0ad451ce12f72ae",
+  "runner_sha256": "5a32b97614f65caa05bfaadf4d875c065b99f06a74633c7d86bdcbe1f614ed6e",
+  "writer_module_sha256": "6e0b64447d5508a2bec9d8b60d8c9ba68be6892265d2d9985481bd20cc37fa7d",
+  "status": "direct_ogip_writer_preflight_passed_full_commissioning_may_be_frozen",
+  "aggregate_pass": true,
+  "controls": [
+    {
+      "id": "bullet_registered_region_169",
+      "cluster": "BULLET",
+      "cells": 9,
+      "writer": {
+        "energy_rows": 1070,
+        "channels": 1024,
+        "groups": 1368,
+        "retained_matrix_elements": 533729,
+        "threshold": 1e-06,
+        "first_channel": 1
+      },
+      "written_validation": {
+        "arf_rows": 1070,
+        "rmf_rows": 1070,
+        "channels": 1024,
+        "ebounds_rows": 1024,
+        "gates": {
+          "arf_rows_exact": true,
+          "arf_finite": true,
+          "rmf_rows_exact": true,
+          "rmf_channels_exact": true,
+          "ebounds_rows_exact": true
+        },
+        "passed": true
+      },
+      "comparisons": {
+        "source": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/official/combined_src.pi",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/written/combined_src.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 536077.11685694,
+              "hierarchical": 536077.11685694,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "background": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/official/combined_bkg.pi",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/written/combined_bkg.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 13500000.0,
+              "hierarchical": 13500000.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 1.0686014620126,
+              "hierarchical": 1.0686014620126,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "arf": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/official/combined_src.arf",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/written/combined_src.arf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "SPECRESP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 536077.11685694,
+              "hierarchical": 536077.116856937,
+              "equal": false,
+              "relative_difference": 5.646199534213751e-15
+            },
+            "DETCHANS": {
+              "direct": 1070,
+              "hierarchical": 1070,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_matrix": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/official/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/written/combined_src.rmf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "N_GRP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "F_CHAN": {
+              "same_shape": true,
+              "left_shape": [
+                1368
+              ],
+              "right_shape": [
+                1368
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "N_CHAN": {
+              "same_shape": true,
+              "left_shape": [
+                1368
+              ],
+              "right_shape": [
+                1368
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "MATRIX": {
+              "same_shape": true,
+              "left_shape": [
+                533729
+              ],
+              "right_shape": [
+                533729
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": null,
+              "hierarchical": 536077.116856937,
+              "equal": false,
+              "relative_difference": null
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_ebounds": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/official/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/bullet_registered_region_169/written/combined_src.rmf",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MIN": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MAX": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        }
+      },
+      "sherpa": {
+        "noticed_bins": 446,
+        "arf_energy_bins": 1070,
+        "rmf_energy_bins": 1070,
+        "rmf_channels": 1024,
+        "model_finite": true,
+        "model_has_positive_prediction": true,
+        "model_sum": 3.359167328462666,
+        "passed": true
+      },
+      "gates": {
+        "source_arrays_exact": true,
+        "background_arrays_exact": true,
+        "arf_arrays_exact": true,
+        "rmf_matrix_arrays_exact": true,
+        "rmf_ebounds_arrays_exact": true,
+        "source_exposure_close": true,
+        "arf_exposure_close": true,
+        "written_response_structure_passes": true,
+        "sherpa_load_and_forward_fold_passes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "abell2146_registered_region_62",
+      "cluster": "ABELL2146",
+      "cells": 10,
+      "writer": {
+        "energy_rows": 1070,
+        "channels": 1024,
+        "groups": 1372,
+        "retained_matrix_elements": 529089,
+        "threshold": 1e-06,
+        "first_channel": 1
+      },
+      "written_validation": {
+        "arf_rows": 1070,
+        "rmf_rows": 1070,
+        "channels": 1024,
+        "ebounds_rows": 1024,
+        "gates": {
+          "arf_rows_exact": true,
+          "arf_finite": true,
+          "rmf_rows_exact": true,
+          "rmf_channels_exact": true,
+          "ebounds_rows_exact": true
+        },
+        "passed": true
+      },
+      "comparisons": {
+        "source": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/official/combined_src.pi",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/written/combined_src.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 418012.62993274,
+              "hierarchical": 418012.62993274,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "background": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/official/combined_bkg.pi",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/written/combined_bkg.pi",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "COUNTS": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 4340000.0,
+              "hierarchical": 4340000.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "BACKSCAL": {
+              "direct": 1.0,
+              "hierarchical": 1.0,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "AREASCAL": {
+              "direct": 0.90805132323204,
+              "hierarchical": 0.90805132323204,
+              "equal": true,
+              "relative_difference": 0.0
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "arf": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/official/combined_src.arf",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/written/combined_src.arf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "SPECRESP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": 418012.62993274,
+              "hierarchical": 418012.62993274047,
+              "equal": false,
+              "relative_difference": 1.113988559108048e-15
+            },
+            "DETCHANS": {
+              "direct": 1070,
+              "hierarchical": 1070,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_matrix": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/official/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/written/combined_src.rmf",
+          "columns": {
+            "ENERG_LO": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "ENERG_HI": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "N_GRP": {
+              "same_shape": true,
+              "left_shape": [
+                1070
+              ],
+              "right_shape": [
+                1070
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "F_CHAN": {
+              "same_shape": true,
+              "left_shape": [
+                1372
+              ],
+              "right_shape": [
+                1372
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "N_CHAN": {
+              "same_shape": true,
+              "left_shape": [
+                1372
+              ],
+              "right_shape": [
+                1372
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "MATRIX": {
+              "same_shape": true,
+              "left_shape": [
+                529089
+              ],
+              "right_shape": [
+                529089
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "EXPOSURE": {
+              "direct": null,
+              "hierarchical": 418012.62993274047,
+              "equal": false,
+              "relative_difference": null
+            },
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        },
+        "rmf_ebounds": {
+          "direct": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/official/combined_src.rmf",
+          "hierarchical": "/home/henry/sigma-v19di-direct-ogip-preflight/v100/abell2146_registered_region_62/written/combined_src.rmf",
+          "columns": {
+            "CHANNEL": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MIN": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            },
+            "E_MAX": {
+              "same_shape": true,
+              "left_shape": [
+                1024
+              ],
+              "right_shape": [
+                1024
+              ],
+              "max_absolute": 0.0,
+              "max_relative": 0.0
+            }
+          },
+          "headers": {
+            "DETCHANS": {
+              "direct": 1024,
+              "hierarchical": 1024,
+              "equal": true,
+              "relative_difference": 0.0
+            }
+          }
+        }
+      },
+      "sherpa": {
+        "noticed_bins": 446,
+        "arf_energy_bins": 1070,
+        "rmf_energy_bins": 1070,
+        "rmf_channels": 1024,
+        "model_finite": true,
+        "model_has_positive_prediction": true,
+        "model_sum": 3.0080458233340357,
+        "passed": true
+      },
+      "gates": {
+        "source_arrays_exact": true,
+        "background_arrays_exact": true,
+        "arf_arrays_exact": true,
+        "rmf_matrix_arrays_exact": true,
+        "rmf_ebounds_arrays_exact": true,
+        "source_exposure_close": true,
+        "arf_exposure_close": true,
+        "written_response_structure_passes": true,
+        "sherpa_load_and_forward_fold_passes": true
+      },
+      "passed": true
+    }
+  ],
+  "spectrum_fitted": false,
+  "temperature_or_source_invariant_opened": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false,
+  "claim_boundary": [
+    "V19DI is a writer and consumer-compatibility preflight, not a spectral or source result.",
+    "The two registered regions are development controls already used in V19DG/V19DH exploration; no new science target is opened.",
+    "No spectrum is fitted and no temperature, source invariant, lensing, halo, action, gravity parameter or holdout result is opened.",
+    "A pass authorizes a separately hash-frozen full commissioning runner; it does not authorize changing the V19X2 spectral model or gates."
+  ]
+}

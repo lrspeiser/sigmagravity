@@ -1,0 +1,14 @@
+{
+  "protocol_version": "SIGMA-V19DK-FITS-CANONICALIZATION-PREFLIGHT-1.0.0",
+  "generated_utc": "2026-08-07T00:18:27.383643+00:00",
+  "config_sha256": "1a1c9b4dd821e4ae3d44d5d8fc82553dd10ad3c41847e1863753aabb977a13df",
+  "runner_sha256": "566ac3dd845324f880941757a015e79c85cb30211744f1c2e840d4207f6f28a2",
+  "status": "fits_canonicalization_preflight_execution_failed",
+  "execution_exception": "FileNotFoundError: [Errno 2] No such file or directory: '/home/henry/sigma-v19dk-fits-canonicalization-preflight/v103/bullet_registered_region_169/repeat_1/bullet_registered_region_169/bullet_registered_region_169_src_grp.pi_src.pi'",
+  "aggregate_pass": false,
+  "full_response_commissioning_successor_authorized": false,
+  "spectrum_fitted": false,
+  "temperature_or_source_invariant_opened": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}
