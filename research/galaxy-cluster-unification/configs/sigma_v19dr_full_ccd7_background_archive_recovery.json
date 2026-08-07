@@ -1,0 +1,75 @@
+{
+  "protocol_version": "SIGMA-V19DR-FULL-CCD7-BACKGROUND-RECOVERY-1.0.0",
+  "status": "frozen after V19DQ passed and after reconciling the 254 exhausted base cells with all 256 zero-background CCD7 products in the unified archive, but before rebuilding any additional CCD7 product, reading any recovered spectrum, running any regional likelihood, constructing I4/I5, opening lensing or gravity payloads, or changing gravity physics",
+  "purpose": "Replace every Abell 2146 ObsID 10464/10888 CCD7 response product whose background was made from the lossy zero-CCD7 common-grid event file. Use the real astrometry-corrected, point-source-excluded pre-reprojection blank sky, every frozen exact thermodynamic-region mask, unchanged source events, response settings and BKGSCALn, then build a structurally complete 5,082-cell unified product index.",
+  "parents": {
+    "v19dq_config": {
+      "path": "configs/sigma_v19dq_ccd7_background_recovery_preflight.json",
+      "sha256": "192d79f51d9e88b1a90b7fe541d5fa503a1221396f34951a7c52c43cd08d0ef9"
+    },
+    "v19dq_runner": {
+      "path": "scripts/run_sigma_v19dq_ccd7_background_recovery_preflight.py",
+      "sha256": "2f1b290a78834742609e953c33915701e5ce23d8638cb71e364c401152ef3a53"
+    },
+    "v19dq_report": {
+      "path": "results/sigma_v19dq_ccd7_background_recovery_preflight/report.json",
+      "sha256": "0e6d9fbff503f50deda990e5ccf24c765b9a7e9ba8f31ba05ac97ad649b2e4a4"
+    },
+    "v19w_config": {
+      "path": "configs/sigma_v19w_full_response_production.json",
+      "sha256": "f5bd6f0f4de34cdea41e1b1e321a4b77fb683be8af8476e3f10d794ec2897197"
+    },
+    "v19w_runner": {
+      "path": "scripts/run_sigma_v19w_full_response_production.py",
+      "sha256": "e9d9f2943366e6ed878568b572c8fc89b390421d7c08018c15ec3b8eab21d7a1"
+    },
+    "v19w2_runner": {
+      "path": "scripts/run_sigma_v19w2_exact_binmap_response_commissioning.py",
+      "sha256": "7bfa95bacc2d6904fb67262b1523cb58fab9cb492a0ccfcec15ae1ea41185810"
+    },
+    "v19u_manifest": {
+      "path": "results/sigma_v19u_response_production_plan/production_manifest.csv",
+      "sha256": "94901f5c5d05b5fdc00d6e04230203ec5f868cd08fbba6089c22820d31ec1bdd"
+    },
+    "v19w5_product_index": {
+      "path": "results/sigma_v19w5_ccd7_hardened_response_recovery/unified_product_index.csv",
+      "sha256": "ab0af0c8f745768ca1373fcb6efbc149908573362ad168759691ab23a6b88cd4"
+    }
+  },
+  "selection": {
+    "cluster": "ABELL2146",
+    "obsids": [10464, 10888],
+    "ccd_id": 7,
+    "expected_cells": 256,
+    "expected_cells_per_observation": 128,
+    "cell_names_sha256": "b40d5cf30ed25bd234178f90cc98428978380efdcc3d83423ed0fd3cc6791820",
+    "minimum_source_band_events": 22,
+    "maximum_source_band_events": 532,
+    "selection_uses_no_spectrum_or_gravity_outcome": true
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19dr_full_ccd7_background_archive_recovery.py",
+    "runner_sha256": "5582aeefc091c9fc05cc83fb9645c1dfd9cd2a194296a253915a7e52405af03e",
+    "scratch_root": "/home/henry/sigma-v19dr-ccd7-background/v100",
+    "output": "results/sigma_v19dr_full_ccd7_background_archive_recovery",
+    "maximum_concurrent_cells": 4,
+    "attempts_per_cell": 1,
+    "free_space_probe": "/home/henry",
+    "minimum_free_bytes_at_launch": 20000000000
+  },
+  "gates": {
+    "all_256_background_subsets_must_be_nonzero": true,
+    "all_event_to_pha_channel_audits_must_be_exact": true,
+    "all_effective_background_scales_must_equal_frozen_BKGSCALn_within_1e-6": true,
+    "all_response_links_and_finite_response_audits_must_pass": true,
+    "no_failed_or_missing_cell_is_permitted": true,
+    "unified_index_must_have_5082_unique_cells_and_exactly_256_replacements": true
+  },
+  "failure_rule": "Retain every completed and failed checkpoint and report terminally. Do not retry, drop, merge or substitute a cell; change a region mask, source event, blank-sky file, particle scale, response setting, worker outcome, threshold or physics parameter; or open the 494-region likelihood. A failure requires a new preregistered implementation diagnosis.",
+  "claim_boundary": [
+    "This is response/background archive recovery, not a spectral or thermodynamic result.",
+    "A pass authorizes the 494-region unmerged joint likelihood using the new unified product index; it does not itself fit any of those regions.",
+    "No I4 thermodynamic-gradient stress or I5 baroclinicity is constructed.",
+    "No lensing, halo, action, galaxy, gravity, validation or holdout payload is opened and no gravity formula or parameter is changed."
+  ]
+}

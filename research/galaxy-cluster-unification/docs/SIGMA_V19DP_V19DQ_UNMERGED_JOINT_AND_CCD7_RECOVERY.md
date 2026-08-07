@@ -84,16 +84,19 @@ This is strong evidence that the V19DP failure was created by loss of real CCD7
 background events, not by observation-to-observation thermodynamic
 inconsistency. It is a calibration result, not a Sigma-gravity result.
 
-## Exact next stage
+## Subsequent V19DR result
 
-The unified response archive still contains zero-background PHAs for 256 Abell
-2146 CCD7 cells: the 254 that exhausted the base run plus two additional cells
-that entered the unified archive. The next registered stage must rebuild all 256 using the real
-pre-reprojection backgrounds and audit exact event counts, PHA channels,
-particle scaling, response links, hashes and archive completeness. Only after
-that archive passes may the 494-region unmerged likelihood be run. I4
-thermodynamic-gradient stress and I5 baroclinicity remain sealed until the full
-regional likelihood passes.
+V19DR subsequently rebuilt all 256 affected products from the real
+pre-reprojection backgrounds under the frozen masks and settings. All 256 pass
+without a failure or retry, restoring 45,252 background-band events. Exact PHA,
+particle-scaling, response-link and archive-completeness gates pass, and the
+new unified index contains 5,082 unique cells with exactly 256 replacements.
+
+The 494-region unmerged likelihood is therefore authorized but has not been
+run. I4 thermodynamic-gradient stress and I5 baroclinicity remain sealed until
+that likelihood passes. See
+[`PROJECT_WRAP_UP_AND_NEXT_STEPS_2026-08-06.md`](PROJECT_WRAP_UP_AND_NEXT_STEPS_2026-08-06.md)
+for the project-level conclusion and resumption plan.
 
 No lensing, halo, action, gravity, validation or holdout payload was opened, and
 no gravity formula or parameter changed.
@@ -102,3 +105,5 @@ Machine-readable evidence:
 
 - `results/sigma_v19dp_unmerged_regional_joint_likelihood_preflight/report.json`
 - `results/sigma_v19dq_ccd7_background_recovery_preflight/report.json`
+- `results/sigma_v19dr_full_ccd7_background_archive_recovery/report.json`
+- `results/sigma_v19dr_full_ccd7_background_archive_recovery/unified_product_index.csv`

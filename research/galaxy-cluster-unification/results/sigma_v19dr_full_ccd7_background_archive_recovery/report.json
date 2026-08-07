@@ -1,0 +1,73 @@
+{
+  "protocol_version": "SIGMA-V19DR-FULL-CCD7-BACKGROUND-RECOVERY-1.0.0",
+  "generated_utc": "2026-08-07T04:44:09.142334+00:00",
+  "config_sha256": "70189a98eff6a4315992b9cc75948b7252fb6def1c63cfa0059b51d54d155c7c",
+  "runner_sha256": "5582aeefc091c9fc05cc83fb9645c1dfd9cd2a194296a253915a7e52405af03e",
+  "status": "full_256_cell_ccd7_background_archive_recovery_passed",
+  "launch_free_bytes": 732527329280,
+  "background_boundary": [
+    {
+      "obsid": 10464,
+      "pre_reprojection_ccd7_rows": 1354493,
+      "post_reprojection_ccd7_rows": 0,
+      "expected_pre_reprojection_ccd7_rows": 1354493,
+      "expected_post_reprojection_ccd7_rows": 0,
+      "pre_reprojection_background": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10464_blanksky_nosrc_evt.fits",
+      "passed": true
+    },
+    {
+      "obsid": 10888,
+      "pre_reprojection_ccd7_rows": 1390824,
+      "post_reprojection_ccd7_rows": 0,
+      "expected_pre_reprojection_ccd7_rows": 1390824,
+      "expected_post_reprojection_ccd7_rows": 0,
+      "pre_reprojection_background": "/home/henry/sigma-v19f-chandra/causal_observables_v19h_v100/ABELL2146/events/acisf10888_blanksky_nosrc_evt.fits",
+      "passed": true
+    }
+  ],
+  "selected_cells": 256,
+  "completed_cells": 256,
+  "failures": {},
+  "source_band_event_range": [
+    22,
+    532
+  ],
+  "background_band_event_range": [
+    20,
+    1219
+  ],
+  "total_background_band_events": 45252,
+  "recovery_index": {
+    "path": "results/sigma_v19dr_full_ccd7_background_archive_recovery/recovery_index.csv",
+    "rows": 256,
+    "sha256": "a17490b7806b973b94116767a5fb04c0a011b6d5b80dcc8813fd01f8e0b3010f"
+  },
+  "unified_product_index": {
+    "path": "results/sigma_v19dr_full_ccd7_background_archive_recovery/unified_product_index.csv",
+    "rows": 5082,
+    "sha256": "97faecdca6f8d72063d69bb3e777d2853f1897d81bf8a2a3f2c25888c6aabc78"
+  },
+  "gates": {
+    "v19dq_two_cell_recovery_parent_passes": true,
+    "exactly_256_frozen_ccd7_cells_selected": true,
+    "both_observations_contribute_128_cells": true,
+    "every_recovered_background_is_nonzero": true,
+    "every_cell_response_and_pha_audit_passes": true,
+    "every_particle_scale_is_exact": true,
+    "no_recovery_failure_remains": true,
+    "unified_index_has_5082_unique_cells": true,
+    "unified_index_replaces_exactly_256_ccd7_cells": true
+  },
+  "aggregate_pass": true,
+  "full_494_region_joint_likelihood_successor_authorized": true,
+  "all_494_regions_run": false,
+  "thermal_stress_or_baroclinicity_constructed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false,
+  "claim_boundary": [
+    "This is response/background archive recovery, not a spectral or thermodynamic result.",
+    "A pass authorizes the 494-region unmerged joint likelihood using the new unified product index; it does not itself fit any of those regions.",
+    "No I4 thermodynamic-gradient stress or I5 baroclinicity is constructed.",
+    "No lensing, halo, action, galaxy, gravity, validation or holdout payload is opened and no gravity formula or parameter is changed."
+  ]
+}

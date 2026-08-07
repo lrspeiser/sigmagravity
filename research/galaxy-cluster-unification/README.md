@@ -15,7 +15,9 @@ source Git commit, size, and SHA-256 hash in
 [`docs/SIGMAGRAVITY_PLACEMENT.md`](docs/SIGMAGRAVITY_PLACEMENT.md) for the
 placement and origin record.
 
-The latest source-measurement checkpoint is
+The project is deliberately wrapped at the source-archive boundary in
+[`docs/PROJECT_WRAP_UP_AND_NEXT_STEPS_2026-08-06.md`](docs/PROJECT_WRAP_UP_AND_NEXT_STEPS_2026-08-06.md).
+The latest detailed source-measurement diagnosis is
 [`docs/SIGMA_V19DP_V19DQ_UNMERGED_JOINT_AND_CCD7_RECOVERY.md`](docs/SIGMA_V19DP_V19DQ_UNMERGED_JOINT_AND_CCD7_RECOVERY.md),
 following the soft-background audit in
 [`docs/SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md`](docs/SIGMA_V19DO_V19DO2_SOFT_BACKGROUND_AUDIT.md).
@@ -25,9 +27,10 @@ failure to two CCD7 spectra. The astrometry-corrected blank sky contained more
 than 1.35 million CCD7 events per observation before the common-grid
 reprojection discarded all of them. Restoring the real background lowered the
 Abell statistic to 1.0312 with no new fit parameter; every registered gate now
-passes. The next source stage is recovery and audit of all 256 zero-background CCD7
-background products. The 494-region likelihood and I4/I5 remain sealed until
-that archive passes.
+passes. V19DR then recovered and audited all 256 affected CCD7 products with no
+failure or retry, producing a complete 5,082-cell unified archive. This closes
+the calibration chapter and authorizes, but does not run, the 494-region
+likelihood. I4 thermodynamic-gradient stress and I5 baroclinicity remain sealed.
 
 The current causal-assembly checkpoint is
 [`docs/SIGMA_V19H_SOURCE_MAP_GATE.md`](docs/SIGMA_V19H_SOURCE_MAP_GATE.md),

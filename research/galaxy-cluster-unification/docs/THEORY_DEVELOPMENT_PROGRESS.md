@@ -1,5 +1,22 @@
 # Theory-development progress against the stage gates
 
+## 2026-08-06 Sigma V19DR full CCD7 archive recovery and project wrap
+
+V19DR applies the frozen V19DQ background correction to every affected Abell
+2146 CCD7 response product. All `256/256` products pass without a failure or
+retry. Their 0.5--7 keV source counts range from `22` to `532`, their real
+background counts range from `20` to `1,219`, and the recovery restores `45,252`
+background-band events in total. Every event-to-PHA channel audit, particle
+scale, response link and finite-response gate passes. The resulting unified
+index contains `5,082` unique cells and exactly `256` V19DR replacements.
+
+This completes the response/background archive and authorizes the 494-region
+unmerged joint likelihood. It does not run that likelihood, construct I4/I5,
+open a lensing or gravity payload, or change a gravity formula or parameter.
+The project is deliberately paused at this clean chapter boundary; the full
+scientific assessment and resumption plan are in
+[`PROJECT_WRAP_UP_AND_NEXT_STEPS_2026-08-06.md`](PROJECT_WRAP_UP_AND_NEXT_STEPS_2026-08-06.md).
+
 ## 2026-08-06 Sigma V19DP--V19DQ unmerged likelihood and CCD7 recovery
 
 V19DP fits one registered region in each development cluster with every
