@@ -1,0 +1,448 @@
+{
+  "protocol_version": "SIGMA-V19DT-UNMERGED-LIKELIHOOD-LOCALIZATION-1.0.0",
+  "generated_utc": "2026-08-07T05:13:36.694192+00:00",
+  "config_sha256": "a352b3130e91bd534eb709c8f1836b8e039ec2c2a1e56701eddb3972b6390edd",
+  "runner_sha256": "fbd2cf81378fd1af3ad3f6657ed26fa0f0a95f1d930735b8bc94d3a3379cb433",
+  "status": "v19ds_terminal_failure_spatial_localization_completed",
+  "regions": 494,
+  "unresolved_regions": 122,
+  "cluster_summaries": {
+    "BULLET": {
+      "regions": 366,
+      "unresolved_regions": 106,
+      "unresolved_exactly_matches_reduced_statistic_above_3": false,
+      "abundance_lower_bound_regions": 179,
+      "abundance_lower_bound_fraction_unresolved": 0.6132075471698113,
+      "spatial_permutation": {
+        "edges": 1063,
+        "observed_same_class_edge_fraction": 0.7168391345249294,
+        "permutation_mean": 0.5871697083725307,
+        "permutation_std": 0.01308645216705419,
+        "z_score": 9.90867688943594,
+        "one_sided_p_value": 9.999000099990002e-05,
+        "draws": 10000,
+        "seed": 190875
+      },
+      "unresolved_connected_components": {
+        "count": 13,
+        "largest_sizes": [
+          58,
+          23,
+          6,
+          5,
+          4,
+          2,
+          2,
+          1,
+          1,
+          1
+        ],
+        "largest_members": [
+          [
+            19,
+            49,
+            51,
+            59,
+            65,
+            69,
+            72,
+            79,
+            82,
+            89,
+            102,
+            103,
+            109,
+            113,
+            120,
+            122,
+            139,
+            141,
+            147,
+            154,
+            161,
+            167,
+            172,
+            178,
+            179,
+            182,
+            185,
+            188,
+            219,
+            221,
+            235,
+            245,
+            252,
+            253,
+            261,
+            268,
+            274,
+            287,
+            293,
+            294,
+            300,
+            311,
+            314,
+            324,
+            331,
+            334,
+            335,
+            351,
+            353,
+            358,
+            360,
+            368,
+            375,
+            376,
+            378,
+            379,
+            380,
+            390
+          ],
+          [
+            100,
+            135,
+            145,
+            162,
+            165,
+            176,
+            186,
+            194,
+            225,
+            229,
+            237,
+            244,
+            264,
+            269,
+            278,
+            297,
+            310,
+            313,
+            336,
+            339,
+            341,
+            384,
+            386
+          ],
+          [
+            0,
+            3,
+            50,
+            258,
+            328,
+            371
+          ],
+          [
+            32,
+            34,
+            36,
+            41,
+            64
+          ],
+          [
+            30,
+            56,
+            66,
+            150
+          ]
+        ]
+      },
+      "unresolved_vs_resolved": {
+        "radius_pixels": {
+          "feature": "radius_pixels",
+          "unresolved_median": 71.78381208328716,
+          "resolved_median": 78.87011565088602,
+          "median_difference": -7.086303567598861,
+          "mann_whitney_u": 12795.0,
+          "two_sided_p_value": 0.2835660178873376
+        },
+        "pixels": {
+          "feature": "pixels",
+          "unresolved_median": 166.0,
+          "resolved_median": 119.5,
+          "median_difference": 46.5,
+          "mann_whitney_u": 15457.0,
+          "two_sided_p_value": 0.06783157256497528
+        },
+        "net_counts": {
+          "feature": "net_counts",
+          "unresolved_median": 1688.0303427075,
+          "resolved_median": 1676.0795314695001,
+          "median_difference": 11.950811237999915,
+          "mann_whitney_u": 14883.0,
+          "two_sided_p_value": 0.22980100339665688
+        },
+        "source_fraction": {
+          "feature": "source_fraction",
+          "unresolved_median": 0.9748134505512094,
+          "resolved_median": 0.9790273528897682,
+          "median_difference": -0.004213902338558784,
+          "mann_whitney_u": 13242.0,
+          "two_sided_p_value": 0.5582391577881101
+        },
+        "cells": {
+          "feature": "cells",
+          "unresolved_median": 12.0,
+          "resolved_median": 10.0,
+          "median_difference": 2.0,
+          "mann_whitney_u": 22901.5,
+          "two_sided_p_value": 2.081715672283806e-31
+        },
+        "maximum_dataset_count_fraction": {
+          "feature": "maximum_dataset_count_fraction",
+          "unresolved_median": 0.1864127429713751,
+          "resolved_median": 0.17116094965982098,
+          "median_difference": 0.01525179331155413,
+          "mann_whitney_u": 19509.5,
+          "two_sided_p_value": 4.37077992685718e-10
+        },
+        "temperature_keV": {
+          "feature": "temperature_keV",
+          "unresolved_median": 11.281727060062217,
+          "resolved_median": 15.83096855837682,
+          "median_difference": -4.549241498314604,
+          "mann_whitney_u": 6152.0,
+          "two_sided_p_value": 9.698739217463463e-17
+        },
+        "abundance_solar": {
+          "feature": "abundance_solar",
+          "unresolved_median": 0.0,
+          "resolved_median": 0.14459628914855077,
+          "median_difference": -0.14459628914855077,
+          "mann_whitney_u": 11514.5,
+          "two_sided_p_value": 0.008652626217577496
+        }
+      },
+      "reduced_statistic_correlations": {
+        "radius_pixels": {
+          "spearman_rho": -0.000790453853171881,
+          "p_value": 0.9879758987712539
+        },
+        "pixels": {
+          "spearman_rho": 0.09658355884810335,
+          "p_value": 0.06492866892207552
+        },
+        "net_counts": {
+          "spearman_rho": 0.12374512850229248,
+          "p_value": 0.017865437192953436
+        },
+        "source_fraction": {
+          "spearman_rho": -0.024814180930591442,
+          "p_value": 0.6360903120506392
+        },
+        "cells": {
+          "spearman_rho": 0.5466511477940464,
+          "p_value": 6.618648774991643e-30
+        },
+        "maximum_dataset_count_fraction": {
+          "spearman_rho": 0.296870345726619,
+          "p_value": 6.992436628381801e-09
+        },
+        "temperature_keV": {
+          "spearman_rho": -0.31037123776168596,
+          "p_value": 1.2956271958174716e-09
+        },
+        "abundance_solar": {
+          "spearman_rho": -0.17840415496346476,
+          "p_value": 0.0006059310215803747
+        }
+      }
+    },
+    "ABELL2146": {
+      "regions": 128,
+      "unresolved_regions": 16,
+      "unresolved_exactly_matches_reduced_statistic_above_3": true,
+      "abundance_lower_bound_regions": 52,
+      "abundance_lower_bound_fraction_unresolved": 0.75,
+      "spatial_permutation": {
+        "edges": 366,
+        "observed_same_class_edge_fraction": 0.8743169398907104,
+        "permutation_mean": 0.7794898907103825,
+        "permutation_std": 0.0130830582339693,
+        "z_score": 7.2480797291045915,
+        "one_sided_p_value": 9.999000099990002e-05,
+        "draws": 10000,
+        "seed": 190976
+      },
+      "unresolved_connected_components": {
+        "count": 3,
+        "largest_sizes": [
+          13,
+          2,
+          1
+        ],
+        "largest_members": [
+          [
+            4,
+            9,
+            17,
+            18,
+            21,
+            28,
+            30,
+            32,
+            50,
+            54,
+            63,
+            65,
+            88
+          ],
+          [
+            29,
+            31
+          ],
+          [
+            121
+          ]
+        ]
+      },
+      "unresolved_vs_resolved": {
+        "radius_pixels": {
+          "feature": "radius_pixels",
+          "unresolved_median": 38.22242302596115,
+          "resolved_median": 44.14543667972541,
+          "median_difference": -5.923013653764258,
+          "mann_whitney_u": 745.0,
+          "two_sided_p_value": 0.27821652565419597
+        },
+        "pixels": {
+          "feature": "pixels",
+          "unresolved_median": 76.0,
+          "resolved_median": 168.0,
+          "median_difference": -92.0,
+          "mann_whitney_u": 459.5,
+          "two_sided_p_value": 0.0016812691695518268
+        },
+        "net_counts": {
+          "feature": "net_counts",
+          "unresolved_median": 1639.004799334,
+          "resolved_median": 1670.50044419,
+          "median_difference": -31.495644856000126,
+          "mann_whitney_u": 469.0,
+          "two_sided_p_value": 0.0021200271609299005
+        },
+        "source_fraction": {
+          "feature": "source_fraction",
+          "unresolved_median": 0.9911360540658474,
+          "resolved_median": 0.973200031666719,
+          "median_difference": 0.017936022399128393,
+          "mann_whitney_u": 1494.0,
+          "two_sided_p_value": 1.670491594886793e-05
+        },
+        "cells": {
+          "feature": "cells",
+          "unresolved_median": 10.0,
+          "resolved_median": 10.0,
+          "median_difference": 0.0,
+          "mann_whitney_u": 680.0,
+          "two_sided_p_value": 3.715145858807935e-06
+        },
+        "maximum_dataset_count_fraction": {
+          "feature": "maximum_dataset_count_fraction",
+          "unresolved_median": 0.17870012589237932,
+          "resolved_median": 0.14508910369201514,
+          "median_difference": 0.03361102220036419,
+          "mann_whitney_u": 1729.0,
+          "two_sided_p_value": 1.996853208533935e-09
+        },
+        "temperature_keV": {
+          "feature": "temperature_keV",
+          "unresolved_median": 6.6312151676957605,
+          "resolved_median": 8.521516832895088,
+          "median_difference": -1.8903016651993276,
+          "mann_whitney_u": 520.0,
+          "two_sided_p_value": 0.0068215505473768
+        },
+        "abundance_solar": {
+          "feature": "abundance_solar",
+          "unresolved_median": 0.0,
+          "resolved_median": 0.19067876399871686,
+          "median_difference": -0.19067876399871686,
+          "mann_whitney_u": 555.0,
+          "two_sided_p_value": 0.011089296956021838
+        }
+      },
+      "reduced_statistic_correlations": {
+        "radius_pixels": {
+          "spearman_rho": -0.11071690166636149,
+          "p_value": 0.2134407521788349
+        },
+        "pixels": {
+          "spearman_rho": -0.21518313682176723,
+          "p_value": 0.014716393132922003
+        },
+        "net_counts": {
+          "spearman_rho": -0.1556892052737594,
+          "p_value": 0.07928319901745252
+        },
+        "source_fraction": {
+          "spearman_rho": 0.297284151254349,
+          "p_value": 0.000654950158673271
+        },
+        "cells": {
+          "spearman_rho": -0.213355140592389,
+          "p_value": 0.015603101644782668
+        },
+        "maximum_dataset_count_fraction": {
+          "spearman_rho": 0.3893288774949642,
+          "p_value": 5.570259118894269e-06
+        },
+        "temperature_keV": {
+          "spearman_rho": -0.21684444240981504,
+          "p_value": 0.013948934915648543
+        },
+        "abundance_solar": {
+          "spearman_rho": -0.17714904278883772,
+          "p_value": 0.04545684363299372
+        }
+      }
+    }
+  },
+  "map_metadata": {
+    "BULLET": {
+      "shape": [
+        626,
+        626
+      ],
+      "map_center_pixel": [
+        307.0,
+        337.0
+      ],
+      "pixel_scale_arcsec": 0.984000000000024
+    },
+    "ABELL2146": {
+      "shape": [
+        745,
+        745
+      ],
+      "map_center_pixel": [
+        339.0,
+        379.0
+      ],
+      "pixel_scale_arcsec": 0.984000000000024
+    }
+  },
+  "gates": {
+    "all_494_regions_localized": true,
+    "all_122_unresolved_regions_retained": true,
+    "unresolved_state_exactly_explained_by_sherpa_reduced_statistic_guard": false,
+    "unresolved_regions_are_spatially_clustered_in_both_clusters": true,
+    "i4_i5_lensing_halo_gravity_and_holdout_remain_sealed": true
+  },
+  "interpretation": {
+    "confidence_engine_failure": "Every unresolved interval is caused by Sherpa's reduced-statistic-above-3 safeguard; no distinct confidence exception occurs.",
+    "measurement_model": "Spatial clustering supports a localized spectral-model inadequacy or physical multiphase structure rather than random archive corruption. It does not by itself distinguish multiphase gas from spatially localized cross-observation calibration residuals.",
+    "next_required_test": "Freeze an all-122 leave-one-observation-out leverage audit before changing the plasma model. If no observation or CCD consistently removes the excess statistic, compare one-temperature versus two-temperature or continuous-temperature plasma models using a preregistered complexity penalty."
+  },
+  "region_diagnostics": {
+    "path": "results\\sigma_v19dt_unmerged_likelihood_localization\\region_diagnostics.csv",
+    "sha256": "a6e18b249f689579a9994328fa288cd2113ce2ec2f2e5f5d7f01d8f6b693e630"
+  },
+  "failure_map": {
+    "path": "results\\sigma_v19dt_unmerged_likelihood_localization\\likelihood_failure_maps.png",
+    "sha256": "f4d6d479e352fd038981942695e6c963d9a13bae050d1058c09e752abedeac1d"
+  },
+  "i4_i5_source_only_successor_authorized": false,
+  "thermal_stress_or_baroclinicity_constructed": false,
+  "lensing_halo_action_gravity_or_holdout_payload_opened": false,
+  "gravity_formula_or_parameter_changed": false
+}

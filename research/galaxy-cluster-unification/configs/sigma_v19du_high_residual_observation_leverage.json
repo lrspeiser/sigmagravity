@@ -1,0 +1,79 @@
+{
+  "protocol_version": "SIGMA-V19DU-HIGH-RESIDUAL-OBSERVATION-LEVERAGE-1.0.0",
+  "freeze_state": "frozen_after_v19ds_and_v19dt_before_any_omission_fit",
+  "purpose": "Determine whether the V19DS reduced-statistic-above-3 regions are driven by one Chandra observation or instead require a richer region-level plasma model. Omit every complete observation in turn while retaining the frozen V19DP likelihood and all remaining CCD cells.",
+  "parents": {
+    "v19ds_report": {
+      "path": "results/sigma_v19ds_full_unmerged_regional_joint_likelihood/report.json",
+      "sha256": "0c60ea83892217fadb9a10548e36f57e83055a2b6127403f5c9687a20be1b874"
+    },
+    "v19dr_unified_index": {
+      "path": "results/sigma_v19dr_full_ccd7_background_archive_recovery/unified_product_index.csv",
+      "sha256": "97faecdca6f8d72063d69bb3e777d2853f1897d81bf8a2a3f2c25888c6aabc78"
+    },
+    "v19dp_config": {
+      "path": "configs/sigma_v19dp_unmerged_regional_joint_likelihood_preflight.json",
+      "sha256": "5f5798d3c7ec77578958a2469d291556ed251d1515c09c792d8e9e9705ce0f00"
+    },
+    "v19dp_runner": {
+      "path": "scripts/run_sigma_v19dp_unmerged_regional_joint_likelihood_preflight.py",
+      "sha256": "4a8d297a1aa51997f6e4d43fa15a4e238fba7aeed8d8aaca608c45da1ecd4b34"
+    }
+  },
+  "selection": {
+    "minimum_reduced_statistic_exclusive": 3.0,
+    "selection_uses_only_terminal_v19ds_measurement_adequacy": true,
+    "expected": {
+      "regions_total": 127,
+      "observation_omission_fits_total": 1250,
+      "clusters": {
+        "BULLET": {"regions": 111, "observation_omission_fits": 1098},
+        "ABELL2146": {"regions": 16, "observation_omission_fits": 152}
+      }
+    }
+  },
+  "clusters": {
+    "BULLET": {"redshift": 0.296, "galactic_nh_cm2": 4.38e20},
+    "ABELL2146": {"redshift": 0.2323, "galactic_nh_cm2": 2.62e20}
+  },
+  "model": {
+    "expression": "observation_response_i[xstbabs_i * shared_xsapec_region]",
+    "fit_energy_keV": [0.5, 7.0],
+    "statistic": "chi2xspecvar",
+    "minimum_grouped_source_counts": 25,
+    "abundance_table": "aspl (Asplund et al. 2009)",
+    "temperature_keV": {"initial": 8.0, "minimum": 1.0, "maximum": 30.0},
+    "abundance_solar": {"initial": 0.3, "minimum": 0.0, "maximum": 2.0},
+    "normalization": {
+      "minimum": 1e-10,
+      "maximum": 1.0,
+      "initial_rule": "median over observations of max(1e-8, 0.01 times grouped 0.5-7 keV source count rate)"
+    },
+    "starts": [
+      {"temperature_keV": 5.0, "abundance_solar": 0.3, "norm_multiplier": 1.0},
+      {"temperature_keV": 10.0, "abundance_solar": 0.5, "norm_multiplier": 0.5},
+      {"temperature_keV": 18.0, "abundance_solar": 0.2, "norm_multiplier": 2.0}
+    ],
+    "shared_across_observations": ["temperature", "abundance", "normalization"],
+    "observation_specific_free_parameters": 0
+  },
+  "decision_gates": {
+    "rescue_maximum_reduced_statistic": 1.5,
+    "large_improvement_maximum_ratio": 0.5,
+    "maximum_region_rescue_fraction_for_model_dominated": 0.25,
+    "consistent_observation_best_omission_fraction": 0.50,
+    "consistent_observation_median_maximum_ratio": 0.67
+  },
+  "implementation": {
+    "runner": "scripts/run_sigma_v19du_high_residual_observation_leverage.py",
+    "runner_sha256": "dbdcebe31d900047d7b1f2339af0795af4126fb7ad6c11c0ed41ce8d50915042",
+    "maximum_concurrent_regions": 4,
+    "output": "results/sigma_v19du_high_residual_observation_leverage"
+  },
+  "failure_rule": "Retain every omission fit and failure. Do not omit a CCD without its full observation, retry or drop a region, change a spectrum, response, background, band, grouping, plasma model, start, parameter, statistic or decision threshold, construct I4/I5, or open a lensing, halo, gravity, validation or holdout payload.",
+  "claim_boundary": [
+    "V19DU is post-outcome measurement diagnosis and cannot validate a thermodynamic source or Sigma Gravity.",
+    "Observation omission is diagnostic; no omitted result replaces the full-data V19DS fit.",
+    "No I4/I5, lensing, halo, action, galaxy, gravity, validation or holdout payload is opened."
+  ]
+}
