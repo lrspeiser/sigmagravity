@@ -88,7 +88,7 @@
   ],
   "implementation": {
     "runner": "scripts/run_sigma_v19dq_ccd7_background_recovery_preflight.py",
-    "runner_sha256": "b37576bae1565399911b7494fcf283b14526a077e3cdc4598d356d33d0db3f14",
+    "runner_sha256": "2f1b290a78834742609e953c33915701e5ce23d8638cb71e364c401152ef3a53",
     "scratch_root": "/home/henry/sigma-v19dq-ccd7-background/v100",
     "output": "results/sigma_v19dq_ccd7_background_recovery_preflight"
   },
@@ -102,7 +102,7 @@
   "failure_rule": "Retain and report the terminal result. Do not alter the exact bin mask, source event selection, BKGSCALn, response settings, shared spectral parameters, statistic, fit band, grouping, thresholds or parent products after seeing the corrected fit. Do not add a per-observation normalization. A failure does not authorize dropping CCD7; diagnose the registered event-coordinate transformation or adopt a separately preregistered local/stowed-background model.",
   "claim_boundary": [
     "This is a two-region calibration and joint-likelihood preflight, not the 494-region production analysis.",
-    "A pass establishes that using the real pre-reprojection CCD7 blank sky repairs the registered spectral boundary and authorizes recovery of all 254 affected CCD7 background products; it does not directly authorize the 494-region likelihood or validate a thermodynamic Sigma source or gravity theory.",
+    "A pass establishes that using the real pre-reprojection CCD7 blank sky repairs the registered spectral boundary and authorizes recovery of all 256 zero-background CCD7 products (254 exhausted base cells plus two additional unified-archive cells); it does not directly authorize the 494-region likelihood or validate a thermodynamic Sigma source or gravity theory.",
     "No I4 thermodynamic-gradient stress or I5 baroclinicity is constructed.",
     "No lensing, halo, action, galaxy, gravity, validation or holdout payload is opened and no gravity formula or parameter is changed."
   ]

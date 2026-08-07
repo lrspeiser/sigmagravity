@@ -25,7 +25,7 @@ failure to two CCD7 spectra. The astrometry-corrected blank sky contained more
 than 1.35 million CCD7 events per observation before the common-grid
 reprojection discarded all of them. Restoring the real background lowered the
 Abell statistic to 1.0312 with no new fit parameter; every registered gate now
-passes. The next source stage is recovery and audit of all 254 affected CCD7
+passes. The next source stage is recovery and audit of all 256 zero-background CCD7
 background products. The 494-region likelihood and I4/I5 remain sealed until
 that archive passes.
 

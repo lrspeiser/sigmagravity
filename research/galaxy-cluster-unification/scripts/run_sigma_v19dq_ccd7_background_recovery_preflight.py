@@ -252,7 +252,7 @@ def run(config_path: Path, output: Path, scratch: Path) -> dict[str, Any]:
         "full_ccd7_background_archive_recovery_successor_authorized": passed,
         "full_494_region_joint_likelihood_successor_authorized": False,
         "next_required_stage": (
-            "rebuild_and_audit_all_254_affected_ccd7_background_products"
+            "rebuild_and_audit_all_256_zero_background_ccd7_products"
             if passed
             else "diagnose_registered_ccd7_background_recovery_failure"
         ),

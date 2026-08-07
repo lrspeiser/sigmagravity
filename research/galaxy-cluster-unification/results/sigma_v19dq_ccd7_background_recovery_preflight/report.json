@@ -1,8 +1,8 @@
 {
   "protocol_version": "SIGMA-V19DQ-CCD7-BACKGROUND-RECOVERY-1.0.0",
-  "generated_utc": "2026-08-07T04:11:05.083202+00:00",
-  "config_sha256": "5d3fcb5c87577a6bd5dd02e76e5673a59f8eb97ae9a375f2e9dd5a3bac43dd10",
-  "runner_sha256": "b37576bae1565399911b7494fcf283b14526a077e3cdc4598d356d33d0db3f14",
+  "generated_utc": "2026-08-07T04:23:23.052784+00:00",
+  "config_sha256": "192d79f51d9e88b1a90b7fe541d5fa503a1221396f34951a7c52c43cd08d0ef9",
+  "runner_sha256": "2f1b290a78834742609e953c33915701e5ce23d8638cb71e364c401152ef3a53",
   "status": "ccd7_real_background_recovery_preflight_passed",
   "parent_v19dp_status": "unmerged_regional_joint_likelihood_preflight_failed",
   "background_boundary": [
@@ -1719,14 +1719,14 @@
   "aggregate_pass": true,
   "full_ccd7_background_archive_recovery_successor_authorized": true,
   "full_494_region_joint_likelihood_successor_authorized": false,
-  "next_required_stage": "rebuild_and_audit_all_254_affected_ccd7_background_products",
+  "next_required_stage": "rebuild_and_audit_all_256_zero_background_ccd7_products",
   "all_494_regions_run": false,
   "thermal_stress_or_baroclinicity_constructed": false,
   "lensing_halo_action_gravity_or_holdout_payload_opened": false,
   "gravity_formula_or_parameter_changed": false,
   "claim_boundary": [
     "This is a two-region calibration and joint-likelihood preflight, not the 494-region production analysis.",
-    "A pass establishes that using the real pre-reprojection CCD7 blank sky repairs the registered spectral boundary and authorizes recovery of all 254 affected CCD7 background products; it does not directly authorize the 494-region likelihood or validate a thermodynamic Sigma source or gravity theory.",
+    "A pass establishes that using the real pre-reprojection CCD7 blank sky repairs the registered spectral boundary and authorizes recovery of all 256 zero-background CCD7 products (254 exhausted base cells plus two additional unified-archive cells); it does not directly authorize the 494-region likelihood or validate a thermodynamic Sigma source or gravity theory.",
     "No I4 thermodynamic-gradient stress or I5 baroclinicity is constructed.",
     "No lensing, halo, action, galaxy, gravity, validation or holdout payload is opened and no gravity formula or parameter is changed."
   ]

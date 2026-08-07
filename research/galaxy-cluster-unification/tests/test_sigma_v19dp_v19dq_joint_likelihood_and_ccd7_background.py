@@ -115,7 +115,7 @@ def test_v19dq_authorizes_only_the_full_ccd7_recovery_stage() -> None:
     assert report["full_ccd7_background_archive_recovery_successor_authorized"] is True
     assert report["full_494_region_joint_likelihood_successor_authorized"] is False
     assert report["next_required_stage"] == (
-        "rebuild_and_audit_all_254_affected_ccd7_background_products"
+        "rebuild_and_audit_all_256_zero_background_ccd7_products"
     )
     assert report["all_494_regions_run"] is False
     assert report["thermal_stress_or_baroclinicity_constructed"] is False

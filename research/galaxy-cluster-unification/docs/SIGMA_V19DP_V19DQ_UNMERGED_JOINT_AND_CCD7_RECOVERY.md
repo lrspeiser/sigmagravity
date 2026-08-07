@@ -1,7 +1,7 @@
 # Sigma V19DP--V19DQ unmerged joint likelihood and CCD7 recovery
 
 Status: terminal registered preflight completed 2026-08-06. The real CCD7
-blank-sky recovery passes. It authorizes recovery of all 254 affected CCD7
+blank-sky recovery passes. It authorizes recovery of all 256 zero-background CCD7
 background products, not the 494-region likelihood itself.
 
 ## Question
@@ -86,8 +86,9 @@ inconsistency. It is a calibration result, not a Sigma-gravity result.
 
 ## Exact next stage
 
-The unified response archive still contains zero-background PHAs for 254 Abell
-2146 CCD7 cells. The next registered stage must rebuild all 254 using the real
+The unified response archive still contains zero-background PHAs for 256 Abell
+2146 CCD7 cells: the 254 that exhausted the base run plus two additional cells
+that entered the unified archive. The next registered stage must rebuild all 256 using the real
 pre-reprojection backgrounds and audit exact event counts, PHA channels,
 particle scaling, response links, hashes and archive completeness. Only after
 that archive passes may the 494-region unmerged likelihood be run. I4

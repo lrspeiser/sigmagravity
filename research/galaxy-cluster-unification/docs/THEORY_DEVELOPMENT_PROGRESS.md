@@ -17,8 +17,9 @@ audits. Abell then passes at `1.031211`, with temperature `10.1729` keV and all
 leave-one-observation-out reduced statistics below `1.12`; Bullet is unchanged.
 No parameter or threshold changed.
 
-This authorizes rebuilding and auditing all 254 affected CCD7 background
-products. It does not yet authorize the 494-region likelihood, I4/I5, lensing,
+This authorizes rebuilding and auditing all 256 zero-background CCD7 products:
+the 254 exhausted base cells plus two additional unified-archive cells. It does
+not yet authorize the 494-region likelihood, I4/I5, lensing,
 gravity, validation or holdout access. See
 [`SIGMA_V19DP_V19DQ_UNMERGED_JOINT_AND_CCD7_RECOVERY.md`](SIGMA_V19DP_V19DQ_UNMERGED_JOINT_AND_CCD7_RECOVERY.md).
 
