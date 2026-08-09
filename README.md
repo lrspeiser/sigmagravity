@@ -424,6 +424,12 @@ The data and code supporting this study are openly available at https://github.c
 
 ---
 
+## Gravity Theory Compiler
+
+The repository now includes the reproducible [Gravity Theory Compiler](research/sigma-theory-compiler/README.md): a bounded covariant-action generator with Cadabra tensor controls, ADM/Dirac analysis, principal-symbol and Hamiltonian gates, GPU-oriented enumeration, observation seals, and hash-bound evidence artifacts. Its current production ledger passes 95/95 formal controls. The first 12 fixed-coefficient linear-`X` quartic Horndeski candidates have exact all-direction local strong-hyperbolicity certificates plus forward-invariant homogeneous ADM/Dirac/quadratic-Hamiltonian branches; they are not observationally promoted, because inhomogeneous PDE trapping and nonlinear global energy remain open.
+
+---
+
 ## Acknowledgments
 
 We thank Emmanuel N. Saridakis (National Observatory of Athens) for detailed feedback on the theoretical framework, particularly regarding field equations and consistency constraints in teleparallel gravity. We thank Rafael Ferraro (IAFE, CONICET–Universidad de Buenos Aires) for discussions on f(T) gravity and dimensional constants. We thank Tiberiu Harko (Babeș-Bolyai University) for incisive feedback on theoretical foundations, particularly regarding auxiliary fields and covariant formulation of acceleration-dependent couplings.
