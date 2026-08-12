@@ -1,0 +1,24 @@
+{
+  "checkpoint_content_sha256": "39603a9a8d640f2fb0b6b69e8beb79550bdc0acac28d777822f02a66700b8d82",
+  "checkpoint_file_sha256": "995d034fce7132ed649de70a4b74c78744ae0adc561e0409f7bcf3ec70f64e26",
+  "claims": {
+    "B7_closed": false,
+    "CK1_closed": false,
+    "CK3_closed": false,
+    "TC2_closed": false,
+    "full_tube_Sylvester_identity": false,
+    "global_H7_closed": false,
+    "lifespan_proved": false
+  },
+  "content_sha256": "f6cdd4d4f04ea0687f06fd637ec0e8a5856115df7a3de5fbb47ec4e0ac06e043",
+  "current_artifact_content_sha256": "a218264eed0930d00f632876a258f6be14de68bb97584871f2361ca27aacc6fe",
+  "current_artifact_file_sha256": "653c60e600ffdb095398218b27f1eb0fe41a33a52c499ddf00ccc3705b8c7264",
+  "current_artifact_path": "chunks/obligation-offset-000224.json",
+  "decision": "stopped",
+  "next_obligation_offset": 245,
+  "permanently_stopped": true,
+  "prior_resume_sha256": "7c309eec9d225f4c0813f0696e9806d7e5c2c9802528ade40d1d92c5f13d4c56",
+  "reason": "exact_obstruction",
+  "remaining_obligations": 2816,
+  "schema_version": "sigma-quartic-tc2-fourth-jet-obligation-status-1.0"
+}

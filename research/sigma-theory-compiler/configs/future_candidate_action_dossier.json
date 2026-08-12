@@ -1,0 +1,38 @@
+{
+  "schema_version": "sigma-future-candidate-action-dossier-config-1.0",
+  "campaign_id": "future-candidate-action-dossier-20260811",
+  "source_bindings": {
+    "future_campaign_config": {
+      "path": "configs/scalable_future_parameter_chunk_campaign.json",
+      "file_sha256": "a10d2dc9f82577503d2be968282fcaed50fcd353e1b12b6d14d34d7d4ed55734"
+    },
+    "preflight": {
+      "path": "runs/engine/reviewed-future-parameter-formal-preflight-001.json",
+      "file_sha256": "0601b760291903e05e9cba372e5e5b55c2e464f0527825b5dcd35365e21a0137",
+      "content_sha256": "0ac4681e1d5d5d4421b19bde6624b79e4ba02480dc1a52412514a70e610499d4"
+    },
+    "aether_followup": {
+      "path": "runs/engine/future-aether-characteristic-shell-hcore-gate.json",
+      "file_sha256": "bde4df84bb21fa37a1e82f644016fd922d2fb44948d8fbdef01dee1247714368",
+      "content_sha256": "d186d6a4d77762ab2fa2d6cb0f602f5a8aec65a550d496b21a890c157bb660fb"
+    },
+    "g3_followup": {
+      "path": "runs/engine/future-g3-flat-radial-matched-constraints-asymptotic-no-go-campaign.json",
+      "file_sha256": "d3a10c1820acf026142844f391b0e9ecfee32646383816261fb4a53a61213189",
+      "content_sha256": "9eeb346ddf1f57a65b5b0f352d2373bd1bf5438fd049ef33cc3264f1e61326aa"
+    }
+  },
+  "budget": {
+    "maximum_candidates": 19,
+    "maximum_output_bytes": 2097152,
+    "maximum_paid_llm_spend_usd": 0.0
+  },
+  "data_eligibility": {
+    "dark_matter_or_halo_inputs": false,
+    "observational_data_opened": false,
+    "paid_llm_calls": false,
+    "redshift_distance_inputs": false
+  },
+  "observational_authorization": false,
+  "external_paid_llm_calls": false
+}

@@ -1,0 +1,1375 @@
+{
+  "schema_version": "sigma-unified-engine-status-config-1.0",
+  "watchdog_database": "runs/campaigns/campaign-v1-live.sqlite",
+  "watchdog_stale_after_seconds": 1800,
+  "mixed_third_jet_supervisor_status": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-supervisor/supervisor-status.json",
+  "unified_live_service_checkpoint": "runs/engine/unified-live-dashboard-safety-service/checkpoint.json",
+  "unified_live_service_config": "configs/unified_engine_live_service_safety.json",
+  "deferred_gpu_handoff_checkpoint": "runs/engine/kastner-schlatter-set-indexed-gpu-scheduler-runtime/deferred-handoff-service/handoff-service-checkpoint.json",
+  "deferred_gpu_handoff_config": "configs/kastner_schlatter_deferred_gpu_handoff_service.json",
+  "sources": [
+    {
+      "label": "billion_streaming",
+      "path": "runs/engine/rust-streaming-billion-status.json",
+      "file_sha256": "40850b92bef64dc49a34caaddcf16f38ddfa08660df89b7cbf0416a110e0902b",
+      "content_sha256": "83c342edadb342e0b34ffaf5768166f927a8c5d11f5553ae662f932f80109b52"
+    },
+    {
+      "label": "cpu_real_formula_overlap_benchmark",
+      "path": "runs/benchmarks/cpu-real-formula-overlap-15-16.json",
+      "file_sha256": "385b15fa72159e4f808f8aedd9913f6e554f2d36751b29948c5bb34e08b16582",
+      "content_sha256": "7f341aa2f54ed0e060a93d5ce89a77faad6558f7971dea710cc324c313b94227"
+    },
+    {
+      "label": "formal_controls_portable_report",
+      "path": "runs/formal-controls-v1/formal-controls-portable.json",
+      "file_sha256": "1a121c66365e70aed1ee9b5e5803829b824ca57c4671ee61b6fa6bad1a1dd8e1",
+      "content_sha256": "cbf2f085198ac29afce473ca39ac7f39681d5ec6b781ef67cfed9313c0a8a420"
+    },
+    {
+      "label": "continuous_scientific_pipeline_admission",
+      "path": "runs/engine/continuous-scientific-pipeline-admission-readiness.json",
+      "file_sha256": "0e740fb96f86d4fce0813225716e5c9734f0e83372a5e748a4bb2c1a3fff372a",
+      "content_sha256": "eeccd079e35ac540213c9dcac96d307fbc89cf597062c2bf8498278c5dd3f6a9"
+    },
+    {
+      "label": "continuous_scientific_pipeline_service_readiness",
+      "path": "runs/engine/continuous-scientific-pipeline-service-readiness.json",
+      "file_sha256": "d0e878af20a750d33780b0e0d87c2020269a39808db6b24f6debb33043d9fa30",
+      "content_sha256": "f16fefad7a5ccb47f52a8da52afbfff1655cf57d52fe6cbb9103746eea773b7f"
+    },
+    {
+      "label": "continuous_scientific_pipeline_service_result",
+      "path": "runs/engine/continuous-scientific-pipeline-service-result.json",
+      "file_sha256": "316c582d3e9ddbb29891d75c227b0cadc80802f42608dc0fefe329e9dd2924a0",
+      "content_sha256": "265110725748d885e55be8153b7cf744c8b97f15d839b70ab77945eba16f0c33"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_genesis",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-genesis.json",
+      "file_sha256": "0d5bca0fca2dc6b4cf3a191dd5ece7157f1934a67632e7a13514f65c9253bd56",
+      "content_sha256": "8b74fea57c2a09383295f6adc8b8caff420e0f07e4c14bb9361aa6a23be9ca54"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_result",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-result.json",
+      "file_sha256": "0db57bec3577f8b99b845e522316d0a721e9f9bdc79d333f2897756df709e781",
+      "content_sha256": "bd84fc36bea021e8cc068bf0e737b5d1654e272bce14046c1c3e511978b20044"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_candidate_followup",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-candidate-followup/result.json",
+      "file_sha256": "d8c4d367e635ebe5a31c8b0eb722be56aac61a428e6c96c83b123f8d5760869c",
+      "content_sha256": "f6109d1532f46fd4ff04b89694d98da4a23e446b8f90ffb0d91ac548002a05f9"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_survivor_pagination",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-survivor-pagination/result.json",
+      "file_sha256": "2e1d623e9d3ccc9d8211512a5caeba67445f6526ad453d0eb8a98865dcfe0fa2",
+      "content_sha256": "f2406cf9bba71e4ed15ba4fa3e80e0ba009afdd950b2445fb0dbc3784476cd6a"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_formal_receipt_worker_partition_0001",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-formal-receipt-worker-partition-0001/result.json",
+      "file_sha256": "29c2ef3f66281162ab2db101830ff56d19581a3ce19da8ab280135e14bdfe72a",
+      "content_sha256": "172e4e922d8689b5d0afcaf80d4cf93cc01c2e0d4faa8d9ebed1134cdf7f93ae"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_cumulative_formal_receipt_worker",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-cumulative-formal-receipt-worker/result.json",
+      "file_sha256": "4c502662558421f03965be01a083ba4dbde8b8df68f88d2e1def10a2a8172efe",
+      "content_sha256": "0777f2eadedcaa76e53c1e1a85e466bf4242bc3a4903b0fc9a1ac76093e4a32b"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_cumulative_formal_partition_0003",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-cumulative-formal-partition-0003/result.json",
+      "file_sha256": "cdb30e56ea3b44f04bb2b0ec3f43dead57bba2cba07147e440df0196f912b5a4",
+      "content_sha256": "057ba51349337f4335ea4e4f15383e86b21af8d2a57fd0af0e177451ab211351"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_cumulative_formal_partition_0004",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-cumulative-formal-partition-0004/result.json",
+      "file_sha256": "9f1444d4852273b6e63672f19351d76cd9b08c1b5093cdc8acc4162899180679",
+      "content_sha256": "aa853ceedac0359904a5e756e43b0c28163625c4938c5bf88095f794bf3fee7a"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_cumulative_formal_partition_0005",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-cumulative-formal-partition-0005/result.json",
+      "file_sha256": "53bcff4d78db8eed6dd1489acec794a39731507cffc40f219a7e417ef646319b",
+      "content_sha256": "bf2f8c7b20053109750d6f703daa3e8d998a0fdc5c360b850e72f18ddcd00b41"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_cumulative_formal_partition_0006",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-cumulative-formal-partition-0006/result.json",
+      "file_sha256": "32d4e494cdbad2bd1ee894faf82ab1effc59db113251f1e2ac0f8c1a3d08bc35",
+      "content_sha256": "763b4f909520e231d7abc50eda63e69e17a1fe3481ef42c4c2d8ce1abc1b2e2a"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_cumulative_formal_partition_0007",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-cumulative-formal-partition-0007/result.json",
+      "file_sha256": "7fce1ee021f694a19c2afc5300e6fb6e8f7a68d4daa9700275cec44cbb57f403",
+      "content_sha256": "8aae17e2a0fc13e645b6a63df9b8ccbd3d0cff6a03103ed3fed3f7a7eb63f069"
+    },
+    {
+      "label": "continuous_scientific_pipeline_epoch_003_formal_receipt_batch_0001",
+      "path": "runs/engine/continuous-scientific-pipeline-epoch-003-formal-receipt-batch-0001/result.json",
+      "file_sha256": "2a5efdd8d0a27cde333f32c562ad9f5d65915731d637b09690dfcac53235fcd9",
+      "content_sha256": "1da334a6d14944f9cdf9a5cdacf55480c5440dbd9ae970825f232399785c782d"
+    },
+    {
+      "label": "promotion_overlay",
+      "path": "runs/engine/composite-promotion-overlay-production-status.json",
+      "file_sha256": "1b2a9ec8d551a705b674cafbb6ee24e7d2165fe8369885526cd18f9a72e3927c",
+      "content_sha256": "018447a6a09a3526158a07bd073d8af3209e782b4805f65fd2009d0f3d9d1c51"
+    },
+    {
+      "label": "grammar_parameter_cells",
+      "path": "runs/engine/grammar-v3-parameter-cell-execution-status.json",
+      "file_sha256": "76098b4a4c1108b2408039adaaaefea717ff35ec6775314ddaa4aa93ef53cede",
+      "content_sha256": "c3aa264a7cbd7afbdbba1b32527f370e3c9ddd5b53c9cd220d7572b12959e593"
+    },
+    {
+      "label": "grammar_parameter_cell_expansion_service",
+      "path": "runs/engine/grammar-v3-parameter-cell-expansion-service-status.json",
+      "file_sha256": "f0d70659c7e208164365ae081627c8f43f08c25225ec085b7bc8476ed0cc8cab",
+      "content_sha256": "ea209731b3645d98510abd4c27a77b26eb846842778869789055a51c4cb8574c"
+    },
+    {
+      "label": "grammar_v3_seed_manifest",
+      "path": "runs/engine/covariant-grammar-v3-seed-manifest.json",
+      "file_sha256": "8c9a2454a71b9a6deb32f12c875a4d8cad8a1da5d78d7ded09d1798641b7d290",
+      "content_sha256": "e28ad576a68648f11892a3ff1fff5b7e18057f1ba0b27c89d538499e46de171b"
+    },
+    {
+      "label": "grammar_parameter_cell_manifest",
+      "path": "runs/engine/grammar-v3-parameter-cell-manifest.json",
+      "file_sha256": "dacbee621057d804ffa7e8b43ba99ea0efe598ca1ec68f549f8ab8b71af14700",
+      "content_sha256": "d25af1508b44e5c975c1044d75d1f302e8e63c8eb4f008c353ed145fb33b99e8"
+    },
+    {
+      "label": "grammar_parameter_cell_compilation",
+      "path": "runs/engine/grammar-v3-parameter-cell-compilation-campaign.json",
+      "file_sha256": "5d235d1946dbd5153013eb34362ed0289a436a050c9b34f75b126e1cdcc09d80",
+      "content_sha256": "53062e9e1296bfffb6834c36562462688946121db4ce1aff0e6e9d4e1389ac92"
+    },
+    {
+      "label": "generated_candidate_formal_export",
+      "path": "runs/engine/generated-candidate-formal-export.json",
+      "file_sha256": "3c3cb99a5d1893ed5b2530c8698fd88340ef88b8d0a88b76c147f693e4df3e21",
+      "content_sha256": "6f10148b0bde5f89d0f96b3e6632790a0e9e72ea9318eced1947bf153a605b86"
+    },
+    {
+      "label": "generated_candidate_metric_variation_specialization",
+      "path": "runs/engine/generated-candidate-metric-variation-execution.json",
+      "file_sha256": "8adcfbd3846eb60c55c837f972ebe82507d91def2224777f65c3cda69d2afb4e",
+      "content_sha256": "bbd5ec183d7710141959361b555a218f7702c095023c06b158d35246569184d8"
+    },
+    {
+      "label": "generated_candidate_formula_gpu_stress",
+      "path": "runs/engine/generated-candidate-formula-gpu-stress-campaign.json",
+      "file_sha256": "790a2b2cded482a4e3a564cfe7b97784e1f0955f3c5a2fc9a19d9a4a1fd8d779",
+      "content_sha256": "2b86cb969e777999a104e1ae58020015056208a0db90b58c0a25b233ca062f65"
+    },
+    {
+      "label": "kastner_schlatter_transactional_gravity_intake",
+      "path": "runs/engine/kastner-schlatter-transactional-gravity-intake.json",
+      "file_sha256": "4c142f202cc30a39ad62039ae01355b91e9264260ec0ec4fd02f45a3a16f82e2",
+      "content_sha256": "560caa71caacd5172ff170d6619f77c99b878c019431c5a1a82982db50117c37"
+    },
+    {
+      "label": "kastner_schlatter_equation_graph_admission",
+      "path": "runs/engine/kastner-schlatter-equation-graph-admission.json",
+      "file_sha256": "37b62205bcbcb95a35dcb2398ad512974a7abefd2164bb31b67eec83df4f5079",
+      "content_sha256": "c6d16e235b25632488ded7fe49eac227505914842b0d4d937cee40ef75754e74"
+    },
+    {
+      "label": "kastner_schlatter_cuda_consequence_campaign",
+      "path": "runs/engine/kastner-schlatter-cuda-consequence-campaign.json",
+      "file_sha256": "b674a0b32d8671cd99f9cf7cabce0723126aa422c1e2fe6fbe781ec1ac6080b9",
+      "content_sha256": "bd0c8411bab79ca66d9f7a90dd0901bf1167a53a6ed2758187a4877215cf5e7f"
+    },
+    {
+      "label": "kastner_schlatter_observational_readiness_contract",
+      "path": "runs/engine/kastner-schlatter-observational-readiness-contract.json",
+      "file_sha256": "96da5e254a97fae39a9e2b036dcc80ae8c8af7fc0bbfcd6cd35241e3008dea35",
+      "content_sha256": "b71e0867bd0a561f05ebe32f3fc2f14fd11e0c97356b870910a14845c2a573ab"
+    },
+    {
+      "label": "kastner_schlatter_cuda_falsification_design",
+      "path": "runs/engine/kastner-schlatter-cuda-falsification-design.json",
+      "file_sha256": "ac4ffc30b5b4db8846fed8f1a8c4d2831fed331df466719409165164a720db31",
+      "content_sha256": "7bbef5b405c73e883a5ecdeb6c817218c13a384570af7cb8d3352ee527480b84"
+    },
+    {
+      "label": "kastner_schlatter_candidate_action_completion",
+      "path": "runs/engine/kastner-schlatter-candidate-action-completion.json",
+      "file_sha256": "95e5e36c5bf96afe9e453a290728721c7d7f06dac4596df1ff0f134b6c83607e",
+      "content_sha256": "a83e15679bd11b5c7bb85b2e207e54f82d302f97f0ce6f08f99cd225de739a4c"
+    },
+    {
+      "label": "kastner_schlatter_action_equivalence_audit",
+      "path": "runs/engine/kastner-schlatter-action-equivalence-audit.json",
+      "file_sha256": "23ee5606a8c719b938644179b2983ee848fbfaacecfa5214a44bc2a3beb13d74",
+      "content_sha256": "a7efb71a98ab3241cd52163797b8c3e0f3fe2e713d20d20534e25e59d1468df9"
+    },
+    {
+      "label": "kastner_schlatter_candidate_action_formal_admission",
+      "path": "runs/engine/kastner-schlatter-candidate-action-formal-admission.json",
+      "file_sha256": "04d6660a03fe6416b442f2b26e15ed14deec060b1d8aa2effde3f4ac89eef56c",
+      "content_sha256": "2c0804f957c2490a74079a62fbd2d0a3d1302df5eb145402dd5f906083f0bf50"
+    },
+    {
+      "label": "kastner_schlatter_de_sitter_energy_prerequisite",
+      "path": "runs/engine/kastner-schlatter-de-sitter-energy-prerequisite.json",
+      "file_sha256": "f61e9521a84e0013ddb75386aacc65ee985fcbd39b4940c17c4e9d055678518d",
+      "content_sha256": "0bca9c6a9678165a0021c82edaf93b42e7e4645d9982c673168f00fb20956400"
+    },
+    {
+      "label": "kastner_schlatter_poisson_action_compatibility",
+      "path": "runs/engine/kastner-schlatter-poisson-action-compatibility.json",
+      "file_sha256": "cb0085e9086194dca0df4a48c74f0930911ab14abaf02028f42217a1a38da8f2",
+      "content_sha256": "611fe2f52994c4dd75cb49abd99e55f6ddcb8a89368cbd8d97b5f63ab428ba75"
+    },
+    {
+      "label": "kastner_schlatter_positive_intensity_preservation",
+      "path": "runs/engine/kastner-schlatter-positive-intensity-preservation-gate.json",
+      "file_sha256": "52d2a13010535c18764fbc66758185a8f7311e3f1dcb6ce87ffcc1dca5c622cf",
+      "content_sha256": "bb916000b6e687f2788ad49fd5ed69cd80d2ec8110eec79f2eb250aca681a3a7"
+    },
+    {
+      "label": "kastner_schlatter_positive_reparameterization",
+      "path": "runs/engine/kastner-schlatter-positive-reparameterization-gate.json",
+      "file_sha256": "19e4c6d83772a0be18a7711dcc8592b258a5b6b309a91ccb70ba054bf41c11f2",
+      "content_sha256": "2bcd7428b1c84df614ade4011a417da5237ddeffb461c52138d980227c97bd2c"
+    },
+    {
+      "label": "kastner_schlatter_covariant_point_process_measure",
+      "path": "runs/engine/kastner-schlatter-covariant-point-process-measure-gate.json",
+      "file_sha256": "d2fa13e86cfb56111933dba13e089222374c89cc7fba3476d7bf90d83909a763",
+      "content_sha256": "c38dc067d20346346c006d666bfeb8c09bbf8ab5c118c736652cddaf3ce2098b"
+    },
+    {
+      "label": "kastner_schlatter_poisson_selector_contract",
+      "path": "runs/engine/kastner-schlatter-poisson-selector-contract-gate.json",
+      "file_sha256": "6bb9e434145ada0013782bb23ce74dc434cd7fa453f7ee26e8d9898788507725",
+      "content_sha256": "22185115c60260aa9a27bd05ae6d76299e8ca05b4d64ad7761c3264a4ede74cb"
+    },
+    {
+      "label": "kastner_schlatter_conditional_poisson_kernel_completion",
+      "path": "runs/engine/kastner-schlatter-conditional-poisson-kernel-completion-gate.json",
+      "file_sha256": "d989b9021e4f05bd938aa37530ee757ac7e89a45c135a9ecf8c6dfb4ffca4103",
+      "content_sha256": "141353d3beabef07b92867fa17e801d2d3018653cce694e2eb748ae5fd1a759b"
+    },
+    {
+      "label": "kastner_schlatter_actualization_history_map_audit",
+      "path": "runs/engine/kastner-schlatter-actualization-history-map-audit.json",
+      "file_sha256": "6347b4d9da5cebcbe09579ab15ffa66b6232de8f85691412d9828e8be0402a34",
+      "content_sha256": "630c184372529bf1e24a7b2404a142096972bdd88e040ded00faee36a228dcd9"
+    },
+    {
+      "label": "kastner_schlatter_qed_actualization_poisson_derivation",
+      "path": "runs/engine/kastner-schlatter-qed-actualization-poisson-derivation-audit.json",
+      "file_sha256": "b7891a450b43abc913c1d360c5f38edb117925a39939c629578c358f5931b92b",
+      "content_sha256": "cec941a0455608f437c2fb8a79fee42dec6d614b9a8f23ef327300ea4d72e024"
+    },
+    {
+      "label": "kastner_schlatter_deterministic_compensator_admission",
+      "path": "runs/engine/kastner-schlatter-deterministic-compensator-admission-gate.json",
+      "file_sha256": "be4de100f32485693df42c26fb95798b6519c6545c2b5672b81833f3a0bfd26f",
+      "content_sha256": "40ee8fc7d6c1f2492edc19edaa7c9dd794b62d37464b26f0d72058ff4eecdaba"
+    },
+    {
+      "label": "kastner_schlatter_canonical_probability_space",
+      "path": "runs/engine/kastner-schlatter-canonical-probability-space-gate.json",
+      "file_sha256": "4fe00f9bb9bb2155631c1e73c60fb713b9353ce53ac3501480bd79efb2df47db",
+      "content_sha256": "3e25957c809756a2c5badff02cf0f84ec246e2083e997d9bebc3e30a78360e78"
+    },
+    {
+      "label": "kastner_schlatter_deterministic_feature_selector_no_go",
+      "path": "runs/engine/kastner-schlatter-deterministic-feature-selector-no-go.json",
+      "file_sha256": "def687d58329e81ac6e61212d4bcfc3e13e207721a743c40da5edf07c96d0839",
+      "content_sha256": "6cd36707506b930233034233153574c38e5cf9b64876a9be576dc1cc87a3dddc"
+    },
+    {
+      "label": "kastner_schlatter_second_order_selector_no_go",
+      "path": "runs/engine/kastner-schlatter-second-order-selector-no-go.json",
+      "file_sha256": "512c7fbceaef30f8f5784e627948a3ff4de85321f52a10e5c2714735660b7e29",
+      "content_sha256": "ab2598a59d3f24fb12d20a85737b8ac28e62bd8c9e54992e533732ccbd7d04ac"
+    },
+    {
+      "label": "kastner_schlatter_finite_factorial_hierarchy_no_go",
+      "path": "runs/engine/kastner-schlatter-finite-factorial-hierarchy-no-go.json",
+      "file_sha256": "717e5d2576bd761a896af54b729adb3db3b75b4d191de0a5ef9a26a72a093779",
+      "content_sha256": "2d03b66894f72366439fdb99b1402ba196ac6e9ab7c3600e175b513b3a6a4b95"
+    },
+    {
+      "label": "kastner_schlatter_countable_full_law_selector_admission",
+      "path": "runs/engine/kastner-schlatter-countable-full-law-selector-admission.json",
+      "file_sha256": "d95563955ccd658410524b0092063b432859d56906673644fd4e1aad2f1008b6",
+      "content_sha256": "b477715296d973c8545088a60b5222991c46edbb8e52a69b263f10f5ec64c639"
+    },
+    {
+      "label": "kastner_schlatter_source_selector_type_inhabitation_audit",
+      "path": "runs/engine/kastner-schlatter-source-selector-type-inhabitation-audit.json",
+      "file_sha256": "ea6ce6d05573fde8fc9164b9372fd3b5d9404bc34a69de6101f2261134f25620",
+      "content_sha256": "ba2f97b87e094c1262017ce9e2deded0a27185dd39ee23c85acd8c7c8ae7085e"
+    },
+    {
+      "label": "kastner_schlatter_actualization_probability_bridge_contract",
+      "path": "runs/engine/kastner-schlatter-actualization-probability-bridge-contract.json",
+      "file_sha256": "2a04cc415dbfe7a3fc3b37b8d74ae274fb66623984bfeb5633c86f29b8ec2a18",
+      "content_sha256": "fa959c92c275e1094570e54684ac35edaab29fd0f3cd6ebab6140fd634a7fcc4"
+    },
+    {
+      "label": "kastner_schlatter_history_kernel_projective_admission",
+      "path": "runs/engine/kastner-schlatter-history-kernel-projective-admission.json",
+      "file_sha256": "70d20aa1001d19f9b84ead84effff446c8cfa496df2717c4e237ebd74657648e",
+      "content_sha256": "022b5d3523267e2967bb08c413bfc5534505de7b4a66300cc1be65688dfa2675"
+    },
+    {
+      "label": "kastner_schlatter_transaction_event_observable_exposure",
+      "path": "runs/engine/kastner-schlatter-transaction-event-observable-exposure-gate.json",
+      "file_sha256": "5dac9a446f6a4eee99022ecd21cc656eccad2053687b1c7565102cdac23c99d2",
+      "content_sha256": "a7d65f3c69614b004dbd17daa72472a8b9431dcbffd2f4ead663724ab3937bc7"
+    },
+    {
+      "label": "kastner_schlatter_poisson_cox_cuda_power",
+      "path": "runs/engine/kastner-schlatter-poisson-cox-cuda-power-campaign.json",
+      "file_sha256": "510ec2a3a585b996ffef60c69c65143cc4dd3c27454ced2d183908509aa001b7",
+      "content_sha256": "604fde7b4fca276bf42120499b8a93f1388442ec0553a425fab63c29963db56d"
+    },
+    {
+      "label": "kastner_schlatter_set_indexed_cuda_falsification",
+      "path": "runs/engine/kastner-schlatter-set-indexed-cuda-falsification-campaign.json",
+      "file_sha256": "364c75722b5211036c95b82e79d52725302fc1032091706737d9d76159ca92ae",
+      "content_sha256": "f1302ba3dc08af684617e8bb58809aa9bc5bd84bce5f9d0e0fcdd92913a61dd4"
+    },
+    {
+      "label": "kastner_schlatter_set_indexed_gpu_scheduler_adapter",
+      "path": "runs/engine/kastner-schlatter-set-indexed-gpu-scheduler-adapter-readiness.json",
+      "file_sha256": "b6b918dbeb7300d802b39ee012f001186dcba695829e0c349115fc195d14594f",
+      "content_sha256": "a46af47035375083308cffea76ee1e0d9b9ef0a3c687a3bc51bd29b7f5a2ae4c"
+    },
+    {
+      "label": "kastner_schlatter_deferred_gpu_ownership",
+      "path": "runs/engine/kastner-schlatter-deferred-gpu-ownership-readiness.json",
+      "file_sha256": "3f6363b8c3444ab50a91a657d26cecca9ef3c3552608ddcca09f90f9e2f34045",
+      "content_sha256": "ce7e72dc65b0697d99ee754ac1f586ed96ea4fe9f016cd650dfc76e0f60a186e"
+    },
+    {
+      "label": "kastner_schlatter_deferred_gpu_handoff_service",
+      "path": "runs/engine/kastner-schlatter-deferred-gpu-handoff-readiness.json",
+      "file_sha256": "30117b9ec880ed0fb163743c9bcb75d1a571486610169714105b56bca7fa5282",
+      "content_sha256": "32673a4d31933d3c489949112b6bdabc4e42c9aa89c624d264b0a1ee2efa2f69"
+    },
+    {
+      "label": "kastner_schlatter_scalar_intensity_cuda_falsification",
+      "path": "runs/engine/kastner-schlatter-scalar-intensity-cuda-falsification.json",
+      "file_sha256": "57c775c9be8bc79cde0e4da91ed516c9435d6e91b5da172de82742b2fa858760",
+      "content_sha256": "51dddfc103383685e296b5bbb1fa5d18666b1e6fcb3b2ab1074031ed3ddbb6a5"
+    },
+    {
+      "label": "kastner_schlatter_extended_geometry_cuda_stress",
+      "path": "runs/engine/kastner-schlatter-extended-geometry-cuda-stress.json",
+      "file_sha256": "eab92cb18af2dd85b96c646361630b43ca8fdda6f4e0cc6ce5a1e0424d2355ef",
+      "content_sha256": "2d9ff9ab427c3c07f0a870967a87afb8d47a3188534aa84e7285db80a0171f3a"
+    },
+    {
+      "label": "generic_g4_b4_termwise_normalization",
+      "path": "runs/engine/generic-g4-b4-termwise-normalization-campaign.json",
+      "file_sha256": "52b67ac2fbaa7cfa495e5da8088fa1aec9fc03b331e4e15bec3bea4dee35d224",
+      "content_sha256": "a9e06a7d4c44ab40744fe54b0e7c11074b7d802355a2a743cbbb326febb35966"
+    },
+    {
+      "label": "einstein_aether_coupling_boundary_kkt",
+      "path": "runs/engine/einstein-aether-coupling-boundary-kkt-gate.json",
+      "file_sha256": "5f2326c19dd5170d146fa162de58552ae6551be1bcb7fe0f0bc4deae866f1609",
+      "content_sha256": "3b3887acf6421672758371ad67c7bc6fb83df6f8dde2059d4cf85a7f29647211"
+    },
+    {
+      "label": "grammar_v3_formal_preflight",
+      "path": "runs/engine/grammar-v3-formal-preflight-status.json",
+      "file_sha256": "03387c868b9074d71ca79691ed92d0ba293dffea2dfb3169d342c67c1a4fc210",
+      "content_sha256": "57d7bb28a348b908ceba2345b8b5fcfa9b30a232a0a04e218a152a20a18ace04"
+    },
+    {
+      "label": "grammar_v3_promotion_admission",
+      "path": "runs/engine/grammar-v3-promotion-admission-status.json",
+      "file_sha256": "fd97321c36ae2a91202c4049f40dc65a94d8136246267cdf42202b6d1e06a963",
+      "content_sha256": "b281b6d9fbf4ddc71e1136d9f2c5140337cd4c4e26c5f335892f24e29cf7e756"
+    },
+    {
+      "label": "grammar_v3_g2_candidate_formal",
+      "path": "runs/engine/grammar-v3-g2-candidate-formal-status.json",
+      "file_sha256": "f28255c6a0325fb5c58cf8737caaabcea4c566bbd1a23db0498530c823977ba1",
+      "content_sha256": "44b71cee51d2fbf9d2bb64a6d693ae952f33f395bdb85f17f8ab742450675c6b"
+    },
+    {
+      "label": "grammar_v3_g2_nonmaximal_positive_mass_followup",
+      "path": "runs/engine/g2-scalable-nonmaximal-positive-mass-audit.json",
+      "file_sha256": "075748654a48442219123a689df61d6f3b9dd83563105de5c43522224763be9c",
+      "content_sha256": "b7e85df56c81da473ead0ac0531b50195b2b41aa8d96798a252ccbbead5376d6"
+    },
+    {
+      "label": "grammar_v3_g2_solar_readiness",
+      "path": "runs/engine/g2-scalable-solar-prediction-readiness.json",
+      "file_sha256": "6a8f971161d5535399a518954b5900f535e5c809c8fef0c019804bc4f8bbdb0a",
+      "content_sha256": "1ef9df8f07d15b448850b46d3c19b2612973827c3901e607940cab6b460ce4b0"
+    },
+    {
+      "label": "grammar_v3_g2_solar_heldout_transfer",
+      "path": "runs/engine/g2-solar-heldout-transfer-registration.json",
+      "file_sha256": "e17db85a4b1864000907228defb8acc3382e9213671b629fa57d0ee8f51545d6",
+      "content_sha256": "639053a3d14371be5b1bc77fe8f29f3e62dda60398fef14ab30eb3095a969b4c"
+    },
+    {
+      "label": "scalable_campaign_epoch",
+      "path": "runs/engine/scalable-campaign-staged-epoch-status.json",
+      "file_sha256": "43ba8c03189235c5bdedff93d7c810ff399decf0828aab23bc2f0feaa539b980",
+      "content_sha256": "64ab322f96e5f75cc26e22c027e6ad942aa37ff4f3dbb949885af8b0a4aabc6c"
+    },
+    {
+      "label": "scalable_future_parameter_chunk",
+      "path": "runs/engine/scalable-future-parameter-chunk-001-status.json",
+      "file_sha256": "f176436cfbe06fcbe1051a5dda49252c0d7ac5561b2cf7cedc50ff0048defea7",
+      "content_sha256": "2c4713d23e2b069a3a8d7d146aaa37be6e5c8d69215760af27753f43adbad81e"
+    },
+    {
+      "label": "scalable_future_formal_preflight",
+      "path": "runs/engine/reviewed-future-parameter-formal-preflight-001.json",
+      "file_sha256": "0601b760291903e05e9cba372e5e5b55c2e464f0527825b5dcd35365e21a0137",
+      "content_sha256": "0ac4681e1d5d5d4421b19bde6624b79e4ba02480dc1a52412514a70e610499d4"
+    },
+    {
+      "label": "future_aether_formal_followup",
+      "path": "runs/engine/future-aether-candidate-formal-followup.json",
+      "file_sha256": "b71e9b62d5ec3556567d290cf1582f43e007406ce2e524006181ef82ab9df2e4",
+      "content_sha256": "de8f21c343328b1888b306faae0bdeddf660cbdd6a591a3b3258ebe6eb9f7fe4"
+    },
+    {
+      "label": "future_aether_constraint_followup",
+      "path": "runs/engine/future-aether-constraint-boundary-embedding-audit.json",
+      "file_sha256": "d6ef962f5ee5b2388f13ca387a133d8420850aff4b2204170778219d2c32d391",
+      "content_sha256": "5e59cbc7d405b827e9f76620499af89439b334a474042251d56629ea5932e27e"
+    },
+    {
+      "label": "future_aether_pure_twist_ae_no_go",
+      "path": "runs/engine/future-aether-pure-twist-ae-no-go-audit.json",
+      "file_sha256": "c63cc8b73bf2d9b9298e4b84e24239ace6ad4a25c24046620db373c7d69842f4",
+      "content_sha256": "602b462fc56a6f6ac86f6180f06e71ac0537e0b1f45231e3dc2ac72fae970ea1"
+    },
+    {
+      "label": "future_aether_weak_field_ae_constraint_gate",
+      "path": "runs/engine/future-aether-weak-field-ae-constraint-gate.json",
+      "file_sha256": "1a573f0094346c54ffeccec6eb518a71fea9c4cfd3f52b7b1c6e11fe4ba8cd22",
+      "content_sha256": "379013d5fff5ad9e4687bfbed20d1dc1ae5a4d6ad5700005718b4ea1c9536f0f"
+    },
+    {
+      "label": "future_aether_finite_amplitude_negative_seed_gate",
+      "path": "runs/engine/future-aether-finite-amplitude-negative-seed-gate.json",
+      "file_sha256": "9f71b8e7c9ec8acd7b317a124cfa439c37a9e2096a40076c1a179c04c6005687",
+      "content_sha256": "744fb1b6814aa68dc82777c7d30130cdc0abbc8077a24fd4b40679ff2e959014"
+    },
+    {
+      "label": "future_aether_nonlinear_lift_characteristic_gate",
+      "path": "runs/engine/future-aether-nonlinear-lift-characteristic-gate.json",
+      "file_sha256": "1d9af1c5e82ac4ad3f870e6f8dabd2e38e3e96028db70040c16c0a8b08cf1322",
+      "content_sha256": "fa2883dd119034cbb5881c3f3e5f06547ea0da870b49823a2aaa6dd94e5b2c42"
+    },
+    {
+      "label": "future_aether_regular_adm_inverse_margin_gate",
+      "path": "runs/engine/future-aether-regular-adm-inverse-margin-gate.json",
+      "file_sha256": "d28312d1080939b8ef208d2f80188ed020cbb960418cfbf9bf054b115ef05b0b",
+      "content_sha256": "94dfb36606193bc92fff2f488da51625ce25a8eec9820be0971b72867d8bc559"
+    },
+    {
+      "label": "future_aether_weighted_ift_contract_gate",
+      "path": "runs/engine/future-aether-weighted-ift-contract-gate.json",
+      "file_sha256": "30810e4780f8967b36d11378ba9b45b9c9498c5c6c95a24c795c95cb7d965366",
+      "content_sha256": "ac0b55c10cbc007e8c1d253a2238b9470fb61d9e94a557d86b9f8fa3019872a7"
+    },
+    {
+      "label": "future_aether_weighted_reference_operator_gate",
+      "path": "runs/engine/future-aether-weighted-reference-operator-gate.json",
+      "file_sha256": "96a4eb4caa30ee8d60f8bf2735ea67a0105736dd0b23105cda36f8a678c3fb75",
+      "content_sha256": "b68156243c60c11a90cb487275884a1fe784a8659b504138f6e68524b22292b9"
+    },
+    {
+      "label": "future_aether_fixed_free_data_principal_gate",
+      "path": "runs/engine/future-aether-fixed-free-data-principal-gate.json",
+      "file_sha256": "6826083e5ae58c02e77b0ca992b8de81d6622d4425754bd410a9d72bd5f6c9fa",
+      "content_sha256": "ae0734719d1bbcf16dfd467d8fa585eaeaa43f1b21339c5a706d1899974ee80f"
+    },
+    {
+      "label": "future_aether_finite_tilt_york_symbol_gate",
+      "path": "runs/engine/future-aether-finite-tilt-york-symbol-gate.json",
+      "file_sha256": "2182f907603e7d4a20f183b5dafabc3b4dd4bcbde9080db7d9c8cb9476091d22",
+      "content_sha256": "67bd425327b28013187f540a9559bbf59d6c21a0f36bed687f8aa60d4f189c2f"
+    },
+    {
+      "label": "future_aether_principal_inverse_fredholm_gate",
+      "path": "runs/engine/future-aether-principal-inverse-fredholm-gate.json",
+      "file_sha256": "a6dbd4fbc19fc2e39b319a0fc472dd38d891cb1b5f4086eed0f6c30383909fd3",
+      "content_sha256": "27df3c4aee72998f22fac6d598db00803aaa6c0d38087cb137b94c12459a8d9b"
+    },
+    {
+      "label": "future_aether_lower_order_coefficient_contract_gate",
+      "path": "runs/engine/future-aether-lower-order-coefficient-contract-gate.json",
+      "file_sha256": "3bf5e7aeb5a29b4383bd69d12ab8fcd8c545bc461c55a3faaa628bb1fdff5585",
+      "content_sha256": "9f8c5e3db114c3431aac7fb90441d26ca110e431dbef8b7bcfff6fe230233915"
+    },
+    {
+      "label": "future_aether_canonical_seed_constraint_dag_gate",
+      "path": "runs/engine/future-aether-canonical-seed-constraint-dag-gate.json",
+      "file_sha256": "e5049b8d39d5b06e6012915d3f05c7886ecb014b983d7cf3877604322e3feddb",
+      "content_sha256": "79fcb07f1cc60297b0954f8fcb88aa4793b40c1f72f8064ac2fe4ce5ceb5dc97"
+    },
+    {
+      "label": "future_aether_characteristic_shell_hcore_gate",
+      "path": "runs/engine/future-aether-characteristic-shell-hcore-gate.json",
+      "file_sha256": "bde4df84bb21fa37a1e82f644016fd922d2fb44948d8fbdef01dee1247714368",
+      "content_sha256": "d186d6a4d77762ab2fa2d6cb0f602f5a8aec65a550d496b21a890c157bb660fb"
+    },
+    {
+      "label": "future_g3_domain_followup",
+      "path": "runs/engine/future-g3-componentwise-domain-contract-campaign.json",
+      "file_sha256": "e453fae2edac28dc9c23020670540326e4acc3380d9d573bd0348f5f58d025b0",
+      "content_sha256": "f3bd43bbc9bd26a28f99404930d6e68f4c3d52daf9ec5e0d2500adbeeb162db7"
+    },
+    {
+      "label": "future_g3_action_bound_followup",
+      "path": "runs/engine/future-g3-action-bound-jet-box-campaign.json",
+      "file_sha256": "5140970b0ed0c5c88f771e48a37ea8d8e1e4dd59d6f9c8d7b9ff95d156bd9fa7",
+      "content_sha256": "af0617991c4ea0f56dc6866a682350fe94e51ff35ffcf30d293bdea461669e9a"
+    },
+    {
+      "label": "future_g3_af_transition_obstruction",
+      "path": "runs/engine/future-g3-af-transition-obstruction-campaign.json",
+      "file_sha256": "18d8be9e4570a5117af0cd071f92e9d03252bcd65b1aaab08bc2dfdbc690b173",
+      "content_sha256": "c56768424a08f3666be10bb7a2e3c8c56e852f6629ae5cd3d8f7347b4ff6a375"
+    },
+    {
+      "label": "future_g3_nonunitary_af_constraint_gate",
+      "path": "runs/engine/future-g3-nonunitary-af-constraint-gate-campaign.json",
+      "file_sha256": "cd569bb88453486ad02257009722f2c34ff1faee107b6b38ebe5e076db37cde9",
+      "content_sha256": "d7574dbc65b833a923ca653a9fc9c87b9fa872a24c6c89020afa995a7039e46a"
+    },
+    {
+      "label": "future_g3_radial_conformal_constraint_reduction",
+      "path": "runs/engine/future-g3-radial-conformal-constraint-reduction-campaign.json",
+      "file_sha256": "729e8cf6434bf3c455c8aa8d37cfaa7391be08daf2e903b8fe4533bccb48d3cf",
+      "content_sha256": "468500013c61dabda396a39ede9698c354311b6841cdf8ba1180cc997a1ed47d"
+    },
+    {
+      "label": "future_g3_radial_lichnerowicz_bvp_no_go",
+      "path": "runs/engine/future-g3-radial-lichnerowicz-bvp-no-go-campaign.json",
+      "file_sha256": "a207492d5848e5a2e01b0344903d1110ac901a18a75944807c88bcc8327b0d12",
+      "content_sha256": "0242110785e5475469b05597e06a1965926b6451b21d8f7babc1cd7418db8f9a"
+    },
+    {
+      "label": "future_g3_nonradial_york_bounded_mean_curvature_no_go",
+      "path": "runs/engine/future-g3-nonradial-york-bounded-mean-curvature-no-go-campaign.json",
+      "file_sha256": "dec17893b285171a166203037a7bc74867955412f0e54a184107b9c3db33f8f2",
+      "content_sha256": "3f366eeb681396f8ae2056f4414b31f3d03794473d27ac5f150a8e16f9b9ad0f"
+    },
+    {
+      "label": "future_g3_york_mean_curvature_frontier",
+      "path": "runs/engine/future-g3-york-mean-curvature-frontier-campaign.json",
+      "file_sha256": "55478aef6bf81449ddad151c5516e5e8e71901c1b142ae4cbbd32e728524fe69",
+      "content_sha256": "be660d9cb540ef02d888b1413eee928335ba0e3f3cc31a82184538985cb82fc2"
+    },
+    {
+      "label": "future_g3_york_analytic_threshold",
+      "path": "runs/engine/future-g3-york-analytic-mean-curvature-threshold-campaign.json",
+      "file_sha256": "3566816d29783f07b7361ea7e965e3cc0d45e8b7f4bb9291d2020dc55bbabd65",
+      "content_sha256": "911425c0710df598caa6a6f4021620a75559f089ad7b034ccdc9887af1e6ef70"
+    },
+    {
+      "label": "future_g3_york_tracefree_compensation",
+      "path": "runs/engine/future-g3-york-tracefree-compensation-no-go-campaign.json",
+      "file_sha256": "bf32d1aa6ee37a3666ee35ab6d3a03250afd9a14433fd100cf4326fc2b50b764",
+      "content_sha256": "33cb23399cd5c0739ffb8e86dd59d554f09030b7918e3ff42933074db432356b"
+    },
+    {
+      "label": "future_g3_general_geometry_curvature_shortfall",
+      "path": "runs/engine/future-g3-general-geometry-curvature-shortfall-no-go-campaign.json",
+      "file_sha256": "001abc2313e0cc88b9a02c6af2043132e97baec069f891d19af001ca92b7059b",
+      "content_sha256": "1c06013ecad8dd73fd3a508b704c886e98ccde8c2c733eac2cd117f97807d809"
+    },
+    {
+      "label": "future_g3_general_geometry_surplus_mismatch",
+      "path": "runs/engine/future-g3-general-geometry-surplus-mismatch-no-go-campaign.json",
+      "file_sha256": "932d0c6c76407ed786b0500c0cdb551e08e40e5ec6e04810eec71d3ec80b4e6a",
+      "content_sha256": "6fd80b865c02883a4d5b387573a7fdd8a13238e984edc2e61204b1b1d08019d7"
+    },
+    {
+      "label": "future_g3_flat_radial_matched_constraints_asymptotic_no_go",
+      "path": "runs/engine/future-g3-flat-radial-matched-constraints-asymptotic-no-go-campaign.json",
+      "file_sha256": "d3a10c1820acf026142844f391b0e9ecfee32646383816261fb4a53a61213189",
+      "content_sha256": "9eeb346ddf1f57a65b5b0f352d2373bd1bf5438fd049ef33cc3264f1e61326aa"
+    },
+    {
+      "label": "future_candidate_action_dossier",
+      "path": "runs/engine/future-candidate-action-dossier.json",
+      "file_sha256": "31151eb4542686c2de72bf535620677712ceb1db17e480b02683bbcddb9b602c",
+      "content_sha256": "2a80457e42c597f470c679163ac6cdf88b5904767780bb83899e9fdcbbb99690"
+    },
+    {
+      "label": "grammar_v3_g3_candidate_formal",
+      "path": "runs/engine/grammar-v3-g3-candidate-formal-status.json",
+      "file_sha256": "13f2a1261bb4e3dc8b1041b24821179e4107dda4bc4e932169c031e1eb2bf569",
+      "content_sha256": "1a0cf394bd51f9fbdd47fc5366d01d3da7d5a2677e0fa9d3ff8d97c105a38058"
+    },
+    {
+      "label": "grammar_v3_g4_scalable_formal_followup",
+      "path": "runs/engine/g4-scalable-action-formal-followup.json",
+      "file_sha256": "b8aefbcfef9d9db3059c5deaa235de84dbb7f234873ea5e4d2a73592026c9d9c",
+      "content_sha256": "7f470af2f26051da8429cd9663ea846277a84d624555e2c4bd48baecc08989db"
+    },
+    {
+      "label": "grammar_v3_aether_candidate_formal",
+      "path": "runs/engine/aether-parameter-cell-formal-gate-status.json",
+      "file_sha256": "3b0c213653fd744a0284b86c3a6f871246af59a037a5913f954402aef2390dc6",
+      "content_sha256": "edbe0f8e888977a7a0c9ffea1f330b45c0a7259c2ee1251ed88cc101824dda1e"
+    },
+    {
+      "label": "scalable_structural_metrics",
+      "path": "runs/engine/scalable-candidate-structural-metrics.json",
+      "file_sha256": "8c6d882786e9f645603c590f7b5f12c20acdc56dc17e2a53a2d5b0380b6a852b",
+      "content_sha256": "bd800f11b1693839dcde2e5305978f956d3dc93a32490451c17c89664aabbdb1"
+    },
+    {
+      "label": "scalable_explanation_dossiers",
+      "path": "runs/engine/scalable-candidate-explanation-dossier-bridge.json",
+      "file_sha256": "2b1552f679f35e6fe499a3650b7f4f27e7d5b3ec5ba181b63d8fbfd3a64d3033",
+      "content_sha256": "006c39c88a34170f9707695b505bade75e7970a45ce006af41c72124e803d463"
+    },
+    {
+      "label": "evidence_pareto",
+      "path": "runs/engine/grammar-v3-evidence-pareto-report.json",
+      "file_sha256": "b6317838546d3d66de7757cf2c638010a757827a14053a269b26b85065d1da53",
+      "content_sha256": "0a230c093f8c33e0dfdaa1cbae9818c8345d3add09b9a69ec4b43fcd9c9e8ac1"
+    },
+    {
+      "label": "followup_service",
+      "path": "runs/engine/grammar-v3-followup-service-g4-final-status.json",
+      "file_sha256": "b8d462a2bcb5fa82056e2aff1b98043eeaa5a91602e8a95ea2c2c00f832c6dfc",
+      "content_sha256": "782911a8ece838363fc2d1fc4ca470b2ecbef4c219cb2e4532a15801169c394d"
+    },
+    {
+      "label": "followup_queue",
+      "path": "runs/engine/grammar-v3-followup-queue-g4-final-status.json",
+      "file_sha256": "53eb76736d32e17127078da92309ca71cfb9cf55fa525b620d2fa2cdf4af9426",
+      "content_sha256": "99b27573a1b7136fc748cb882db91edaf2685b5425420346efaa9e7de9837a3a"
+    },
+    {
+      "label": "resource_profile",
+      "path": "configs/resource_profile_5090.json",
+      "file_sha256": "7cefb93ee81f589bc4632e90900e5e67aa97c19b9b31ad3315b9114b5df14a26",
+      "content_sha256": "e6605e735cdb8b74f14180fb49a96da46c5f95745772637e24e93b47d4bd4108"
+    },
+    {
+      "label": "llm_proposal_adapter",
+      "path": "runs/engine/llm-formula-proposal-adapter-readiness.json",
+      "file_sha256": "30422f63b0e1551880031798db2e7e2d5cfce8b6f1820086759b3aee58c8e746",
+      "content_sha256": "ff3f52fd2131504aed7a744bf7b23b848c6ca86ef5628bb2c930be0635c52004"
+    },
+    {
+      "label": "llm_campaign_bridge",
+      "path": "runs/engine/campaign-llm-proposal-bridge-readiness.json",
+      "file_sha256": "ff5fb957cc8f5fab08fdf34601aafdf3dd07c52813956374c78a7393b2c812a9",
+      "content_sha256": "49a37169665f8bce6f72ca5d081d08c620ffacffda02f871d7d0332e13b7e936"
+    },
+    {
+      "label": "g4_solar_evaluator",
+      "path": "runs/engine/reviewed-g4-candidate-solar-evaluator-readiness.json",
+      "file_sha256": "4fba90244ae58bae71192010356d53cf6d5c0f97517b97cef94a72a74a1cb49c",
+      "content_sha256": "17e9410233a546f8ac946b3ec1993f00fbd564080eef1b7c40e41669894f5fc5"
+    },
+    {
+      "label": "g4_solar_execution",
+      "path": "runs/engine/grammar-v3-g4-solar-reviewed-execution-status.json",
+      "file_sha256": "81a88405cff5062753c207a3aed3beb97e2c6d7452487f2724e03f99bf6a1148",
+      "content_sha256": "f3956814494f1c3db1cb22c36651f6c9019511ff07e36cda88c58af443672d74"
+    },
+    {
+      "label": "g4_galaxy_evaluator",
+      "path": "runs/engine/reviewed-g4-candidate-galaxy-evaluator-readiness.json",
+      "file_sha256": "29e066623914c84c88172fffb20e262d31635052cdef66188a709049aee6492f",
+      "content_sha256": "05d9cffd288746fdd297058fec61b21a96226bc169eef46892b53d1a08c3764c"
+    },
+    {
+      "label": "g4_galaxy_execution",
+      "path": "runs/engine/grammar-v3-g4-galaxy-reviewed-execution-status.json",
+      "file_sha256": "4a993874c91a98066a02de359fa398720b7b91de7222fb7a3717ecc996152c5e",
+      "content_sha256": "71c97d5d4d7af0edf83a7c26529da7fec33a10290f19352e1b4f04bae32425bd"
+    },
+    {
+      "label": "typed_dsl_admission",
+      "path": "runs/engine/typed-dsl-campaign-admission-readiness.json",
+      "file_sha256": "1dcb15be647eff8b85357f816356658204ac72a8685eac561ec85167643394c7",
+      "content_sha256": "5187dbf28f2087d294c1e85de70f0c20adc0a3c5b2c450e8db40b5ff385786a2"
+    },
+    {
+      "label": "compiler_registry_bridge",
+      "path": "runs/engine/compiler-receipt-registry-bridge-readiness.json",
+      "file_sha256": "a30d66b3333070be91c22eedf1bf225406afd1497941c533e192d0f15ec0b060",
+      "content_sha256": "24bc2693b6d95cdc709122fe88e7d0637f7c478f9828a8d1dc5b43a7122dda36"
+    },
+    {
+      "label": "reviewed_local_formula_epoch",
+      "path": "runs/engine/reviewed-local-formula-epoch-status.json",
+      "file_sha256": "db5f7248d7fd965578bea4b34be031b8bbf3d4184edc0ef5315663b406f430cb",
+      "content_sha256": "485228d1079a3c577c1335772fb3728cce81b88b7b86fb8a447e868a355f8440"
+    },
+    {
+      "label": "reviewed_local_formula_service",
+      "path": "runs/engine/reviewed-local-formula-service-readiness.json",
+      "file_sha256": "e8af6efe8c219ddd03a8f9bf2be079cbac5d2f25453ac2823dfc7a9158b9f387",
+      "content_sha256": "1688e50e2c9b80803833d2c397718a5b7fa58d7f67374936bf8eec3778d19f3f"
+    },
+    {
+      "label": "g4_galaxy_forward_model",
+      "path": "runs/engine/g4-scalar-free-galaxy-forward-model.json",
+      "file_sha256": "5671eb3380eac4468f17afe9359db5e38f2455df8745d358f190a865abac8107",
+      "content_sha256": "cfc514924fda33ee084c03a1b39e72a0c5e0f2513fb5239ad652f4594a2e2a7b"
+    },
+    {
+      "label": "g4_galaxy_branch_distance",
+      "path": "runs/engine/g4-galaxy-branch-distance-registration.json",
+      "file_sha256": "8e073f85989e9ebf4b77bf137f5b687d30cad0ec8cb910ac8691e00a7746406c",
+      "content_sha256": "1a488f5b08421ded95c097dc2477bc2f34754af230dbc5f402f6e0ee07e4b2e7"
+    },
+    {
+      "label": "g4_galaxy_calibration_evaluation",
+      "path": "runs/engine/g4-galaxy-calibration-evaluation-registration.json",
+      "file_sha256": "798a8f9a247ca8a5d4fb8c07b8482047a27170b2047921866788f22dc7a3d375",
+      "content_sha256": "e8229a0a2aca013d7139fc80c3ae2430207539b3c04278d6c92398785d957dea"
+    },
+    {
+      "label": "g4_galaxy_prediction_contract_transform",
+      "path": "runs/engine/g4-galaxy-prediction-contract-transform-registration.json",
+      "file_sha256": "42dccf8603aa7e5d64d4d1e4f34fd3f07cbf09d62c01baa53836103452e988d9",
+      "content_sha256": "273a8d7fbbdb394724f5e7e3c07cf0c9dd7aeff802193f5edc3af961a89f8c31"
+    },
+    {
+      "label": "g4_galaxy_manifest_bundle_tooling",
+      "path": "runs/engine/g4-galaxy-manifest-bundle-tooling-readiness.json",
+      "file_sha256": "aa1722821d116ff60348dde324744b605dbf01dbc91b9c0eaa3523f59985fcf6",
+      "content_sha256": "902dbc9475f9eca2454c244f9de0f844f42182fefc4da5ea4096049bc94e6a4d"
+    },
+    {
+      "label": "g4_galaxy_source_registry_admission",
+      "path": "runs/engine/g4-galaxy-source-registry-admission-readiness.json",
+      "file_sha256": "64dcc559ab84578d4b9fe8181ca8ac299a05d27abb9a037697ee697cc0b9a093",
+      "content_sha256": "cb6d78ceda73b917615cd2b4a14d170c2e1cf32468c3e5dfa00067e3142d6c63"
+    },
+    {
+      "label": "anonymous_massive_vector_chronological_rediscovery",
+      "path": "runs/physics-language/anonymous-massive-vector-chronological-rediscovery/campaign.json",
+      "file_sha256": "584265dd598e3560f215dd847d47419b08bdda381675501dd8ca6798db7cafaf",
+      "content_sha256": "d72ec89affe99644f044d11c1abe9850f8261633f8510349ff93bb68cafe36eb"
+    },
+    {
+      "label": "quartic_anti_wick_composition_campaign",
+      "path": "runs/physics-language/quartic-anti-wick-composition-campaign/campaign.json",
+      "file_sha256": "9a9cb443ee86a5b5d45ba29ea1287442b101f8c675681f6eedaa927d33f41f1e",
+      "content_sha256": "02c98ac16a6cd4bc3871003fb77918e21666a60fec65bc28c85484a6011c541d"
+    },
+    {
+      "label": "quartic_annular_k55_c6_campaign",
+      "path": "runs/physics-language/quartic-annular-k55-c6-campaign/campaign.json",
+      "file_sha256": "bcc2b4184e5bcfb64d9a8a24ca095aa4067c18502c0c2f4956dcd8ad6f7fc527",
+      "content_sha256": "55fa580fb91e37f48a8e6bd39c4c172c9aa4b3960336d42b88ceb211331b4e2f"
+    },
+    {
+      "label": "quartic_bounded_frequency_defect_campaign",
+      "path": "runs/physics-language/quartic-bounded-frequency-defect-campaign/campaign.json",
+      "file_sha256": "e2dd669e0a939558d7379ac3600032eb7bca22e550d6965816ceca5e2724187a",
+      "content_sha256": "56ea95a21af505cf1a75f1fe757b947ee13039a241e91b1853e305fbfee7514a"
+    },
+    {
+      "label": "quartic_dyadic_localization_campaign",
+      "path": "runs/physics-language/quartic-dyadic-localization-campaign/campaign.json",
+      "file_sha256": "859b472f666cae9175aa7da8bc90ef175ca16f1987b967d65c71f5cc14139c94",
+      "content_sha256": "ce7afcaf428144cc7149dfdd67be5139d09a2e33d3d2bb8a19b867799313f3b5"
+    },
+    {
+      "label": "quartic_finite_sobolev_hierarchy_no_go_campaign",
+      "path": "runs/physics-language/quartic-finite-sobolev-hierarchy-no-go-campaign/campaign.json",
+      "file_sha256": "404a869cd676fb57389535c74ff4fea73ec1ae3da43cad1ff74951f817ae1308",
+      "content_sha256": "a74fb10a523cef935695d99fff595de7aa51a8ead322171373827c8b6db9288a"
+    },
+    {
+      "label": "quartic_full_tensor_good_unknown_reconciliation_gate",
+      "path": "runs/physics-language/quartic-full-tensor-good-unknown-reconciliation-gate/campaign.json",
+      "file_sha256": "cf7957c2efad52a1fa91761fc6259e17a58011cc6093365f9e86e8e7eea0dfd6",
+      "content_sha256": "9994df86948a4419dd999b66610e9fea847dece6d5300f68152e942ffb2b87c8"
+    },
+    {
+      "label": "quartic_scalar_hessian_d2_integrability_gate",
+      "path": "runs/physics-language/quartic-scalar-hessian-d2-integrability-gate/campaign.json",
+      "file_sha256": "654a0442e0d6ec0166eed1d15da163260658d6cd44192da9cbb4e4b2b88f105a",
+      "content_sha256": "66f680eec0ab93169163f7f1e2055aac7713f45fcc2abf2f12907183e701b45c"
+    },
+    {
+      "label": "quartic_scalar_hessian_curl_invariance_gate",
+      "path": "runs/physics-language/quartic-scalar-hessian-curl-invariance-gate/campaign.json",
+      "file_sha256": "8e457a5e6812d36615c884a52cbece2469cf8ab27d3e76a78b01d99a919b3111",
+      "content_sha256": "b97ed68d0ec156bc5de16f45cfe177d999f8d974bc9403768690d9e629c47d42"
+    },
+    {
+      "label": "quartic_scalar_hessian_output_bundle_repair_gate",
+      "path": "runs/physics-language/quartic-scalar-hessian-output-bundle-repair-gate/campaign.json",
+      "file_sha256": "e1ae98ebcb3c2739f7c84938d61ce9e7d2d209d4025f54a7d1d499a8495acfdb",
+      "content_sha256": "688dcb478b86d44330f8a3623183e91c237bd91f31bd4e91bf5869098175973f"
+    },
+    {
+      "label": "quartic_full_d2f_high_atom_coverage_gate",
+      "path": "runs/physics-language/quartic-full-d2f-high-atom-coverage-gate/campaign.json",
+      "file_sha256": "b9ce34960b766a6fe74a36a13190b0f050a1447884d599fad1eebfe189b32590",
+      "content_sha256": "e7e4e4171aed90d07d68791183c58a696e77b9bed745f1018da2c5ee9438c38a"
+    },
+    {
+      "label": "quartic_principal_high_atom_connection_extension_gate",
+      "path": "runs/physics-language/quartic-principal-high-atom-connection-extension-gate/campaign.json",
+      "file_sha256": "e4ffc8f0d82f3c4381703f338a03cc334e15268aaf5b0c7f0dd1305ee96f8b92",
+      "content_sha256": "33942664dc481ae112650c1f9ad1c4834687161601b54348b55a82139816c028"
+    },
+    {
+      "label": "quartic_reverse_principal_source_map_identifiability_gate",
+      "path": "runs/physics-language/quartic-reverse-principal-source-map-identifiability-gate/campaign.json",
+      "file_sha256": "683b0e62afb0bbbcaf9cf8237749a7c97c48b1075e01832a5a73682657210cfd",
+      "content_sha256": "6882a6899a83c9551a6a2443847480e254a00e26cf29539bab318966af26b9fd"
+    },
+    {
+      "label": "quartic_reverse_principal_typed_map_curl_gate",
+      "path": "runs/physics-language/quartic-reverse-principal-typed-map-curl-gate/campaign.json",
+      "file_sha256": "4e432566b16e44b7d5ca05a2ce6e60b5ebd849e2fe8c88fa6523297f1fc111b4",
+      "content_sha256": "79d06514c1dd8fd7933bdc36b19622fc3cce8ddcaf14712f0b908fbe6c9f2664"
+    },
+    {
+      "label": "quartic_cross_slice_one_sided_output_connection_no_go_gate",
+      "path": "runs/physics-language/quartic-cross-slice-one-sided-output-connection-no-go-gate/campaign.json",
+      "file_sha256": "2a6823b9dda087b1a336b85b559305850dd2a9b9c987aa274bcd9ec0d08a55ba",
+      "content_sha256": "250bec41dafd002930516c250ca5bbda3eb35c633a53d3e397d8040f1ead6554"
+    },
+    {
+      "label": "quartic_cross_slice_two_sided_connection_identifiability_gate",
+      "path": "runs/physics-language/quartic-cross-slice-two-sided-connection-identifiability-gate/campaign.json",
+      "file_sha256": "c3ecb5b65a716d5c55ede9d165880e04614f525dce43d49a0f3d9b996a6a9a5a",
+      "content_sha256": "71876e080a30eb3ec3f1b066c4107911a344d9f5005a2f480a7a35275101e17e"
+    },
+    {
+      "label": "quartic_candidate_pother_one_form_connection_gate",
+      "path": "runs/physics-language/quartic-candidate-pother-one-form-connection-gate/campaign.json",
+      "file_sha256": "f43b5623a46dc19541cd5a6323bd8b0c1ea7b63c7fbcfdb1e26bfe35a2f82bf6",
+      "content_sha256": "c79256b901eb6e7b543938cae6e6cf4b41e9fe2778aa37077604cf39a869f93d"
+    },
+    {
+      "label": "quartic_fitted_output_connection_covariant_origin_audit",
+      "path": "runs/physics-language/quartic-fitted-output-connection-covariant-origin-audit/campaign.json",
+      "file_sha256": "828b3a128031011d7628745c22b75a828f98288392f16d32ae2354b589cb9728",
+      "content_sha256": "1e96b08e8d451a6a8baed04757c9c6ee85b886ffbfeffadf526678ed27a2007f"
+    },
+    {
+      "label": "quartic_ck1_p55_tube_envelope",
+      "path": "runs/physics-language/quartic-tc2-ck1-p55-tube-envelope-campaign/campaign.json",
+      "file_sha256": "2fa035928055cde3d1da140479e652619efcf7627334eff2c20c58bc63390e78",
+      "content_sha256": "739b1a94016380264fad2c671f7981cfe7baef750b8bf1662ff77a78fbd7370a"
+    },
+    {
+      "label": "quartic_tc2_quadratic_deltak_extension",
+      "path": "runs/physics-language/quartic-tc2-quadratic-deltak-extension-campaign/campaign.json",
+      "file_sha256": "bb651cb099e409fff85d3354c69a88f667cd39453946a8affce00378b3c705bf",
+      "content_sha256": "aa77319d686d655f1b16b0ac1e29475e87537adae5b41aee156864ea45ec04f1"
+    },
+    {
+      "label": "quartic_tc2_diagonal_third_jet",
+      "path": "runs/physics-language/quartic-tc2-diagonal-third-jet-campaign/campaign.json",
+      "file_sha256": "02ffaf86bbbb239c4ab4d82dfb70bca55d1822a75480925c05b4bde4ef506471",
+      "content_sha256": "ac1e65dae3210e179314048114966b95543b64599e1dd74e7ea045f9624caa10"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_basis_reduction",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-basis-reduction-campaign/campaign.json",
+      "file_sha256": "4ce66d6e4b66e3ac3c0154175e2ac330eb460456c56199dd14d929477ffc27ff",
+      "content_sha256": "dfba90dc7ae87863a7fc19a05913c0c731856e78fb676f78a0b1cb540c37cd9d"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_reranked_reduction",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-reduction-campaign/campaign.json",
+      "file_sha256": "9709ba55c6574c0b81da755742677a400fbf9ce20c0d723f5553c59728edefa0",
+      "content_sha256": "4d1bdf4e27d8aa917e9ab2544331c9358c5e8d8260af449db0ed4a85793ec5f8"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_range_obligations",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-range-obligation-campaign/campaign.json",
+      "file_sha256": "1bcdad6095cdb6ca483748da2ed08196ad8f5d73e4782586cd0c505991c03b05",
+      "content_sha256": "b87e76db34c828fe2d9ec1623c34af4ead33cd9f627140bc4dd776999ee9462e"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_chunk_0",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/chunks/obligation-offset-000000.json",
+      "file_sha256": "ff7eb73e46dd828dffb0a59f547245470b7b25995c28b8bdf10ad19b42bd0ba4",
+      "content_sha256": "c0a56d249afd246387477d1dca3b41f3133ad5e407a4e6c38763c477f119c55b"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_chunk_32",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/chunks/obligation-offset-000032.json",
+      "file_sha256": "0a9934ffc8ab2007e0c1d4a18dcb51b81ff433229e46b86a6938293c2bb89786",
+      "content_sha256": "b6e03be15c3bfdceb69e71918b12eae0d117009ad43617830f6364ff886b4ee1"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_chunk_64",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/chunks/obligation-offset-000064.json",
+      "file_sha256": "87413321a617730321f5e139abe0226dbdcc25c52fd5acb34d6f8f2d1f8fc8f2",
+      "content_sha256": "7c5e45b1550d9ed33c24fcdcd11b0b8b3b5945c037bcde9a5ab90815635e8b5a"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_chunk_96",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/chunks/obligation-offset-000096.json",
+      "file_sha256": "7dbb3fd66144c77f84943042d218ebcd9a39a48c3818ac81d9cff0f2fc8435cc",
+      "content_sha256": "0d2a6e48a1a1488939b8add55db415f757405a678f4567024e978da10a204a2c"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_chunk_128",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/chunks/obligation-offset-000128.json",
+      "file_sha256": "276ba773e63aba6efd0edd3700dfa1eafb103c9f9796188cdbb83e281668789c",
+      "content_sha256": "2b35519cc877d2cd9715edb9bd9a52bae406783a7e7c2289057be76cd4f5bf3d"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_chunk_160",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/chunks/obligation-offset-000160.json",
+      "file_sha256": "c0a80a0c4145e1868b1e2f7e52801d777c19543a29af98029d43763eb3008989",
+      "content_sha256": "cc334f6d9b7667ce64ee9c8cb922ea7590ba65baaa02f031c905b2b01852695d"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_chunk_192",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/chunks/obligation-offset-000192.json",
+      "file_sha256": "93badebf9838d807be56de5e4b51538917fea485dbaeeda5dd073398cce98aea",
+      "content_sha256": "ff1920687f6a1e299902674d77b629bc07c06c1e332ad45181b5d8b3b527188c"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_chunk_224",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/chunks/obligation-offset-000224.json",
+      "file_sha256": "653c60e600ffdb095398218b27f1eb0fe41a33a52c499ddf00ccc3705b8c7264",
+      "content_sha256": "a218264eed0930d00f632876a258f6be14de68bb97584871f2361ca27aacc6fe"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_checkpoint",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/checkpoint.json",
+      "file_sha256": "995d034fce7132ed649de70a4b74c78744ae0adc561e0409f7bcf3ec70f64e26",
+      "content_sha256": "39603a9a8d640f2fb0b6b69e8beb79550bdc0acac28d777822f02a66700b8d82"
+    },
+    {
+      "label": "quartic_tc2_fourth_jet_status",
+      "path": "runs/physics-language/quartic-tc2-fourth-jet-obligation-service/service-status.json",
+      "file_sha256": "9ada9a1907c8af59a1499f9e5cfff6cc93e81bfe1c5ed0dc17da3f37267f010e",
+      "content_sha256": "f6cdd4d4f04ea0687f06fd637ec0e8a5856115df7a3de5fbb47ec4e0ac06e043"
+    },
+    {
+      "label": "quartic_tc2_d4_obstruction_cokernel_certificate",
+      "path": "runs/physics-language/quartic-tc2-d4-obstruction-cokernel-certificate/campaign.json",
+      "file_sha256": "73cb76e16153b1f7f781b6fa1bdc6659a03553b583456f7aebbd46516f9abfe5",
+      "content_sha256": "bef3246a17942c74e8f3cdb09bc14a36c6bdc44d030a9a70ce833c30ec04bc65"
+    },
+    {
+      "label": "quartic_tc2_d4_homogeneous_freedom_reduction",
+      "path": "runs/physics-language/quartic-tc2-d4-homogeneous-freedom-reduction/campaign.json",
+      "file_sha256": "9c6ec3bde9a9063f720fb5bc15c2ccf70e5732b682b3dfe355caf537a2f5a1e8",
+      "content_sha256": "43e40ccbae728364121e63dc44945b2ca7fd6d733aab662bf04f6a1842193212"
+    },
+    {
+      "label": "quartic_tc2_d4_minimal_tc2_escape",
+      "path": "runs/physics-language/quartic-tc2-d4-minimal-tc2-escape-campaign/campaign.json",
+      "file_sha256": "abb4ba1e6e0abe89c5fd8ad2166774377531b59556c1eca4732e89b8dada76e5",
+      "content_sha256": "8b15318e04bfe89f6dd321b04634878b57639fcd48503cade30739db61e033d4"
+    },
+    {
+      "label": "quartic_tc2_d4_registered_operator_origin_no_go",
+      "path": "runs/physics-language/quartic-tc2-d4-registered-operator-origin-no-go-campaign/campaign.json",
+      "file_sha256": "ae42b7996ffdb5ef45383f712715a20462d3451d51a50780fcd04ba04dfcf3c7",
+      "content_sha256": "2e36e22901106e64d0ef0a18212350b44c657c0cfb63f72cf41931d2ffb611e3"
+    },
+    {
+      "label": "quartic_tc2_d4_topology_changing_origin_classification",
+      "path": "runs/physics-language/quartic-tc2-d4-topology-changing-origin-classification-campaign/campaign.json",
+      "file_sha256": "378a67b784bc47e65922d326786b6b34c81ac2c51a59b4bfe749ab4a41fa7199",
+      "content_sha256": "a651886567fc042451464993acdd642d5e75afdb4015eebdcac8d92db9288b0d"
+    },
+    {
+      "label": "quartic_tc2_d4_curl_constraint_admission",
+      "path": "runs/physics-language/quartic-tc2-d4-curl-constraint-admission-campaign/campaign.json",
+      "file_sha256": "61beec6a3be333eba6858e04339cd978acb42dfb049b055ddcbf3e5edb732401",
+      "content_sha256": "df37680b05b3d6da32e107bee16397a1a37b77d97c3da5a26c0bd49ad194cb6a"
+    },
+    {
+      "label": "quartic_tc2_d4_curl_companion_range",
+      "path": "runs/physics-language/quartic-tc2-d4-curl-companion-range-campaign/campaign.json",
+      "file_sha256": "bdb0ccf0e197eda6700003dcc4b9b748b845d65d2ce2a9835acf222510afa0e6",
+      "content_sha256": "1d6c0f3d49ffe343c5d4a50d606b32ba415e611bc728407ff061ce9010dc0f6c"
+    },
+    {
+      "label": "quartic_tc2_d4_axis2_base_rhs",
+      "path": "runs/physics-language/quartic-tc2-d4-axis2-base-rhs-campaign/campaign.json",
+      "file_sha256": "43f85f50b5a5f8f07e1b5f99cf824c9b574df4ec1899de267ff8f0f855c5e252",
+      "content_sha256": "d2fdd65e23574d2f7f65fb328b69764d21073af67ff293622a4735cec26eb451"
+    },
+    {
+      "label": "quartic_tc2_d4_spatial_gradient_annihilator_no_go",
+      "path": "runs/physics-language/quartic-tc2-d4-spatial-gradient-annihilator-no-go-campaign/campaign.json",
+      "file_sha256": "08720c9935aff02bd7e0d99a9cb81122a378b0140da8ecb55c14214e216af0a8",
+      "content_sha256": "3def0e98013e1ad85dd40ba1d67729c90fb987d283b43a13efe49be2655d038b"
+    },
+    {
+      "label": "quartic_tc2_d4_full_linear_gradient_annihilator_no_go",
+      "path": "runs/physics-language/quartic-tc2-d4-full-linear-gradient-annihilator-no-go-campaign/campaign.json",
+      "file_sha256": "7b7531a22cadf8cc677f43afc8934165c7bbe784f01a19c109950e5ea6a76986",
+      "content_sha256": "61f3329788f62150ccb515b58e1c1589840ee0a35b2aff4856219c6bbfb22ccc"
+    },
+    {
+      "label": "quartic_tc2_d4_parity_cubic_angular_escape",
+      "path": "runs/physics-language/quartic-tc2-d4-parity-cubic-angular-escape-campaign/campaign.json",
+      "file_sha256": "1c34088df67498e3759d45e13e995203af1d8f0c29a59f65f61969fd5f7ac655",
+      "content_sha256": "0528f24fea92d5b675e07e09f176fefa6c0c591aa89c126c839c65c3133a4c07"
+    },
+    {
+      "label": "quartic_tc2_d4_parity_cubic_generic_direction",
+      "path": "runs/physics-language/quartic-tc2-d4-parity-cubic-generic-direction-campaign/campaign.json",
+      "file_sha256": "831b03c0bb469462cae64d365695bfdcc21c7cc6dd243e90e8af897eecd044d6",
+      "content_sha256": "d0ba78316e17d363236adec58e1877ee85af9c9d24f098071b5f4564b46fa9b6"
+    },
+    {
+      "label": "quartic_tc2_d4_matrix_curl_rank_one_completion",
+      "path": "runs/physics-language/quartic-tc2-d4-matrix-curl-rank-one-completion-campaign/campaign.json",
+      "file_sha256": "78cb8bc71989d44d59d2b56369796aa8ba2113dde9b808cd405984ada39489af",
+      "content_sha256": "2ed3075655adf64bf99130926ed287dfee2cbfdfefdcffa8e03e01c2b63c7cc1"
+    },
+    {
+      "label": "quartic_tc2_d4_degree_three_matrix_curl_sphere_extension",
+      "path": "runs/physics-language/quartic-tc2-d4-degree-three-matrix-curl-sphere-extension-campaign/campaign.json",
+      "file_sha256": "118ee8b29dc6ddc40099a5ad53a07f0d2692de52e22912f64dab85e8dfedd972",
+      "content_sha256": "4c76c478f692bcacff5f7203fab42a7c1b5e667cf2df4169ae5ccbabeb1d79ed"
+    },
+    {
+      "label": "quartic_tc2_d4_degree_three_c23_great_circle_escape",
+      "path": "runs/physics-language/quartic-tc2-d4-degree-three-c23-great-circle-escape-campaign/campaign.json",
+      "file_sha256": "b4bd5621a3c7b4b25be43a3b620c2a18ae59f14a95c454578021ddb50e1a9c85",
+      "content_sha256": "96be9b9cc071e3ae1ce2185f4b4421d2517def328232f65bee195ac3b0716072"
+    },
+    {
+      "label": "quartic_tc2_d4_degree_three_rank_two_xyz_completion",
+      "path": "runs/physics-language/quartic-tc2-d4-degree-three-rank-two-xyz-completion-campaign/campaign.json",
+      "file_sha256": "8fcbe63b82c5179733cf302a9899dd0e08272f70f5e01b44d21b4e12d2c6c125",
+      "content_sha256": "0b40e4612aafea85af822419175bac742be54baf0741b7b87b1506cfe762099f"
+    },
+    {
+      "label": "quartic_tc2_d4_degree_three_sixth_frame_completion",
+      "path": "runs/physics-language/quartic-tc2-d4-degree-three-sixth-frame-completion-campaign/campaign.json",
+      "file_sha256": "0e9291235a2e7d9405e13fc29d22b5817d3ae90142644f11a1986cfa105373ad",
+      "content_sha256": "6f09474078bf787468d039b16756a7854e5f0cd788c07406fe278e0f4cec9fad"
+    },
+    {
+      "label": "quartic_tc2_d4_rational_chart_determining_gate",
+      "path": "runs/physics-language/quartic-tc2-d4-rational-chart-determining-gate/campaign.json",
+      "file_sha256": "aafe337f5f8a49585038065a4d232cef9fe335c68106b4371a8dc5710fc83536",
+      "content_sha256": "48b8ecfe63336071721baeb90a41f379ac1b4235629b380abdf0124e7008152c"
+    },
+    {
+      "label": "quartic_tc2_d4_degree_five_counterexample_escape",
+      "path": "runs/physics-language/quartic-tc2-d4-degree-five-counterexample-escape-campaign/campaign.json",
+      "file_sha256": "a5c34554b1723ff11dfe8c9823974b4db90597eb5df36449931b4d01553e3eff",
+      "content_sha256": "eb46a7b76d5f51a62254ecbe00e91c120103c5d81948443c1b9e4da2004414b5"
+    },
+    {
+      "label": "quartic_tc2_d4_revised_symbol_rational_counterexample",
+      "path": "runs/physics-language/quartic-tc2-d4-revised-symbol-rational-counterexample-campaign/campaign.json",
+      "file_sha256": "1e26cbd89fa1269d64cbeafbfeca59bf0a90139554077233a0ad9943bff79a91",
+      "content_sha256": "b45091bc5c393cf80d849872abc6edf0e0f1e2a9e0c19fb439a82a156386cd85"
+    },
+    {
+      "label": "quartic_tc2_d4_revised_eight_frame_rational_counterexample",
+      "path": "runs/physics-language/quartic-tc2-d4-revised-eight-frame-rational-counterexample-campaign/campaign.json",
+      "file_sha256": "fb66b5c274af3133b2dfb25a0a3fb176211ee6432c0f7791c310321096920dfe",
+      "content_sha256": "42f7984ba9bb5f6bcd5fe489f382b33401fd4f5d9c418b5184dee520d57475e3"
+    },
+    {
+      "label": "quartic_tc2_d4_revised_nine_frame_rational_counterexample",
+      "path": "runs/physics-language/quartic-tc2-d4-revised-nine-frame-rational-counterexample-campaign/campaign.json",
+      "file_sha256": "fcf0d1bcb8436dce574a2ea58048168368df3f4d9901f27fd8b2f50da3838b76",
+      "content_sha256": "e556ef1716683882598e4d9a4b9ea550ca1d8a7945b0d96913ab84a0da3b57d5"
+    },
+    {
+      "label": "quartic_tc2_d4_revised_ten_frame_rational_counterexample",
+      "path": "runs/physics-language/quartic-tc2-d4-revised-ten-frame-rational-counterexample-campaign/campaign.json",
+      "file_sha256": "becf02682293cda9c772b3e47e0f025933c42cc980f3d025866fb10366a8dfde",
+      "content_sha256": "fdbcf67e59e2cd9977cab22b1891f6d067183427f0d00b6fb841647638107e2e"
+    },
+    {
+      "label": "quartic_tc2_d4_revised_eleven_frame_rational_counterexample",
+      "path": "runs/physics-language/quartic-tc2-d4-revised-eleven-frame-rational-counterexample-campaign/campaign.json",
+      "file_sha256": "133adea5fa612afb4c80e7419674eb9f65f7a3dd7e1033c9d1c09553a9d52f36",
+      "content_sha256": "5dac044360e2dbff204e1f762d90634f30c8005bddd85d11f1ad7308faa0a17a"
+    },
+    {
+      "label": "quartic_tc2_d4_revised_eleven_frame_degree_six_envelope_gate",
+      "path": "runs/physics-language/quartic-tc2-d4-revised-eleven-frame-degree-six-envelope-gate/campaign.json",
+      "file_sha256": "ad5a6094aa963c8ce855d6954b32ac63ebb89e349128a258102b4e1b3d66a4c7",
+      "content_sha256": "0c2b8ce7bd797a62111b824a892b3d1f3db075ad87271c3bb1a4b9f58a87418a"
+    },
+    {
+      "label": "quartic_tc2_d4_revised_twelve_frame_height_two_rational_gate",
+      "path": "runs/physics-language/quartic-tc2-d4-revised-twelve-frame-height-two-rational-gate/campaign.json",
+      "file_sha256": "7235da9603f970e25b5852a5d4b5b4957855a5e0c2958d84e24891228c35eb23",
+      "content_sha256": "55a68d34961739728a6ae111ea1c76f83f51524614712d7e960f4f37a1139267"
+    },
+    {
+      "label": "quartic_tc2_reranked_obligation_chunk_0",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-obligation-service/chunks/obligation-offset-000000.json",
+      "file_sha256": "f11c9e242b2e016fbb72319ead0e25ba1c5b18cf2a3684de042fa1cde468b2e7",
+      "content_sha256": "cc0881c1e06a7f5fa308be071d950f2ddd3f9239f6b522a87cc13cd9d4c94ea7"
+    },
+    {
+      "label": "quartic_tc2_reranked_obligation_chunk_64",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-obligation-service/chunks/obligation-offset-000064.json",
+      "file_sha256": "323837496fb1bf9fda76f16af0cda77f0f4357d3dde86aec1b86974a0508be4a",
+      "content_sha256": "e4f855cfd11f4758a5b3bf82d26c2eb74c722075638a35865193469b60c4b5a3"
+    },
+    {
+      "label": "quartic_tc2_reranked_obligation_chunk_128",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-obligation-service/chunks/obligation-offset-000128.json",
+      "file_sha256": "51bb63e14cf4af3d86a38509da567402ce252c91ba1a809d73bfd076153edfe1",
+      "content_sha256": "4a257669a8bc266b1a309ab5d5fd32a4aa879deaa149cc41a42b377120999548"
+    },
+    {
+      "label": "quartic_tc2_reranked_obligation_chunk_192",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-obligation-service/chunks/obligation-offset-000192.json",
+      "file_sha256": "5b39a4a805e181300ad202da15dca9d24dec0574c1f78d168f05d4f5ba96c91d",
+      "content_sha256": "138a8dcb3d6c219757292fabebf4e91282f2aa32d36f0cbf7361511e2d6d5836"
+    },
+    {
+      "label": "quartic_tc2_reranked_obligation_chunk_256",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-obligation-service/chunks/obligation-offset-000256.json",
+      "file_sha256": "506d1cc0968cf68c649ca0d0dc5bb6fc9f57a9cc4ba2744bc725d652b7d7296b",
+      "content_sha256": "1e724e025eeccb5d3fbcc6f3f930e9d8102abe06b610ffc49324ce08823ecd83"
+    },
+    {
+      "label": "quartic_tc2_reranked_obligation_chunk_320",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-obligation-service/chunks/obligation-offset-000320.json",
+      "file_sha256": "548a6918c44540b8746932a7ead46cfeebf09b0b5c003be71acd1d51f79452f7",
+      "content_sha256": "5ef3f6bc0e4fcb733b580e1f1fbd86b025e3807c572b23fe6c36ad8643ef627b"
+    },
+    {
+      "label": "quartic_tc2_reranked_obligation_chunk_384",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-obligation-service/chunks/obligation-offset-000384.json",
+      "file_sha256": "fb780b8c2df7d75ce5214daeb95f3ceb205971602ceb841af137fbe0763a99fb",
+      "content_sha256": "a543a2a98d3cdab9bcfbe2e742e3853922d32b87784051dc7be2f87769724853"
+    },
+    {
+      "label": "quartic_tc2_reranked_obligation_checkpoint",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-obligation-service/checkpoint.json",
+      "file_sha256": "0690ecbc9340de52d44366dde58a270fc7802daa4a7cacc308629f764e185c57",
+      "content_sha256": "859ac5b8b3fc4c05f56c80d4eaddf352da7e17fa094509727ae2aba41eba00da"
+    },
+    {
+      "label": "quartic_tc2_reranked_obligation_status",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-reranked-obligation-service/service-status.json",
+      "file_sha256": "0812644d95a76d248d29cdbc91b029d6421e20cf21f526ed14567b788928e1de",
+      "content_sha256": "f7017e232e73d9449d25e1d31796ff9e4643434ecbf6259ea2492e1658e82aab"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_chunk",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-chunk-campaign/campaign.json",
+      "file_sha256": "8c134c9eb2c5a4a652f6f50bfc8d531c800c3397be590d5c6c3bc64b9e03c82c",
+      "content_sha256": "74248e1b9aaa6d4f500d873899e985df0334aff82fa94ad44ba231bb321a1a80"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_chunk_64",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-continuation-service/chunks/offset-000064.json",
+      "file_sha256": "e9e60b58ad4aed78c75210f65220d88dbbfec0b17365d5723f8d9e43931f88bf",
+      "content_sha256": "61f94c5084311ea5a8b662fdf8d255d96a41538f42a6d127dac78f938d0e959c"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_chunk_128",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-continuation-service/chunks/offset-000128.json",
+      "file_sha256": "b601dd5c3abb381d9b94ff61024243a4ceba9aa63b46eae6510873fcd67a4a5c",
+      "content_sha256": "870ce28ae99648c5a586c094cd2202f1b2f3d52bb2801570e03de68c3fb7a482"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_checkpoint",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-continuation-service/checkpoint.json",
+      "file_sha256": "27cab321e2f5b828ad233b672201288667906d978e58f78f1ef62a73dd9509f8",
+      "content_sha256": "efa8c7fc5513cbdb0436a8f67a6851b15897b9c29187363896997a97df278cce"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_continuation_status",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-continuation-service/service-status.json",
+      "file_sha256": "35822ae31ef1c4a8af604151eb9572f0e3f5bf0bae61b01cbfd77723770eae87",
+      "content_sha256": "9affc8b5c4989180b87134c0c2070607a70c44ca66a4d13c5820b49c88a05947"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_192",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000192.json",
+      "file_sha256": "f4bc39a4297f1e30c69c5731ba72ef730d701d2b2189571503ec0765de97fcc1",
+      "content_sha256": "e4e1ec252a63327d1e1280f861c042349bf288c40270c75516e21a4f035044e3"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_256",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000256.json",
+      "file_sha256": "af293b85cfb72cbffc87d6eb7768d17660a6937d120273a3cc82476b391f70b4",
+      "content_sha256": "6fe3198438f2c69b5e8471349f2880844520b7077d323481fa9c483bc73e639a"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_320",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000320.json",
+      "file_sha256": "9bc4f1835a97c8c367037cee1fbf9777b18514c32da72bbefb40e65f518af87b",
+      "content_sha256": "4c85f4efa8d66337cbcfc5b2f9b3c4758dff03cc726faeac6b2f5a08fe94242e"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_384",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000384.json",
+      "file_sha256": "d7a9872e2aa9cd736666cfae2f4adb8bbeb192250fa4011c6777d879f08788ee",
+      "content_sha256": "747b0ee5a309717ac87cad12fdea3e9868a11e0685519bfa3dafda13ef8b00bf"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_448",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000448.json",
+      "file_sha256": "50958c459114b9331427310e4f5b2779ef7b208f8022f761f614b865a5de7527",
+      "content_sha256": "25979aed15dfb59b0b8c678ba4e7982f966609378755ff31e16ee5d1a15d37d8"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_512",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000512.json",
+      "file_sha256": "53703fd5c9b2e8f1f3172c0649a4e208f1de6f084ed35ac972d49315431f00e3",
+      "content_sha256": "8a27fca36606d137e6f7175ed8faf9854a72bd6656e3129c6775946306cd0ed2"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_576",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000576.json",
+      "file_sha256": "05f50d9309a507605cd121cb20d56ffcbb5fe0ef9add94b46dc65ff6b0ffa82e",
+      "content_sha256": "779075eb67c32b83953ca2311f68b2f217f5d002f627305fddea325fdad4728a"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_640",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000640.json",
+      "file_sha256": "76895de409e0250863c8d82487eb3b85f9c50c9b0409b2ed3ec20ff3822784ca",
+      "content_sha256": "a833243d276fb64f62cbd33a53d0ca07e5860f0ca19b90bc4e0ad76c8a3c755d"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_704",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000704.json",
+      "file_sha256": "e123a13cabde2cfe289ac65790aebd0eed6bde380428695f22c9e2b1611a5113",
+      "content_sha256": "3dbe5fa22d488363560378fbdf4791c20c67bbb96f44a2bda2ef51871a2c76c1"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_768",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000768.json",
+      "file_sha256": "0562864f88546854e995ae0b6cf4594d8c1fe8f12c5a200f5a656e4f9ea1d59e",
+      "content_sha256": "c7f01e4c6fe97d713fe01cbbfb795a56bc9d749a051e852ca30aefc96cac46b0"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_832",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000832.json",
+      "file_sha256": "5cef202b70ebff233d2bdff536a012e11f6e2c0241d5478b8a6fc3f14b35bb49",
+      "content_sha256": "81dbcad67e9e120970c573d143a17cc825de252e4020ee9a28c52dee6c3a99eb"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_896",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000896.json",
+      "file_sha256": "514cf9811e8baffcc98af2b8cbf5ce698d6ee7b7b6fc288b9e002b26a0cafe5c",
+      "content_sha256": "2c9ebe51011f210738d54f708b875cb018241e3507c03f7407eb115f5b527d4d"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_960",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-000960.json",
+      "file_sha256": "a2cda25f891aa895f0eff03d7a96448c9db824c9533a4c155d3a1bc11f04ee6f",
+      "content_sha256": "3538e414e7996c8f6b7956a11f2476983537df48da4a2eb647fca4d2dd1ed29b"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_1024",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-001024.json",
+      "file_sha256": "6ed8d22710811d41cd3238676a9f2e6904ca1bbc1b193097a74d048919c4164f",
+      "content_sha256": "683edf3afaceb21513149a501c2cfc27647cedc1337980451edebab6abd4cddb"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_1088",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-001088.json",
+      "file_sha256": "928ff811764603dfaeddba8d5f25210e43b6bf0ce4bfe90efbdad3c61fe2295e",
+      "content_sha256": "ddb5a460f7d939fa2228e9548e9679e3a01a97b146aa07676dc8b1c4c49bbb07"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_1152",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-001152.json",
+      "file_sha256": "5756f5338a78d8f82547df669ebf690cfe9afb00ec36f6235a62a9773548720f",
+      "content_sha256": "7dc7d58eb914553a7f8246ebc75b0ec837fef7364b17bd643d8f8604dfead7b3"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_1216",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-001216.json",
+      "file_sha256": "8c9611b58fe0bf5bb5131cd85d8cad909664b043b326111b774ee1192e657cba",
+      "content_sha256": "fc2a6a8fea63e48fe24fa143f7da8b19a0a44cd7aa7a84a8f3b9246bc834e352"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_1280",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-001280.json",
+      "file_sha256": "760e49a3c76fbba4aba2c5741f997e37f08d30653f7141aec79c86492271887b",
+      "content_sha256": "34588b348b44f672c8093337c1822852c8ec14057559ab8af41e50afd049caad"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_1344",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-001344.json",
+      "file_sha256": "0c7f189a8e3092621a56125d5da3558eab740f5878c3b6b1a1e0991143864ffb",
+      "content_sha256": "24da99e73666a824e2236f57dd690608d1b0d8d30652371e4ab2e84c6c578c7d"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_1408",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-001408.json",
+      "file_sha256": "4559ae14aa0dba381a743d09987bc819b325d2841f2e0d3eb25789ce88154140",
+      "content_sha256": "ab52142fa3a0a460eb4979f607fc6f95592fb874e40874d24f4b96e09cbd1b40"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_1472",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-001472.json",
+      "file_sha256": "fb19d4340fb2461062144570feca93c31665099c4a708ae74d562e23cefdf31c",
+      "content_sha256": "d28be339daafb1eadf664ccdca2921cfc1d21be59d24aca143f02e9c22172743"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_chunk_1536",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/chunks/offset-001536.json",
+      "file_sha256": "a8d1824620d0b531c98478a53064c1057f17b79d5f93317306a305986da802fb",
+      "content_sha256": "32160f0004d0e2712a09b5ce7c5b0da79819d40c70ad47e0f06cb733e6f3f369"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_checkpoint",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/checkpoint.json",
+      "file_sha256": "0655404c44ce7d2e98c8625603ce3af17db5c031f30dba93c8f600b9a2881a64",
+      "content_sha256": "74cc9b17e31847e01b89f344e825202b7d827332de8bfc27c27c7b328b1055a0"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_status",
+      "path": "runs/physics-language/quartic-tc2-mixed-third-jet-parallel-continuation-service/service-status.json",
+      "file_sha256": "f6eaaeeed4cb205ccf43c5501f12da27dedd6bb0f72bb05836c752dbc97afedf",
+      "content_sha256": "0bbedea739e99b4b8909754d796fe86b2c5c1f36f17aa8537d2bbf72eaa77e58"
+    },
+    {
+      "label": "quartic_tc2_mixed_third_jet_parallel_supervisor_readiness",
+      "path": "runs/engine/quartic-tc2-mixed-third-jet-parallel-supervisor-readiness.json",
+      "file_sha256": "44c54858946c4914693609de3b50a9a05e2a7dc75108ef6e7cc53ff383950f1b",
+      "content_sha256": "9a421c9968eb21c078670b71e195ed738c4c24436595f7e703e5dfdea69e33e3"
+    },
+    {
+      "label": "unified_live_dashboard_service_readiness",
+      "path": "runs/engine/unified-engine-live-service-readiness.json",
+      "file_sha256": "5fa27805c51036d5b81f59fe3a55d1681b2fc976b90cf69a3f305cfa563ab07e",
+      "content_sha256": "a3be005a2322a625f178c6c257c81c75a319b10605317be817ebda6112a5bcb7"
+    },
+    {
+      "label": "unified_live_dashboard_service_safety_readiness",
+      "path": "runs/engine/unified-engine-live-service-safety-readiness-v2.json",
+      "file_sha256": "50c9a3def7e101fa2849cb75fc3ff4020e365dba91502d21441783838f27967e",
+      "content_sha256": "f52f4d233f11d95b76763413070b4973d1849e53e40e88f2bf4c3820a6095abb"
+    }
+  ],
+  "content_sha256": "a6b398f2fcec283d634746612ef3cf639f07d45130646b4afea8bb393fb69b99"
+}

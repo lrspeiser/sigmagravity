@@ -1,0 +1,98 @@
+{
+  "bindings": {
+    "admission_config": {
+      "file_sha256": "5999694d772bee9eeaced607cf4b7905ae45af9c3d133dc4d839a03c63ef7502",
+      "path": "configs/continuous_scientific_pipeline_admission.json"
+    },
+    "config": {
+      "file_sha256": "30b7a9442ad00999f9121e3cd6ce0c81b564864f0104637cd83fd5f0477d30ba",
+      "path": "configs/continuous_scientific_pipeline_service.json"
+    },
+    "formal_backend_config": {
+      "file_sha256": "2db7fc1f7baa12e043f9098b6c5b1e68f1e36fa9262cbd5b772ecbaf2eb967db",
+      "path": "configs/continuous_formula_formal_backend.json"
+    },
+    "formal_backend_source": {
+      "file_sha256": "9964149975b8c0f21736731985d2368e39ff65057042d05f25cf3410c05ac21d",
+      "path": "src/sigma_theory_compiler/continuous_formula_formal_backend.py"
+    },
+    "formal_backend_test": {
+      "file_sha256": "d4a1b6626eac3d033faf8d8c445c106749f2a9541b842c9912c7c00d66add0f2",
+      "path": "tests/test_continuous_formula_formal_backend.py"
+    },
+    "source": {
+      "file_sha256": "38118feaf0617ba31b0f4098de8e329bb45b900f0000af8f5e35a6a52697a4f9",
+      "path": "src/sigma_theory_compiler/continuous_scientific_pipeline_service.py"
+    },
+    "test": {
+      "file_sha256": "99c3b1786e904dfdc55ce21af9f8c422ef613f37fa8f75334185a559071a71a3",
+      "path": "tests/test_continuous_scientific_pipeline_service.py"
+    }
+  },
+  "content_sha256": "f16fefad7a5ccb47f52a8da52afbfff1655cf57d52fe6cbb9103746eea773b7f",
+  "decision": "preexecution_preregistration_snapshot_no_current_runtime_claim",
+  "execution_state": {
+    "current_runtime_status_claimed": false,
+    "cycles_executed_at_preregistration": 0,
+    "live_SQLite_accessed": false,
+    "queue_created_at_preregistration": false,
+    "service_started_at_preregistration": false
+  },
+  "first_remaining_blocker": "complete_candidate_specific_comparable_evidence_after_covariant_action_health_before_any_rank_rebuild_can_be_admitted",
+  "resource_contract": {
+    "CPU_backoff_percent": 92,
+    "cpu_workers": 15,
+    "gpu_workers": 0,
+    "minimum_RAM_MiB": 32768
+  },
+  "safe_start_criteria": [
+    "runtime path remains Git-ignored and contains no foreign lease",
+    "available RAM is at least 32768 MiB",
+    "device-wide CPU is below 92 percent",
+    "no other CPU generation owner is active",
+    "ordinal interval is unconsumed",
+    "survivor count is within the fixed candidate-manifest bound",
+    "formal blocks or exact hard rejections are expected until complete comparable evidence exists"
+  ],
+  "schema_version": "sigma-continuous-scientific-pipeline-service-readiness-2.0",
+  "scientific_contract": {
+    "candidate_manifest_reconstructed_from_ordinals": true,
+    "covariant_action_health_executed_only_after_exact_mapping": true,
+    "direct_rank_assignment": false,
+    "formal_backend": "candidate_bound_covariant_action_health_v1",
+    "formal_backend_available": true,
+    "formal_stage_fails_closed": true,
+    "ranking_is_request_only": true,
+    "real_formula_evaluator_allowlisted": true
+  },
+  "seals": {
+    "arbitrary_callable_or_subprocess_injection": false,
+    "campaign_live_sqlite_access": false,
+    "dark_matter_or_halo_inputs": false,
+    "direct_rank_assignment": false,
+    "existing_process_signaled": false,
+    "gpu_or_cuda_access": false,
+    "observations_opened": false,
+    "paid_llm_calls": false,
+    "redshift_or_cosmology_inputs": false
+  },
+  "service_contract": {
+    "checkpoint_resume": true,
+    "external_stop_request": true,
+    "hard_owned_child_formal_timeout": true,
+    "hard_owned_child_generation_timeout": true,
+    "isolated_atomic_JSON_queue": true,
+    "maximum_action_seconds": 120,
+    "maximum_actions_per_cycle": 1,
+    "maximum_cycles": 16,
+    "maximum_service_seconds": 600,
+    "single_owner_O_EXCL_PID_argv_lease": true,
+    "timeout_cleanup_is_campaign_owned_child_only": true
+  },
+  "snapshot_scope": {
+    "artifact_role": "preexecution_preregistration",
+    "completed_execution_reported_separately": true,
+    "completed_execution_result_path": "runs/engine/continuous-scientific-pipeline-service-result.json",
+    "runtime_status_asserted": false
+  }
+}

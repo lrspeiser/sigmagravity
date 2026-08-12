@@ -1,0 +1,44 @@
+{
+  "schema_version": "sigma-grammar-v3-followup-queue-config-1.0",
+  "pareto_report": {
+    "path": "runs/engine/grammar-v3-evidence-pareto-report.json",
+    "file_sha256": "b6317838546d3d66de7757cf2c638010a757827a14053a269b26b85065d1da53",
+    "content_sha256": "0a230c093f8c33e0dfdaa1cbae9818c8345d3add09b9a69ec4b43fcd9c9e8ac1",
+    "evidence_packet_registry_root_sha256": "548a4930db101a8ce8b7ab731369fdc22c9320dad7b5ace805f20d28bc069c10"
+  },
+  "reviewed_task_types": [
+    "aether_nonlinear_twist_energy",
+    "g2_global_boundary_dirac_contract",
+    "g2_global_positive_mass",
+    "g3_uniform_interval_cell",
+    "g3_global_lapse_dirac_contract",
+    "g4_global_lapse_invertibility",
+    "g4_global_positive_energy"
+  ],
+  "reviewed_evaluators": {
+    "aether_nonlinear_twist_energy": {
+      "descriptor_path": "configs/grammar_v3_aether_twist_followup_evaluator.json",
+      "descriptor_file_sha256": "0e0fb203c61b184c5d742029a253812bf88b5479b5f234e0a131ae72f16d7c06"
+    },
+    "g2_global_boundary_dirac_contract": {
+      "descriptor_path": "configs/grammar_v3_g2_boundary_followup_evaluator.json",
+      "descriptor_file_sha256": "5d6074ff5d6392d79926a2beb44e9f4e1748357937aa11b4715fe8f1596d465d"
+    },
+    "g2_global_positive_mass": {
+      "descriptor_path": "configs/grammar_v3_g2_positive_mass_followup_evaluator.json",
+      "descriptor_file_sha256": "7c004f3909fd8f37a7ce4e139105ec25a7bf6006fccd32c6a61953c573e2b773"
+    }
+  },
+  "budget": {
+    "maximum_tasks": 10,
+    "maximum_wall_seconds": 120,
+    "maximum_database_bytes": 16777216
+  },
+  "data_eligibility": {
+    "observational_data_opened": false,
+    "dark_matter_or_halo_inputs": false,
+    "redshift_distance_inputs": false,
+    "paid_llm_calls": false
+  },
+  "external_paid_llm_calls": false
+}

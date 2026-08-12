@@ -1,0 +1,25 @@
+{
+  "checkpoint_content_sha256": "efa8c7fc5513cbdb0436a8f67a6851b15897b9c29187363896997a97df278cce",
+  "checkpoint_file_sha256": "27cab321e2f5b828ad233b672201288667906d978e58f78f1ef62a73dd9509f8",
+  "claims": {
+    "B7_closed": false,
+    "CK1_closed": false,
+    "CK3_closed": false,
+    "TC2_closed": false,
+    "full_mixed_sector_closed": false,
+    "full_tube_Sylvester_identity": false,
+    "global_H7_closed": false,
+    "lifespan_proved": false
+  },
+  "content_sha256": "9affc8b5c4989180b87134c0c2070607a70c44ca66a4d13c5820b49c88a05947",
+  "current_artifact_content_sha256": "870ce28ae99648c5a586c094cd2202f1b2f3d52bb2801570e03de68c3fb7a482",
+  "current_artifact_file_sha256": "b601dd5c3abb381d9b94ff61024243a4ceba9aa63b46eae6510873fcd67a4a5c",
+  "current_artifact_path": "chunks/offset-000128.json",
+  "decision": "checkpointed",
+  "next_offset": 192,
+  "permanently_stopped": false,
+  "prior_resume_sha256": "4b3912340b0474933742efe70f2fb4af7d5397e8f3f01fa98924df64ec1cfcea",
+  "reason": "chunk_limit",
+  "remaining_mixed_triples": 12108,
+  "schema_version": "sigma-quartic-tc2-mixed-third-jet-continuation-status-1.0"
+}
