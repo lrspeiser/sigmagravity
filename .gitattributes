@@ -83,3 +83,4 @@ research/galaxy-cluster-unification/configs/sigma_v19w_full_response_production.
 research/galaxy-cluster-unification/scripts/run_sigma_v19w_full_response_production.py -text
 research/galaxy-cluster-unification/results/sigma_v19w_full_response_production/*.json -text -diff
 research/galaxy-cluster-unification/results/sigma_v19w_full_response_production/product_index.csv text eol=crlf
+research/sigma-theory-compiler/runs/engine/g4-galaxy-calibration-evaluation-registration.json -text
